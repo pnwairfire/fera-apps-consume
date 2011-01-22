@@ -1,0 +1,4026 @@
+<?xml version="1.0" standalone="yes"?>
+<EMISSIONS_FACTOR_DATABASE>
+   <EFG>
+    	<ID>16</ID>
+    	<fuel_type>Default - Av. of all</fuel_type>
+    	<n>average of all</n>
+    	<references>Ottmar</references>
+    	<PM_flaming>26.71428571</PM_flaming>
+    	<PM10b_flaming>16.77142857</PM10b_flaming>
+    	<PM25_flaming>13.073966</PM25_flaming>
+    	<CO_flaming>89.54345643</CO_flaming>
+    	<CO2_flaming>2521.929828</CO2_flaming>
+    	<CH4_flaming>3.346003166</CH4_flaming>
+    	<NMHC_flaming>4.759810927</NMHC_flaming>
+    	<PM_smold_resid>39.37142857</PM_smold_resid>
+    	<PM10b_smold_resid>27.94285714</PM10b_smold_resid>
+    	<PM25_smold_resid>19.1062523</PM25_smold_resid>
+    	<CO_smold_resid>209.3289107</CO_smold_resid>
+    	<CO2_smold_resid>2285.410765</CO2_smold_resid>
+    	<CH4_smold_resid>11.13691426</CH4_smold_resid>
+    	<NMHC_smold_resid>10.37712161</NMHC_smold_resid>
+    </EFG>
+   <EFG>
+    	<ID>0</ID>
+    	<fuel_type>Default - Source Code</fuel_type>
+    	<n></n>
+    	<references>Consume 3.0 source code</references>
+    	<PM_flaming>24.0</PM_flaming>
+    	<PM10b_flaming>16.0</PM10b_flaming>
+    	<PM25_flaming>13.0</PM25_flaming>
+    	<CO_flaming>96.0</CO_flaming>
+    	<CO2_flaming>3380.0</CO2_flaming>
+    	<CH4_flaming>4.0</CH4_flaming>
+    	<NMHC_flaming>6.0</NMHC_flaming>
+    	<PM_smold_resid>35.0</PM_smold_resid>
+    	<PM10b_smold_resid>26.0</PM10b_smold_resid>
+    	<PM25_smold_resid>21.0</PM25_smold_resid>
+    	<CO_smold_resid>243.0</CO_smold_resid>
+    	<CO2_smold_resid>3082.0</CO2_smold_resid>
+    	<CH4_smold_resid>14.0</CH4_smold_resid>
+    	<NMHC_smold_resid>13.0</NMHC_smold_resid>
+    </EFG>
+    <EFG>
+    	<ID>17</ID>
+    	<fuel_type>Default - User's Guide</fuel_type>
+    	<n>average of all</n>
+    	<references>Ottmar - Consume 3.0 documentation</references>
+    	<PM_flaming>23</PM_flaming>
+    	<PM10b_flaming>15</PM10b_flaming>
+    	<PM25_flaming>13</PM25_flaming>
+    	<CO_flaming>90</CO_flaming>
+    	<CO2_flaming>2522</CO2_flaming>
+    	<CH4_flaming>3</CH4_flaming>
+    	<NMHC_flaming>5</NMHC_flaming>
+    	<PM_smold_resid>34</PM_smold_resid>
+    	<PM10b_smold_resid>24</PM10b_smold_resid>
+    	<PM25_smold_resid>19</PM25_smold_resid>
+    	<CO_smold_resid>209</CO_smold_resid>
+    	<CO2_smold_resid>2285</CO2_smold_resid>
+    	<CH4_smold_resid>11</CH4_smold_resid>
+    	<NMHC_smold_resid>10</NMHC_smold_resid>
+    </EFG>
+    <EFG>
+    	<ID>1</ID>
+    	<fuel_type>Doug-fir/hemlock</fuel_type>
+    	<n>12</n>
+    	<references>Ward et al. 1989</references>
+    	<PM_flaming>24.7</PM_flaming>
+    	<PM10b_flaming>16.6</PM10b_flaming>
+    	<PM25_flaming>14.9</PM25_flaming>
+    	<CO_flaming>143</CO_flaming>
+    	<CO2_flaming>3385</CO2_flaming>
+    	<CH4_flaming>4.6</CH4_flaming>
+    	<NMHC_flaming>4.2</NMHC_flaming>
+    	<PM_smold_resid>35</PM_smold_resid>
+    	<PM10b_smold_resid>27.6</PM10b_smold_resid>
+    	<PM25_smold_resid>26.1</PM25_smold_resid>
+    	<CO_smold_resid>463</CO_smold_resid>
+    	<CO2_smold_resid>2804</CO2_smold_resid>
+    	<CH4_smold_resid>15.2</CH4_smold_resid>
+    	<NMHC_smold_resid>8.4</NMHC_smold_resid>
+    </EFG>
+    <EFG>
+    	<ID>2</ID>
+    	<fuel_type>Hardwoods         </fuel_type>
+    	<n>8</n>
+    	<references>Ward et al. 1989</references>
+    	<PM_flaming>23</PM_flaming>
+    	<PM10b_flaming>14</PM10b_flaming>
+    	<PM25_flaming>12.2</PM25_flaming>
+    	<CO_flaming>92</CO_flaming>
+    	<CO2_flaming>3389</CO2_flaming>
+    	<CH4_flaming>4.4</CH4_flaming>
+    	<NMHC_flaming>5.2</NMHC_flaming>
+    	<PM_smold_resid>38</PM_smold_resid>
+    	<PM10b_smold_resid>25.9</PM10b_smold_resid>
+    	<PM25_smold_resid>23.4</PM25_smold_resid>
+    	<CO_smold_resid>366</CO_smold_resid>
+    	<CO2_smold_resid>2851</CO2_smold_resid>
+    	<CH4_smold_resid>19.6</CH4_smold_resid>
+    	<NMHC_smold_resid>14</NMHC_smold_resid>
+    </EFG>
+    <EFG>
+    	<ID>3</ID>
+    	<fuel_type>Ponderosa/Lodgepole</fuel_type>
+    	<n>3</n>
+    	<references>Ward et al. 1989</references>
+    	<PM_flaming>18.8</PM_flaming>
+    	<PM10b_flaming>11.5</PM10b_flaming>
+    	<PM25_flaming>10</PM25_flaming>
+    	<CO_flaming>89</CO_flaming>
+    	<CO2_flaming>3401</CO2_flaming>
+    	<CH4_flaming>3</CH4_flaming>
+    	<NMHC_flaming>3.6</NMHC_flaming>
+    	<PM_smold_resid>48.6</PM_smold_resid>
+    	<PM10b_smold_resid>36.7</PM10b_smold_resid>
+    	<PM25_smold_resid>34.2</PM25_smold_resid>
+    	<CO_smold_resid>285</CO_smold_resid>
+    	<CO2_smold_resid>2971</CO2_smold_resid>
+    	<CH4_smold_resid>14.6</CH4_smold_resid>
+    	<NMHC_smold_resid>9.6</NMHC_smold_resid>
+    </EFG>
+    <EFG>
+    	<ID>4</ID>
+    	<fuel_type>Mixed conifer    </fuel_type>
+    	<n>3</n>
+    	<references>Ward et al. 1989</references>
+    	<PM_flaming>22</PM_flaming>
+    	<PM10b_flaming>11.7</PM10b_flaming>
+    	<PM25_flaming>9.6</PM25_flaming>
+    	<CO_flaming>53</CO_flaming>
+    	<CO2_flaming>3458</CO2_flaming>
+    	<CH4_flaming>3</CH4_flaming>
+    	<NMHC_flaming>3.2</NMHC_flaming>
+    	<PM_smold_resid>33.6</PM_smold_resid>
+    	<PM10b_smold_resid>25.3</PM10b_smold_resid>
+    	<PM25_smold_resid>23.6</PM25_smold_resid>
+    	<CO_smold_resid>273</CO_smold_resid>
+    	<CO2_smold_resid>3023</CO2_smold_resid>
+    	<CH4_smold_resid>17.6</CH4_smold_resid>
+    	<NMHC_smold_resid>13.2</NMHC_smold_resid>
+    </EFG>
+    <EFG>
+    	<ID>5</ID>
+    	<fuel_type>Juniper           </fuel_type>
+    	<n>6</n>
+    	<references>Ward et al. 1989</references>
+    	<PM_flaming>21.9</PM_flaming>
+    	<PM10b_flaming>15.3</PM10b_flaming>
+    	<PM25_flaming>13.9</PM25_flaming>
+    	<CO_flaming>82</CO_flaming>
+    	<CO2_flaming>3401</CO2_flaming>
+    	<CH4_flaming>3.9</CH4_flaming>
+    	<NMHC_flaming>5.5</NMHC_flaming>
+    	<PM_smold_resid>35.1</PM_smold_resid>
+    	<PM10b_smold_resid>25.8</PM10b_smold_resid>
+    	<PM25_smold_resid>23.8</PM25_smold_resid>
+    	<CO_smold_resid>250</CO_smold_resid>
+    	<CO2_smold_resid>3050</CO2_smold_resid>
+    	<CH4_smold_resid>20.5</CH4_smold_resid>
+    	<NMHC_smold_resid>15.5</NMHC_smold_resid>
+    </EFG>
+    <EFG>
+    	<ID>6</ID>
+    	<fuel_type>Sagebrush        </fuel_type>
+    	<n>4</n>
+    	<references>Hardy et al. 1998</references>
+    	<PM_flaming>45</PM_flaming>
+    	<PM10b_flaming>31.8</PM10b_flaming>
+    	<PM25_flaming>29.1</PM25_flaming>
+    	<CO_flaming>155</CO_flaming>
+    	<CO2_flaming>3197</CO2_flaming>
+    	<CH4_flaming>7.4</CH4_flaming>
+    	<NMHC_flaming>6.8</NMHC_flaming>
+    	<PM_smold_resid>45.3</PM_smold_resid>
+    	<PM10b_smold_resid>29.6</PM10b_smold_resid>
+    	<PM25_smold_resid>26.4</PM25_smold_resid>
+    	<CO_smold_resid>212</CO_smold_resid>
+    	<CO2_smold_resid>3118</CO2_smold_resid>
+    	<CH4_smold_resid>12.4</CH4_smold_resid>
+    	<NMHC_smold_resid>14.5</NMHC_smold_resid>
+    </EFG>
+    <EFG>
+    	<ID>7</ID>
+    	<fuel_type>Chaparral        </fuel_type>
+    	<n>9</n>
+    	<references>Hardy et al. 1998</references>
+    	<PM_flaming>31.6</PM_flaming>
+    	<PM10b_flaming>16.5</PM10b_flaming>
+    	<PM25_flaming>13.5</PM25_flaming>
+    	<CO_flaming>119</CO_flaming>
+    	<CO2_flaming>3326</CO2_flaming>
+    	<CH4_flaming>3.4</CH4_flaming>
+    	<NMHC_flaming>17.2</NMHC_flaming>
+    	<PM_smold_resid>40</PM_smold_resid>
+    	<PM10b_smold_resid>24.7</PM10b_smold_resid>
+    	<PM25_smold_resid>21.6</PM25_smold_resid>
+    	<CO_smold_resid>197</CO_smold_resid>
+    	<CO2_smold_resid>3144</CO2_smold_resid>
+    	<CH4_smold_resid>9</CH4_smold_resid>
+    	<NMHC_smold_resid>30.6</NMHC_smold_resid>
+    </EFG>
+    <EFG>
+    	<ID>8</ID>
+    	<fuel_type>Western Pine      </fuel_type>
+    	<n>53</n>
+    	<references>Baker 2005</references>
+    	<PM_flaming>na</PM_flaming>
+    	<PM10b_flaming>na</PM10b_flaming>
+    	<PM25_flaming>13.82</PM25_flaming>
+    	<CO_flaming>81.65</CO_flaming>
+    	<CO2_flaming>1663.32</CO2_flaming>
+    	<CH4_flaming>2.89</CH4_flaming>
+    	<NMHC_flaming>2.77</NMHC_flaming>
+    	<PM_smold_resid>na</PM_smold_resid>
+    	<PM10b_smold_resid>na</PM10b_smold_resid>
+    	<PM25_smold_resid>14.43</PM25_smold_resid>
+    	<CO_smold_resid>141.47</CO_smold_resid>
+    	<CO2_smold_resid>1551.59</CO2_smold_resid>
+    	<CH4_smold_resid>6.25</CH4_smold_resid>
+    	<NMHC_smold_resid>3.77</NMHC_smold_resid>
+    </EFG>
+    <EFG>
+    	<ID>9</ID>
+    	<fuel_type>Minnesota Oak    </fuel_type>
+    	<n>14</n>
+    	<references>Baker 2006</references>
+    	<PM_flaming>na</PM_flaming>
+    	<PM10b_flaming>na</PM10b_flaming>
+    	<PM25_flaming>10.02</PM25_flaming>
+    	<CO_flaming>61.19</CO_flaming>
+    	<CO2_flaming>1709.21</CO2_flaming>
+    	<CH4_flaming>1.66</CH4_flaming>
+    	<NMHC_flaming>1.92</NMHC_flaming>
+    	<PM_smold_resid>na</PM_smold_resid>
+    	<PM10b_smold_resid>na</PM10b_smold_resid>
+    	<PM25_smold_resid>10.45</PM25_smold_resid>
+    	<CO_smold_resid>109.06</CO_smold_resid>
+    	<CO2_smold_resid>1609.45</CO2_smold_resid>
+    	<CH4_smold_resid>6.64</CH4_smold_resid>
+    	<NMHC_smold_resid>3.75</NMHC_smold_resid>
+    </EFG>
+    <EFG>
+    	<ID>10</ID>
+    	<fuel_type>Minnesota Pine   </fuel_type>
+    	<n>9</n>
+    	<references>Baker 2007</references>
+    	<PM_flaming>na</PM_flaming>
+    	<PM10b_flaming>na</PM10b_flaming>
+    	<PM25_flaming>11.71</PM25_flaming>
+    	<CO_flaming>64.62</CO_flaming>
+    	<CO2_flaming>1694.33</CO2_flaming>
+    	<CH4_flaming>2.03</CH4_flaming>
+    	<NMHC_flaming>2.03</NMHC_flaming>
+    	<PM_smold_resid>na</PM_smold_resid>
+    	<PM10b_smold_resid>na</PM10b_smold_resid>
+    	<PM25_smold_resid>13.44</PM25_smold_resid>
+    	<CO_smold_resid>90.77</CO_smold_resid>
+    	<CO2_smold_resid>1644.78</CO2_smold_resid>
+    	<CH4_smold_resid>3.09</CH4_smold_resid>
+    	<NMHC_smold_resid>2.61</NMHC_smold_resid>
+    </EFG>
+    <EFG>
+    	<ID>11</ID>
+    	<fuel_type>Southern Pine    </fuel_type>
+    	<n>206</n>
+    	<references>Baker 2008</references>
+    	<PM_flaming>na</PM_flaming>
+    	<PM10b_flaming>na</PM10b_flaming>
+    	<PM25_flaming>11.44</PM25_flaming>
+    	<CO_flaming>72.79</CO_flaming>
+    	<CO2_flaming>1680.72</CO2_flaming>
+    	<CH4_flaming>2.04</CH4_flaming>
+    	<NMHC_flaming>2.48</NMHC_flaming>
+    	<PM_smold_resid>na</PM_smold_resid>
+    	<PM10b_smold_resid>na</PM10b_smold_resid>
+    	<PM25_smold_resid>9.91</PM25_smold_resid>
+    	<CO_smold_resid>119.34</CO_smold_resid>
+    	<CO2_smold_resid>1601.54</CO2_smold_resid>
+    	<CH4_smold_resid>3.76</CH4_smold_resid>
+    	<NMHC_smold_resid>4.04</NMHC_smold_resid>
+    </EFG>
+    <EFG>
+    	<ID>12</ID>
+    	<fuel_type>Sage             </fuel_type>
+    	<n>16</n>
+    	<references>Baker 2009</references>
+    	<PM_flaming>na</PM_flaming>
+    	<PM10b_flaming>na</PM10b_flaming>
+    	<PM25_flaming>12.92</PM25_flaming>
+    	<CO_flaming>126.35</CO_flaming>
+    	<CO2_flaming>1589.82</CO2_flaming>
+    	<CH4_flaming>3.12</CH4_flaming>
+    	<NMHC_flaming>4.35</NMHC_flaming>
+    	<PM_smold_resid>na</PM_smold_resid>
+    	<PM10b_smold_resid>na</PM10b_smold_resid>
+    	<PM25_smold_resid>8.36</PM25_smold_resid>
+    	<CO_smold_resid>184.22</CO_smold_resid>
+    	<CO2_smold_resid>1452.55</CO2_smold_resid>
+    	<CH4_smold_resid>11.92</CH4_smold_resid>
+    	<NMHC_smold_resid>14.28</NMHC_smold_resid>
+    </EFG>
+    <EFG>
+    	<ID>13</ID>
+    	<fuel_type>Minnesota Grass  </fuel_type>
+    	<n>23</n>
+    	<references>Baker 2010</references>
+    	<PM_flaming>na</PM_flaming>
+    	<PM10b_flaming>na</PM10b_flaming>
+    	<PM25_flaming>12.18</PM25_flaming>
+    	<CO_flaming>61.35</CO_flaming>
+    	<CO2_flaming>1698.00</CO2_flaming>
+    	<CH4_flaming>2.12</CH4_flaming>
+    	<NMHC_flaming>3.82</NMHC_flaming>
+    	<PM_smold_resid>na</PM_smold_resid>
+    	<PM10b_smold_resid>na</PM10b_smold_resid>
+    	<PM25_smold_resid>10.75</PM25_smold_resid>
+    	<CO_smold_resid>109.37</CO_smold_resid>
+    	<CO2_smold_resid>1629.92</CO2_smold_resid>
+    	<CH4_smold_resid>4.32</CH4_smold_resid>
+    	<NMHC_smold_resid>4.25</NMHC_smold_resid>
+    </EFG>
+    <EFG>
+    	<ID>14</ID>
+    	<fuel_type>Arizona Piles    </fuel_type>
+    	<n>76</n>
+    	<references>Baker 2011</references>
+    	<PM_flaming>na</PM_flaming>
+    	<PM10b_flaming>na</PM10b_flaming>
+    	<PM25_flaming>7.74</PM25_flaming>
+    	<CO_flaming>52.66</CO_flaming>
+    	<CO2_flaming>1714.61</CO2_flaming>
+    	<CH4_flaming>3.28</CH4_flaming>
+    	<NMHC_flaming>3.56</NMHC_flaming>
+    	<PM_smold_resid>na</PM_smold_resid>
+    	<PM10b_smold_resid>na</PM10b_smold_resid>
+    	<PM25_smold_resid>21.05</PM25_smold_resid>
+    	<CO_smold_resid>130.37</CO_smold_resid>
+    	<CO2_smold_resid>1544.93</CO2_smold_resid>
+    	<CH4_smold_resid>11.03</CH4_smold_resid>
+    	<NMHC_smold_resid>6.78</NMHC_smold_resid>
+    </EFG>
+    <EFG>
+    	<ID>15</ID>
+    	<fuel_type>Grassland (source)    </fuel_type>
+    	<n></n>
+    	<references>Source code default</references>
+    	<PM_flaming>20</PM_flaming>
+    	<PM10b_flaming>20</PM10b_flaming>
+    	<PM25_flaming>6.0</PM25_flaming>
+    	<CO_flaming>80.0</CO_flaming>
+    	<CO2_flaming>3400</CO2_flaming>
+    	<CH4_flaming>0</CH4_flaming>
+    	<NMHC_flaming>0</NMHC_flaming>
+    	<PM_smold_resid>20.0</PM_smold_resid>
+    	<PM10b_smold_resid>20.0</PM10b_smold_resid>
+    	<PM25_smold_resid>6.0</PM25_smold_resid>
+    	<CO_smold_resid>80.0</CO_smold_resid>
+    	<CO2_smold_resid>3400</CO2_smold_resid>
+    	<CH4_smold_resid>0</CH4_smold_resid>
+    	<NMHC_smold_resid>0</NMHC_smold_resid>
+    </EFG>
+    <FCCS_EFG>
+	    <fccs_id>900</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>0</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>1</fccs_id>
+	    <all_nat>9|9|9</all_nat>
+	    <all_act_west>2|2|2</all_act_west>
+	    <all_act_other>9|9|9</all_act_other>
+	    <source>2|2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>2</fccs_id>
+	    <all_nat>8|8|8|8|8</all_nat>
+	    <all_act_west>1|1|4|1|1</all_act_west>
+	    <all_act_other>1|1|1|1|1</all_act_other>
+	    <source>1|1|4|1|1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>3</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>1</all_act_west>
+	    <all_act_other>1</all_act_other>
+	    <source>1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>4</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>1</all_act_west>
+	    <all_act_other>1</all_act_other>
+	    <source>1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>5</fccs_id>
+	    <all_nat>8|8|8</all_nat>
+	    <all_act_west>1|4|1</all_act_west>
+	    <all_act_other>1|4|1</all_act_other>
+	    <source>1|4|1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>6</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>7</fccs_id>
+	    <all_nat>8|8|8</all_nat>
+	    <all_act_west>1|4|4</all_act_west>
+	    <all_act_other>1|1|4</all_act_other>
+	    <source>1|4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>8</fccs_id>
+	    <all_nat>8|8</all_nat>
+	    <all_act_west>4|1</all_act_west>
+	    <all_act_other>1|1</all_act_other>
+	    <source>4|1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>9</fccs_id>
+	    <all_nat>8|8</all_nat>
+	    <all_act_west>4|1</all_act_west>
+	    <all_act_other>1|1</all_act_other>
+	    <source>4|1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>10</fccs_id>
+	    <all_nat>8|8|8|8|8</all_nat>
+	    <all_act_west>4|1|4|1|1</all_act_west>
+	    <all_act_other>1|1|1|1|1</all_act_other>
+	    <source>4|1|4|1|1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>11</fccs_id>
+	    <all_nat>8|8|8|8|8</all_nat>
+	    <all_act_west>4|1|4|1|1</all_act_west>
+	    <all_act_other>1|1|1|1|1</all_act_other>
+	    <source>4|1|4|1|1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>12</fccs_id>
+	    <all_nat>8|8</all_nat>
+	    <all_act_west>1|4</all_act_west>
+	    <all_act_other>1|4</all_act_other>
+	    <source>1|4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>13</fccs_id>
+	    <all_nat>8|8</all_nat>
+	    <all_act_west>1|4</all_act_west>
+	    <all_act_other>1|1</all_act_other>
+	    <source>1|4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>14</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>15</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>3</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>16</fccs_id>
+	    <all_nat>8|8|9|8</all_nat>
+	    <all_act_west>4|3|2|3</all_act_west>
+	    <all_act_other>4|3|9|3</all_act_other>
+	    <source>4|3|2|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>17</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>4</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>18</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>1</all_act_west>
+	    <all_act_other>1</all_act_other>
+	    <source>1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>19</fccs_id>
+	    <all_nat>8|8</all_nat>
+	    <all_act_west>4|4</all_act_west>
+	    <all_act_other>4|4</all_act_other>
+	    <source>4|4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>20</fccs_id>
+	    <all_nat>5</all_nat>
+	    <all_act_west>5</all_act_west>
+	    <all_act_other>5</all_act_other>
+	    <source>5</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>21</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>3</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>22</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>3</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>23</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>3</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>24</fccs_id>
+	    <all_nat>8|8</all_nat>
+	    <all_act_west>3|3</all_act_west>
+	    <all_act_other>3|3</all_act_other>
+	    <source>3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>25</fccs_id>
+	    <all_nat>5|5</all_nat>
+	    <all_act_west>5|5</all_act_west>
+	    <all_act_other>5|5</all_act_other>
+	    <source>5|5</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>26</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>3</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>27</fccs_id>
+	    <all_nat>8|5|5</all_nat>
+	    <all_act_west>3|5|5</all_act_west>
+	    <all_act_other>3|5|5</all_act_other>
+	    <source>3|5|5</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>28</fccs_id>
+	    <all_nat>8|8</all_nat>
+	    <all_act_west>3|3</all_act_west>
+	    <all_act_other>8|3</all_act_other>
+	    <source>3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>29</fccs_id>
+	    <all_nat>8|8|8</all_nat>
+	    <all_act_west>4|1|3</all_act_west>
+	    <all_act_other>4|1|3</all_act_other>
+	    <source>4|1|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>30</fccs_id>
+	    <all_nat>7</all_nat>
+	    <all_act_west>7</all_act_west>
+	    <all_act_other>7</all_act_other>
+	    <source>7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>32</fccs_id>
+	    <all_nat>8|5|5</all_nat>
+	    <all_act_west>3|5|5</all_act_west>
+	    <all_act_other>3|5|5</all_act_other>
+	    <source>3|5|5</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>33</fccs_id>
+	    <all_nat>7</all_nat>
+	    <all_act_west>7</all_act_west>
+	    <all_act_other>7</all_act_other>
+	    <source>7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>34</fccs_id>
+	    <all_nat>8|8</all_nat>
+	    <all_act_west>1|3</all_act_west>
+	    <all_act_other>1|3</all_act_other>
+	    <source>1|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>36</fccs_id>
+	    <all_nat>9|9|9</all_nat>
+	    <all_act_west>2|2|2</all_act_west>
+	    <all_act_other>9|9|9</all_act_other>
+	    <source>2|2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>37</fccs_id>
+	    <all_nat>8|8</all_nat>
+	    <all_act_west>3|3</all_act_west>
+	    <all_act_other>3|3</all_act_other>
+	    <source>3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>38</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>1</all_act_other>
+	    <source>1|4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>39</fccs_id>
+	    <all_nat>8|8</all_nat>
+	    <all_act_west>4|3</all_act_west>
+	    <all_act_other>4|3</all_act_other>
+	    <source>4|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>40</fccs_id>
+	    <all_nat>7</all_nat>
+	    <all_act_west>7</all_act_west>
+	    <all_act_other>7</all_act_other>
+	    <source>7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>41</fccs_id>
+	    <all_nat>13|13|9|13|13</all_nat>
+	    <all_act_west>13|13|2|13|13</all_act_west>
+	    <all_act_other>13|13|9|13|13</all_act_other>
+	    <source>15|15|2|15|15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>42</fccs_id>
+	    <all_nat>9|9</all_nat>
+	    <all_act_west>2|2</all_act_west>
+	    <all_act_other>9|9</all_act_other>
+	    <source>2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>43</fccs_id>
+	    <all_nat>9|7</all_nat>
+	    <all_act_west>2|7</all_act_west>
+	    <all_act_other>9|7</all_act_other>
+	    <source>2|7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>44</fccs_id>
+	    <all_nat>7</all_nat>
+	    <all_act_west>7</all_act_west>
+	    <all_act_other>7</all_act_other>
+	    <source>7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>45</fccs_id>
+	    <all_nat>9|7</all_nat>
+	    <all_act_west>2|7</all_act_west>
+	    <all_act_other>9|7</all_act_other>
+	    <source>2|7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>46</fccs_id>
+	    <all_nat>7</all_nat>
+	    <all_act_west>7</all_act_west>
+	    <all_act_other>7</all_act_other>
+	    <source>7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>47</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>1</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>48</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>1</all_act_other>
+	    <source>1|4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>49</fccs_id>
+	    <all_nat>7|6</all_nat>
+	    <all_act_west>7|6</all_act_west>
+	    <all_act_other>7|6</all_act_other>
+	    <source>7|6</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>51</fccs_id>
+	    <all_nat>7</all_nat>
+	    <all_act_west>7</all_act_west>
+	    <all_act_other>7</all_act_other>
+	    <source>7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>52</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>1</all_act_west>
+	    <all_act_other>1</all_act_other>
+	    <source>1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>53</fccs_id>
+	    <all_nat>8|8</all_nat>
+	    <all_act_west>3|3</all_act_west>
+	    <all_act_other>8|3</all_act_other>
+	    <source>3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>54</fccs_id>
+	    <all_nat>8|8|8</all_nat>
+	    <all_act_west>1|4|3</all_act_west>
+	    <all_act_other>1|4|3</all_act_other>
+	    <source>1|4|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>55</fccs_id>
+	    <all_nat>5</all_nat>
+	    <all_act_west>5</all_act_west>
+	    <all_act_other>5</all_act_other>
+	    <source>5</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>56</fccs_id>
+	    <all_nat>13|13|12|12|12</all_nat>
+	    <all_act_west>13|13|6|6|6</all_act_west>
+	    <all_act_other>13|13|12|12|12</all_act_other>
+	    <source>15|15|6|6|6</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>57</fccs_id>
+	    <all_nat>13|13</all_nat>
+	    <all_act_west>13|13</all_act_west>
+	    <all_act_other>13|13</all_act_other>
+	    <source>15|15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>58</fccs_id>
+	    <all_nat>5|5</all_nat>
+	    <all_act_west>5|5</all_act_west>
+	    <all_act_other>5|5</all_act_other>
+	    <source>5|5</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>59</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>4</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>60</fccs_id>
+	    <all_nat>13|13|12|12|12</all_nat>
+	    <all_act_west>13|13|6|6|6</all_act_west>
+	    <all_act_other>13|13|12|12|12</all_act_other>
+	    <source>15|15|6|6|6</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>61</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>3</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>62</fccs_id>
+	    <all_nat>13|8|8|7|13</all_nat>
+	    <all_act_west>13|1|4|7|13</all_act_west>
+	    <all_act_other>13|1|4|7|13</all_act_other>
+	    <source>15|1|4|7|15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>63</fccs_id>
+	    <all_nat>13|13</all_nat>
+	    <all_act_west>13|1</all_act_west>
+	    <all_act_other>13|13</all_act_other>
+	    <source>15|1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>65</fccs_id>
+	    <all_nat>13</all_nat>
+	    <all_act_west>13</all_act_west>
+	    <all_act_other>13</all_act_other>
+	    <source>15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>66</fccs_id>
+	    <all_nat>13|13|13|13</all_nat>
+	    <all_act_west>13|13|13|13</all_act_west>
+	    <all_act_other>13|13|13|13</all_act_other>
+	    <source>15|15|15|15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>67</fccs_id>
+	    <all_nat>8|8</all_nat>
+	    <all_act_west>1|3</all_act_west>
+	    <all_act_other>1|3</all_act_other>
+	    <source>1|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>69</fccs_id>
+	    <all_nat>5|5|12|13|12</all_nat>
+	    <all_act_west>5|5|6|13|6</all_act_west>
+	    <all_act_other>5|5|12|13|12</all_act_other>
+	    <source>5|5|6|15|6</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>70</fccs_id>
+	    <all_nat>8|8|8</all_nat>
+	    <all_act_west>4|3|3</all_act_west>
+	    <all_act_other>4|3|3</all_act_other>
+	    <source>4|3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>71</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>72</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>73</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>74</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>75</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>76</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>77</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>78</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>79</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>80</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>81</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>82</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>83</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>84</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>85</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>8</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>86</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>8</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>87</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>8</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>88</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>8</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>89</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>8</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>90</fccs_id>
+	    <all_nat>9|9</all_nat>
+	    <all_act_west>2|2</all_act_west>
+	    <all_act_other>9|9</all_act_other>
+	    <source>2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>91</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>8</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>92</fccs_id>
+	    <all_nat>8|8|8|8|8</all_nat>
+	    <all_act_west>4|4|4|4|4</all_act_west>
+	    <all_act_other>8|8|8|4|4</all_act_other>
+	    <source>4|4|4|4|4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>93</fccs_id>
+	    <all_nat>9|9</all_nat>
+	    <all_act_west>2|2</all_act_west>
+	    <all_act_other>9|9</all_act_other>
+	    <source>2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>94</fccs_id>
+	    <all_nat>9|9</all_nat>
+	    <all_act_west>2|2</all_act_west>
+	    <all_act_other>9|9</all_act_other>
+	    <source>2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>95</fccs_id>
+	    <all_nat>9|9</all_nat>
+	    <all_act_west>2|2</all_act_west>
+	    <all_act_other>9|9</all_act_other>
+	    <source>2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>97</fccs_id>
+	    <all_nat>13</all_nat>
+	    <all_act_west>1</all_act_west>
+	    <all_act_other>13</all_act_other>
+	    <source>1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>98</fccs_id>
+	    <all_nat>8|8</all_nat>
+	    <all_act_west>1|1</all_act_west>
+	    <all_act_other>8|8</all_act_other>
+	    <source>1|1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>99</fccs_id>
+	    <all_nat>13</all_nat>
+	    <all_act_west>13</all_act_west>
+	    <all_act_other>13</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>100</fccs_id>
+	    <all_nat>13|13</all_nat>
+	    <all_act_west>13|13</all_act_west>
+	    <all_act_other>13|13</all_act_other>
+	    <source>3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>101</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>8</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>102</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>8</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>103</fccs_id>
+	    <all_nat>8|8|9</all_nat>
+	    <all_act_west>4|4|2</all_act_west>
+	    <all_act_other>8|8|9</all_act_other>
+	    <source>4|4|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>104</fccs_id>
+	    <all_nat>8|8|9</all_nat>
+	    <all_act_west>4|4|2</all_act_west>
+	    <all_act_other>8|8|9</all_act_other>
+	    <source>4|4|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>105</fccs_id>
+	    <all_nat>8|8|8|9|9</all_nat>
+	    <all_act_west>4|4|4|2|2</all_act_west>
+	    <all_act_other>8|8|8|9|9</all_act_other>
+	    <source>4|4|4|2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>106</fccs_id>
+	    <all_nat>10</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>10</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>107</fccs_id>
+	    <all_nat>10</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>10</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>109</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>110</fccs_id>
+	    <all_nat>9|9|9</all_nat>
+	    <all_act_west>2|2|2</all_act_west>
+	    <all_act_other>9|9|9</all_act_other>
+	    <source>2|2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>114</fccs_id>
+	    <all_nat>10|11|11</all_nat>
+	    <all_act_west>3|3|3</all_act_west>
+	    <all_act_other>10|11|11</all_act_other>
+	    <source>3|3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>115</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>120</fccs_id>
+	    <all_nat>10|11|11</all_nat>
+	    <all_act_west>3|3|3</all_act_west>
+	    <all_act_other>10|11|11</all_act_other>
+	    <source>3|3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>121</fccs_id>
+	    <all_nat>10|11|11</all_nat>
+	    <all_act_west>3|3|3</all_act_west>
+	    <all_act_other>10|11|11</all_act_other>
+	    <source>3|3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>123</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>124</fccs_id>
+	    <all_nat>10</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>10</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>125</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>129</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>131</fccs_id>
+	    <all_nat>13|13</all_nat>
+	    <all_act_west>13|13</all_act_west>
+	    <all_act_other>13|13</all_act_other>
+	    <source>15|15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>133</fccs_id>
+	    <all_nat>13</all_nat>
+	    <all_act_west>13</all_act_west>
+	    <all_act_other>13</all_act_other>
+	    <source>15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>134</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>135</fccs_id>
+	    <all_nat>10|5|13</all_nat>
+	    <all_act_west>4|5|13</all_act_west>
+	    <all_act_other>10|5|13</all_act_other>
+	    <source>4|5|15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>138</fccs_id>
+	    <all_nat>10|10</all_nat>
+	    <all_act_west>3|3</all_act_west>
+	    <all_act_other>10|10</all_act_other>
+	    <source>3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>140</fccs_id>
+	    <all_nat>10</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>10</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>142</fccs_id>
+	    <all_nat>9|9</all_nat>
+	    <all_act_west>2|2</all_act_west>
+	    <all_act_other>9|9</all_act_other>
+	    <source>2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>143</fccs_id>
+	    <all_nat>8|9|9</all_nat>
+	    <all_act_west>4|2|2</all_act_west>
+	    <all_act_other>8|9|9</all_act_other>
+	    <source>4|2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>146</fccs_id>
+	    <all_nat>10</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>10</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>147</fccs_id>
+	    <all_nat>10</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>10</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>148</fccs_id>
+	    <all_nat>10</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>10</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>152</fccs_id>
+	    <all_nat>10|10</all_nat>
+	    <all_act_west>3|3</all_act_west>
+	    <all_act_other>10|10</all_act_other>
+	    <source>3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>154</fccs_id>
+	    <all_nat>9|9|13</all_nat>
+	    <all_act_west>2|2|13</all_act_west>
+	    <all_act_other>9|9|13</all_act_other>
+	    <source>2|2|15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>155</fccs_id>
+	    <all_nat>10</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>10</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>156</fccs_id>
+	    <all_nat>11</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>11</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>157</fccs_id>
+	    <all_nat>11</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>11</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>158</fccs_id>
+	    <all_nat>11</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>11</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>161</fccs_id>
+	    <all_nat>11|11</all_nat>
+	    <all_act_west>3|3</all_act_west>
+	    <all_act_other>11|11</all_act_other>
+	    <source>3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>162</fccs_id>
+	    <all_nat>11|11</all_nat>
+	    <all_act_west>3|3</all_act_west>
+	    <all_act_other>11|11</all_act_other>
+	    <source>3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>164</fccs_id>
+	    <all_nat>11</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>11</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>165</fccs_id>
+	    <all_nat>11|9|11</all_nat>
+	    <all_act_west>3|2|2</all_act_west>
+	    <all_act_other>11|9|11</all_act_other>
+	    <source>3|2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>166</fccs_id>
+	    <all_nat>11|9|11</all_nat>
+	    <all_act_west>3|2|2</all_act_west>
+	    <all_act_other>11|9|11</all_act_other>
+	    <source>3|2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>168</fccs_id>
+	    <all_nat>11</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>11</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>170</fccs_id>
+	    <all_nat>11</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>11</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>173</fccs_id>
+	    <all_nat>9|13</all_nat>
+	    <all_act_west>2|13</all_act_west>
+	    <all_act_other>9|13</all_act_other>
+	    <source>2|15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>174</fccs_id>
+	    <all_nat>7|11|9</all_nat>
+	    <all_act_west>7|2|2</all_act_west>
+	    <all_act_other>7|11|9</all_act_other>
+	    <source>7|2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>175</fccs_id>
+	    <all_nat>13|13</all_nat>
+	    <all_act_west>13|13</all_act_west>
+	    <all_act_other>13|13</all_act_other>
+	    <source>15|15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>176</fccs_id>
+	    <all_nat>13</all_nat>
+	    <all_act_west>13</all_act_west>
+	    <all_act_other>13</all_act_other>
+	    <source>15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>178</fccs_id>
+	    <all_nat>11</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>11</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>180</fccs_id>
+	    <all_nat>9|9</all_nat>
+	    <all_act_west>2|2</all_act_west>
+	    <all_act_other>9|9</all_act_other>
+	    <source>2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>181</fccs_id>
+	    <all_nat>11</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>11</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>182</fccs_id>
+	    <all_nat>11</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>11</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>183</fccs_id>
+	    <all_nat>11</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>11</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>184</fccs_id>
+	    <all_nat>11|11</all_nat>
+	    <all_act_west>3|3</all_act_west>
+	    <all_act_other>11|11</all_act_other>
+	    <source>3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>185</fccs_id>
+	    <all_nat>11|11</all_nat>
+	    <all_act_west>3|3</all_act_west>
+	    <all_act_other>11|11</all_act_other>
+	    <source>3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>186</fccs_id>
+	    <all_nat>11|9</all_nat>
+	    <all_act_west>3|2</all_act_west>
+	    <all_act_other>11|9</all_act_other>
+	    <source>3|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>187</fccs_id>
+	    <all_nat>11|11</all_nat>
+	    <all_act_west>3|3</all_act_west>
+	    <all_act_other>11|11</all_act_other>
+	    <source>3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>188</fccs_id>
+	    <all_nat>11|5</all_nat>
+	    <all_act_west>3|7</all_act_west>
+	    <all_act_other>11|5</all_act_other>
+	    <source>3|7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>189</fccs_id>
+	    <all_nat>11|5</all_nat>
+	    <all_act_west>3|7</all_act_west>
+	    <all_act_other>11|5</all_act_other>
+	    <source>3|7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>190</fccs_id>
+	    <all_nat>11|9</all_nat>
+	    <all_act_west>3|2</all_act_west>
+	    <all_act_other>11|9</all_act_other>
+	    <source>3|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>191</fccs_id>
+	    <all_nat>11|11|9</all_nat>
+	    <all_act_west>3|3|2</all_act_west>
+	    <all_act_other>11|11|9</all_act_other>
+	    <source>3|3|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>196</fccs_id>
+	    <all_nat>11</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>11</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>203</fccs_id>
+	    <all_nat>13</all_nat>
+	    <all_act_west>13</all_act_west>
+	    <all_act_other>13</all_act_other>
+	    <source>15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>208</fccs_id>
+	    <all_nat>8|8</all_nat>
+	    <all_act_west>4|1</all_act_west>
+	    <all_act_other>4|1</all_act_other>
+	    <source>4|1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>210</fccs_id>
+	    <all_nat>5|5</all_nat>
+	    <all_act_west>5|5</all_act_west>
+	    <all_act_other>5|5</all_act_other>
+	    <source>5|5</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>211</fccs_id>
+	    <all_nat>8|8</all_nat>
+	    <all_act_west>3|3</all_act_west>
+	    <all_act_other>8|3</all_act_other>
+	    <source>3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>212</fccs_id>
+	    <all_nat>8|8</all_nat>
+	    <all_act_west>3|3</all_act_west>
+	    <all_act_other>8|3</all_act_other>
+	    <source>3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>213</fccs_id>
+	    <all_nat>13|13|13</all_nat>
+	    <all_act_west>13|13|13</all_act_west>
+	    <all_act_other>13|13|13</all_act_other>
+	    <source>15|15|15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>214</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>4</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>215</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>1</all_act_other>
+	    <source>1|4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>216</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>217</fccs_id>
+	    <all_nat>7</all_nat>
+	    <all_act_west>7</all_act_west>
+	    <all_act_other>7</all_act_other>
+	    <source>7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>218</fccs_id>
+	    <all_nat>7</all_nat>
+	    <all_act_west>7</all_act_west>
+	    <all_act_other>7</all_act_other>
+	    <source>7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>219</fccs_id>
+	    <all_nat>8|8|8</all_nat>
+	    <all_act_west>1|4|3</all_act_west>
+	    <all_act_other>1|4|3</all_act_other>
+	    <source>1|4|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>220</fccs_id>
+	    <all_nat>8|8|8</all_nat>
+	    <all_act_west>1|4|3</all_act_west>
+	    <all_act_other>1|4|3</all_act_other>
+	    <source>1|4|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>221</fccs_id>
+	    <all_nat>13</all_nat>
+	    <all_act_west>13</all_act_west>
+	    <all_act_other>13</all_act_other>
+	    <source>15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>222</fccs_id>
+	    <all_nat>8|8</all_nat>
+	    <all_act_west>3|3</all_act_west>
+	    <all_act_other>8|3</all_act_other>
+	    <source>3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>223</fccs_id>
+	    <all_nat>8|8|8</all_nat>
+	    <all_act_west>1|4|3</all_act_west>
+	    <all_act_other>1|4|3</all_act_other>
+	    <source>1|4|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>224</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>225</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>226</fccs_id>
+	    <all_nat>8|7</all_nat>
+	    <all_act_west>4|7</all_act_west>
+	    <all_act_other>4|7</all_act_other>
+	    <source>4|7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>227</fccs_id>
+	    <all_nat>8|7</all_nat>
+	    <all_act_west>4|7</all_act_west>
+	    <all_act_other>4|7</all_act_other>
+	    <source>4|7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>228</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>3</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>229</fccs_id>
+	    <all_nat>8|5</all_nat>
+	    <all_act_west>3|5</all_act_west>
+	    <all_act_other>3|5</all_act_other>
+	    <source>3|5</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>230</fccs_id>
+	    <all_nat>5|5</all_nat>
+	    <all_act_west>5|5</all_act_west>
+	    <all_act_other>5|5</all_act_other>
+	    <source>5|5</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>231</fccs_id>
+	    <all_nat>5|8|5|7</all_nat>
+	    <all_act_west>5|3|5|7</all_act_west>
+	    <all_act_other>5|3|5|7</all_act_other>
+	    <source>5|3|5|7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>232</fccs_id>
+	    <all_nat>7|7|7|7</all_nat>
+	    <all_act_west>7|7|7|7</all_act_west>
+	    <all_act_other>7|7|7|7</all_act_other>
+	    <source>7|7|7|7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>233</fccs_id>
+	    <all_nat>5|13|13|12</all_nat>
+	    <all_act_west>5|13|13|6</all_act_west>
+	    <all_act_other>5|13|13|12</all_act_other>
+	    <source>5|15|15|6</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>234</fccs_id>
+	    <all_nat>5|13|13|12</all_nat>
+	    <all_act_west>5|13|13|6</all_act_west>
+	    <all_act_other>5|13|13|12</all_act_other>
+	    <source>5|15|15|6</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>235</fccs_id>
+	    <all_nat>13|13|9|13|13</all_nat>
+	    <all_act_west>13|13|2|13|13</all_act_west>
+	    <all_act_other>13|13|9|13|13</all_act_other>
+	    <source>15|15|2|15|15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>236</fccs_id>
+	    <all_nat>7</all_nat>
+	    <all_act_west>7</all_act_west>
+	    <all_act_other>7</all_act_other>
+	    <source>7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>237</fccs_id>
+	    <all_nat>8|8|7|13</all_nat>
+	    <all_act_west>1|4|7|13</all_act_west>
+	    <all_act_other>1|4|7|13</all_act_other>
+	    <source>1|4|7|15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>238</fccs_id>
+	    <all_nat>8|8</all_nat>
+	    <all_act_west>1|4</all_act_west>
+	    <all_act_other>1|1</all_act_other>
+	    <source>1|4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>239</fccs_id>
+	    <all_nat>8|8|8</all_nat>
+	    <all_act_west>1|4|4</all_act_west>
+	    <all_act_other>1|1|4</all_act_other>
+	    <source>1|4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>240</fccs_id>
+	    <all_nat>11</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>11</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>241</fccs_id>
+	    <all_nat>11|11|11</all_nat>
+	    <all_act_west>3|3|3</all_act_west>
+	    <all_act_other>11|11|11</all_act_other>
+	    <source>3|3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>242</fccs_id>
+	    <all_nat>11|11|11</all_nat>
+	    <all_act_west>3|3|3</all_act_west>
+	    <all_act_other>11|11|11</all_act_other>
+	    <source>3|3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>243</fccs_id>
+	    <all_nat>9|10</all_nat>
+	    <all_act_west>2|3</all_act_west>
+	    <all_act_other>9|10</all_act_other>
+	    <source>2|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>260</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>261</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>262</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>263</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>264</fccs_id>
+	    <all_nat>9|7|7</all_nat>
+	    <all_act_west>2|7|7</all_act_west>
+	    <all_act_other>9|7|7</all_act_other>
+	    <source>2|7|7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>265</fccs_id>
+	    <all_nat>10</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>10</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>266</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>267</fccs_id>
+	    <all_nat>9|9|9</all_nat>
+	    <all_act_west>2|2|2</all_act_west>
+	    <all_act_other>9|9|9</all_act_other>
+	    <source>2|2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>268</fccs_id>
+	    <all_nat>10|10|9</all_nat>
+	    <all_act_west>4|4|2</all_act_west>
+	    <all_act_other>10|10|9</all_act_other>
+	    <source>4|0|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>269</fccs_id>
+	    <all_nat>9|9</all_nat>
+	    <all_act_west>2|2</all_act_west>
+	    <all_act_other>9|9</all_act_other>
+	    <source>2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>270</fccs_id>
+	    <all_nat>10</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>10</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>272</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>273</fccs_id>
+	    <all_nat>8|8|8|8</all_nat>
+	    <all_act_west>4|1|4|3</all_act_west>
+	    <all_act_other>4|1|4|3</all_act_other>
+	    <source>4|1|4|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>274</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>275</fccs_id>
+	    <all_nat>9|9</all_nat>
+	    <all_act_west>2|2</all_act_west>
+	    <all_act_other>9|9</all_act_other>
+	    <source>2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>276</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>279</fccs_id>
+	    <all_nat>8|8|10</all_nat>
+	    <all_act_west>4|4|4</all_act_west>
+	    <all_act_other>8|8|10</all_act_other>
+	    <source>4|4|4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>280</fccs_id>
+	    <all_nat>13</all_nat>
+	    <all_act_west>13</all_act_west>
+	    <all_act_other>13</all_act_other>
+	    <source>15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>281</fccs_id>
+	    <all_nat>11</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>11</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>282</fccs_id>
+	    <all_nat>11</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>11</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>283</fccs_id>
+	    <all_nat>9|9|9</all_nat>
+	    <all_act_west>2|2|2</all_act_west>
+	    <all_act_other>9|9|9</all_act_other>
+	    <source>2|2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>284</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>286</fccs_id>
+	    <all_nat>8|8</all_nat>
+	    <all_act_west>3|3</all_act_west>
+	    <all_act_other>3|3</all_act_other>
+	    <source>3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>287</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>8</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>288</fccs_id>
+	    <all_nat>11</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>11</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>289</fccs_id>
+	    <all_nat>11|13</all_nat>
+	    <all_act_west>4|13</all_act_west>
+	    <all_act_other>11|13</all_act_other>
+	    <source>4|15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>291</fccs_id>
+	    <all_nat>11</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>11</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>801</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>802</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>803</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>810</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>813</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>821</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>822</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>823</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>824</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>888</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>0</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>301</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>302</fccs_id>
+	    <all_nat>13|7|13</all_nat>
+	    <all_act_west>0|7|1</all_act_west>
+	    <all_act_other>13|7|13</all_act_other>
+	    <source>15|7|1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>303</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>304</fccs_id>
+	    <all_nat>8|8</all_nat>
+	    <all_act_west>4|1</all_act_west>
+	    <all_act_other>4|1</all_act_other>
+	    <source>4|1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>305</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>306</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>3</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>307</fccs_id>
+	    <all_nat>7</all_nat>
+	    <all_act_west>7</all_act_west>
+	    <all_act_other>7</all_act_other>
+	    <source>7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>308</fccs_id>
+	    <all_nat>12|12</all_nat>
+	    <all_act_west>6|6</all_act_west>
+	    <all_act_other>12|12</all_act_other>
+	    <source>6</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>309</fccs_id>
+	    <all_nat>7</all_nat>
+	    <all_act_west>7</all_act_west>
+	    <all_act_other>7</all_act_other>
+	    <source>7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>310</fccs_id>
+	    <all_nat>7</all_nat>
+	    <all_act_west>7</all_act_west>
+	    <all_act_other>7</all_act_other>
+	    <source>7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>311</fccs_id>
+	    <all_nat>7</all_nat>
+	    <all_act_west>7</all_act_west>
+	    <all_act_other>7</all_act_other>
+	    <source>7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>312</fccs_id>
+	    <all_nat>7</all_nat>
+	    <all_act_west>7</all_act_west>
+	    <all_act_other>7</all_act_other>
+	    <source>7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>313</fccs_id>
+	    <all_nat>7|7</all_nat>
+	    <all_act_west>7|7</all_act_west>
+	    <all_act_other>7|7</all_act_other>
+	    <source>7|7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>314</fccs_id>
+	    <all_nat>7</all_nat>
+	    <all_act_west>7</all_act_west>
+	    <all_act_other>7</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>315</fccs_id>
+	    <all_nat>13|13|13</all_nat>
+	    <all_act_west>0|6|1</all_act_west>
+	    <all_act_other>13|13|13</all_act_other>
+	    <source>15|6|1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>316</fccs_id>
+	    <all_nat>7</all_nat>
+	    <all_act_west>7</all_act_west>
+	    <all_act_other>7</all_act_other>
+	    <source>7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>317</fccs_id>
+	    <all_nat>7</all_nat>
+	    <all_act_west>7</all_act_west>
+	    <all_act_other>7</all_act_other>
+	    <source>7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>318</fccs_id>
+	    <all_nat>13|7</all_nat>
+	    <all_act_west>0|7</all_act_west>
+	    <all_act_other>13|7</all_act_other>
+	    <source>15|7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>319</fccs_id>
+	    <all_nat>8</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>1</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>320</fccs_id>
+	    <all_nat>8|8</all_nat>
+	    <all_act_west>4|3</all_act_west>
+	    <all_act_other>4|3</all_act_other>
+	    <source>4|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>401</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>402</fccs_id>
+	    <all_nat>11|11|11</all_nat>
+	    <all_act_west>3|3|3</all_act_west>
+	    <all_act_other>11|11|11</all_act_other>
+	    <source>3|3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>403</fccs_id>
+	    <all_nat>9|7|7</all_nat>
+	    <all_act_west>2|7|7</all_act_west>
+	    <all_act_other>9|7|7</all_act_other>
+	    <source>2|7|7</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>404</fccs_id>
+	    <all_nat>9|9</all_nat>
+	    <all_act_west>2|2</all_act_west>
+	    <all_act_other>9|9</all_act_other>
+	    <source>2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>405</fccs_id>
+	    <all_nat>9|9</all_nat>
+	    <all_act_west>2|2</all_act_west>
+	    <all_act_other>9|9</all_act_other>
+	    <source>2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>406</fccs_id>
+	    <all_nat>9|11</all_nat>
+	    <all_act_west>2|3</all_act_west>
+	    <all_act_other>9|11</all_act_other>
+	    <source>2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>407</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>409</fccs_id>
+	    <all_nat>11</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>11</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>410</fccs_id>
+	    <all_nat>10</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>10</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>411</fccs_id>
+	    <all_nat>5</all_nat>
+	    <all_act_west>5</all_act_west>
+	    <all_act_other>5</all_act_other>
+	    <source>5</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>412</fccs_id>
+	    <all_nat>7</all_nat>
+	    <all_act_west>7</all_act_west>
+	    <all_act_other>7</all_act_other>
+	    <source>7|1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>413</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>417</fccs_id>
+	    <all_nat>13</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>13</all_act_other>
+	    <source>15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>419</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>420</fccs_id>
+	    <all_nat>13|13</all_nat>
+	    <all_act_west>0|0</all_act_west>
+	    <all_act_other>13|13</all_act_other>
+	    <source>15|15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>421</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>422</fccs_id>
+	    <all_nat>13|13</all_nat>
+	    <all_act_west>0|0</all_act_west>
+	    <all_act_other>13|13</all_act_other>
+	    <source>15|15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>423</fccs_id>
+	    <all_nat>13|13</all_nat>
+	    <all_act_west>0|0</all_act_west>
+	    <all_act_other>13|13</all_act_other>
+	    <source>15|15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>424</fccs_id>
+	    <all_nat>11</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>11</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>425</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>426</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>427</fccs_id>
+	    <all_nat>10</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>10</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>428</fccs_id>
+	    <all_nat>13</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>13</all_act_other>
+	    <source>15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>429</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>430</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>431</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>433</fccs_id>
+	    <all_nat>10</all_nat>
+	    <all_act_west>3</all_act_west>
+	    <all_act_other>10</all_act_other>
+	    <source>3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>434</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>435</fccs_id>
+	    <all_nat>13</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>13</all_act_other>
+	    <source>15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>436</fccs_id>
+	    <all_nat>13</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>13</all_act_other>
+	    <source>15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>437</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>438</fccs_id>
+	    <all_nat>11</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>11</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>439</fccs_id>
+	    <all_nat>11</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>11</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>440</fccs_id>
+	    <all_nat>11|11</all_nat>
+	    <all_act_west>4|2</all_act_west>
+	    <all_act_other>11|11</all_act_other>
+	    <source>4|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>441</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>442</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>443</fccs_id>
+	    <all_nat>13</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>13</all_act_other>
+	    <source>15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>445</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>1</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>448</fccs_id>
+	    <all_nat>11</all_nat>
+	    <all_act_west>4</all_act_west>
+	    <all_act_other>11</all_act_other>
+	    <source>4</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>449</fccs_id>
+	    <all_nat>9</all_nat>
+	    <all_act_west>2</all_act_west>
+	    <all_act_other>9</all_act_other>
+	    <source>2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>450</fccs_id>
+	    <all_nat>5</all_nat>
+	    <all_act_west>5</all_act_west>
+	    <all_act_other>5</all_act_other>
+	    <source>5</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>451</fccs_id>
+	    <all_nat>5</all_nat>
+	    <all_act_west>5</all_act_west>
+	    <all_act_other>5</all_act_other>
+	    <source>5</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>453</fccs_id>
+	    <all_nat>13|13</all_nat>
+	    <all_act_west>0|0</all_act_west>
+	    <all_act_other>13|13</all_act_other>
+	    <source>15|15</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>454</fccs_id>
+	    <all_nat>9|9</all_nat>
+	    <all_act_west>2|2</all_act_west>
+	    <all_act_other>9|9</all_act_other>
+	    <source>2|2</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>455</fccs_id>
+	    <all_nat>10|10</all_nat>
+	    <all_act_west>3|3</all_act_west>
+	    <all_act_other>10|10</all_act_other>
+	    <source>3|3</source>
+    </FCCS_EFG>
+    <FCCS_EFG>
+	    <fccs_id>456</fccs_id>
+	    <all_nat>0</all_nat>
+	    <all_act_west>0</all_act_west>
+	    <all_act_other>0</all_act_other>
+	    <source>1</source>
+    </FCCS_EFG>
+	<cover_type>
+		<cover_type_ID>1</cover_type_ID>
+		<type_number>SRM 101</type_number>
+		<type_name>Bluebunch Wheatgrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>2</cover_type_ID>
+		<type_number>SRM 102</type_number>
+		<type_name>Idaho Fescue</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>3</cover_type_ID>
+		<type_number>SRM 103</type_number>
+		<type_name>Green Fescue</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>4</cover_type_ID>
+		<type_number>SRM 104</type_number>
+		<type_name>Antelope Bitterbrush-Bluebunch Wheatgrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>5</cover_type_ID>
+		<type_number>SRM 105</type_number>
+		<type_name>Antelope Bitterbrush-Idaho Fescue</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>6</cover_type_ID>
+		<type_number>SRM 106</type_number>
+		<type_name>Bluegrass Scabland</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>7</cover_type_ID>
+		<type_number>SRM 107</type_number>
+		<type_name>Western Juniper-Big Sagebrush-Bluebunch Wheatgrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>8</cover_type_ID>
+		<type_number>SRM 108</type_number>
+		<type_name>Alpine Idaho Fescue</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>9</cover_type_ID>
+		<type_number>SRM 109</type_number>
+		<type_name>Ponderosa Pine - Shrubland</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>10</cover_type_ID>
+		<type_number>SRM 110</type_number>
+		<type_name>Ponderosa Pine - Grassland</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>11</cover_type_ID>
+		<type_number>SRM 201</type_number>
+		<type_name>Blue Oak Woodland</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>12</cover_type_ID>
+		<type_number>SRM 202</type_number>
+		<type_name>Coast Live Oak Woodland</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>13</cover_type_ID>
+		<type_number>SRM 203</type_number>
+		<type_name>Riparian Woodland</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>14</cover_type_ID>
+		<type_number>SAF   1</type_number>
+		<type_name>Jack Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>15</cover_type_ID>
+		<type_number>SAF   5</type_number>
+		<type_name>Balsam Fir</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>16</cover_type_ID>
+		<type_number>SAF  12</type_number>
+		<type_name>Black Spruce (Eastern)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>17</cover_type_ID>
+		<type_number>SAF  13</type_number>
+		<type_name>Black Spruce-Tamarack</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>18</cover_type_ID>
+		<type_number>SAF 107</type_number>
+		<type_name>White Spruce (Eastern)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>19</cover_type_ID>
+		<type_number>SAF  38</type_number>
+		<type_name>Tamarack</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>20</cover_type_ID>
+		<type_number>SAF  16</type_number>
+		<type_name>Aspen (Eastern)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>21</cover_type_ID>
+		<type_number>SAF  17</type_number>
+		<type_name>Pin Cherry</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>22</cover_type_ID>
+		<type_number>SAF  18</type_number>
+		<type_name>Paper Birch (Eastern)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>23</cover_type_ID>
+		<type_number>SAF  32</type_number>
+		<type_name>Red Spruce</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>24</cover_type_ID>
+		<type_number>SAF  33</type_number>
+		<type_name>Red Spruce-Balsam Fir</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>25</cover_type_ID>
+		<type_number>SAF  34</type_number>
+		<type_name>Red Spruce-Fraser Fir</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>26</cover_type_ID>
+		<type_number>SAF  30</type_number>
+		<type_name>Red Spruce-Yellow Birch</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>27</cover_type_ID>
+		<type_number>SAF  31</type_number>
+		<type_name>Red Spruce-Sugar Maple-Beech</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>28</cover_type_ID>
+		<type_number>SAF  35</type_number>
+		<type_name>Paper Birch-Red Spruce-Balsam Fir</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>29</cover_type_ID>
+		<type_number>SAF  37</type_number>
+		<type_name>Northern White Cedar</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>30</cover_type_ID>
+		<type_number>SAF  15</type_number>
+		<type_name>Red Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>31</cover_type_ID>
+		<type_number>SAF  21</type_number>
+		<type_name>Eastern White Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>32</cover_type_ID>
+		<type_number>SAF  22</type_number>
+		<type_name>White Pine-Hemlock</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>33</cover_type_ID>
+		<type_number>SAF  23</type_number>
+		<type_name>Eastern Hemlock</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>34</cover_type_ID>
+		<type_number>SAF  20</type_number>
+		<type_name>White Pine-Northern Red Oak-Red Maple</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>35</cover_type_ID>
+		<type_number>SAF  51</type_number>
+		<type_name>White Pine-Chestnut Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>36</cover_type_ID>
+		<type_number>SAF  24</type_number>
+		<type_name>Hemlock-Yellow Birch</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>37</cover_type_ID>
+		<type_number>SAF  27</type_number>
+		<type_name>Sugar Maple</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>38</cover_type_ID>
+		<type_number>SAF  25</type_number>
+		<type_name>Sugar Maple-Beech-Yellow Birch</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>39</cover_type_ID>
+		<type_number>SAF  26</type_number>
+		<type_name>Sugar Maple-Basswood</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>40</cover_type_ID>
+		<type_number>SAF  28</type_number>
+		<type_name>Black Cherry-Maple</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>41</cover_type_ID>
+		<type_number>SAF  60</type_number>
+		<type_name>Beech-Sugar Maple</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>42</cover_type_ID>
+		<type_number>SAF 108</type_number>
+		<type_name>Red Maple</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>43</cover_type_ID>
+		<type_number>SAF  14</type_number>
+		<type_name>Northern Pin Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>44</cover_type_ID>
+		<type_number>SAF  19</type_number>
+		<type_name>Gray Birch-Red Maple</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>45</cover_type_ID>
+		<type_number>SAF  39</type_number>
+		<type_name>Black Ash-American Elm-Red Maple</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>46</cover_type_ID>
+		<type_number>SAF 109</type_number>
+		<type_name>Hawthorn</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>47</cover_type_ID>
+		<type_number>SAF  40</type_number>
+		<type_name>Post Oak-Blackjack Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>48</cover_type_ID>
+		<type_number>SAF  42</type_number>
+		<type_name>Bur Oak (Eastern)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>49</cover_type_ID>
+		<type_number>SAF  43</type_number>
+		<type_name>Bear Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>50</cover_type_ID>
+		<type_number>SAF  44</type_number>
+		<type_name>Chestnut Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>51</cover_type_ID>
+		<type_number>SAF  52</type_number>
+		<type_name>White Oak-Black Oak-Northern Red Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>52</cover_type_ID>
+		<type_number>SAF  53</type_number>
+		<type_name>White Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>53</cover_type_ID>
+		<type_number>SAF 110</type_number>
+		<type_name>Black Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>54</cover_type_ID>
+		<type_number>SAF  55</type_number>
+		<type_name>Northern Red Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>55</cover_type_ID>
+		<type_number>SAF  50</type_number>
+		<type_name>Black Locust</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>56</cover_type_ID>
+		<type_number>SAF  57</type_number>
+		<type_name>Yellow-Poplar</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>57</cover_type_ID>
+		<type_number>SAF  58</type_number>
+		<type_name>Yellow-Poplar-Eastern Hemlock</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>58</cover_type_ID>
+		<type_number>SAF  59</type_number>
+		<type_name>Yellow-Poplar-White Oak-Northern Red Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>59</cover_type_ID>
+		<type_number>SAF  61</type_number>
+		<type_name>River Birch-Sycamore</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>60</cover_type_ID>
+		<type_number>SAF  62</type_number>
+		<type_name>Silver Maple-American Elm</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>61</cover_type_ID>
+		<type_number>SAF  64</type_number>
+		<type_name>Sassafras-Persimmon</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>62</cover_type_ID>
+		<type_number>SAF  65</type_number>
+		<type_name>Pin Oak-Sweetgum</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>63</cover_type_ID>
+		<type_number>SAF  45</type_number>
+		<type_name>Pitch Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>64</cover_type_ID>
+		<type_number>SAF  46</type_number>
+		<type_name>Eastern Redcedar</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>65</cover_type_ID>
+		<type_number>SAF  69</type_number>
+		<type_name>Sand Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>66</cover_type_ID>
+		<type_number>SAF  70</type_number>
+		<type_name>Longleaf Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>67</cover_type_ID>
+		<type_number>SAF  83</type_number>
+		<type_name>Longleaf Pine-Slash Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>68</cover_type_ID>
+		<type_number>SAF  75</type_number>
+		<type_name>Shortleaf Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>69</cover_type_ID>
+		<type_number>SAF  79</type_number>
+		<type_name>Virginia Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>70</cover_type_ID>
+		<type_number>SAF  81</type_number>
+		<type_name>Loblolly Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>71</cover_type_ID>
+		<type_number>SAF  80</type_number>
+		<type_name>Loblolly Pine-Shortleaf Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>72</cover_type_ID>
+		<type_number>SAF  84</type_number>
+		<type_name>Slash Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>73</cover_type_ID>
+		<type_number>SAF 111</type_number>
+		<type_name>South Florida Slash Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>74</cover_type_ID>
+		<type_number>SAF  98</type_number>
+		<type_name>Pond Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>75</cover_type_ID>
+		<type_number>SAF  71</type_number>
+		<type_name>Longleaf Pine-Scrub Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>76</cover_type_ID>
+		<type_number>SAF  76</type_number>
+		<type_name>Shortleaf Pine-Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>77</cover_type_ID>
+		<type_number>SAF  78</type_number>
+		<type_name>Virginia Pine-Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>78</cover_type_ID>
+		<type_number>SAF  82</type_number>
+		<type_name>Loblolly Pine-Hardwood</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>79</cover_type_ID>
+		<type_number>SAF  85</type_number>
+		<type_name>Slash Pine-Hardwood</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>80</cover_type_ID>
+		<type_number>SAF 63</type_number>
+		<type_name>Cottonwood (Southern)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>81</cover_type_ID>
+		<type_number>SAF  88</type_number>
+		<type_name>Willow Oak-Water Oak-Diamondleaf Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>82</cover_type_ID>
+		<type_number>SAF  89</type_number>
+		<type_name>Live Oak (Southern)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>83</cover_type_ID>
+		<type_number>SAF  91</type_number>
+		<type_name>Swamp Chestnut Oak-Cherrybark oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>84</cover_type_ID>
+		<type_number>SAF  92</type_number>
+		<type_name>Sweetgum-Willow Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>85</cover_type_ID>
+		<type_number>SAF  93</type_number>
+		<type_name>Sugarberry-American Elm-Green Ash</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>86</cover_type_ID>
+		<type_number>SAF  94</type_number>
+		<type_name>Sycamore-Sweetgum-American Elm</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>87</cover_type_ID>
+		<type_number>SAF  95</type_number>
+		<type_name>Black Willow</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>88</cover_type_ID>
+		<type_number>SAF  96</type_number>
+		<type_name>Overcup Oak-Water Hickory</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>89</cover_type_ID>
+		<type_number>SAF 101</type_number>
+		<type_name>Baldcypress</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>90</cover_type_ID>
+		<type_number>SAF 102</type_number>
+		<type_name>Baldcypress-Tupelo</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>91</cover_type_ID>
+		<type_number>SAF 103</type_number>
+		<type_name>Water Tupelo-Swamp Tupelo</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>92</cover_type_ID>
+		<type_number>SAF 104</type_number>
+		<type_name>Sweetbay-Swamp Tupelo-Redbay</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>93</cover_type_ID>
+		<type_number>SAF  66</type_number>
+		<type_name>Ashe Juniper-Redberry (Pinchot) Juniper</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>94</cover_type_ID>
+		<type_number>SAF  67</type_number>
+		<type_name>Mohrs (Shin) Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>95</cover_type_ID>
+		<type_number>SAF  68</type_number>
+		<type_name>Mesquite (Southern)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>96</cover_type_ID>
+		<type_number>SAF  72</type_number>
+		<type_name>Southern Scrub Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>97</cover_type_ID>
+		<type_number>SAF  73</type_number>
+		<type_name>Southern Redcedar</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>98</cover_type_ID>
+		<type_number>SAF  74</type_number>
+		<type_name>Cabbage Palmetto</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>99</cover_type_ID>
+		<type_number>SAF  87</type_number>
+		<type_name>Sweetgum-Yellow-Poplar</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>100</cover_type_ID>
+		<type_number>SAF  97</type_number>
+		<type_name>Atlantic White-Cedar</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>101</cover_type_ID>
+		<type_number>SAF 100</type_number>
+		<type_name>Pondcypress</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>102</cover_type_ID>
+		<type_number>SAF 105</type_number>
+		<type_name>Tropical Hardwoods (Florida)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>103</cover_type_ID>
+		<type_number>SAF 106</type_number>
+		<type_name>Mangrove</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>104</cover_type_ID>
+		<type_number>SAF 201</type_number>
+		<type_name>White Spruce (Western)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>105</cover_type_ID>
+		<type_number>SAF 251</type_number>
+		<type_name>White Spruce-Aspen</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>106</cover_type_ID>
+		<type_number>SAF 202</type_number>
+		<type_name>White Spruce-Paper Birch</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>107</cover_type_ID>
+		<type_number>SAF 252</type_number>
+		<type_name>Paper Birch (Western)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>108</cover_type_ID>
+		<type_number>SAF 203</type_number>
+		<type_name>Balsam Poplar</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>109</cover_type_ID>
+		<type_number>SAF 204</type_number>
+		<type_name>Black Spruce (Western)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>110</cover_type_ID>
+		<type_number>SAF 253</type_number>
+		<type_name>Black Spruce-White Spruce</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>111</cover_type_ID>
+		<type_number>SAF 254</type_number>
+		<type_name>Black Spruce-Paper Birch</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>112</cover_type_ID>
+		<type_number>SAF 205</type_number>
+		<type_name>Mountain Hemlock</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>113</cover_type_ID>
+		<type_number>SAF 206</type_number>
+		<type_name>Engelmann Spruce-Subalpine Fir</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>114</cover_type_ID>
+		<type_number>SAF 207</type_number>
+		<type_name>Red Fir</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>115</cover_type_ID>
+		<type_number>SAF 208</type_number>
+		<type_name>Whitebark Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>116</cover_type_ID>
+		<type_number>SAF 209</type_number>
+		<type_name>Bristlecone Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>117</cover_type_ID>
+		<type_number>SAF 256</type_number>
+		<type_name>California Mixed Subalpine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>118</cover_type_ID>
+		<type_number>SAF 210</type_number>
+		<type_name>Interior Douglas-Fir</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>119</cover_type_ID>
+		<type_number>SAF 211</type_number>
+		<type_name>White Fir</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>120</cover_type_ID>
+		<type_number>SAF 212</type_number>
+		<type_name>Western Larch</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>121</cover_type_ID>
+		<type_number>SAF 213</type_number>
+		<type_name>Grand Fir</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>122</cover_type_ID>
+		<type_number>SAF 215</type_number>
+		<type_name>Western White Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>123</cover_type_ID>
+		<type_number>SAF 216</type_number>
+		<type_name>Blue Spruce</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>124</cover_type_ID>
+		<type_number>SAF 217</type_number>
+		<type_name>Aspen (Western)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>125</cover_type_ID>
+		<type_number>SAF 218</type_number>
+		<type_name>Lodgepole Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>126</cover_type_ID>
+		<type_number>SAF 219</type_number>
+		<type_name>Limber Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>127</cover_type_ID>
+		<type_number>SAF 220</type_number>
+		<type_name>Rocky Mountain Juniper</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>128</cover_type_ID>
+		<type_number>SAF 221</type_number>
+		<type_name>Red Alder</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>129</cover_type_ID>
+		<type_number>SAF 222</type_number>
+		<type_name>Black Cottonwood-Willow</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>130</cover_type_ID>
+		<type_number>SAF 223</type_number>
+		<type_name>Sitka Spruce</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>131</cover_type_ID>
+		<type_number>SAF 224</type_number>
+		<type_name>Western Hemlock</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>132</cover_type_ID>
+		<type_number>SAF 225</type_number>
+		<type_name>Western Hemlock-Sitka Spruce</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>133</cover_type_ID>
+		<type_number>SAF 226</type_number>
+		<type_name>Coastal True Fir-Hemlock</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>134</cover_type_ID>
+		<type_number>SAF 227</type_number>
+		<type_name>Western Redcedar-Western Hemlock</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>135</cover_type_ID>
+		<type_number>SAF 228</type_number>
+		<type_name>Western Redcedar</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>136</cover_type_ID>
+		<type_number>SAF 229</type_number>
+		<type_name>Pacific Douglas-Fir</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>137</cover_type_ID>
+		<type_number>SAF 230</type_number>
+		<type_name>Douglas-Fir-Western Hemlock</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>138</cover_type_ID>
+		<type_number>SAF 231</type_number>
+		<type_name>Port Orford-Cedar</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>139</cover_type_ID>
+		<type_number>SAF 232</type_number>
+		<type_name>Redwood</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>140</cover_type_ID>
+		<type_number>SAF 233</type_number>
+		<type_name>Oregon White Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>141</cover_type_ID>
+		<type_number>SAF 234</type_number>
+		<type_name>Douglas-Fir-Tanoak-Pacific Madrone</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>142</cover_type_ID>
+		<type_number>SAF 235</type_number>
+		<type_name>Cottonwood-Willow (Western)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>143</cover_type_ID>
+		<type_number>SAF 236</type_number>
+		<type_name>Bur Oak (Western)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>144</cover_type_ID>
+		<type_number>SAF 237</type_number>
+		<type_name>Interior Ponderosa Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>145</cover_type_ID>
+		<type_number>SAF 238</type_number>
+		<type_name>Western Juniper</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>146</cover_type_ID>
+		<type_number>SAF 239</type_number>
+		<type_name>Pinyon-Juniper</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>147</cover_type_ID>
+		<type_number>SAF 240</type_number>
+		<type_name>Arizona Cypress</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>148</cover_type_ID>
+		<type_number>SAF 241</type_number>
+		<type_name>Western Live Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>149</cover_type_ID>
+		<type_number>SAF 242</type_number>
+		<type_name>Mesquite (Western)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>150</cover_type_ID>
+		<type_number>SAF 243</type_number>
+		<type_name>Sierra Nevada Mixed Conifer</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>151</cover_type_ID>
+		<type_number>SAF 244</type_number>
+		<type_name>Pacific Ponderosa Pine-Douglas-Fir</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>152</cover_type_ID>
+		<type_number>SAF 245</type_number>
+		<type_name>Pacific Ponderosa Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>153</cover_type_ID>
+		<type_number>SAF 246</type_number>
+		<type_name>California Black Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>154</cover_type_ID>
+		<type_number>SAF 247</type_number>
+		<type_name>Jeffrey Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>155</cover_type_ID>
+		<type_number>SAF 248</type_number>
+		<type_name>Knobcone Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>156</cover_type_ID>
+		<type_number>SAF 249</type_number>
+		<type_name>Canyon Live Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>157</cover_type_ID>
+		<type_number>SAF 250</type_number>
+		<type_name>Blue Oak-Digger Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>158</cover_type_ID>
+		<type_number>SAF 255</type_number>
+		<type_name>California Coast Live Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>159</cover_type_ID>
+		<type_number>SRM 204</type_number>
+		<type_name>Northern Coastal Shrub</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>160</cover_type_ID>
+		<type_number>SRM 205</type_number>
+		<type_name>Coastal Sage Shrub</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>161</cover_type_ID>
+		<type_number>SRM 206</type_number>
+		<type_name>Chamise Chaparral</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>162</cover_type_ID>
+		<type_number>SRM 207</type_number>
+		<type_name>Scrub Oak Mixed Chaparral</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>163</cover_type_ID>
+		<type_number>SRM 208</type_number>
+		<type_name>Ceanothus Mixed Chaparral</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>164</cover_type_ID>
+		<type_number>SRM 209</type_number>
+		<type_name>Montane Shrubland</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>165</cover_type_ID>
+		<type_number>SRM 210</type_number>
+		<type_name>Bitterbrush</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>166</cover_type_ID>
+		<type_number>SRM 211</type_number>
+		<type_name>Creosote Bush Shrub</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>167</cover_type_ID>
+		<type_number>SRM 212</type_number>
+		<type_name>Blackbush</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>168</cover_type_ID>
+		<type_number>SRM 213</type_number>
+		<type_name>Alpine Grassland (Pacific Southwest)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>169</cover_type_ID>
+		<type_number>SRM 214</type_number>
+		<type_name>Coastal Prairie</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>170</cover_type_ID>
+		<type_number>SRM 215</type_number>
+		<type_name>Valley Grassland (Pacific Southwest)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>171</cover_type_ID>
+		<type_number>SRM 216</type_number>
+		<type_name>Montane Meadows</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>172</cover_type_ID>
+		<type_number>SRM 217</type_number>
+		<type_name>Wetlands (Pacific Southwest)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>173</cover_type_ID>
+		<type_number>SRM 301</type_number>
+		<type_name>Bluebunch Wheatgrass-Blue Grama</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>174</cover_type_ID>
+		<type_number>SRM 302</type_number>
+		<type_name>Bluebunch Wheatgrass-Sandberg Bluegrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>175</cover_type_ID>
+		<type_number>SRM 303</type_number>
+		<type_name>Bluebunch Wheatgrass-Western Wheatgrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>176</cover_type_ID>
+		<type_number>SRM 304</type_number>
+		<type_name>Idaho Fescue-Bluebunch Wheatgrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>177</cover_type_ID>
+		<type_number>SRM 305</type_number>
+		<type_name>Idaho Fescue-Richardson Wheatgrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>178</cover_type_ID>
+		<type_number>SRM 306</type_number>
+		<type_name>Idaho Fescue-Slender Wheatgrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>179</cover_type_ID>
+		<type_number>SRM 307</type_number>
+		<type_name>Idaho Fescue-Threadleaf Sedge</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>180</cover_type_ID>
+		<type_number>SRM 308</type_number>
+		<type_name>Idaho Fescue-Tufted Hairgrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>181</cover_type_ID>
+		<type_number>SRM 309</type_number>
+		<type_name>Idaho Fescue-Western Wheatgrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>182</cover_type_ID>
+		<type_number>SRM 310</type_number>
+		<type_name>Needle-and-Thread - Blue Grama</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>183</cover_type_ID>
+		<type_number>SRM 311</type_number>
+		<type_name>Rough Fescue-Bluebunch Wheatgrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>184</cover_type_ID>
+		<type_number>SRM 312</type_number>
+		<type_name>Rough Fescue-Idaho Fescue</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>185</cover_type_ID>
+		<type_number>SRM 313</type_number>
+		<type_name>Tufted Hairgrass-Sedge</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>186</cover_type_ID>
+		<type_number>SRM 314</type_number>
+		<type_name>Big Sagebrush-Bluebunch Wheatgrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>187</cover_type_ID>
+		<type_number>SRM 315</type_number>
+		<type_name>Big Sagebrush-Idaho Fescue</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>188</cover_type_ID>
+		<type_number>SRM 316</type_number>
+		<type_name>Big Sagebrush-Rough Fescue</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>189</cover_type_ID>
+		<type_number>SRM 317</type_number>
+		<type_name>Bitterbrush-Bluebunch Wheatgrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>190</cover_type_ID>
+		<type_number>SRM 318</type_number>
+		<type_name>Bitterbrush-Idaho Fescue</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>191</cover_type_ID>
+		<type_number>SRM 319</type_number>
+		<type_name>Bitterbrush-Rough Fescue</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>192</cover_type_ID>
+		<type_number>SRM 320</type_number>
+		<type_name>Black Sagebrush-Bluebunch Wheatgrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>193</cover_type_ID>
+		<type_number>SRM 321</type_number>
+		<type_name>Black Sagebrush-Idaho Fescue</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>194</cover_type_ID>
+		<type_number>SRM 322</type_number>
+		<type_name>Curlleaf Mountain-Mahogany-Bluebunch Wheatgrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>195</cover_type_ID>
+		<type_number>SRM 323</type_number>
+		<type_name>Shrubby Cinquefoil-Rough Fescue</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>196</cover_type_ID>
+		<type_number>SRM 324</type_number>
+		<type_name>Threetip Sagebrush-Idaho Fescue</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>197</cover_type_ID>
+		<type_number>SRM 401</type_number>
+		<type_name>Basin Big Sagebrush</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>198</cover_type_ID>
+		<type_number>SRM 402</type_number>
+		<type_name>Mountain Big Sagebrush</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>199</cover_type_ID>
+		<type_number>SRM 403</type_number>
+		<type_name>Wyoming Big Sagebrush</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>200</cover_type_ID>
+		<type_number>SRM 404</type_number>
+		<type_name>Treetip Sagebrush</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>201</cover_type_ID>
+		<type_number>SRM 405</type_number>
+		<type_name>Black Sagebrush</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>202</cover_type_ID>
+		<type_number>SRM 406</type_number>
+		<type_name>Low Sagebrush</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>203</cover_type_ID>
+		<type_number>SRM 407</type_number>
+		<type_name>Stiff Sagebrush</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>204</cover_type_ID>
+		<type_number>SRM 408</type_number>
+		<type_name>Other Sagebrush Types</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>205</cover_type_ID>
+		<type_number>SRM 409</type_number>
+		<type_name>Tall Forb (Great Basin)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>206</cover_type_ID>
+		<type_number>SRM 410</type_number>
+		<type_name>Alpine Rangeland (Great Basin)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>207</cover_type_ID>
+		<type_number>SRM 411</type_number>
+		<type_name>Aspen Woodland</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>208</cover_type_ID>
+		<type_number>SRM 412</type_number>
+		<type_name>Juniper-Pinyon Woodland</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>209</cover_type_ID>
+		<type_number>SRM 413</type_number>
+		<type_name>Gambel Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>210</cover_type_ID>
+		<type_number>SRM 414</type_number>
+		<type_name>Salt Desert Shrub</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>211</cover_type_ID>
+		<type_number>SRM 415</type_number>
+		<type_name>Curlleaf Mountain-Mahogany</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>212</cover_type_ID>
+		<type_number>SRM 416</type_number>
+		<type_name>True Mountain-Mahogany</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>213</cover_type_ID>
+		<type_number>SRM 417</type_number>
+		<type_name>Littleleaf Mountain-Mahogany</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>214</cover_type_ID>
+		<type_number>SRM 418</type_number>
+		<type_name>Bigtooth Maple</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>215</cover_type_ID>
+		<type_number>SRM 419</type_number>
+		<type_name>Bittercherry</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>216</cover_type_ID>
+		<type_number>SRM 420</type_number>
+		<type_name>Snowbush</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>217</cover_type_ID>
+		<type_number>SRM 421</type_number>
+		<type_name>Chokecherry-Serviceberry-Rose</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>218</cover_type_ID>
+		<type_number>SRM 422</type_number>
+		<type_name>Riparian (Great Basin)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>219</cover_type_ID>
+		<type_number>SRM 501</type_number>
+		<type_name>Saltbush-Greasewood</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>220</cover_type_ID>
+		<type_number>SRM 502</type_number>
+		<type_name>Grama-Galetta</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>221</cover_type_ID>
+		<type_number>SRM 503</type_number>
+		<type_name>Arizona Chaparral</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>222</cover_type_ID>
+		<type_number>SRM 504</type_number>
+		<type_name>Juniper-Pinyon Pine Woodland</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>223</cover_type_ID>
+		<type_number>SRM 505</type_number>
+		<type_name>Grama-Tobosa Shrub</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>224</cover_type_ID>
+		<type_number>SRM 506</type_number>
+		<type_name>Creosotebush-Bursage</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>225</cover_type_ID>
+		<type_number>SRM 507</type_number>
+		<type_name>Palo Verde-Cactus</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>226</cover_type_ID>
+		<type_number>SRM 508</type_number>
+		<type_name>Creosotebush-Tarbush</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>227</cover_type_ID>
+		<type_number>SRM 509</type_number>
+		<type_name>Oak-Juniper Woodland and Mahogany-Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>228</cover_type_ID>
+		<type_number>SRM 601</type_number>
+		<type_name>Bluestem Prairie</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>229</cover_type_ID>
+		<type_number>SRM 602</type_number>
+		<type_name>Bluestem-Prairie Sandreed</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>230</cover_type_ID>
+		<type_number>SRM 603</type_number>
+		<type_name>Prairie Sandreed-Needlegrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>231</cover_type_ID>
+		<type_number>SRM 604</type_number>
+		<type_name>Bluestem-Grama Prairie</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>232</cover_type_ID>
+		<type_number>SRM 605</type_number>
+		<type_name>Sandsage Prairie</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>233</cover_type_ID>
+		<type_number>SRM 606</type_number>
+		<type_name>Wheatgrass-Bluestem-Needlegrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>234</cover_type_ID>
+		<type_number>SRM 607</type_number>
+		<type_name>Wheatgrass-Needlegrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>235</cover_type_ID>
+		<type_number>SRM 608</type_number>
+		<type_name>Wheatgrass-Grama-Needlegrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>236</cover_type_ID>
+		<type_number>SRM 609</type_number>
+		<type_name>Wheatgrass-Grama</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>237</cover_type_ID>
+		<type_number>SRM 610</type_number>
+		<type_name>Wheatgrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>238</cover_type_ID>
+		<type_number>SRM 611</type_number>
+		<type_name>Blue Grama-Buffalograss</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>239</cover_type_ID>
+		<type_number>SRM 612</type_number>
+		<type_name>Sagebrush-Grass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>240</cover_type_ID>
+		<type_number>SRM 613</type_number>
+		<type_name>Fescue Grassland</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>241</cover_type_ID>
+		<type_number>SRM 614</type_number>
+		<type_name>Crested Wheatgrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>242</cover_type_ID>
+		<type_number>SRM 615</type_number>
+		<type_name>Wheatgrass-Saltgrass-Grama</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>243</cover_type_ID>
+		<type_number>SRM 701</type_number>
+		<type_name>Alkali Sacaton-Tobosagrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>244</cover_type_ID>
+		<type_number>SRM 702</type_number>
+		<type_name>Black Grama-Alkali Sacaton</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>245</cover_type_ID>
+		<type_number>SRM 703</type_number>
+		<type_name>Black Grama-Sideoats Grama</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>246</cover_type_ID>
+		<type_number>SRM 704</type_number>
+		<type_name>Blue Grama-Western Wheatgrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>247</cover_type_ID>
+		<type_number>SRM 705</type_number>
+		<type_name>Blue Grama-Galetta</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>248</cover_type_ID>
+		<type_number>SRM 706</type_number>
+		<type_name>Blue Grama-Sideoats Grama</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>249</cover_type_ID>
+		<type_number>SRM 707</type_number>
+		<type_name>Blue Grama-Sideoats Grama-Black Grama</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>250</cover_type_ID>
+		<type_number>SRM 708</type_number>
+		<type_name>Bluestem-Dropseed</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>251</cover_type_ID>
+		<type_number>SRM 709</type_number>
+		<type_name>Bluestem-Grama</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>252</cover_type_ID>
+		<type_number>SRM 710</type_number>
+		<type_name>Bluestem Prairie</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>253</cover_type_ID>
+		<type_number>SRM 711</type_number>
+		<type_name>Bluestem-Sacahuista Prairie</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>254</cover_type_ID>
+		<type_number>SRM 712</type_number>
+		<type_name>Galetta-Alkali Sacaton</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>255</cover_type_ID>
+		<type_number>SRM 713</type_number>
+		<type_name>Grama-Muhly-Threeawn</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>256</cover_type_ID>
+		<type_number>SRM 714</type_number>
+		<type_name>Grama-Bluestem</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>257</cover_type_ID>
+		<type_number>SRM 715</type_number>
+		<type_name>Grama-Buffalograss</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>258</cover_type_ID>
+		<type_number>SRM 716</type_number>
+		<type_name>Grama-Feathergrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>259</cover_type_ID>
+		<type_number>SRM 717</type_number>
+		<type_name>Little Bluestem-Indiangrass-Texas Wintergrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>260</cover_type_ID>
+		<type_number>SRM 718</type_number>
+		<type_name>Mesquite-Grama</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>261</cover_type_ID>
+		<type_number>SRM 719</type_number>
+		<type_name>Mesquite-Liveoak-Seacoast Bluestem</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>262</cover_type_ID>
+		<type_number>SRM 720</type_number>
+		<type_name>Sand Bluestem-Little Bluestem Dunes</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>263</cover_type_ID>
+		<type_number>SRM 721</type_number>
+		<type_name>Sand Bluestem-Little Bluestem Prairie</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>264</cover_type_ID>
+		<type_number>SRM 722</type_number>
+		<type_name>Sand Sagebrush-Mixed Prairie</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>265</cover_type_ID>
+		<type_number>SRM 723</type_number>
+		<type_name>Sea Oats</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>266</cover_type_ID>
+		<type_number>SRM 724</type_number>
+		<type_name>Sideoats Grama-New Mexico Feathergrass-Winterfat</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>267</cover_type_ID>
+		<type_number>SRM 725</type_number>
+		<type_name>Vine Mesquite-Alkali Sacaton</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>268</cover_type_ID>
+		<type_number>SRM 726</type_number>
+		<type_name>Cordgrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>269</cover_type_ID>
+		<type_number>SRM 727</type_number>
+		<type_name>Mesquite-Buffalograss</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>270</cover_type_ID>
+		<type_number>SRM 728</type_number>
+		<type_name>Mesquite-Granjeno-Acacia</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>271</cover_type_ID>
+		<type_number>SRM 729</type_number>
+		<type_name>Mesquite</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>272</cover_type_ID>
+		<type_number>SRM 730</type_number>
+		<type_name>Sand Shinnery Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>273</cover_type_ID>
+		<type_number>SRM 731</type_number>
+		<type_name>Cross Timbers-Oklahoma</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>274</cover_type_ID>
+		<type_number>SRM 732</type_number>
+		<type_name>Cross Timbers-Texas (Little Bluestem Post Oak)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>275</cover_type_ID>
+		<type_number>SRM 733</type_number>
+		<type_name>Juniper-Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>276</cover_type_ID>
+		<type_number>SRM 734</type_number>
+		<type_name>Mesquite-Oak</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>277</cover_type_ID>
+		<type_number>SRM 735</type_number>
+		<type_name>Sideoats Grama-Sumac-Juniper</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>278</cover_type_ID>
+		<type_number>SRM 801</type_number>
+		<type_name>Savanna</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>279</cover_type_ID>
+		<type_number>SRM 802</type_number>
+		<type_name>Missouri Prairie</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>280</cover_type_ID>
+		<type_number>SRM 803</type_number>
+		<type_name>Missouri Glade</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>281</cover_type_ID>
+		<type_number>SRM 804</type_number>
+		<type_name>Tall Fescue</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>282</cover_type_ID>
+		<type_number>SRM 805</type_number>
+		<type_name>Riparian (Southeastern)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>283</cover_type_ID>
+		<type_number>SRM 806</type_number>
+		<type_name>Gulf Coast Salt Marsh</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>284</cover_type_ID>
+		<type_number>SRM 807</type_number>
+		<type_name>Gulf Coast Fresh Marsh</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>285</cover_type_ID>
+		<type_number>SRM 808</type_number>
+		<type_name>Sand Pine Scrub</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>286</cover_type_ID>
+		<type_number>SRM 809</type_number>
+		<type_name>Mixed Hardwood and Pine</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>287</cover_type_ID>
+		<type_number>SRM 810</type_number>
+		<type_name>Longleaf Pine-Turkey Oak Hills</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>288</cover_type_ID>
+		<type_number>SRM 811</type_number>
+		<type_name>South Florida Flatwoods</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>289</cover_type_ID>
+		<type_number>SRM 812</type_number>
+		<type_name>North Florida Flatwoods</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>290</cover_type_ID>
+		<type_number>SRM 813</type_number>
+		<type_name>Cutthroat Seeps</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>291</cover_type_ID>
+		<type_number>SRM 814</type_number>
+		<type_name>Cabbage Palms Flatwoods</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>292</cover_type_ID>
+		<type_number>SRM 815</type_number>
+		<type_name>Unpland Hardwood Hammocks</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>293</cover_type_ID>
+		<type_number>SRM 816</type_number>
+		<type_name>Cabbage Palm Hammocks</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>294</cover_type_ID>
+		<type_number>SRM 817</type_number>
+		<type_name>Oak Hammocks</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>295</cover_type_ID>
+		<type_number>SRM 818</type_number>
+		<type_name>Florida Salt Marsh</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>296</cover_type_ID>
+		<type_number>SRM 819</type_number>
+		<type_name>Freshwater Marsh and Ponds</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>297</cover_type_ID>
+		<type_number>SRM 820</type_number>
+		<type_name>Everglades Flatwoods</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>298</cover_type_ID>
+		<type_number>SRM 821</type_number>
+		<type_name>Pitcher Plant Bogs</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>299</cover_type_ID>
+		<type_number>SRM 822</type_number>
+		<type_name>Slough (Southeastern)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>300</cover_type_ID>
+		<type_number>SRM 901</type_number>
+		<type_name>Alder (Alaska)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>301</cover_type_ID>
+		<type_number>SRM 902</type_number>
+		<type_name>Alpine Herb (Alaska)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>302</cover_type_ID>
+		<type_number>SRM 903</type_number>
+		<type_name>Beach Wildrye-Mixed Forb</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>303</cover_type_ID>
+		<type_number>SRM 904</type_number>
+		<type_name>Black Spruce-Lichen</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>304</cover_type_ID>
+		<type_number>SRM 905</type_number>
+		<type_name>Bluejoint Reedgrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>305</cover_type_ID>
+		<type_number>SRM 906</type_number>
+		<type_name>Broadleaf Forest</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>306</cover_type_ID>
+		<type_number>SRM 907</type_number>
+		<type_name>Dryas</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>307</cover_type_ID>
+		<type_number>SRM 908</type_number>
+		<type_name>Fescue</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>308</cover_type_ID>
+		<type_number>SRM 909</type_number>
+		<type_name>Freshwater Marsh</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>309</cover_type_ID>
+		<type_number>SRM 910</type_number>
+		<type_name>Hairgrass</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>310</cover_type_ID>
+		<type_number>SRM 911</type_number>
+		<type_name>Lichen Tundra</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>311</cover_type_ID>
+		<type_number>SRM 912</type_number>
+		<type_name>Low Scrub Shrub Birch-Ericaceous</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>312</cover_type_ID>
+		<type_number>SRM 913</type_number>
+		<type_name>Low Scrub Swamp</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>313</cover_type_ID>
+		<type_number>SRM 914</type_number>
+		<type_name>Mesic Sedge-Grass-Herb Meadow Tundra</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>314</cover_type_ID>
+		<type_number>SRM 915</type_number>
+		<type_name>Mixed Herb-Herbaceous</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>315</cover_type_ID>
+		<type_number>SRM 916</type_number>
+		<type_name>Sedge-Shrub Tundra</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>316</cover_type_ID>
+		<type_number>SRM 917</type_number>
+		<type_name>Tall Shrub Swamp (Alaska)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>317</cover_type_ID>
+		<type_number>SRM 918</type_number>
+		<type_name>Tussock Tundra</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>318</cover_type_ID>
+		<type_number>SRM 919</type_number>
+		<type_name>Wet Meadow Tundra (Alaska)</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>319</cover_type_ID>
+		<type_number>SRM 920</type_number>
+		<type_name>White Spruce-Paper Birch</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>320</cover_type_ID>
+		<type_number>SRM 921</type_number>
+		<type_name>Willow</type_name>
+	</cover_type>
+	<cover_type>
+		<cover_type_ID>321</cover_type_ID>
+		<type_number>Unknown</type_number>
+		<type_name>Unknown</type_name>
+	</cover_type>
+</EMISSIONS_FACTOR_DATABASE>

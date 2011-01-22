@@ -1,0 +1,10 @@
+Authors
+-------
+
+The primary author of consume.py is Michael Billmire <mgbillmi - at - mtu.edu>
+
+Others who have contributed to the application:
+ * Reid Sawtell
+ * Tyler A. Erickson
+ * Jef Cieslinski
+

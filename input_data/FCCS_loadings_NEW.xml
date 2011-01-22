@@ -1,0 +1,1953 @@
+<?xml version="1.0" standalone="yes"?>
+<FCCS_File>
+<FCCS>
+	<fuelbed_number>2</fuelbed_number>
+	<site_name>Western hemlock -- western redcedar -- Douglas-fir forest</site_name>
+	<overstory>13.56</overstory>
+	<midstory>7.04</midstory>
+	<understory>0.36</understory>
+	<totalTrees>20.96</totalTrees>
+	<shrubs_Primary>4.68</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>3</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>45.75</duffloading>
+	<nonwoodylive>0.13</nonwoodylive>
+	<nonwoodydead>0.03</nonwoodydead>
+	<nw_Primary>0.16</nw_Primary>
+	<nw_Primary_perc_live>81.25</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>1</w_Sound_Sml_0_25>
+	<w_Sound_Sml>2</w_Sound_Sml>
+	<w_Sound_1_3>4</w_Sound_1_3>
+	<w_Sound_3_9>2</w_Sound_3_9>
+	<w_Sound_9_20>3</w_Sound_9_20>
+	<w_Sound_GT20>6</w_Sound_GT20>
+	<w_Rotten_3_9>1</w_Rotten_3_9>
+	<w_Rotten_9_20>3</w_Rotten_9_20>
+	<w_Rotten_GT20>4</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>5</fuelbed_number>
+	<site_name>Douglas-fir -- white fir forest</site_name>
+	<overstory>13.2</overstory>
+	<midstory>6.34</midstory>
+	<understory>1.4</understory>
+	<totalTrees>20.94</totalTrees>
+	<shrubs_Primary>5.27</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>1.1</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>13.17</duffloading>
+	<nonwoodylive>0.11</nonwoodylive>
+	<nonwoodydead>0.11</nonwoodydead>
+	<nw_Primary>0.22</nw_Primary>
+	<nw_Primary_perc_live>50</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.5</w_Sound_Sml_0_25>
+	<w_Sound_Sml>1.6</w_Sound_Sml>
+	<w_Sound_1_3>3.3</w_Sound_1_3>
+	<w_Sound_3_9>4.3</w_Sound_3_9>
+	<w_Sound_9_20>8.9</w_Sound_9_20>
+	<w_Sound_GT20>3.4</w_Sound_GT20>
+	<w_Rotten_3_9>0.8</w_Rotten_3_9>
+	<w_Rotten_9_20>1.6</w_Rotten_9_20>
+	<w_Rotten_GT20>0.6</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>6</fuelbed_number>
+	<site_name>Oregon white oak -- Douglas-fir forest</site_name>
+	<overstory>5.62</overstory>
+	<midstory>6.51</midstory>
+	<understory>0.1</understory>
+	<totalTrees>12.23</totalTrees>
+	<shrubs_Primary>1.1</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0.3</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>4.18</duffloading>
+	<nonwoodylive>0.51</nonwoodylive>
+	<nonwoodydead>0.19</nonwoodydead>
+	<nw_Primary>0.7</nw_Primary>
+	<nw_Primary_perc_live>72.8571429</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.1</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.4</w_Sound_Sml>
+	<w_Sound_1_3>0.8</w_Sound_1_3>
+	<w_Sound_3_9>2.6</w_Sound_3_9>
+	<w_Sound_9_20>2.2</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0.3</w_Rotten_3_9>
+	<w_Rotten_9_20>0.7</w_Rotten_9_20>
+	<w_Rotten_GT20>0.7</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>7</fuelbed_number>
+	<site_name>Douglas-fir -- sugar pine -- tanoak forest</site_name>
+	<overstory>11.5</overstory>
+	<midstory>7.41</midstory>
+	<understory>0.39</understory>
+	<totalTrees>19.3</totalTrees>
+	<shrubs_Primary>0.98</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>1.3</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>19.21</duffloading>
+	<nonwoodylive>0.02</nonwoodylive>
+	<nonwoodydead>0</nonwoodydead>
+	<nw_Primary>0.02</nw_Primary>
+	<nw_Primary_perc_live>100</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>1</w_Sound_Sml_0_25>
+	<w_Sound_Sml>3.2</w_Sound_Sml>
+	<w_Sound_1_3>1.9</w_Sound_1_3>
+	<w_Sound_3_9>0.6</w_Sound_3_9>
+	<w_Sound_9_20>0.7</w_Sound_9_20>
+	<w_Sound_GT20>1.7</w_Sound_GT20>
+	<w_Rotten_3_9>4.9</w_Rotten_3_9>
+	<w_Rotten_9_20>5.4</w_Rotten_9_20>
+	<w_Rotten_GT20>14.2</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>8</fuelbed_number>
+	<site_name>Western hemlock / Douglas-fir -- western redcedar / vine maple forest</site_name>
+	<overstory>6.55</overstory>
+	<midstory>9.99</midstory>
+	<understory>0.34</understory>
+	<totalTrees>16.89</totalTrees>
+	<shrubs_Primary>1.18</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>5</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>69.3</duffloading>
+	<nonwoodylive>0.02</nonwoodylive>
+	<nonwoodydead>0.01</nonwoodydead>
+	<nw_Primary>0.03</nw_Primary>
+	<nw_Primary_perc_live>66.6666667</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>1</w_Sound_Sml_0_25>
+	<w_Sound_Sml>2</w_Sound_Sml>
+	<w_Sound_1_3>4</w_Sound_1_3>
+	<w_Sound_3_9>10</w_Sound_3_9>
+	<w_Sound_9_20>20</w_Sound_9_20>
+	<w_Sound_GT20>10</w_Sound_GT20>
+	<w_Rotten_3_9>2</w_Rotten_3_9>
+	<w_Rotten_9_20>10</w_Rotten_9_20>
+	<w_Rotten_GT20>5</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>10</fuelbed_number>
+	<site_name>Western hemlock -- Douglas-fir / Sitka spruce forest</site_name>
+	<overstory>11.75</overstory>
+	<midstory>13.38</midstory>
+	<understory>0.66</understory>
+	<totalTrees>25.78</totalTrees>
+	<shrubs_Primary>1.25</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>5</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>57</duffloading>
+	<nonwoodylive>0.22</nonwoodylive>
+	<nonwoodydead>0.13</nonwoodydead>
+	<nw_Primary>0.35</nw_Primary>
+	<nw_Primary_perc_live>62.8571429</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>1.3</w_Sound_Sml_0_25>
+	<w_Sound_Sml>1</w_Sound_Sml>
+	<w_Sound_1_3>1</w_Sound_1_3>
+	<w_Sound_3_9>5</w_Sound_3_9>
+	<w_Sound_9_20>35</w_Sound_9_20>
+	<w_Sound_GT20>5</w_Sound_GT20>
+	<w_Rotten_3_9>2</w_Rotten_3_9>
+	<w_Rotten_9_20>10</w_Rotten_9_20>
+	<w_Rotten_GT20>5</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>12</fuelbed_number>
+	<site_name>Red fir -- mountain hemlock / lodgepole pine -- western white pine forest</site_name>
+	<overstory>16.12</overstory>
+	<midstory>0</midstory>
+	<understory>0.09</understory>
+	<totalTrees>16.21</totalTrees>
+	<shrubs_Primary>0.01</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>1.4</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>18.82</duffloading>
+	<nonwoodylive>0.04</nonwoodylive>
+	<nonwoodydead>0.02</nonwoodydead>
+	<nw_Primary>0.06</nw_Primary>
+	<nw_Primary_perc_live>66.6666667</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.3</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.6</w_Sound_Sml>
+	<w_Sound_1_3>1.1</w_Sound_1_3>
+	<w_Sound_3_9>0.6</w_Sound_3_9>
+	<w_Sound_9_20>4.5</w_Sound_9_20>
+	<w_Sound_GT20>7</w_Sound_GT20>
+	<w_Rotten_3_9>0.5</w_Rotten_3_9>
+	<w_Rotten_9_20>3.6</w_Rotten_9_20>
+	<w_Rotten_GT20>5</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>14</fuelbed_number>
+	<site_name>California black oak woodland</site_name>
+	<overstory>19.6</overstory>
+	<midstory>0</midstory>
+	<understory>0.03</understory>
+	<totalTrees>19.63</totalTrees>
+	<shrubs_Primary>0.1</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0.5</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>2.64</duffloading>
+	<nonwoodylive>0.08</nonwoodylive>
+	<nonwoodydead>0.02</nonwoodydead>
+	<nw_Primary>0.1</nw_Primary>
+	<nw_Primary_perc_live>80</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.25</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.5</w_Sound_Sml>
+	<w_Sound_1_3>0.9</w_Sound_1_3>
+	<w_Sound_3_9>1.25</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>16</fuelbed_number>
+	<site_name>Jeffrey pine -- ponderosa pine -- Douglas-fir -- California black oak forest</site_name>
+	<overstory>3.6</overstory>
+	<midstory>4.17</midstory>
+	<understory>0.56</understory>
+	<totalTrees>8.33</totalTrees>
+	<shrubs_Primary>2.43</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>1</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>11.44</duffloading>
+	<nonwoodylive>0.14</nonwoodylive>
+	<nonwoodydead>0.06</nonwoodydead>
+	<nw_Primary>0.2</nw_Primary>
+	<nw_Primary_perc_live>70</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.3</w_Sound_Sml_0_25>
+	<w_Sound_Sml>1.4</w_Sound_Sml>
+	<w_Sound_1_3>1.8</w_Sound_1_3>
+	<w_Sound_3_9>0.8</w_Sound_3_9>
+	<w_Sound_9_20>2.5</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0.7</w_Rotten_3_9>
+	<w_Rotten_9_20>2.5</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>17</fuelbed_number>
+	<site_name>Red fir forest</site_name>
+	<overstory>24.65</overstory>
+	<midstory>0</midstory>
+	<understory>0.32</understory>
+	<totalTrees>24.97</totalTrees>
+	<shrubs_Primary>0</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>4.6</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>54.64</duffloading>
+	<nonwoodylive>0.04</nonwoodylive>
+	<nonwoodydead>0.02</nonwoodydead>
+	<nw_Primary>0.06</nw_Primary>
+	<nw_Primary_perc_live>66.6666667</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.9</w_Sound_Sml_0_25>
+	<w_Sound_Sml>3.1</w_Sound_Sml>
+	<w_Sound_1_3>3</w_Sound_1_3>
+	<w_Sound_3_9>1</w_Sound_3_9>
+	<w_Sound_9_20>1</w_Sound_9_20>
+	<w_Sound_GT20>1</w_Sound_GT20>
+	<w_Rotten_3_9>1</w_Rotten_3_9>
+	<w_Rotten_9_20>0.8</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>18</fuelbed_number>
+	<site_name>Douglas-fir / oceanspray forest</site_name>
+	<overstory>0.8</overstory>
+	<midstory>6.36</midstory>
+	<understory>0.35</understory>
+	<totalTrees>7.51</totalTrees>
+	<shrubs_Primary>0.18</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0.8</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>10.54</duffloading>
+	<nonwoodylive>0.11</nonwoodylive>
+	<nonwoodydead>0.06</nonwoodydead>
+	<nw_Primary>0.17</nw_Primary>
+	<nw_Primary_perc_live>64.7058824</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.4</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.8</w_Sound_Sml>
+	<w_Sound_1_3>0.2</w_Sound_1_3>
+	<w_Sound_3_9>1.1</w_Sound_3_9>
+	<w_Sound_9_20>2.7</w_Sound_9_20>
+	<w_Sound_GT20>6.3</w_Sound_GT20>
+	<w_Rotten_3_9>0.9</w_Rotten_3_9>
+	<w_Rotten_9_20>0.8</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>20</fuelbed_number>
+	<site_name>Western juniper / curl-leaf mountain mahogany woodland</site_name>
+	<overstory>1.51</overstory>
+	<midstory>2.13</midstory>
+	<understory>0</understory>
+	<totalTrees>3.64</totalTrees>
+	<shrubs_Primary>0.53</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>1</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>3.9</duffloading>
+	<nonwoodylive>0.28</nonwoodylive>
+	<nonwoodydead>0.07</nonwoodydead>
+	<nw_Primary>0.35</nw_Primary>
+	<nw_Primary_perc_live>80</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.05</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.1</w_Sound_Sml>
+	<w_Sound_1_3>0.5</w_Sound_1_3>
+	<w_Sound_3_9>1</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>2</w_Rotten_9_20>
+	<w_Rotten_GT20>4</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>22</fuelbed_number>
+	<site_name>Lodgepole pine forest</site_name>
+	<overstory>4.13</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>4.13</totalTrees>
+	<shrubs_Primary>0</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>2</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>13</duffloading>
+	<nonwoodylive>0.14</nonwoodylive>
+	<nonwoodydead>0.06</nonwoodydead>
+	<nw_Primary>0.2</nw_Primary>
+	<nw_Primary_perc_live>70</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.4</w_Sound_Sml_0_25>
+	<w_Sound_Sml>2.2</w_Sound_Sml>
+	<w_Sound_1_3>2.8</w_Sound_1_3>
+	<w_Sound_3_9>8.3</w_Sound_3_9>
+	<w_Sound_9_20>0.7</w_Sound_9_20>
+	<w_Sound_GT20>0.5</w_Sound_GT20>
+	<w_Rotten_3_9>0.8</w_Rotten_3_9>
+	<w_Rotten_9_20>0.5</w_Rotten_9_20>
+	<w_Rotten_GT20>0.5</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>24</fuelbed_number>
+	<site_name>Pacific ponderosa pine / Douglas-fir forest</site_name>
+	<overstory>3.68</overstory>
+	<midstory>1.87</midstory>
+	<understory>0.17</understory>
+	<totalTrees>5.72</totalTrees>
+	<shrubs_Primary>0</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0.6</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>4.96</duffloading>
+	<nonwoodylive>0.38</nonwoodylive>
+	<nonwoodydead>0.13</nonwoodydead>
+	<nw_Primary>0.51</nw_Primary>
+	<nw_Primary_perc_live>74.5098039</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.1</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.2</w_Sound_Sml>
+	<w_Sound_1_3>0.75</w_Sound_1_3>
+	<w_Sound_3_9>2</w_Sound_3_9>
+	<w_Sound_9_20>0.8</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>1.8</w_Rotten_3_9>
+	<w_Rotten_9_20>0.2</w_Rotten_9_20>
+	<w_Rotten_GT20>0.5</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>27</fuelbed_number>
+	<site_name>Ponderosa pine -- two needle pinyon -- Utah juniper forest</site_name>
+	<overstory>1.55</overstory>
+	<midstory>1.78</midstory>
+	<understory>0.17</understory>
+	<totalTrees>3.5</totalTrees>
+	<shrubs_Primary>1.67</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0.3</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>1.02</duffloading>
+	<nonwoodylive>0.45</nonwoodylive>
+	<nonwoodydead>0.05</nonwoodydead>
+	<nw_Primary>0.5</nw_Primary>
+	<nw_Primary_perc_live>90</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.2</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.3</w_Sound_Sml>
+	<w_Sound_1_3>1</w_Sound_1_3>
+	<w_Sound_3_9>2</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>1</w_Rotten_3_9>
+	<w_Rotten_9_20>2</w_Rotten_9_20>
+	<w_Rotten_GT20>6</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>28</fuelbed_number>
+	<site_name>Ponderosa pine savanna</site_name>
+	<overstory>0.75</overstory>
+	<midstory>1.08</midstory>
+	<understory>0</understory>
+	<totalTrees>1.83</totalTrees>
+	<shrubs_Primary>1.58</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0.4</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>3.64</duffloading>
+	<nonwoodylive>0.72</nonwoodylive>
+	<nonwoodydead>0.08</nonwoodydead>
+	<nw_Primary>0.8</nw_Primary>
+	<nw_Primary_perc_live>90</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.05</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.1</w_Sound_Sml>
+	<w_Sound_1_3>0.2</w_Sound_1_3>
+	<w_Sound_3_9>0.3</w_Sound_3_9>
+	<w_Sound_9_20>0.5</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0.5</w_Rotten_3_9>
+	<w_Rotten_9_20>1</w_Rotten_9_20>
+	<w_Rotten_GT20>2</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>30</fuelbed_number>
+	<site_name>Turbinella oak -- alderleaf mountain mahogany shrubland</site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>2.03</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0.2</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0.65</duffloading>
+	<nonwoodylive>0.08</nonwoodylive>
+	<nonwoodydead>0.02</nonwoodydead>
+	<nw_Primary>0.1</nw_Primary>
+	<nw_Primary_perc_live>80</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.1</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.3</w_Sound_Sml>
+	<w_Sound_1_3>0</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>36</fuelbed_number>
+	<site_name>California live oak --   blue oak woodland</site_name>
+	<overstory>1.21</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>1.21</totalTrees>
+	<shrubs_Primary>1.58</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>1</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>4.3</duffloading>
+	<nonwoodylive>0.2</nonwoodylive>
+	<nonwoodydead>0.2</nonwoodydead>
+	<nw_Primary>0.4</nw_Primary>
+	<nw_Primary_perc_live>50</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.5</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.5</w_Sound_Sml>
+	<w_Sound_1_3>1</w_Sound_1_3>
+	<w_Sound_3_9>1</w_Sound_3_9>
+	<w_Sound_9_20>1</w_Sound_9_20>
+	<w_Sound_GT20>0.2</w_Sound_GT20>
+	<w_Rotten_3_9>0.2</w_Rotten_3_9>
+	<w_Rotten_9_20>0.2</w_Rotten_9_20>
+	<w_Rotten_GT20>0.2</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>37</fuelbed_number>
+	<site_name>Ponderosa pine -- Jeffrey pine forest</site_name>
+	<overstory>7.4</overstory>
+	<midstory>1.04</midstory>
+	<understory>0.18</understory>
+	<totalTrees>8.62</totalTrees>
+	<shrubs_Primary>3.02</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>2</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>22.1</duffloading>
+	<nonwoodylive>0.16</nonwoodylive>
+	<nonwoodydead>0.15</nonwoodydead>
+	<nw_Primary>0.31</nw_Primary>
+	<nw_Primary_perc_live>51.6129032</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.1</w_Sound_Sml_0_25>
+	<w_Sound_Sml>1</w_Sound_Sml>
+	<w_Sound_1_3>1.5</w_Sound_1_3>
+	<w_Sound_3_9>1.2</w_Sound_3_9>
+	<w_Sound_9_20>2.5</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0.6</w_Rotten_3_9>
+	<w_Rotten_9_20>2.5</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>38</fuelbed_number>
+	<site_name>Douglas-fir -- madrone / tanoak forest</site_name>
+	<overstory>4.83</overstory>
+	<midstory>10.16</midstory>
+	<understory>3.81</understory>
+	<totalTrees>18.8</totalTrees>
+	<shrubs_Primary>0.63</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0.8</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>7.4</duffloading>
+	<nonwoodylive>0.16</nonwoodylive>
+	<nonwoodydead>0.04</nonwoodydead>
+	<nw_Primary>0.2</nw_Primary>
+	<nw_Primary_perc_live>80</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>1</w_Sound_Sml_0_25>
+	<w_Sound_Sml>2</w_Sound_Sml>
+	<w_Sound_1_3>2</w_Sound_1_3>
+	<w_Sound_3_9>3</w_Sound_3_9>
+	<w_Sound_9_20>3</w_Sound_9_20>
+	<w_Sound_GT20>7</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>41</fuelbed_number>
+	<site_name>Idaho fescue -- bluebunch wheatgrass grassland</site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>0</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0</duffloading>
+	<nonwoodylive>0.56</nonwoodylive>
+	<nonwoodydead>0.1</nonwoodydead>
+	<nw_Primary>0.66</nw_Primary>
+	<nw_Primary_perc_live>84.8484848</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0</w_Sound_Sml>
+	<w_Sound_1_3>0</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>42</fuelbed_number>
+	<site_name>Quaking aspen / Engelmann spruce forest</site_name>
+	<overstory>6.68</overstory>
+	<midstory>0</midstory>
+	<understory>0.61</understory>
+	<totalTrees>7.29</totalTrees>
+	<shrubs_Primary>0.01</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>1.3</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>11.22</duffloading>
+	<nonwoodylive>0.36</nonwoodylive>
+	<nonwoodydead>0.04</nonwoodydead>
+	<nw_Primary>0.4</nw_Primary>
+	<nw_Primary_perc_live>90</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.3</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.7</w_Sound_Sml>
+	<w_Sound_1_3>1.8</w_Sound_1_3>
+	<w_Sound_3_9>9</w_Sound_3_9>
+	<w_Sound_9_20>0.6</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>5</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>43</fuelbed_number>
+	<site_name>Arizona white oak / gray oak -- Emory oak woodland</site_name>
+	<overstory>1.8</overstory>
+	<midstory>0</midstory>
+	<understory>1.81</understory>
+	<totalTrees>3.61</totalTrees>
+	<shrubs_Primary>0.36</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0.4</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>2.08</duffloading>
+	<nonwoodylive>0.43</nonwoodylive>
+	<nonwoodydead>0.07</nonwoodydead>
+	<nw_Primary>0.5</nw_Primary>
+	<nw_Primary_perc_live>86</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.1</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.4</w_Sound_Sml>
+	<w_Sound_1_3>0.8</w_Sound_1_3>
+	<w_Sound_3_9>1</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>44</fuelbed_number>
+	<site_name>Scrub oak chaparral shrubland</site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>4.52</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0.1</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0.6</duffloading>
+	<nonwoodylive>0</nonwoodylive>
+	<nonwoodydead>0</nonwoodydead>
+	<nw_Primary>0</nw_Primary>
+	<nw_Primary_perc_live>0</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.5</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.25</w_Sound_Sml>
+	<w_Sound_1_3>0.25</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>45</fuelbed_number>
+	<site_name>Pine -- oak forest</site_name>
+	<overstory>1.28</overstory>
+	<midstory>0.88</midstory>
+	<understory>0.67</understory>
+	<totalTrees>2.83</totalTrees>
+	<shrubs_Primary>0.83</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>1</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>3.9</duffloading>
+	<nonwoodylive>0.08</nonwoodylive>
+	<nonwoodydead>0.02</nonwoodydead>
+	<nw_Primary>0.1</nw_Primary>
+	<nw_Primary_perc_live>80</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.4</w_Sound_Sml_0_25>
+	<w_Sound_Sml>1</w_Sound_Sml>
+	<w_Sound_1_3>1</w_Sound_1_3>
+	<w_Sound_3_9>4</w_Sound_3_9>
+	<w_Sound_9_20>1</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>3</w_Rotten_3_9>
+	<w_Rotten_9_20>0.5</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>46</fuelbed_number>
+	<site_name>Chamise chaparral shrubland</site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>5.25</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0.4</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>3.12</duffloading>
+	<nonwoodylive>0</nonwoodylive>
+	<nonwoodydead>0</nonwoodydead>
+	<nw_Primary>0</nw_Primary>
+	<nw_Primary_perc_live>0</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.5</w_Sound_Sml_0_25>
+	<w_Sound_Sml>1</w_Sound_Sml>
+	<w_Sound_1_3>1</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>47</fuelbed_number>
+	<site_name>Redwood -- tanoak forest</site_name>
+	<overstory>4.23</overstory>
+	<midstory>9.05</midstory>
+	<understory>1.8</understory>
+	<totalTrees>15.07</totalTrees>
+	<shrubs_Primary>4.12</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>4.5</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>51.2</duffloading>
+	<nonwoodylive>0.35</nonwoodylive>
+	<nonwoodydead>0.15</nonwoodydead>
+	<nw_Primary>0.5</nw_Primary>
+	<nw_Primary_perc_live>70</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.4</w_Sound_Sml_0_25>
+	<w_Sound_Sml>2</w_Sound_Sml>
+	<w_Sound_1_3>3</w_Sound_1_3>
+	<w_Sound_3_9>8</w_Sound_3_9>
+	<w_Sound_9_20>12</w_Sound_9_20>
+	<w_Sound_GT20>8</w_Sound_GT20>
+	<w_Rotten_3_9>6</w_Rotten_3_9>
+	<w_Rotten_9_20>8</w_Rotten_9_20>
+	<w_Rotten_GT20>6</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>49</fuelbed_number>
+	<site_name>Creosote bush shrubland</site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>0.42</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0</duffloading>
+	<nonwoodylive>0.07</nonwoodylive>
+	<nonwoodydead>0.03</nonwoodydead>
+	<nw_Primary>0.1</nw_Primary>
+	<nw_Primary_perc_live>70</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.1</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.2</w_Sound_Sml>
+	<w_Sound_1_3>0</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>51</fuelbed_number>
+	<site_name>Coastal sage shrubland</site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>3.48</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0</duffloading>
+	<nonwoodylive>0</nonwoodylive>
+	<nonwoodydead>0</nonwoodydead>
+	<nw_Primary>0</nw_Primary>
+	<nw_Primary_perc_live>0</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.1</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.1</w_Sound_Sml>
+	<w_Sound_1_3>0</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>52</fuelbed_number>
+	<site_name>Douglas-fir -- Pacific ponderosa pine / oceanspray forest</site_name>
+	<overstory>1.82</overstory>
+	<midstory>10.6</midstory>
+	<understory>1.11</understory>
+	<totalTrees>13.52</totalTrees>
+	<shrubs_Primary>0.29</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>1.1</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>14.28</duffloading>
+	<nonwoodylive>0.15</nonwoodylive>
+	<nonwoodydead>0.06</nonwoodydead>
+	<nw_Primary>0.21</nw_Primary>
+	<nw_Primary_perc_live>71.4285714</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.4</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.9</w_Sound_Sml>
+	<w_Sound_1_3>0.4</w_Sound_1_3>
+	<w_Sound_3_9>0.4</w_Sound_3_9>
+	<w_Sound_9_20>1.1</w_Sound_9_20>
+	<w_Sound_GT20>0.6</w_Sound_GT20>
+	<w_Rotten_3_9>0.4</w_Rotten_3_9>
+	<w_Rotten_9_20>2.4</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>53</fuelbed_number>
+	<site_name>Pacific ponderosa pine forest</site_name>
+	<overstory>9.22</overstory>
+	<midstory>0</midstory>
+	<understory>0.3</understory>
+	<totalTrees>9.51</totalTrees>
+	<shrubs_Primary>0</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>1.5</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>18.7</duffloading>
+	<nonwoodylive>0.03</nonwoodylive>
+	<nonwoodydead>0.03</nonwoodydead>
+	<nw_Primary>0.06</nw_Primary>
+	<nw_Primary_perc_live>50</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.1</w_Sound_Sml_0_25>
+	<w_Sound_Sml>1.5</w_Sound_Sml>
+	<w_Sound_1_3>1.5</w_Sound_1_3>
+	<w_Sound_3_9>8</w_Sound_3_9>
+	<w_Sound_9_20>3</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>3</w_Rotten_3_9>
+	<w_Rotten_9_20>1.5</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>54</fuelbed_number>
+	<site_name>Douglas-fir / white fir -- interior ponderosa pine forest</site_name>
+	<overstory>3.34</overstory>
+	<midstory>16.54</midstory>
+	<understory>5.88</understory>
+	<totalTrees>25.75</totalTrees>
+	<shrubs_Primary>0.1</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>2</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>26.6</duffloading>
+	<nonwoodylive>0.08</nonwoodylive>
+	<nonwoodydead>0.03</nonwoodydead>
+	<nw_Primary>0.11</nw_Primary>
+	<nw_Primary_perc_live>72.7272727</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.3</w_Sound_Sml_0_25>
+	<w_Sound_Sml>2.4</w_Sound_Sml>
+	<w_Sound_1_3>4.9</w_Sound_1_3>
+	<w_Sound_3_9>0.5</w_Sound_3_9>
+	<w_Sound_9_20>3</w_Sound_9_20>
+	<w_Sound_GT20>4</w_Sound_GT20>
+	<w_Rotten_3_9>1</w_Rotten_3_9>
+	<w_Rotten_9_20>3</w_Rotten_9_20>
+	<w_Rotten_GT20>4</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>55</fuelbed_number>
+	<site_name>Western juniper / sagebrush savanna</site_name>
+	<overstory>2.5</overstory>
+	<midstory>0</midstory>
+	<understory>1.98</understory>
+	<totalTrees>4.48</totalTrees>
+	<shrubs_Primary>0.45</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0.2</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0.39</duffloading>
+	<nonwoodylive>0.31</nonwoodylive>
+	<nonwoodydead>0.31</nonwoodydead>
+	<nw_Primary>0.62</nw_Primary>
+	<nw_Primary_perc_live>50</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.2</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.4</w_Sound_Sml>
+	<w_Sound_1_3>0.8</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>56</fuelbed_number>
+	<site_name>Sagebrush shrubland</site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>1.57</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0</duffloading>
+	<nonwoodylive>0.36</nonwoodylive>
+	<nonwoodydead>0.36</nonwoodydead>
+	<nw_Primary>0.72</nw_Primary>
+	<nw_Primary_perc_live>50</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0</w_Sound_Sml>
+	<w_Sound_1_3>0</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>57</fuelbed_number>
+	<site_name>Wheatgrass -- cheatgrass grassland</site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>0</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0</duffloading>
+	<nonwoodylive>0.07</nonwoodylive>
+	<nonwoodydead>0.04</nonwoodydead>
+	<nw_Primary>0.11</nw_Primary>
+	<nw_Primary_perc_live>63.6363636</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0</w_Sound_Sml>
+	<w_Sound_1_3>0</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>59</fuelbed_number>
+	<site_name>Subalpine fir -- Engelmann spruce -- Douglas-fir -- lodgepole pine forest</site_name>
+	<overstory>0.35</overstory>
+	<midstory>5.22</midstory>
+	<understory>0.29</understory>
+	<totalTrees>5.85</totalTrees>
+	<shrubs_Primary>1</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>3.2</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>43.8</duffloading>
+	<nonwoodylive>0.26</nonwoodylive>
+	<nonwoodydead>0.04</nonwoodydead>
+	<nw_Primary>0.3</nw_Primary>
+	<nw_Primary_perc_live>86.6666667</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.5</w_Sound_Sml_0_25>
+	<w_Sound_Sml>1</w_Sound_Sml>
+	<w_Sound_1_3>2</w_Sound_1_3>
+	<w_Sound_3_9>6.3</w_Sound_3_9>
+	<w_Sound_9_20>3.9</w_Sound_9_20>
+	<w_Sound_GT20>0.3</w_Sound_GT20>
+	<w_Rotten_3_9>6.3</w_Rotten_3_9>
+	<w_Rotten_9_20>3.9</w_Rotten_9_20>
+	<w_Rotten_GT20>0.3</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>61</fuelbed_number>
+	<site_name>Whitebark pine / subalpine fir forest</site_name>
+	<overstory>7.67</overstory>
+	<midstory>0</midstory>
+	<understory>3.77</understory>
+	<totalTrees>11.45</totalTrees>
+	<shrubs_Primary>1.05</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>1.3</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>15.68</duffloading>
+	<nonwoodylive>0.12</nonwoodylive>
+	<nonwoodydead>0.08</nonwoodydead>
+	<nw_Primary>0.2</nw_Primary>
+	<nw_Primary_perc_live>60</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.1</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.4</w_Sound_Sml>
+	<w_Sound_1_3>1.7</w_Sound_1_3>
+	<w_Sound_3_9>4.4</w_Sound_3_9>
+	<w_Sound_9_20>13.6</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>5.4</w_Rotten_3_9>
+	<w_Rotten_9_20>19.5</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>65</fuelbed_number>
+	<site_name>Purple tussockgrass / California oatgrass grassland</site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>0</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0.2</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>2.34</duffloading>
+	<nonwoodylive>1.62</nonwoodylive>
+	<nonwoodydead>0.18</nonwoodydead>
+	<nw_Primary>1.8</nw_Primary>
+	<nw_Primary_perc_live>90</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0</w_Sound_Sml>
+	<w_Sound_1_3>0</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>66</fuelbed_number>
+	<site_name>Bluebunch wheatgrass   -- bluegrass grassland</site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>0.03</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>1.7</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>24.22</duffloading>
+	<nonwoodylive>0.86</nonwoodylive>
+	<nonwoodydead>0.15</nonwoodydead>
+	<nw_Primary>1.01</nw_Primary>
+	<nw_Primary_perc_live>85.1485149</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0</w_Sound_Sml>
+	<w_Sound_1_3>0</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>69</fuelbed_number>
+	<site_name>Western juniper / sagebrush   -- bitterbrush shrubland</site_name>
+	<overstory>0.03</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0.03</totalTrees>
+	<shrubs_Primary>1.31</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0.1</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0.08</duffloading>
+	<nonwoodylive>0.18</nonwoodylive>
+	<nonwoodydead>0.02</nonwoodydead>
+	<nw_Primary>0.2</nw_Primary>
+	<nw_Primary_perc_live>90</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.2</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.4</w_Sound_Sml>
+	<w_Sound_1_3>0.2</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>70</fuelbed_number>
+	<site_name>Subalpine fir / lodgepole pine -- whitebark pine -- Engelmann spruce forest</site_name>
+	<overstory>6.92</overstory>
+	<midstory>2.45</midstory>
+	<understory>0.19</understory>
+	<totalTrees>9.55</totalTrees>
+	<shrubs_Primary>1.11</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>1.2</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>14.04</duffloading>
+	<nonwoodylive>0.14</nonwoodylive>
+	<nonwoodydead>0.06</nonwoodydead>
+	<nw_Primary>0.2</nw_Primary>
+	<nw_Primary_perc_live>70</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.3</w_Sound_Sml_0_25>
+	<w_Sound_Sml>1.2</w_Sound_Sml>
+	<w_Sound_1_3>2.5</w_Sound_1_3>
+	<w_Sound_3_9>12</w_Sound_3_9>
+	<w_Sound_9_20>7</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>8.7</w_Rotten_3_9>
+	<w_Rotten_9_20>5.5</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>208</fuelbed_number>
+	<site_name>Grand fir -- Douglas-fir forest</site_name>
+	<overstory>4.66</overstory>
+	<midstory>5.3</midstory>
+	<understory>1.25</understory>
+	<totalTrees>11.21</totalTrees>
+	<shrubs_Primary>0.78</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>2</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>23.14</duffloading>
+	<nonwoodylive>0.05</nonwoodylive>
+	<nonwoodydead>0.01</nonwoodydead>
+	<nw_Primary>0.06</nw_Primary>
+	<nw_Primary_perc_live>83.3333333</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.5</w_Sound_Sml_0_25>
+	<w_Sound_Sml>1.6</w_Sound_Sml>
+	<w_Sound_1_3>3.3</w_Sound_1_3>
+	<w_Sound_3_9>4.3</w_Sound_3_9>
+	<w_Sound_9_20>8.9</w_Sound_9_20>
+	<w_Sound_GT20>3.4</w_Sound_GT20>
+	<w_Rotten_3_9>0.8</w_Rotten_3_9>
+	<w_Rotten_9_20>1.6</w_Rotten_9_20>
+	<w_Rotten_GT20>0.6</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>210</fuelbed_number>
+	<site_name>Pinyon -- Utah juniper woodland</site_name>
+	<overstory>0.56</overstory>
+	<midstory>0.72</midstory>
+	<understory>0</understory>
+	<totalTrees>1.28</totalTrees>
+	<shrubs_Primary>0.54</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0.2</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0.52</duffloading>
+	<nonwoodylive>0.09</nonwoodylive>
+	<nonwoodydead>0.01</nonwoodydead>
+	<nw_Primary>0.1</nw_Primary>
+	<nw_Primary_perc_live>90</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.2</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.4</w_Sound_Sml>
+	<w_Sound_1_3>1</w_Sound_1_3>
+	<w_Sound_3_9>0.3</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0.2</w_Rotten_3_9>
+	<w_Rotten_9_20>0.2</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>211</fuelbed_number>
+	<site_name>Interior ponderosa pine forest</site_name>
+	<overstory>2.37</overstory>
+	<midstory>3.67</midstory>
+	<understory>1.2</understory>
+	<totalTrees>7.24</totalTrees>
+	<shrubs_Primary>0.1</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0.5</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>5.7</duffloading>
+	<nonwoodylive>0.09</nonwoodylive>
+	<nonwoodydead>0.02</nonwoodydead>
+	<nw_Primary>0.11</nw_Primary>
+	<nw_Primary_perc_live>81.8181818</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.1</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.5</w_Sound_Sml>
+	<w_Sound_1_3>0.9</w_Sound_1_3>
+	<w_Sound_3_9>0.4</w_Sound_3_9>
+	<w_Sound_9_20>1.2</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0.4</w_Rotten_3_9>
+	<w_Rotten_9_20>0.3</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>218</fuelbed_number>
+	<site_name>Gambel oak / big sagebrush shrubland</site_name>
+	<overstory>0.39</overstory>
+	<midstory>0</midstory>
+	<understory>6.17</understory>
+	<totalTrees>6.57</totalTrees>
+	<shrubs_Primary>0.7</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0.6</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>3.9</duffloading>
+	<nonwoodylive>0.09</nonwoodylive>
+	<nonwoodydead>0.02</nonwoodydead>
+	<nw_Primary>0.11</nw_Primary>
+	<nw_Primary_perc_live>81.8181818</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.2</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.6</w_Sound_Sml>
+	<w_Sound_1_3>1</w_Sound_1_3>
+	<w_Sound_3_9>0.5</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>221</fuelbed_number>
+	<site_name>Wheatgrass -- ryegrass grassland</site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>0</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0</duffloading>
+	<nonwoodylive>0.2</nonwoodylive>
+	<nonwoodydead>0.06</nonwoodydead>
+	<nw_Primary>0.26</nw_Primary>
+	<nw_Primary_perc_live>76.9230769</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0</w_Sound_Sml>
+	<w_Sound_1_3>0</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>224</fuelbed_number>
+	<site_name>Quaking aspen forest</site_name>
+	<overstory>9.13</overstory>
+	<midstory>10.97</midstory>
+	<understory>0.99</understory>
+	<totalTrees>21.09</totalTrees>
+	<shrubs_Primary>0.44</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0.9</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>11.88</duffloading>
+	<nonwoodylive>0.89</nonwoodylive>
+	<nonwoodydead>0.16</nonwoodydead>
+	<nw_Primary>1.05</nw_Primary>
+	<nw_Primary_perc_live>84.7619048</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.2</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.6</w_Sound_Sml>
+	<w_Sound_1_3>1.8</w_Sound_1_3>
+	<w_Sound_3_9>5.9</w_Sound_3_9>
+	<w_Sound_9_20>1.9</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>2.8</w_Rotten_3_9>
+	<w_Rotten_9_20>0.9</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>226</fuelbed_number>
+	<site_name>White fir -- gambel oak forest</site_name>
+	<overstory>5.09</overstory>
+	<midstory>7.74</midstory>
+	<understory>5.11</understory>
+	<totalTrees>17.94</totalTrees>
+	<shrubs_Primary>0.04</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>1.8</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>23.4</duffloading>
+	<nonwoodylive>0.07</nonwoodylive>
+	<nonwoodydead>0.01</nonwoodydead>
+	<nw_Primary>0.08</nw_Primary>
+	<nw_Primary_perc_live>87.5</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.6</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.9</w_Sound_Sml>
+	<w_Sound_1_3>1.2</w_Sound_1_3>
+	<w_Sound_3_9>7.1</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>1.5</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>231</fuelbed_number>
+	<site_name>Gambel oak -- Rocky Mountain juniper -- ponderosa pine forest</site_name>
+	<overstory>2.17</overstory>
+	<midstory>2.93</midstory>
+	<understory>0.85</understory>
+	<totalTrees>5.95</totalTrees>
+	<shrubs_Primary>1.2</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>1.2</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>4.68</duffloading>
+	<nonwoodylive>0.11</nonwoodylive>
+	<nonwoodydead>0.01</nonwoodydead>
+	<nw_Primary>0.12</nw_Primary>
+	<nw_Primary_perc_live>91.6666667</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.5</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.5</w_Sound_Sml>
+	<w_Sound_1_3>2</w_Sound_1_3>
+	<w_Sound_3_9>5</w_Sound_3_9>
+	<w_Sound_9_20>2</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>1</w_Rotten_3_9>
+	<w_Rotten_9_20>1</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>232</fuelbed_number>
+	<site_name>Mesquite savanna</site_name>
+	<overstory>0.21</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0.21</totalTrees>
+	<shrubs_Primary>1.43</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0</duffloading>
+	<nonwoodylive>0.4</nonwoodylive>
+	<nonwoodydead>0.1</nonwoodydead>
+	<nw_Primary>0.5</nw_Primary>
+	<nw_Primary_perc_live>80</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0</w_Sound_Sml>
+	<w_Sound_1_3>0</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>236</fuelbed_number>
+	<site_name>Tobosa -- grama grassland</site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>0.11</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0</duffloading>
+	<nonwoodylive>0.04</nonwoodylive>
+	<nonwoodydead>0.01</nonwoodydead>
+	<nw_Primary>0.05</nw_Primary>
+	<nw_Primary_perc_live>80</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0</w_Sound_Sml>
+	<w_Sound_1_3>0</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>237</fuelbed_number>
+	<site_name>Huckleberry -- heather shrubland</site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>2.19</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0</duffloading>
+	<nonwoodylive>0.06</nonwoodylive>
+	<nonwoodydead>0</nonwoodydead>
+	<nw_Primary>0.06</nw_Primary>
+	<nw_Primary_perc_live>100</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0</w_Sound_Sml>
+	<w_Sound_1_3>0</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>238</fuelbed_number>
+	<site_name>Pacific silver fir / mountain hemlock forest</site_name>
+	<overstory>6.4</overstory>
+	<midstory>2.93</midstory>
+	<understory>0.05</understory>
+	<totalTrees>9.38</totalTrees>
+	<shrubs_Primary>0.16</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>2</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>25.48</duffloading>
+	<nonwoodylive>0.08</nonwoodylive>
+	<nonwoodydead>0.02</nonwoodydead>
+	<nw_Primary>0.1</nw_Primary>
+	<nw_Primary_perc_live>80</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.2</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.2</w_Sound_Sml>
+	<w_Sound_1_3>0.4</w_Sound_1_3>
+	<w_Sound_3_9>0.2</w_Sound_3_9>
+	<w_Sound_9_20>6</w_Sound_9_20>
+	<w_Sound_GT20>2.5</w_Sound_GT20>
+	<w_Rotten_3_9>0.5</w_Rotten_3_9>
+	<w_Rotten_9_20>17</w_Rotten_9_20>
+	<w_Rotten_GT20>7</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>273</fuelbed_number>
+	<site_name>Engelmann spruce -- Douglas-fir / white fir -- interior ponderosa pine forest</site_name>
+	<overstory>4.31</overstory>
+	<midstory>5.45</midstory>
+	<understory>0.51</understory>
+	<totalTrees>10.28</totalTrees>
+	<shrubs_Primary>0.1</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>1.6</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>16.64</duffloading>
+	<nonwoodylive>0.07</nonwoodylive>
+	<nonwoodydead>0</nonwoodydead>
+	<nw_Primary>0.07</nw_Primary>
+	<nw_Primary_perc_live>100</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.25</w_Sound_Sml_0_25>
+	<w_Sound_Sml>1.5</w_Sound_Sml>
+	<w_Sound_1_3>3</w_Sound_1_3>
+	<w_Sound_3_9>5</w_Sound_3_9>
+	<w_Sound_9_20>4.5</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>1</w_Rotten_3_9>
+	<w_Rotten_9_20>1.5</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>286</fuelbed_number>
+	<site_name>Limber pine -- interior ponderosa pine forest</site_name>
+	<overstory>0.73</overstory>
+	<midstory>3.02</midstory>
+	<understory>0</understory>
+	<totalTrees>3.75</totalTrees>
+	<shrubs_Primary>0.88</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>1.4</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>12.74</duffloading>
+	<nonwoodylive>0.1</nonwoodylive>
+	<nonwoodydead>0.01</nonwoodydead>
+	<nw_Primary>0.11</nw_Primary>
+	<nw_Primary_perc_live>90.9090909</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.2</w_Sound_Sml_0_25>
+	<w_Sound_Sml>1</w_Sound_Sml>
+	<w_Sound_1_3>1</w_Sound_1_3>
+	<w_Sound_3_9>1</w_Sound_3_9>
+	<w_Sound_9_20>6</w_Sound_9_20>
+	<w_Sound_GT20>2</w_Sound_GT20>
+	<w_Rotten_3_9>2</w_Rotten_3_9>
+	<w_Rotten_9_20>5</w_Rotten_9_20>
+	<w_Rotten_GT20>10</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>301</fuelbed_number>
+	<site_name>California central valley riparian</site_name>
+	<overstory>10.98</overstory>
+	<midstory>2.61</midstory>
+	<understory>0</understory>
+	<totalTrees>13.59</totalTrees>
+	<shrubs_Primary>0.58</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>2</duffloading>
+	<nonwoodylive>0.18</nonwoodylive>
+	<nonwoodydead>0.02</nonwoodydead>
+	<nw_Primary>0.2</nw_Primary>
+	<nw_Primary_perc_live>90</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.2</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.3</w_Sound_Sml>
+	<w_Sound_1_3>0.1</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>302</fuelbed_number>
+	<site_name>Intermountain montane subalpine riparian</site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>0.72</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0.4</duffloading>
+	<nonwoodylive>0.28</nonwoodylive>
+	<nonwoodydead>0.02</nonwoodydead>
+	<nw_Primary>0.3</nw_Primary>
+	<nw_Primary_perc_live>93.3333333</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0</w_Sound_Sml>
+	<w_Sound_1_3>0</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>303</fuelbed_number>
+	<site_name>Warm desert riparian</site_name>
+	<overstory>5.49</overstory>
+	<midstory>1.92</midstory>
+	<understory>0</understory>
+	<totalTrees>7.41</totalTrees>
+	<shrubs_Primary>0.59</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>2</duffloading>
+	<nonwoodylive>0</nonwoodylive>
+	<nonwoodydead>0</nonwoodydead>
+	<nw_Primary>0</nw_Primary>
+	<nw_Primary_perc_live>0</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.2</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.3</w_Sound_Sml>
+	<w_Sound_1_3>0.1</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>304</fuelbed_number>
+	<site_name>Conifer swamp</site_name>
+	<overstory>3.02</overstory>
+	<midstory>1.21</midstory>
+	<understory>0</understory>
+	<totalTrees>4.23</totalTrees>
+	<shrubs_Primary>0.48</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>3</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>28.5</duffloading>
+	<nonwoodylive>0.02</nonwoodylive>
+	<nonwoodydead>0</nonwoodydead>
+	<nw_Primary>0.02</nw_Primary>
+	<nw_Primary_perc_live>100</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.4</w_Sound_Sml_0_25>
+	<w_Sound_Sml>1</w_Sound_Sml>
+	<w_Sound_1_3>2</w_Sound_1_3>
+	<w_Sound_3_9>4</w_Sound_3_9>
+	<w_Sound_9_20>2</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>2</w_Rotten_3_9>
+	<w_Rotten_9_20>1</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>305</fuelbed_number>
+	<site_name>Red alder</site_name>
+	<overstory>9.28</overstory>
+	<midstory>3.8</midstory>
+	<understory>0.34</understory>
+	<totalTrees>13.43</totalTrees>
+	<shrubs_Primary>1.5</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>1</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>15</duffloading>
+	<nonwoodylive>0.09</nonwoodylive>
+	<nonwoodydead>0.01</nonwoodydead>
+	<nw_Primary>0.1</nw_Primary>
+	<nw_Primary_perc_live>90</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.2</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.8</w_Sound_Sml>
+	<w_Sound_1_3>1.3</w_Sound_1_3>
+	<w_Sound_3_9>0.5</w_Sound_3_9>
+	<w_Sound_9_20>0.5</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>3</w_Rotten_3_9>
+	<w_Rotten_9_20>2</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>306</fuelbed_number>
+	<site_name>Knobcone pine forest</site_name>
+	<overstory>0.69</overstory>
+	<midstory>2.3</midstory>
+	<understory>0.4</understory>
+	<totalTrees>3.39</totalTrees>
+	<shrubs_Primary>0.88</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>1.4</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>12.74</duffloading>
+	<nonwoodylive>0.1</nonwoodylive>
+	<nonwoodydead>0.01</nonwoodydead>
+	<nw_Primary>0.11</nw_Primary>
+	<nw_Primary_perc_live>90.9090909</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.2</w_Sound_Sml_0_25>
+	<w_Sound_Sml>1</w_Sound_Sml>
+	<w_Sound_1_3>1</w_Sound_1_3>
+	<w_Sound_3_9>1</w_Sound_3_9>
+	<w_Sound_9_20>6</w_Sound_9_20>
+	<w_Sound_GT20>2</w_Sound_GT20>
+	<w_Rotten_3_9>2</w_Rotten_3_9>
+	<w_Rotten_9_20>5</w_Rotten_9_20>
+	<w_Rotten_GT20>10</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>307</fuelbed_number>
+	<site_name>Palo verde shrubland</site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>0.19</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0</duffloading>
+	<nonwoodylive>0.02</nonwoodylive>
+	<nonwoodydead>0.18</nonwoodydead>
+	<nw_Primary>0.2</nw_Primary>
+	<nw_Primary_perc_live>10</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0</w_Sound_Sml>
+	<w_Sound_1_3>0</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>308</fuelbed_number>
+	<site_name>Low sagebrush </site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>1.25</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0</duffloading>
+	<nonwoodylive>0.05</nonwoodylive>
+	<nonwoodydead>0.01</nonwoodydead>
+	<nw_Primary>0.06</nw_Primary>
+	<nw_Primary_perc_live>83.3333333</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.06</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.02</w_Sound_Sml>
+	<w_Sound_1_3>0</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>309</fuelbed_number>
+	<site_name>Blackbrush</site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>0.05</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0</duffloading>
+	<nonwoodylive>0.08</nonwoodylive>
+	<nonwoodydead>0.02</nonwoodydead>
+	<nw_Primary>0.1</nw_Primary>
+	<nw_Primary_perc_live>80</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0</w_Sound_Sml>
+	<w_Sound_1_3>0</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>310</fuelbed_number>
+	<site_name>Greasewood</site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>0.75</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0</duffloading>
+	<nonwoodylive>0.07</nonwoodylive>
+	<nonwoodydead>0.03</nonwoodydead>
+	<nw_Primary>0.1</nw_Primary>
+	<nw_Primary_perc_live>70</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.1</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.2</w_Sound_Sml>
+	<w_Sound_1_3>0</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>311</fuelbed_number>
+	<site_name>Salt-desert shrub</site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>0.36</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0</duffloading>
+	<nonwoodylive>0.07</nonwoodylive>
+	<nonwoodydead>0.03</nonwoodydead>
+	<nw_Primary>0.1</nw_Primary>
+	<nw_Primary_perc_live>70</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.1</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.2</w_Sound_Sml>
+	<w_Sound_1_3>0</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>312</fuelbed_number>
+	<site_name>Gambel oak </site_name>
+	<overstory>0.39</overstory>
+	<midstory>2.22</midstory>
+	<understory>6.17</understory>
+	<totalTrees>8.79</totalTrees>
+	<shrubs_Primary>0.7</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>1.2</duffloading>
+	<nonwoodylive>0.09</nonwoodylive>
+	<nonwoodydead>0.02</nonwoodydead>
+	<nw_Primary>0.11</nw_Primary>
+	<nw_Primary_perc_live>81.8181818</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.2</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.2</w_Sound_Sml>
+	<w_Sound_1_3>1</w_Sound_1_3>
+	<w_Sound_3_9>0.5</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>313</fuelbed_number>
+	<site_name>Mountain Mahogany</site_name>
+	<overstory>0.02</overstory>
+	<midstory>0.37</midstory>
+	<understory>1.03</understory>
+	<totalTrees>1.42</totalTrees>
+	<shrubs_Primary>0.27</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>1.2</duffloading>
+	<nonwoodylive>0.08</nonwoodylive>
+	<nonwoodydead>0.02</nonwoodydead>
+	<nw_Primary>0.1</nw_Primary>
+	<nw_Primary_perc_live>80</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.2</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.2</w_Sound_Sml>
+	<w_Sound_1_3>1</w_Sound_1_3>
+	<w_Sound_3_9>0.5</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>314</fuelbed_number>
+	<site_name>Limber-bristlecone pine</site_name>
+	<overstory>5.03</overstory>
+	<midstory>0</midstory>
+	<understory>2.41</understory>
+	<totalTrees>7.45</totalTrees>
+	<shrubs_Primary>1.05</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>1.12</duffloading>
+	<nonwoodylive>0.12</nonwoodylive>
+	<nonwoodydead>0.08</nonwoodydead>
+	<nw_Primary>0.2</nw_Primary>
+	<nw_Primary_perc_live>60</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.1</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.4</w_Sound_Sml>
+	<w_Sound_1_3>1.7</w_Sound_1_3>
+	<w_Sound_3_9>4.4</w_Sound_3_9>
+	<w_Sound_9_20>13.6</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>1</w_Rotten_3_9>
+	<w_Rotten_9_20>0.5</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>315</fuelbed_number>
+	<site_name>Interior alpine forb-grass</site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>0</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0</duffloading>
+	<nonwoodylive>1.28</nonwoodylive>
+	<nonwoodydead>0.07</nonwoodydead>
+	<nw_Primary>1.35</nw_Primary>
+	<nw_Primary_perc_live>94.8148148</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0</w_Sound_Sml>
+	<w_Sound_1_3>0</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>316</fuelbed_number>
+	<site_name>Northern California coastal shrub</site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>8.48</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>0</duffloading>
+	<nonwoodylive>0.27</nonwoodylive>
+	<nonwoodydead>0.03</nonwoodydead>
+	<nw_Primary>0.3</nw_Primary>
+	<nw_Primary_perc_live>90</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.1</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.1</w_Sound_Sml>
+	<w_Sound_1_3>0</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>317</fuelbed_number>
+	<site_name>Rocky Mountain Maple</site_name>
+	<overstory>3.81</overstory>
+	<midstory>0</midstory>
+	<understory>0.09</understory>
+	<totalTrees>3.9</totalTrees>
+	<shrubs_Primary>0.2</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>4</duffloading>
+	<nonwoodylive>0.09</nonwoodylive>
+	<nonwoodydead>0.01</nonwoodydead>
+	<nw_Primary>0.1</nw_Primary>
+	<nw_Primary_perc_live>90</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.2</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.8</w_Sound_Sml>
+	<w_Sound_1_3>1.3</w_Sound_1_3>
+	<w_Sound_3_9>0.5</w_Sound_3_9>
+	<w_Sound_9_20>0.5</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>3</w_Rotten_3_9>
+	<w_Rotten_9_20>2</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>318</fuelbed_number>
+	<site_name>Bluejoint reedgrass -- water sedge grassland</site_name>
+	<overstory>0</overstory>
+	<midstory>0</midstory>
+	<understory>0</understory>
+	<totalTrees>0</totalTrees>
+	<shrubs_Primary>0</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>1</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>2.25</duffloading>
+	<nonwoodylive>1.19</nonwoodylive>
+	<nonwoodydead>0.06</nonwoodydead>
+	<nw_Primary>1.25</nw_Primary>
+	<nw_Primary_perc_live>95.2</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0</w_Sound_Sml>
+	<w_Sound_1_3>0</w_Sound_1_3>
+	<w_Sound_3_9>0</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>319</fuelbed_number>
+	<site_name>North Pacific avalanche chute shrubland</site_name>
+	<overstory>1.98</overstory>
+	<midstory>0</midstory>
+	<understory>0.34</understory>
+	<totalTrees>2.33</totalTrees>
+	<shrubs_Primary>0</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>0</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>1.2</duffloading>
+	<nonwoodylive>0</nonwoodylive>
+	<nonwoodydead>0</nonwoodydead>
+	<nw_Primary>0</nw_Primary>
+	<nw_Primary_perc_live>0</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.3</w_Sound_Sml_0_25>
+	<w_Sound_Sml>0.4</w_Sound_Sml>
+	<w_Sound_1_3>0.9</w_Sound_1_3>
+	<w_Sound_3_9>1.1</w_Sound_3_9>
+	<w_Sound_9_20>0</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0.1</w_Rotten_3_9>
+	<w_Rotten_9_20>0</w_Rotten_9_20>
+	<w_Rotten_GT20>0</w_Rotten_GT20>
+</FCCS>
+<FCCS>
+	<fuelbed_number>320</fuelbed_number>
+	<site_name>Western Larch Forest Alliance</site_name>
+	<overstory>7.7</overstory>
+	<midstory>1.16</midstory>
+	<understory>0.05</understory>
+	<totalTrees>8.91</totalTrees>
+	<shrubs_Primary>0.33</shrubs_Primary>
+	<shrubs_Primary_perc_live>100</shrubs_Primary_perc_live>
+	<g_DuffDep_Upper>1.7</g_DuffDep_Upper>
+	<g_DuffDep_Upper_perc>100</g_DuffDep_Upper_perc>
+	<duffloading>14.88</duffloading>
+	<nonwoodylive>0.05</nonwoodylive>
+	<nonwoodydead>0.06</nonwoodydead>
+	<nw_Primary>0.11</nw_Primary>
+	<nw_Primary_perc_live>45.4545455</nw_Primary_perc_live>
+	<w_Sound_Sml_0_25>0.7</w_Sound_Sml_0_25>
+	<w_Sound_Sml>2.1</w_Sound_Sml>
+	<w_Sound_1_3>4.4</w_Sound_1_3>
+	<w_Sound_3_9>0.7</w_Sound_3_9>
+	<w_Sound_9_20>3.5</w_Sound_9_20>
+	<w_Sound_GT20>0</w_Sound_GT20>
+	<w_Rotten_3_9>0.7</w_Rotten_3_9>
+	<w_Rotten_9_20>8</w_Rotten_9_20>
+	<w_Rotten_GT20>1</w_Rotten_GT20>
+</FCCS>
+</FCCS_File>

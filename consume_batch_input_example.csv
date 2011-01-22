@@ -1,0 +1,3 @@
+slope,shrub_black_pct,fm_1000hr,area,fuelbeds,lengthOfIgnition,burn_type,days_since_rain,fm_10hr,windspeed,can_con_pct,fm_type,units,ecoregion,fm_duff
+5.0,0.0,20.0,100.0,27,30.0,natural,20.0,50.0,5.0,20.0,MEAS-Th,tons_ac,western,20.0
+5.0,0.0,20.0,100.0,18,30.0,,20.0,50.0,5.0,20.0,,,western,20.0
