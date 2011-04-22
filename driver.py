@@ -1,4 +1,5 @@
 import consume
+import sys
 
 def PrintHeader(consumeObj, id, catList):
     out = "fuelbed"
@@ -52,7 +53,12 @@ consumer = consume.FuelConsumption(fccs_file = "fccs_pyconsume_input.xml")
 ids = [str(i[0]) for i in consumer.FCCS.data]
 
 ### - this file contains configuration data (windspeed, percent blackened, etc.)
-consumer.load_scenario("input_1.csv")
-
-### - summarizes results across all the fuelbeds
-PrintCsv(consumer, ids)
+if len(sys.argv) > 1:
+        consumer.load_scenario(sys.argv[1])  
+        PrintCsv(consumer, ids)
+else:
+    ecoregions = ['western', 'boreal', 'southern']
+    for region in ecoregions:
+        consumer.load_scenario("{}.csv".format(region))  
+        ### - summarizes results across all the fuelbeds
+        PrintCsv(consumer, ids)
