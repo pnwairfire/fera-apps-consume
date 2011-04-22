@@ -1,4 +1,0 @@
-unitID,fccsID,ecoregion,area,1000hr_fm,duff_fm,canopy_consumed_pct,shrub_blackened_pct,units,category,flaming,smoldering,residual,total
-1,27,western,100.0,20.0,20.0,20.0,0.0,tons/ac,total consumption,4.34513115108,2.5994364306,3.74821583691,10.6927834186
-2,18,western,100.0,20.0,20.0,20.0,0.0,tons/ac,total consumption,4.75264315834,3.62525545715,2.72546274213,11.1033613576
-ALL,ALL,200.0,ALL,ALL,ALL,ALL,tons/ac,consumption,4.54888715471,3.11234594388,3.23683928952,10.8980723881
