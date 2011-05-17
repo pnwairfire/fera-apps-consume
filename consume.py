@@ -784,7 +784,6 @@ Index 1           Index 2              Index 3                     Index 4      
 import math
 import numpy as np
 import os
-a = np.array
 
 def list_valid_fm_types():
     """Returns a list of valid 1000hr fuel moisture types for activity burn
@@ -1292,7 +1291,7 @@ class InputVar:
 
         try:
             if self.array:
-                self.value = a(self.value, dtype=float)
+                self.value = np.array(self.value, dtype=float)
         except:
             self.valid = False
 
@@ -1441,7 +1440,7 @@ class InputVarSet:
                     for par in self.params:
                         if par.kw == vi:
                             if par.array:
-                                self.unique_inputs[vi] = a(mod_runs[px[vi]])
+                                self.unique_inputs[vi] = np.array(mod_runs[px[vi]])
                             else:
                                 self.unique_inputs[vi] = mod_runs[px[vi]]
                 else: self.unique_inputs[vi] = self.validated_inputs[vi]
@@ -1841,8 +1840,8 @@ class FuelConsumption:
         self._fccs_loadings = []
         self.units = "tons_ac"
         self._build_input_set()
-        self._cons_data = a([])
-        self._emis_data = a([])
+        self._cons_data = np.array([])
+        self._emis_data = np.array([])
         self._calc_success = False
         self._conv_success = False
         self._unique_check = False
@@ -2033,22 +2032,22 @@ class FuelConsumption:
 
 
         if len(area) == 1:
-            area = a([1] * len(fccs_ids), dtype=float) * area
+            area = np.array([1] * len(fccs_ids), dtype=float) * area
 
         if len(ecoregion) == 1:
             ecoregion = ecoregion * len(fccs_ids)
 
         if len(fm_1000hr) == 1:
-            fm_1000hr = a([1] * len(fccs_ids), dtype=float) * fm_1000hr
+            fm_1000hr = np.array([1] * len(fccs_ids), dtype=float) * fm_1000hr
 
         if len(fm_duff) == 1:
-            fm_duff = a([1] * len(fccs_ids), dtype=float) * fm_duff
+            fm_duff = np.array([1] * len(fccs_ids), dtype=float) * fm_duff
 
         if len(fm_can) == 1:
-            fm_can = a([1] * len(fccs_ids), dtype=float) * fm_can
+            fm_can = np.array([1] * len(fccs_ids), dtype=float) * fm_can
 
         if len(fm_shb) == 1:
-            fm_shb = a([1] * len(fccs_ids), dtype=float) * fm_shb
+            fm_shb = np.array([1] * len(fccs_ids), dtype=float) * fm_shb
 
 
         if stratum == "all":
@@ -2067,7 +2066,7 @@ class FuelConsumption:
         txt = ""
         txt += ("\n\nFUEL CONSUMPTION\nConsumption units: " + str_au +
             "\nHeat release units: " + hr_au +
-            "\nTotal area: %.0f" % sum(a(area)) + " acres")
+            "\nTotal area: %.0f" % sum(np.array(area)) + " acres")
 
         csv_lines = ("unitID,fccsID,ecoregion,area,1000hr_fm,duff_fm,"
                      + "canopy_consumed_pct,shrub_blackened_pct,units,"
@@ -2131,19 +2130,19 @@ class FuelConsumption:
 
         if units in perarea() and sum(area) > 0:
 
-            tot_flam = sum(a(area) * a(cons_data[0][0]))
-            tot_smld = sum(a(area) * a(cons_data[0][1]))
-            tot_resd = sum(a(area) * a(cons_data[0][2]))
-            tot_cons = sum(a(area) * a(cons_data[0][3]))
+            tot_flam = sum(np.array(area) * np.array(cons_data[0][0]))
+            tot_smld = sum(np.array(area) * np.array(cons_data[0][1]))
+            tot_resd = sum(np.array(area) * np.array(cons_data[0][2]))
+            tot_cons = sum(np.array(area) * np.array(cons_data[0][3]))
             pa_flam = tot_flam / tot_area
             pa_smld = tot_smld / tot_area
             pa_resd = tot_resd / tot_area
             pa_cons = tot_cons / tot_area
 
-            pa_flam_hr = sum(a(heat_data[0][0]))
-            pa_smld_hr = sum(a(heat_data[0][1]))
-            pa_resd_hr = sum(a(heat_data[0][2]))
-            pa_cons_hr = sum(a(heat_data[0][3]))
+            pa_flam_hr = sum(np.array(heat_data[0][0]))
+            pa_smld_hr = sum(np.array(heat_data[0][1]))
+            pa_resd_hr = sum(np.array(heat_data[0][2]))
+            pa_cons_hr = sum(np.array(heat_data[0][3]))
 
             txt += ("\n\nALL FUELBEDS:\n\nConsumption:\t%.2e" % pa_flam + "\t%.2e"
                 % pa_smld + "\t%.2e" % pa_resd + "\t%.2e" % pa_cons)
@@ -2435,7 +2434,7 @@ class FuelConsumption:
                 cans = []
                 for f in self.InSet.validated_inputs['fuelbeds']:
                     cans.append(float(self._fccs_canopy_consumption_pct[int(f)]))
-                self.InSet.validated_inputs['can_con_pct'] = a(cans)
+                self.InSet.validated_inputs['can_con_pct'] = np.array(cans)
 
             else:
                 for j, jval in enumerate(can):
@@ -2644,7 +2643,7 @@ class FuelConsumption:
             # convert to numpy arrays
             for t in zip(*LoadDefs)[1]:
                 if t != 'fccs_id':
-                    LD[t] = a(LD[t])
+                    LD[t] = np.array(LD[t])
 
             if len(self.customized_fuel_loadings) != 0:
                 for flc in self.customized_fuel_loadings:
@@ -2672,7 +2671,7 @@ class FuelConsumption:
         # Repeated functions
         def csdist(tot, csd):
             """Portions consumption by consumption stage"""
-            return a([tot * csd[0], tot * csd[1], tot * csd[2], tot * sum(csd)])
+            return np.array([tot * csd[0], tot * csd[1], tot * csd[2], tot * sum(csd)])
 
         def propcons(x):
             """ Equation to calculate proportion consumed for various strata"""
@@ -3269,7 +3268,7 @@ class FuelConsumption:
                     return np.where(np.greater(f, tot), tot, f)
 
                 pct = (1.0 - (((q - fDRED)**2.0) / (q**2.0)))
-                return a([check(t, tl) for t, tl in enumerate(tlc)])
+                return np.array([check(t, tl) for t, tl in enumerate(tlc)])
 
             def csdist_act(f, tots, rF):
                 """ Distribute woody activity consumption by combustion stage
@@ -3283,7 +3282,7 @@ class FuelConsumption:
                        (tots - f) * rF,               # residual
                        tots]
 
-                return a(list(zip(*dist)))
+                return np.array(list(zip(*dist)))
 
             def ccon_one_act():
                 """ 1-hr (0 to 1/4") woody fuels consumption, activity """
@@ -3300,7 +3299,7 @@ class FuelConsumption:
             def ccon_hun_act():
                 """ Eq. F: Total 100-hr (1" - 3") fuel consumption, activity
                     p.144 ln 4585"""
-                resFrac = a([0.0])
+                resFrac = np.array([0.0])
                 QMD_100hr = 1.68
                 total = LD['hun_hr_sound'] * pct_hun_hr
                 [flamgDRED, flaming_portion] = flaming_DRED_calc(total)
@@ -3313,36 +3312,36 @@ class FuelConsumption:
 
                 # make sure flaming doesn't exceed total... ln 4665
                 flamg = np.where(np.greater(flamg, total), total, flamg)
-                return a([zip(*csdist_act(flamg, total, resFrac))]), flamgDRED, flaming_portion
+                return np.array([zip(*csdist_act(flamg, total, resFrac))]), flamgDRED, flaming_portion
 
             def ccon_oneK_act():
                 """ 1000-hr (3" - 9") woody fuels consumption, activity
                     Eq. O, ln 4610-4613 """
-                resFrac = a([[0.25], [0.63]]) # [snd, rot] non-flaming resid pct
-                totld = a([LD['oneK_hr_sound'], LD['oneK_hr_rotten']])
+                resFrac = np.array([[0.25], [0.63]]) # [snd, rot] non-flaming resid pct
+                totld = np.array([LD['oneK_hr_sound'], LD['oneK_hr_rotten']])
                 oneK_redux = qmd_redux_calc(QMDs[1])
                 total_snd = oneK_redux * totld[0]
                 total_rot = oneK_redux * totld[1]
                 flamg = flamg_portion(QMDs[1], [total_snd, total_rot], totld, flamgDRED)
-                return csdist_act(flamg, a([total_snd, total_rot]), resFrac)
+                return csdist_act(flamg, np.array([total_snd, total_rot]), resFrac)
 
             def ccon_tenK_act():
                 """ 10K-hr (9 to 20") woody fuels consumption, activity
                     Eq. O, ln 4615-4618 """
-                resFrac = a([[0.33], [0.67]]) # [snd, rot] non-flaming resid pct
-                totld = a([LD['tenK_hr_sound'], LD['tenK_hr_rotten']])
+                resFrac = np.array([[0.33], [0.67]]) # [snd, rot] non-flaming resid pct
+                totld = np.array([LD['tenK_hr_sound'], LD['tenK_hr_rotten']])
                 tenK_redux = qmd_redux_calc(QMDs[2])
                 total_snd = tenK_redux * totld[0]
                 total_rot = tenK_redux * totld[1]
                 flamg = flamg_portion(QMDs[2], [total_snd, total_rot], totld, flamgDRED)
-                return csdist_act(flamg, a([total_snd, total_rot]), resFrac)
+                return csdist_act(flamg, np.array([total_snd, total_rot]), resFrac)
 
             def ccon_tnkp_act():
                 """ >10,000-hr (20"+) woody fuel consumption, activity
                  p. 153 Table P, ln 4619
                  Documentation does not include the condition that where
                  1000hr FM < 31%, redux is always 5%"""
-                resFrac = a([[0.5], [0.67]]) # [snd, rot] non-flaming resid pct
+                resFrac = np.array([[0.5], [0.67]]) # [snd, rot] non-flaming resid pct
                 pct_redux = (np.less(adjfm_1000hr, 35.0) *  # mask out above 35%
                        (np.where(np.less(adjfm_1000hr, 31.0),# where < 31%
                           0.05,                                   # true
@@ -3358,7 +3357,7 @@ class FuelConsumption:
                                     total_snd, flamgsnd)
                 flamgrot = np.where(np.greater(flamgrot, total_rot),
                                     total_rot, flamgrot)
-                return csdist_act(a([flamgsnd, flamgrot]), a([total_snd, total_rot]), resFrac)
+                return csdist_act(np.array([flamgsnd, flamgrot]), np.array([total_snd, total_rot]), resFrac)
 
 
             # Variables that need to be defined for these equations
@@ -3466,7 +3465,7 @@ class FuelConsumption:
         #### OUTPUT EXPORT ####
         #######################
 
-        self._ucons_data = a([all_fsrt, can_fsrt, shb_fsrt, nw_fsrt, llm_fsrt,
+        self._ucons_data = np.array([all_fsrt, can_fsrt, shb_fsrt, nw_fsrt, llm_fsrt,
                 gf_fsrt,woody_fsrt, can_over_fsrt, can_mid_fsrt, can_under_fsrt,
                 can_snag1f_fsrt, can_snag1w_fsrt, can_snag1nf_fsrt,
                 can_snag2_fsrt, can_snag3_fsrt, can_ladder_fsrt,
@@ -4291,7 +4290,7 @@ class Emissions:
             alls = []
             base = self._emis_data[p]
             for i in range(0, len(self.FCobj._cons_data)):
-                base2 = area * a(base[i])
+                base2 = area * np.array(base[i])
                 alls.append(np.sum(base2, axis=1))
 
             return alls / tot_area
@@ -4307,21 +4306,21 @@ class Emissions:
         t = self.efDB.data[0]
         fidlen = int(self.scenLen)# <<< ucons
 
-        ef_flamg_pm = a([t['PM_flaming']] * fidlen, dtype = float)
-        ef_flamg_pm10 = a([t['PM10b_flaming']] * fidlen, dtype = float)
-        ef_flamg_pm25 = a([t['PM25_flaming']] * fidlen, dtype = float)
-        ef_flamg_co = a([t['CO_flaming']] * fidlen, dtype = float)
-        ef_flamg_co2 = a([t['CO2_flaming']] * fidlen, dtype = float)
-        ef_flamg_ch4 = a([t['CH4_flaming']] * fidlen, dtype = float)
-        ef_flamg_nmhc = a([t['NMHC_flaming']] * fidlen, dtype = float)
+        ef_flamg_pm = np.array([t['PM_flaming']] * fidlen, dtype = float)
+        ef_flamg_pm10 = np.array([t['PM10b_flaming']] * fidlen, dtype = float)
+        ef_flamg_pm25 = np.array([t['PM25_flaming']] * fidlen, dtype = float)
+        ef_flamg_co = np.array([t['CO_flaming']] * fidlen, dtype = float)
+        ef_flamg_co2 = np.array([t['CO2_flaming']] * fidlen, dtype = float)
+        ef_flamg_ch4 = np.array([t['CH4_flaming']] * fidlen, dtype = float)
+        ef_flamg_nmhc = np.array([t['NMHC_flaming']] * fidlen, dtype = float)
 
-        ef_smres_pm = a([t['PM_smold_resid']] * fidlen, dtype = float)
-        ef_smres_pm10 = a([t['PM10b_smold_resid']] * fidlen, dtype = float)
-        ef_smres_pm25 = a([t['PM25_smold_resid']] * fidlen, dtype = float)
-        ef_smres_co = a([t['CO_smold_resid']] * fidlen, dtype = float)
-        ef_smres_co2 = a([t['CO2_smold_resid']] * fidlen, dtype = float)
-        ef_smres_ch4 = a([t['CH4_smold_resid']] * fidlen, dtype = float)
-        ef_smres_nmhc = a([t['NMHC_smold_resid']] * fidlen, dtype = float)
+        ef_smres_pm = np.array([t['PM_smold_resid']] * fidlen, dtype = float)
+        ef_smres_pm10 = np.array([t['PM10b_smold_resid']] * fidlen, dtype = float)
+        ef_smres_pm25 = np.array([t['PM25_smold_resid']] * fidlen, dtype = float)
+        ef_smres_co = np.array([t['CO_smold_resid']] * fidlen, dtype = float)
+        ef_smres_co2 = np.array([t['CO2_smold_resid']] * fidlen, dtype = float)
+        ef_smres_ch4 = np.array([t['CH4_smold_resid']] * fidlen, dtype = float)
+        ef_smres_nmhc = np.array([t['NMHC_smold_resid']] * fidlen, dtype = float)
 
         # And go fetch factors from the chosen emissions factor groups
         for i in range(0, fidlen):
@@ -4338,14 +4337,14 @@ class Emissions:
                         ef_flamg_pm[i] = data['PM_flaming']; ef_smres_pm[i] = data['PM_smold_resid']
                         ef_flamg_pm10[i] = data['PM10b_flaming']; ef_smres_pm10[i] = data['PM10b_smold_resid']
 
-        fill = [a([0] * fidlen, dtype=float)]
-        ef_pm = a([ef_flamg_pm] + [ef_smres_pm] + [ef_smres_pm] + fill)
-        ef_pm10 = a([ef_flamg_pm10] + [ef_smres_pm10] + [ef_smres_pm10] + fill)
-        ef_pm25 = a([ef_flamg_pm25] + [ef_smres_pm25] + [ef_smres_pm25] + fill)
-        ef_co = a([ef_flamg_co] + [ef_smres_co] + [ef_smres_co] + fill)
-        ef_co2 = a([ef_flamg_co2] + [ef_smres_co2] + [ef_smres_co2] + fill)
-        ef_ch4 = a([ef_flamg_ch4] + [ef_smres_ch4] + [ef_smres_ch4] + fill)
-        ef_nmhc = a([ef_flamg_nmhc] + [ef_smres_nmhc] + [ef_smres_nmhc] + fill)
+        fill = [np.array([0] * fidlen, dtype=float)]
+        ef_pm = np.array([ef_flamg_pm] + [ef_smres_pm] + [ef_smres_pm] + fill)
+        ef_pm10 = np.array([ef_flamg_pm10] + [ef_smres_pm10] + [ef_smres_pm10] + fill)
+        ef_pm25 = np.array([ef_flamg_pm25] + [ef_smres_pm25] + [ef_smres_pm25] + fill)
+        ef_co = np.array([ef_flamg_co] + [ef_smres_co] + [ef_smres_co] + fill)
+        ef_co2 = np.array([ef_flamg_co2] + [ef_smres_co2] + [ef_smres_co2] + fill)
+        ef_ch4 = np.array([ef_flamg_ch4] + [ef_smres_ch4] + [ef_smres_ch4] + fill)
+        ef_nmhc = np.array([ef_flamg_nmhc] + [ef_smres_nmhc] + [ef_smres_nmhc] + fill)
 
 
        # Emissions calculations:
@@ -4368,7 +4367,7 @@ class Emissions:
         # And emissions per-unit-area summaries:
         area = self.FCobj.InSet.validated_inputs['area']
         if len(area) == 1:
-            area = a(np.array([1] * fidlen), dtype=float) * area
+            area = np.array(np.array([1] * fidlen), dtype=float) * area
         tot_area = sum(area)
 
         pm_all = get_emis_summ(0)
@@ -4379,7 +4378,7 @@ class Emissions:
         ch4_all = get_emis_summ(5)
         nmhc_all = get_emis_summ(6)
 
-        self._emis_summ = a([pm_all, pm10_all, pm25_all, co_all, co2_all,
+        self._emis_summ = np.array([pm_all, pm10_all, pm25_all, co_all, co2_all,
                              ch4_all, nmhc_all])
 
 ##############################################################################
