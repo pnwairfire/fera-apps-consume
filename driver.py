@@ -29,6 +29,24 @@ def PrintCsv(consumeObj, idList):
                 out += "," + str(results[i][j]['total'][0])
         print(out)
 
+def PrintCsvForOne(consumeObj, idList):
+	### - top-level catagory list
+    catagoryList = ['summary', 'canopy', 'ground fuels', 'litter-lichen-moss', 'nonwoody', 'shrub', 'woody fuels']
+
+    PrintHeader(consumeObj, idList, catagoryList)
+
+    ### - loop through all the fuelbeds
+    for id in idList:
+        out = id
+        consumeObj.fuelbed_fccs_ids = id
+        results = consumeObj.results()['consumption']
+        for i in catagoryList:
+        	### - this is a divider column for each top-level catagory
+            out += "," + "-{}-".format(i)
+            for j in results[i].keys():
+                out += "," + str(results[i][j]['total'][0])
+        print(out)
+
 def SimpleSummary(consumeObj, idList):
 	for i in idList:
 	    consumeObj.fuelbed_fccs_ids = i
@@ -55,7 +73,7 @@ ids = [str(i[0]) for i in consumer.FCCS.data]
 ### - this file contains configuration data (windspeed, percent blackened, etc.)
 if len(sys.argv) > 1:
         consumer.load_scenario(sys.argv[1])
-        PrintCsv(consumer, ids)
+        PrintCsvForOne(consumer, ['1001'])
 else:
     ecoregions = ['western', 'boreal', 'southern']
     for region in ecoregions:
