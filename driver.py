@@ -14,7 +14,7 @@ def PrintHeader(consumeObj, id, catList):
 def PrintCsv(consumeObj, idList):
 	### - top-level catagory list
     catagoryList = ['summary', 'canopy', 'ground fuels', 'litter-lichen-moss', 'nonwoody', 'shrub', 'woody fuels']
-    
+
     PrintHeader(consumeObj, idList, catagoryList)
 
     ### - loop through all the fuelbeds
@@ -47,18 +47,18 @@ def SimpleSummary(consumeObj, idList):
 #-------------------------------------------------------------------------------
 
 ### - this is the "database" of information from FCCS
-consumer = consume.FuelConsumption(fccs_file = "fccs_pyconsume_input.xml")
+consumer = consume.FuelConsumption(fccs_file = "input_data/fccs_pyconsume_input.xml")
 
 ### - this gets a list of the fuelbed numbers that are in the above file.
 ids = [str(i[0]) for i in consumer.FCCS.data]
 
 ### - this file contains configuration data (windspeed, percent blackened, etc.)
 if len(sys.argv) > 1:
-        consumer.load_scenario(sys.argv[1])  
+        consumer.load_scenario(sys.argv[1])
         PrintCsv(consumer, ids)
 else:
     ecoregions = ['western', 'boreal', 'southern']
     for region in ecoregions:
-        consumer.load_scenario("{}.csv".format(region))  
+        consumer.load_scenario("{}.csv".format(region))
         ### - summarizes results across all the fuelbeds
         PrintCsv(consumer, ids)
