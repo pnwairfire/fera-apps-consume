@@ -1,7 +1,7 @@
 import consume
 import sys
 
-def PrintHeader(results, id, catList):
+def PrintHeader(results, catList):
     out = "fuelbed"
     for i in catList:
         out += "," + i.upper()
@@ -14,21 +14,18 @@ def PrintCsv(consumeObj, idList):
     catagoryList = ['summary', 'canopy', 'ground fuels', 'litter-lichen-moss',
         'nonwoody', 'shrub', 'woody fuels']
 
-    ### - loop through all the fuelbeds
-    headerPrinted = False
-    for id in idList:
-        out = id
-        consumeObj.fuelbed_fccs_ids = id
-        results = consumeObj.results()['consumption']
-        if not headerPrinted:
-            PrintHeader(results, id, catagoryList)
-            headerPrinted = True
-        for i in catagoryList:
+    consumeObj.fuelbed_fccs_ids = idList
+    results = consumeObj.results()['consumption']
+    PrintHeader(results, catagoryList)
+    for fbIdx in xrange(0, len(idList)):
+        out = idList[fbIdx]
+        for cat in catagoryList:
         	### - this is a divider column for each top-level catagory
-            out += "," + "-{}-".format(i)
-            for j in results[i].keys():
-                out += "," + str(results[i][j]['total'][0])
+            out += "," + "-{}-".format(cat)
+            for key in results[cat].keys():
+                out += "," + str(results[cat][key]['total'][fbIdx])
         print(out)
+
 
 def SimpleSummary(consumeObj, idList):
 	for i in idList:
@@ -56,7 +53,7 @@ ids = [str(i[0]) for i in consumer.FCCS.data]
 ### - this file contains configuration data (windspeed, percent blackened, etc.)
 if len(sys.argv) > 1:
         consumer.load_scenario(sys.argv[1])
-        PrintCsv(consumer, ['2'])
+        PrintCsv(consumer, ['2', '1001'])
 else:
     ecoregions = ['western', 'boreal', 'southern']
     for region in ecoregions:
