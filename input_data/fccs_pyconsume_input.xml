@@ -1,6 +1,6 @@
 <FCCS_file>
 	<!-- Generator: FCCS -->
-	<!-- GeneratorVersion:  2.2 : 05/18/2011 -->
+	<!-- GeneratorVersion:  2.2 : 05/19/2011 -->
 	<FCCS>
 		<fuelbed_number>1</fuelbed_number>
 		<site_name>Black cottonwood -- Douglas-fir -- quaking aspen riparian forest</site_name>
@@ -19,6 +19,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>95.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -61,6 +62,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>2</fuelbed_number>
@@ -81,6 +83,7 @@
 		<shrubs_Secondary>1.0709201</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.15</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -123,6 +126,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>3</fuelbed_number>
@@ -141,6 +145,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.3</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -183,6 +188,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>4</fuelbed_number>
@@ -201,6 +207,7 @@
 		<shrubs_Secondary>0.25518</shrubs_Secondary>
 		<shrubs_Primary_perc_live>70.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.5</nw_Primary>
 		<nw_Secondary>0.1</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -243,6 +250,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>5</fuelbed_number>
@@ -263,6 +271,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>50.00</nw_Primary_perc_live>
@@ -305,6 +314,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>6</fuelbed_number>
@@ -324,6 +334,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.6</nw_Primary>
 		<nw_Secondary>0.1</nw_Secondary>
 		<nw_Primary_perc_live>75.00</nw_Primary_perc_live>
@@ -366,6 +377,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>7</fuelbed_number>
@@ -383,6 +395,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>95.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-2.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.020000001</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>95.00</nw_Primary_perc_live>
@@ -422,6 +435,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>8</fuelbed_number>
@@ -442,6 +456,7 @@
 		<shrubs_Secondary>0.299045</shrubs_Secondary>
 		<shrubs_Primary_perc_live>75.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.010000001</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -484,6 +499,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>9</fuelbed_number>
@@ -502,6 +518,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.15</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -544,6 +561,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>10</fuelbed_number>
@@ -564,6 +582,7 @@
 		<shrubs_Secondary>0.387705</shrubs_Secondary>
 		<shrubs_Primary_perc_live>75.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.3</nw_Primary>
 		<nw_Secondary>0.05</nw_Secondary>
 		<nw_Primary_perc_live>60.00</nw_Primary_perc_live>
@@ -606,6 +625,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>11</fuelbed_number>
@@ -626,6 +646,7 @@
 		<shrubs_Secondary>0.387705</shrubs_Secondary>
 		<shrubs_Primary_perc_live>75.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0.05</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -668,6 +689,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>12</fuelbed_number>
@@ -688,6 +710,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>75.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>75.00</nw_Primary_perc_live>
@@ -730,6 +753,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.040000003</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>13</fuelbed_number>
@@ -750,6 +774,7 @@
 		<shrubs_Secondary>0.20176502</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>95.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -789,6 +814,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.040000003</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>14</fuelbed_number>
@@ -805,6 +831,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>75.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -844,6 +871,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>15</fuelbed_number>
@@ -864,6 +892,7 @@
 		<shrubs_Secondary>0.024090001</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.040000003</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>60.00</nw_Primary_perc_live>
@@ -906,6 +935,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>16</fuelbed_number>
@@ -925,6 +955,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.1</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -964,6 +995,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>17</fuelbed_number>
@@ -984,6 +1016,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>-3.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.060000002</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -1023,6 +1056,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>18</fuelbed_number>
@@ -1043,6 +1077,7 @@
 		<shrubs_Secondary>0.027800003</shrubs_Secondary>
 		<shrubs_Primary_perc_live>75.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>95.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.07</nw_Secondary>
 		<nw_Primary_perc_live>65.00</nw_Primary_perc_live>
@@ -1085,6 +1120,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>19</fuelbed_number>
@@ -1102,6 +1138,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.010000001</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>60.00</nw_Primary_perc_live>
@@ -1141,6 +1178,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>20</fuelbed_number>
@@ -1157,6 +1195,7 @@
 		<shrubs_Secondary>0.0064600003</shrubs_Secondary>
 		<shrubs_Primary_perc_live>70.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0.3</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -1196,6 +1235,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>21</fuelbed_number>
@@ -1216,6 +1256,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>99.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.020000001</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -1258,6 +1299,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>22</fuelbed_number>
@@ -1278,6 +1320,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>99.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -1320,6 +1363,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.040000003</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>23</fuelbed_number>
@@ -1340,6 +1384,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>75.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.17</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -1382,6 +1427,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.040000003</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>24</fuelbed_number>
@@ -1402,6 +1448,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>-3.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.5</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>75.00</nw_Primary_perc_live>
@@ -1444,6 +1491,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>25</fuelbed_number>
@@ -1463,6 +1511,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.040000003</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>60.00</nw_Primary_perc_live>
@@ -1499,6 +1548,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>26</fuelbed_number>
@@ -1517,6 +1567,7 @@
 		<shrubs_Secondary>0.043745</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.07</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>95.00</nw_Primary_perc_live>
@@ -1556,6 +1607,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>27</fuelbed_number>
@@ -1576,6 +1628,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.5</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -1618,6 +1671,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>28</fuelbed_number>
@@ -1635,6 +1689,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.8</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -1677,6 +1732,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>29</fuelbed_number>
@@ -1694,6 +1750,7 @@
 		<shrubs_Secondary>0.043745</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>95.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.1</nw_Secondary>
 		<nw_Primary_perc_live>95.00</nw_Primary_perc_live>
@@ -1736,6 +1793,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>30</fuelbed_number>
@@ -1752,6 +1810,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>100.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -1788,6 +1847,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>32</fuelbed_number>
@@ -1805,6 +1865,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>-3.00</nw_Primary_perc_live>
@@ -1844,6 +1905,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>33</fuelbed_number>
@@ -1863,6 +1925,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.23</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>60.00</nw_Primary_perc_live>
@@ -1905,6 +1968,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>34</fuelbed_number>
@@ -1926,6 +1990,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -1968,6 +2033,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>36</fuelbed_number>
@@ -1987,6 +2053,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>70.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.4</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>50.00</nw_Primary_perc_live>
@@ -2029,6 +2096,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>37</fuelbed_number>
@@ -2049,6 +2117,7 @@
 		<shrubs_Secondary>1.302</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.3</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>50.00</nw_Primary_perc_live>
@@ -2088,6 +2157,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>38</fuelbed_number>
@@ -2105,6 +2175,7 @@
 		<shrubs_Secondary>0.01095</shrubs_Secondary>
 		<shrubs_Primary_perc_live>95.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>95.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -2141,6 +2212,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>39</fuelbed_number>
@@ -2162,6 +2234,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>60.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>50.00</nw_Primary_perc_live>
@@ -2204,6 +2277,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>40</fuelbed_number>
@@ -2220,6 +2294,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.080000006</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -2250,6 +2325,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>41</fuelbed_number>
@@ -2266,6 +2342,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>-3.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.55</nw_Primary>
 		<nw_Secondary>0.1</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -2296,6 +2373,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>42</fuelbed_number>
@@ -2317,6 +2395,7 @@
 		<shrubs_Secondary>0.005475</shrubs_Secondary>
 		<shrubs_Primary_perc_live>2.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.3</nw_Primary>
 		<nw_Secondary>0.1</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -2359,6 +2438,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>43</fuelbed_number>
@@ -2378,6 +2458,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>95.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.4</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -2417,6 +2498,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>44</fuelbed_number>
@@ -2433,6 +2515,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>75.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>-3.00</nw_Primary_perc_live>
@@ -2469,6 +2552,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>45</fuelbed_number>
@@ -2487,6 +2571,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>95.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -2529,6 +2614,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>46</fuelbed_number>
@@ -2545,6 +2631,7 @@
 		<shrubs_Secondary>0.0745</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>85.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>-3.00</nw_Primary_perc_live>
@@ -2581,6 +2668,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>47</fuelbed_number>
@@ -2602,6 +2690,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>70.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.5</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -2644,6 +2733,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>48</fuelbed_number>
@@ -2663,6 +2753,7 @@
 		<shrubs_Secondary>0.9389301</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -2705,6 +2796,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>49</fuelbed_number>
@@ -2721,6 +2813,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>45.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -2757,6 +2850,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>51</fuelbed_number>
@@ -2773,6 +2867,7 @@
 		<shrubs_Secondary>2.26781</shrubs_Secondary>
 		<shrubs_Primary_perc_live>70.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>80.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>-3.00</nw_Primary_perc_live>
@@ -2812,6 +2907,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>52</fuelbed_number>
@@ -2832,6 +2928,7 @@
 		<shrubs_Secondary>0.055675007</shrubs_Secondary>
 		<shrubs_Primary_perc_live>89.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>95.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -2874,6 +2971,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>53</fuelbed_number>
@@ -2894,6 +2992,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>-3.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>50.00</nw_Primary_perc_live>
@@ -2936,6 +3035,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>54</fuelbed_number>
@@ -2953,6 +3053,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>75.00</nw_Primary_perc_live>
@@ -2995,6 +3096,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>55</fuelbed_number>
@@ -3011,6 +3113,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.6</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>50.00</nw_Primary_perc_live>
@@ -3050,6 +3153,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>56</fuelbed_number>
@@ -3066,6 +3170,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.70000005</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>50.00</nw_Primary_perc_live>
@@ -3096,6 +3201,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>57</fuelbed_number>
@@ -3112,6 +3218,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>-3.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>65.00</nw_Primary_perc_live>
@@ -3142,6 +3249,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>58</fuelbed_number>
@@ -3161,6 +3269,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>70.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.05</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -3191,6 +3300,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>59</fuelbed_number>
@@ -3211,6 +3321,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.3</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -3250,6 +3361,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>60</fuelbed_number>
@@ -3266,6 +3378,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>50.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.1</nw_Secondary>
 		<nw_Primary_perc_live>50.00</nw_Primary_perc_live>
@@ -3296,6 +3409,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>61</fuelbed_number>
@@ -3316,6 +3430,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>89.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>60.00</nw_Primary_perc_live>
@@ -3358,6 +3473,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>62</fuelbed_number>
@@ -3374,6 +3490,7 @@
 		<shrubs_Secondary>0.40352502</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>98.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -3404,6 +3521,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>63</fuelbed_number>
@@ -3420,6 +3538,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>-2.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-2.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>1.25</nw_Primary>
 		<nw_Secondary>0.1</nw_Secondary>
 		<nw_Primary_perc_live>95.00</nw_Primary_perc_live>
@@ -3450,6 +3569,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>65</fuelbed_number>
@@ -3466,6 +3586,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>-2.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-2.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>1.5000001</nw_Primary>
 		<nw_Secondary>0.3</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -3496,6 +3617,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>66</fuelbed_number>
@@ -3512,6 +3634,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>100.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>1.0</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -3542,6 +3665,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>67</fuelbed_number>
@@ -3562,6 +3686,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.75000006</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>75.00</nw_Primary_perc_live>
@@ -3604,6 +3729,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>69</fuelbed_number>
@@ -3620,6 +3746,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>93.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -3656,6 +3783,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>70</fuelbed_number>
@@ -3676,6 +3804,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -3718,6 +3847,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>71</fuelbed_number>
@@ -3734,6 +3864,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.5</nw_Primary>
 		<nw_Secondary>0.1</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -3773,6 +3904,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>72</fuelbed_number>
@@ -3792,6 +3924,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>6.0000005</nw_Primary>
 		<nw_Secondary>0.3</nw_Secondary>
 		<nw_Primary_perc_live>95.00</nw_Primary_perc_live>
@@ -3831,6 +3964,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0.040000003</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>73</fuelbed_number>
@@ -3850,6 +3984,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>3.0000002</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -3889,6 +4024,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>74</fuelbed_number>
@@ -3908,6 +4044,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.70000005</nw_Primary>
 		<nw_Secondary>0.020000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -3947,6 +4084,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>75</fuelbed_number>
@@ -3964,6 +4102,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>-3.00</nw_Primary_perc_live>
@@ -4003,6 +4142,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>76</fuelbed_number>
@@ -4021,6 +4161,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>3.0000002</nw_Primary>
 		<nw_Secondary>0.020000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -4060,6 +4201,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>77</fuelbed_number>
@@ -4078,6 +4220,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -4117,6 +4260,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.1</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>78</fuelbed_number>
@@ -4133,6 +4277,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.90000004</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -4172,6 +4317,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>79</fuelbed_number>
@@ -4188,6 +4334,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>2.5</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -4224,6 +4371,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>80</fuelbed_number>
@@ -4240,6 +4388,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>78.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>5.0</nw_Primary>
 		<nw_Secondary>0.1</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -4276,6 +4425,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>81</fuelbed_number>
@@ -4292,6 +4442,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>78.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>3.8000002</nw_Primary>
 		<nw_Secondary>0.020000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -4328,6 +4479,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>82</fuelbed_number>
@@ -4344,6 +4496,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>99.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>4.5</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>95.00</nw_Primary_perc_live>
@@ -4380,6 +4533,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>83</fuelbed_number>
@@ -4396,6 +4550,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>5.0</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -4432,6 +4587,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>84</fuelbed_number>
@@ -4448,6 +4604,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>4.0</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>75.00</nw_Primary_perc_live>
@@ -4487,6 +4644,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>85</fuelbed_number>
@@ -4506,6 +4664,7 @@
 		<shrubs_Secondary>0.68976504</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0.020000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -4548,6 +4707,7 @@
 		<g_SMDepth>18.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>86</fuelbed_number>
@@ -4567,6 +4727,7 @@
 		<shrubs_Secondary>0.68976504</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.020000001</nw_Primary>
 		<nw_Secondary>0.020000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -4609,6 +4770,7 @@
 		<g_SMDepth>18.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>87</fuelbed_number>
@@ -4628,6 +4790,7 @@
 		<shrubs_Secondary>0.33613002</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.010000001</nw_Primary>
 		<nw_Secondary>0.020000001</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -4670,6 +4833,7 @@
 		<g_SMDepth>18.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>88</fuelbed_number>
@@ -4689,6 +4853,7 @@
 		<shrubs_Secondary>0.067040004</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.020000001</nw_Primary>
 		<nw_Secondary>0.020000001</nw_Secondary>
 		<nw_Primary_perc_live>75.00</nw_Primary_perc_live>
@@ -4731,6 +4896,7 @@
 		<g_SMDepth>18.00</g_SMDepth>
 		<g_SMDensity>0.50</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>89</fuelbed_number>
@@ -4750,6 +4916,7 @@
 		<shrubs_Secondary>0.05028</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>1.0</nw_Primary>
 		<nw_Secondary>0.020000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -4792,6 +4959,7 @@
 		<g_SMDepth>18.00</g_SMDepth>
 		<g_SMDensity>0.50</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>90</fuelbed_number>
@@ -4811,6 +4979,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.010000001</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -4853,6 +5022,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>91</fuelbed_number>
@@ -4872,6 +5042,7 @@
 		<shrubs_Secondary>0.28606</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.030000001</nw_Primary>
 		<nw_Secondary>0.020000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -4914,6 +5085,7 @@
 		<g_SMDepth>18.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>92</fuelbed_number>
@@ -4933,6 +5105,7 @@
 		<shrubs_Secondary>0.272205</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.010000001</nw_Primary>
 		<nw_Secondary>0.020000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -4975,6 +5148,7 @@
 		<g_SMDepth>12.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>93</fuelbed_number>
@@ -4993,6 +5167,7 @@
 		<shrubs_Secondary>0.27887002</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.010000001</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -5035,6 +5210,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>94</fuelbed_number>
@@ -5053,6 +5229,7 @@
 		<shrubs_Secondary>0.140245</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.010000001</nw_Primary>
 		<nw_Secondary>0.020000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -5095,6 +5272,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>95</fuelbed_number>
@@ -5111,6 +5289,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0.05</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -5150,6 +5329,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>97</fuelbed_number>
@@ -5166,6 +5346,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>3.0000002</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -5196,6 +5377,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>98</fuelbed_number>
@@ -5212,6 +5394,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -5242,6 +5425,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>99</fuelbed_number>
@@ -5258,6 +5442,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>-2.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-2.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>5.0</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -5288,6 +5473,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>100</fuelbed_number>
@@ -5304,6 +5490,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>-2.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-2.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>3.0000002</nw_Primary>
 		<nw_Secondary>1.0</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -5334,6 +5521,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>101</fuelbed_number>
@@ -5353,6 +5541,7 @@
 		<shrubs_Secondary>0.533745</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.010000001</nw_Primary>
 		<nw_Secondary>0.020000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -5395,6 +5584,7 @@
 		<g_SMDepth>18.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>7.50</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>102</fuelbed_number>
@@ -5416,6 +5606,7 @@
 		<shrubs_Secondary>0.533745</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>1.0</nw_Primary>
 		<nw_Secondary>0.05</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -5458,6 +5649,7 @@
 		<g_SMDepth>18.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>7.50</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>103</fuelbed_number>
@@ -5479,6 +5671,7 @@
 		<shrubs_Secondary>0.36960503</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.010000001</nw_Primary>
 		<nw_Secondary>0.020000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -5521,6 +5714,7 @@
 		<g_SMDepth>12.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>104</fuelbed_number>
@@ -5542,6 +5736,7 @@
 		<shrubs_Secondary>0.36960503</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>1.0</nw_Primary>
 		<nw_Secondary>0.05</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -5584,6 +5779,7 @@
 		<g_SMDepth>12.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>105</fuelbed_number>
@@ -5605,6 +5801,7 @@
 		<shrubs_Secondary>0.36101</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.010000001</nw_Primary>
 		<nw_Secondary>0.05</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -5647,6 +5844,7 @@
 		<g_SMDepth>12.00</g_SMDepth>
 		<g_SMDensity>0.50</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>106</fuelbed_number>
@@ -5666,6 +5864,7 @@
 		<shrubs_Secondary>0.054650005</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0.05</nw_Secondary>
 		<nw_Primary_perc_live>50.00</nw_Primary_perc_live>
@@ -5708,6 +5907,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>107</fuelbed_number>
@@ -5729,6 +5929,7 @@
 		<shrubs_Secondary>0.01095</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.010000001</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -5768,6 +5969,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>109</fuelbed_number>
@@ -5789,6 +5991,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.4</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -5831,6 +6034,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.3</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>110</fuelbed_number>
@@ -5850,6 +6054,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>95.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>95.00</nw_Primary_perc_live>
@@ -5892,6 +6097,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>114</fuelbed_number>
@@ -5911,6 +6117,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.1</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -5953,6 +6160,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>115</fuelbed_number>
@@ -5969,6 +6177,7 @@
 		<shrubs_Secondary>0.36175</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -6008,6 +6217,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>120</fuelbed_number>
@@ -6026,6 +6236,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-2.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>60.00</nw_Primary_perc_live>
@@ -6065,6 +6276,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>121</fuelbed_number>
@@ -6085,6 +6297,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>60.00</nw_Primary_perc_live>
@@ -6127,6 +6340,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>123</fuelbed_number>
@@ -6146,6 +6360,7 @@
 		<shrubs_Secondary>0.31301004</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>85.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -6188,6 +6403,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>124</fuelbed_number>
@@ -6209,6 +6425,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -6248,6 +6465,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>125</fuelbed_number>
@@ -6269,6 +6487,7 @@
 		<shrubs_Secondary>0.31774</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>85.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>75.00</nw_Primary_perc_live>
@@ -6311,6 +6530,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>129</fuelbed_number>
@@ -6330,6 +6550,7 @@
 		<shrubs_Secondary>0.10887</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -6372,6 +6593,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>131</fuelbed_number>
@@ -6388,6 +6610,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>70.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>3.0000002</nw_Primary>
 		<nw_Secondary>0.3</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -6418,6 +6641,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>133</fuelbed_number>
@@ -6434,6 +6658,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>70.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>3.0000002</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -6473,6 +6698,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>134</fuelbed_number>
@@ -6489,6 +6715,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -6531,6 +6758,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>135</fuelbed_number>
@@ -6552,6 +6780,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>1.0</nw_Primary>
 		<nw_Secondary>0.5</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -6591,6 +6820,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>138</fuelbed_number>
@@ -6608,6 +6838,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>75.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>75.00</nw_Primary_perc_live>
@@ -6647,6 +6878,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>140</fuelbed_number>
@@ -6664,6 +6896,7 @@
 		<shrubs_Secondary>0.8</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>60.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.020000001</nw_Primary>
 		<nw_Secondary>0.70000005</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -6703,6 +6936,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>142</fuelbed_number>
@@ -6722,6 +6956,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.010000001</nw_Primary>
 		<nw_Secondary>0.1</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -6761,6 +6996,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>143</fuelbed_number>
@@ -6782,6 +7018,7 @@
 		<shrubs_Secondary>0.31659502</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>85.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.5</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -6824,6 +7061,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>146</fuelbed_number>
@@ -6844,6 +7082,7 @@
 		<shrubs_Secondary>0.1093</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -6883,6 +7122,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>147</fuelbed_number>
@@ -6903,6 +7143,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.3</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -6942,6 +7183,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>148</fuelbed_number>
@@ -6962,6 +7204,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -7001,6 +7244,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>152</fuelbed_number>
@@ -7020,6 +7264,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -7062,6 +7307,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>154</fuelbed_number>
@@ -7081,6 +7327,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>70.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.3</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>60.00</nw_Primary_perc_live>
@@ -7120,6 +7367,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>155</fuelbed_number>
@@ -7139,6 +7387,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>95.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>95.00</nw_Primary_perc_live>
@@ -7181,6 +7430,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>156</fuelbed_number>
@@ -7199,6 +7449,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>95.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0.05</nw_Secondary>
 		<nw_Primary_perc_live>60.00</nw_Primary_perc_live>
@@ -7241,6 +7492,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>157</fuelbed_number>
@@ -7262,6 +7514,7 @@
 		<shrubs_Secondary>0.46896502</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>85.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>75.00</nw_Primary_perc_live>
@@ -7304,6 +7557,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>158</fuelbed_number>
@@ -7325,6 +7579,7 @@
 		<shrubs_Secondary>0.82069004</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>85.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>75.00</nw_Primary_perc_live>
@@ -7367,6 +7622,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>161</fuelbed_number>
@@ -7384,6 +7640,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-2.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -7423,6 +7680,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>162</fuelbed_number>
@@ -7439,6 +7697,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-2.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -7481,6 +7740,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>164</fuelbed_number>
@@ -7498,6 +7758,7 @@
 		<shrubs_Secondary>0.190575</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.010000001</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -7537,6 +7798,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0.3</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>165</fuelbed_number>
@@ -7553,6 +7815,7 @@
 		<shrubs_Secondary>0.38842002</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>80.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.3</nw_Primary>
 		<nw_Secondary>0.05</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -7589,6 +7852,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>166</fuelbed_number>
@@ -7609,6 +7873,7 @@
 		<shrubs_Secondary>1.0378901</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>80.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -7648,6 +7913,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>168</fuelbed_number>
@@ -7664,6 +7930,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-2.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -7694,6 +7961,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>170</fuelbed_number>
@@ -7712,6 +7980,7 @@
 		<shrubs_Secondary>1.1625</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -7742,6 +8011,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>173</fuelbed_number>
@@ -7758,6 +8028,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.1</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -7797,6 +8068,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>174</fuelbed_number>
@@ -7815,6 +8087,7 @@
 		<shrubs_Secondary>0.13830002</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>80.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.1</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -7854,6 +8127,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.040000003</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>175</fuelbed_number>
@@ -7870,6 +8144,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>-2.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-2.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>4.0</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>65.00</nw_Primary_perc_live>
@@ -7900,6 +8175,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>176</fuelbed_number>
@@ -7916,6 +8192,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>-2.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-2.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>4.0</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>65.00</nw_Primary_perc_live>
@@ -7946,6 +8223,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>178</fuelbed_number>
@@ -7962,6 +8240,7 @@
 		<shrubs_Secondary>0.612715</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>75.00</nw_Primary_perc_live>
@@ -8004,6 +8283,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>180</fuelbed_number>
@@ -8021,6 +8301,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>75.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.25</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>75.00</nw_Primary_perc_live>
@@ -8063,6 +8344,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>181</fuelbed_number>
@@ -8083,6 +8365,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>-2.00</nw_Primary_perc_live>
@@ -8125,6 +8408,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>182</fuelbed_number>
@@ -8143,6 +8427,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.1</nw_Secondary>
 		<nw_Primary_perc_live>60.00</nw_Primary_perc_live>
@@ -8182,6 +8467,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>183</fuelbed_number>
@@ -8198,6 +8484,7 @@
 		<shrubs_Secondary>0.76589006</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>75.00</nw_Primary_perc_live>
@@ -8240,6 +8527,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.3</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>184</fuelbed_number>
@@ -8259,6 +8547,7 @@
 		<shrubs_Secondary>0.20658001</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>85.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>60.00</nw_Primary_perc_live>
@@ -8301,6 +8590,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>185</fuelbed_number>
@@ -8319,6 +8609,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>60.00</nw_Primary_perc_live>
@@ -8361,6 +8652,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>186</fuelbed_number>
@@ -8380,6 +8672,7 @@
 		<shrubs_Secondary>0.20658001</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>85.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>60.00</nw_Primary_perc_live>
@@ -8422,6 +8715,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>187</fuelbed_number>
@@ -8440,6 +8734,7 @@
 		<shrubs_Secondary>0.24933001</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>85.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>60.00</nw_Primary_perc_live>
@@ -8482,6 +8777,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>188</fuelbed_number>
@@ -8501,6 +8797,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>-3.00</nw_Primary_perc_live>
@@ -8543,6 +8840,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>189</fuelbed_number>
@@ -8562,6 +8860,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>-3.00</nw_Primary_perc_live>
@@ -8604,6 +8903,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>190</fuelbed_number>
@@ -8622,6 +8922,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -8664,6 +8965,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>191</fuelbed_number>
@@ -8682,6 +8984,7 @@
 		<shrubs_Secondary>0.11305001</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -8721,6 +9024,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>196</fuelbed_number>
@@ -8737,6 +9041,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>95.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>0.00</nw_Primary_perc_live>
@@ -8779,6 +9084,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>203</fuelbed_number>
@@ -8795,6 +9101,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>-2.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-2.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>3.0000002</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -8825,6 +9132,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>208</fuelbed_number>
@@ -8845,6 +9153,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>95.00</nw_Primary_perc_live>
@@ -8887,6 +9196,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>210</fuelbed_number>
@@ -8905,6 +9215,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -8944,6 +9255,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>211</fuelbed_number>
@@ -8961,6 +9273,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -9000,6 +9313,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>212</fuelbed_number>
@@ -9018,6 +9332,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>-3.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -9060,6 +9375,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>213</fuelbed_number>
@@ -9076,6 +9392,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>-3.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>65.00</nw_Primary_perc_live>
@@ -9106,6 +9423,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>214</fuelbed_number>
@@ -9124,6 +9442,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -9163,6 +9482,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>215</fuelbed_number>
@@ -9180,6 +9500,7 @@
 		<shrubs_Secondary>0.005475</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>85.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -9219,6 +9540,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>216</fuelbed_number>
@@ -9235,6 +9557,7 @@
 		<shrubs_Secondary>0.0401</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.05</nw_Secondary>
 		<nw_Primary_perc_live>65.00</nw_Primary_perc_live>
@@ -9274,6 +9597,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>217</fuelbed_number>
@@ -9295,6 +9619,7 @@
 		<shrubs_Secondary>0.054685004</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>95.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -9334,6 +9659,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>218</fuelbed_number>
@@ -9350,6 +9676,7 @@
 		<shrubs_Secondary>0.036455005</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>98.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -9386,6 +9713,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>219</fuelbed_number>
@@ -9403,6 +9731,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>60.00</nw_Primary_perc_live>
@@ -9442,6 +9771,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>220</fuelbed_number>
@@ -9463,6 +9793,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -9505,6 +9836,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>221</fuelbed_number>
@@ -9521,6 +9853,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>-2.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-2.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0.05</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -9551,6 +9884,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>222</fuelbed_number>
@@ -9571,6 +9905,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.010000001</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>60.00</nw_Primary_perc_live>
@@ -9610,6 +9945,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>223</fuelbed_number>
@@ -9630,6 +9966,7 @@
 		<shrubs_Secondary>0.010935001</shrubs_Secondary>
 		<shrubs_Primary_perc_live>60.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>80.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>75.00</nw_Primary_perc_live>
@@ -9672,6 +10009,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>224</fuelbed_number>
@@ -9690,6 +10028,7 @@
 		<shrubs_Secondary>0.010935001</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>95.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>1.0</nw_Primary>
 		<nw_Secondary>0.05</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -9729,6 +10068,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>225</fuelbed_number>
@@ -9748,6 +10088,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>70.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.5</nw_Primary>
 		<nw_Secondary>0.05</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -9790,6 +10131,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>226</fuelbed_number>
@@ -9810,6 +10152,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>95.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0.030000001</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -9852,6 +10195,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>227</fuelbed_number>
@@ -9872,6 +10216,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -9911,6 +10256,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>228</fuelbed_number>
@@ -9931,6 +10277,7 @@
 		<shrubs_Secondary>0.01458</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>95.00</nw_Primary_perc_live>
@@ -9970,6 +10317,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>229</fuelbed_number>
@@ -9989,6 +10337,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>60.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>50.00</nw_Primary_perc_live>
@@ -10028,6 +10377,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>230</fuelbed_number>
@@ -10047,6 +10397,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -10083,6 +10434,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>231</fuelbed_number>
@@ -10104,6 +10456,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>95.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.020000001</nw_Primary>
 		<nw_Secondary>0.1</nw_Secondary>
 		<nw_Primary_perc_live>95.00</nw_Primary_perc_live>
@@ -10146,6 +10499,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>232</fuelbed_number>
@@ -10162,6 +10516,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>95.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.5</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -10192,6 +10547,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>233</fuelbed_number>
@@ -10208,6 +10564,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -10238,6 +10595,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>234</fuelbed_number>
@@ -10254,6 +10612,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>50.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -10284,6 +10643,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>235</fuelbed_number>
@@ -10300,6 +10660,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>-3.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>2.0</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -10330,6 +10691,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>236</fuelbed_number>
@@ -10346,6 +10708,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>75.00</nw_Primary_perc_live>
@@ -10376,6 +10739,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>237</fuelbed_number>
@@ -10392,6 +10756,7 @@
 		<shrubs_Secondary>0.17362</shrubs_Secondary>
 		<shrubs_Primary_perc_live>98.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>95.00</nw_Primary_perc_live>
@@ -10422,6 +10787,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>238</fuelbed_number>
@@ -10440,6 +10806,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -10479,6 +10846,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.040000003</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>239</fuelbed_number>
@@ -10497,6 +10865,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>95.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.020000001</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>95.00</nw_Primary_perc_live>
@@ -10539,6 +10908,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>240</fuelbed_number>
@@ -10555,6 +10925,7 @@
 		<shrubs_Secondary>0.08658001</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>85.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -10585,6 +10956,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>241</fuelbed_number>
@@ -10603,6 +10975,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -10645,6 +11018,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>242</fuelbed_number>
@@ -10663,6 +11037,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>5.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.3</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>15.00</nw_Primary_perc_live>
@@ -10705,6 +11080,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>243</fuelbed_number>
@@ -10723,6 +11099,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -10759,6 +11136,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>260</fuelbed_number>
@@ -10778,6 +11156,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>95.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>3.0000002</nw_Primary>
 		<nw_Secondary>3.0000002</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -10814,6 +11193,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>261</fuelbed_number>
@@ -10830,6 +11210,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>2.0</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -10866,6 +11247,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>262</fuelbed_number>
@@ -10882,6 +11264,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>95.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>6.0000005</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -10912,6 +11295,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>263</fuelbed_number>
@@ -10929,6 +11313,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>3.0000002</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -10965,6 +11350,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>264</fuelbed_number>
@@ -10984,6 +11370,7 @@
 		<shrubs_Secondary>0.17165002</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>85.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>1.0</nw_Primary>
 		<nw_Secondary>0.25</nw_Secondary>
 		<nw_Primary_perc_live>50.00</nw_Primary_perc_live>
@@ -11020,6 +11407,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0.3</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>265</fuelbed_number>
@@ -11041,6 +11429,7 @@
 		<shrubs_Secondary>0.15218</shrubs_Secondary>
 		<shrubs_Primary_perc_live>75.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>75.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>1.0</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>75.00</nw_Primary_perc_live>
@@ -11080,6 +11469,7 @@
 		<g_SMDepth>15.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>3.00</g_SMRadius>
+		<ladderFuels>0.040000003</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>266</fuelbed_number>
@@ -11099,6 +11489,7 @@
 		<shrubs_Secondary>0.10339501</shrubs_Secondary>
 		<shrubs_Primary_perc_live>75.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>75.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.25</nw_Primary>
 		<nw_Secondary>0.1</nw_Secondary>
 		<nw_Primary_perc_live>75.00</nw_Primary_perc_live>
@@ -11141,6 +11532,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>267</fuelbed_number>
@@ -11162,6 +11554,7 @@
 		<shrubs_Secondary>0.088085</shrubs_Secondary>
 		<shrubs_Primary_perc_live>75.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>75.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>75.00</nw_Primary_perc_live>
@@ -11204,6 +11597,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>268</fuelbed_number>
@@ -11225,6 +11619,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>75.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>75.00</nw_Primary_perc_live>
@@ -11267,6 +11662,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>269</fuelbed_number>
@@ -11286,6 +11682,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>85.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.5</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -11328,6 +11725,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>270</fuelbed_number>
@@ -11349,6 +11747,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0.05</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -11388,6 +11787,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>272</fuelbed_number>
@@ -11406,6 +11806,7 @@
 		<shrubs_Secondary>0.342875</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>80.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.25</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -11445,6 +11846,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>273</fuelbed_number>
@@ -11465,6 +11867,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>95.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.020000001</nw_Primary>
 		<nw_Secondary>0.05</nw_Secondary>
 		<nw_Primary_perc_live>95.00</nw_Primary_perc_live>
@@ -11507,6 +11910,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>274</fuelbed_number>
@@ -11526,6 +11930,7 @@
 		<shrubs_Secondary>0.6</shrubs_Secondary>
 		<shrubs_Primary_perc_live>75.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>75.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.5</nw_Primary>
 		<nw_Secondary>0.25</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -11568,6 +11973,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>275</fuelbed_number>
@@ -11587,6 +11993,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.05</nw_Primary>
 		<nw_Secondary>0.1</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -11629,6 +12036,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>276</fuelbed_number>
@@ -11648,6 +12056,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -11687,6 +12096,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.040000003</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>279</fuelbed_number>
@@ -11707,6 +12117,7 @@
 		<shrubs_Secondary>0.70729005</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.020000001</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -11746,6 +12157,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>280</fuelbed_number>
@@ -11762,6 +12174,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>3.0000002</nw_Primary>
 		<nw_Secondary>0.5</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -11792,6 +12205,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>281</fuelbed_number>
@@ -11813,6 +12227,7 @@
 		<shrubs_Secondary>0.12705001</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.010000001</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -11855,6 +12270,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>282</fuelbed_number>
@@ -11875,6 +12291,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.020000001</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -11917,6 +12334,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>283</fuelbed_number>
@@ -11936,6 +12354,7 @@
 		<shrubs_Secondary>0.16432002</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.010000001</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -11978,6 +12397,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.3</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>284</fuelbed_number>
@@ -11997,6 +12417,7 @@
 		<shrubs_Secondary>0.32661</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.010000001</nw_Primary>
 		<nw_Secondary>0.1</nw_Secondary>
 		<nw_Primary_perc_live>85.00</nw_Primary_perc_live>
@@ -12039,6 +12460,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>286</fuelbed_number>
@@ -12057,6 +12479,7 @@
 		<shrubs_Secondary>0.182275</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>90.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.010000001</nw_Primary>
 		<nw_Secondary>0.1</nw_Secondary>
 		<nw_Primary_perc_live>90.00</nw_Primary_perc_live>
@@ -12099,6 +12522,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>287</fuelbed_number>
@@ -12120,6 +12544,7 @@
 		<shrubs_Secondary>0.014915001</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>80.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.010000001</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -12159,6 +12584,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>288</fuelbed_number>
@@ -12178,6 +12604,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.010000001</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -12220,6 +12647,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0.040000003</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>289</fuelbed_number>
@@ -12236,6 +12664,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>-3.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>3.0000002</nw_Primary>
 		<nw_Secondary>0</nw_Secondary>
 		<nw_Primary_perc_live>80.00</nw_Primary_perc_live>
@@ -12272,6 +12701,7 @@
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>291</fuelbed_number>
@@ -12290,6 +12720,7 @@
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.1</nw_Primary>
 		<nw_Secondary>0.1</nw_Secondary>
 		<nw_Primary_perc_live>60.00</nw_Primary_perc_live>
@@ -12329,6 +12760,7 @@
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
+		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>1000</fuelbed_number>
@@ -12350,6 +12782,7 @@
 		<shrubs_Secondary>0.055675007</shrubs_Secondary>
 		<shrubs_Primary_perc_live>89.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>95.00</shrubs_Secondary_perc_live>
+		<needleDrape>0</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -12392,6 +12825,7 @@
 		<g_SMDepth>18.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
 		<fuelbed_number>1001</fuelbed_number>
@@ -12413,6 +12847,7 @@
 		<shrubs_Secondary>0.055675007</shrubs_Secondary>
 		<shrubs_Primary_perc_live>89.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>95.00</shrubs_Secondary_perc_live>
+		<needleDrape>1.5000001</needleDrape>
 		<nw_Primary>0.2</nw_Primary>
 		<nw_Secondary>0.010000001</nw_Secondary>
 		<nw_Primary_perc_live>70.00</nw_Primary_perc_live>
@@ -12455,5 +12890,6 @@
 		<g_SMDepth>18.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 </FCCS_file>
