@@ -3011,8 +3011,8 @@ class FuelConsumption:
             # KS - if the duff_reduction value is greater than zero use it,
             # otherwise, use zero.
             duff_reduction_tmp = (LD['ff_reduction'] - llm_depth)
-            return (duff_reduction_tmp * np.greater(duff_reduction_tmp,
-                np.zeros_like(duff_reduction_tmp)))
+            non_zero = duff_reduction_tmp > 0.0
+            return (duff_reduction_tmp * non_zero)
 
         ### WOODY FUEL CONSUMPTION ACTIVITY EQUATIONS ###
         def ccon_activity():
