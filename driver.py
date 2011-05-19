@@ -1,10 +1,8 @@
 import consume
 import sys
 
-def PrintHeader(consumeObj, id, catList):
+def PrintHeader(results, id, catList):
     out = "fuelbed"
-    consumeObj.fuelbed_fccs_ids = id
-    results = consumeObj.results()['consumption']
     for i in catList:
         out += "," + i.upper()
         for j in results[i].keys():
@@ -13,33 +11,18 @@ def PrintHeader(consumeObj, id, catList):
 
 def PrintCsv(consumeObj, idList):
 	### - top-level catagory list
-    catagoryList = ['summary', 'canopy', 'ground fuels', 'litter-lichen-moss', 'nonwoody', 'shrub', 'woody fuels']
-
-    PrintHeader(consumeObj, idList, catagoryList)
+    catagoryList = ['summary', 'canopy', 'ground fuels', 'litter-lichen-moss',
+        'nonwoody', 'shrub', 'woody fuels']
 
     ### - loop through all the fuelbeds
+    headerPrinted = False
     for id in idList:
         out = id
         consumeObj.fuelbed_fccs_ids = id
         results = consumeObj.results()['consumption']
-        for i in catagoryList:
-        	### - this is a divider column for each top-level catagory
-            out += "," + "-{}-".format(i)
-            for j in results[i].keys():
-                out += "," + str(results[i][j]['total'][0])
-        print(out)
-
-def PrintCsvForOne(consumeObj, idList):
-	### - top-level catagory list
-    catagoryList = ['summary', 'canopy', 'ground fuels', 'litter-lichen-moss', 'nonwoody', 'shrub', 'woody fuels']
-
-    PrintHeader(consumeObj, idList, catagoryList)
-
-    ### - loop through all the fuelbeds
-    for id in idList:
-        out = id
-        consumeObj.fuelbed_fccs_ids = id
-        results = consumeObj.results()['consumption']
+        if not headerPrinted:
+            PrintHeader(results, id, catagoryList)
+            headerPrinted = True
         for i in catagoryList:
         	### - this is a divider column for each top-level catagory
             out += "," + "-{}-".format(i)
@@ -73,7 +56,7 @@ ids = [str(i[0]) for i in consumer.FCCS.data]
 ### - this file contains configuration data (windspeed, percent blackened, etc.)
 if len(sys.argv) > 1:
         consumer.load_scenario(sys.argv[1])
-        PrintCsvForOne(consumer, ['1001'])
+        PrintCsv(consumer, ['2'])
 else:
     ecoregions = ['western', 'boreal', 'southern']
     for region in ecoregions:
