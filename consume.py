@@ -3008,9 +3008,11 @@ class FuelConsumption:
             #if llm_depth[n] > duff_depth[n]:    #<<< USER'S GUIDE - SUSAN PRICHARD SAYS THIS IS THE CORRECT COMPARISON
             #if llm_depth[n] >= ff_reduction[n]:  #<<< SOURCE CODE
 
-            return ((LD['ff_reduction'] - llm_depth) *
-                              np.less_equal(llm_depth, duff_depth))
-
+            # KS - if the duff_reduction value is greater than zero use it,
+            # otherwise, use zero.
+            duff_reduction_tmp = (LD['ff_reduction'] - llm_depth)
+            return (duff_reduction_tmp * np.greater(duff_reduction_tmp,
+                np.zeros_like(duff_reduction_tmp)))
 
         ### WOODY FUEL CONSUMPTION ACTIVITY EQUATIONS ###
         def ccon_activity():
