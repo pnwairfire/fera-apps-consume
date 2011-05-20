@@ -5,7 +5,9 @@ def PrintHeader(results, catList):
     out = "fuelbed"
     for i in catList:
         out += "," + i.upper()
-        for j in results[i].keys():
+        ### - this needs to stay in sync with the way the data is printed
+        sortedKeys = sorted(results[i].keys())
+        for j in sortedKeys:
             out += "," + j
     print(out)
 
@@ -22,10 +24,11 @@ def PrintCsv(consumeObj, idList):
         for cat in catagoryList:
         	### - this is a divider column for each top-level catagory
             out += "," + "-{}-".format(cat)
-            for key in results[cat].keys():
+            ### - this needs to stay in sync with the way the header is printed
+            sortedKeys = sorted(results[cat].keys())
+            for key in sortedKeys:
                 out += "," + str(results[cat][key]['total'][fbIdx])
         print(out)
-
 
 def SimpleSummary(consumeObj, idList):
 	for i in idList:
@@ -53,7 +56,7 @@ ids = [str(i[0]) for i in consumer.FCCS.data]
 ### - this file contains configuration data (windspeed, percent blackened, etc.)
 if len(sys.argv) > 1:
         consumer.load_scenario(sys.argv[1])
-        PrintCsv(consumer, ['2', '1001'])
+        PrintCsv(consumer, ['1', '2', '1001'])
 else:
     ecoregions = ['western', 'boreal', 'southern']
     for region in ecoregions:
