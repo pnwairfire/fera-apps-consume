@@ -4504,15 +4504,15 @@ def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs):
                                     'snags class 3' : can_snags_3,
                                     'ladder fuels' : can_ladder},
                                 'shrub' : {
-                                    'primary live' : shb_prim_live,
-                                    'primary dead' : shb_prim_dead,
-                                    'secondary live' : shb_seco_live,
-                                    'secondary dead' :  shb_seco_dead},
+                                    'shrub primary live' : shb_prim_live,
+                                    'shrub primary dead' : shb_prim_dead,
+                                    'shrub secondary live' : shb_seco_live,
+                                    'shrub secondary dead' :  shb_seco_dead},
                                 'nonwoody' : {
-                                    'primary live' : nw_prim_live,
-                                    'primary dead' : nw_prim_dead,
-                                    'secondary live' : nw_seco_live,
-                                    'secondary dead' :  nw_seco_dead},
+                                    'nonwoody primary live' : nw_prim_live,
+                                    'nonwoody primary dead' : nw_prim_dead,
+                                    'nonwoody secondary live' : nw_seco_live,
+                                    'nonwoody secondary dead' :  nw_seco_dead},
                                 'litter-lichen-moss' : {
                                     'litter' : llm_litter,
                                     'lichen' : llm_lichen,
