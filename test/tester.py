@@ -76,7 +76,7 @@ class DataObj(object):
                 commonKeys.append(key)
         return sorted(commonKeys)
 
-    def Compare(self, other, debug=false):
+    def Compare(self, other, debug=False):
         failures = 0
         comparisons = 0
         self._debug = debug
