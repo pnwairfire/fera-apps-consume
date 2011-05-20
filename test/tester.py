@@ -11,6 +11,7 @@
 import csv
 import sys
 from ulp import WithinThisManyULP
+import decimal as dec
 
 def isNumber(s):
     try:
@@ -21,39 +22,66 @@ def isNumber(s):
 
 class DataObj(object):
     """ Read a csv file and create a map keyed by lines and columns
-        Allow for 2 of these objects to be compared.
-    """
-
+        Allow for 2 of these objects to be compared."""
     def __init__(self, filename):
         self._filename= filename
+        self._debug= False
         self._map = dict()
         self._cols= []
         self.ReadFile()
 
     def ReadFile(self):
+        """ Read in the file and create a map using the fuelbed number
+            as the key."""
         reader = csv.DictReader(open(self._filename, 'r'), delimiter=',', quotechar='|')
         self._cols = reader.fieldnames
         for row in reader:
             self._map[row['fuelbed']] = row
 
     def CompareItems(self, a, b, key, column):
+        """ Convert strings to Decimals and truncate sensibly. Compare with
+            the specified tolerance factor """
         compare = True
+        TOLERANCE = 10000
+        FOUR_PLACES = dec.Decimal('0.0001')
         if isNumber(a) and isNumber(b):
-            if not WithinThisManyULP(float(a), float(b), 10000):
-                print "{} : {} : {} : {}".format(key, column, a, b)
+            aa = dec.Decimal(a.lstrip('-')).quantize(FOUR_PLACES)
+            bb = dec.Decimal(b.lstrip('-')).quantize(FOUR_PLACES)
+            if not WithinThisManyULP(aa, bb, TOLERANCE):
+                print "{} : {} : {} : {}".format(key, column, aa, bb)
                 compare = False
+            else:
+                if self._debug:
+                    print "Good - {} : {} : {} : {}".format(key, column, aa, bb)
+        else:
+            print "Not compared {} : {}".format(a, b)
         return compare
 
-    def Compare(self, other):
-        comparisons = 0
-        failures = 0
-        mykeys = set(self._map.keys())
-        otherKeys = set(other._map.keys())
+    def CheckColumns(self, a, b):
+        """ Primarily for ensuring that we are covering everything. May be
+            eliminated as the testing process matures. """
+        setA = set(a)
+        setB = set(b)
+        common = setA & setB
+        different = setA ^ setB
+        print "\nColumns checked:\n\t{}\n".format("\n\t".join(common))
+        print "Columns not common:\n\t{}\n".format("\n\t".join(different))
+
+    def GetCommonKeys(self, keysA, keysB):
+        aa = set(keysA)
+        bb = set(keysB)
         commonKeys = []
-        for key in (mykeys & otherKeys):
+        for key in (aa & bb):
             if key.isdigit():
-                commonKeys.append(int(key))
-        commonKeys = sorted(commonKeys)
+                commonKeys.append(key)
+        return sorted(commonKeys)
+
+    def Compare(self, other, debug=false):
+        failures = 0
+        comparisons = 0
+        self._debug = debug
+        self.CheckColumns(self._cols, other._cols)
+        commonKeys = self.GetCommonKeys(self._map.keys(), other._map.keys())
         for key in commonKeys:
             key = str(key)
             for col in self._cols:
