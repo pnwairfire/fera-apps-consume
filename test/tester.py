@@ -12,6 +12,7 @@ import csv
 import sys
 from ulp import WithinThisManyULP
 import decimal as dec
+import re
 
 def isNumber(s):
     try:
@@ -42,7 +43,7 @@ class DataObj(object):
         """ Convert strings to Decimals and truncate sensibly. Compare with
             the specified tolerance factor """
         compare = True
-        TOLERANCE = 10000
+        TOLERANCE = 100000
         FOUR_PLACES = dec.Decimal('0.0001')
         if isNumber(a) and isNumber(b):
             aa = dec.Decimal(a.lstrip('-')).quantize(FOUR_PLACES)
@@ -63,10 +64,14 @@ class DataObj(object):
             eliminated as the testing process matures. """
         setA = set(a)
         setB = set(b)
-        common = setA & setB
-        different = setA ^ setB
+        common = sorted(list(setA & setB))
+        difference = sorted(list(setB - setA))
+        diffMinusMarkerCols = []
+        for i in difference:
+            if not re.search('^[A-Z].*$', i.strip()):
+                diffMinusMarkerCols.append(i)
         print "\nColumns checked:\n\t{}\n".format("\n\t".join(common))
-        print "Columns not common:\n\t{}\n".format("\n\t".join(different))
+        print "Columns not checked:\n\t{}\n".format("\n\t".join(diffMinusMarkerCols))
 
     def GetCommonKeys(self, keysA, keysB):
         aa = set(keysA)
