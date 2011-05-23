@@ -4,7 +4,7 @@ import sys
 def PrintHeader(results, catList):
     out = "fuelbed"
     for i in catList:
-        out += "," + i.upper()
+        #out += "," + i.upper()
         ### - this needs to stay in sync with the way the data is printed
         sortedKeys = sorted(results[i].keys())
         for j in sortedKeys:
@@ -23,7 +23,7 @@ def PrintCsv(consumeObj, idList):
         out = idList[fbIdx]
         for cat in catagoryList:
         	### - this is a divider column for each top-level catagory
-            out += "," + "-{}-".format(cat)
+            #out += "," + "-{}-".format(cat)
             ### - this needs to stay in sync with the way the header is printed
             sortedKeys = sorted(results[cat].keys())
             for key in sortedKeys:
