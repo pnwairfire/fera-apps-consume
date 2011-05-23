@@ -53,8 +53,9 @@ class DataObj(object):
             else:
                 if self._debug:
                     print "Good - {} : {} : {} : {}".format(key, column, aa, bb)
-        else:
+        elif(self._debug):
             print "Not compared {} : {}".format(a, b)
+
         return compare
 
     def CheckColumns(self, a, b):
@@ -73,7 +74,7 @@ class DataObj(object):
         commonKeys = []
         for key in (aa & bb):
             if key.isdigit():
-                commonKeys.append(key)
+                commonKeys.append(int(key))
         return sorted(commonKeys)
 
     def Compare(self, other, debug=False):
