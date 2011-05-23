@@ -68,6 +68,7 @@ class DataObj(object):
         difference = sorted(list(setB - setA))
         diffMinusMarkerCols = []
         for i in difference:
+            ### - eliminate 'marker' columns
             if not re.search('^[A-Z].*$', i.strip()):
                 diffMinusMarkerCols.append(i)
         print "\nColumns checked:\n\t{}\n".format("\n\t".join(common))

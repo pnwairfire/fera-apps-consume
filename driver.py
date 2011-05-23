@@ -1,10 +1,16 @@
+#-------------------------------------------------------------------------------
+# Name:        driver.py
+# Author:      kjells
+# Created:     23/05/2011
+# Copyright:   (c) kjells 2011
+# Purpose:     Use to generate results for regression tests.
+#-------------------------------------------------------------------------------
 import consume
 import sys
 
 def PrintHeader(results, catList):
     out = "fuelbed"
     for i in catList:
-        #out += "," + i.upper()
         ### - this needs to stay in sync with the way the data is printed
         sortedKeys = sorted(results[i].keys())
         for j in sortedKeys:
@@ -22,8 +28,6 @@ def PrintCsv(consumeObj, idList):
     for fbIdx in xrange(0, len(idList)):
         out = idList[fbIdx]
         for cat in catagoryList:
-        	### - this is a divider column for each top-level catagory
-            #out += "," + "-{}-".format(cat)
             ### - this needs to stay in sync with the way the header is printed
             sortedKeys = sorted(results[cat].keys())
             for key in sortedKeys:
