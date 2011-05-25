@@ -784,61 +784,23 @@ Index 1           Index 2              Index 3                     Index 4      
 import math
 import numpy as np
 import os
-
-def list_valid_fm_types():
-    """Returns a list of valid 1000hr fuel moisture types for activity burn
-       calculations"""
-    return ['MEAS-Th', 'ADJ-Th', 'NFDRS-Th']
-
-def list_valid_burntypes():
-    """Returns a list of valid burn types"""
-    return ['natural', 'activity'] #, 'piles']
-
-def list_valid_units():
-    """Returns a list of valid output units for consumption/emissions data."""
-    return ['lbs', 'lbs_ac', 'tons', 'tons_ac', 'kg', 'kg_m^2',
-            'kg_ha', 'kg_km^2', 'tonnes', 'tonnes_ha', 'tonnes_km^2']
-
-def list_valid_ecoregions():
-    """Returns a list of valid ecoregions used by consume"""
-    return ['western', 'southern', 'boreal']
-
-def list_valid_emissions_species():
-    """Returns a list of valid emissions species (pollutants) for emissions data
-    """
-    return ["pm", "pm10", "pm25", "co", "co2", "ch4", "nmhc"]
-
-def list_valid_combustion_stages():
-    """Returns a list of valid combustion stages for consumption/emissions data
-    """
-    return ["flaming", "smoldering", "residual", "total"]
-
-def list_valid_consumption_strata():
-    """Returns a list of valid 1st-order consumption strata for consumption data
-    """
-    return ["summary", "canopy", "woody fuels", "shrub", "nonwoody",
-            "ground fuels", "litter-lichen-moss"]
-
-def perarea():
-    """ Returns list of valid output units that are area weighted """
-    return ['tons_ac', 'lbs_ac', 'kg_ha', 'kg_m^2', 'tonnes_ha', 'kg_km^2',
-                   'tonnes_km^2']
+import data_desc as dd
 
 InputVarParameters =[
 #kw, name, intname, validvals, defvalue, array, spec to activity equations
 ['fuelbeds', 'FCCS fuelbeds (ID#)', '.fuelbed_fccs_ids', [], '1', False, False],
 ['area', 'Fuelbed area (acres)', '.fuelbed_area_acres', [0,1000000], 1.0, True, False],
-['ecoregion', 'Fuelbed ecoregion', '.fuelbed_ecoregion', list_valid_ecoregions(), 'western', False, False],
+['ecoregion', 'Fuelbed ecoregion', '.fuelbed_ecoregion', dd.list_valid_ecoregions(), 'western', False, False],
 ['fm_1000hr', 'Fuel moisture (1000-hr, %)', '.fuel_moisture_1000hr_pct', [0,140], 50.0, True, False],
 ['fm_10hr', 'Fuel moisture (10-hr, %)', '.fuel_moisture_10hr_pct', [0,100], 50.0, True, True],
 ['fm_duff', 'Fuel moisture (duff, %)', '.fuel_moisture_duff_pct', [0,400], 50.0, True, False],
 ['can_con_pct', 'Canopy consumption (%)', '.canopy_consumption_pct', [-1,100], -1, True, False],
 ['shrub_black_pct', 'Shrub blackened (%)', '.shrub_blackened_pct', [0,100], 50.0, True, False],
-['burn_type', 'Burn type', '.burn_type', list_valid_burntypes(), 'natural', False, False],
-['units', 'Output units', '.output_units', list_valid_units(), 'tons_ac', False, False],
+['burn_type', 'Burn type', '.burn_type', dd.list_valid_burntypes(), 'natural', False, False],
+['units', 'Output units', '.output_units', dd.list_valid_units(), 'tons_ac', False, False],
 ['slope', 'Slope (%)', '.slope_pct', [0,100], 5.0, True, True],
 ['windspeed', 'Mid-flame windspeed (mph)', '.windspeed', [0, 35], 5.0, True, True],
-['fm_type', '1000hr fuel moisture type', '.fm_type', list_valid_fm_types(), 'MEAS-Th', False, True],
+['fm_type', '1000hr fuel moisture type', '.fm_type', dd.list_valid_fm_types(), 'MEAS-Th', False, True],
 ['days_since_rain', 'Days since sgnf. rainfall', '.days_since_rain', [0,365], 20, True, True],
 ['lengthOfIgnition', 'Length of ignition (min.)', '.lengthOfIgnition', [0,10000], 30.0, True, True],
 ['efg', 'Emissions factor group(s)', '.emissions_factor_group', [0,20], 0, False, False]]
@@ -2062,7 +2024,7 @@ class FuelConsumption:
             catrange = range(categories.index(strat) + 1, categories.index(strat) + 2)
         else:
             print ('ERROR: Invalid consumption strata. Please choose among:\n' +
-                   ','.join(list_valid_consumption_strata()) + ', all, or total')
+                   ','.join(dd.list_valid_consumption_strata()) + ', all, or total')
 
 
         txt = ""
