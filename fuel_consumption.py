@@ -1657,7 +1657,8 @@ class FuelConsumption:
         def ccon_lch():
             """ Lichen consumption, activity & natural"""
             csd_lch = [0.95, 0.05, 0.00]
-            lch_pretot = np.minimum(LD['lch_depth'], LD['ff_reduction'])
+            lch_pretot = np.minimum(LD['lch_depth'], LD['ff_reduction_successive'])
+            LD['ff_reduction_successive'] = LD['ff_reduction_successive'] - lch_pretot
             if burn_type == 'activity':
                 lch_pretot = np.where(ecob_mask, lch_pretot, LD['lch_depth'])
 
@@ -1668,7 +1669,8 @@ class FuelConsumption:
         def ccon_moss():
             """ Moss consumption, activity & natural"""
             csd_moss = [0.95, 0.05, 0.00]
-            moss_pretot = np.minimum(LD['moss_depth'], LD['ff_reduction'])
+            moss_pretot = np.minimum(LD['moss_depth'], LD['ff_reduction_successive'])
+            LD['ff_reduction_successive'] = LD['ff_reduction_successive'] - moss_pretot
             if burn_type == 'activity':
                 moss_pretot = np.where(ecob_mask, moss_pretot, LD['moss_depth'])
 
@@ -1678,7 +1680,8 @@ class FuelConsumption:
         def ccon_litter():
             """ Litter consumption, activity & natural"""
             csd_lit = [0.90, 0.10, 0.00]
-            lit_pretot = np.minimum(LD['lit_depth'], LD['ff_reduction'])
+            lit_pretot = np.minimum(LD['lit_depth'], LD['ff_reduction_successive'])
+            LD['ff_reduction_successive'] = LD['ff_reduction_successive'] - lit_pretot
             if burn_type == 'activity':
                 lit_pretot = np.where(ecob_mask, lit_pretot, LD['lit_depth'])
             lit_total = (lit_pretot * LD['lit_pctcv'] *
@@ -2278,6 +2281,7 @@ class FuelConsumption:
 
         [LD['ff_reduction'], y_b, duff_depth] = ccon_ffr()
 
+        LD['ff_reduction_successive'] = LD['ff_reduction']
         lch_fsrt = ccon_lch()
         moss_fsrt = ccon_moss()
         lit_fsrt = ccon_litter()
@@ -2314,6 +2318,7 @@ class FuelConsumption:
                         shb_seco_live_fsrt, shb_seco_dead_fsrt])
         nw_fsrt = sum([nw_prim_live_fsrt, nw_prim_dead_fsrt,
                        nw_seco_live_fsrt, nw_seco_dead_fsrt])
+        # kjell!
         llm_fsrt = sum([lch_fsrt, moss_fsrt, lit_fsrt])
         gf_fsrt = sum([duff_upper_fsrt, duff_lower_fsrt, bas_fsrt, sqm_fsrt])
         woody_fsrt = sum([stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt,
