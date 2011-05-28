@@ -1,4 +1,4 @@
-def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs):
+def make_dictionary_of_lists(cons_data, cons_debug_data, heat_data, emis_data, inputs):
     """
 
     Creates a dictionary of lists (accessed by calling the 'results' property)
@@ -17,6 +17,12 @@ def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs):
         'smoldering' : cons_data[s][1],
         'residual' : cons_data[s][2],
         'total' : cons_data[s][3]}
+
+    def cons_debug_dict(s):
+        """ Return consumption dictionary for specified index"""
+        return {
+        'total' : cons_debug_data[s]
+        }
 
     def emis_dict(s, p):
         """ Return emissions dictionary for specified index & species """
@@ -86,6 +92,9 @@ def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs):
     wd_hr10kp_snd = cons_dict(41)
     wd_hr10kp_rot = cons_dict(42)
 
+    lit_mean_bd = cons_debug_dict(0)
+    ff_reduction = cons_debug_dict(1)
+
     results = {'parameters' : inputs,
                'heat release' : all_heat,
 
@@ -138,7 +147,11 @@ def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs):
                                     '10000-hr fuels sound' : wd_hr10000_snd,
                                     '10000-hr fuels rotten' : wd_hr10000_rot,
                                     '10k+-hr fuels sound' : wd_hr10kp_snd,
-                                    '10k+-hr fuels rotten' : wd_hr10kp_rot}}}
+                                    '10k+-hr fuels rotten' : wd_hr10kp_rot},
+                                'debug' : {
+                                    'litter_bulk_density' : lit_mean_bd,
+                                    'forest floor reduction' : ff_reduction}
+                                    }}
 
 
     if len(emis_data) != 0:
