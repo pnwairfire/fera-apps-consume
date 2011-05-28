@@ -8,62 +8,104 @@
 import consume
 import sys
 
-def PrintHeader(results, catList):
-    out = "fuelbed"
-    for i in catList:
-        ### - this needs to stay in sync with the way the data is printed
-        sortedKeys = sorted(results[i].keys())
-        for j in sortedKeys:
-            out += "," + j
-    print(out)
+class Driver(object):
+    """ Drive consume object for testing purposes
+    """
+    def __init__(self):
+        self._consumer = consume.FuelConsumption(
+            fccs_file = "input_data/fccs_pyconsume_input.xml")
 
-def PrintCsv(consumeObj, idList):
-	### - top-level catagory list
-    catagoryList = ['summary', 'canopy', 'ground fuels', 'litter-lichen-moss',
-        'nonwoody', 'shrub', 'woody fuels']
+    def _reset_consumer(self):
+        self._consumer.burn_type = 'natural'
+        self._consumer.fuelbed_area_acres = 100
+        self._consumer.fuel_moisture_1000hr_pct = 20
+        self._consumer.fuel_moisture_duff_pct = 20
+        self._consumer.fuel_moisture_10hr_pct = 50
+        self._consumer.canopy_consumption_pct = 20
+        self._consumer.shrub_blackened_pct = 50
+        self._consumer.output_units = 'tons_ac'
+        self._consumer.slope = 5
+        self._consumer.lengthOfIgnition = 30
+        self._consumer.days_since_rain = 20
+        self._consumer.windspeed = 5
+        self._consumer.fm_type = 'MEAS-Th'
 
-    consumeObj.fuelbed_fccs_ids = idList
-    results = consumeObj.results()['consumption']
-    PrintHeader(results, catagoryList)
-    for fbIdx in xrange(0, len(idList)):
-        out = idList[fbIdx]
-        for cat in catagoryList:
-            ### - this needs to stay in sync with the way the header is printed
-            sortedKeys = sorted(results[cat].keys())
-            for key in sortedKeys:
-                out += "," + str(results[cat][key]['total'][fbIdx])
-        print(out)
+    def write_header(self, results, catagory_list, stream):
+        out = "fuelbed"
+        for i in catagory_list:
+            ### - this needs to stay in sync with the way the data is printed
+            sorted_keys = sorted(results[i].keys())
+            for j in sorted_keys:
+                out += "," + j
+        out += '\n'
+        stream.write(out)
 
-def SimpleSummary(consumeObj, idList):
-	for i in idList:
-	    consumeObj.fuelbed_fccs_ids = i
-	    print "Fuelbed {0}:".format(i)
-	    print "\ttotal = {0}".format(consumeObj.results()['consumption']['summary']['total']['total'])
-	    print "\tcanopy = {0}".format(consumeObj.results()['consumption']['summary']['canopy']['total'])
-	    print "\tground fuels= {0}".format(consumeObj.results()['consumption']['summary']['ground fuels']['total'])
-	    print "\tlitter-lichen-moss= {0}".format(consumeObj.results()['consumption']['summary']['litter-lichen-moss']['total'])
-	    print "\tnonwoody= {0}".format(consumeObj.results()['consumption']['summary']['nonwoody']['total'])
-	    print "\tshrub= {0}".format(consumeObj.results()['consumption']['summary']['shrub']['total'])
-	    print "\twoody fuels= {0}".format(consumeObj.results()['consumption']['summary']['woody fuels']['total'])
+    def write_csv(self, fuelbed_list, stream, header, debug):
+    	### - top-level catagory list
+        catagory_list = ['summary', 'canopy', 'ground fuels', 'litter-lichen-moss',
+            'nonwoody', 'shrub', 'woody fuels']
+        if debug:
+            catagory_list.append('debug')
 
+        results = self._consumer.results()['consumption']
+        if header:
+            self.write_header(results, catagory_list, stream)
+        for fb_index in xrange(0, len(fuelbed_list)):
+            out = fuelbed_list[fb_index]
+            for cat in catagory_list:
+                ### - this needs to stay in sync with the way the header is printed
+                sorted_keys = sorted(results[cat].keys())
+                for key in sorted_keys:
+                    out += "," + str(results[cat][key]['total'][fb_index])
+            out += '\n'
+            stream.write(out)
+
+    def run_tests(self, fuelbed_list=[], scenario_list=[], outfile=None, debug=False):
+        self._reset_consumer()
+        if not len(fuelbed_list):
+            fuelbed_list = [str(i[0]) for i in self._consumer.FCCS.data]
+        self._consumer.fuelbed_fccs_ids = fuelbed_list
+
+        if not len(scenario_list):
+            scenario_list = ['western', 'southern', 'boreal', 'activity']
+
+        close_file = False
+        if not outfile:
+            outfile = open('output_consume.csv', 'w')
+            close_file = True
+
+        write_header = True
+        for scene in scenario_list:
+            if 'activity' is scene:
+                self._consumer.burn_type = scene
+                self._consumer.fuelbed_ecoregion = 'western'
+            else:
+                self._consumer.fuelbed_ecoregion = scene
+            self.write_csv(fuelbed_list, outfile, write_header, debug)
+            write_header = False
+
+        if close_file:
+            outfile.close()
 
 #-------------------------------------------------------------------------------
 # Start
 #-------------------------------------------------------------------------------
+driver = Driver()
+driver.run_tests(scenario_list=['western', 'southern', 'boreal'])
 
-### - this is the "database" of information from FCCS
-consumer = consume.FuelConsumption(fccs_file = "input_data/fccs_pyconsume_input.xml")
+"""
+### - runs over all fuelbeds using 'western', 'southern', 'boreal', 'activity'
+driver.run_tests()
 
-### - this gets a list of the fuelbed numbers that are in the above file.
-ids = [str(i[0]) for i in consumer.FCCS.data]
+### - run over the specfied fuelbeds, all scenarios
+driver.run_tests(fuelbed_list=['1', '3', '1001'])
 
-### - this file contains configuration data (windspeed, percent blackened, etc.)
-if len(sys.argv) > 1:
-        consumer.load_scenario(sys.argv[1])
-        PrintCsv(consumer, ['1', '2', '1001'])
-else:
-    ecoregions = ['western', 'boreal', 'southern']
-    for region in ecoregions:
-        consumer.load_scenario("{}.csv".format(region))
-        ### - summarizes results across all the fuelbeds
-        PrintCsv(consumer, ids)
+### - limit the scenarios
+driver.run_tests(scenario_list=['western', 'southern', 'boreal'])
+driver.run_tests(scenario_list=['western'])
+driver.run_tests(scenario_list=['southern'])
+driver.run_tests(scenario_list=['boreal'])
+
+### - add the debug columns, far right of the output
+driver.run_tests(debug=True)
+"""
