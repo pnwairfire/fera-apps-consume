@@ -702,6 +702,7 @@ class FuelConsumption:
         self.units = "tons_ac"
         self._build_input_set()
         self._cons_data = np.array([])
+        self._cons_debug_data = np.array([])
         self._emis_data = np.array([])
         self._calc_success = False
         self._conv_success = False
@@ -757,6 +758,7 @@ class FuelConsumption:
             self._convert_units()
             if self._conv_success:
                 return util.make_dictionary_of_lists(cons_data = self._cons_data,
+                                          cons_debug_data = self._cons_debug_data,
                                           heat_data = self._heat_data,
                                           emis_data = [],
                                           inputs = self.InSet.validated_inputs)
@@ -1684,14 +1686,15 @@ class FuelConsumption:
             LD['ff_reduction_successive'] = LD['ff_reduction_successive'] - lit_pretot
             if burn_type == 'activity':
                 lit_pretot = np.where(ecob_mask, lit_pretot, LD['lit_depth'])
-            lit_total = (lit_pretot * LD['lit_pctcv'] *
-                                ((LD['lit_s_ndl_pct'] * 3.0)
+            mean_weighted_litterbd = ((LD['lit_s_ndl_pct'] * 3.0)
                                 + (LD['lit_l_ndl_pct'] * 3.0)
                                 + (LD['lit_o_ndl_pct'] * 3.0)
                                 + (LD['lit_blf_d_pct'] * 1.5)
                                 + (LD['lit_blf_e_pct'] * 1.5)
                                 + (LD['lit_palm_pct'] * 0.3)
-                                + (LD['lit_grass_pct'] * 0.5)))
+                                + (LD['lit_grass_pct'] * 0.5))
+            LD['lit_mean_bd'] = mean_weighted_litterbd
+            lit_total = (lit_pretot * LD['lit_pctcv'] * mean_weighted_litterbd)
             return csdist(lit_total, csd_lit)
 
 
@@ -2318,7 +2321,6 @@ class FuelConsumption:
                         shb_seco_live_fsrt, shb_seco_dead_fsrt])
         nw_fsrt = sum([nw_prim_live_fsrt, nw_prim_dead_fsrt,
                        nw_seco_live_fsrt, nw_seco_dead_fsrt])
-        # kjell!
         llm_fsrt = sum([lch_fsrt, moss_fsrt, lit_fsrt])
         gf_fsrt = sum([duff_upper_fsrt, duff_lower_fsrt, bas_fsrt, sqm_fsrt])
         woody_fsrt = sum([stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt,
@@ -2345,6 +2347,8 @@ class FuelConsumption:
                 one_hr_fsrt, ten_hr_fsrt, hun_hr_fsrt, oneK_hr_snd_fsrt,
                 oneK_hr_rot_fsrt, tenK_hr_snd_fsrt, tenK_hr_rot_fsrt,
                 tnkp_hr_snd_fsrt, tnkp_hr_rot_fsrt])
+
+        self._cons_debug_data = np.array([LD['lit_mean_bd'], LD['ff_reduction']])
 
         # delete extraneous memory hogging variables
         del (all_fsrt, can_fsrt, shb_fsrt, nw_fsrt, llm_fsrt,
