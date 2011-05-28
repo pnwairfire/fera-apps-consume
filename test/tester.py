@@ -104,6 +104,8 @@ def main():
         one = DataObj(sys.argv[1])
         two = DataObj(sys.argv[2])
         one.Compare(two)
+    else:
+        print "\nError: Please specify the two files to compare.\n"
 
 if __name__ == '__main__':
     main()
