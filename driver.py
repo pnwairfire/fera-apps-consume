@@ -20,7 +20,7 @@ class Driver(object):
         self._consumer.fuelbed_area_acres = 100
         self._consumer.fuel_moisture_1000hr_pct = 20
         self._consumer.fuel_moisture_duff_pct = 20
-        self._consumer.fuel_moisture_10hr_pct = 50
+        self._consumer.fuel_moisture_10hr_pct = 10
         self._consumer.canopy_consumption_pct = 20
         self._consumer.shrub_blackened_pct = 50
         self._consumer.output_units = 'tons_ac'
@@ -91,7 +91,8 @@ class Driver(object):
 # Start
 #-------------------------------------------------------------------------------
 driver = Driver()
-driver.run_tests(scenario_list=['western', 'southern', 'boreal'])
+#driver.run_tests(scenario_list=['activity'])
+driver.run_tests(fuelbed_list=['41'], scenario_list=['southern'])
 
 """
 ### - runs over all fuelbeds using 'western', 'southern', 'boreal', 'activity'

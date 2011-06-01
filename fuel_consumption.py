@@ -1912,9 +1912,9 @@ class FuelConsumption:
                 return np.clip(np.where(
                         np.less(adj_fm_10hr, 26.7),   # if adj10hrFM < 26.7,
                         0.9 - (adj_fm_10hr - 12.0) * 0.0535,       # true
-                        (-169.08 - (adj_fm_10hr * 118.39259975) -  # false
-                        (((adj_fm_10hr)**2) * 0.66458677) +
-                        (((adj_fm_10hr)**3) * 0.007979673)) *
+                        (-169.08 - (adj_fm_10hr * 18.393) -  # false
+                        (((adj_fm_10hr)**2) * 0.6646) +
+                        (((adj_fm_10hr)**3) * 0.00798)) *
                         np.less_equal(adj_fm_10hr, 29.3)), # mask out > 29.3%
                         0.0,1.0) # clip range to 0-1
 

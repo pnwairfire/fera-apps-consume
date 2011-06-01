@@ -98,6 +98,7 @@ class DataObj(object):
                     comparisons += 1
                     failures += 1 if not check else 0
         print "\n{} comparisons {} failures".format(comparisons, failures)
+        print "Left value = {}   Right values = {}".format(self._filename, other._filename)
 
 def main():
     if len(sys.argv) > 2:
