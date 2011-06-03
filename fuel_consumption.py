@@ -1629,40 +1629,39 @@ class FuelConsumption:
 
         def ccon_ffr():
             """ Forest-floor reduction calculation, p.177  """
-
             # total duff depth (inches)
             duff_depth = LD['duff_upper_depth'] + LD['duff_lower_depth']
+
             # total forest floor depth (inches)
             ff_depth = (duff_depth + LD['lit_depth'] +
                         LD['lch_depth'] + LD['moss_depth'])
-
-                # boreal
             y_b = 1.2383 - (0.0114 * fm_duff) # used to calc squirrel mid. redux
-            ffr_boreal = ff_depth * propcons(y_b)
 
-                # southern
-            ffr_southern = (-0.0061 * fm_duff) + (0.6179 * ff_depth)
-            ffr_southern = np.where(
-                        np.less_equal(ffr_southern, 0.25), # if ffr south <= .25
-                        (0.006181 * math.e**(0.398983 * (ff_depth - # true
-                        (0.00987 * (fm_duff-60.0))))),
-                        ffr_southern)                               # false
+            ffr = np.array([])
+            if 'activity' in burn_type:
+                activity_duff_reduction = duff_redux_activity()
+                ffr = (activity_duff_reduction / duff_depth) * ff_depth
+            else:
+                if 'boreal' in ecoregion:
+                    ffr = ff_depth * propcons(y_b)
+                elif 'southern' in ecoregion:
+                    ffr = (-0.0061 * fm_duff) + (0.6179 * ff_depth)
+                    ffr = np.where(
+                                np.less_equal(ffr, 0.25), # if ffr south <= .25
+                                (0.006181 * math.e**(0.398983 * (ff_depth - # true
+                                (0.00987 * (fm_duff-60.0))))), ffr) # false
+                elif 'western' in ecoregion:
+                    y = -0.8085 - (0.0213 * fm_duff) + (1.0625 * ff_depth)
+                    ffr = ff_depth * propcons(y)
+                else: assert False
 
-                # western
-            y = -0.8085 - (0.0213 * fm_duff) + (1.0625 * ff_depth)
-            ffr_western = ff_depth * propcons(y)
-
-            return [((ecos_mask * ffr_southern) +
-                     (ecob_mask * ffr_boreal) +
-                     (ecow_mask * ffr_western)), y_b, duff_depth]
+            return [ffr, y_b, duff_depth]
 
         def ccon_lch():
             """ Lichen consumption, activity & natural"""
             csd_lch = [0.95, 0.05, 0.00]
             lch_pretot = np.minimum(LD['lch_depth'], LD['ff_reduction_successive'])
             LD['ff_reduction_successive'] = LD['ff_reduction_successive'] - lch_pretot
-            if 'activity' in burn_type:
-                lch_pretot = np.where(ecob_mask, lch_pretot, LD['lch_depth'])
 
             lch_total = (lch_pretot * 0.5 * LD['lch_pctcv'])
 
@@ -1673,8 +1672,6 @@ class FuelConsumption:
             csd_moss = [0.95, 0.05, 0.00]
             moss_pretot = np.minimum(LD['moss_depth'], LD['ff_reduction_successive'])
             LD['ff_reduction_successive'] = LD['ff_reduction_successive'] - moss_pretot
-            if 'activity' in burn_type:
-                moss_pretot = np.where(ecob_mask, moss_pretot, LD['moss_depth'])
 
             moss_total = (moss_pretot * 1.5 * LD['moss_pctcv'])
             return csdist(moss_total, csd_moss)
@@ -1684,8 +1681,6 @@ class FuelConsumption:
             csd_lit = [0.90, 0.10, 0.00]
             lit_pretot = np.minimum(LD['lit_depth'], LD['ff_reduction_successive'])
             LD['ff_reduction_successive'] = LD['ff_reduction_successive'] - lit_pretot
-            if 'activity' in burn_type:
-                lit_pretot = np.where(ecob_mask, lit_pretot, LD['lit_depth'])
             mean_weighted_litterbd = ((LD['lit_s_ndl_pct'] * 3.0)
                                 + (LD['lit_l_ndl_pct'] * 3.0)
                                 + (LD['lit_o_ndl_pct'] * 3.0)
@@ -1881,6 +1876,7 @@ class FuelConsumption:
             non_zero = duff_reduction_tmp > 0.0
             return (duff_reduction_tmp * non_zero)
 
+
         ### WOODY FUEL CONSUMPTION ACTIVITY EQUATIONS ###
         def ccon_activity():
             """ Woody fuel activity equations, p. 142 """
@@ -2051,7 +2047,6 @@ class FuelConsumption:
 
                 return diam_reduction, adjfm_1000hr
 
-
             def duff_redux_activity():
                 """Duff reduction calculation, activity
                    p160 ln 4765"""
@@ -2106,7 +2101,6 @@ class FuelConsumption:
                 duff_reduction = np.minimum(duff_reduction, duff_depth)
 
                 return duff_reduction
-
 
             def qmd_redux_calc(q):
                 """ Eq. N p. 152 ln 4611, 4616 Quadratic mean diameter reduction
