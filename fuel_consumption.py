@@ -1661,7 +1661,7 @@ class FuelConsumption:
             csd_lch = [0.95, 0.05, 0.00]
             lch_pretot = np.minimum(LD['lch_depth'], LD['ff_reduction_successive'])
             LD['ff_reduction_successive'] = LD['ff_reduction_successive'] - lch_pretot
-            if burn_type == 'activity':
+            if 'activity' in burn_type:
                 lch_pretot = np.where(ecob_mask, lch_pretot, LD['lch_depth'])
 
             lch_total = (lch_pretot * 0.5 * LD['lch_pctcv'])
@@ -1673,7 +1673,7 @@ class FuelConsumption:
             csd_moss = [0.95, 0.05, 0.00]
             moss_pretot = np.minimum(LD['moss_depth'], LD['ff_reduction_successive'])
             LD['ff_reduction_successive'] = LD['ff_reduction_successive'] - moss_pretot
-            if burn_type == 'activity':
+            if 'activity' in burn_type:
                 moss_pretot = np.where(ecob_mask, moss_pretot, LD['moss_depth'])
 
             moss_total = (moss_pretot * 1.5 * LD['moss_pctcv'])
@@ -1684,7 +1684,7 @@ class FuelConsumption:
             csd_lit = [0.90, 0.10, 0.00]
             lit_pretot = np.minimum(LD['lit_depth'], LD['ff_reduction_successive'])
             LD['ff_reduction_successive'] = LD['ff_reduction_successive'] - lit_pretot
-            if burn_type == 'activity':
+            if 'activity' in burn_type:
                 lit_pretot = np.where(ecob_mask, lit_pretot, LD['lit_depth'])
             mean_weighted_litterbd = ((LD['lit_s_ndl_pct'] * 3.0)
                                 + (LD['lit_l_ndl_pct'] * 3.0)

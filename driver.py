@@ -76,10 +76,11 @@ class Driver(object):
 
         write_header = True
         for scene in scenario_list:
-            if 'activity' is scene:
+            if 'activity' == scene:
                 self._consumer.burn_type = scene
                 self._consumer.fuelbed_ecoregion = 'western'
             else:
+                print scene
                 self._consumer.fuelbed_ecoregion = scene
             self.write_csv(fuelbed_list, outfile, write_header, debug)
             write_header = False
@@ -91,8 +92,12 @@ class Driver(object):
 # Start
 #-------------------------------------------------------------------------------
 driver = Driver()
-#driver.run_tests(scenario_list=['activity'])
-driver.run_tests(fuelbed_list=['41'], scenario_list=['southern'])
+if len(sys.argv) > 1:
+    # - use the supplied scenario
+    driver.run_tests(scenario_list=['{}'.format(sys.argv[1])])
+else:
+    #driver.run_tests(scenario_list=['activity'])
+    driver.run_tests(fuelbed_list=['1'], scenario_list=['activity'])
 
 """
 ### - runs over all fuelbeds using 'western', 'southern', 'boreal', 'activity'
