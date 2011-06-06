@@ -1730,6 +1730,7 @@ class FuelConsumption:
             #   xml file appears to only list 'depth' data, hence our usage
             #   here """
             csd_sqm = [0.10, 0.30, 0.60]
+            y_b = 1.2383 - (0.0114 * fm_duff) # used to calc squirrel mid. redux
             sqm_reduction = LD['sqm_depth'] * propcons(y_b) * ecob_mask
             sqm_area = (LD['sqm_density'] * math.pi *
                         (LD['sqm_radius']**2.0) / 43560.0)
@@ -2057,6 +2058,7 @@ class FuelConsumption:
                 # Eq. S: Drying period equations - This equation requires
                 # "days since significant rainfall" data: the # of days since
                 # at least 0.25 inches fell...
+                duff_depth = LD['duff_upper_depth'] + LD['duff_lower_depth']
                 days_to_moist = 21.0 * ((duff_depth / 3.0)**1.18) # ln 4772
                 days_to_dry = 57.0 * ((duff_depth / 3.0)**1.18) # ln 4773
 
@@ -2222,6 +2224,16 @@ class FuelConsumption:
                                     total_rot, flamgrot)
                 return csdist_act(np.array([flamgsnd, flamgrot]), np.array([total_snd, total_rot]), resFrac)
 
+            def ccon_ffr_activity():
+                duff_redux = duff_redux_activity()
+                duff_depth = LD['duff_upper_depth'] + LD['duff_lower_depth']
+                ffr_total_depth = (duff_depth + LD['lit_depth'] +
+                        LD['lch_depth'] + LD['moss_depth'])
+                calculated_reduction = (duff_redux / duff_depth) * ffr_total_depth
+                ffr_redux = np.where(
+                    np.less(ffr_total_depth, calculated_reduction),
+                    ffr_total_depth, calculated_reduction)
+                return ffr_redux
 
             # Variables that need to be defined for these equations
             #snow_free_days = 30 # need for curing eval, if still valid
@@ -2257,9 +2269,10 @@ class FuelConsumption:
                      tnkp_fsrt[0][3] + tnkp_fsrt[1][3])
             diam_reduction = np.where(np.equal(woody, 0.0), 0.0, diam_reduction)
 
+
             return (one_fsrt, ten_fsrt, hun_hr_fsrt,
-                    oneK_fsrt, tenK_fsrt, tnkp_fsrt,
-                   ccon_duff(duff_redux_activity()))
+                   oneK_fsrt, tenK_fsrt, tnkp_fsrt,
+                   ccon_ffr_activity())
 
 
            ########################################################
@@ -2276,16 +2289,6 @@ class FuelConsumption:
         [nw_prim_live_fsrt, nw_prim_dead_fsrt,
          nw_seco_live_fsrt, nw_seco_dead_fsrt] = ccon_nw()
 
-        [LD['ff_reduction'], y_b, duff_depth] = ccon_ffr()
-
-        LD['ff_reduction_successive'] = LD['ff_reduction']
-        lch_fsrt = ccon_lch()
-        moss_fsrt = ccon_moss()
-        lit_fsrt = ccon_litter()
-
-        bas_fsrt = ccon_bas()
-        sqm_fsrt = ccon_sqm()
-
         [stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt] = ccon_stumps()
 
         if burn_type in ['natural', ['natural']]:
@@ -2298,14 +2301,32 @@ class FuelConsumption:
             oneK_hr_rot_fsrt = ccon_oneK_rot_nat()
             tenK_hr_rot_fsrt = ccon_tenK_rot_nat()
             tnkp_hr_rot_fsrt = ccon_tnkp_rot_nat()
+
+            [LD['ff_reduction'], y_b, duff_depth] = ccon_ffr()
+            LD['ff_reduction_successive'] = LD['ff_reduction']
+            lch_fsrt = ccon_lch()
+            moss_fsrt = ccon_moss()
+            lit_fsrt = ccon_litter()
             [duff_upper_fsrt, duff_lower_fsrt] = ccon_duff(duff_redux_natural())
 
+            bas_fsrt = ccon_bas()
+            sqm_fsrt = ccon_sqm()
         else:
             [one_hr_fsrt, ten_hr_fsrt, hun_hr_fsrt,
             [oneK_hr_snd_fsrt, oneK_hr_rot_fsrt],
             [tenK_hr_snd_fsrt, tenK_hr_rot_fsrt],
             [tnkp_hr_snd_fsrt, tnkp_hr_rot_fsrt],
-            [duff_upper_fsrt, duff_lower_fsrt]] = ccon_activity()
+            LD['ff_reduction']] = ccon_activity()
+
+            LD['ff_reduction_successive'] = LD['ff_reduction']
+            [duff_upper_fsrt, duff_lower_fsrt] = ccon_duff(duff_redux_natural())
+            lch_fsrt = ccon_lch()
+            moss_fsrt = ccon_moss()
+            lit_fsrt = ccon_litter()
+
+            bas_fsrt = ccon_bas()
+            sqm_fsrt = ccon_sqm()
+
 
         # Category summations
         can_fsrt = sum([can_over_fsrt, can_mid_fsrt, can_under_fsrt,
@@ -2329,18 +2350,51 @@ class FuelConsumption:
         #### OUTPUT EXPORT ####
         #######################
 
-        self._ucons_data = np.array([all_fsrt, can_fsrt, shb_fsrt, nw_fsrt, llm_fsrt,
-                gf_fsrt,woody_fsrt, can_over_fsrt, can_mid_fsrt, can_under_fsrt,
-                can_snag1f_fsrt, can_snag1w_fsrt, can_snag1nf_fsrt,
-                can_snag2_fsrt, can_snag3_fsrt, can_ladder_fsrt,
-                shb_prim_live_fsrt, shb_prim_dead_fsrt, shb_seco_live_fsrt,
-                shb_seco_dead_fsrt, nw_prim_live_fsrt, nw_prim_dead_fsrt,
-                nw_seco_live_fsrt, nw_seco_dead_fsrt, lit_fsrt, lch_fsrt,
-                moss_fsrt, duff_upper_fsrt, duff_lower_fsrt, bas_fsrt,
-                sqm_fsrt, stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt,
-                one_hr_fsrt, ten_hr_fsrt, hun_hr_fsrt, oneK_hr_snd_fsrt,
-                oneK_hr_rot_fsrt, tenK_hr_snd_fsrt, tenK_hr_rot_fsrt,
-                tnkp_hr_snd_fsrt, tnkp_hr_rot_fsrt])
+        self._ucons_data = np.array(
+            [all_fsrt,
+            can_fsrt,
+            shb_fsrt,
+            nw_fsrt,
+            llm_fsrt,
+            gf_fsrt,
+            woody_fsrt,
+            can_over_fsrt,
+            can_mid_fsrt,
+            can_under_fsrt,
+            can_snag1f_fsrt,
+            can_snag1w_fsrt,
+            can_snag1nf_fsrt,
+            can_snag2_fsrt,
+            can_snag3_fsrt,
+            can_ladder_fsrt,
+            shb_prim_live_fsrt,
+            shb_prim_dead_fsrt,
+            shb_seco_live_fsrt,
+            shb_seco_dead_fsrt,
+            nw_prim_live_fsrt,
+            nw_prim_dead_fsrt,
+            nw_seco_live_fsrt,
+            nw_seco_dead_fsrt,
+            lit_fsrt,
+            lch_fsrt,
+            moss_fsrt,
+            duff_upper_fsrt,
+            duff_lower_fsrt,
+            bas_fsrt,
+            sqm_fsrt,
+            stump_snd_fsrt,
+            stump_rot_fsrt,
+            stump_ltr_fsrt,
+            one_hr_fsrt,
+            ten_hr_fsrt,
+            hun_hr_fsrt,
+            oneK_hr_snd_fsrt,
+            oneK_hr_rot_fsrt,
+            tenK_hr_snd_fsrt,
+            tenK_hr_rot_fsrt,
+            tnkp_hr_snd_fsrt,
+            tnkp_hr_rot_fsrt]
+            )
 
         self._cons_debug_data = np.array([LD['lit_mean_bd'], LD['ff_reduction']])
 
