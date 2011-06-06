@@ -2229,7 +2229,8 @@ class FuelConsumption:
                 duff_depth = LD['duff_upper_depth'] + LD['duff_lower_depth']
                 ffr_total_depth = (duff_depth + LD['lit_depth'] +
                         LD['lch_depth'] + LD['moss_depth'])
-                calculated_reduction = (duff_redux / duff_depth) * ffr_total_depth
+                calculated_reduction = np.where(np.greater(duff_depth, 0.0),
+                    (duff_redux / duff_depth) * ffr_total_depth, 0.0)
                 ffr_redux = np.where(
                     np.less(ffr_total_depth, calculated_reduction),
                     ffr_total_depth, calculated_reduction)
