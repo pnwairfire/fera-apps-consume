@@ -1739,7 +1739,7 @@ class FuelConsumption:
             return csdist(sqm_total, csd_sqm)
 
 
-        def ccon_duff(duff_reduction):
+        def ccon_duff():
             """ Duff consumption, activity & natural*
                 * note that there are different equations for activity/natural
                   to calculate duff_reduction
@@ -1749,24 +1749,17 @@ class FuelConsumption:
             """
             csd_duffu = [0.10, 0.70, 0.20]
             csd_duffl = [0.0, 0.20, 0.80]
+            upperduff_pretot = np.minimum(
+                LD['duff_upper_depth'], LD['ff_reduction_successive'])
+            LD['ff_reduction_successive'] = LD['ff_reduction_successive'] - upperduff_pretot
 
-            # duff upper
-            redux_up = np.where(     # select where: depth <= reduction
-                       np.less_equal(LD['duff_upper_depth'], duff_reduction),
-                       LD['duff_upper_depth'],              # if true
-                       duff_reduction)                      # if false
+            lowerduff_pretot = np.minimum(
+                LD['duff_lower_depth'], LD['ff_reduction_successive'])
+            LD['ff_reduction_successive'] = LD['ff_reduction_successive'] - upperduff_pretot
 
-            # duff lower
-            redux_lo = np.where(     # select where: depth >= reduction
-                       np.greater_equal(LD['duff_upper_depth'], duff_reduction),
-                       zeroes,                                  # true
-                       duff_reduction - LD['duff_upper_depth']) # false
+            duff_upper = np.maximum(upperduff_pretot * 8.0 * LD['duff_upper_pctcv'], 0.0)
 
-            # upper
-            duff_upper = np.maximum(redux_up * 8.0 * LD['duff_upper_pctcv'], 0.0)
-
-            # lower
-            lo_total = redux_lo * LD['duff_lower_pctcv']
+            lo_total = lowerduff_pretot * LD['duff_lower_pctcv']
             bulk_dens = (np.where(np.equal(LD['duff_lower_deriv'], 3), 18.0, 0.0) +
                          np.where(np.equal(LD['duff_lower_deriv'], 4), 22.0, 0.0))
             duff_lower = np.maximum(lo_total * bulk_dens, 0.0)
@@ -2302,31 +2295,22 @@ class FuelConsumption:
             oneK_hr_rot_fsrt = ccon_oneK_rot_nat()
             tenK_hr_rot_fsrt = ccon_tenK_rot_nat()
             tnkp_hr_rot_fsrt = ccon_tnkp_rot_nat()
-
             [LD['ff_reduction'], y_b, duff_depth] = ccon_ffr()
             LD['ff_reduction_successive'] = LD['ff_reduction']
-            lch_fsrt = ccon_lch()
-            moss_fsrt = ccon_moss()
-            lit_fsrt = ccon_litter()
-            [duff_upper_fsrt, duff_lower_fsrt] = ccon_duff(duff_redux_natural())
-
-            bas_fsrt = ccon_bas()
-            sqm_fsrt = ccon_sqm()
         else:
             [one_hr_fsrt, ten_hr_fsrt, hun_hr_fsrt,
             [oneK_hr_snd_fsrt, oneK_hr_rot_fsrt],
             [tenK_hr_snd_fsrt, tenK_hr_rot_fsrt],
             [tnkp_hr_snd_fsrt, tnkp_hr_rot_fsrt],
             LD['ff_reduction']] = ccon_activity()
-
             LD['ff_reduction_successive'] = LD['ff_reduction']
-            [duff_upper_fsrt, duff_lower_fsrt] = ccon_duff(duff_redux_natural())
-            lch_fsrt = ccon_lch()
-            moss_fsrt = ccon_moss()
-            lit_fsrt = ccon_litter()
 
-            bas_fsrt = ccon_bas()
-            sqm_fsrt = ccon_sqm()
+        lch_fsrt = ccon_lch()
+        moss_fsrt = ccon_moss()
+        lit_fsrt = ccon_litter()
+        [duff_upper_fsrt, duff_lower_fsrt] = ccon_duff()
+        bas_fsrt = ccon_bas()
+        sqm_fsrt = ccon_sqm()
 
 
         # Category summations

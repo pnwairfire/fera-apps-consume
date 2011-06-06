@@ -94,10 +94,13 @@ class Driver(object):
 driver = Driver()
 if len(sys.argv) > 1:
     # - use the supplied scenario
+    #driver.run_tests(fuelbed_list=['2'], scenario_list=['{}'.format(sys.argv[1])])
     driver.run_tests(scenario_list=['{}'.format(sys.argv[1])])
 else:
     #driver.run_tests(scenario_list=['activity'])
-    driver.run_tests(fuelbed_list=['1'], scenario_list=['activity'])
+    #driver.run_tests(fuelbed_list=['1'], scenario_list=['activity'])
+    #driver.run_tests(fuelbed_list=['1'], scenario_list=['western'])
+    driver.run_tests(scenario_list=['western'])
 
 """
 ### - runs over all fuelbeds using 'western', 'southern', 'boreal', 'activity'
