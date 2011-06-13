@@ -1974,15 +1974,25 @@ class FuelConsumption:
 
                 def test_ignition_const_calc():
                     """ test """
-                    # run scenarios
-                    area = 12
-                    fm_10hr = 12
-                    fm_1000hr = 35
-                    extreme = ignitionConst_calc(50, 30, 12, 35)
+                    logger = []
+                    keylist = ['area', 'lengthOfIgnition', 'fm_10hr', 'fm_1000hr', 'igc']
 
-                    x = 10
+                    for area in range(5, 30, 5):
+                        for len_ig in range(10, 50, 10):
+                            for fm10 in range(9, 30, 5):
+                                for fm1000 in range(39, 60, 5):
+                                    ignitionConst_calc(
+                                        area=area,
+                                        lengthOfIgnition=len_ig,
+                                        fm_10hr=fm10,
+                                        fm_1000hr=fm1000,
+                                        logger=logger
+                                        )
+                    for item in logger:
+                        print "\t".join(["{}:{}".format(key, item[key]) for key in keylist])
 
-                def ignitionConst_calc(area, lengthOfIgnition, fm_10hr, fm_1000hr):
+                def ignitionConst_calc(area,
+                        lengthOfIgnition, fm_10hr, fm_1000hr, logger=None):
                     """ Calculate Ignition Constant ln 5146
                     Maximum Ignition Duration (minutes): "The total number of
                     minutes that can elapse in the ignition period and still be
@@ -2039,6 +2049,15 @@ class FuelConsumption:
                            (fm_1000hr * (-3.0 / 20.0)) + 8.0 + (0.5 * igc), igc)
 
                     igc = np.where(np.less(igc, 1.0), 1.0, igc)
+
+                    if not logger is None:
+                        data = {}
+                        data['area'] = area
+                        data['lengthOfIgnition'] = lengthOfIgnition
+                        data['fm_10hr'] = fm_10hr
+                        data['fm_1000hr'] = fm_1000hr
+                        data['igc'] = igc
+                        logger.append(data)
 
                     return igc
 
