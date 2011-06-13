@@ -1972,8 +1972,17 @@ class FuelConsumption:
                                      (-0.005 * adjfm_1000hr) + 0.731,
                                      diam_reduction)
 
+                def test_ignition_const_calc():
+                    """ test """
+                    # run scenarios
+                    area = 12
+                    fm_10hr = 12
+                    fm_1000hr = 35
+                    extreme = ignitionConst_calc(50, 30, 12, 35)
 
-                def ignitionConst_calc():
+                    x = 10
+
+                def ignitionConst_calc(area, lengthOfIgnition, fm_10hr, fm_1000hr):
                     """ Calculate Ignition Constant ln 5146
                     Maximum Ignition Duration (minutes): "The total number of
                     minutes that can elapse in the ignition period and still be
@@ -2002,15 +2011,15 @@ class FuelConsumption:
 
                     # ignition coefficient
                     igc = np.where(np.less_equal(lengthOfIgnition, igd1),
-                           np.where(np.less(area, 10.0),
-                                      4.0 - (10.0 - area) / 100.0, 4.0),
-                           np.where(np.less_equal(lengthOfIgnition, igd2),
+                        np.where(np.less(area, 10.0),
+                            4.0 - (10.0 - area) / 100.0, 4.0),
+                        np.where(np.less_equal(lengthOfIgnition, igd2),
                             3.0 + ((igd2 - lengthOfIgnition) / (igd2 - igd1)),
-                            np.where(np.less_equal(lengthOfIgnition, igd3),
-                             2.0 + ((igd3 - lengthOfIgnition) / (igd3 - igd2)),
-                             np.where(np.less_equal(lengthOfIgnition, igd4),
-                             1.0 + ((igd4 - lengthOfIgnition) / (igd4 - igd3)),
-                             1.0))))
+                        np.where(np.less_equal(lengthOfIgnition, igd3),
+                            2.0 + ((igd3 - lengthOfIgnition) / (igd3 - igd2)),
+                        np.where(np.less_equal(lengthOfIgnition, igd4),
+                            1.0 + ((igd4 - lengthOfIgnition) / (igd4 - igd3)),
+                        1.0))))
 
                     # adjust for 10 hour fuel moisture ln 5239
                     # if > 18, igc = 1.0, if b/t 15-18, that equation
@@ -2031,12 +2040,17 @@ class FuelConsumption:
 
                 def high_intensity_adjustment(diam_reduction):
                     """ Eq. L: p.150, ln 4607-4609 """
-                    reduxFactor = (1.0 - (0.11 * (ignitionConst_calc() - 1.0)))
+                    igc = ignitionConst_calc(
+                        area, lengthOfIgnition, fm_10hr, fm_1000hr)
+                    reduxFactor = (1.0 - (0.11 * (igc - 1.0)))
                     return diam_reduction * reduxFactor
 
                 # Execute calculations for diam reduction
                 adjfm_1000hr = final1000hr()
                 diam_reduction = spring_summer_adjustment()
+                # - Kjell - remove
+                test_ignition_const_calc()
+
                 diam_reduction = high_intensity_adjustment(diam_reduction)
 
                 return diam_reduction, adjfm_1000hr
