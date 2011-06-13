@@ -2010,15 +2010,19 @@ class FuelConsumption:
                              80.0 + (4.0 * area)))
 
                     # ignition coefficient
+                    under10 = 4.0 - (10.0 - area) / 100.0
+                    under_igd2 = 3.0 + ((igd2 - lengthOfIgnition) / (igd2 - igd1))
+                    under_igd3 = 2.0 + ((igd3 - lengthOfIgnition) / (igd3 - igd2))
+                    under_igd4 = 1.0 + ((igd4 - lengthOfIgnition) / (igd4 - igd3))
                     igc = np.where(np.less_equal(lengthOfIgnition, igd1),
                         np.where(np.less(area, 10.0),
-                            4.0 - (10.0 - area) / 100.0, 4.0),
+                            under10, 4.0),
                         np.where(np.less_equal(lengthOfIgnition, igd2),
-                            3.0 + ((igd2 - lengthOfIgnition) / (igd2 - igd1)),
+                            under_igd2,
                         np.where(np.less_equal(lengthOfIgnition, igd3),
-                            2.0 + ((igd3 - lengthOfIgnition) / (igd3 - igd2)),
+                            under_igd3,
                         np.where(np.less_equal(lengthOfIgnition, igd4),
-                            1.0 + ((igd4 - lengthOfIgnition) / (igd4 - igd3)),
+                            under_igd4,
                         1.0))))
 
                     # adjust for 10 hour fuel moisture ln 5239
