@@ -2072,7 +2072,7 @@ class FuelConsumption:
                 adjfm_1000hr = final1000hr()
                 diam_reduction = spring_summer_adjustment()
                 # - Kjell - remove
-                test_ignition_const_calc()
+                #test_ignition_const_calc()
 
                 diam_reduction = high_intensity_adjustment(diam_reduction)
 

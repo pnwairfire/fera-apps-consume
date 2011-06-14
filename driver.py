@@ -30,12 +30,12 @@ class Driver(object):
         self._consumer.windspeed = 5
         self._consumer.fm_type = 'MEAS-Th'
 
-    def _reset_activity_scenario2(self):
+    """def _reset_activity_scenario2(self):
         self._consumer.fuel_moisture_10hr_pct = 15
         self._consumer.fuel_moisture_1000hr_pct = 45
         self._consumer.fuelbed_area_acres = 5
 
-    """def _reset_activity_scenario3(self):
+    def _reset_activity_scenario3(self):
         self._consumer.fuel_moisture_10hr_pct = 17
         self._consumer.fuel_moisture_1000hr_pct = 55
         self._consumer.fuelbed_area_acres = 100
@@ -79,7 +79,7 @@ class Driver(object):
     def run_tests(self, fuelbed_list=[], scenario_list=[], outfile=None, debug=False):
         self._reset_consumer()
 
-        self._reset_activity_scenario2()
+        #self._reset_activity_scenario2()
         #self._reset_activity_scenario3()
         #self._reset_activity_scenario4()
 
