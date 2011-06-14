@@ -258,16 +258,16 @@ class FCCSDB():
                     text += "\n\t   Ladder fuels: " + str(data[11]) + lu
 
                     text += "\n\n\tShrub loadings"
-                    text += "\n\t   Primary: " + str(data[12]) + lu
-                    text += "\n\t   Primary % live: " + str(data[13]*100) + pu
-                    text += "\n\t   Secondary: " + str(data[14]) + lu
-                    text += "\n\t   Secondary % live: " + str(data[15]*100) + pu
+                    text += "\n\t   Shrub Primary: " + str(data[12]) + lu
+                    text += "\n\t   Shrub Primary % live: " + str(data[13]*100) + pu
+                    text += "\n\t   Shrub Secondary: " + str(data[14]) + lu
+                    text += "\n\t   Shrub Secondary % live: " + str(data[15]*100) + pu
 
                     text += "\n\n\tNonwoody loadings"
-                    text += "\n\t   Primary: " + str(data[16]) + lu
-                    text += "\n\t   Primary % live: " + str(data[17]*100) + pu
-                    text += "\n\t   Secondary: " + str(data[18]) + lu
-                    text += "\n\t   Secondary % live: " + str(data[19]*100) + pu
+                    text += "\n\t   NW Primary: " + str(data[16]) + lu
+                    text += "\n\t   NW Primary % live: " + str(data[17]*100) + pu
+                    text += "\n\t   NW Secondary: " + str(data[18]) + lu
+                    text += "\n\t   NW Secondary % live: " + str(data[19]*100) + pu
 
                     text += "\n\n\tLitter-lichen-moss loadings"
                     text += "\n\t   Litter depth: " + str(data[23]) + du
