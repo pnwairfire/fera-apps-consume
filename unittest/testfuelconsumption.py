@@ -7,10 +7,10 @@ import nose
 class TestFuelConsumption(unittest.TestCase):
 
     def setUp(self):
-        pass
-##        self._consumer = consume.FuelConsumption(
-##            fccs_file = "input_data/fccs_pyconsume_input.xml")
-##        self.reset_consumer()
+        self._consumer = consume.FuelConsumption(
+            fccs_file = "unittest/test.xml")
+            #fccs_file = "input_data/fccs_pyconsume_input.xml")
+        self.reset_consumer()
 
     def reset_consumer(self):
         self._consumer.burn_type = 'natural'
@@ -80,6 +80,18 @@ class TestFuelConsumption(unittest.TestCase):
 
     def test_consumption_calc(self):
         pass
+
+    def test_calc_intensity_reduction_factor(self):
+        import numpy as np
+        f = self._consumer.calc_intensity_reduction_factor
+        area = np.array([10, 20, 25, 30])
+        lengthOfIgnition = np.array([5, 20, 40, 60])
+        fm_10hr = np.array([10, 14, 17, 25])
+        fm_1000hr = np.array([35, 40, 49, 55])
+        irf = f(area, lengthOfIgnition, fm_10hr, fm_1000hr)
+        expected = [0.33, 0.22, 0.11, 1.0]
+        for i, item, in enumerate(expected):
+            nose.tools.eq_(irf[i], item, "Expected {}, got {}".format(item, irf[i]))
 
 if __name__ == '__main__':
     unittest.main()

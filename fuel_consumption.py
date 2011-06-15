@@ -1350,7 +1350,31 @@ class FuelConsumption:
 
         self._heat_data = (self._cons_data * BTU_PER_UNIT)
 
+    def calc_intensity_reduction_factor(self, area, lengthOfIgnition, fm_10hr, fm_1000hr):
+        """ The intensity of fire can limit the consumption of large woody fuels.
+            Mass ignition causes small fuels to be consumed more rapidly, thereby
+            increasing the intensity of the fire.  This can shorten the fire duration,
+            causing large fuels to absorb less energy and have less consumption.  Consume
+            takes this into account by reducing the amount of diameter reduction of 1000-hr
+            and 10,000-hr fuels as fires increase in intensity
+            """
+        extreme = np.where(np.less(area, 10.0), 0,
+            np.where(np.less(area, 20.0), area, 0.5 * area + 10.0))
+        very_high = np.where(np.less(area, 20.0), 2.0 * area, 20.0 + area)
+        high = np.where(np.less(area, 20.0), 4.0 * area, 40.0 + (2.0 * area))
+        medium = np.where(np.less(area, 20.0), 8.0 * area, 80.0 + (4.0 * area))
 
+        # Move from least to most selective (i.e. order of execution is important)
+        irf = np.where((np.less_equal(fm_10hr, 18) & np.less_equal(fm_1000hr, 50)),
+                    (np.where(np.less(lengthOfIgnition, high),
+                     0.11, 1.0)), 1.0)
+        irf = np.where((np.less(fm_10hr, 15) & np.less_equal(fm_1000hr, 50)),
+                    (np.where(np.less(lengthOfIgnition, very_high),
+                     0.22, irf)), irf)
+        irf = np.where(
+            (np.greater_equal(area, 10) & np.less(fm_10hr, 15) & np.less(fm_1000hr, 40)),
+                (np.where(np.less(lengthOfIgnition, extreme), 0.33, irf)), irf)
+        return irf
 
     def _consumption_calc(self, fuelbeds, ecoregion = 'western', fm_1000hr=50.0,
                           fm_duff=50.0, burn_type = 'natural', can_con_pct=50.0,
@@ -1991,34 +2015,8 @@ class FuelConsumption:
                     for item in logger:
                         print "\t".join(["{}:{}".format(key, item[key]) for key in keylist])
 
-                def calc_intensity_reduction_factor(area, lengthOfIgnition, fm_10hr, fm_1000hr):
-                    """ The intensity of fire can limit the consumption of large woody fuels.
-                        Mass ignition causes small fuels to be consumed more rapidly, thereby
-                        increasing the intensity of the fire.  This can shorten the fire duration,
-                        causing large fuels to absorb less energy and have less consumption.  Consume
-                        takes this into account by reducing the amount of diameter reduction of 1000-hr
-                        and 10,000-hr fuels as fires increase in intensity
-                        """
-                    extreme = np.where(np.less(area, 10.0), 0,
-                        np.where(np.less(area, 20.0), area, 0.5 * area + 10.0))
-                    very_high = np.where(np.less(area, 20.0), 2.0 * area, 20.0 + area)
-                    high = np.where(np.less(area, 20.0), 4.0 * area, 40.0 + (2.0 * area))
-                    medium = np.where(np.less(area, 20.0), 8.0 * area, 80.0 + (4.0 * area))
-
-                    # Move from least to most selective (i.e. order of execution is important)
-                    irf = np.where((np.less_equal(fm_10hr, 18) & np.less_equal(fm_1000hr, 50)),
-                                (np.where(np.less(lengthOfIgnition, high),
-                                 0.11, 1.0)), 1.0)
-                    irf = np.where((np.less(fm_10hr, 15) & np.less_equal(fm_1000hr, 50)),
-                                (np.where(np.less(lengthOfIgnition, very_high),
-                                 0.22, irf)), irf)
-                    irf = np.where(
-                        (np.greater_equal(area, 10) & np.less(fm_10hr, 15) & np.less(fm_1000hr, 40)),
-                            (np.where(np.less(lengthOfIgnition, extreme), 0.33, irf)), irf)
-                    return irf
-
                 def high_intensity_adjustment(diam_reduction):
-                    reduxFactor = calc_intensity_reduction_factor(
+                    reduxFactor = self.calc_intensity_reduction_factor(
                             area, lengthOfIgnition, fm_10hr, fm_1000hr)
                     return diam_reduction * reduxFactor
 
