@@ -14,9 +14,8 @@ class TestFCCSDB(unittest.TestCase):
         pass
 
     def testget_canopy_pct(self):
+        # get_canopy_pct() should likely be removed. Old xml files have this as data.
         pass
-##        result = self.db.get_canopy_pct(1)
-##        nose.tools.eq_(result == 10, "10 not {}".format(result))
 
     def testbrowse(self):
         pass

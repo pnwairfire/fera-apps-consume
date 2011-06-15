@@ -30,7 +30,7 @@ class Driver(object):
         self._consumer.windspeed = 5
         self._consumer.fm_type = 'MEAS-Th'
 
-    """def _reset_activity_scenario2(self):
+    def _reset_activity_scenario2(self):
         self._consumer.fuel_moisture_10hr_pct = 15
         self._consumer.fuel_moisture_1000hr_pct = 45
         self._consumer.fuelbed_area_acres = 5
@@ -44,7 +44,7 @@ class Driver(object):
         self._consumer.fuel_moisture_10hr_pct = 25
         self._consumer.fuel_moisture_1000hr_pct = 55
         self._consumer.fuelbed_area_acres = 100
-    """
+
 
     def write_header(self, results, catagory_list, stream):
         out = "fuelbed"
@@ -115,7 +115,7 @@ class Driver(object):
 driver = Driver()
 if len(sys.argv) > 1:
     # - use the supplied scenario
-    #driver.run_tests(fuelbed_list=['2'], scenario_list=['{}'.format(sys.argv[1])])
+    #driver.run_tests(fuelbed_list=['1'], scenario_list=['{}'.format(sys.argv[1])])
     driver.run_tests(scenario_list=['{}'.format(sys.argv[1])])
 else:
     #driver.run_tests(scenario_list=['activity'])

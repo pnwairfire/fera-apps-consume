@@ -1991,89 +1991,40 @@ class FuelConsumption:
                     for item in logger:
                         print "\t".join(["{}:{}".format(key, item[key]) for key in keylist])
 
-                def ignitionConst_calc(area,
-                        lengthOfIgnition, fm_10hr, fm_1000hr, logger=None):
-                    """ Calculate Ignition Constant ln 5146
-                    Maximum Ignition Duration (minutes): "The total number of
-                    minutes that can elapse in the ignition period and still be
-                    considered a mass ignition"
-                    """
+                def calc_intensity_reduction_factor(area, lengthOfIgnition, fm_10hr, fm_1000hr):
+                    """ The intensity of fire can limit the consumption of large woody fuels.
+                        Mass ignition causes small fuels to be consumed more rapidly, thereby
+                        increasing the intensity of the fire.  This can shorten the fire duration,
+                        causing large fuels to absorb less energy and have less consumption.  Consume
+                        takes this into account by reducing the amount of diameter reduction of 1000-hr
+                        and 10,000-hr fuels as fires increase in intensity
+                        """
+                    extreme = np.where(np.less(area, 10.0), 0,
+                        np.where(np.less(area, 20.0), area, 0.5 * area + 10.0))
+                    very_high = np.where(np.less(area, 20.0), 2.0 * area, 20.0 + area)
+                    high = np.where(np.less(area, 20.0), 4.0 * area, 40.0 + (2.0 * area))
+                    medium = np.where(np.less(area, 20.0), 8.0 * area, 80.0 + (4.0 * area))
 
-                    igd1 = np.where(np.less(area, 20.0),
-                                    area, 0.5 * area + 10.0)
-                    igd2 = np.where(                    # if length <= maxidndur
-                          np.less_equal(lengthOfIgnition, igd1),
-                            igd1,
-                            np.where(np.less(area, 20.0),
-                             2.0 * area,
-                             20.0 + area))
-
-                    igd3 = np.where(np.less_equal(lengthOfIgnition, igd2),
-                            igd2,
-                            np.where(np.less(area, 20.0),
-                             4.0 * area,
-                             40.0 + (4.0 * area)))
-                    igd4 = np.where(np.less_equal(lengthOfIgnition, igd3),
-                            igd3,
-                            np.where(np.less(area, 20.0),
-                             8.0 * area,
-                             80.0 + (4.0 * area)))
-
-                    # ignition coefficient
-                    under10 = 4.0 - (10.0 - area) / 100.0
-                    under_igd2 = 3.0 + ((igd2 - lengthOfIgnition) / (igd2 - igd1))
-                    under_igd3 = 2.0 + ((igd3 - lengthOfIgnition) / (igd3 - igd2))
-                    under_igd4 = 1.0 + ((igd4 - lengthOfIgnition) / (igd4 - igd3))
-                    igc = np.where(np.less_equal(lengthOfIgnition, igd1),
-                        np.where(np.less(area, 10.0),
-                            under10, 4.0),
-                        np.where(np.less_equal(lengthOfIgnition, igd2),
-                            under_igd2,
-                        np.where(np.less_equal(lengthOfIgnition, igd3),
-                            under_igd3,
-                        np.where(np.less_equal(lengthOfIgnition, igd4),
-                            under_igd4,
-                        1.0))))
-
-                    # adjust for 10 hour fuel moisture ln 5239
-                    # if > 18, igc = 1.0, if b/t 15-18, that equation
-                    igc = np.where(np.greater(fm_10hr, 15.0),
-                           np.where(np.greater(fm_10hr, 18.0),
-                            igc - (igc - 1.0) * ((fm_10hr - 15.0) / 3.0),
-                            1.0),
-                            igc)
-
-                    # adjust for 1000hr fuel moisture ln5255
-                    turnpt = (igc * -3.333) + 53.333
-                    igc = np.where(np.greater(fm_1000hr, turnpt),
-                           (fm_1000hr * (-3.0 / 20.0)) + 8.0 + (0.5 * igc), igc)
-
-                    igc = np.where(np.less(igc, 1.0), 1.0, igc)
-
-                    if not logger is None:
-                        data = {}
-                        data['area'] = area
-                        data['lengthOfIgnition'] = lengthOfIgnition
-                        data['fm_10hr'] = fm_10hr
-                        data['fm_1000hr'] = fm_1000hr
-                        data['igc'] = igc
-                        logger.append(data)
-
-                    return igc
+                    # Move from least to most selective (i.e. order of execution is important)
+                    irf = np.where((np.less_equal(fm_10hr, 18) & np.less_equal(fm_1000hr, 50)),
+                                (np.where(np.less(lengthOfIgnition, high),
+                                 0.11, 1.0)), 1.0)
+                    irf = np.where((np.less(fm_10hr, 15) & np.less_equal(fm_1000hr, 50)),
+                                (np.where(np.less(lengthOfIgnition, very_high),
+                                 0.22, irf)), irf)
+                    irf = np.where(
+                        (np.greater_equal(area, 10) & np.less(fm_10hr, 15) & np.less(fm_1000hr, 40)),
+                            (np.where(np.less(lengthOfIgnition, extreme), 0.33, irf)), irf)
+                    return irf
 
                 def high_intensity_adjustment(diam_reduction):
-                    """ Eq. L: p.150, ln 4607-4609 """
-                    igc = ignitionConst_calc(
-                        area, lengthOfIgnition, fm_10hr, fm_1000hr)
-                    reduxFactor = (1.0 - (0.11 * (igc - 1.0)))
+                    reduxFactor = calc_intensity_reduction_factor(
+                            area, lengthOfIgnition, fm_10hr, fm_1000hr)
                     return diam_reduction * reduxFactor
 
                 # Execute calculations for diam reduction
                 adjfm_1000hr = final1000hr()
                 diam_reduction = spring_summer_adjustment()
-                # - Kjell - remove
-                #test_ignition_const_calc()
-
                 diam_reduction = high_intensity_adjustment(diam_reduction)
 
                 return diam_reduction, adjfm_1000hr
