@@ -13,6 +13,7 @@ class TestFCCSDB(unittest.TestCase):
     def tearDown(self):
         pass
 
+    """
     def testget_canopy_pct(self):
         # get_canopy_pct() should likely be removed. Old xml files have this as data.
         pass
@@ -22,6 +23,7 @@ class TestFCCSDB(unittest.TestCase):
 
     def testlist_fuel_loading_names(self):
         pass
+    """
 
     def short_info(self):
         short_info = self.db.info(1, detail=False, ret=True)

@@ -1350,7 +1350,7 @@ class FuelConsumption:
 
         self._heat_data = (self._cons_data * BTU_PER_UNIT)
 
-    def calc_intensity_reduction_factor(self, area, lengthOfIgnition, fm_10hr, fm_1000hr):
+    def calc_intensity_reduction_factor_nparray(self, area, lengthOfIgnition, fm_10hr, fm_1000hr):
         """ The intensity of fire can limit the consumption of large woody fuels.
             Mass ignition causes small fuels to be consumed more rapidly, thereby
             increasing the intensity of the fire.  This can shorten the fire duration,
@@ -1372,8 +1372,35 @@ class FuelConsumption:
                     (np.where(np.less(lengthOfIgnition, very_high),
                      0.22, irf)), irf)
         irf = np.where(
-            (np.greater_equal(area, 10) & np.less(fm_10hr, 15) & np.less(fm_1000hr, 40)),
+            (np.greater_equal(area, 10) & np.less(fm_10hr, 15) & np.less_equal(fm_1000hr, 40)),
                 (np.where(np.less(lengthOfIgnition, extreme), 0.33, irf)), irf)
+        return irf
+
+    def calc_intensity_reduction_factor(self, area, lengthOfIgnition, fm_10hr, fm_1000hr):
+        """ The intensity of fire can limit the consumption of large woody fuels.
+            Mass ignition causes small fuels to be consumed more rapidly, thereby
+            increasing the intensity of the fire.  This can shorten the fire duration,
+            causing large fuels to absorb less energy and have less consumption.  Consume
+            takes this into account by reducing the amount of diameter reduction of 1000-hr
+            and 10,000-hr fuels as fires increase in intensity
+            """
+        #assert 1 == len(area) and 1 == len(lengthOfIgnition) and 1 == len(fm_10hr) and 1 == len(fm_1000hr)
+
+        extreme = 0 if 10 > area else area if area >=10 and area <= 20 else (0.5 * area + 10)
+        very_high = (2.0 * area) if area < 20 else (area + 20)
+        high = (4 * area) if area < 20 else (2 * area + 40)
+        medium = (8 * area) if area < 20 else (4 * area + 80)
+
+        irf = 0
+        if fm_10hr < 15 and fm_1000hr <= 40 and area >= 10 and lengthOfIgnition < extreme:
+            irf = 0.33
+        elif fm_10hr < 15 and fm_1000hr <= 50 and lengthOfIgnition < very_high:
+            irf = 0.22
+        elif fm_10hr <= 18 and fm_1000hr <= 50 and lengthOfIgnition < high:
+            irf = 0.11
+        else:
+            irf = 1.0
+
         return irf
 
     def _consumption_calc(self, fuelbeds, ecoregion = 'western', fm_1000hr=50.0,
@@ -1995,25 +2022,6 @@ class FuelConsumption:
                     return np.where(np.greater(adjfm_1000hr, 60.0),
                                      (-0.005 * adjfm_1000hr) + 0.731,
                                      diam_reduction)
-
-                def test_ignition_const_calc():
-                    """ test """
-                    logger = []
-                    keylist = ['area', 'lengthOfIgnition', 'fm_10hr', 'fm_1000hr', 'igc']
-
-                    for area in range(5, 30, 5):
-                        for len_ig in range(10, 50, 10):
-                            for fm10 in range(9, 30, 5):
-                                for fm1000 in range(39, 60, 5):
-                                    ignitionConst_calc(
-                                        area=area,
-                                        lengthOfIgnition=len_ig,
-                                        fm_10hr=fm10,
-                                        fm_1000hr=fm1000,
-                                        logger=logger
-                                        )
-                    for item in logger:
-                        print "\t".join(["{}:{}".format(key, item[key]) for key in keylist])
 
                 def high_intensity_adjustment(diam_reduction):
                     reduxFactor = self.calc_intensity_reduction_factor(

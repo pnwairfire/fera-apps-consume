@@ -30,6 +30,7 @@ class TestFuelConsumption(unittest.TestCase):
     def tearDown(self):
         pass
 
+    """
     def testreset_inputs_and_outputs(self):
         pass
 
@@ -80,10 +81,11 @@ class TestFuelConsumption(unittest.TestCase):
 
     def test_consumption_calc(self):
         pass
+    """
 
     def test_calc_intensity_reduction_factor(self):
         import numpy as np
-        f = self._consumer.calc_intensity_reduction_factor
+        f = self._consumer.calc_intensity_reduction_factor_nparray
         area = np.array([10, 20, 25, 30])
         lengthOfIgnition = np.array([5, 20, 40, 60])
         fm_10hr = np.array([10, 14, 17, 25])
@@ -92,6 +94,28 @@ class TestFuelConsumption(unittest.TestCase):
         expected = [0.33, 0.22, 0.11, 1.0]
         for i, item, in enumerate(expected):
             nose.tools.eq_(irf[i], item, "Expected {}, got {}".format(item, irf[i]))
+
+    def test_calc_intensity_reduction_factor_alt(self):
+        f = self._consumer.calc_intensity_reduction_factor
+        tests = [
+            [0.22, 9, 5, 14, 39],   # - fm extreme but area too small
+            [0.33, 10, 5, 14, 39],  # - fm extreme but area just adequate
+            [0.11, 10, 5, 15, 39],  # - fm10 just out of extreme and makes it move 2 buckets
+            [0.22, 10, 5, 14, 41],  # - fm1000 just out of extreme
+            [0.22, 10, 19, 14, 41],  # - fm1000 just out of extreme
+            [0.11, 10, 20, 14, 41],  # - fm1000 just out of extreme
+            [0.22, 10, 10, 14, 39],  # - fm extreme, area ok, duration to high
+            [0.33, 10, 9, 14, 39],  # - fm extreme, area ok, duration just below
+            [0.33, 19, 18, 14, 39],  # - area just under 20
+            [0.33, 21, 20, 14, 39],  # - area just over 20 duration just under
+            [0.22, 21, 21, 14, 39],  # - area just over 20 duration equal
+            [0.11, 19, 75, 18, 50],  # - area just over 20 duration equal
+            [1.0, 19, 75, 18, 51],  # - area just over 20 duration equal
+            [1.0, 19, 75, 19, 50],  # - area just over 20 duration equal
+            [1.0, 19, 76, 18, 50],  # - area just over 20 duration equal
+        ]
+        for test in tests:
+            nose.tools.eq_(test[0], f(test[1], test[2], test[3], test[4]))
 
 if __name__ == '__main__':
     unittest.main()
