@@ -1384,17 +1384,16 @@ class FuelConsumption:
             takes this into account by reducing the amount of diameter reduction of 1000-hr
             and 10,000-hr fuels as fires increase in intensity
             """
-        extreme = 0 if 10 > area else area if area >=10 and area <= 20 else (0.5 * area + 10)
+        extreme = 0 if 10 > area else area if area >=10 and area < 20 else (0.5 * area + 10)
         very_high = (2.0 * area) if area < 20 else (area + 20)
         high = (4 * area) if area < 20 else (2 * area + 40)
-        medium = (8 * area) if area < 20 else (4 * area + 80)
 
         irf = 0
-        if fm_10hr < 15 and fm_1000hr <= 40 and lengthOfIgnition < extreme:
+        if fm_10hr < 15 and fm_1000hr <= 40 and lengthOfIgnition <= extreme:
             irf = 0.33
-        elif fm_10hr < 15 and fm_1000hr <= 50 and lengthOfIgnition < very_high:
+        elif fm_10hr < 15 and fm_1000hr <= 50 and lengthOfIgnition <= very_high:
             irf = 0.22
-        elif fm_10hr <= 18 and fm_1000hr <= 50 and lengthOfIgnition < high:
+        elif fm_10hr <= 18 and fm_1000hr <= 50 and lengthOfIgnition <= high:
             irf = 0.11
         else:
             irf = 1.0

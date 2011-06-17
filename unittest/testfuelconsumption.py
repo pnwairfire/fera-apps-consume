@@ -103,18 +103,19 @@ class TestFuelConsumption(unittest.TestCase):
             [0.11, 10, 5, 15, 39],  # - fm10 just out of extreme and makes it move 2 buckets
             [0.22, 10, 5, 14, 41],  # - fm1000 just out of extreme
             [0.22, 10, 19, 14, 41],  # - fm1000 just out of extreme
-            [0.11, 10, 20, 14, 41],  # - fm1000 just out of extreme
-            [0.22, 10, 10, 14, 39],  # - fm extreme, area ok, duration to high
+            [0.11, 10, 21, 14, 41],  # - fm1000 just out of extreme
+            [0.22, 10, 11, 14, 39],  # - fm extreme, area ok, duration to high
             [0.33, 10, 9, 14, 39],  # - fm extreme, area ok, duration just below
             [0.33, 19, 18, 14, 39],  # - area just under 20
             [0.33, 21, 20, 14, 39],  # - area just over 20 duration just under
             [0.22, 21, 21, 14, 39],  # - area just over 20 duration equal
             [0.11, 19, 75, 18, 50],  # - area just over 20 duration equal
             [1.0, 19, 75, 18, 51],  # - area just over 20 duration equal
-            [1.0, 19, 75, 19, 50],  # - area just over 20 duration equal
-            [1.0, 19, 76, 18, 50],  # - area just over 20 duration equal
+            [1.0, 19, 76, 19, 50],  # - area just over 20 duration equal
+            [1.0, 19, 77, 18, 50],  # - area just over 20 duration equal
         ]
-        for test in tests:
+        for i, test in enumerate(tests):
+            print i
             nose.tools.eq_(test[0], f(test[1], test[2], test[3], test[4]))
 
 if __name__ == '__main__':
