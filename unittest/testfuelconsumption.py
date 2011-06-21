@@ -99,11 +99,11 @@ class TestFuelConsumption(unittest.TestCase):
         f = self._consumer.calc_intensity_reduction_factor
         tests = [
             [0.22, 9, 5, 14, 39],   # - fm extreme but area too small
-            [0.33, 10, 5, 14, 39],  # - fm extreme but area just adequate
+            [0.33, 10, 5, 14, 39],  # - fm extreme, area just adequate
             [0.11, 10, 5, 15, 39],  # - fm10 just out of extreme and makes it move 2 buckets
             [0.22, 10, 5, 14, 41],  # - fm1000 just out of extreme
             [0.22, 10, 19, 14, 41],  # - fm1000 just out of extreme
-            [0.11, 10, 21, 14, 41],  # - fm1000 just out of extreme
+            [0.11, 10, 21, 14, 41],  # - fm1000 just out of extreme, area just over
             [0.22, 10, 11, 14, 39],  # - fm extreme, area ok, duration to high
             [0.33, 10, 9, 14, 39],  # - fm extreme, area ok, duration just below
             [0.33, 19, 18, 14, 39],  # - area just under 20
@@ -115,7 +115,7 @@ class TestFuelConsumption(unittest.TestCase):
             [1.0, 19, 77, 18, 50],  # - area just over 20 duration equal
         ]
         for i, test in enumerate(tests):
-            print i
+            #print i
             nose.tools.eq_(test[0], f(test[1], test[2], test[3], test[4]))
 
 if __name__ == '__main__':

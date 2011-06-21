@@ -1388,15 +1388,13 @@ class FuelConsumption:
         very_high = (2.0 * area) if area < 20 else (area + 20)
         high = (4 * area) if area < 20 else (2 * area + 40)
 
-        irf = 0
+        irf = 1 # no reduction
         if fm_10hr < 15 and fm_1000hr <= 40 and lengthOfIgnition <= extreme:
             irf = 0.33
         elif fm_10hr < 15 and fm_1000hr <= 50 and lengthOfIgnition <= very_high:
             irf = 0.22
         elif fm_10hr <= 18 and fm_1000hr <= 50 and lengthOfIgnition <= high:
             irf = 0.11
-        else:
-            irf = 1.0
 
         return irf
 
