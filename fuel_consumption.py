@@ -1390,11 +1390,11 @@ class FuelConsumption:
 
         irf = 1 # no reduction
         if fm_10hr < 15 and fm_1000hr <= 40 and lengthOfIgnition <= extreme:
-            irf = 0.33
+            irf = 2.0/3.0
         elif fm_10hr < 15 and fm_1000hr <= 50 and lengthOfIgnition <= very_high:
-            irf = 0.22
+            irf = 0.78
         elif fm_10hr <= 18 and fm_1000hr <= 50 and lengthOfIgnition <= high:
-            irf = 0.11
+            irf = 0.89
 
         return irf
 
