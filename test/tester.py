@@ -43,11 +43,11 @@ class DataObj(object):
         """ Convert strings to Decimals and truncate sensibly. Compare with
             the specified tolerance factor """
         compare = True
-        TOLERANCE = 100000
-        FOUR_PLACES = dec.Decimal('0.0001')
+        TOLERANCE = 1000000000
+        PLACES = dec.Decimal('0.0001')
         if isNumber(a) and isNumber(b):
-            aa = dec.Decimal(a.lstrip('-')).quantize(FOUR_PLACES)
-            bb = dec.Decimal(b.lstrip('-')).quantize(FOUR_PLACES)
+            aa = dec.Decimal(a.lstrip('-')).quantize(PLACES)
+            bb = dec.Decimal(b.lstrip('-')).quantize(PLACES)
             if not WithinThisManyULP(aa, bb, TOLERANCE):
                 print "{} : {} : {} : {}".format(key, column, aa, bb)
                 compare = False
