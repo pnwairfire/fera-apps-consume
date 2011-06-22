@@ -98,25 +98,25 @@ class TestFuelConsumption(unittest.TestCase):
     def test_calc_intensity_reduction_factor_alt(self):
         f = self._consumer.calc_intensity_reduction_factor
         tests = [
-            [0.22, 9, 5, 14, 39],   # - fm extreme but area too small
-            [0.33, 10, 5, 14, 39],  # - fm extreme, area just adequate
-            [0.11, 10, 5, 15, 39],  # - fm10 just out of extreme and makes it move 2 buckets
-            [0.22, 10, 5, 14, 41],  # - fm1000 just out of extreme
-            [0.22, 10, 19, 14, 41],  # - fm1000 just out of extreme
-            [0.11, 10, 21, 14, 41],  # - fm1000 just out of extreme, area just over
-            [0.22, 10, 11, 14, 39],  # - fm extreme, area ok, duration to high
-            [0.33, 10, 9, 14, 39],  # - fm extreme, area ok, duration just below
-            [0.33, 19, 18, 14, 39],  # - area just under 20
-            [0.33, 21, 20, 14, 39],  # - area just over 20 duration just under
-            [0.22, 21, 21, 14, 39],  # - area just over 20 duration equal
-            [0.11, 19, 75, 18, 50],  # - area just over 20 duration equal
+            [0.78, 9, 5, 15, 39],   # - fm extreme but area too small
+            [0.667, 10, 5, 15, 39],  # - fm extreme, area just adequate
+            [0.89, 10, 5, 16, 39],  # - fm10 just out of extreme and makes it move 2 buckets
+            [0.78, 10, 5, 15, 41],  # - fm1000 just out of extreme
+            [0.78, 10, 19, 15, 41],  # - fm1000 just out of extreme
+            [0.89, 10, 21, 15, 41],  # - fm1000 just out of extreme, area just over
+            [0.78, 10, 11, 15, 39],  # - fm extreme, area ok, duration to high
+            [0.667, 10, 9, 15, 39],  # - fm extreme, area ok, duration just below
+            [0.667, 19, 18, 15, 39],  # - area just under 20
+            [0.667, 21, 20, 15, 39],  # - area just over 20 duration just under
+            [0.78, 21, 21, 15, 39],  # - area just over 20 duration equal
+            [0.89, 19, 75, 18, 50],  # - area just over 20 duration equal
             [1.0, 19, 75, 18, 51],  # - area just over 20 duration equal
             [1.0, 19, 76, 19, 50],  # - area just over 20 duration equal
             [1.0, 19, 77, 18, 50],  # - area just over 20 duration equal
         ]
         for i, test in enumerate(tests):
             #print i
-            nose.tools.eq_(test[0], f(test[1], test[2], test[3], test[4]))
+            self.assertAlmostEqual(test[0], f(test[1], test[2], test[3], test[4]), 2)
 
 if __name__ == '__main__':
     unittest.main()
