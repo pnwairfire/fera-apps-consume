@@ -2069,8 +2069,7 @@ class FuelConsumption:
                                adj_wet_duff_redux,
                                  np.where(
                                  np.greater_equal(days_since_rain, days_to_dry),
-                                 np.maximum(dry_df_redux, wet_df_redux),
-                                 np.maximum(moist_df_redux, wet_df_redux)))
+                                 dry_df_redux, moist_df_redux))
 
                 # Eq. W: Shallow duff adjustment p. 162, ln 4802-4811
                 duff_reduction2 = np.where(
