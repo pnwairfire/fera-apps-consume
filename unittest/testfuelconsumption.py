@@ -3,13 +3,13 @@
 import unittest
 import consume
 import nose
+import helper
 
 class TestFuelConsumption(unittest.TestCase):
 
     def setUp(self):
-        self._consumer = consume.FuelConsumption(
-            fccs_file = "unittest/test.xml")
-            #fccs_file = "input_data/fccs_pyconsume_input.xml")
+        infile = helper.get_test_inputfile()
+        self._consumer = consume.FuelConsumption(fccs_file = infile)
         self.reset_consumer()
 
     def reset_consumer(self):

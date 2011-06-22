@@ -39,11 +39,11 @@ class Driver(object):
     def _reset_activity_scenario2(self):
         self._consumer.fuel_moisture_10hr_pct = 15
         self._consumer.fuel_moisture_1000hr_pct = 45
-        self._consumer.fuelbed_area_acres = 5
+        self._consumer.fuelbed_area_acres = 25
 
     def _reset_activity_scenario3(self):
         self._consumer.fuel_moisture_10hr_pct = 17
-        self._consumer.fuel_moisture_1000hr_pct = 55
+        self._consumer.fuel_moisture_1000hr_pct = 50
         self._consumer.fuelbed_area_acres = 100
 
     def _reset_activity_scenario4(self):
@@ -84,11 +84,15 @@ class Driver(object):
 
     def run_tests(self, fuelbed_list=[], scenario_list=[], outfile=None, debug=False):
         self._reset_consumer()
+        outfilename = 'output_consume.csv'
 
         #self._reset_activity_scenario()
         #self._reset_activity_scenario2()
+        #outfilename = 'output_scenario2.csv'
         #self._reset_activity_scenario3()
+        #outfilename = 'output_scenario3.csv'
         #self._reset_activity_scenario4()
+        #outfilename = 'output_scenario4.csv'
 
         if not len(fuelbed_list):
             fuelbed_list = [str(i[0]) for i in self._consumer.FCCS.data]
@@ -99,7 +103,7 @@ class Driver(object):
 
         close_file = False
         if not outfile:
-            outfile = open('output_consume.csv', 'w')
+            outfile = open(outfilename, 'w')
             close_file = True
 
         write_header = True
@@ -122,7 +126,7 @@ class Driver(object):
 driver = Driver()
 if len(sys.argv) > 1:
     # - use the supplied scenario
-    #driver.run_tests(fuelbed_list=['1'], scenario_list=['{}'.format(sys.argv[1])])
+    #driver.run_tests(fuelbed_list=['7'], scenario_list=['{}'.format(sys.argv[1])])
     driver.run_tests(scenario_list=['{}'.format(sys.argv[1])])
 else:
     #driver.run_tests(scenario_list=['activity'])

@@ -4,11 +4,13 @@ import unittest
 import fccs_db
 import nose
 import re
+import helper
 
 class TestFCCSDB(unittest.TestCase):
 
     def setUp(self):
-        self.db = fccs_db.FCCSDB(fccs_file='unittest/test.xml')
+        infile = helper.get_test_inputfile()
+        self.db = fccs_db.FCCSDB(fccs_file=infile)
 
     def tearDown(self):
         pass
