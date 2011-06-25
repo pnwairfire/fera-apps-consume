@@ -522,6 +522,25 @@ import data_desc as dd
 import input_variables as iv
 import util_consume as util
 
+# Variables that need to be defined for these equations
+#snow_free_days = 30 # need for curing eval, if still valid
+
+# "global"s
+
+# quadratic mean diameters: [hun, oneK, tenK, tnkp]
+QMDs = [1.68, 5.22, 12.10, 25.00]
+cdic = {
+  'spring' : {"MEAS-Th" : [-0.097, 4.747],  # spring-like
+        "ADJ-Th" : [-0.096, 4.6495],
+        "NFDRS-Th" : [-0.120 / 1.4, 4.305]},
+  'summer' : {"MEAS-Th" : [-0.108, 5.68],   # summer-like
+        "ADJ-Th" : [-0.1251, 6.27],
+        "NFDRS-Th" : [-0.150 / 1.4, 5.58]},
+  'adj' : {"MEAS-Th" : 1.0,            # for the <0.5 adj
+        "ADJ-Th" : 1.0,
+        "NFDRS-Th" : 1.4}}
+
+print cdic['adj']['ADJ-Th'] * 2.0
 
 class FuelConsumption:
     """A class that estimates fuel consumption due to fire.
@@ -1398,6 +1417,8 @@ class FuelConsumption:
 
         return irf
 
+
+
     def _consumption_calc(self, fuelbeds, ecoregion = 'western', fm_1000hr=50.0,
                           fm_duff=50.0, burn_type = 'natural', can_con_pct=50.0,
                           shrub_black_pct = 50.0, fm_10hr = 50.0,
@@ -1587,7 +1608,7 @@ class FuelConsumption:
             return math.e ** (x) / (1 + math.e ** x)
 
         # Consumption calculation methods
-        def ccon_canopy ():
+        def ccon_canopy(can_con_pct, LD):
             """ Canopy consumption, activity & natural, p.166
             Proportions for snag1nf are not specified in the manual; right now,
             the class 1 wood values are in place, which seem to correspond to
@@ -1607,7 +1628,7 @@ class FuelConsumption:
             return [csdist(LD[t[0]] * pct, t[1]) for t in can_params]
 
 
-        def ccon_shrub():
+        def ccon_shrub(shrub_black_pct, LD):
             """ Shrub consumption, activity & natural, p.168
 
             ## The manual specifies the following equation to calculate percent
@@ -1648,7 +1669,7 @@ class FuelConsumption:
                 return hold, hold, hold, hold
 
 
-        def ccon_nw():
+        def ccon_nw(LD):
             """ Nonwoody consumption, activity & natural, p.169 """
 
             nw_prim_total = LD['nw_prim'] * 0.9274
@@ -1673,7 +1694,7 @@ class FuelConsumption:
         ###################################################################
         # p. 175 in the manual
 
-        def ccon_ffr():
+        def ccon_ffr(fm_duff, burn_type, ecoregion, LD):
             """ Forest-floor reduction calculation, p.177  """
             # total duff depth (inches)
             duff_depth = LD['duff_upper_depth'] + LD['duff_lower_depth']
@@ -1703,7 +1724,7 @@ class FuelConsumption:
 
             return [ffr, y_b, duff_depth]
 
-        def ccon_lch():
+        def ccon_lch(LD):
             """ Lichen consumption, activity & natural"""
             csd_lch = [0.95, 0.05, 0.00]
             lch_pretot = np.minimum(LD['lch_depth'], LD['ff_reduction_successive'])
@@ -1713,7 +1734,7 @@ class FuelConsumption:
 
             return csdist(lch_total, csd_lch)
 
-        def ccon_moss():
+        def ccon_moss(LD):
             """ Moss consumption, activity & natural"""
             csd_moss = [0.95, 0.05, 0.00]
             moss_pretot = np.minimum(LD['moss_depth'], LD['ff_reduction_successive'])
@@ -1722,7 +1743,7 @@ class FuelConsumption:
             moss_total = (moss_pretot * 1.5 * LD['moss_pctcv'])
             return csdist(moss_total, csd_moss)
 
-        def ccon_litter():
+        def ccon_litter(LD):
             """ Litter consumption, activity & natural"""
             csd_lit = [0.90, 0.10, 0.00]
             lit_pretot = np.minimum(LD['lit_depth'], LD['ff_reduction_successive'])
@@ -1744,7 +1765,7 @@ class FuelConsumption:
         ################################
         # p. 179-183 in the manual
 
-        def ccon_bas():
+        def ccon_bas(LD):
             """ Basal accumulations consumption, activity & natural
 
              The following equations in the next 4 lines of code for basal
@@ -1765,7 +1786,7 @@ class FuelConsumption:
             return csdist(bas_total, csd_bas)
 
 
-        def ccon_sqm():
+        def ccon_sqm(fm_duff, ecob_mask, LD):
             """ Squirrel middens consumption, activity & natural
             # These squirrel midden consumption equations are not included in
             # the 3.0 manual; they were derived from the source code.
@@ -1785,7 +1806,7 @@ class FuelConsumption:
             return csdist(sqm_total, csd_sqm)
 
 
-        def ccon_duff():
+        def ccon_duff(LD):
             """ Duff consumption, activity & natural*
                 * note that there are different equations for activity/natural
                   to calculate duff_reduction
@@ -1819,7 +1840,7 @@ class FuelConsumption:
         ##############################
         # p. 169-175 in the manual
 
-        def ccon_stumps():
+        def ccon_stumps(LD):
             """ STUMP CONSUMPTION - ACTIVITY and NATURAL """
             stump_params = [['stump_sound', 0.10, [0.50, 0.50, 0.0]],
                             ['stump_rotten', 0.50, [0.10, 0.30, 0.60]],
@@ -1828,18 +1849,18 @@ class FuelConsumption:
             return [csdist(LD[s[0]] * s[1], s[2]) for s in stump_params]
 
         ### WOODY FUEL CONSUMPTION NATURAL EQUATIONS ###
-        def ccon_one_nat():
+        def ccon_one_nat(LD):
             """ 1-hr (0 to 1/4"), natural """
             csd = [0.95, 0.05, 0.00]
             return csdist(LD['one_hr_sound'], csd)
 
-        def ccon_ten_nat():
+        def ccon_ten_nat(LD):
             """ 10-hr (1/4" to 1"), natural, p.169"""
             csd = [0.90, 0.10, 0.00]
             total = LD['ten_hr_sound'] * 0.8650
             return csdist(total, csd)
 
-        def ccon_hun_nat():
+        def ccon_hun_nat(ecos_mask, LD):
             """ 100-hr (1 to 3"), natural """
             csd = [0.85, 0.10, 0.05]
             total = np.where(
@@ -1848,7 +1869,7 @@ class FuelConsumption:
                     LD['hun_hr_sound'] * 0.7844)    # false
             return csdist(total, csd)
 
-        def ccon_oneK_snd_nat():
+        def ccon_oneK_snd_nat(fm_duff, fm_1000hr, ecos_mask, LD):
             """ 1000-hr (3 to 9") sound, natural """
             csd = [0.60, 0.30, 0.10]
             y = 0.0302 - (0.0379 * fm_duff)
@@ -1859,21 +1880,21 @@ class FuelConsumption:
                    LD['oneK_hr_sound'] * propcons(z))   # false
             return csdist(total, csd)
 
-        def ccon_tenK_snd_nat():
+        def ccon_tenK_snd_nat(fm_1000hr, LD):
             """ 10K-hr (9 to 20") sound, natural """
             csd = [0.40, 0.40, 0.20]
             x = 0.7869 - (0.0387 * fm_1000hr)
             total = LD['tenK_hr_sound'] * propcons(x)
             return csdist(total, csd)
 
-        def ccon_tnkp_snd_nat():
+        def ccon_tnkp_snd_nat(fm_1000hr, LD):
             """ 10K+ hr (>20") sound, natural """
             csd = [0.20, 0.40, 0.40]
             z = 0.3960 - (0.0389 * fm_1000hr)
             total = LD['tnkp_hr_sound'] * propcons(z)
             return csdist(total, csd)
 
-        def ccon_oneK_rot_nat():
+        def ccon_oneK_rot_nat(fm_duff, ecos_mask, LD):
             """ 1000-hr (3 to 9") rotten, natural """
             csd = [0.20, 0.30, 0.50]
             y = 4.0139 - (0.0600 * fm_duff) + (0.8341 * LD['oneK_hr_rotten'])
@@ -1883,14 +1904,14 @@ class FuelConsumption:
                     LD['oneK_hr_rotten'] * propcons(y))     # false
             return csdist(total, csd)
 
-        def ccon_tenK_rot_nat():
+        def ccon_tenK_rot_nat(fm_duff, LD):
             """ 10K-hr (9 to 20") rotten, natural """
             csd = [0.10, 0.30, 0.60]
             y = 2.1218 - (0.0438 * fm_duff)
             total = LD['tenK_hr_rotten'] * propcons(y)
             return csdist(total, csd)
 
-        def ccon_tnkp_rot_nat():
+        def ccon_tnkp_rot_nat(fm_duff, LD):
             """ 10K+ hr (>20") rotten, natural """
             csd = [0.10, 0.30, 0.60]
             y = 0.8022 - (0.0266 * fm_duff)
@@ -1898,29 +1919,29 @@ class FuelConsumption:
             return csdist(total, csd)
 
 
-        def duff_redux_natural():
-            """ Duff reduction calculation, natural """
-
-            # total depth of litter, lichen, and moss layer, used in duff calc.
-            llm_depth = LD['lit_depth'] + LD['lch_depth'] + LD['moss_depth']
-
-            #Duff reduction equation (natural fuels):
-
-            #if llm_depth[n] >= duff_reduction:   #<<<EQUATIONS DOCUMENTATION
-            #if llm_depth[n] > duff_depth[n]:    #<<< USER'S GUIDE - SUSAN PRICHARD SAYS THIS IS THE CORRECT COMPARISON
-            #if llm_depth[n] >= ff_reduction[n]:  #<<< SOURCE CODE
-
-            # KS - if the duff_reduction value is greater than zero use it,
-            # otherwise, use zero.
-            duff_reduction_tmp = (LD['ff_reduction'] - llm_depth)
-            non_zero = duff_reduction_tmp > 0.0
-            return (duff_reduction_tmp * non_zero)
+##        def duff_redux_natural(LD):
+##            """ Duff reduction calculation, natural """
+##
+##            # total depth of litter, lichen, and moss layer, used in duff calc.
+##            llm_depth = LD['lit_depth'] + LD['lch_depth'] + LD['moss_depth']
+##
+##            #Duff reduction equation (natural fuels):
+##
+##            #if llm_depth[n] >= duff_reduction:   #<<<EQUATIONS DOCUMENTATION
+##            #if llm_depth[n] > duff_depth[n]:    #<<< USER'S GUIDE - SUSAN PRICHARD SAYS THIS IS THE CORRECT COMPARISON
+##            #if llm_depth[n] >= ff_reduction[n]:  #<<< SOURCE CODE
+##
+##            # KS - if the duff_reduction value is greater than zero use it,
+##            # otherwise, use zero.
+##            duff_reduction_tmp = (LD['ff_reduction'] - llm_depth)
+##            non_zero = duff_reduction_tmp > 0.0
+##            return (duff_reduction_tmp * non_zero)
 
 
         ### WOODY FUEL CONSUMPTION ACTIVITY EQUATIONS ###
-        def ccon_activity():
+        def ccon_activity(fm_1000hr, fm_type, windspeed, fm_10hr, LD):
             """ Woody fuel activity equations, p. 142 """
-            def pct_hun_hr_calc():
+            def pct_hun_hr_calc(windspeed, fm_10hr, LD):
                 """ Calculate % of 100-hour fuels consumed, p. 142, ln 4541 """
 
                 # Eq. A: Default 100-hr load
@@ -1957,7 +1978,7 @@ class FuelConsumption:
             def diam_redux_calc():
                 """ Calculation of diameter reduction for woody fuels activity
                     equations """
-                def final1000hr():
+                def final1000hr(fm_1000hr, fm_type):
                     """Eq. G: Evaluating if curing has occurred, p.146-7
                     ln 5009 -> according to source code, this analysis is not
                     included- a relic of Consume 2.1. """
@@ -1967,11 +1988,11 @@ class FuelConsumption:
                    #         uncured_FM,
                    #         fm_1000hr)
 
-                #return np.where(np.greater(DRED_FM, 60.0), uncured_FM, DRED_FM)
+                    #return np.where(np.greater(DRED_FM, 60.0), uncured_FM, DRED_FM)
 
                     return fm_1000hr * cdic['adj'][fm_type]
 
-                def spring_summer_adjustment():
+                def spring_summer_adjustment(pct_hun_hr, adjfm_1000hr):
                     """ p. 148, ln 5063
                      note: NFDRS #'s div by 1.4 in source code, NOT in doc.
                      Eq. H: Evaluating spring-like burning conditions occurred
@@ -1979,7 +2000,7 @@ class FuelConsumption:
                      Eq. J: Summer-like diameter reduction equation
                     """
 
-                    def calc_mb(x):
+                    def calc_mb(x, fm_type, mask_spring, mask_summer, mask_trans, spring_ff):
                         """ create m & b masks  """
                         sprg = cdic['spring'][fm_type][x]
                         sumr = cdic['summer'][fm_type][x]
@@ -1996,8 +2017,8 @@ class FuelConsumption:
                     mask_summer = np.greater_equal(pct_hun_hr, 0.85)
                     spring_ff = (pct_hun_hr - 0.75) / 0.1
 
-                    m = calc_mb(0)
-                    b = calc_mb(1)
+                    m = calc_mb(0, fm_type, mask_spring, mask_summer, mask_trans, spring_ff)
+                    b = calc_mb(1, fm_type, mask_spring, mask_summer, mask_trans, spring_ff)
 
                     diam_reduction = (adjfm_1000hr * m) + b # ln 5129
 
@@ -2018,7 +2039,7 @@ class FuelConsumption:
                                      (-0.005 * adjfm_1000hr) + 0.731,
                                      diam_reduction)
 
-                def high_intensity_adjustment(diam_reduction):
+                def high_intensity_adjustment(diam_reduction, lengthOfIgnition, fm_10hr, fm_1000hr):
                     assert 1 == len(area) and 1 == len(lengthOfIgnition)
                     assert 1 == len(fm_10hr) and 1 == len(fm_1000hr)
                     reduxFactor = self.calc_intensity_reduction_factor(
@@ -2026,13 +2047,15 @@ class FuelConsumption:
                     return diam_reduction * reduxFactor
 
                 # Execute calculations for diam reduction
-                adjfm_1000hr = final1000hr()
-                diam_reduction = spring_summer_adjustment()
-                diam_reduction = high_intensity_adjustment(diam_reduction)
+                adjfm_1000hr = final1000hr(fm_1000hr, fm_type)
+                diam_reduction = spring_summer_adjustment(pct_hun_hr, adjfm_1000hr)
+                diam_reduction = high_intensity_adjustment(
+                    diam_reduction, lengthOfIgnition, fm_10hr, fm_1000hr)
 
                 return diam_reduction, adjfm_1000hr
 
-            def duff_redux_activity():
+            def duff_redux_activity(
+                diam_reduction, oneK_fsrt, tenK_fsrt, tnkp_fsrt, days_since_rain, LD):
                 """Duff reduction calculation, activity
                    p160 ln 4765"""
 
@@ -2087,7 +2110,7 @@ class FuelConsumption:
 
                 return duff_reduction
 
-            def qmd_redux_calc(q):
+            def qmd_redux_calc(q, diam_reduction):
                 """ Eq. N p. 152 ln 4611, 4616 Quadratic mean diameter reduction
                 For 1000hr and 10khr fuels.
                 p. 152 "Quadratic mean diameter is used to convert calculated
@@ -2097,7 +2120,7 @@ class FuelConsumption:
                                class with average volume" """
                 return (1.0 - ((q - diam_reduction) / q)**2.0)
 
-            def flaming_DRED_calc(hun_hr_total):
+            def flaming_DRED_calc(hun_hr_total, diam_reduction):
                 """ p. 155, ln 4655
                 Flaming diameter reduction (inches)
                 (%) this is a fixed value, from Ottmar 1983 """
@@ -2132,25 +2155,25 @@ class FuelConsumption:
 
                 return np.array(list(zip(*dist)))
 
-            def ccon_one_act():
+            def ccon_one_act(LD):
                 """ 1-hr (0 to 1/4") woody fuels consumption, activity """
                 csd = [1.0, 0.0, 0.0]
                 return csdist(LD['one_hr_sound'], csd)
 
-            def ccon_ten_act():
+            def ccon_ten_act(LD):
                 """ 10-hr (1/4" to 1") woody fuels consumption, activity
                     ln 4537 """
                 csd = [1.0, 0.0, 0.0]
                 total = LD['ten_hr_sound']
                 return csdist(total, csd)
 
-            def ccon_hun_act():
+            def ccon_hun_act(pct_hun_hr, diam_reduction, QMDS, LD):
                 """ Eq. F: Total 100-hr (1" - 3") fuel consumption, activity
                     p.144 ln 4585"""
                 resFrac = np.array([0.0])
                 QMD_100hr = 1.68
                 total = LD['hun_hr_sound'] * pct_hun_hr
-                [flamgDRED, flaming_portion] = flaming_DRED_calc(total)
+                [flamgDRED, flaming_portion] = flaming_DRED_calc(total, diam_reduction)
 
                 # Flaming consumption for 100-hr fuels... ln 4657
                 flamg = np.where(np.greater_equal(flamgDRED, QMD_100hr),
@@ -2162,29 +2185,29 @@ class FuelConsumption:
                 flamg = np.where(np.greater(flamg, total), total, flamg)
                 return np.array([zip(*csdist_act(flamg, total, resFrac))]), flamgDRED, flaming_portion
 
-            def ccon_oneK_act():
+            def ccon_oneK_act(LD, QMDS, diam_reduction):
                 """ 1000-hr (3" - 9") woody fuels consumption, activity
                     Eq. O, ln 4610-4613 """
                 resFrac = np.array([[0.25], [0.63]]) # [snd, rot] non-flaming resid pct
                 totld = np.array([LD['oneK_hr_sound'], LD['oneK_hr_rotten']])
-                oneK_redux = qmd_redux_calc(QMDs[1])
+                oneK_redux = qmd_redux_calc(QMDs[1], diam_reduction)
                 total_snd = oneK_redux * totld[0]
                 total_rot = oneK_redux * totld[1]
                 flamg = flamg_portion(QMDs[1], [total_snd, total_rot], totld, flamgDRED)
                 return csdist_act(flamg, np.array([total_snd, total_rot]), resFrac)
 
-            def ccon_tenK_act():
+            def ccon_tenK_act(LD, QMDS, diam_reduction):
                 """ 10K-hr (9 to 20") woody fuels consumption, activity
                     Eq. O, ln 4615-4618 """
                 resFrac = np.array([[0.33], [0.67]]) # [snd, rot] non-flaming resid pct
                 totld = np.array([LD['tenK_hr_sound'], LD['tenK_hr_rotten']])
-                tenK_redux = qmd_redux_calc(QMDs[2])
+                tenK_redux = qmd_redux_calc(QMDs[2], diam_reduction)
                 total_snd = tenK_redux * totld[0]
                 total_rot = tenK_redux * totld[1]
                 flamg = flamg_portion(QMDs[2], [total_snd, total_rot], totld, flamgDRED)
                 return csdist_act(flamg, np.array([total_snd, total_rot]), resFrac)
 
-            def ccon_tnkp_act():
+            def ccon_tnkp_act(adjfm_1000hr, flaming_portion, LD):
                 """ >10,000-hr (20"+) woody fuel consumption, activity
                  p. 153 Table P, ln 4619
                  Documentation does not include the condition that where
@@ -2207,8 +2230,9 @@ class FuelConsumption:
                                     total_rot, flamgrot)
                 return csdist_act(np.array([flamgsnd, flamgrot]), np.array([total_snd, total_rot]), resFrac)
 
-            def ccon_ffr_activity():
-                duff_redux = duff_redux_activity()
+            def ccon_ffr_activity(diam_reduction, oneK_fsrt, tenK_fsrt, tnkp_fsrt, days_since_rain, LD):
+                duff_redux = duff_redux_activity(diam_reduction,
+                    oneK_fsrt, tenK_fsrt, tnkp_fsrt, days_since_rain, LD)
                 duff_depth = LD['duff_upper_depth'] + LD['duff_lower_depth']
                 ffr_total_depth = (duff_depth + LD['lit_depth'] +
                         LD['lch_depth'] + LD['moss_depth'])
@@ -2219,33 +2243,16 @@ class FuelConsumption:
                     ffr_total_depth, calculated_reduction)
                 return ffr_redux
 
-            # Variables that need to be defined for these equations
-            #snow_free_days = 30 # need for curing eval, if still valid
-
-            # "global"s
-
-            # quadratic mean diameters: [hun, oneK, tenK, tnkp]
-            QMDs = [1.68, 5.22, 12.10, 25.00]
-            cdic = {
-              'spring' : {"MEAS-Th" : [-0.097, 4.747],  # spring-like
-                    "ADJ-Th" : [-0.096, 4.6495],
-                    "NFDRS-Th" : [-0.120 / 1.4, 4.305]},
-              'summer' : {"MEAS-Th" : [-0.108, 5.68],   # summer-like
-                    "ADJ-Th" : [-0.1251, 6.27],
-                    "NFDRS-Th" : [-0.150 / 1.4, 5.58]},
-              'adj' : {"MEAS-Th" : 1.0,            # for the <0.5 adj
-                    "ADJ-Th" : 1.0,
-                    "NFDRS-Th" : 1.4}}
-
             # execute calculations
-            pct_hun_hr = pct_hun_hr_calc()
+            pct_hun_hr = pct_hun_hr_calc(windspeed, fm_10hr, LD)
             [diam_reduction, adjfm_1000hr] = diam_redux_calc()
-            [[hun_hr_fsrt], flamgDRED, flaming_portion] = ccon_hun_act()
-            one_fsrt = ccon_one_act()
-            ten_fsrt = ccon_ten_act()
-            oneK_fsrt = ccon_oneK_act()
-            tenK_fsrt = ccon_tenK_act()
-            tnkp_fsrt = ccon_tnkp_act()
+            [[hun_hr_fsrt], flamgDRED, flaming_portion] = ccon_hun_act(
+                                                            pct_hun_hr, diam_reduction, QMDs, LD)
+            one_fsrt = ccon_one_act(LD)
+            ten_fsrt = ccon_ten_act(LD)
+            oneK_fsrt = ccon_oneK_act(LD, QMDs, diam_reduction)
+            tenK_fsrt = ccon_tenK_act(LD, QMDs, diam_reduction)
+            tnkp_fsrt = ccon_tnkp_act(adjfm_1000hr, flaming_portion, LD)
 
             # <<< below included to jive with source code- not in manual, tho
             woody = (oneK_fsrt[0][3] + oneK_fsrt[1][3] +
@@ -2256,7 +2263,7 @@ class FuelConsumption:
 
             return (one_fsrt, ten_fsrt, hun_hr_fsrt,
                    oneK_fsrt, tenK_fsrt, tnkp_fsrt,
-                   ccon_ffr_activity())
+                   ccon_ffr_activity(diam_reduction, oneK_fsrt, tenK_fsrt, tnkp_fsrt, days_since_rain, LD))
 
 
            ########################################################
@@ -2265,42 +2272,42 @@ class FuelConsumption:
 
         [can_over_fsrt, can_mid_fsrt, can_under_fsrt, can_snag1f_fsrt,
          can_snag1w_fsrt, can_snag1nf_fsrt, can_snag2_fsrt, can_snag3_fsrt,
-         can_ladder_fsrt] = ccon_canopy()
+         can_ladder_fsrt] = ccon_canopy(can_con_pct, LD)
 
         [shb_prim_live_fsrt, shb_prim_dead_fsrt,
-         shb_seco_live_fsrt, shb_seco_dead_fsrt] = ccon_shrub()
+         shb_seco_live_fsrt, shb_seco_dead_fsrt] = ccon_shrub(shrub_black_pct, LD)
 
         [nw_prim_live_fsrt, nw_prim_dead_fsrt,
-         nw_seco_live_fsrt, nw_seco_dead_fsrt] = ccon_nw()
+         nw_seco_live_fsrt, nw_seco_dead_fsrt] = ccon_nw(LD)
 
-        [stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt] = ccon_stumps()
+        [stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt] = ccon_stumps(LD)
 
         if burn_type in ['natural', ['natural']]:
-            one_hr_fsrt = ccon_one_nat()
-            ten_hr_fsrt = ccon_ten_nat()
-            hun_hr_fsrt = ccon_hun_nat()
-            oneK_hr_snd_fsrt = ccon_oneK_snd_nat()
-            tenK_hr_snd_fsrt = ccon_tenK_snd_nat()
-            tnkp_hr_snd_fsrt = ccon_tnkp_snd_nat()
-            oneK_hr_rot_fsrt = ccon_oneK_rot_nat()
-            tenK_hr_rot_fsrt = ccon_tenK_rot_nat()
-            tnkp_hr_rot_fsrt = ccon_tnkp_rot_nat()
-            [LD['ff_reduction'], y_b, duff_depth] = ccon_ffr()
+            one_hr_fsrt = ccon_one_nat(LD)
+            ten_hr_fsrt = ccon_ten_nat(LD)
+            hun_hr_fsrt = ccon_hun_nat(ecos_mask, LD)
+            oneK_hr_snd_fsrt = ccon_oneK_snd_nat(fm_duff, fm_1000hr, ecos_mask, LD)
+            tenK_hr_snd_fsrt = ccon_tenK_snd_nat(fm_1000hr, LD)
+            tnkp_hr_snd_fsrt = ccon_tnkp_snd_nat(fm_1000hr, LD)
+            oneK_hr_rot_fsrt = ccon_oneK_rot_nat(fm_1000hr, ecos_mask, LD)
+            tenK_hr_rot_fsrt = ccon_tenK_rot_nat(fm_1000hr, LD)
+            tnkp_hr_rot_fsrt = ccon_tnkp_rot_nat(fm_1000hr, LD)
+            [LD['ff_reduction'], y_b, duff_depth] = ccon_ffr(fm_duff, burn_type, ecoregion, LD)
             LD['ff_reduction_successive'] = LD['ff_reduction']
         else:
             [one_hr_fsrt, ten_hr_fsrt, hun_hr_fsrt,
             [oneK_hr_snd_fsrt, oneK_hr_rot_fsrt],
             [tenK_hr_snd_fsrt, tenK_hr_rot_fsrt],
             [tnkp_hr_snd_fsrt, tnkp_hr_rot_fsrt],
-            LD['ff_reduction']] = ccon_activity()
+            LD['ff_reduction']] = ccon_activity(fm_1000hr, fm_type, windspeed, fm_10hr, LD)
             LD['ff_reduction_successive'] = LD['ff_reduction']
 
-        lch_fsrt = ccon_lch()
-        moss_fsrt = ccon_moss()
-        lit_fsrt = ccon_litter()
-        [duff_upper_fsrt, duff_lower_fsrt] = ccon_duff()
-        bas_fsrt = ccon_bas()
-        sqm_fsrt = ccon_sqm()
+        lch_fsrt = ccon_lch(LD)
+        moss_fsrt = ccon_moss(LD)
+        lit_fsrt = ccon_litter(LD)
+        [duff_upper_fsrt, duff_lower_fsrt] = ccon_duff(LD)
+        bas_fsrt = ccon_bas(LD)
+        sqm_fsrt = ccon_sqm(fm_duff, ecob_mask, LD)
 
 
         # Category summations
