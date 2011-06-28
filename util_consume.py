@@ -1,3 +1,6 @@
+import numpy as np
+import math
+
 def make_dictionary_of_lists(cons_data, cons_debug_data, heat_data, emis_data, inputs):
     """
 
@@ -283,3 +286,13 @@ def unit_conversion(data, area, from_units, output_units):
                  data /= area
 
             return [output_units, data]
+
+# Repeated functions
+def csdist(tot, csd):
+    """Portions consumption by consumption stage"""
+    return np.array([tot * csd[0], tot * csd[1], tot * csd[2], tot * sum(csd)])
+
+def propcons(x):
+    """ Equation to calculate proportion consumed for various strata"""
+    return math.e ** (x) / (1 + math.e ** x)
+
