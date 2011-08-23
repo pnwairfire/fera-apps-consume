@@ -270,7 +270,7 @@ class InputVarSet:
         if display: self.display_input_values()
 
 
-    def display_input_values(self,r=False, tsize=8):
+    def display_input_values(self, print_to_console=True, tsize=8):
         """Lists the input parameters for the consumption scenario.
 
         Displays the input parameters for the consumption in the shell. Useful
@@ -280,8 +280,8 @@ class InputVarSet:
         """
         out = self._display("value", "Value(s)", "Scenario parameters", tsize)
 
-        if r: return out
-        else: print out
+        if print_to_console: print out
+        else: return out
 
 
     def display_variable_names(self):

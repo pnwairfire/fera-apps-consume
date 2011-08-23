@@ -833,7 +833,7 @@ class FuelConsumption:
         print "\nFile saved to: " + csv_out
 
 
-    def display_inputs(self):
+    def display_inputs(self, print_to_console=True):
         """Lists the input parameters for the consumption scenario.
 
         Displays the input parameters for the consumption in the shell. Useful
@@ -842,7 +842,7 @@ class FuelConsumption:
 
         """
         self._build_input_set()
-        self.InSet.display_input_values()
+        return self.InSet.display_input_values(print_to_console)
 
 
     def list_variable_names(self):
