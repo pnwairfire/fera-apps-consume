@@ -894,7 +894,7 @@ class FuelConsumption:
         cons_data = self._cons_data
         heat_data = self._heat_data
 
-        if units in perarea() and sum(area) > 0:
+        if units in dd.perarea() and sum(area) > 0:
             str_au = "/".join(units.split("_"))
             hr_au = "btu/" + units.split("_")[1]
 
@@ -996,7 +996,7 @@ class FuelConsumption:
 
         tot_area = sum(area)
 
-        if units in perarea() and sum(area) > 0:
+        if units in dd.perarea() and sum(area) > 0:
 
             tot_flam = sum(np.array(area) * np.array(cons_data[0][0]))
             tot_smld = sum(np.array(area) * np.array(cons_data[0][1]))

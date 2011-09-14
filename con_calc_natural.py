@@ -60,7 +60,7 @@ def ccon_shrub(shrub_black_pct, LD):
                 util.csdist(shb_seco_total * pctlives, csd_live),
                 util.csdist(shb_seco_total * pctdeads, csd_dead))
     else:
-        hold = util.csdist(zeroes, [0.0, 0.0, 0.0])
+        hold = util.csdist(np.array([0.0] * len(LD['fccs_id']), dtype=float), [0.0, 0.0, 0.0])
         return hold, hold, hold, hold
 
 
