@@ -13,7 +13,8 @@ class Driver(object):
     """
     def __init__(self):
         self._consumer = consume.FuelConsumption(
-            fccs_file = "input_data/fccs_pyconsume_input.xml")
+            fccs_file = "input_data/fccs_loadings.xml")
+            #fccs_file = "input_data/fccs_pyconsume_input.xml")
 
     def _reset_consumer(self):
         self._consumer.burn_type = 'natural'
@@ -136,8 +137,8 @@ if len(sys.argv) > 1:
 else:
     #driver.run_tests(scenario_list=['activity'])
     #driver.run_tests(fuelbed_list=['1'], scenario_list=['activity'])
-    #driver.run_tests(fuelbed_list=['1'], scenario_list=['western'])
-    driver.run_tests(scenario_list=['western'])
+    driver.run_tests(fuelbed_list=['41'], scenario_list=['western'])
+    #driver.run_tests(scenario_list=['western'])
 
 """
 ### - runs over all fuelbeds using 'western', 'southern', 'boreal', 'activity'

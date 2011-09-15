@@ -319,6 +319,7 @@ import numpy as np
 import emissions_db as edb
 import input_variables as iv
 import data_desc as dd
+import util_consume as util
 
 class Emissions:
     """A class that estimates emissions from fire.
@@ -737,12 +738,12 @@ class Emissions:
         if self.output_units.validate() and not reset:
             orig_units = self.units
 
-            [self.units, self._emis_data] = unit_conversion(self._emis_data,
+            [self.units, self._emis_data] = util.unit_conversion(self._emis_data,
                                                    area,
                                                    self.units,
                                                    self.output_units.value[0])
 
-            [self.units, self._emis_summ] = unit_conversion(self._emis_summ,
+            [self.units, self._emis_summ] = util.unit_conversion(self._emis_summ,
                                                    sum(area),
                                                    orig_units,
                                                    self.output_units.value[0])
