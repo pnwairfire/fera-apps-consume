@@ -62,6 +62,10 @@ class Driver(object):
         out += '\n'
         stream.write(out)
 
+    def check_emissions(self):
+        emissions = consume.Emissions(self._consumer)
+        emissions.report()
+
     def write_csv(self, fuelbed_list, stream, header, debug):
     	### - top-level catagory list
         catagory_list = ['summary', 'canopy', 'ground fuels', 'litter-lichen-moss',
@@ -70,6 +74,7 @@ class Driver(object):
             catagory_list.append('debug')
 
         results = self._consumer.results()['consumption']
+        self.check_emissions()
         if header:
             self.write_header(results, catagory_list, stream)
         for fb_index in xrange(0, len(fuelbed_list)):

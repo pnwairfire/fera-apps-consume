@@ -1,3 +1,5 @@
+import os
+
 class EmissionsFactorDB:
     """ Emissions Factor Database object
 

@@ -1,5 +1,6 @@
 import numpy as np
 import math
+import data_desc as dd
 
 def make_dictionary_of_lists(cons_data, cons_debug_data, heat_data, emis_data, inputs):
     """
@@ -271,7 +272,7 @@ def unit_conversion(data, area, from_units, output_units):
         cv = undict[from_units]
 
         data *= cv
-        if from_units in perarea():
+        if from_units in dd.perarea():
             data *= area
 
         from_units = "tons"
@@ -282,7 +283,7 @@ def unit_conversion(data, area, from_units, output_units):
         else:
             # And then perform whatever conversion necessary from there:
             data *= (1 / undict[output_units])
-            if output_units in perarea():
+            if output_units in dd.perarea():
                  data /= area
 
             return [output_units, data]

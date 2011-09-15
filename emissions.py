@@ -315,8 +315,10 @@ Index 1           Index 2              Index 3                     Index 4      
 -----------------------------------------------------------------------------------------------------------------------------
 
 """
-
+import numpy as np
 import emissions_db as edb
+import input_variables as iv
+import data_desc as dd
 
 class Emissions:
     """A class that estimates emissions from fire.
@@ -345,7 +347,7 @@ class Emissions:
 
         """
 
-        self.efDB = EmissionsFactorDB(emissions_xml, FCobj)
+        self.efDB = edb.EmissionsFactorDB(emissions_xml, FCobj)
         self.reset_inputs_and_outputs()
 
         if FCobj is not None:
@@ -364,11 +366,11 @@ class Emissions:
 
         for p in params:
             if type(params[p]) in (int, str, list, float, np.array, tuple):
-                tmp = InputVar(p)
+                tmp = iv.InputVar(p)
                 tmp.value = params[p]
                 params[p] = tmp
 
-        self.InSet = InputVarSet(params)
+        self.InSet = iv.InputVarSet(params)
 
 
     def reset_inputs_and_outputs(self):
@@ -377,13 +379,13 @@ class Emissions:
         self._emis_data = 1
         self._emis_summ = 1
         self.scenLen = 0
-        self.InSet = InputVarSet([])
+        self.InSet = iv.InputVarSet([])
 
         self.units = "lbs_ac"
-        self.output_units = InputVar('units')
+        self.output_units = iv.InputVar('units')
         self.output_units.value = "lbs_ac"
 
-        self.emissions_factor_group = InputVar('efg')
+        self.emissions_factor_group = iv.InputVar('efg')
         self.emissions_factor_group.valids = self.efDB.valid_efgs
 
 
@@ -498,7 +500,7 @@ class Emissions:
             efgs = self.InSet.params['efg'].value
             str_au = units
 
-            if units in perarea() and sum(area) > 0:
+            if units in dd.perarea() and sum(area) > 0:
                 str_au = "/".join(units.split("_"))
 
             if len(area) == 1:
@@ -543,7 +545,7 @@ class Emissions:
             all_hed =  'ALL,ALL,' + str(sum(area)) + ',ALL,' + str_au + ','
 
 
-            if self.units in perarea() and sum(area) > 0:
+            if self.units in dd.perarea() and sum(area) > 0:
                 em_sum = self._emis_summ[0]
                 for j in range(0, 7):
                     print (categories[j] + "\t%.2e" % em_sum[j][0]
@@ -728,7 +730,7 @@ class Emissions:
         area = self.InSet.params['area'].value
 
         if type(self.output_units) in bads:
-            tmp = InputVar('units')
+            tmp = iv.InputVar('units')
             tmp.value = self.output_units
             self.output_units = self.InSet.params['units'] = tmp
 
@@ -805,8 +807,11 @@ class Emissions:
         ef_smres_nmhc = np.array([t['NMHC_smold_resid']] * fidlen, dtype = float)
 
         # And go fetch factors from the chosen emissions factor groups
+        elLen = len(efg)
+        dbDataLen = len(self.efDB.data)
         for i in range(0, fidlen):
             for j in range(0, len(self.efDB.data)):
+                check = int(self.efDB.data[j]['ID'])
                 if ef_num[i] == int(self.efDB.data[j]['ID']):
                     data = self.efDB.data[j]
                     ef_flamg_pm25[i] = data['PM25_flaming']; ef_smres_pm25[i] = data['PM25_smold_resid']
