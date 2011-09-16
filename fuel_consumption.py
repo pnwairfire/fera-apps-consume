@@ -1295,19 +1295,12 @@ class FuelConsumption:
         self._build_input_set()
 
         if self.InSet.validate() and self.validate_customized_fuel_loadings():
-            # Build canopy consumption input if auto-calc (-1) is selected
             can = self.InSet.validated_inputs['can_con_pct']
-            if len(can) == 1 and -1 in can:
-                cans = []
-                for f in self.InSet.validated_inputs['fuelbeds']:
-                    cans.append(float(self._fccs_canopy_consumption_pct[int(f)]))
-                self.InSet.validated_inputs['can_con_pct'] = np.array(cans)
-            else:
-                for j, jval in enumerate(can):
-                    if jval == -1:
-                        self.InSet.validated_inputs['can_con_pct'][j] = (
-                                float(self._fccs_canopy_consumption_pct[int(
-                                self.InSet.validated_inputs['fuelbeds'][j])]))
+            for j, jval in enumerate(can):
+                if jval == -1:
+                    self.InSet.validated_inputs['can_con_pct'][j] = (
+                            float(self._fccs_canopy_consumption_pct[int(
+                            self.InSet.validated_inputs['fuelbeds'][j])]))
 
             self.canopy_consumption_pct.value = self.InSet.validated_inputs['can_con_pct']
 

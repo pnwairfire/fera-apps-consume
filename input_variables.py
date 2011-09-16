@@ -9,7 +9,7 @@ InputVarParameters =[
 ['fm_1000hr', 'Fuel moisture (1000-hr, %)', '.fuel_moisture_1000hr_pct', [0,140], 50.0, True, False],
 ['fm_10hr', 'Fuel moisture (10-hr, %)', '.fuel_moisture_10hr_pct', [0,100], 50.0, True, True],
 ['fm_duff', 'Fuel moisture (duff, %)', '.fuel_moisture_duff_pct', [0,400], 50.0, True, False],
-['can_con_pct', 'Canopy consumption (%)', '.canopy_consumption_pct', [-1,100], -1, True, False],
+['can_con_pct', 'Canopy consumption (%)', '.canopy_consumption_pct', [0,100], 0, True, False],
 ['shrub_black_pct', 'Shrub blackened (%)', '.shrub_blackened_pct', [0,100], 50.0, True, False],
 ['burn_type', 'Burn type', '.burn_type', dd.list_valid_burntypes(), 'natural', False, False],
 ['units', 'Output units', '.output_units', dd.list_valid_units(), 'tons_ac', False, False],
