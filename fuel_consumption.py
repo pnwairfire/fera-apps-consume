@@ -678,7 +678,6 @@ class FuelConsumption:
 
         self.FCCS = fccs.FCCSDB(fccs_file)
         iv.InputVarParameters[0][3] = self._val_fccs = self.FCCS.valids
-        self._fccs_canopy_consumption_pct = self.FCCS.fccs_canopy_consumption_pct
         self.reset_inputs_and_outputs()
 
     def reset_inputs_and_outputs(self):
