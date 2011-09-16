@@ -73,20 +73,12 @@ class FCCSDB():
         del tree
 
         fccs = []
-        self.fccs_canopy_consumption_pct = {}
-
         for node in root:
-            if node.tag == "FCCS_CC":
-                ccid = load_data(node, 'fccs_id')
-                ccdt = load_data(node, 'canopy_consumption_pct')
-                self.fccs_canopy_consumption_pct[ccid] = ccdt
+            temp = [0] * len(dd.LoadDefs)
+            for ld in dd.LoadDefs:
+                temp[ld[2]] = load_data(node, ld[0])
+            fccs.append(temp)
 
-            else:
-                temp = [0] * len(dd.LoadDefs)
-                for ld in dd.LoadDefs:
-                    temp[ld[2]] = load_data(node, ld[0])
-
-                fccs.append(temp)
         del root
         return fccs
 
