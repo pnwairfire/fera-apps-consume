@@ -34,7 +34,6 @@
               <xs:element name="all_nat" type="xs:string" />
               <xs:element name="all_act_west" type="xs:string" />
               <xs:element name="all_act_other" type="xs:string" />
-              <xs:element name="source" type="xs:string" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
