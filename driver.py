@@ -13,8 +13,8 @@ class Driver(object):
     """
     def __init__(self):
         self._consumer = consume.FuelConsumption(
-            fccs_file = "input_data/fccs_loadings.xml")
             #fccs_file = "input_data/fccs_pyconsume_input.xml")
+            fccs_file = "input_data/input_without_1000fb.xml")
 
     def _reset_consumer(self):
         self._consumer.burn_type = 'natural'
@@ -65,7 +65,7 @@ class Driver(object):
 
     def check_emissions(self):
         emissions = consume.Emissions(self._consumer)
-        emissions.report()
+        emissions.report(csv="00emiss.csv")
 
     def write_csv(self, fuelbed_list, stream, header, debug):
     	### - top-level catagory list
@@ -137,7 +137,7 @@ if len(sys.argv) > 1:
 else:
     #driver.run_tests(scenario_list=['activity'])
     #driver.run_tests(fuelbed_list=['1'], scenario_list=['activity'])
-    driver.run_tests(fuelbed_list=['41'], scenario_list=['western'])
+    driver.run_tests(fuelbed_list=['41', '53', '235'], scenario_list=['western'])
     #driver.run_tests(scenario_list=['western'])
 
 """
