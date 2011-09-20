@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="EMISSIONS_FACTOR_DATABASE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="EFG">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" type="xs:unsignedByte" />
+              <xs:element name="fuel_type" type="xs:string" />
+              <xs:element name="n" type="xs:string" />
+              <xs:element name="references" type="xs:string" />
+              <xs:element name="PM_flaming" type="xs:string" />
+              <xs:element name="PM10b_flaming" type="xs:string" />
+              <xs:element name="PM25_flaming" type="xs:decimal" />
+              <xs:element name="CO_flaming" type="xs:decimal" />
+              <xs:element name="CO2_flaming" type="xs:decimal" />
+              <xs:element name="CH4_flaming" type="xs:decimal" />
+              <xs:element name="NMHC_flaming" type="xs:decimal" />
+              <xs:element name="PM_smold_resid" type="xs:string" />
+              <xs:element name="PM10b_smold_resid" type="xs:string" />
+              <xs:element name="PM25_smold_resid" type="xs:decimal" />
+              <xs:element name="CO_smold_resid" type="xs:decimal" />
+              <xs:element name="CO2_smold_resid" type="xs:decimal" />
+              <xs:element name="CH4_smold_resid" type="xs:decimal" />
+              <xs:element name="NMHC_smold_resid" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element maxOccurs="unbounded" name="FCCS_EFG">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="fccs_id" type="xs:unsignedShort" />
+              <xs:element name="all_nat" type="xs:string" />
+              <xs:element name="all_act_west" type="xs:string" />
+              <xs:element name="all_act_other" type="xs:string" />
+              <xs:element name="source" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element maxOccurs="unbounded" name="cover_type">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="cover_type_ID" type="xs:unsignedShort" />
+              <xs:element name="type_number" type="xs:string" />
+              <xs:element name="type_name" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

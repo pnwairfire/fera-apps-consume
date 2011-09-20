@@ -1,47 +1,7 @@
 <?xml version="1.0" standalone="yes"?>
 <EMISSIONS_FACTOR_DATABASE>
-   <EFG>
-    	<ID>16</ID>
-    	<fuel_type>Default - Av. of all</fuel_type>
-    	<n>average of all</n>
-    	<references>Ottmar</references>
-    	<PM_flaming>26.71428571</PM_flaming>
-    	<PM10b_flaming>16.77142857</PM10b_flaming>
-    	<PM25_flaming>13.073966</PM25_flaming>
-    	<CO_flaming>89.54345643</CO_flaming>
-    	<CO2_flaming>2521.929828</CO2_flaming>
-    	<CH4_flaming>3.346003166</CH4_flaming>
-    	<NMHC_flaming>4.759810927</NMHC_flaming>
-    	<PM_smold_resid>39.37142857</PM_smold_resid>
-    	<PM10b_smold_resid>27.94285714</PM10b_smold_resid>
-    	<PM25_smold_resid>19.1062523</PM25_smold_resid>
-    	<CO_smold_resid>209.3289107</CO_smold_resid>
-    	<CO2_smold_resid>2285.410765</CO2_smold_resid>
-    	<CH4_smold_resid>11.13691426</CH4_smold_resid>
-    	<NMHC_smold_resid>10.37712161</NMHC_smold_resid>
-    </EFG>
-   <EFG>
-    	<ID>0</ID>
-    	<fuel_type>Default - Source Code</fuel_type>
-    	<n></n>
-    	<references>Consume 3.0 source code</references>
-    	<PM_flaming>24.0</PM_flaming>
-    	<PM10b_flaming>16.0</PM10b_flaming>
-    	<PM25_flaming>13.0</PM25_flaming>
-    	<CO_flaming>96.0</CO_flaming>
-    	<CO2_flaming>3380.0</CO2_flaming>
-    	<CH4_flaming>4.0</CH4_flaming>
-    	<NMHC_flaming>6.0</NMHC_flaming>
-    	<PM_smold_resid>35.0</PM_smold_resid>
-    	<PM10b_smold_resid>26.0</PM10b_smold_resid>
-    	<PM25_smold_resid>21.0</PM25_smold_resid>
-    	<CO_smold_resid>243.0</CO_smold_resid>
-    	<CO2_smold_resid>3082.0</CO2_smold_resid>
-    	<CH4_smold_resid>14.0</CH4_smold_resid>
-    	<NMHC_smold_resid>13.0</NMHC_smold_resid>
-    </EFG>
     <EFG>
-    	<ID>17</ID>
+    	<ID>0</ID>
     	<fuel_type>Default - User's Guide</fuel_type>
     	<n>average of all</n>
     	<references>Ottmar - Consume 3.0 documentation</references>
@@ -365,2058 +325,1764 @@
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>0</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>1</fccs_id>
 	    <all_nat>9|9|9</all_nat>
 	    <all_act_west>2|2|2</all_act_west>
 	    <all_act_other>9|9|9</all_act_other>
-	    <source>2|2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>2</fccs_id>
 	    <all_nat>8|8|8|8|8</all_nat>
 	    <all_act_west>1|1|4|1|1</all_act_west>
 	    <all_act_other>1|1|1|1|1</all_act_other>
-	    <source>1|1|4|1|1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>3</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>1</all_act_west>
 	    <all_act_other>1</all_act_other>
-	    <source>1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>4</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>1</all_act_west>
 	    <all_act_other>1</all_act_other>
-	    <source>1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>5</fccs_id>
 	    <all_nat>8|8|8</all_nat>
 	    <all_act_west>1|4|1</all_act_west>
 	    <all_act_other>1|4|1</all_act_other>
-	    <source>1|4|1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>6</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>7</fccs_id>
 	    <all_nat>8|8|8</all_nat>
 	    <all_act_west>1|4|4</all_act_west>
 	    <all_act_other>1|1|4</all_act_other>
-	    <source>1|4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>8</fccs_id>
 	    <all_nat>8|8</all_nat>
 	    <all_act_west>4|1</all_act_west>
 	    <all_act_other>1|1</all_act_other>
-	    <source>4|1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>9</fccs_id>
 	    <all_nat>8|8</all_nat>
 	    <all_act_west>4|1</all_act_west>
 	    <all_act_other>1|1</all_act_other>
-	    <source>4|1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>10</fccs_id>
 	    <all_nat>8|8|8|8|8</all_nat>
 	    <all_act_west>4|1|4|1|1</all_act_west>
 	    <all_act_other>1|1|1|1|1</all_act_other>
-	    <source>4|1|4|1|1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>11</fccs_id>
 	    <all_nat>8|8|8|8|8</all_nat>
 	    <all_act_west>4|1|4|1|1</all_act_west>
 	    <all_act_other>1|1|1|1|1</all_act_other>
-	    <source>4|1|4|1|1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>12</fccs_id>
 	    <all_nat>8|8</all_nat>
 	    <all_act_west>1|4</all_act_west>
 	    <all_act_other>1|4</all_act_other>
-	    <source>1|4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>13</fccs_id>
 	    <all_nat>8|8</all_nat>
 	    <all_act_west>1|4</all_act_west>
 	    <all_act_other>1|1</all_act_other>
-	    <source>1|4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>14</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>15</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>3</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>16</fccs_id>
 	    <all_nat>8|8|9|8</all_nat>
 	    <all_act_west>4|3|2|3</all_act_west>
 	    <all_act_other>4|3|9|3</all_act_other>
-	    <source>4|3|2|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>17</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>4</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>18</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>1</all_act_west>
 	    <all_act_other>1</all_act_other>
-	    <source>1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>19</fccs_id>
 	    <all_nat>8|8</all_nat>
 	    <all_act_west>4|4</all_act_west>
 	    <all_act_other>4|4</all_act_other>
-	    <source>4|4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>20</fccs_id>
 	    <all_nat>5</all_nat>
 	    <all_act_west>5</all_act_west>
 	    <all_act_other>5</all_act_other>
-	    <source>5</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>21</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>3</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>22</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>3</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>23</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>3</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>24</fccs_id>
 	    <all_nat>8|8</all_nat>
 	    <all_act_west>3|3</all_act_west>
 	    <all_act_other>3|3</all_act_other>
-	    <source>3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>25</fccs_id>
 	    <all_nat>5|5</all_nat>
 	    <all_act_west>5|5</all_act_west>
 	    <all_act_other>5|5</all_act_other>
-	    <source>5|5</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>26</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>3</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>27</fccs_id>
 	    <all_nat>8|5|5</all_nat>
 	    <all_act_west>3|5|5</all_act_west>
 	    <all_act_other>3|5|5</all_act_other>
-	    <source>3|5|5</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>28</fccs_id>
 	    <all_nat>8|8</all_nat>
 	    <all_act_west>3|3</all_act_west>
 	    <all_act_other>8|3</all_act_other>
-	    <source>3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>29</fccs_id>
 	    <all_nat>8|8|8</all_nat>
 	    <all_act_west>4|1|3</all_act_west>
 	    <all_act_other>4|1|3</all_act_other>
-	    <source>4|1|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>30</fccs_id>
 	    <all_nat>7</all_nat>
 	    <all_act_west>7</all_act_west>
 	    <all_act_other>7</all_act_other>
-	    <source>7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>32</fccs_id>
 	    <all_nat>8|5|5</all_nat>
 	    <all_act_west>3|5|5</all_act_west>
 	    <all_act_other>3|5|5</all_act_other>
-	    <source>3|5|5</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>33</fccs_id>
 	    <all_nat>7</all_nat>
 	    <all_act_west>7</all_act_west>
 	    <all_act_other>7</all_act_other>
-	    <source>7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>34</fccs_id>
 	    <all_nat>8|8</all_nat>
 	    <all_act_west>1|3</all_act_west>
 	    <all_act_other>1|3</all_act_other>
-	    <source>1|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>36</fccs_id>
 	    <all_nat>9|9|9</all_nat>
 	    <all_act_west>2|2|2</all_act_west>
 	    <all_act_other>9|9|9</all_act_other>
-	    <source>2|2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>37</fccs_id>
 	    <all_nat>8|8</all_nat>
 	    <all_act_west>3|3</all_act_west>
 	    <all_act_other>3|3</all_act_other>
-	    <source>3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>38</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>1</all_act_other>
-	    <source>1|4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>39</fccs_id>
 	    <all_nat>8|8</all_nat>
 	    <all_act_west>4|3</all_act_west>
 	    <all_act_other>4|3</all_act_other>
-	    <source>4|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>40</fccs_id>
 	    <all_nat>7</all_nat>
 	    <all_act_west>7</all_act_west>
 	    <all_act_other>7</all_act_other>
-	    <source>7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>41</fccs_id>
 	    <all_nat>13|13|9|13|13</all_nat>
 	    <all_act_west>13|13|2|13|13</all_act_west>
 	    <all_act_other>13|13|9|13|13</all_act_other>
-	    <source>15|15|2|15|15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>42</fccs_id>
 	    <all_nat>9|9</all_nat>
 	    <all_act_west>2|2</all_act_west>
 	    <all_act_other>9|9</all_act_other>
-	    <source>2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>43</fccs_id>
 	    <all_nat>9|7</all_nat>
 	    <all_act_west>2|7</all_act_west>
 	    <all_act_other>9|7</all_act_other>
-	    <source>2|7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>44</fccs_id>
 	    <all_nat>7</all_nat>
 	    <all_act_west>7</all_act_west>
 	    <all_act_other>7</all_act_other>
-	    <source>7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>45</fccs_id>
 	    <all_nat>9|7</all_nat>
 	    <all_act_west>2|7</all_act_west>
 	    <all_act_other>9|7</all_act_other>
-	    <source>2|7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>46</fccs_id>
 	    <all_nat>7</all_nat>
 	    <all_act_west>7</all_act_west>
 	    <all_act_other>7</all_act_other>
-	    <source>7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>47</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>1</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>48</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>1</all_act_other>
-	    <source>1|4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>49</fccs_id>
 	    <all_nat>7|6</all_nat>
 	    <all_act_west>7|6</all_act_west>
 	    <all_act_other>7|6</all_act_other>
-	    <source>7|6</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>51</fccs_id>
 	    <all_nat>7</all_nat>
 	    <all_act_west>7</all_act_west>
 	    <all_act_other>7</all_act_other>
-	    <source>7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>52</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>1</all_act_west>
 	    <all_act_other>1</all_act_other>
-	    <source>1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>53</fccs_id>
 	    <all_nat>8|8</all_nat>
 	    <all_act_west>3|3</all_act_west>
 	    <all_act_other>8|3</all_act_other>
-	    <source>3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>54</fccs_id>
 	    <all_nat>8|8|8</all_nat>
 	    <all_act_west>1|4|3</all_act_west>
 	    <all_act_other>1|4|3</all_act_other>
-	    <source>1|4|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>55</fccs_id>
 	    <all_nat>5</all_nat>
 	    <all_act_west>5</all_act_west>
 	    <all_act_other>5</all_act_other>
-	    <source>5</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>56</fccs_id>
 	    <all_nat>13|13|12|12|12</all_nat>
 	    <all_act_west>13|13|6|6|6</all_act_west>
 	    <all_act_other>13|13|12|12|12</all_act_other>
-	    <source>15|15|6|6|6</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>57</fccs_id>
 	    <all_nat>13|13</all_nat>
 	    <all_act_west>13|13</all_act_west>
 	    <all_act_other>13|13</all_act_other>
-	    <source>15|15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>58</fccs_id>
 	    <all_nat>5|5</all_nat>
 	    <all_act_west>5|5</all_act_west>
 	    <all_act_other>5|5</all_act_other>
-	    <source>5|5</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>59</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>4</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>60</fccs_id>
 	    <all_nat>13|13|12|12|12</all_nat>
 	    <all_act_west>13|13|6|6|6</all_act_west>
 	    <all_act_other>13|13|12|12|12</all_act_other>
-	    <source>15|15|6|6|6</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>61</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>3</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>62</fccs_id>
 	    <all_nat>13|8|8|7|13</all_nat>
 	    <all_act_west>13|1|4|7|13</all_act_west>
 	    <all_act_other>13|1|4|7|13</all_act_other>
-	    <source>15|1|4|7|15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>63</fccs_id>
 	    <all_nat>13|13</all_nat>
 	    <all_act_west>13|1</all_act_west>
 	    <all_act_other>13|13</all_act_other>
-	    <source>15|1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>65</fccs_id>
 	    <all_nat>13</all_nat>
 	    <all_act_west>13</all_act_west>
 	    <all_act_other>13</all_act_other>
-	    <source>15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>66</fccs_id>
 	    <all_nat>13|13|13|13</all_nat>
 	    <all_act_west>13|13|13|13</all_act_west>
 	    <all_act_other>13|13|13|13</all_act_other>
-	    <source>15|15|15|15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>67</fccs_id>
 	    <all_nat>8|8</all_nat>
 	    <all_act_west>1|3</all_act_west>
 	    <all_act_other>1|3</all_act_other>
-	    <source>1|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>69</fccs_id>
 	    <all_nat>5|5|12|13|12</all_nat>
 	    <all_act_west>5|5|6|13|6</all_act_west>
 	    <all_act_other>5|5|12|13|12</all_act_other>
-	    <source>5|5|6|15|6</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>70</fccs_id>
 	    <all_nat>8|8|8</all_nat>
 	    <all_act_west>4|3|3</all_act_west>
 	    <all_act_other>4|3|3</all_act_other>
-	    <source>4|3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>71</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>72</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>73</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>74</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>75</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>76</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>77</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>78</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>79</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>80</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>81</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>82</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>83</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>84</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>85</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>8</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>86</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>8</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>87</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>8</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>88</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>8</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>89</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>8</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>90</fccs_id>
 	    <all_nat>9|9</all_nat>
 	    <all_act_west>2|2</all_act_west>
 	    <all_act_other>9|9</all_act_other>
-	    <source>2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>91</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>8</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>92</fccs_id>
 	    <all_nat>8|8|8|8|8</all_nat>
 	    <all_act_west>4|4|4|4|4</all_act_west>
 	    <all_act_other>8|8|8|4|4</all_act_other>
-	    <source>4|4|4|4|4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>93</fccs_id>
 	    <all_nat>9|9</all_nat>
 	    <all_act_west>2|2</all_act_west>
 	    <all_act_other>9|9</all_act_other>
-	    <source>2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>94</fccs_id>
 	    <all_nat>9|9</all_nat>
 	    <all_act_west>2|2</all_act_west>
 	    <all_act_other>9|9</all_act_other>
-	    <source>2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>95</fccs_id>
 	    <all_nat>9|9</all_nat>
 	    <all_act_west>2|2</all_act_west>
 	    <all_act_other>9|9</all_act_other>
-	    <source>2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>97</fccs_id>
 	    <all_nat>13</all_nat>
 	    <all_act_west>1</all_act_west>
 	    <all_act_other>13</all_act_other>
-	    <source>1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>98</fccs_id>
 	    <all_nat>8|8</all_nat>
 	    <all_act_west>1|1</all_act_west>
 	    <all_act_other>8|8</all_act_other>
-	    <source>1|1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>99</fccs_id>
 	    <all_nat>13</all_nat>
 	    <all_act_west>13</all_act_west>
 	    <all_act_other>13</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>100</fccs_id>
 	    <all_nat>13|13</all_nat>
 	    <all_act_west>13|13</all_act_west>
 	    <all_act_other>13|13</all_act_other>
-	    <source>3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>101</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>8</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>102</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>8</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>103</fccs_id>
 	    <all_nat>8|8|9</all_nat>
 	    <all_act_west>4|4|2</all_act_west>
 	    <all_act_other>8|8|9</all_act_other>
-	    <source>4|4|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>104</fccs_id>
 	    <all_nat>8|8|9</all_nat>
 	    <all_act_west>4|4|2</all_act_west>
 	    <all_act_other>8|8|9</all_act_other>
-	    <source>4|4|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>105</fccs_id>
 	    <all_nat>8|8|8|9|9</all_nat>
 	    <all_act_west>4|4|4|2|2</all_act_west>
 	    <all_act_other>8|8|8|9|9</all_act_other>
-	    <source>4|4|4|2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>106</fccs_id>
 	    <all_nat>10</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>10</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>107</fccs_id>
 	    <all_nat>10</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>10</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>109</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>110</fccs_id>
 	    <all_nat>9|9|9</all_nat>
 	    <all_act_west>2|2|2</all_act_west>
 	    <all_act_other>9|9|9</all_act_other>
-	    <source>2|2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>114</fccs_id>
 	    <all_nat>10|11|11</all_nat>
 	    <all_act_west>3|3|3</all_act_west>
 	    <all_act_other>10|11|11</all_act_other>
-	    <source>3|3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>115</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>120</fccs_id>
 	    <all_nat>10|11|11</all_nat>
 	    <all_act_west>3|3|3</all_act_west>
 	    <all_act_other>10|11|11</all_act_other>
-	    <source>3|3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>121</fccs_id>
 	    <all_nat>10|11|11</all_nat>
 	    <all_act_west>3|3|3</all_act_west>
 	    <all_act_other>10|11|11</all_act_other>
-	    <source>3|3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>123</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>124</fccs_id>
 	    <all_nat>10</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>10</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>125</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>129</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>131</fccs_id>
 	    <all_nat>13|13</all_nat>
 	    <all_act_west>13|13</all_act_west>
 	    <all_act_other>13|13</all_act_other>
-	    <source>15|15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>133</fccs_id>
 	    <all_nat>13</all_nat>
 	    <all_act_west>13</all_act_west>
 	    <all_act_other>13</all_act_other>
-	    <source>15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>134</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>135</fccs_id>
 	    <all_nat>10|5|13</all_nat>
 	    <all_act_west>4|5|13</all_act_west>
 	    <all_act_other>10|5|13</all_act_other>
-	    <source>4|5|15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>138</fccs_id>
 	    <all_nat>10|10</all_nat>
 	    <all_act_west>3|3</all_act_west>
 	    <all_act_other>10|10</all_act_other>
-	    <source>3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>140</fccs_id>
 	    <all_nat>10</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>10</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>142</fccs_id>
 	    <all_nat>9|9</all_nat>
 	    <all_act_west>2|2</all_act_west>
 	    <all_act_other>9|9</all_act_other>
-	    <source>2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>143</fccs_id>
 	    <all_nat>8|9|9</all_nat>
 	    <all_act_west>4|2|2</all_act_west>
 	    <all_act_other>8|9|9</all_act_other>
-	    <source>4|2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>146</fccs_id>
 	    <all_nat>10</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>10</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>147</fccs_id>
 	    <all_nat>10</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>10</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>148</fccs_id>
 	    <all_nat>10</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>10</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>152</fccs_id>
 	    <all_nat>10|10</all_nat>
 	    <all_act_west>3|3</all_act_west>
 	    <all_act_other>10|10</all_act_other>
-	    <source>3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>154</fccs_id>
 	    <all_nat>9|9|13</all_nat>
 	    <all_act_west>2|2|13</all_act_west>
 	    <all_act_other>9|9|13</all_act_other>
-	    <source>2|2|15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>155</fccs_id>
 	    <all_nat>10</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>10</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>156</fccs_id>
 	    <all_nat>11</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>11</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>157</fccs_id>
 	    <all_nat>11</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>11</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>158</fccs_id>
 	    <all_nat>11</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>11</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>161</fccs_id>
 	    <all_nat>11|11</all_nat>
 	    <all_act_west>3|3</all_act_west>
 	    <all_act_other>11|11</all_act_other>
-	    <source>3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>162</fccs_id>
 	    <all_nat>11|11</all_nat>
 	    <all_act_west>3|3</all_act_west>
 	    <all_act_other>11|11</all_act_other>
-	    <source>3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>164</fccs_id>
 	    <all_nat>11</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>11</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>165</fccs_id>
 	    <all_nat>11|9|11</all_nat>
 	    <all_act_west>3|2|2</all_act_west>
 	    <all_act_other>11|9|11</all_act_other>
-	    <source>3|2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>166</fccs_id>
 	    <all_nat>11|9|11</all_nat>
 	    <all_act_west>3|2|2</all_act_west>
 	    <all_act_other>11|9|11</all_act_other>
-	    <source>3|2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>168</fccs_id>
 	    <all_nat>11</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>11</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>170</fccs_id>
 	    <all_nat>11</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>11</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>173</fccs_id>
 	    <all_nat>9|13</all_nat>
 	    <all_act_west>2|13</all_act_west>
 	    <all_act_other>9|13</all_act_other>
-	    <source>2|15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>174</fccs_id>
 	    <all_nat>7|11|9</all_nat>
 	    <all_act_west>7|2|2</all_act_west>
 	    <all_act_other>7|11|9</all_act_other>
-	    <source>7|2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>175</fccs_id>
 	    <all_nat>13|13</all_nat>
 	    <all_act_west>13|13</all_act_west>
 	    <all_act_other>13|13</all_act_other>
-	    <source>15|15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>176</fccs_id>
 	    <all_nat>13</all_nat>
 	    <all_act_west>13</all_act_west>
 	    <all_act_other>13</all_act_other>
-	    <source>15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>178</fccs_id>
 	    <all_nat>11</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>11</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>180</fccs_id>
 	    <all_nat>9|9</all_nat>
 	    <all_act_west>2|2</all_act_west>
 	    <all_act_other>9|9</all_act_other>
-	    <source>2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>181</fccs_id>
 	    <all_nat>11</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>11</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>182</fccs_id>
 	    <all_nat>11</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>11</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>183</fccs_id>
 	    <all_nat>11</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>11</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>184</fccs_id>
 	    <all_nat>11|11</all_nat>
 	    <all_act_west>3|3</all_act_west>
 	    <all_act_other>11|11</all_act_other>
-	    <source>3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>185</fccs_id>
 	    <all_nat>11|11</all_nat>
 	    <all_act_west>3|3</all_act_west>
 	    <all_act_other>11|11</all_act_other>
-	    <source>3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>186</fccs_id>
 	    <all_nat>11|9</all_nat>
 	    <all_act_west>3|2</all_act_west>
 	    <all_act_other>11|9</all_act_other>
-	    <source>3|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>187</fccs_id>
 	    <all_nat>11|11</all_nat>
 	    <all_act_west>3|3</all_act_west>
 	    <all_act_other>11|11</all_act_other>
-	    <source>3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>188</fccs_id>
 	    <all_nat>11|5</all_nat>
 	    <all_act_west>3|7</all_act_west>
 	    <all_act_other>11|5</all_act_other>
-	    <source>3|7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>189</fccs_id>
 	    <all_nat>11|5</all_nat>
 	    <all_act_west>3|7</all_act_west>
 	    <all_act_other>11|5</all_act_other>
-	    <source>3|7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>190</fccs_id>
 	    <all_nat>11|9</all_nat>
 	    <all_act_west>3|2</all_act_west>
 	    <all_act_other>11|9</all_act_other>
-	    <source>3|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>191</fccs_id>
 	    <all_nat>11|11|9</all_nat>
 	    <all_act_west>3|3|2</all_act_west>
 	    <all_act_other>11|11|9</all_act_other>
-	    <source>3|3|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>196</fccs_id>
 	    <all_nat>11</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>11</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>203</fccs_id>
 	    <all_nat>13</all_nat>
 	    <all_act_west>13</all_act_west>
 	    <all_act_other>13</all_act_other>
-	    <source>15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>208</fccs_id>
 	    <all_nat>8|8</all_nat>
 	    <all_act_west>4|1</all_act_west>
 	    <all_act_other>4|1</all_act_other>
-	    <source>4|1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>210</fccs_id>
 	    <all_nat>5|5</all_nat>
 	    <all_act_west>5|5</all_act_west>
 	    <all_act_other>5|5</all_act_other>
-	    <source>5|5</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>211</fccs_id>
 	    <all_nat>8|8</all_nat>
 	    <all_act_west>3|3</all_act_west>
 	    <all_act_other>8|3</all_act_other>
-	    <source>3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>212</fccs_id>
 	    <all_nat>8|8</all_nat>
 	    <all_act_west>3|3</all_act_west>
 	    <all_act_other>8|3</all_act_other>
-	    <source>3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>213</fccs_id>
 	    <all_nat>13|13|13</all_nat>
 	    <all_act_west>13|13|13</all_act_west>
 	    <all_act_other>13|13|13</all_act_other>
-	    <source>15|15|15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>214</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>4</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>215</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>1</all_act_other>
-	    <source>1|4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>216</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>217</fccs_id>
 	    <all_nat>7</all_nat>
 	    <all_act_west>7</all_act_west>
 	    <all_act_other>7</all_act_other>
-	    <source>7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>218</fccs_id>
 	    <all_nat>7</all_nat>
 	    <all_act_west>7</all_act_west>
 	    <all_act_other>7</all_act_other>
-	    <source>7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>219</fccs_id>
 	    <all_nat>8|8|8</all_nat>
 	    <all_act_west>1|4|3</all_act_west>
 	    <all_act_other>1|4|3</all_act_other>
-	    <source>1|4|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>220</fccs_id>
 	    <all_nat>8|8|8</all_nat>
 	    <all_act_west>1|4|3</all_act_west>
 	    <all_act_other>1|4|3</all_act_other>
-	    <source>1|4|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>221</fccs_id>
 	    <all_nat>13</all_nat>
 	    <all_act_west>13</all_act_west>
 	    <all_act_other>13</all_act_other>
-	    <source>15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>222</fccs_id>
 	    <all_nat>8|8</all_nat>
 	    <all_act_west>3|3</all_act_west>
 	    <all_act_other>8|3</all_act_other>
-	    <source>3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>223</fccs_id>
 	    <all_nat>8|8|8</all_nat>
 	    <all_act_west>1|4|3</all_act_west>
 	    <all_act_other>1|4|3</all_act_other>
-	    <source>1|4|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>224</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>225</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>226</fccs_id>
 	    <all_nat>8|7</all_nat>
 	    <all_act_west>4|7</all_act_west>
 	    <all_act_other>4|7</all_act_other>
-	    <source>4|7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>227</fccs_id>
 	    <all_nat>8|7</all_nat>
 	    <all_act_west>4|7</all_act_west>
 	    <all_act_other>4|7</all_act_other>
-	    <source>4|7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>228</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>3</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>229</fccs_id>
 	    <all_nat>8|5</all_nat>
 	    <all_act_west>3|5</all_act_west>
 	    <all_act_other>3|5</all_act_other>
-	    <source>3|5</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>230</fccs_id>
 	    <all_nat>5|5</all_nat>
 	    <all_act_west>5|5</all_act_west>
 	    <all_act_other>5|5</all_act_other>
-	    <source>5|5</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>231</fccs_id>
 	    <all_nat>5|8|5|7</all_nat>
 	    <all_act_west>5|3|5|7</all_act_west>
 	    <all_act_other>5|3|5|7</all_act_other>
-	    <source>5|3|5|7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>232</fccs_id>
 	    <all_nat>7|7|7|7</all_nat>
 	    <all_act_west>7|7|7|7</all_act_west>
 	    <all_act_other>7|7|7|7</all_act_other>
-	    <source>7|7|7|7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>233</fccs_id>
 	    <all_nat>5|13|13|12</all_nat>
 	    <all_act_west>5|13|13|6</all_act_west>
 	    <all_act_other>5|13|13|12</all_act_other>
-	    <source>5|15|15|6</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>234</fccs_id>
 	    <all_nat>5|13|13|12</all_nat>
 	    <all_act_west>5|13|13|6</all_act_west>
 	    <all_act_other>5|13|13|12</all_act_other>
-	    <source>5|15|15|6</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>235</fccs_id>
 	    <all_nat>13|13|9|13|13</all_nat>
 	    <all_act_west>13|13|2|13|13</all_act_west>
 	    <all_act_other>13|13|9|13|13</all_act_other>
-	    <source>15|15|2|15|15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>236</fccs_id>
 	    <all_nat>7</all_nat>
 	    <all_act_west>7</all_act_west>
 	    <all_act_other>7</all_act_other>
-	    <source>7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>237</fccs_id>
 	    <all_nat>8|8|7|13</all_nat>
 	    <all_act_west>1|4|7|13</all_act_west>
 	    <all_act_other>1|4|7|13</all_act_other>
-	    <source>1|4|7|15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>238</fccs_id>
 	    <all_nat>8|8</all_nat>
 	    <all_act_west>1|4</all_act_west>
 	    <all_act_other>1|1</all_act_other>
-	    <source>1|4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>239</fccs_id>
 	    <all_nat>8|8|8</all_nat>
 	    <all_act_west>1|4|4</all_act_west>
 	    <all_act_other>1|1|4</all_act_other>
-	    <source>1|4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>240</fccs_id>
 	    <all_nat>11</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>11</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>241</fccs_id>
 	    <all_nat>11|11|11</all_nat>
 	    <all_act_west>3|3|3</all_act_west>
 	    <all_act_other>11|11|11</all_act_other>
-	    <source>3|3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>242</fccs_id>
 	    <all_nat>11|11|11</all_nat>
 	    <all_act_west>3|3|3</all_act_west>
 	    <all_act_other>11|11|11</all_act_other>
-	    <source>3|3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>243</fccs_id>
 	    <all_nat>9|10</all_nat>
 	    <all_act_west>2|3</all_act_west>
 	    <all_act_other>9|10</all_act_other>
-	    <source>2|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>260</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>261</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>262</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>263</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>264</fccs_id>
 	    <all_nat>9|7|7</all_nat>
 	    <all_act_west>2|7|7</all_act_west>
 	    <all_act_other>9|7|7</all_act_other>
-	    <source>2|7|7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>265</fccs_id>
 	    <all_nat>10</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>10</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>266</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>267</fccs_id>
 	    <all_nat>9|9|9</all_nat>
 	    <all_act_west>2|2|2</all_act_west>
 	    <all_act_other>9|9|9</all_act_other>
-	    <source>2|2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>268</fccs_id>
 	    <all_nat>10|10|9</all_nat>
 	    <all_act_west>4|4|2</all_act_west>
 	    <all_act_other>10|10|9</all_act_other>
-	    <source>4|0|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>269</fccs_id>
 	    <all_nat>9|9</all_nat>
 	    <all_act_west>2|2</all_act_west>
 	    <all_act_other>9|9</all_act_other>
-	    <source>2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>270</fccs_id>
 	    <all_nat>10</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>10</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>272</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>273</fccs_id>
 	    <all_nat>8|8|8|8</all_nat>
 	    <all_act_west>4|1|4|3</all_act_west>
 	    <all_act_other>4|1|4|3</all_act_other>
-	    <source>4|1|4|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>274</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>275</fccs_id>
 	    <all_nat>9|9</all_nat>
 	    <all_act_west>2|2</all_act_west>
 	    <all_act_other>9|9</all_act_other>
-	    <source>2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>276</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>279</fccs_id>
 	    <all_nat>8|8|10</all_nat>
 	    <all_act_west>4|4|4</all_act_west>
 	    <all_act_other>8|8|10</all_act_other>
-	    <source>4|4|4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>280</fccs_id>
 	    <all_nat>13</all_nat>
 	    <all_act_west>13</all_act_west>
 	    <all_act_other>13</all_act_other>
-	    <source>15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>281</fccs_id>
 	    <all_nat>11</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>11</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>282</fccs_id>
 	    <all_nat>11</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>11</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>283</fccs_id>
 	    <all_nat>9|9|9</all_nat>
 	    <all_act_west>2|2|2</all_act_west>
 	    <all_act_other>9|9|9</all_act_other>
-	    <source>2|2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>284</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>286</fccs_id>
 	    <all_nat>8|8</all_nat>
 	    <all_act_west>3|3</all_act_west>
 	    <all_act_other>3|3</all_act_other>
-	    <source>3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>287</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>8</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>288</fccs_id>
 	    <all_nat>11</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>11</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>289</fccs_id>
 	    <all_nat>11|13</all_nat>
 	    <all_act_west>4|13</all_act_west>
 	    <all_act_other>11|13</all_act_other>
-	    <source>4|15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>291</fccs_id>
 	    <all_nat>11</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>11</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>801</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>802</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>803</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>810</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>813</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>821</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>822</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>823</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>824</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>888</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>0</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>301</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>302</fccs_id>
 	    <all_nat>13|7|13</all_nat>
 	    <all_act_west>0|7|1</all_act_west>
 	    <all_act_other>13|7|13</all_act_other>
-	    <source>15|7|1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>303</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>304</fccs_id>
 	    <all_nat>8|8</all_nat>
 	    <all_act_west>4|1</all_act_west>
 	    <all_act_other>4|1</all_act_other>
-	    <source>4|1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>305</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>306</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>3</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>307</fccs_id>
 	    <all_nat>7</all_nat>
 	    <all_act_west>7</all_act_west>
 	    <all_act_other>7</all_act_other>
-	    <source>7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>308</fccs_id>
 	    <all_nat>12|12</all_nat>
 	    <all_act_west>6|6</all_act_west>
 	    <all_act_other>12|12</all_act_other>
-	    <source>6</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>309</fccs_id>
 	    <all_nat>7</all_nat>
 	    <all_act_west>7</all_act_west>
 	    <all_act_other>7</all_act_other>
-	    <source>7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>310</fccs_id>
 	    <all_nat>7</all_nat>
 	    <all_act_west>7</all_act_west>
 	    <all_act_other>7</all_act_other>
-	    <source>7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>311</fccs_id>
 	    <all_nat>7</all_nat>
 	    <all_act_west>7</all_act_west>
 	    <all_act_other>7</all_act_other>
-	    <source>7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>312</fccs_id>
 	    <all_nat>7</all_nat>
 	    <all_act_west>7</all_act_west>
 	    <all_act_other>7</all_act_other>
-	    <source>7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>313</fccs_id>
 	    <all_nat>7|7</all_nat>
 	    <all_act_west>7|7</all_act_west>
 	    <all_act_other>7|7</all_act_other>
-	    <source>7|7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>314</fccs_id>
 	    <all_nat>7</all_nat>
 	    <all_act_west>7</all_act_west>
 	    <all_act_other>7</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>315</fccs_id>
 	    <all_nat>13|13|13</all_nat>
 	    <all_act_west>0|6|1</all_act_west>
 	    <all_act_other>13|13|13</all_act_other>
-	    <source>15|6|1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>316</fccs_id>
 	    <all_nat>7</all_nat>
 	    <all_act_west>7</all_act_west>
 	    <all_act_other>7</all_act_other>
-	    <source>7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>317</fccs_id>
 	    <all_nat>7</all_nat>
 	    <all_act_west>7</all_act_west>
 	    <all_act_other>7</all_act_other>
-	    <source>7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>318</fccs_id>
 	    <all_nat>13|7</all_nat>
 	    <all_act_west>0|7</all_act_west>
 	    <all_act_other>13|7</all_act_other>
-	    <source>15|7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>319</fccs_id>
 	    <all_nat>8</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>1</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>320</fccs_id>
 	    <all_nat>8|8</all_nat>
 	    <all_act_west>4|3</all_act_west>
 	    <all_act_other>4|3</all_act_other>
-	    <source>4|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>401</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>402</fccs_id>
 	    <all_nat>11|11|11</all_nat>
 	    <all_act_west>3|3|3</all_act_west>
 	    <all_act_other>11|11|11</all_act_other>
-	    <source>3|3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>403</fccs_id>
 	    <all_nat>9|7|7</all_nat>
 	    <all_act_west>2|7|7</all_act_west>
 	    <all_act_other>9|7|7</all_act_other>
-	    <source>2|7|7</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>404</fccs_id>
 	    <all_nat>9|9</all_nat>
 	    <all_act_west>2|2</all_act_west>
 	    <all_act_other>9|9</all_act_other>
-	    <source>2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>405</fccs_id>
 	    <all_nat>9|9</all_nat>
 	    <all_act_west>2|2</all_act_west>
 	    <all_act_other>9|9</all_act_other>
-	    <source>2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>406</fccs_id>
 	    <all_nat>9|11</all_nat>
 	    <all_act_west>2|3</all_act_west>
 	    <all_act_other>9|11</all_act_other>
-	    <source>2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>407</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>409</fccs_id>
 	    <all_nat>11</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>11</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>410</fccs_id>
 	    <all_nat>10</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>10</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>411</fccs_id>
 	    <all_nat>5</all_nat>
 	    <all_act_west>5</all_act_west>
 	    <all_act_other>5</all_act_other>
-	    <source>5</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>412</fccs_id>
 	    <all_nat>7</all_nat>
 	    <all_act_west>7</all_act_west>
 	    <all_act_other>7</all_act_other>
-	    <source>7|1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>413</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>417</fccs_id>
 	    <all_nat>13</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>13</all_act_other>
-	    <source>15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>419</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>420</fccs_id>
 	    <all_nat>13|13</all_nat>
 	    <all_act_west>0|0</all_act_west>
 	    <all_act_other>13|13</all_act_other>
-	    <source>15|15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>421</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>422</fccs_id>
 	    <all_nat>13|13</all_nat>
 	    <all_act_west>0|0</all_act_west>
 	    <all_act_other>13|13</all_act_other>
-	    <source>15|15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>423</fccs_id>
 	    <all_nat>13|13</all_nat>
 	    <all_act_west>0|0</all_act_west>
 	    <all_act_other>13|13</all_act_other>
-	    <source>15|15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>424</fccs_id>
 	    <all_nat>11</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>11</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>425</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>426</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>427</fccs_id>
 	    <all_nat>10</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>10</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>428</fccs_id>
 	    <all_nat>13</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>13</all_act_other>
-	    <source>15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>429</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>430</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>431</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>433</fccs_id>
 	    <all_nat>10</all_nat>
 	    <all_act_west>3</all_act_west>
 	    <all_act_other>10</all_act_other>
-	    <source>3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>434</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>435</fccs_id>
 	    <all_nat>13</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>13</all_act_other>
-	    <source>15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>436</fccs_id>
 	    <all_nat>13</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>13</all_act_other>
-	    <source>15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>437</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>438</fccs_id>
 	    <all_nat>11</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>11</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>439</fccs_id>
 	    <all_nat>11</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>11</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>440</fccs_id>
 	    <all_nat>11|11</all_nat>
 	    <all_act_west>4|2</all_act_west>
 	    <all_act_other>11|11</all_act_other>
-	    <source>4|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>441</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>442</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>443</fccs_id>
 	    <all_nat>13</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>13</all_act_other>
-	    <source>15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>445</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>1</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>448</fccs_id>
 	    <all_nat>11</all_nat>
 	    <all_act_west>4</all_act_west>
 	    <all_act_other>11</all_act_other>
-	    <source>4</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>449</fccs_id>
 	    <all_nat>9</all_nat>
 	    <all_act_west>2</all_act_west>
 	    <all_act_other>9</all_act_other>
-	    <source>2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>450</fccs_id>
 	    <all_nat>5</all_nat>
 	    <all_act_west>5</all_act_west>
 	    <all_act_other>5</all_act_other>
-	    <source>5</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>451</fccs_id>
 	    <all_nat>5</all_nat>
 	    <all_act_west>5</all_act_west>
 	    <all_act_other>5</all_act_other>
-	    <source>5</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>453</fccs_id>
 	    <all_nat>13|13</all_nat>
 	    <all_act_west>0|0</all_act_west>
 	    <all_act_other>13|13</all_act_other>
-	    <source>15|15</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>454</fccs_id>
 	    <all_nat>9|9</all_nat>
 	    <all_act_west>2|2</all_act_west>
 	    <all_act_other>9|9</all_act_other>
-	    <source>2|2</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>455</fccs_id>
 	    <all_nat>10|10</all_nat>
 	    <all_act_west>3|3</all_act_west>
 	    <all_act_other>10|10</all_act_other>
-	    <source>3|3</source>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>456</fccs_id>
 	    <all_nat>0</all_nat>
 	    <all_act_west>0</all_act_west>
 	    <all_act_other>0</all_act_other>
-	    <source>1</source>
     </FCCS_EFG>
 	<cover_type>
 		<cover_type_ID>1</cover_type_ID>
