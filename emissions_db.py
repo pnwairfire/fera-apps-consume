@@ -65,13 +65,25 @@ class EmissionsFactorDB:
             ef_eqid_map[id] = components
         return ef_eqid_map
 
+    def load_data(self, node, tag_name, text_data):
+        """ Loads data from xml file based on the given tag name """
+        if tag_name in text_data:
+            data = node.findtext(tag_name)
+        else:
+            if node.findtext(tag_name) == 'na':
+                data = 'na'
+            else:
+                data = 0.0
+                data = node.findtext(tag_name)
+                if not data or float(data) < 0:
+                    data = 0.0
+                else:
+                    data = float(data)
+        return data
+
     def _load_from_xml_db(self, tag):
         """Load emissions factor data from an external xml file
-
-        Loads emission factor data from an XML file.
-
         """
-
         tag_name_efg = ['ID', 'fuel_type', 'n', 'references', 'PM_flaming',
                         'PM10b_flaming', 'PM25_flaming', 'CO_flaming',
                         'CO2_flaming', 'CH4_flaming', 'NMHC_flaming',
@@ -80,25 +92,7 @@ class EmissionsFactorDB:
                         'CH4_smold_resid', 'NMHC_smold_resid']
 
         tag_name_ct = ['cover_type_ID', 'type_number', 'type_name']
-        text_data = (['ID', 'fuel_type', 'references', 'n', 'fccs_id'] +
-                     tag_name_ct)
-
-
-        def load_data(node, tag_name):
-            """ Loads data from xml file based on the given tag name """
-            if tag_name in text_data:
-                data = node.findtext(tag_name)
-            else:
-                if node.findtext(tag_name) == 'na':
-                    data = 'na'
-                else:
-                    data = 0.0
-                    data = node.findtext(tag_name)
-                    if not data or float(data) < 0:
-                        data = 0.0
-                    else:
-                        data = float(data)
-            return data
+        text_data = (['ID', 'fuel_type', 'references', 'n', 'fccs_id'] + tag_name_ct)
 
         from xml.etree import ElementTree as ET
         tree = ET.parse(self.xml_file)
@@ -114,12 +108,11 @@ class EmissionsFactorDB:
             print "Weird error somewhere"
 
         allData = []
-
         for node in root:
             temp = {}
             if node.tag == tag:
                 for tn in tag_names:
-                    temp[tn] = (load_data(node, tn))
+                    temp[tn] = (self.load_data(node, tn, text_data))
                 allData.append(temp)
 
         del root
@@ -131,15 +124,19 @@ class EmissionsFactorDB:
 
         Displays a table of emissions factor groups and their associated
         fuel types and references.
-
         """
-
         print ("\nID#\tFuel type\t\tReference\n" +
                "-------------------------------------------------")
         for c in self.data:
             print (str(c['ID']) + "\t" + str(c['fuel_type']) +
                 "\t" + str(c['references']))
 
+    def tabs(self, nm):
+        t = 2 - (int(len(nm)) / tsize)
+        return nm + "\t" * t
+
+    check = True
+    txt = ""
 
     def info(self, efg_id, ret = False, tsize = 8):
         """Display an emission factor group description.
@@ -148,14 +145,7 @@ class EmissionsFactorDB:
         with the specified group id. Requires emissions factor group ID number
         as the only argument. For a list of valid emissions factor groups, use
         the .browse() method.
-
         """
-        def tabs(nm):
-            t = 2 - (int(len(nm)) / tsize)
-            return nm + "\t" * t
-
-        check = True
-        txt = ""
 
         for i in range(0, len(self.data)):
             if int(self.data[i]['ID']) == int(efg_id):
@@ -166,7 +156,7 @@ class EmissionsFactorDB:
                 txt += "\nN : " + str(dat['n'])
                 txt += "\nReference : " + str(dat['references'])
                 txt += ("\n\nEmissions factors (lbs/ton consumed):" +
-                       "\n\n\t\t" + tabs("flaming\t\tsmoldering/residual"))
+                       "\n\n\t\t" + self.tabs("flaming\t\tsmoldering/residual"))
 
                 for es in ['PM   ', 'PM10b', 'PM25', 'CO   ', 'CO2 ', 'CH4 ', 'NMHC']:
                     fla = dat[es.strip() + '_flaming']
@@ -174,9 +164,7 @@ class EmissionsFactorDB:
                     if not type(fla) is str and not type(smo) is str:
                         fla = "%.1f" % fla
                         smo = "%.1f" % smo
-                    txt += "\n" + tabs(es.rstrip('b')) + tabs(fla) + tabs(smo)
-
-
+                    txt += "\n" + self.tabs(es.rstrip('b')) + self.tabs(fla) + self.tabs(smo)
 
         if int(efg_id) == -1:
             check = False
