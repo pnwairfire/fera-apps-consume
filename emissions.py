@@ -710,7 +710,7 @@ class Emissions:
                     if emissions_factor_group < 0:
                         efnums = self.efDB.get_efgs(emissions_factor_group,
                                  self.FCobj.InSet.validated_inputs['fuelbeds'],
-                                 self.FCobj.InSet.validated_inputs['ecoregion'])[0]
+                                 self.FCobj.InSet.validated_inputs['ecoregion'])
 
                 self.InSet.params['efg'].value = efnums
                 self.InSet.validated_inputs['efg'] = efnums
