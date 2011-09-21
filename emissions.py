@@ -710,7 +710,7 @@ class Emissions:
                     if emissions_factor_group < 0:
                         efnums = self.efDB.get_efgs(emissions_factor_group,
                                  self.FCobj.InSet.validated_inputs['fuelbeds'],
-                                 self.FCobj.InSet.validated_inputs['ecoregion'])
+                                 self.FCobj.InSet.validated_inputs['ecoregion'][0])
 
                 self.InSet.params['efg'].value = efnums
                 self.InSet.validated_inputs['efg'] = efnums
@@ -808,22 +808,17 @@ class Emissions:
         ef_smres_nmhc = np.array([t['NMHC_smold_resid']] * fidlen, dtype = float)
 
         # And go fetch factors from the chosen emissions factor groups
-        elLen = len(efg)
-        dbDataLen = len(self.efDB.data)
         for i in range(0, fidlen):
-            for j in range(0, len(self.efDB.data)):
-                check = int(self.efDB.data[j]['ID'])
-                if ef_num[i] == self.efDB.data[j]['ID']:
-                    data = self.efDB.data[j]
-                    ef_flamg_pm25[i] = data['PM25_flaming']; ef_smres_pm25[i] = data['PM25_smold_resid']
-                    ef_flamg_co[i] = data['CO_flaming']; ef_smres_co[i] = data['CO_smold_resid']
-                    ef_flamg_co2[i] = data['CO2_flaming']; ef_smres_co2[i] = data['CO2_smold_resid']
-                    ef_flamg_ch4[i] = data['CH4_flaming']; ef_smres_ch4[i] = data['CH4_smold_resid']
-                    ef_flamg_nmhc[i] = data['NMHC_flaming']; ef_smres_nmhc[i] = data['NMHC_smold_resid']
+            data = self.efDB.data[int(ef_num[i])]
+            ef_flamg_pm25[i] = data['PM25_flaming']; ef_smres_pm25[i] = data['PM25_smold_resid']
+            ef_flamg_co[i] = data['CO_flaming']; ef_smres_co[i] = data['CO_smold_resid']
+            ef_flamg_co2[i] = data['CO2_flaming']; ef_smres_co2[i] = data['CO2_smold_resid']
+            ef_flamg_ch4[i] = data['CH4_flaming']; ef_smres_ch4[i] = data['CH4_smold_resid']
+            ef_flamg_nmhc[i] = data['NMHC_flaming']; ef_smres_nmhc[i] = data['NMHC_smold_resid']
 
-                    if ef_num[i] < 8 or ef_num[i] > 14:
-                        ef_flamg_pm[i] = data['PM_flaming']; ef_smres_pm[i] = data['PM_smold_resid']
-                        ef_flamg_pm10[i] = data['PM10b_flaming']; ef_smres_pm10[i] = data['PM10b_smold_resid']
+            if ef_num[i] < 8 or ef_num[i] > 14:
+                ef_flamg_pm[i] = data['PM_flaming']; ef_smres_pm[i] = data['PM_smold_resid']
+                ef_flamg_pm10[i] = data['PM10b_flaming']; ef_smres_pm10[i] = data['PM10b_smold_resid']
 
         fill = [np.array([0] * fidlen, dtype=float)]
         ef_pm = np.array([ef_flamg_pm] + [ef_smres_pm] + [ef_smres_pm] + fill)
