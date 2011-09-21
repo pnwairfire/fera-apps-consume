@@ -118,7 +118,6 @@ class EmissionsFactorDB:
         del root
         return allData
 
-
     def browse(self):
         """Display the emissions factor table
 
@@ -223,11 +222,9 @@ class EmissionsFactorDB:
                                     -12 = natural burns, user-select
                                     -13 = activity burns, auto-select
                                     -14 = activity burns, user-select
-
         """
-        # Main program
         ef_nums = []
-        for f in range(0, len(fuelbed_list)): #<<< uinput
+        for f in range(0, len(fuelbed_list)):
             fuelbed_id = fuelbed_list[f]
             eq_id_key = self.get_key(self.FCobj.burn_type.value[0], ecoregion)
             if fuelbed_id in self.fccs_emissions_groups:

@@ -468,7 +468,7 @@ class Emissions:
         ins = self.FCobj.InSet.validated_inputs
         ins['emissions_fac_group'] = self.InSet.validated_inputs['efg']
         ins['units_emissions'] = self.InSet.validated_inputs['units']
-        return make_dictionary_of_lists(cons_data = self.FCobj._cons_data,
+        return util.make_dictionary_of_lists(cons_data = self.FCobj._cons_data,
                                         heat_data = self.FCobj._heat_data,
                                         emis_data = self._emis_data,
                                         inputs = ins)

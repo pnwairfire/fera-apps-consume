@@ -63,19 +63,27 @@ class Driver(object):
         out += '\n'
         stream.write(out)
 
-    def check_emissions(self):
-        emissions = consume.Emissions(self._consumer)
-        emissions.report(csv="00emiss.csv")
+    def write_header_alternate(self, catagory_list, stream):
+        out = "fuelbed"
+        for i in catagory_list:
+            out += "," + i
+        out += '\n'
+        stream.write(out)
 
-    def write_csv(self, fuelbed_list, stream, header, debug):
+    def check_emissions(self):
+        ''' stub '''
+        #emissions = consume.Emissions(self._consumer)
+        #emissions.report(csv="00emiss.csv")
+        #results = emissions.results()
+        #print(results)
+
+    def write_csv(self, results, fuelbed_list, stream, header, debug):
     	### - top-level catagory list
         catagory_list = ['summary', 'canopy', 'ground fuels', 'litter-lichen-moss',
             'nonwoody', 'shrub', 'woody fuels']
         if debug:
             catagory_list.append('debug')
 
-        results = self._consumer.results()['consumption']
-        self.check_emissions()
         if header:
             self.write_header(results, catagory_list, stream)
         for fb_index in xrange(0, len(fuelbed_list)):
@@ -88,9 +96,52 @@ class Driver(object):
             out += '\n'
             stream.write(out)
 
+    def write_csv_alternate(self, results, fuelbed_list, stream, header):
+        if header:
+            columns = ['flaming', 'residual', 'smoldering', 'total']
+            self.write_header_alternate(results, columns, stream)
+        for fb_index in xrange(0, len(fuelbed_list)):
+            out = fuelbed_list[fb_index]
+            sorted_keys = sorted(results['summary']['total'].keys())
+            for key in sorted_keys:
+                out += "," + str(results['summary']['total'][key][fb_index])
+            out += '\n'
+            stream.write(out)
+
+    def write_csv_alt3(self, results, fuelbed_list, stream, header):
+        # use all the emission keys except 'stratum'
+        emissions_keys = sorted(results['emissions'].keys())
+        emissions_keys = [key for key in emissions_keys if key != 'stratum']
+        cons_keys = sorted(results['consumption']['summary']['total'].keys())
+
+        # build up the column headers
+        columns = []
+        for key in cons_keys:
+            columns.append("{}_{}".format("cons", key))
+        for i in emissions_keys:
+            for j in cons_keys:
+                columns.append("{}_{}".format(i, j))
+
+        if header:
+            self.write_header_alternate(columns, stream)
+        for fb_index in xrange(0, len(fuelbed_list)):
+            out = fuelbed_list[fb_index]
+
+            # print the consumption column values
+            for key in cons_keys:
+                out += "," + str(results['consumption']['summary']['total'][key][fb_index])
+
+            # print the emission column values
+            for i in emissions_keys:
+                for j in cons_keys:
+                    out += "," + str(results['emissions'][i][j][fb_index])
+            out += '\n'
+            stream.write(out)
+
     def run_tests(self, fuelbed_list=[], scenario_list=[], outfile=None, debug=False):
         self._reset_consumer()
-        outfilename = 'output_consume.csv'
+        #outfilename = 'output_consume.csv'
+        outfilename = 'output_consume_alternate.csv'
 
         #self._reset_activity_scenario()
         #self._reset_activity_scenario2()
@@ -120,7 +171,11 @@ class Driver(object):
             else:
                 print scene
                 self._consumer.fuelbed_ecoregion = scene
-            self.write_csv(fuelbed_list, outfile, write_header, debug)
+            emissions = consume.Emissions(self._consumer)
+            results = emissions.results()
+            #self.write_csv(results['consumption'], fuelbed_list, outfile, write_header, debug)
+            #self.write_csv_alternate(results['consumption'], fuelbed_list, outfile, write_header)
+            self.write_csv_alt3(results, fuelbed_list, outfile, write_header)
             write_header = False
 
         if close_file:

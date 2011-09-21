@@ -2,7 +2,7 @@ import numpy as np
 import math
 import data_desc as dd
 
-def make_dictionary_of_lists(cons_data, cons_debug_data, heat_data, emis_data, inputs):
+def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs, cons_debug_data=""):
     """
 
     Creates a dictionary of lists (accessed by calling the 'results' property)
@@ -24,9 +24,10 @@ def make_dictionary_of_lists(cons_data, cons_debug_data, heat_data, emis_data, i
 
     def cons_debug_dict(s):
         """ Return consumption dictionary for specified index"""
-        return {
-        'total' : cons_debug_data[s]
-        }
+        if len(cons_debug_data):
+            return { 'total' : cons_debug_data[s] }
+        else:
+            return None
 
     def emis_dict(s, p):
         """ Return emissions dictionary for specified index & species """
