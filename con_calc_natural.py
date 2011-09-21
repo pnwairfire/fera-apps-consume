@@ -43,12 +43,15 @@ def ccon_shrub(shrub_black_pct, LD):
         z = -2.6573 + (0.0956 * shb_load_total) + (0.0473 * shrub_black_pct)
 
         shb_cnsm_total = shb_load_total * util.propcons(z)
-        divzero = np.not_equal(shb_load_total, 0.0)
 
-        shb_prim_total = np.where(divzero,
-              shb_cnsm_total * (LD['shrub_prim'] / shb_load_total), 0.0)
-        shb_seco_total = np.where(divzero,
-              shb_cnsm_total * (LD['shrub_seco'] / shb_load_total), 0.0)
+        # - this works correctly but still generates a warning, use the
+        #   context manager to swallow the benign warning
+        with np.errstate(divide='ignore', invalid='ignore'):
+            nonzero_loading = np.not_equal(shb_load_total, 0.0)
+            shb_prim_total = np.where(nonzero_loading,
+                  shb_cnsm_total * (LD['shrub_prim'] / shb_load_total), 0.0)
+            shb_seco_total = np.where(nonzero_loading,
+                  shb_cnsm_total * (LD['shrub_seco'] / shb_load_total), 0.0)
 
         pctlivep = LD['shrub_prim_pctlv']
         pctdeadp = 1 - pctlivep

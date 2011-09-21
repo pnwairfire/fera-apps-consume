@@ -192,7 +192,7 @@ if len(sys.argv) > 1:
 else:
     #driver.run_tests(scenario_list=['activity'])
     #driver.run_tests(fuelbed_list=['1'], scenario_list=['activity'])
-    driver.run_tests(fuelbed_list=['41', '53', '235'], scenario_list=['western'])
+    driver.run_tests(fuelbed_list=['41', '53', '235'], scenario_list=['activity'])
     #driver.run_tests(scenario_list=['western'])
 
 """

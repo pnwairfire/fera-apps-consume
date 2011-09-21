@@ -172,9 +172,12 @@ def duff_redux_activity(
                                       (diam_reduction ** 0.5))
 
     # p161 ln 4784
-    adj_wet_duff_redux = (wet_df_redux +
-                         (moist_df_redux - wet_df_redux) *
-                         (days_since_rain / days_to_moist))
+    # - this works correctly but still generates a warning, use the
+    #   context manager to swallow the benign warning
+    with np.errstate(divide='ignore'):
+        nonzero_days = np.not_equal(days_to_moist, 0.0)
+        quotient = np.where(nonzero_days, (days_since_rain / days_to_moist), 0.0)
+    adj_wet_duff_redux = (wet_df_redux + (moist_df_redux - wet_df_redux) * quotient)
 
 
     # adjusted wet duff, to smooth the transition ln 4781
@@ -331,8 +334,15 @@ def ccon_ffr_activity(diam_reduction, oneK_fsrt, tenK_fsrt, tnkp_fsrt, days_sinc
     duff_depth = LD['duff_upper_depth'] + LD['duff_lower_depth']
     ffr_total_depth = (duff_depth + LD['lit_depth'] +
             LD['lch_depth'] + LD['moss_depth'])
+
+    # - this works correctly but still generates a warning, use the
+    #   context manager to swallow the benign warning
+    with np.errstate(divide='ignore', invalid='ignore'):
+        nonzero_depth = np.not_equal(duff_depth, 0.0)
+        quotient = np.where(nonzero_depth, (duff_redux / duff_depth), 0.0)
+
     calculated_reduction = np.where(np.greater(duff_depth, 0.0),
-        (duff_redux / duff_depth) * ffr_total_depth, 0.0)
+        quotient * ffr_total_depth, 0.0)
     ffr_redux = np.where(
         np.less(ffr_total_depth, calculated_reduction),
         ffr_total_depth, calculated_reduction)
