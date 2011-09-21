@@ -125,13 +125,6 @@ class EmissionsFactorDB:
                 self.data[c]['fuel_type'], self.data[c]['references'])
             print(out)
 
-    def tabs(self, nm):
-        t = 2 - (int(len(nm)) / tsize)
-        return nm + "\t" * t
-
-    check = True
-    txt = ""
-
     def info(self, efg_id, ret = False, tsize = 8):
         """Display an emission factor group description.
 
@@ -140,25 +133,22 @@ class EmissionsFactorDB:
         as the only argument. For a list of valid emissions factor groups, use
         the .browse() method.
         """
+        check = False
+        dat = self.data[int(efg_id)]
+        txt = "Emission factor group ID# : " + str(dat['ID'])
+        txt += "\nFuel type : " + str(dat['fuel_type'])
+        txt += "\nN : " + str(dat['n'])
+        txt += "\nReference : " + str(dat['references'])
+        txt += ("\n\nEmissions factors (lbs/ton consumed):" +
+               "\n\n\t\t" + tabs(tsize, "flaming\t\tsmoldering/residual"))
 
-        for i in range(0, len(self.data)):
-            if int(self.data[i]['ID']) == int(efg_id):
-                check = False
-                dat = self.data[i]
-                txt += "Emission factor group ID# : " + str(dat['ID'])
-                txt += "\nFuel type : " + str(dat['fuel_type'])
-                txt += "\nN : " + str(dat['n'])
-                txt += "\nReference : " + str(dat['references'])
-                txt += ("\n\nEmissions factors (lbs/ton consumed):" +
-                       "\n\n\t\t" + self.tabs("flaming\t\tsmoldering/residual"))
-
-                for es in ['PM   ', 'PM10b', 'PM25', 'CO   ', 'CO2 ', 'CH4 ', 'NMHC']:
-                    fla = dat[es.strip() + '_flaming']
-                    smo = dat[es.strip() + '_smold_resid']
-                    if not type(fla) is str and not type(smo) is str:
-                        fla = "%.1f" % fla
-                        smo = "%.1f" % smo
-                    txt += "\n" + self.tabs(es.rstrip('b')) + self.tabs(fla) + self.tabs(smo)
+        for es in ['PM   ', 'PM10b', 'PM25', 'CO   ', 'CO2 ', 'CH4 ', 'NMHC']:
+            fla = dat[es.strip() + '_flaming']
+            smo = dat[es.strip() + '_smold_resid']
+            if not type(fla) is str and not type(smo) is str:
+                fla = "%.1f" % fla
+                smo = "%.1f" % smo
+            txt += "\n" + tabs(tsize, es.rstrip('b')) + tabs(tsize, fla) + tabs(tsize, smo)
 
         if int(efg_id) == -1:
             check = False
@@ -254,6 +244,11 @@ class EmissionsFactorDB:
 ##                return choice
 ##            else:
 ##                return choice
+
+def tabs(tsize, nm):
+    t = 2 - (int(len(nm)) / tsize)
+    return nm + "\t" * t
+
 def get_float(in_str):
     try:
         ret_val = float(in_str)
