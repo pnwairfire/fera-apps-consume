@@ -813,7 +813,7 @@ class Emissions:
         for i in range(0, fidlen):
             for j in range(0, len(self.efDB.data)):
                 check = int(self.efDB.data[j]['ID'])
-                if ef_num[i] == int(self.efDB.data[j]['ID']):
+                if ef_num[i] == self.efDB.data[j]['ID']:
                     data = self.efDB.data[j]
                     ef_flamg_pm25[i] = data['PM25_flaming']; ef_smres_pm25[i] = data['PM25_smold_resid']
                     ef_flamg_co[i] = data['CO_flaming']; ef_smres_co[i] = data['CO_smold_resid']
