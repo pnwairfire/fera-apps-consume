@@ -118,11 +118,12 @@ class EmissionsFactorDB:
         Displays a table of emissions factor groups and their associated
         fuel types and references.
         """
-        print ("\nID#\tFuel type\t\tReference\n" +
+        print ("\nID#\tFuel type\t\t\tReference\n" +
                "-------------------------------------------------")
         for c in self.data:
-            print (str(self.data[c]['ID']) + "\t" + str(self.data[c]['fuel_type']) +
-                "\t" + str(self.data[c]['references']))
+            out = "{}\t{}\t\t\t{}".format(c,
+                self.data[c]['fuel_type'], self.data[c]['references'])
+            print(out)
 
     def tabs(self, nm):
         t = 2 - (int(len(nm)) / tsize)
@@ -257,7 +258,7 @@ def get_float(in_str):
     try:
         ret_val = float(in_str)
     except:
-        ret_val = 0.0
+        ret_val = in_str
     return ret_val
 
 def get_item(tag, container):
