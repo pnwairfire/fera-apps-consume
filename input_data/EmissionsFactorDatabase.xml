@@ -5,20 +5,20 @@
     	<fuel_type>Default - User's Guide</fuel_type>
     	<n>average of all</n>
     	<references>Ottmar - Consume 3.0 documentation</references>
-    	<PM_flaming>23</PM_flaming>
-    	<PM10b_flaming>15</PM10b_flaming>
-    	<PM25_flaming>13</PM25_flaming>
-    	<CO_flaming>90</CO_flaming>
-    	<CO2_flaming>2522</CO2_flaming>
-    	<CH4_flaming>3</CH4_flaming>
-    	<NMHC_flaming>5</NMHC_flaming>
-    	<PM_smold_resid>34</PM_smold_resid>
-    	<PM10b_smold_resid>24</PM10b_smold_resid>
-    	<PM25_smold_resid>19</PM25_smold_resid>
-    	<CO_smold_resid>209</CO_smold_resid>
-    	<CO2_smold_resid>2285</CO2_smold_resid>
-    	<CH4_smold_resid>11</CH4_smold_resid>
-    	<NMHC_smold_resid>10</NMHC_smold_resid>
+    	<PM_flaming>26.7</PM_flaming>
+    	<PM10b_flaming>16.8</PM10b_flaming>
+    	<PM25_flaming>13.1</PM25_flaming>
+    	<CO_flaming>89.5</CO_flaming>
+    	<CO2_flaming>2521.9</CO2_flaming>
+    	<CH4_flaming>3.3</CH4_flaming>
+    	<NMHC_flaming>4.8</NMHC_flaming>
+    	<PM_smold_resid>39.4</PM_smold_resid>
+    	<PM10b_smold_resid>27.9</PM10b_smold_resid>
+    	<PM25_smold_resid>19.1</PM25_smold_resid>
+    	<CO_smold_resid>209.3</CO_smold_resid>
+    	<CO2_smold_resid>2285.4</CO2_smold_resid>
+    	<CH4_smold_resid>11.1</CH4_smold_resid>
+    	<NMHC_smold_resid>10.4</NMHC_smold_resid>
     </EFG>
     <EFG>
     	<ID>1</ID>
@@ -165,15 +165,15 @@
     	<fuel_type>Western Pine      </fuel_type>
     	<n>53</n>
     	<references>Baker 2005</references>
-    	<PM_flaming>na</PM_flaming>
-    	<PM10b_flaming>na</PM10b_flaming>
+    	<PM_flaming>26.7</PM_flaming>
+    	<PM10b_flaming>16.8</PM10b_flaming>
     	<PM25_flaming>13.82</PM25_flaming>
     	<CO_flaming>81.65</CO_flaming>
     	<CO2_flaming>1663.32</CO2_flaming>
     	<CH4_flaming>2.89</CH4_flaming>
     	<NMHC_flaming>2.77</NMHC_flaming>
-    	<PM_smold_resid>na</PM_smold_resid>
-    	<PM10b_smold_resid>na</PM10b_smold_resid>
+    	<PM_smold_resid>39.4</PM_smold_resid>
+    	<PM10b_smold_resid>27.9</PM10b_smold_resid>
     	<PM25_smold_resid>14.43</PM25_smold_resid>
     	<CO_smold_resid>141.47</CO_smold_resid>
     	<CO2_smold_resid>1551.59</CO2_smold_resid>
@@ -185,15 +185,15 @@
     	<fuel_type>Minnesota Oak    </fuel_type>
     	<n>14</n>
     	<references>Baker 2006</references>
-    	<PM_flaming>na</PM_flaming>
-    	<PM10b_flaming>na</PM10b_flaming>
+    	<PM_flaming>26.7</PM_flaming>
+    	<PM10b_flaming>16.8</PM10b_flaming>
     	<PM25_flaming>10.02</PM25_flaming>
     	<CO_flaming>61.19</CO_flaming>
     	<CO2_flaming>1709.21</CO2_flaming>
     	<CH4_flaming>1.66</CH4_flaming>
     	<NMHC_flaming>1.92</NMHC_flaming>
-    	<PM_smold_resid>na</PM_smold_resid>
-    	<PM10b_smold_resid>na</PM10b_smold_resid>
+    	<PM_smold_resid>39.4</PM_smold_resid>
+    	<PM10b_smold_resid>27.9</PM10b_smold_resid>
     	<PM25_smold_resid>10.45</PM25_smold_resid>
     	<CO_smold_resid>109.06</CO_smold_resid>
     	<CO2_smold_resid>1609.45</CO2_smold_resid>
@@ -205,15 +205,15 @@
     	<fuel_type>Minnesota Pine   </fuel_type>
     	<n>9</n>
     	<references>Baker 2007</references>
-    	<PM_flaming>na</PM_flaming>
-    	<PM10b_flaming>na</PM10b_flaming>
+    	<PM_flaming>26.7</PM_flaming>
+    	<PM10b_flaming>16.8</PM10b_flaming>
     	<PM25_flaming>11.71</PM25_flaming>
     	<CO_flaming>64.62</CO_flaming>
     	<CO2_flaming>1694.33</CO2_flaming>
     	<CH4_flaming>2.03</CH4_flaming>
     	<NMHC_flaming>2.03</NMHC_flaming>
-    	<PM_smold_resid>na</PM_smold_resid>
-    	<PM10b_smold_resid>na</PM10b_smold_resid>
+    	<PM_smold_resid>39.4</PM_smold_resid>
+    	<PM10b_smold_resid>27.9</PM10b_smold_resid>
     	<PM25_smold_resid>13.44</PM25_smold_resid>
     	<CO_smold_resid>90.77</CO_smold_resid>
     	<CO2_smold_resid>1644.78</CO2_smold_resid>
@@ -225,15 +225,15 @@
     	<fuel_type>Southern Pine    </fuel_type>
     	<n>206</n>
     	<references>Baker 2008</references>
-    	<PM_flaming>na</PM_flaming>
-    	<PM10b_flaming>na</PM10b_flaming>
+    	<PM_flaming>26.7</PM_flaming>
+    	<PM10b_flaming>16.8</PM10b_flaming>
     	<PM25_flaming>11.44</PM25_flaming>
     	<CO_flaming>72.79</CO_flaming>
     	<CO2_flaming>1680.72</CO2_flaming>
     	<CH4_flaming>2.04</CH4_flaming>
     	<NMHC_flaming>2.48</NMHC_flaming>
-    	<PM_smold_resid>na</PM_smold_resid>
-    	<PM10b_smold_resid>na</PM10b_smold_resid>
+    	<PM_smold_resid>39.4</PM_smold_resid>
+    	<PM10b_smold_resid>27.9</PM10b_smold_resid>
     	<PM25_smold_resid>9.91</PM25_smold_resid>
     	<CO_smold_resid>119.34</CO_smold_resid>
     	<CO2_smold_resid>1601.54</CO2_smold_resid>
@@ -245,15 +245,15 @@
     	<fuel_type>Sage             </fuel_type>
     	<n>16</n>
     	<references>Baker 2009</references>
-    	<PM_flaming>na</PM_flaming>
-    	<PM10b_flaming>na</PM10b_flaming>
+    	<PM_flaming>26.7</PM_flaming>
+    	<PM10b_flaming>16.8</PM10b_flaming>
     	<PM25_flaming>12.92</PM25_flaming>
     	<CO_flaming>126.35</CO_flaming>
     	<CO2_flaming>1589.82</CO2_flaming>
     	<CH4_flaming>3.12</CH4_flaming>
     	<NMHC_flaming>4.35</NMHC_flaming>
-    	<PM_smold_resid>na</PM_smold_resid>
-    	<PM10b_smold_resid>na</PM10b_smold_resid>
+    	<PM_smold_resid>39.4</PM_smold_resid>
+    	<PM10b_smold_resid>27.9</PM10b_smold_resid>
     	<PM25_smold_resid>8.36</PM25_smold_resid>
     	<CO_smold_resid>184.22</CO_smold_resid>
     	<CO2_smold_resid>1452.55</CO2_smold_resid>
@@ -265,15 +265,15 @@
     	<fuel_type>Minnesota Grass  </fuel_type>
     	<n>23</n>
     	<references>Baker 2010</references>
-    	<PM_flaming>na</PM_flaming>
-    	<PM10b_flaming>na</PM10b_flaming>
+    	<PM_flaming>20</PM_flaming>
+    	<PM10b_flaming>20</PM10b_flaming>
     	<PM25_flaming>12.18</PM25_flaming>
     	<CO_flaming>61.35</CO_flaming>
     	<CO2_flaming>1698.00</CO2_flaming>
     	<CH4_flaming>2.12</CH4_flaming>
     	<NMHC_flaming>3.82</NMHC_flaming>
-    	<PM_smold_resid>na</PM_smold_resid>
-    	<PM10b_smold_resid>na</PM10b_smold_resid>
+    	<PM_smold_resid>20</PM_smold_resid>
+    	<PM10b_smold_resid>20</PM10b_smold_resid>
     	<PM25_smold_resid>10.75</PM25_smold_resid>
     	<CO_smold_resid>109.37</CO_smold_resid>
     	<CO2_smold_resid>1629.92</CO2_smold_resid>
@@ -285,15 +285,15 @@
     	<fuel_type>Arizona Piles    </fuel_type>
     	<n>76</n>
     	<references>Baker 2011</references>
-    	<PM_flaming>na</PM_flaming>
-    	<PM10b_flaming>na</PM10b_flaming>
+    	<PM_flaming>26.7</PM_flaming>
+    	<PM10b_flaming>16.8</PM10b_flaming>
     	<PM25_flaming>7.74</PM25_flaming>
     	<CO_flaming>52.66</CO_flaming>
     	<CO2_flaming>1714.61</CO2_flaming>
     	<CH4_flaming>3.28</CH4_flaming>
     	<NMHC_flaming>3.56</NMHC_flaming>
-    	<PM_smold_resid>na</PM_smold_resid>
-    	<PM10b_smold_resid>na</PM10b_smold_resid>
+    	<PM_smold_resid>39.4</PM_smold_resid>
+    	<PM10b_smold_resid>27.9</PM10b_smold_resid>
     	<PM25_smold_resid>21.05</PM25_smold_resid>
     	<CO_smold_resid>130.37</CO_smold_resid>
     	<CO2_smold_resid>1544.93</CO2_smold_resid>
