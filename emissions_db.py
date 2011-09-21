@@ -97,22 +97,7 @@ class EmissionsFactorDB:
 
         Links the SAF Cover Type data provided in the FCCS data to the
         appropriate emissions factors from the EmissionsFactorDatabase.xml,
-        then checks if multiple appropriate emissions factors exist.
-
-        If multiple valid sets exist, the emissions_factor_group argument
-        determines whether a group is automatically selected (auto selection
-        chooses the majority set or the first set listed if no majority
-        exists) or prompts the user to choose a group of emissions factors.
-
-        emissions_factor_group  :   # valid (acc. to Ottmar/Prichard) groupings:
-                                    -1 = all burns, auto-select
-                                    -2 = all burns, user-select
-
-                                    # proposed/not yet validated groupings:
-                                    -11 = natural burns, auto-select
-                                    -12 = natural burns, user-select
-                                    -13 = activity burns, auto-select
-                                    -14 = activity burns, user-select
+        If multiple cover types exist the first is chosen and mapped to SAF data.
         """
         ef_nums = []
         for f in range(0, len(fuelbed_list)):
@@ -136,8 +121,8 @@ class EmissionsFactorDB:
         print ("\nID#\tFuel type\t\tReference\n" +
                "-------------------------------------------------")
         for c in self.data:
-            print (str(c['ID']) + "\t" + str(c['fuel_type']) +
-                "\t" + str(c['references']))
+            print (str(self.data[c]['ID']) + "\t" + str(self.data[c]['fuel_type']) +
+                "\t" + str(self.data[c]['references']))
 
     def tabs(self, nm):
         t = 2 - (int(len(nm)) / tsize)
