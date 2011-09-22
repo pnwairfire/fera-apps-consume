@@ -172,7 +172,6 @@ class Driver(object):
                 print scene
                 self._consumer.fuelbed_ecoregion = scene
             emissions = consume.Emissions(self._consumer)
-            print(emissions.efDB.info(5))
             results = emissions.results()
             #self.write_csv(results['consumption'], fuelbed_list, outfile, write_header, debug)
             #self.write_csv_alternate(results['consumption'], fuelbed_list, outfile, write_header)

@@ -1,1 +1,1 @@
-c:\progfiles_x86\Python27\Scripts\nosetests.exe -w unittest  --detailed-errors
+@set PYTHONPATH=%PYTHONPATH%;. && c:\progfiles_x86\Python27\Scripts\nosetests.exe -w unittest  --detailed-errors
