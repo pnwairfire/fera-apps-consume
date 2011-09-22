@@ -1300,9 +1300,9 @@
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>216</fccs_id>
-	    <all_nat>0</all_nat>
-	    <all_act_west>0</all_act_west>
-	    <all_act_other>0</all_act_other>
+	    <all_nat>7</all_nat>
+	    <all_act_west>7</all_act_west>
+	    <all_act_other>7</all_act_other>
     </FCCS_EFG>
     <FCCS_EFG>
 	    <fccs_id>217</fccs_id>
