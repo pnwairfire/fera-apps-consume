@@ -24,11 +24,12 @@ def isNumber(s):
 class DataObj(object):
     """ Read a csv file and create a map keyed by lines and columns
         Allow for 2 of these objects to be compared."""
-    def __init__(self, filename):
+    def __init__(self, filename, console=True):
         self._filename= filename
         self._debug= False
         self._map = dict()
         self._cols= []
+        self._console_output = console
         self.ReadFile()
 
     def ReadFile(self):
@@ -49,14 +50,14 @@ class DataObj(object):
             aa = dec.Decimal(a.lstrip('-')).quantize(PLACES)
             bb = dec.Decimal(b.lstrip('-')).quantize(PLACES)
             if not WithinThisManyULP(aa, bb, TOLERANCE):
-                print "{} : {} : {} : {}".format(key, column, aa, bb)
+                if self._console_output:
+                    print "{} : {} : {} : {}".format(key, column, aa, bb)
                 compare = False
             else:
                 if self._debug:
                     print "Good - {} : {} : {} : {}".format(key, column, aa, bb)
         elif(self._debug):
             print "Not compared {} : {}".format(a, b)
-
         return compare
 
     def CheckColumns(self, a, b):
@@ -71,8 +72,9 @@ class DataObj(object):
             ### - eliminate 'marker' columns
             if not re.search('^[A-Z].*$', i.strip()):
                 diffMinusMarkerCols.append(i)
-        print "\nColumns checked:\n\t{}\n".format("\n\t".join(common))
-        print "Columns not checked:\n\t{}\n".format("\n\t".join(diffMinusMarkerCols))
+        if self._console_output:
+            print "\nColumns checked:\n\t{}\n".format("\n\t".join(common))
+            print "Columns not checked:\n\t{}\n".format("\n\t".join(diffMinusMarkerCols))
 
     def GetCommonKeys(self, keysA, keysB):
         aa = set(keysA)
@@ -97,8 +99,10 @@ class DataObj(object):
                         self._map[key][col], other._map[key][col], key, col)
                     comparisons += 1
                     failures += 1 if not check else 0
-        print "\n{} comparisons {} failures".format(comparisons, failures)
-        print "Left value = {}   Right values = {}".format(self._filename, other._filename)
+        if self._console_output:
+            print "\n{} comparisons {} failures".format(comparisons, failures)
+            print "Left value = {}   Right values = {}".format(self._filename, other._filename)
+        return failures, comparisons
 
 def main():
     if len(sys.argv) > 2:
