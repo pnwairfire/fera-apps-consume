@@ -83,7 +83,7 @@ class EmissionsFactorDB:
         if burn_type == 'natural':
             key = 'all_nat'
         elif burn_type == 'activity':
-            key = 'all_act_west' if ecoregion == 'western' else 'all_act_other'
+            key = 'all_act_other'
         return key
 
     def get_group_id(self, efgs, key):
