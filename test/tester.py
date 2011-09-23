@@ -10,9 +10,10 @@
 #!/usr/bin/env python
 import csv
 import sys
-from ulp import WithinThisManyULP
+from ulp import WithinThisManyULP, HowManyULP
 import decimal as dec
 import re
+import math
 
 def isNumber(s):
     try:
@@ -40,18 +41,29 @@ class DataObj(object):
         for row in reader:
             self._map[row['fuelbed']] = row
 
+    def GetTolerance(self, number):
+        if number < 0.01:
+            return 1000000000
+        elif number < 0.1:
+            return 100000000
+        else:
+            check = number * dec.Decimal(0.05)
+            dist = HowManyULP(number, number + check)
+            return dist
+
     def CompareItems(self, a, b, key, column):
         """ Convert strings to Decimals and truncate sensibly. Compare with
             the specified tolerance factor """
         compare = True
-        TOLERANCE = 1000000000
+        check = HowManyULP(23.0001, 23.0002)
         PLACES = dec.Decimal('0.0001')
         if isNumber(a) and isNumber(b):
             aa = dec.Decimal(a.lstrip('-')).quantize(PLACES)
             bb = dec.Decimal(b.lstrip('-')).quantize(PLACES)
-            if not WithinThisManyULP(aa, bb, TOLERANCE):
+            tolerance = self.GetTolerance(max(aa, bb))
+            if not WithinThisManyULP(aa, bb, tolerance):
                 if self._console_output:
-                    print "{} : {} : {} : {}".format(key, column, aa, bb)
+                    print "{}:\t{}\t:\t{}\t:\t{}".format(key, column, aa, bb)
                 compare = False
             else:
                 if self._debug:

@@ -17,12 +17,22 @@ def write_columns(results, catagories, stream, first_element, index, header=Fals
         sorted_keys = sorted(results[cat].keys())
         for key in sorted_keys:
             out += ","
-            out += str(results[cat][key]['total'][index]) if not header else key
+            if not header:
+                out += str(results[cat][key]['total'][index])
+            else:
+                out += key
     out += '\n'
     stream.write(out)
 
 def write_header(results, catagory_list, stream):
     write_columns(results, catagory_list, stream, 'fuelbed', None, True)
+
+def write_header_emissions(catagory_list, stream):
+    out = "fuelbed"
+    for i in catagory_list:
+        out += "," + i
+    out += '\n'
+    stream.write(out)
 
 def write_csv(results, fuelbed_list, stream):
 	# - top-level catagory list
@@ -32,11 +42,41 @@ def write_csv(results, fuelbed_list, stream):
     for fb_index in xrange(0, len(fuelbed_list)):
         write_columns(results, catagory_list, stream, fuelbed_list[fb_index], fb_index)
 
+def write_csv_emissions(results, fuelbed_list, stream):
+    # use all the emission keys except 'stratum'
+    emissions_keys = sorted(results['emissions'].keys())
+    emissions_keys = [key for key in emissions_keys if key != 'stratum']
+    cons_keys = sorted(results['consumption']['summary']['total'].keys())
+
+    # build up the column headers
+    columns = []
+    for key in cons_keys:
+        columns.append("{}_{}".format("cons", key))
+    for i in emissions_keys:
+        for j in cons_keys:
+            columns.append("{}_{}".format(i, j))
+
+    write_header_emissions(columns, stream)
+    for fb_index in xrange(0, len(fuelbed_list)):
+        out = fuelbed_list[fb_index]
+
+        # print the consumption column values
+        for key in cons_keys:
+            out += "," + str(results['consumption']['summary']['total'][key][fb_index])
+
+        # print the emission column values
+        for i in emissions_keys:
+            for j in cons_keys:
+                out += "," + str(results['emissions'][i][j][fb_index])
+        out += '\n'
+        stream.write(out)
+
+
 def run_tests(consumer, fuelbed_list, outfile):
     results = consumer.results()
     write_csv(results['consumption'], fuelbed_list, outfile)
 
-def SetDefaults(consumer, map):
+def set_defaults(consumer, map):
     consumer.burn_type = map['burn_type'] if 'burn_type' in map else 'natural'
     consumer.fuelbed_area_acres = map['fuelbed_area_acres'] if 'fuelbed_area_acres' in map else 100
     consumer.fuel_moisture_1000hr_pct = map['fuel_moisture_1000hr_pct'] if 'fuel_moisture_1000hr_pct' in map else 20
@@ -51,6 +91,15 @@ def SetDefaults(consumer, map):
     consumer.lengthOfIgnition = map['lengthOfIgnition'] if 'lengthOfIgnition' in map else 30
     consumer.slope = map['slope'] if 'slope' in map else 5
     consumer.windspeed = map['windspeed'] if 'windspeed' in map else 5
+
+def run_basic_scenarios(consumer, fuelbed_list):
+    scenario_list = ['western', 'southern', 'boreal', 'activity']
+    for scene in scenario_list:
+        consumer.fuelbed_ecoregion = scene if scene != 'activity' else 'western'
+        consumer.burn_type = 'activity' if scene == 'activity' else 'natural'
+        outfilename = "{}_out.csv".format(scene)
+        reference_values = "{}_Expected.csv".format(scene)
+        run_and_test(consumer, fuelbed_list, outfilename, reference_values)
 
 def run_additional_activity_scenarios(consumer, fuelbed_list):
     activityTwo = {
@@ -74,7 +123,7 @@ def run_additional_activity_scenarios(consumer, fuelbed_list):
     scenario_list = ['activityTwo', 'activityThree', 'activityFour', 'activityFive']
     counter = 2
     for scene in scenario_list:
-        SetDefaults(consumer, scene)
+        set_defaults(consumer, scene)
         consumer.fuelbed_ecoregion = 'western'
         consumer.burn_type = 'activity'
         outfilename = "activity{}_out.csv".format(counter)
@@ -82,14 +131,26 @@ def run_additional_activity_scenarios(consumer, fuelbed_list):
         reference_values = "activity{}_expected.csv".format(counter)
         run_and_test(consumer, fuelbed_list, outfilename, reference_values)
 
-def run_basic_scenarios(consumer, fuelbed_list):
-    scenario_list = ['western', 'southern', 'boreal', 'activity']
-    for scene in scenario_list:
-        consumer.fuelbed_ecoregion = scene if scene != 'activity' else 'western'
-        consumer.burn_type = 'activity' if scene == 'activity' else 'natural'
-        outfilename = "{}_out.csv".format(scene)
-        reference_values = "{}_Expected.csv".format(scene)
-        run_and_test(consumer, fuelbed_list, outfilename, reference_values)
+def run_emissions_tests(consumer, fuelbed_list):
+    emissions = consume.Emissions(consumer)
+    for outfilename in ['activity_emissions.csv',
+                    'activity_emissions_kgha.csv',
+                    'western_emissions.csv']:
+        if 'activity_emissions_kgha.csv' == outfilename:
+            emissions.FCobj.output_units.value = 'kg_ha'
+            emissions.output_units.value = 'kg_ha'
+        if 'western_emissions.csv' == outfilename:
+            emissions.FCobj.output_units.value = 'tons_ac'
+            emissions.output_units.value = 'tons_ac'
+            emissions.FCobj.burn_type.value = 'natural'
+        with open(outfilename, 'w') as outfile:
+            results = emissions.results()
+            write_csv_emissions(results, fuelbed_list, outfile)
+        reference_file = "{}_expected.csv".format(outfilename.split('.')[0])
+        ref = compareCSV(reference_file, console=False)
+        computed = compareCSV(outfilename, console=False)
+        (failed, compared) = ref.Compare(computed)
+        print("{} = failed, {} compared:\t{}".format(failed, compared, outfilename))
 
 def run_and_test(consumer, fuelbed_list, outfilename, reference_values):
     with open(outfilename, 'w') as outfile:
@@ -110,7 +171,7 @@ def run_and_test(consumer, fuelbed_list, outfilename, reference_values):
 consumer = consume.FuelConsumption(
             #fccs_file = "input_data/fccs_pyconsume_input.xml")
             fccs_file = "../input_data/input_without_1000fb.xml")
-SetDefaults(consumer, {})
+set_defaults(consumer, {})
 
 # run over all the fuelbeds
 fuelbed_list = [str(i[0]) for i in consumer.FCCS.data]
@@ -118,3 +179,7 @@ consumer.fuelbed_fccs_ids = fuelbed_list
 
 run_basic_scenarios(consumer, fuelbed_list)
 run_additional_activity_scenarios(consumer, fuelbed_list)
+run_emissions_tests(consumer, fuelbed_list)
+
+
+
