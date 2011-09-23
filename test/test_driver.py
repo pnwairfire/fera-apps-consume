@@ -36,49 +36,6 @@ def run_tests(consumer, fuelbed_list, outfile):
     results = consumer.results()
     write_csv(results['consumption'], fuelbed_list, outfile)
 
-def run_additional_activity_scenarios(consumer, fuelbed_list):
-    activityTwo = {
-        'fuel_moisture_10hr_pct':15,
-        'fuel_moisture_1000hr_pct':39,
-        'fuelbed_area_acres':10,
-        'lengthOfIgnition':5
-        }
-
-    activityThree = {
-        'fuel_moisture_10hr_pct':15,
-        'fuel_moisture_1000hr_pct':45,
-        'fuelbed_area_acres':25,
-        }
-
-    activityFour = {
-        'fuel_moisture_10hr_pct':17,
-        'fuel_moisture_1000hr_pct':50,
-        'fuelbed_area_acres':100,
-        }
-
-    activityFive = {
-        'fuel_moisture_10hr_pct':25,
-        'fuel_moisture_1000hr_pct':55,
-        'fuelbed_area_acres':100,
-        }
-
-    scenario_list = ['activityTwo', 'activityThree', 'activityFour', 'activityFive']
-    counter = 2
-    for scene in scenario_list:
-        SetDefaults(consumer, scene)
-        consumer.fuelbed_ecoregion = 'western'
-        consumer.burn_type = 'activity'
-        outfilename = "activity{}_out.csv".format(counter)
-        counter += 1
-        with open(outfilename, 'w') as outfile:
-            run_tests(consumer, fuelbed_list, outfile)
-        reference_values = "activity{}_expected.csv".format(counter)
-        ref = compareCSV(reference_values, console=False)
-        computed = compareCSV(outfilename, console=False)
-        (failed, compared) = ref.Compare(computed)
-        print("{}: failed = {} compared = {}".format(outfilename, failed, compared))
-
-
 def SetDefaults(consumer, map):
     consumer.burn_type = map['burn_type'] if 'burn_type' in map else 'natural'
     consumer.fuelbed_area_acres = map['fuelbed_area_acres'] if 'fuelbed_area_acres' in map else 100
@@ -95,19 +52,53 @@ def SetDefaults(consumer, map):
     consumer.slope = map['slope'] if 'slope' in map else 5
     consumer.windspeed = map['windspeed'] if 'windspeed' in map else 5
 
+def run_additional_activity_scenarios(consumer, fuelbed_list):
+    activityTwo = {
+        'fuel_moisture_10hr_pct':15,
+        'fuel_moisture_1000hr_pct':39,
+        'fuelbed_area_acres':10,
+        'lengthOfIgnition':5 }
+    activityThree = {
+        'fuel_moisture_10hr_pct':15,
+        'fuel_moisture_1000hr_pct':45,
+        'fuelbed_area_acres':25 }
+    activityFour = {
+        'fuel_moisture_10hr_pct':17,
+        'fuel_moisture_1000hr_pct':50,
+        'fuelbed_area_acres':100 }
+    activityFive = {
+        'fuel_moisture_10hr_pct':25,
+        'fuel_moisture_1000hr_pct':55,
+        'fuelbed_area_acres':100 }
+
+    scenario_list = ['activityTwo', 'activityThree', 'activityFour', 'activityFive']
+    counter = 2
+    for scene in scenario_list:
+        SetDefaults(consumer, scene)
+        consumer.fuelbed_ecoregion = 'western'
+        consumer.burn_type = 'activity'
+        outfilename = "activity{}_out.csv".format(counter)
+        counter += 1
+        reference_values = "activity{}_expected.csv".format(counter)
+        run_and_test(consumer, fuelbed_list, outfilename, reference_values)
+
 def run_basic_scenarios(consumer, fuelbed_list):
     scenario_list = ['western', 'southern', 'boreal', 'activity']
     for scene in scenario_list:
         consumer.fuelbed_ecoregion = scene if scene != 'activity' else 'western'
         consumer.burn_type = 'activity' if scene == 'activity' else 'natural'
         outfilename = "{}_out.csv".format(scene)
-        with open(outfilename, 'w') as outfile:
-            run_tests(consumer, fuelbed_list, outfile)
         reference_values = "{}_Expected.csv".format(scene)
-        ref = compareCSV(reference_values, console=False)
-        computed = compareCSV(outfilename, console=False)
-        (failed, compared) = ref.Compare(computed)
-        print("{}: failed = {} compared = {}".format(outfilename, failed, compared))
+        run_and_test(consumer, fuelbed_list, outfilename, reference_values)
+
+def run_and_test(consumer, fuelbed_list, outfilename, reference_values):
+    with open(outfilename, 'w') as outfile:
+        run_tests(consumer, fuelbed_list, outfile)
+    ref = compareCSV(reference_values, console=False)
+    computed = compareCSV(outfilename, console=False)
+    (failed, compared) = ref.Compare(computed)
+    print("{} = failed, {} compared:\t{}".format(failed, compared, outfilename))
+
 
 
 #-------------------------------------------------------------------------------
