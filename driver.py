@@ -8,6 +8,14 @@
 import consume
 import sys
 
+
+def wrap_input_display(inputs):
+    chunks = inputs.split('\n')
+    for line in chunks:
+        if not line.startswith('FCCS'):
+            print(line)
+
+
 class Driver(object):
     """ Drive consume object for testing purposes
     """
@@ -99,7 +107,7 @@ class Driver(object):
     def write_csv_alternate(self, results, fuelbed_list, stream, header):
         if header:
             columns = ['flaming', 'residual', 'smoldering', 'total']
-            self.write_header_alternate(results, columns, stream)
+            self.write_header_alternate(columns, stream)
         for fb_index in xrange(0, len(fuelbed_list)):
             out = fuelbed_list[fb_index]
             sorted_keys = sorted(results['summary']['total'].keys())
@@ -171,7 +179,11 @@ class Driver(object):
             else:
                 print scene
                 self._consumer.fuelbed_ecoregion = scene
+
+            self._consumer.output_units = 'kg_ha'
             emissions = consume.Emissions(self._consumer)
+            emissions.output_units = 'kg_ha'
+            wrap_input_display(emissions.FCobj.display_inputs(print_to_console=False))
             results = emissions.results()
             #self.write_csv(results['consumption'], fuelbed_list, outfile, write_header, debug)
             #self.write_csv_alternate(results['consumption'], fuelbed_list, outfile, write_header)
@@ -192,7 +204,7 @@ if len(sys.argv) > 1:
 else:
     #driver.run_tests(scenario_list=['activity'])
     #driver.run_tests(fuelbed_list=['1'], scenario_list=['activity'])
-    driver.run_tests(fuelbed_list=['5'], scenario_list=['activity'])
+    driver.run_tests(fuelbed_list=['216'], scenario_list=['activity'])
     #driver.run_tests(scenario_list=['western'])
 
 """

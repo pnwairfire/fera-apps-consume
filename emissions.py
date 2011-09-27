@@ -690,7 +690,8 @@ class Emissions:
             self.scenLen = len(self.FCobj._cons_data[0][0])
 
         self._build_input_set()
-        self._convert_units(reset = True)
+        #self._convert_units(reset = True)
+        self._convert_units()
         if emissions_factor_group == -5:
             self._emissions_calc(efg = self.emissions_factor_group.value)
             self.units = 'lbs_ac'
@@ -726,7 +727,7 @@ class Emissions:
 
     def _convert_units(self, reset = False):
         """Converts units of consumption and emissions data"""
-
+        print("_convert_units - {}".format(reset))
         bads = (int, str, list, float, np.array, tuple)
         area = self.InSet.params['area'].value
 

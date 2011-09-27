@@ -756,7 +756,6 @@ class FuelConsumption:
         and examples of how to extract information from the dictionary.
 
         """
-
         self._calculate()
         if self._calc_success:
             self._convert_units()
@@ -1170,10 +1169,8 @@ class FuelConsumption:
         if verbose: return out, baseDict
         else: return out
 
-
     def _build_input_set(self):
         """Builds the InputVarSet object from the individual input parameters"""
-
         if self._params == None:
             params = {'fuelbeds': self.fuelbed_fccs_ids,
                       'area': self.fuelbed_area_acres,
@@ -1326,6 +1323,7 @@ class FuelConsumption:
                                                 self.units,
                                                 self.output_units.value[0])
 
+            print(self.units)
             self.InSet.params['units'].value = self.units
             self.InSet.validated_inputs['units'] = self.units
             self._heat_release_calc()

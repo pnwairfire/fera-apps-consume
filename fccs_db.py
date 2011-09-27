@@ -1,4 +1,5 @@
 import data_desc as dd
+import os
 
 class FCCSDB():
     """ A class the stores, retrieves, and distributes FCCS fuelbed information

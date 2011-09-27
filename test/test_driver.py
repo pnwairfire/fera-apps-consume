@@ -7,9 +7,16 @@
 #-------------------------------------------------------------------------------
 
 # - run via batch file that sets PYTHONPATH correctly
-import consume
 import sys
+import consume
 from tester import DataObj as compareCSV
+
+def wrap_input_display(inputs):
+    chunks = inputs.split('\n')
+    for line in chunks:
+        # print everything with the exception of the fuelbed array
+        if not line.startswith('FCCS'):
+            print(line)
 
 def write_columns(results, catagories, stream, first_element, index, header=False):
     out = first_element
@@ -120,39 +127,105 @@ def run_additional_activity_scenarios(consumer, fuelbed_list):
         'fuel_moisture_1000hr_pct':55,
         'fuelbed_area_acres':100 }
 
-    scenario_list = ['activityTwo', 'activityThree', 'activityFour', 'activityFive']
+    scenario_list = [activityTwo, activityThree, activityFour, activityFive]
     counter = 2
     for scene in scenario_list:
         set_defaults(consumer, scene)
         consumer.fuelbed_ecoregion = 'western'
         consumer.burn_type = 'activity'
         outfilename = "activity{}_out.csv".format(counter)
+        reference_values = "Scen{}_Activity_Expected.csv".format(counter)
         counter += 1
-        reference_values = "activity{}_expected.csv".format(counter)
         run_and_test(consumer, fuelbed_list, outfilename, reference_values)
 
+def run_western_emissions():
+    consumer = consume.FuelConsumption(
+                #fccs_file = "input_data/fccs_pyconsume_input.xml")
+                fccs_file = "../input_data/input_without_1000fb.xml")
+    set_defaults(consumer, {})
+    em = consume.Emissions(consumer)
+    outfilename = 'western_emissions.csv'
+    with open(outfilename, 'w') as outfile:
+        results = em.results()
+        write_csv_emissions(results, fuelbed_list, outfile)
+
+    wrap_input_display(em.FCobj.display_inputs(print_to_console=False))
+
+    reference_file = "{}_expected.csv".format(outfilename.split('.')[0])
+    ref = compareCSV(reference_file, console=False)
+    computed = compareCSV(outfilename, console=False)
+    (failed, compared) = ref.Compare(computed)
+    print("{} = failed, {} compared:\t{}\n".format(failed, compared, outfilename))
+
+def run_activity_emissions():
+    consumer = consume.FuelConsumption(
+                #fccs_file = "input_data/fccs_pyconsume_input.xml")
+                fccs_file = "../input_data/input_without_1000fb.xml")
+    set_defaults(consumer, {})
+    em = consume.Emissions(consumer)
+    outfilename = 'activity_emissions.csv'
+    with open(outfilename, 'w') as outfile:
+        results = em.results()
+        write_csv_emissions(results, fuelbed_list, outfile)
+
+    wrap_input_display(em.FCobj.display_inputs(print_to_console=False))
+
+    reference_file = "{}_expected.csv".format(outfilename.split('.')[0])
+    ref = compareCSV(reference_file, console=False)
+    computed = compareCSV(outfilename, console=False)
+    (failed, compared) = ref.Compare(computed)
+    print("{} = failed, {} compared:\t{}\n".format(failed, compared, outfilename))
+
+def run_western_emissions():
+    consumer = consume.FuelConsumption(
+                #fccs_file = "input_data/fccs_pyconsume_input.xml")
+                fccs_file = "../input_data/input_without_1000fb.xml")
+    set_defaults(consumer, {})
+    em = consume.Emissions(consumer)
+    outfilename = 'western_emissions.csv'
+    with open(outfilename, 'w') as outfile:
+        results = em.results()
+        write_csv_emissions(results, fuelbed_list, outfile)
+
+    wrap_input_display(em.FCobj.display_inputs(print_to_console=False))
+
+    reference_file = "{}_expected.csv".format(outfilename.split('.')[0])
+    ref = compareCSV(reference_file, console=False)
+    computed = compareCSV(outfilename, console=False)
+    (failed, compared) = ref.Compare(computed)
+    print("{} = failed, {} compared:\t{}\n".format(failed, compared, outfilename))
+
+
 def run_emissions_tests(consumer, fuelbed_list):
-    emissions = consume.Emissions(consumer)
+    consumer.burn_type = 'activity'
+    em = consume.Emissions(consumer)
     for outfilename in ['activity_emissions.csv',
                     'activity_emissions_kgha.csv',
                     'western_emissions.csv']:
+        print(outfilename, "\n")
         if 'activity_emissions_kgha.csv' == outfilename:
-            emissions.FCobj.output_units.value = 'kg_ha'
-            emissions.output_units.value = 'kg_ha'
+            print("Setting...")
+            em.FCobj.output_units = 'kg_ha'
+            em.output_units = 'kg_ha'
         if 'western_emissions.csv' == outfilename:
-            emissions.FCobj.output_units.value = 'tons_ac'
-            emissions.output_units.value = 'tons_ac'
-            emissions.FCobj.burn_type.value = 'natural'
+            em.FCobj.output_units = 'tons_ac'
+            em.output_units = 'tons_ac'
+            em.FCobj.burn_type.value = ['natural']
+
         with open(outfilename, 'w') as outfile:
-            results = emissions.results()
+            results = em.results()
             write_csv_emissions(results, fuelbed_list, outfile)
+
+        wrap_input_display(em.FCobj.display_inputs(print_to_console=False))
+
         reference_file = "{}_expected.csv".format(outfilename.split('.')[0])
         ref = compareCSV(reference_file, console=False)
         computed = compareCSV(outfilename, console=False)
         (failed, compared) = ref.Compare(computed)
-        print("{} = failed, {} compared:\t{}".format(failed, compared, outfilename))
+        print("{} = failed, {} compared:\t{}\n".format(failed, compared, outfilename))
 
 def run_and_test(consumer, fuelbed_list, outfilename, reference_values):
+    wrap_input_display(consumer.display_inputs(print_to_console=False))
     with open(outfilename, 'w') as outfile:
         run_tests(consumer, fuelbed_list, outfile)
     ref = compareCSV(reference_values, console=False)
@@ -179,6 +252,7 @@ consumer.fuelbed_fccs_ids = fuelbed_list
 
 run_basic_scenarios(consumer, fuelbed_list)
 run_additional_activity_scenarios(consumer, fuelbed_list)
+set_defaults(consumer, {})
 run_emissions_tests(consumer, fuelbed_list)
 
 

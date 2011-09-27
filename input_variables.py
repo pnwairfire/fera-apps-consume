@@ -79,8 +79,8 @@ class InputVar:
 
         if not self.valid:
             print "\nInvalid input for *" + self.name + "* parameter: "
-            print "\t" + str(self.invalids)
-            self.display_valid_values()
+            #ks print "\t" + str(self.invalids)
+            #ks self.display_valid_values()
 
         return self.valid
 
@@ -107,19 +107,23 @@ class InputVarSet:
 
         Required argument:
         params  : a dictionary containing InputVar objects"""
-
         self.params = params
+        self.validated_inputs = {}
+        if len(params):
+            self.validate()
+        else:
+            print('Error: InputVarSet with no parameters')
 
     def __repr__(self):
-        return self.display_input_values(r=True)
+        print('--__repr__ --')
+        rep = self.display_input_values(print_to_console=True)
+        return rep if rep else "Error: no data for InputVarSet"
 
     def validate(self):
         """ Validates input parameters lengths and values, returns 'True' if
             valid, 'False' if not. If valid, stores validated inputs in the
             .validated_inputs variable.
         """
-
-        self.validated_inputs = {}
         valid = True
         ls = [list, np.ndarray]
         self.set_length = p = max([len(m.value) if type(m.value) in ls else 1
@@ -418,5 +422,9 @@ class InputVarSet:
         header =  ("\n" + head + ":\n" + "\n" + tabs("Parameter")
                + tabs(kwhead) + "\n" +
                "--------------------------------------------------------------")
-
-        return header + txtout
+        out = header + txtout
+        if out:
+            return out
+        else:
+            import traceback
+            traceback.print_stack()
