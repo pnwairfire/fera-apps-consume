@@ -108,6 +108,8 @@ class InputVarSet:
         Required argument:
         params  : a dictionary containing InputVar objects"""
         self.params = params
+
+        #ks - all below
         self.validated_inputs = {}
         if len(params):
             self.validate()
@@ -422,6 +424,7 @@ class InputVarSet:
         header =  ("\n" + head + ":\n" + "\n" + tabs("Parameter")
                + tabs(kwhead) + "\n" +
                "--------------------------------------------------------------")
+        #ks -mods
         out = header + txtout
         if out:
             return out

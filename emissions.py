@@ -362,7 +362,7 @@ class Emissions:
         params = {'fuelbeds': self.FCobj.InSet.params['fuelbeds'],
                   'area': self.FCobj.InSet.params['area'],
                   'ecoregion': self.FCobj.InSet.params['ecoregion'],
-                  'efg': self.emissions_factor_group,
+                  'efg': 0, # ks-todo
                   'units': self.output_units}
 
         for p in params:
@@ -380,7 +380,7 @@ class Emissions:
         self._emis_data = 1
         self._emis_summ = 1
         self.scenLen = 0
-        self.InSet = iv.InputVarSet([])
+        self.InSet = None
 
         self.units = "lbs_ac"
         self.output_units = iv.InputVar('units')
@@ -462,8 +462,7 @@ class Emissions:
                           exist for a particular FCCS fuelbed
 
         """
-
-        self._calculate(emissions_factor_group = efg)
+        self._calculate()
         self._convert_units()
         ins = self.FCobj.InSet.validated_inputs
         ins['emissions_fac_group'] = self.InSet.validated_inputs['efg']
@@ -677,7 +676,7 @@ class Emissions:
             return out
 
 
-    def _calculate(self, emissions_factor_group = -1):
+    def _calculate(self):
         """Calculates emissions estimates.
 
         Runs all the functions necessary to derive emissions from the
@@ -690,51 +689,30 @@ class Emissions:
             self.scenLen = len(self.FCobj._cons_data[0][0])
 
         self._build_input_set()
-        #self._convert_units(reset = True)
         self._convert_units()
-        if emissions_factor_group == -5:
-            self._emissions_calc(efg = self.emissions_factor_group.value)
-            self.units = 'lbs_ac'
 
-            return True
+        efnums = self.efDB.get_efgs(
+                 self.FCobj.InSet.validated_inputs['fuelbeds'],
+                 self.FCobj.InSet.validated_inputs['ecoregion'][0])
 
-        else:
-            self.emissions_factor_group.value = emissions_factor_group
-            self._build_input_set()
-            if self.InSet.validate():
-                efnums = self.InSet.validated_inputs['efg']
-
-                if emissions_factor_group > -1:
-                    efnums = [emissions_factor_group] * self.scenLen
-
-                else:
-                    if emissions_factor_group < 0:
-                        efnums = self.efDB.get_efgs(emissions_factor_group,
-                                 self.FCobj.InSet.validated_inputs['fuelbeds'],
-                                 self.FCobj.InSet.validated_inputs['ecoregion'][0])
-
-                self.InSet.params['efg'].value = efnums
-                self.InSet.validated_inputs['efg'] = efnums
-                self.emissions_factor_group.value = efnums
-                self._emissions_calc(efg = efnums)
-                self.units = 'lbs_ac'
-                return True
-
-            else:
-                return False
-
-
+        self.InSet.params['efg'].value = efnums
+        self.InSet.validated_inputs['efg'] = efnums
+        self.emissions_factor_group.value = efnums
+        #self.units = 'lbs_ac'
+        self._emissions_calc(efg = efnums)
+        return True
 
     def _convert_units(self, reset = False):
         """Converts units of consumption and emissions data"""
-        print("_convert_units - {}".format(reset))
         bads = (int, str, list, float, np.array, tuple)
         area = self.InSet.params['area'].value
+        propagate_units = False
 
         if type(self.output_units) in bads:
             tmp = iv.InputVar('units')
             tmp.value = self.output_units
             self.output_units = self.InSet.params['units'] = tmp
+            propagate_units = True
 
         if self.output_units.validate() and not reset:
             orig_units = self.units
@@ -751,8 +729,9 @@ class Emissions:
 
             #self._input_parameters[8] = self.output_units
 
-        if reset: self.FCobj.output_units = 'tons_ac'
-        self.FCobj._convert_units()
+        #if reset: self.FCobj.output_units = 'tons_ac'
+        if propagate_units:
+            self.FCobj._convert_units(explicit_units=self.units)
 
 
     def _emissions_calc(self, efg):

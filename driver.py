@@ -8,13 +8,13 @@
 import consume
 import sys
 
-
 def wrap_input_display(inputs):
     chunks = inputs.split('\n')
+    print('')
     for line in chunks:
-        if not line.startswith('FCCS'):
+        # print everything with the exception of the fuelbed array
+        if line and not line.startswith('FCCS'):
             print(line)
-
 
 class Driver(object):
     """ Drive consume object for testing purposes
@@ -207,19 +207,6 @@ else:
     driver.run_tests(fuelbed_list=['216'], scenario_list=['activity'])
     #driver.run_tests(scenario_list=['western'])
 
-"""
-### - runs over all fuelbeds using 'western', 'southern', 'boreal', 'activity'
-driver.run_tests()
 
-### - run over the specfied fuelbeds, all scenarios
-driver.run_tests(fuelbed_list=['1', '3', '1001'])
 
-### - limit the scenarios
-driver.run_tests(scenario_list=['western', 'southern', 'boreal'])
-driver.run_tests(scenario_list=['western'])
-driver.run_tests(scenario_list=['southern'])
-driver.run_tests(scenario_list=['boreal'])
 
-### - add the debug columns, far right of the output
-driver.run_tests(debug=True)
-"""

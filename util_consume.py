@@ -298,3 +298,28 @@ def propcons(x):
     """ Equation to calculate proportion consumed for various strata"""
     return math.e ** (x) / (1 + math.e ** x)
 
+#-------------------------------------------------------------------------------
+#   For testing
+#-------------------------------------------------------------------------------
+def main():
+    a = 42.3847781507
+    b = 23.2962946918
+
+    for i in ['tons_ac', 'lbs_ac', 'lbs', 'kg', 'kg_ha', 'kg_m^2', 'kg_km^2', 'tonnes', 'tonnes_ha', 'tonnes_km^2']:
+        for j in ['tons_ac', 'lbs_ac', 'lbs', 'kg_ha', 'kg_m^2', 'kg_km^2', 'tonnes', 'tonnes_ha', 'tonnes_km^2']:
+            print(unit_conversion(a, 100, i, j ))
+            print(unit_conversion(b, 100, i, j))
+
+if __name__ == '__main__':
+    main()
+
+
+
+
+
+
+
+
+
+
+

@@ -1303,13 +1303,17 @@ class FuelConsumption:
             self.units = 'tons_ac'
             [self._unq_inputs, self._runlnk] = self.InSet.getuniques(self._unique_check)
             self._consumption_calc(**self._unq_inputs)
+            self._heat_release_calc()
             self._calc_success = True
 
 
-    def _convert_units(self):
+    def _convert_units(self, explicit_units=None):
         """ Checks units and runs the unit conversion method for output data """
         # Convert to the desired output units
         self._conv_sucess = False
+
+        if explicit_units:
+            self.output_units = str(explicit_units)
 
         if type(self.output_units) in (int, str, list, float, np.array, tuple):
             tmp = iv.InputVar('units')
@@ -1323,10 +1327,10 @@ class FuelConsumption:
                                                 self.units,
                                                 self.output_units.value[0])
 
-            print(self.units)
+            print(self.units)   #ks
             self.InSet.params['units'].value = self.units
             self.InSet.validated_inputs['units'] = self.units
-            self._heat_release_calc()
+            #self._heat_release_calc()
             self._conv_success = True
 
 

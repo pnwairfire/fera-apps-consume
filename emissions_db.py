@@ -94,7 +94,7 @@ class EmissionsFactorDB:
         id = group.split('|')[0] if '|' in group else group
         return id
 
-    def get_efgs(self, emissions_factor_group, fuelbed_list, ecoregion):
+    def get_efgs(self, fuelbed_list, ecoregion):
         """Gets the appropriate emissions factor groups for the given FCCS IDs
 
         Links the SAF Cover Type data provided in the FCCS data to the
