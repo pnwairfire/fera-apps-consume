@@ -62,3 +62,4 @@ For questions/comments, contact:
 
 from emissions import *
 from fuel_consumption import *
+from data_desc import list_valid_units
