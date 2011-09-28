@@ -118,7 +118,7 @@ def run_basic_scenarios(consumer, fuelbed_list):
         consumer.fuelbed_ecoregion = scene if scene != 'activity' else 'western'
         consumer.burn_type = 'activity' if scene == 'activity' else 'natural'
         outfilename = "results/{}_out.csv".format(scene)
-        reference_values = "./expected/{}_Expected.csv".format(scene)
+        reference_values = "./expected/{}_expected.csv".format(scene)
         run_and_test(consumer, fuelbed_list, outfilename, reference_values)
 
 def run_additional_activity_scenarios(consumer, fuelbed_list):
@@ -147,7 +147,7 @@ def run_additional_activity_scenarios(consumer, fuelbed_list):
         consumer.fuelbed_ecoregion = 'western'
         consumer.burn_type = 'activity'
         outfilename = "results/activity{}_out.csv".format(counter)
-        reference_values = "./expected/Scen{}_Activity_Expected.csv".format(counter)
+        reference_values = "./expected/Scen{}_activity_expected.csv".format(counter)
         counter += 1
         run_and_test(consumer, fuelbed_list, outfilename, reference_values)
 
