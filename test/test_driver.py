@@ -147,7 +147,7 @@ def run_additional_activity_scenarios(consumer, fuelbed_list):
         consumer.fuelbed_ecoregion = 'western'
         consumer.burn_type = 'activity'
         outfilename = "results/activity{}_out.csv".format(counter)
-        reference_values = "./expected/Scen{}_activity_expected.csv".format(counter)
+        reference_values = "./expected/scen{}_activity_expected.csv".format(counter)
         counter += 1
         run_and_test(consumer, fuelbed_list, outfilename, reference_values)
 
