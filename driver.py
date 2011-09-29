@@ -180,14 +180,14 @@ class Driver(object):
                 print scene
                 self._consumer.fuelbed_ecoregion = scene
 
-            self._consumer.output_units = 'kg_ha'
+            #self._consumer.output_units = 'kg_ha'
             emissions = consume.Emissions(self._consumer)
-            emissions.output_units = 'kg_ha'
+            #emissions.output_units = 'kg_ha'
             wrap_input_display(emissions.FCobj.display_inputs(print_to_console=False))
             results = emissions.results()
-            #self.write_csv(results['consumption'], fuelbed_list, outfile, write_header, debug)
+            self.write_csv(results['consumption'], fuelbed_list, outfile, write_header, debug)
             #self.write_csv_alternate(results['consumption'], fuelbed_list, outfile, write_header)
-            self.write_csv_alt3(results, fuelbed_list, outfile, write_header)
+            #self.write_csv_alt3(results, fuelbed_list, outfile, write_header)
             write_header = False
 
         if close_file:
