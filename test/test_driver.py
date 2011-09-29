@@ -40,6 +40,9 @@ def write_columns(results, catagories, stream, first_element, index, header=Fals
             if not header:
                 out += str(results[cat][key]['total'][index])
             else:
+                # 'primary live', 'seconday live' occur in multiple catagories, ensure unique column headings
+                if 'primary' in key or 'secondary' in key:
+                    key = cat + " " + key
                 out += key
     out += '\n'
     stream.write(out)
