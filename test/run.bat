@@ -1,0 +1,1 @@
+@set PYTHONPATH=%PYTHONPATH%;.;%cd% && c:\progfiles_x86\Python27\python.exe test_driver.py
