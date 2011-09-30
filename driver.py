@@ -22,7 +22,7 @@ class Driver(object):
     def __init__(self):
         self._consumer = consume.FuelConsumption(
             #fccs_file = "input_data/fccs_pyconsume_input.xml")
-            fccs_file = "input_data/input_without_1000fb.xml")
+            fccs_file = "./consume/input_data/input_without_1000fb.xml")
 
     def _reset_consumer(self):
         self._consumer.burn_type = 'natural'

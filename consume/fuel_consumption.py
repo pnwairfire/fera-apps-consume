@@ -1388,6 +1388,20 @@ class FuelConsumption:
 
         return LD
 
+    def calc_ff_redux_proportion(self, LD):
+        duff_depth = LD['duff_upper_depth'] + LD['duff_lower_depth']
+
+        # total forest floor depth (inches)
+        ff_depth = (duff_depth + LD['lit_depth'] + LD['lch_depth'] + LD['moss_depth'])
+
+        # - this works correctly but still generates a warning, use the
+        #   context manager to swallow the benign warning
+        with np.errstate(divide='ignore'):
+            nonzero_depth = np.not_equal(ff_depth, 0.0)
+            ff_redux_proportion = np.where(nonzero_depth, (LD['ff_reduction'] / ff_depth), 0.0)
+
+        return ff_redux_proportion
+
     def _consumption_calc(self, fuelbeds, ecoregion = 'western', fm_1000hr=50.0,
                           fm_duff=50.0, burn_type = 'natural', can_con_pct=50.0,
                           shrub_black_pct = 50.0, fm_10hr = 50.0,
@@ -1569,8 +1583,10 @@ class FuelConsumption:
         moss_fsrt = ccn.ccon_moss(LD)
         lit_fsrt = ccn.ccon_litter(LD)
         [duff_upper_fsrt, duff_lower_fsrt] = ccn.ccon_duff(LD)
-        bas_fsrt = ccn.ccon_bas(LD)
-        sqm_fsrt = ccn.ccon_sqm(fm_duff, ecob_mask, LD)
+
+        ff_redux_proportion = self.calc_ff_redux_proportion(LD)
+        bas_fsrt = ccn.ccon_bas(LD, ff_redux_proportion)
+        sqm_fsrt = ccn.ccon_sqm(LD, ff_redux_proportion)
 
 
         # Category summations

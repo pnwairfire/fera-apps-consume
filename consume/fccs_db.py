@@ -16,7 +16,8 @@ class FCCSDB():
 
         self.xml_file = fccs_file
         if fccs_file == "":
-            self.xml_file = os.path.join(os.path.split(__file__)[0],
+            abs_path = os.path.abspath(__file__)
+            self.xml_file = os.path.join(os.path.split(abs_path)[0],
                                          'input_data/FCCS_loadings.xml')
 
         self.data = self._load_data_from_xml()

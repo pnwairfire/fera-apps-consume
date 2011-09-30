@@ -122,30 +122,35 @@ def ccon_ffr(fm_duff, burn_type, ecoregion, LD):
 
     return [ffr, y_b, duff_depth]
 
+def calc_and_reduce_ff(LD, key):
+    # if the depth of the layer (LD[key]) is less than the available reduction
+    #  use the depth of the layer. Otherwise, use the available reduction
+    layer_reduction = np.where(LD[key] < LD['ff_reduction_successive'],
+            LD[key], LD['ff_reduction_successive'])
+    # reduce the available reduction by the calculated amount
+    LD['ff_reduction_successive'] = LD['ff_reduction_successive'] - layer_reduction
+    # should never be less than zero
+    assert(0 == len(np.where(LD['ff_reduction_successive'] < 0)[0]))
+    return layer_reduction
+
 def ccon_lch(LD):
     """ Lichen consumption, activity & natural"""
     csd_lch = [0.95, 0.05, 0.00]
-    lch_pretot = np.minimum(LD['lch_depth'], LD['ff_reduction_successive'])
-    LD['ff_reduction_successive'] = LD['ff_reduction_successive'] - lch_pretot
-
+    lch_pretot = calc_and_reduce_ff(LD, 'lch_depth')
     lch_total = (lch_pretot * 0.5 * LD['lch_pctcv'])
-
     return util.csdist(lch_total, csd_lch)
 
 def ccon_moss(LD):
     """ Moss consumption, activity & natural"""
     csd_moss = [0.95, 0.05, 0.00]
-    moss_pretot = np.minimum(LD['moss_depth'], LD['ff_reduction_successive'])
-    LD['ff_reduction_successive'] = LD['ff_reduction_successive'] - moss_pretot
-
+    moss_pretot = calc_and_reduce_ff(LD, 'moss_depth')
     moss_total = (moss_pretot * 1.5 * LD['moss_pctcv'])
     return util.csdist(moss_total, csd_moss)
 
 def ccon_litter(LD):
     """ Litter consumption, activity & natural"""
     csd_lit = [0.90, 0.10, 0.00]
-    lit_pretot = np.minimum(LD['lit_depth'], LD['ff_reduction_successive'])
-    LD['ff_reduction_successive'] = LD['ff_reduction_successive'] - lit_pretot
+    lit_pretot = calc_and_reduce_ff(LD, 'lit_depth')
     mean_weighted_litterbd = ((LD['lit_s_ndl_pct'] * 3.0)
                         + (LD['lit_l_ndl_pct'] * 3.0)
                         + (LD['lit_o_ndl_pct'] * 3.0)
@@ -163,7 +168,7 @@ def ccon_litter(LD):
 ################################
 # p. 179-183 in the manual
 
-def ccon_bas(LD):
+def ccon_bas(LD, ff_redux_proportion):
     """ Basal accumulations consumption, activity & natural
 
      The following equations in the next 4 lines of code for basal
@@ -172,19 +177,22 @@ def ccon_bas(LD):
      an original developer of Consume 3.0.
     """
     csd_bas = [0.10, 0.40, 0.50]
-    # '43560' refers to the conversion factor from square feet to acres.
-    # '0.8333' refers to default tree radius (in ft, based on 20" diam)
-    bas_density = LD['bas_pct'] / 2.0 #<<< should pct be div by 100?
-    bas_area = np.maximum((
-                ((math.pi * (LD['bas_rad'] ** 2.0) / 43560.0) -
-                (math.pi * 0.8333 / 43560.0)) * bas_density), 0.0)
-    bas_total = (np.minimum(LD['bas_depth'], LD['ff_reduction'])
-                 * bas_area * 12.0)
+##    # '43560' refers to the conversion factor from square feet to acres.
+##    # '0.8333' refers to default tree radius (in ft, based on 20" diam)
+##    bas_density = LD['bas_pct'] / 2.0 #<<< should pct be div by 100?
+##    bas_area = np.maximum((
+##                ((math.pi * (LD['bas_rad'] ** 2.0) / 43560.0) -
+##                (math.pi * 0.8333 / 43560.0)) * bas_density), 0.0)
+##    bas_total = (np.minimum(LD['bas_depth'], LD['ff_reduction'])
+##                 * bas_area * 12.0)
+##
+##    return util.csdist(bas_total, csd_bas)
+    bas_redux = ff_redux_proportion * LD['bas_depth']
+    return util.csdist(bas_redux, csd_bas)
 
-    return util.csdist(bas_total, csd_bas)
 
 
-def ccon_sqm(fm_duff, ecob_mask, LD):
+def ccon_sqm(LD, ff_redux_proportion):
     """ Squirrel middens consumption, activity & natural
     # These squirrel midden consumption equations are not included in
     # the 3.0 manual; they were derived from the source code.
@@ -195,13 +203,15 @@ def ccon_sqm(fm_duff, ecob_mask, LD):
     #   xml file appears to only list 'depth' data, hence our usage
     #   here """
     csd_sqm = [0.10, 0.30, 0.60]
-    y_b = 1.2383 - (0.0114 * fm_duff) # used to calc squirrel mid. redux
-    sqm_reduction = LD['sqm_depth'] * util.propcons(y_b) * ecob_mask
-    sqm_area = (LD['sqm_density'] * math.pi *
-                (LD['sqm_radius']**2.0) / 43560.0)
-    sqm_total = sqm_reduction * sqm_area * 12.0
-
-    return util.csdist(sqm_total, csd_sqm)
+##    y_b = 1.2383 - (0.0114 * fm_duff) # used to calc squirrel mid. redux
+##    sqm_reduction = LD['sqm_depth'] * util.propcons(y_b) * ecob_mask
+##    sqm_area = (LD['sqm_density'] * math.pi *
+##                (LD['sqm_radius']**2.0) / 43560.0)
+##    sqm_total = sqm_reduction * sqm_area * 12.0
+##
+##    return util.csdist(sqm_total, csd_sqm)
+    sqm_redux = ff_redux_proportion * LD['sqm_depth']
+    return util.csdist(sqm_redux, csd_sqm)
 
 
 def ccon_duff(LD):
@@ -214,17 +224,13 @@ def ccon_duff(LD):
     """
     csd_duffu = [0.10, 0.70, 0.20]
     csd_duffl = [0.0, 0.20, 0.80]
-    upperduff_pretot = np.minimum(
-        LD['duff_upper_depth'], LD['ff_reduction_successive'])
-    LD['ff_reduction_successive'] = LD['ff_reduction_successive'] - upperduff_pretot
 
-    lowerduff_pretot = np.minimum(
-        LD['duff_lower_depth'], LD['ff_reduction_successive'])
-    LD['ff_reduction_successive'] = LD['ff_reduction_successive'] - upperduff_pretot
-
+    upperduff_pretot = calc_and_reduce_ff(LD, 'duff_upper_depth')
     duff_upper = np.maximum(upperduff_pretot * 8.0 * LD['duff_upper_pctcv'], 0.0)
 
+    lowerduff_pretot = calc_and_reduce_ff(LD, 'duff_lower_depth')
     lo_total = lowerduff_pretot * LD['duff_lower_pctcv']
+
     bulk_dens = (np.where(np.equal(LD['duff_lower_deriv'], 3), 18.0, 0.0) +
                  np.where(np.equal(LD['duff_lower_deriv'], 4), 22.0, 0.0))
     duff_lower = np.maximum(lo_total * bulk_dens, 0.0)
