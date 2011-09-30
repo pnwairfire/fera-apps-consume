@@ -23,7 +23,7 @@ def build_dirs():
 
 def copy_files(file_list, dest):
     for file in file_list:
-        print("{} -> {}".format(file, dest))
+        print("{}\t->\t{}".format(file, dest))
         shutil.copy(file, dest)
 
 def copy_non_source():
@@ -38,26 +38,25 @@ def copy_non_source():
 
 def copy_source():
     SOURCE_FILES = [
-        '../__init__.py',
-        '../con_calc_activity.py',
-        '../con_calc_natural.py',
-        '../data_desc.py',
-        '../driver.py',
-        '../emissions.py',
-        '../emissions_db.py',
-        '../fccs_db.py',
-        '../fuel_consumption.py',
-        '../input_variables.py',
-        '../util_consume.py'
+        '../consume/__init__.py',
+        '../consume/con_calc_activity.py',
+        '../consume/con_calc_natural.py',
+        '../consume/data_desc.py',
+        '../consume/emissions.py',
+        '../consume/emissions_db.py',
+        '../consume/fccs_db.py',
+        '../consume/fuel_consumption.py',
+        '../consume/input_variables.py',
+        '../consume/util_consume.py'
     ]
     copy_files(SOURCE_FILES, PKG_SOURCE_DIR)
-    all_py_files = [i for i in os.listdir('..') if i.endswith('.py')]
+    all_py_files = [i for i in os.listdir('../consume') if i.endswith('.py')]
     for file in all_py_files:
-        if file not in [i[3:] for i in SOURCE_FILES]:
+        if file not in [i.split('/')[2] for i in SOURCE_FILES]:
             print("\n{} is not listed as a source file. It won't be included in the package.".format(file))
 
 def copy_datafiles():
-    datafiles = ['../input_data/' + i for i in os.listdir('../input_data')]
+    datafiles = ['../consume/input_data/' + i for i in os.listdir('../consume/input_data')]
     copy_files(datafiles, PKG_DATAFILES_DIR)
 
 def run_setup():

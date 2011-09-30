@@ -1398,6 +1398,7 @@ class FuelConsumption:
         #   context manager to swallow the benign warning
         with np.errstate(divide='ignore'):
             nonzero_depth = np.not_equal(ff_depth, 0.0)
+            # divide reduction by total ff depth to get proportion
             ff_redux_proportion = np.where(nonzero_depth, (LD['ff_reduction'] / ff_depth), 0.0)
 
         return ff_redux_proportion
