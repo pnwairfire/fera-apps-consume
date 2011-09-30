@@ -22,7 +22,7 @@ def wrap_input_display(inputs):
 def get_consumption_object():
     consumer = consume.FuelConsumption(
                 #fccs_file = "input_data/fccs_pyconsume_input.xml")
-                fccs_file = "../input_data/input_without_1000fb.xml")
+                fccs_file = "../consume/input_data/input_without_1000fb.xml")
     set_defaults(consumer, {})
 
     # run over all the fuelbeds
@@ -225,7 +225,7 @@ def run_and_test(consumer, fuelbed_list, outfilename, reference_values):
 #  that occurs, we can use the larger file
 consumer = consume.FuelConsumption(
             #fccs_file = "input_data/fccs_pyconsume_input.xml")
-            fccs_file = "../input_data/input_without_1000fb.xml")
+            fccs_file = "../consume/input_data/input_without_1000fb.xml")
 set_defaults(consumer, {})
 
 # run over all the fuelbeds
