@@ -5,3 +5,4 @@ output/*
 ./*.pyc
 ./*.csv
 test/*
+build_distribution/consume/*

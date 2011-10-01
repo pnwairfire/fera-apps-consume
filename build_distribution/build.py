@@ -37,9 +37,9 @@ def copy_non_source():
 
 def copy_source():
     SOURCE_FILES = [
+        '../__init__.py',
         '../con_calc_activity.py',
         '../con_calc_natural.py',
-        '../consume.py',
         '../data_desc.py',
         '../driver.py',
         '../emissions.py',
