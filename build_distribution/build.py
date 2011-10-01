@@ -11,12 +11,13 @@
 import shutil
 import os
 
-
 PKG_DIR = './consume'
 PKG_SOURCE_DIR = './consume/consume'
 PKG_DATAFILES_DIR = PKG_SOURCE_DIR + '/input_data'
 
 def build_dirs():
+    if os.path.exists(PKG_DIR):
+        shutil.rmtree(PKG_DIR)
     for dir in [PKG_DIR, PKG_SOURCE_DIR, PKG_DATAFILES_DIR]:
         os.mkdir(dir)
 
