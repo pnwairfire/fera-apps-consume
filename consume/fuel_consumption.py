@@ -1390,7 +1390,6 @@ class FuelConsumption:
 
     def calc_ff_redux_proportion(self, LD):
         duff_depth = LD['duff_upper_depth'] + LD['duff_lower_depth']
-
         # total forest floor depth (inches)
         ff_depth = (duff_depth + LD['lit_depth'] + LD['lch_depth'] + LD['moss_depth'])
 
@@ -1402,12 +1401,6 @@ class FuelConsumption:
             ff_redux_proportion = np.where(nonzero_depth, (LD['ff_reduction'] / ff_depth), 0.0)
 
         return ff_redux_proportion
-
-    def calc_ff_depth(self, LD):
-        duff_depth = LD['duff_upper_depth'] + LD['duff_lower_depth']
-        # total forest floor depth (inches)
-        ff_depth = (duff_depth + LD['lit_depth'] + LD['lch_depth'] + LD['moss_depth'])
-        return ff_depth
 
     def _consumption_calc(self, fuelbeds, ecoregion = 'western', fm_1000hr=50.0,
                           fm_duff=50.0, burn_type = 'natural', can_con_pct=50.0,
@@ -1592,10 +1585,8 @@ class FuelConsumption:
         [duff_upper_fsrt, duff_lower_fsrt] = ccn.ccon_duff(LD)
 
         ff_redux_proportion = self.calc_ff_redux_proportion(LD)
-
-        ff_depth = self.calc_ff_depth(LD)
-        bas_fsrt = ccn.ccon_bas(burn_type, ecoregion, LD['bas_loading'], fm_duff, ff_depth)
-        sqm_fsrt = ccn.ccon_sqm(LD, ff_redux_proportion)
+        bas_fsrt = ccn.ccon_bas(LD['bas_loading'], ff_redux_proportion)
+        sqm_fsrt = ccn.ccon_sqm(LD['sqm_loading'], ff_redux_proportion)
 
 
         # Category summations

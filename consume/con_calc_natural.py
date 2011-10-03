@@ -168,7 +168,7 @@ def ccon_litter(LD):
 ################################
 # p. 179-183 in the manual
 
-def ccon_bas(burn_type, ecoregion, basal_loading, fm_duff, ff_depth):
+def ccon_bas(basal_loading, ff_redux_proportion):
     """ Basal accumulations consumption, activity & natural
 
      The following equations in the next 4 lines of code for basal
@@ -177,30 +177,11 @@ def ccon_bas(burn_type, ecoregion, basal_loading, fm_duff, ff_depth):
      an original developer of Consume 3.0.
     """
     csd_bas = [0.10, 0.40, 0.50]
-
     basal_consumption = np.array([])
-    if 'activity' in burn_type:
-        #assert False
-        basal_consumption = basal_loading * 0.0
-    else:
-        if 'boreal' in ecoregion:
-            y_b = 1.2383 - (0.0114 * fm_duff) # used to calc squirrel mid. redux
-            basal_consumption = basal_loading * util.propcons(y_b)
-        elif 'southern' in ecoregion:
-            basal_consumption = (-0.0061 * fm_duff) + (0.6179 * basal_loading)
-            basal_consumption = np.where(
-                        np.less_equal(basal_consumption, 0.25), # if ffr south <= .25
-                        (0.006181 * math.e**(0.398983 * (ff_depth - # true
-                        (0.00987 * (fm_duff-60.0))))), basal_consumption) # false
-        elif 'western' in ecoregion:
-            y = -0.8085 - (0.0213 * fm_duff) + (1.0625 * ff_depth)
-            basal_consumption = basal_loading * util.propcons(y)
-        else: assert False
+    basal_consumption = basal_loading * ff_redux_proportion
     return util.csdist(basal_consumption, csd_bas)
 
-
-
-def ccon_sqm(LD, ff_redux_proportion):
+def ccon_sqm(sqm_loading, ff_redux_proportion):
     """ Squirrel middens consumption, activity & natural
     # These squirrel midden consumption equations are not included in
     # the 3.0 manual; they were derived from the source code.
@@ -211,16 +192,8 @@ def ccon_sqm(LD, ff_redux_proportion):
     #   xml file appears to only list 'depth' data, hence our usage
     #   here """
     csd_sqm = [0.10, 0.30, 0.60]
-##    y_b = 1.2383 - (0.0114 * fm_duff) # used to calc squirrel mid. redux
-##    sqm_reduction = LD['sqm_depth'] * util.propcons(y_b) * ecob_mask
-##    sqm_area = (LD['sqm_density'] * math.pi *
-##                (LD['sqm_radius']**2.0) / 43560.0)
-##    sqm_total = sqm_reduction * sqm_area * 12.0
-##
-##    return util.csdist(sqm_total, csd_sqm)
-    sqm_redux = ff_redux_proportion * LD['sqm_depth']
-    return util.csdist(sqm_redux, csd_sqm)
-
+    sqm_consumption = sqm_loading * ff_redux_proportion
+    return util.csdist(sqm_consumption, csd_sqm)
 
 def ccon_duff(LD):
     """ Duff consumption, activity & natural*
