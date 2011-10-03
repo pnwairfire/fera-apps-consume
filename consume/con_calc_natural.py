@@ -170,11 +170,6 @@ def ccon_litter(LD):
 
 def ccon_bas(basal_loading, ff_redux_proportion):
     """ Basal accumulations consumption, activity & natural
-
-     The following equations in the next 4 lines of code for basal
-     accumulation consumption are NOT in the manual, but were derived
-     from the source code and in consultation with Susan Prichard(USFS)
-     an original developer of Consume 3.0.
     """
     csd_bas = [0.10, 0.40, 0.50]
     basal_consumption = np.array([])
@@ -183,14 +178,7 @@ def ccon_bas(basal_loading, ff_redux_proportion):
 
 def ccon_sqm(sqm_loading, ff_redux_proportion):
     """ Squirrel middens consumption, activity & natural
-    # These squirrel midden consumption equations are not included in
-    # the 3.0 manual; they were derived from the source code.
-    # Squirrel midden reduction is zero unless in a boreal
-    # ecoregion.
-    # Note: the source code uses squirrel midden 'height' instead
-    #   of 'depth'...not sure if they are interchangeable. The FCCS
-    #   xml file appears to only list 'depth' data, hence our usage
-    #   here """
+    """
     csd_sqm = [0.10, 0.30, 0.60]
     sqm_consumption = sqm_loading * ff_redux_proportion
     return util.csdist(sqm_consumption, csd_sqm)
