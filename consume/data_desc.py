@@ -98,4 +98,6 @@ LoadDefs = (('fuelbed_number', 'fccs_id', 0),
             ('w_Rotten_GT20', 'tnkp_hr_rotten', 57),
             ('w_Jackpots', 'pl_jackpots', 58),
             ('site_name', 'site_name', 59),
-            ('site_description', 'site_desc', 60))
+            ('site_description', 'site_desc', 60),
+            ('g_BasLoading', 'bas_loading', 61),
+            ('g_SMLoading', 'sqm_loading', 62) )

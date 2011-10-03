@@ -1,6 +1,6 @@
 <FCCS_file>
 	<!-- Generator: FCCS -->
-	<!-- GeneratorVersion:  2.2 : 05/19/2011 -->
+	<!-- GeneratorVersion:  2.2 : 10/03/2011 -->
 	<FCCS>
 		<fuelbed_number>1</fuelbed_number>
 		<site_name>Black cottonwood -- Douglas-fir -- quaking aspen riparian forest</site_name>
@@ -311,6 +311,7 @@
 		<g_BasDep>3.50</g_BasDep>
 		<g_BasRadius>1.66</g_BasRadius>
 		<g_BasPercent>7.00</g_BasPercent>
+		<g_BasLoading>0.005032585</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -374,6 +375,7 @@
 		<g_BasDep>1.00</g_BasDep>
 		<g_BasRadius>2.50</g_BasRadius>
 		<g_BasPercent>40.00</g_BasPercent>
+		<g_BasLoading>0.003730353</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -750,6 +752,7 @@
 		<g_BasDep>3.00</g_BasDep>
 		<g_BasRadius>0.83</g_BasRadius>
 		<g_BasPercent>50.00</g_BasPercent>
+		<g_BasLoading>0.044539507</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -932,6 +935,7 @@
 		<g_BasDep>10.00</g_BasDep>
 		<g_BasRadius>1.50</g_BasRadius>
 		<g_BasPercent>30.00</g_BasPercent>
+		<g_BasLoading>0.053305216</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -951,7 +955,7 @@
 		<snags_C1Foliage>7.120363E-4</snags_C1Foliage>
 		<snags_C1Wood>18.78411</snags_C1Wood>
 		<snags_C2>4.5741596</snags_C2>
-		<shrubs_Primary>0.93136007</shrubs_Primary>
+		<shrubs_Primary>0.9286601</shrubs_Primary>
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
@@ -992,6 +996,7 @@
 		<g_BasDep>2.00</g_BasDep>
 		<g_BasRadius>1.50</g_BasRadius>
 		<g_BasPercent>20.00</g_BasPercent>
+		<g_BasLoading>0.008226075</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -1053,6 +1058,7 @@
 		<g_BasDep>6.00</g_BasDep>
 		<g_BasRadius>1.50</g_BasRadius>
 		<g_BasPercent>30.00</g_BasPercent>
+		<g_BasLoading>0.046254437</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -1117,6 +1123,7 @@
 		<g_BasDep>2.00</g_BasDep>
 		<g_BasRadius>0.41</g_BasRadius>
 		<g_BasPercent>5.00</g_BasPercent>
+		<g_BasLoading>4.195936E-5</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -1175,6 +1182,7 @@
 		<g_BasDep>3.00</g_BasDep>
 		<g_BasRadius>1.25</g_BasRadius>
 		<g_BasPercent>30.00</g_BasPercent>
+		<g_BasLoading>0.004306602</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -1296,6 +1304,7 @@
 		<g_BasDep>0.50</g_BasDep>
 		<g_BasRadius>0.50</g_BasRadius>
 		<g_BasPercent>1.00</g_BasPercent>
+		<g_BasLoading>7.8842783E-4</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -1424,6 +1433,7 @@
 		<g_BasDep>2.00</g_BasDep>
 		<g_BasRadius>0.83</g_BasRadius>
 		<g_BasPercent>10.00</g_BasPercent>
+		<g_BasLoading>0.0053644944</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -1488,6 +1498,7 @@
 		<g_BasDep>2.00</g_BasDep>
 		<g_BasRadius>1.00</g_BasRadius>
 		<g_BasPercent>20.00</g_BasPercent>
+		<g_BasLoading>0.0057187728</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -1545,6 +1556,7 @@
 		<g_BasDep>1.00</g_BasDep>
 		<g_BasRadius>2.50</g_BasRadius>
 		<g_BasPercent>40.00</g_BasPercent>
+		<g_BasLoading>0.026004892</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -1604,6 +1616,7 @@
 		<g_BasDep>2.00</g_BasDep>
 		<g_BasRadius>0.50</g_BasRadius>
 		<g_BasPercent>40.00</g_BasPercent>
+		<g_BasLoading>0.0021582968</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -1668,6 +1681,7 @@
 		<g_BasDep>2.00</g_BasDep>
 		<g_BasRadius>0.50</g_BasRadius>
 		<g_BasPercent>5.00</g_BasPercent>
+		<g_BasLoading>2.158303E-4</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -1729,6 +1743,7 @@
 		<g_BasDep>4.00</g_BasDep>
 		<g_BasRadius>2.00</g_BasRadius>
 		<g_BasPercent>2.00</g_BasPercent>
+		<g_BasLoading>4.778106E-4</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -1902,6 +1917,7 @@
 		<g_BasDep>3.00</g_BasDep>
 		<g_BasRadius>1.00</g_BasRadius>
 		<g_BasPercent>50.00</g_BasPercent>
+		<g_BasLoading>5.7085766E-4</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -2030,6 +2046,7 @@
 		<g_BasDep>2.00</g_BasDep>
 		<g_BasRadius>0.50</g_BasRadius>
 		<g_BasPercent>15.00</g_BasPercent>
+		<g_BasLoading>5.917074E-4</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -2154,6 +2171,7 @@
 		<g_BasDep>2.50</g_BasDep>
 		<g_BasRadius>0.50</g_BasRadius>
 		<g_BasPercent>30.00</g_BasPercent>
+		<g_BasLoading>5.8520195E-4</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -2274,6 +2292,7 @@
 		<g_BasDep>2.50</g_BasDep>
 		<g_BasRadius>0.50</g_BasRadius>
 		<g_BasPercent>20.00</g_BasPercent>
+		<g_BasLoading>0</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -2730,6 +2749,7 @@
 		<g_BasDep>5.00</g_BasDep>
 		<g_BasRadius>0.83</g_BasRadius>
 		<g_BasPercent>20.00</g_BasPercent>
+		<g_BasLoading>0.0017300678</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -2809,7 +2829,7 @@
 		<overstory>0</overstory>
 		<midstory>0</midstory>
 		<understory>0</understory>
-		<shrubs_Primary>0.41519502</shrubs_Primary>
+		<shrubs_Primary>0.39151004</shrubs_Primary>
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>45.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
@@ -2968,6 +2988,7 @@
 		<g_BasDep>2.00</g_BasDep>
 		<g_BasRadius>0.50</g_BasRadius>
 		<g_BasPercent>10.00</g_BasPercent>
+		<g_BasLoading>2.5547153E-4</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -3032,6 +3053,7 @@
 		<g_BasDep>2.00</g_BasDep>
 		<g_BasRadius>1.50</g_BasRadius>
 		<g_BasPercent>40.00</g_BasPercent>
+		<g_BasLoading>0.082158074</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -3093,6 +3115,7 @@
 		<g_BasDep>2.00</g_BasDep>
 		<g_BasRadius>1.50</g_BasRadius>
 		<g_BasPercent>23.00</g_BasPercent>
+		<g_BasLoading>5.2628614E-4</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -3726,6 +3749,7 @@
 		<g_BasDep>2.00</g_BasDep>
 		<g_BasRadius>0.50</g_BasRadius>
 		<g_BasPercent>15.00</g_BasPercent>
+		<g_BasLoading>2.6987257E-4</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -3780,6 +3804,7 @@
 		<g_BasDep>0.80</g_BasDep>
 		<g_BasRadius>2.50</g_BasRadius>
 		<g_BasPercent>2.00</g_BasPercent>
+		<g_BasLoading>4.2421074E-4</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -4139,6 +4164,7 @@
 		<g_BasDep>5.00</g_BasDep>
 		<g_BasRadius>1.50</g_BasRadius>
 		<g_BasPercent>20.00</g_BasPercent>
+		<g_BasLoading>0.059678458</g_BasLoading>
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
@@ -4257,6 +4283,7 @@
 		<g_BasDep>3.00</g_BasDep>
 		<g_BasRadius>0.66</g_BasRadius>
 		<g_BasPercent>20.00</g_BasPercent>
+		<g_BasLoading>8.672881E-4</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -4492,7 +4519,7 @@
 		<overstory>0</overstory>
 		<midstory>0</midstory>
 		<understory>0</understory>
-		<shrubs_Primary>0.091460004</shrubs_Primary>
+		<shrubs_Primary>0.090495005</shrubs_Primary>
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>99.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
@@ -4707,6 +4734,7 @@
 		<g_SMDepth>18.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<g_SMLoading>0.08099419</g_SMLoading>
 		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
@@ -4770,6 +4798,7 @@
 		<g_SMDepth>18.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<g_SMLoading>0.08099419</g_SMLoading>
 		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
@@ -4833,6 +4862,7 @@
 		<g_SMDepth>18.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<g_SMLoading>0.08099419</g_SMLoading>
 		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
@@ -4896,6 +4926,7 @@
 		<g_SMDepth>18.00</g_SMDepth>
 		<g_SMDensity>0.50</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<g_SMLoading>0.040497094</g_SMLoading>
 		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
@@ -4959,6 +4990,7 @@
 		<g_SMDepth>18.00</g_SMDepth>
 		<g_SMDensity>0.50</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<g_SMLoading>0.040497094</g_SMLoading>
 		<ladderFuels>0</ladderFuels>
 	</FCCS>
 	<FCCS>
@@ -5085,6 +5117,7 @@
 		<g_SMDepth>18.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<g_SMLoading>0.08099419</g_SMLoading>
 		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
@@ -5148,6 +5181,7 @@
 		<g_SMDepth>12.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<g_SMLoading>0.053996127</g_SMLoading>
 		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
@@ -5584,6 +5618,7 @@
 		<g_SMDepth>18.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>7.50</g_SMRadius>
+		<g_SMLoading>0.18223695</g_SMLoading>
 		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
@@ -5649,6 +5684,7 @@
 		<g_SMDepth>18.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>7.50</g_SMRadius>
+		<g_SMLoading>0.18223695</g_SMLoading>
 		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
@@ -5714,6 +5750,7 @@
 		<g_SMDepth>12.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<g_SMLoading>0.053996127</g_SMLoading>
 		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
@@ -5779,6 +5816,7 @@
 		<g_SMDepth>12.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<g_SMLoading>0.053996127</g_SMLoading>
 		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
@@ -5844,6 +5882,7 @@
 		<g_SMDepth>12.00</g_SMDepth>
 		<g_SMDensity>0.50</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<g_SMLoading>0.026998064</g_SMLoading>
 		<ladderFuels>0.5</ladderFuels>
 	</FCCS>
 	<FCCS>
@@ -6527,6 +6566,7 @@
 		<g_BasDep>5.00</g_BasDep>
 		<g_BasRadius>0.75</g_BasRadius>
 		<g_BasPercent>2.00</g_BasPercent>
+		<g_BasLoading>0.0015709824</g_BasLoading>
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
@@ -6776,7 +6816,7 @@
 		<snags_C1Wood>0.13247307</snags_C1Wood>
 		<snags_C2>0.32353497</snags_C2>
 		<snags_C3>0.32353497</snags_C3>
-		<shrubs_Primary>0.19896501</shrubs_Primary>
+		<shrubs_Primary>0.19794501</shrubs_Primary>
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>90.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
@@ -6875,6 +6915,7 @@
 		<g_BasDep>2.00</g_BasDep>
 		<g_BasRadius>0.66</g_BasRadius>
 		<g_BasPercent>10.00</g_BasPercent>
+		<g_BasLoading>6.390163E-4</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -7554,6 +7595,7 @@
 		<g_BasDep>5.00</g_BasDep>
 		<g_BasRadius>0.66</g_BasRadius>
 		<g_BasPercent>2.00</g_BasPercent>
+		<g_BasLoading>7.864803E-4</g_BasLoading>
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
@@ -7619,6 +7661,7 @@
 		<g_BasDep>5.00</g_BasDep>
 		<g_BasRadius>0.66</g_BasRadius>
 		<g_BasPercent>2.00</g_BasPercent>
+		<g_BasLoading>6.4304675E-4</g_BasLoading>
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
@@ -7910,6 +7953,7 @@
 		<g_BasDep>8.00</g_BasDep>
 		<g_BasRadius>1.00</g_BasRadius>
 		<g_BasPercent>10.00</g_BasPercent>
+		<g_BasLoading>0.0041607902</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -8124,6 +8168,7 @@
 		<g_BasDep>3.00</g_BasDep>
 		<g_BasRadius>0.50</g_BasRadius>
 		<g_BasPercent>10.00</g_BasPercent>
+		<g_BasLoading>3.2914092E-4</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -8587,6 +8632,7 @@
 		<g_BasDep>1.00</g_BasDep>
 		<g_BasRadius>0.83</g_BasRadius>
 		<g_BasPercent>5.00</g_BasPercent>
+		<g_BasLoading>2.4172018E-4</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -8837,6 +8883,7 @@
 		<g_BasDep>1.50</g_BasDep>
 		<g_BasRadius>0.50</g_BasRadius>
 		<g_BasPercent>10.00</g_BasPercent>
+		<g_BasLoading>0.001198039</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -8900,6 +8947,7 @@
 		<g_BasDep>1.00</g_BasDep>
 		<g_BasRadius>0.33</g_BasRadius>
 		<g_BasPercent>2.00</g_BasPercent>
+		<g_BasLoading>3.7375838E-5</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -8962,6 +9010,7 @@
 		<g_BasDep>1.00</g_BasDep>
 		<g_BasRadius>0.16</g_BasRadius>
 		<g_BasPercent>80.00</g_BasPercent>
+		<g_BasLoading>0</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -9193,6 +9242,7 @@
 		<g_BasDep>3.00</g_BasDep>
 		<g_BasRadius>1.66</g_BasRadius>
 		<g_BasPercent>20.00</g_BasPercent>
+		<g_BasLoading>0.0072261672</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -9310,6 +9360,7 @@
 		<g_BasDep>1.50</g_BasDep>
 		<g_BasRadius>1.00</g_BasRadius>
 		<g_BasPercent>25.00</g_BasPercent>
+		<g_BasLoading>0.0017368754</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -9372,6 +9423,7 @@
 		<g_BasDep>1.00</g_BasDep>
 		<g_BasRadius>1.00</g_BasRadius>
 		<g_BasPercent>40.00</g_BasPercent>
+		<g_BasLoading>0.009827294</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -9479,6 +9531,7 @@
 		<g_BasDep>2.00</g_BasDep>
 		<g_BasRadius>1.25</g_BasRadius>
 		<g_BasPercent>25.00</g_BasPercent>
+		<g_BasLoading>0.0012079012</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -9768,6 +9821,7 @@
 		<g_BasDep>2.00</g_BasDep>
 		<g_BasRadius>1.00</g_BasRadius>
 		<g_BasPercent>30.00</g_BasPercent>
+		<g_BasLoading>0.0036734077</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -10314,6 +10368,7 @@
 		<g_BasDep>1.00</g_BasDep>
 		<g_BasRadius>2.00</g_BasRadius>
 		<g_BasPercent>30.00</g_BasPercent>
+		<g_BasLoading>0.013971498</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -10431,6 +10486,7 @@
 		<g_BasDep>1.00</g_BasDep>
 		<g_BasRadius>2.50</g_BasRadius>
 		<g_BasPercent>40.00</g_BasPercent>
+		<g_BasLoading>0.021898784</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -10512,7 +10568,7 @@
 		<overstory>0.21235502</overstory>
 		<midstory>0</midstory>
 		<understory>0</understory>
-		<shrubs_Primary>0.48566</shrubs_Primary>
+		<shrubs_Primary>0.46913004</shrubs_Primary>
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>95.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
@@ -10843,6 +10899,7 @@
 		<g_BasDep>1.50</g_BasDep>
 		<g_BasRadius>1.00</g_BasRadius>
 		<g_BasPercent>35.00</g_BasPercent>
+		<g_BasLoading>0.0030556004</g_BasLoading>
 		<g_SMDepth>-2.00</g_SMDepth>
 		<g_SMDensity>-2.00</g_SMDensity>
 		<g_SMRadius>-2.00</g_SMRadius>
@@ -11355,7 +11412,7 @@
 	<FCCS>
 		<fuelbed_number>264</fuelbed_number>
 		<site_name>Post oak -- blackjack oak forest</site_name>
-		<site_description>This fuelbed, commonly referred to as crosstimbers, is composed of post oak and blackjack oak in a broadleaf forest or woodland on rolling hills in central Texas through central Oklahoma and extending into southeastern Kansas. It varies from closed forest to open woodland with open prairie inclusions depending on soils and rainfall. Under fire exclusion, oak root sprouts, understory growth and vines can create ladder fuels. Long-term grazing causes annual grasses to increase. This fuelbed represents forests more than 50 years old.</site_description>
+		<site_description>This fuelbed, commonly referred to as 'crosstimbers', is composed of post oak and blackjack oak in a broadleaf forest or woodland on rolling hills in central Texas through central Oklahoma and extending into southeastern Kansas. It varies from closed forest to open woodland with open prairie inclusions depending on soils and rainfall. Under fire exclusion, oak root sprouts, understory growth and vines can create ladder fuels. Long-term grazing causes annual grasses to increase. This fuelbed represents forests more than 50 years old.</site_description>
 		<ecoregion>220,230,250</ecoregion>
 		<vegetation_form>1</vegetation_form>
 		<natural_fire_regime>1</natural_fire_regime>
@@ -11469,6 +11526,7 @@
 		<g_SMDepth>15.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>3.00</g_SMRadius>
+		<g_SMLoading>0.024298256</g_SMLoading>
 		<ladderFuels>0.040000003</ladderFuels>
 	</FCCS>
 	<FCCS>
@@ -11863,7 +11921,7 @@
 		<snags_C1Wood>7.323053</snags_C1Wood>
 		<snags_C2>29.40531</snags_C2>
 		<snags_C3>5.8534956</snags_C3>
-		<shrubs_Primary>0.058950003</shrubs_Primary>
+		<shrubs_Primary>0.058755003</shrubs_Primary>
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>95.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
@@ -11907,6 +11965,7 @@
 		<g_BasDep>2.00</g_BasDep>
 		<g_BasRadius>0.50</g_BasRadius>
 		<g_BasPercent>20.00</g_BasPercent>
+		<g_BasLoading>6.304943E-4</g_BasLoading>
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
@@ -12170,7 +12229,7 @@
 		<overstory>0</overstory>
 		<midstory>0</midstory>
 		<understory>0</understory>
-		<shrubs_Primary>0.27526504</shrubs_Primary>
+		<shrubs_Primary>0.27212</shrubs_Primary>
 		<shrubs_Secondary>0</shrubs_Secondary>
 		<shrubs_Primary_perc_live>80.00</shrubs_Primary_perc_live>
 		<shrubs_Secondary_perc_live>-3.00</shrubs_Secondary_perc_live>
@@ -12519,6 +12578,7 @@
 		<g_BasDep>1.00</g_BasDep>
 		<g_BasRadius>2.00</g_BasRadius>
 		<g_BasPercent>10.00</g_BasPercent>
+		<g_BasLoading>0.001722998</g_BasLoading>
 		<g_SMDepth>-3.00</g_SMDepth>
 		<g_SMDensity>-3.00</g_SMDensity>
 		<g_SMRadius>-3.00</g_SMRadius>
@@ -12822,9 +12882,11 @@
 		<g_BasDep>2.00</g_BasDep>
 		<g_BasRadius>0.50</g_BasRadius>
 		<g_BasPercent>10.00</g_BasPercent>
+		<g_BasLoading>2.5547153E-4</g_BasLoading>
 		<g_SMDepth>18.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<g_SMLoading>0.08099419</g_SMLoading>
 		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 	<FCCS>
@@ -12887,9 +12949,11 @@
 		<g_BasDep>2.00</g_BasDep>
 		<g_BasRadius>0.50</g_BasRadius>
 		<g_BasPercent>10.00</g_BasPercent>
+		<g_BasLoading>2.5547153E-4</g_BasLoading>
 		<g_SMDepth>18.00</g_SMDepth>
 		<g_SMDensity>1.00</g_SMDensity>
 		<g_SMRadius>5.00</g_SMRadius>
+		<g_SMLoading>0.08099419</g_SMLoading>
 		<ladderFuels>3.0000002</ladderFuels>
 	</FCCS>
 </FCCS_file>

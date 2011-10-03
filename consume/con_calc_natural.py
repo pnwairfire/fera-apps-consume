@@ -168,7 +168,7 @@ def ccon_litter(LD):
 ################################
 # p. 179-183 in the manual
 
-def ccon_bas(LD, ff_redux_proportion):
+def ccon_bas(burn_type, ecoregion, basal_loading, fm_duff, ff_depth):
     """ Basal accumulations consumption, activity & natural
 
      The following equations in the next 4 lines of code for basal
@@ -177,18 +177,26 @@ def ccon_bas(LD, ff_redux_proportion):
      an original developer of Consume 3.0.
     """
     csd_bas = [0.10, 0.40, 0.50]
-##    # '43560' refers to the conversion factor from square feet to acres.
-##    # '0.8333' refers to default tree radius (in ft, based on 20" diam)
-##    bas_density = LD['bas_pct'] / 2.0 #<<< should pct be div by 100?
-##    bas_area = np.maximum((
-##                ((math.pi * (LD['bas_rad'] ** 2.0) / 43560.0) -
-##                (math.pi * 0.8333 / 43560.0)) * bas_density), 0.0)
-##    bas_total = (np.minimum(LD['bas_depth'], LD['ff_reduction'])
-##                 * bas_area * 12.0)
-##
-##    return util.csdist(bas_total, csd_bas)
-    bas_redux = ff_redux_proportion * LD['bas_depth']
-    return util.csdist(bas_redux, csd_bas)
+
+    basal_consumption = np.array([])
+    if 'activity' in burn_type:
+        #assert False
+        basal_consumption = basal_loading * 0.0
+    else:
+        if 'boreal' in ecoregion:
+            y_b = 1.2383 - (0.0114 * fm_duff) # used to calc squirrel mid. redux
+            basal_consumption = basal_loading * util.propcons(y_b)
+        elif 'southern' in ecoregion:
+            basal_consumption = (-0.0061 * fm_duff) + (0.6179 * basal_loading)
+            basal_consumption = np.where(
+                        np.less_equal(basal_consumption, 0.25), # if ffr south <= .25
+                        (0.006181 * math.e**(0.398983 * (ff_depth - # true
+                        (0.00987 * (fm_duff-60.0))))), basal_consumption) # false
+        elif 'western' in ecoregion:
+            y = -0.8085 - (0.0213 * fm_duff) + (1.0625 * ff_depth)
+            basal_consumption = basal_loading * util.propcons(y)
+        else: assert False
+    return util.csdist(basal_consumption, csd_bas)
 
 
 
