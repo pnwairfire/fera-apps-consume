@@ -78,7 +78,7 @@ class EmissionsFactorDB:
             ctype_map[id] = components
         return ctype_map
 
-    def get_key(self, burn_type, ecoregion):
+    def get_key(self, burn_type):
         key = 'bogus'
         # could be single element list or simply a string
         type = burn_type[0] if 1 == len(burn_type) else burn_type
@@ -104,7 +104,7 @@ class EmissionsFactorDB:
         ef_nums = []
         for f in range(0, len(fuelbed_list)):
             fuelbed_id = fuelbed_list[f]
-            eq_id_key = self.get_key(self.FCobj.burn_type.value, ecoregion)
+            eq_id_key = self.get_key(self.FCobj.burn_type.value)
             if fuelbed_id in self.fccs_emissions_groups:
                 efgs = self.fccs_emissions_groups[fuelbed_id]
                 group = efgs[eq_id_key]
