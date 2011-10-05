@@ -387,7 +387,6 @@ class Emissions:
         self.output_units.value = "lbs_ac"
 
         self.emissions_factor_group = iv.InputVar('efg')
-        self.emissions_factor_group.valids = self.efDB.valid_efgs
 
 
     def results(self, efg = -1):
@@ -727,9 +726,7 @@ class Emissions:
                                                    orig_units,
                                                    self.output_units.value[0])
 
-            #self._input_parameters[8] = self.output_units
-
-        #if reset: self.FCobj.output_units = 'tons_ac'
+        #ks if reset: self.FCobj.output_units = 'tons_ac'
         if propagate_units:
             self.FCobj._convert_units(explicit_units=self.units)
 
@@ -764,7 +761,6 @@ class Emissions:
             """ Converts list to numpy array """
             return np.array(d)
 
-        ef_num = efg
         all_fsrt = self.FCobj._cons_data # <<< ucons
 
         # Load default emissions factors (average of all factors...)
@@ -789,7 +785,7 @@ class Emissions:
 
         # And go fetch factors from the chosen emissions factor groups
         for i in range(0, fidlen):
-            data = self.efDB.data[int(ef_num[i])]
+            data = self.efDB.data[int(efg[i])]
             ef_flamg_pm25[i] = data['PM25_flaming']; ef_smres_pm25[i] = data['PM25_smold_resid']
             ef_flamg_co[i] = data['CO_flaming']; ef_smres_co[i] = data['CO_smold_resid']
             ef_flamg_co2[i] = data['CO2_flaming']; ef_smres_co2[i] = data['CO2_smold_resid']

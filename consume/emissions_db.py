@@ -33,12 +33,12 @@ class EmissionsFactorDB:
 
         root = get_rootnode(self.xml_file)
         self.data = self._load_emissions_factor_groups(root)
+
+        # this data comes from the loadings input file
         self.fccs_emissions_groups = self._load_emissions_factor_eqid()
+
         # - only used in the info() method
         #self.cover_type_descriptions = self._load_from_xml_db(root)
-
-        self.valid_efgs = [-1, -2, -5]#, -11, -12, -13, -14] # for later...
-        self.valid_efgs.sort()
 
     def _load_emissions_factor_groups(self, root):
         efg_map = {}
