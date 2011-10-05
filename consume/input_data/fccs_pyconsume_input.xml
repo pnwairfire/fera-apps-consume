@@ -1,6 +1,6 @@
 <FCCS_file>
 	<!-- Generator: FCCS -->
-	<!-- GeneratorVersion:  2.2 : 10/04/2011 -->
+	<!-- GeneratorVersion:  2.2 : 10/05/2011 -->
 	<FCCS>
 		<fuelbed_number>1</fuelbed_number>
 		<site_name>Black cottonwood -- Douglas-fir -- quaking aspen riparian forest</site_name>
@@ -4142,6 +4142,8 @@
 		<vegetation_form>1</vegetation_form>
 		<natural_fire_regime>3</natural_fire_regime>
 		<cover_type>-1</cover_type>
+		<efg_natural>0</efg_natural>
+		<efg_activity>0</efg_activity>
 		<overstory>2.9501007</overstory>
 		<midstory>0</midstory>
 		<understory>0</understory>
@@ -4199,6 +4201,8 @@
 		<vegetation_form>1</vegetation_form>
 		<natural_fire_regime>4</natural_fire_regime>
 		<cover_type>-1</cover_type>
+		<efg_natural>0</efg_natural>
+		<efg_activity>0</efg_activity>
 		<overstory>3.9465363</overstory>
 		<midstory>0</midstory>
 		<understory>0</understory>
@@ -4259,6 +4263,8 @@
 		<vegetation_form>1</vegetation_form>
 		<natural_fire_regime>5</natural_fire_regime>
 		<cover_type>-1</cover_type>
+		<efg_natural>0</efg_natural>
+		<efg_activity>0</efg_activity>
 		<overstory>17.98157</overstory>
 		<midstory>0</midstory>
 		<understory>0</understory>
@@ -4319,6 +4325,8 @@
 		<vegetation_form>5</vegetation_form>
 		<natural_fire_regime>3</natural_fire_regime>
 		<cover_type>-1</cover_type>
+		<efg_natural>0</efg_natural>
+		<efg_activity>0</efg_activity>
 		<overstory>2.981464</overstory>
 		<midstory>0</midstory>
 		<understory>0</understory>
@@ -4379,6 +4387,8 @@
 		<vegetation_form>2</vegetation_form>
 		<natural_fire_regime>6</natural_fire_regime>
 		<cover_type>-1</cover_type>
+		<efg_natural>0</efg_natural>
+		<efg_activity>0</efg_activity>
 		<overstory>5.7944703</overstory>
 		<midstory>0</midstory>
 		<understory>0.12872635</understory>
@@ -4438,6 +4448,8 @@
 		<vegetation_form>2</vegetation_form>
 		<natural_fire_regime>6</natural_fire_regime>
 		<cover_type>-1</cover_type>
+		<efg_natural>0</efg_natural>
+		<efg_activity>0</efg_activity>
 		<overstory>2.095846</overstory>
 		<midstory>0</midstory>
 		<understory>0</understory>
@@ -4497,6 +4509,8 @@
 		<vegetation_form>1</vegetation_form>
 		<natural_fire_regime>6</natural_fire_regime>
 		<cover_type>-1</cover_type>
+		<efg_natural>0</efg_natural>
+		<efg_activity>0</efg_activity>
 		<overstory>5.48856</overstory>
 		<midstory>7.57944</midstory>
 		<understory>4.05108</understory>
@@ -4557,6 +4571,8 @@
 		<vegetation_form>6</vegetation_form>
 		<natural_fire_regime>4</natural_fire_regime>
 		<cover_type>-1</cover_type>
+		<efg_natural>0</efg_natural>
+		<efg_activity>0</efg_activity>
 		<overstory>0</overstory>
 		<midstory>0</midstory>
 		<understory>0</understory>
@@ -4614,6 +4630,8 @@
 		<vegetation_form>3</vegetation_form>
 		<natural_fire_regime>2</natural_fire_regime>
 		<cover_type>-1</cover_type>
+		<efg_natural>0</efg_natural>
+		<efg_activity>0</efg_activity>
 		<overstory>0</overstory>
 		<midstory>0</midstory>
 		<understory>0</understory>
@@ -4668,6 +4686,8 @@
 		<vegetation_form>3</vegetation_form>
 		<natural_fire_regime>6</natural_fire_regime>
 		<cover_type>-1</cover_type>
+		<efg_natural>0</efg_natural>
+		<efg_activity>0</efg_activity>
 		<overstory>0</overstory>
 		<midstory>0</midstory>
 		<understory>0</understory>
@@ -4722,6 +4742,8 @@
 		<vegetation_form>3</vegetation_form>
 		<natural_fire_regime>2</natural_fire_regime>
 		<cover_type>-1</cover_type>
+		<efg_natural>0</efg_natural>
+		<efg_activity>0</efg_activity>
 		<overstory>0</overstory>
 		<midstory>0</midstory>
 		<understory>0</understory>
@@ -4776,6 +4798,8 @@
 		<vegetation_form>6</vegetation_form>
 		<natural_fire_regime>6</natural_fire_regime>
 		<cover_type>-1</cover_type>
+		<efg_natural>0</efg_natural>
+		<efg_activity>0</efg_activity>
 		<overstory>0</overstory>
 		<midstory>0</midstory>
 		<understory>0</understory>
@@ -4830,6 +4854,8 @@
 		<vegetation_form>3</vegetation_form>
 		<natural_fire_regime>6</natural_fire_regime>
 		<cover_type>-1</cover_type>
+		<efg_natural>0</efg_natural>
+		<efg_activity>0</efg_activity>
 		<overstory>0</overstory>
 		<midstory>0</midstory>
 		<understory>0</understory>
@@ -4884,6 +4910,8 @@
 		<vegetation_form>5</vegetation_form>
 		<natural_fire_regime>1</natural_fire_regime>
 		<cover_type>-1</cover_type>
+		<efg_natural>0</efg_natural>
+		<efg_activity>0</efg_activity>
 		<overstory>0.078146644</overstory>
 		<midstory>0</midstory>
 		<understory>0</understory>
@@ -6569,6 +6597,8 @@
 		<vegetation_form>6</vegetation_form>
 		<natural_fire_regime>4</natural_fire_regime>
 		<cover_type>-1</cover_type>
+		<efg_natural>0</efg_natural>
+		<efg_activity>0</efg_activity>
 		<overstory>0.2117016</overstory>
 		<midstory>0</midstory>
 		<understory>0</understory>
@@ -11899,6 +11929,8 @@
 		<vegetation_form>1</vegetation_form>
 		<natural_fire_regime>6</natural_fire_regime>
 		<cover_type>-1</cover_type>
+		<efg_natural>0</efg_natural>
+		<efg_activity>0</efg_activity>
 		<overstory>1.6498351</overstory>
 		<midstory>0</midstory>
 		<understory>0</understory>
@@ -11956,6 +11988,8 @@
 		<vegetation_form>3</vegetation_form>
 		<natural_fire_regime>2</natural_fire_regime>
 		<cover_type>-1</cover_type>
+		<efg_natural>0</efg_natural>
+		<efg_activity>0</efg_activity>
 		<overstory>0</overstory>
 		<midstory>0</midstory>
 		<understory>0</understory>
@@ -12010,6 +12044,8 @@
 		<vegetation_form>3</vegetation_form>
 		<natural_fire_regime>6</natural_fire_regime>
 		<cover_type>-1</cover_type>
+		<efg_natural>0</efg_natural>
+		<efg_activity>0</efg_activity>
 		<overstory>0</overstory>
 		<midstory>0</midstory>
 		<understory>0</understory>
@@ -12058,6 +12094,8 @@
 		<vegetation_form>5</vegetation_form>
 		<natural_fire_regime>1</natural_fire_regime>
 		<cover_type>-1</cover_type>
+		<efg_natural>0</efg_natural>
+		<efg_activity>0</efg_activity>
 		<overstory>0.03267</overstory>
 		<midstory>0</midstory>
 		<understory>0</understory>

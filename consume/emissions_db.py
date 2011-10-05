@@ -37,8 +37,8 @@ class EmissionsFactorDB:
         # this data comes from the loadings input file
         self.fccs_emissions_groups = self._load_emissions_factor_eqid()
 
-        # - only used in the info() method
-        #self.cover_type_descriptions = self._load_from_xml_db(root)
+        # - only used in the prompt() method, which has been removed
+        #ks self.cover_type_descriptions = self._load_covertype()
 
     def _load_emissions_factor_groups(self, root):
         efg_map = {}
@@ -63,18 +63,9 @@ class EmissionsFactorDB:
             ef_eqid_map[id] = components
         return ef_eqid_map
 
-    def _load_covertype(self, root):
-        assert False # - this is untested
-        ctype_map = {}
-        ctype = root.iterfind('cover_type')
-        for node in ctype:
-            kids = node.getchildren()
-            id = get_item('ID', kids)
-            components = {}
-            for kid in kids:
-                components[kid.tag] = get_float(kid.text)
-            ctype_map[id] = components
-        return ctype_map
+    def _load_covertype(self):
+        assert False # - this may not be necessary
+
 
     def get_key(self, burn_type):
         # could be single element list or simply a string

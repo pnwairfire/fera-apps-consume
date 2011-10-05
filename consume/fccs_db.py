@@ -54,7 +54,8 @@ class FCCSDB():
                 return node.findtext(tag_name)
 
             elif tag_name in ['fuelbed_number', 'fccs_id']:
-                return int(node.findtext(tag_name))
+                fb_num = int(node.findtext(tag_name))
+                return fb_num
             else:
                 data = 0
                 data = node.findtext(tag_name)

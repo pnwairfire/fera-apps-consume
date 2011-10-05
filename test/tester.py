@@ -54,23 +54,26 @@ class DataObj(object):
     def CompareItems(self, a, b, key, column):
         """ Convert strings to Decimals and truncate sensibly. Compare with
             the specified tolerance factor """
-        compare = True
-        check = HowManyULP(23.0001, 23.0002)
-        PLACES = dec.Decimal('0.0001')
-        if isNumber(a) and isNumber(b):
-            aa = dec.Decimal(a.lstrip('-')).quantize(PLACES)
-            bb = dec.Decimal(b.lstrip('-')).quantize(PLACES)
-            tolerance = self.GetTolerance(max(aa, bb))
-            if not WithinThisManyULP(aa, bb, tolerance):
-                if self._console_output:
-                    print "{}:\t{}\t:\t{}\t:\t{}".format(key, column, aa, bb)
-                compare = False
-            else:
-                if self._debug:
-                    print "Good - {} : {} : {} : {}".format(key, column, aa, bb)
-        elif(self._debug):
-            print "Not compared {} : {}".format(a, b)
-        return compare
+        if a and b:
+            compare = True
+            check = HowManyULP(23.0001, 23.0002)
+            PLACES = dec.Decimal('0.0001')
+            if isNumber(a) and isNumber(b):
+                aa = dec.Decimal(a.lstrip('-')).quantize(PLACES)
+                bb = dec.Decimal(b.lstrip('-')).quantize(PLACES)
+                tolerance = self.GetTolerance(max(aa, bb))
+                if not WithinThisManyULP(aa, bb, tolerance):
+                    if self._console_output:
+                        print "{}:\t{}\t:\t{}\t:\t{}".format(key, column, aa, bb)
+                    compare = False
+                else:
+                    if self._debug:
+                        print "Good - {} : {} : {} : {}".format(key, column, aa, bb)
+            elif(self._debug):
+                print "Not compared {} : {}".format(a, b)
+            return compare
+        else:
+            print("Missing value for key = {}".format(key))
 
     def CheckColumns(self, a, b):
         """ Primarily for ensuring that we are covering everything. May be
