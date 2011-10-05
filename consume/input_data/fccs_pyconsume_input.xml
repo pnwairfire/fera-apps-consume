@@ -77,7 +77,7 @@
 		<natural_fire_regime>5</natural_fire_regime>
 		<cover_type>131,134,135,136,137</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 224</srm_id>
 		<srm_description>Western Hemlock</srm_description>
 		<overstory>13.562626</overstory>
@@ -145,7 +145,7 @@
 		<natural_fire_regime>5</natural_fire_regime>
 		<cover_type>136</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 229</srm_id>
 		<srm_description>Pacific Douglas-Fir</srm_description>
 		<overstory>8.566303</overstory>
@@ -211,7 +211,7 @@
 		<natural_fire_regime>1</natural_fire_regime>
 		<cover_type>118</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 210</srm_id>
 		<srm_description>Interior Douglas-Fir</srm_description>
 		<overstory>3.5038576</overstory>
@@ -277,7 +277,7 @@
 		<natural_fire_regime>3</natural_fire_regime>
 		<cover_type>118,119,136</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 210</srm_id>
 		<srm_description>Interior Douglas-Fir</srm_description>
 		<overstory>13.201457</overstory>
@@ -414,7 +414,7 @@
 		<natural_fire_regime>3</natural_fire_regime>
 		<cover_type>136,141,150</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 229</srm_id>
 		<srm_description>Pacific Douglas-Fir</srm_description>
 		<overstory>11.499841</overstory>
@@ -476,7 +476,7 @@
 		<natural_fire_regime>5</natural_fire_regime>
 		<cover_type>135,137</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 228</srm_id>
 		<srm_description>Western Redcedar</srm_description>
 		<overstory>6.554909</overstory>
@@ -544,7 +544,7 @@
 		<natural_fire_regime>5</natural_fire_regime>
 		<cover_type>135,137</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 228</srm_id>
 		<srm_description>Western Redcedar</srm_description>
 		<overstory>8.193637</overstory>
@@ -610,7 +610,7 @@
 		<natural_fire_regime>5</natural_fire_regime>
 		<cover_type>130,131,132,136,137</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 223</srm_id>
 		<srm_description>Sitka Spruce</srm_description>
 		<overstory>11.747089</overstory>
@@ -678,7 +678,7 @@
 		<natural_fire_regime>5</natural_fire_regime>
 		<cover_type>130,131,132,136,137</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 223</srm_id>
 		<srm_description>Sitka Spruce</srm_description>
 		<overstory>12.1955805</overstory>
@@ -746,7 +746,7 @@
 		<natural_fire_regime>4</natural_fire_regime>
 		<cover_type>112,117</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 205</srm_id>
 		<srm_description>Mountain Hemlock</srm_description>
 		<overstory>16.115591</overstory>
@@ -815,7 +815,7 @@
 		<natural_fire_regime>5</natural_fire_regime>
 		<cover_type>112,133</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 205</srm_id>
 		<srm_description>Mountain Hemlock</srm_description>
 		<overstory>3.8898215</overstory>
@@ -941,7 +941,7 @@
 		<natural_fire_regime>1</natural_fire_regime>
 		<cover_type>154</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>3</efg_activity>
 		<srm_id>SAF 247</srm_id>
 		<srm_description>Jeffrey Pine</srm_description>
 		<overstory>13.972307</overstory>
@@ -1010,7 +1010,7 @@
 		<natural_fire_regime>1</natural_fire_regime>
 		<cover_type>150,152,153,154</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>4</efg_activity>
 		<srm_id>SAF 243</srm_id>
 		<srm_description>Sierra Nevada Mixed Conifer</srm_description>
 		<overstory>3.6008883</overstory>
@@ -1075,7 +1075,7 @@
 		<natural_fire_regime>4</natural_fire_regime>
 		<cover_type>114</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>4</efg_activity>
 		<srm_id>SAF 207</srm_id>
 		<srm_description>Red Fir</srm_description>
 		<overstory>24.652784</overstory>
@@ -1141,7 +1141,7 @@
 		<natural_fire_regime>1</natural_fire_regime>
 		<cover_type>118</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 210</srm_id>
 		<srm_description>Interior Douglas-Fir</srm_description>
 		<overstory>0.80498886</overstory>
@@ -1210,7 +1210,7 @@
 		<natural_fire_regime>1</natural_fire_regime>
 		<cover_type>119,150</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>4</efg_activity>
 		<srm_id>SAF 211</srm_id>
 		<srm_description>White Fir</srm_description>
 		<overstory>5.80724</overstory>
@@ -1334,7 +1334,7 @@
 		<natural_fire_regime>4</natural_fire_regime>
 		<cover_type>125</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>3</efg_activity>
 		<srm_id>SAF 218</srm_id>
 		<srm_description>Lodgepole Pine</srm_description>
 		<overstory>0.63249123</overstory>
@@ -1403,7 +1403,7 @@
 		<natural_fire_regime>4</natural_fire_regime>
 		<cover_type>125</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>3</efg_activity>
 		<srm_id>SAF 218</srm_id>
 		<srm_description>Lodgepole Pine</srm_description>
 		<overstory>4.1255674</overstory>
@@ -1471,7 +1471,7 @@
 		<natural_fire_regime>4</natural_fire_regime>
 		<cover_type>125</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>3</efg_activity>
 		<srm_id>SAF 218</srm_id>
 		<srm_description>Lodgepole Pine</srm_description>
 		<overstory>3.7805727</overstory>
@@ -1540,7 +1540,7 @@
 		<natural_fire_regime>1</natural_fire_regime>
 		<cover_type>151,152</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>3</efg_activity>
 		<srm_id>SAF 244</srm_id>
 		<srm_description>Pacific Ponderosa Pine-Douglas-Fir</srm_description>
 		<overstory>3.679949</overstory>
@@ -1671,7 +1671,7 @@
 		<natural_fire_regime>1</natural_fire_regime>
 		<cover_type>144</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>3</efg_activity>
 		<srm_id>SAF 237</srm_id>
 		<srm_description>Interior Ponderosa Pine</srm_description>
 		<overstory>0.7823485</overstory>
@@ -1735,7 +1735,7 @@
 		<natural_fire_regime>1</natural_fire_regime>
 		<cover_type>144,146,222</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>3</efg_activity>
 		<srm_id>SAF 237</srm_id>
 		<srm_description>Interior Ponderosa Pine</srm_description>
 		<overstory>1.5524786</overstory>
@@ -1870,7 +1870,7 @@
 		<natural_fire_regime>3</natural_fire_regime>
 		<cover_type>113,118,144</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>4</efg_activity>
 		<srm_id>SAF 206</srm_id>
 		<srm_description>Engelmann Spruce-Subalpine Fir</srm_description>
 		<overstory>10.349857</overstory>
@@ -1993,7 +1993,7 @@
 		<natural_fire_regime>1</natural_fire_regime>
 		<cover_type>144,146,222</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>3</efg_activity>
 		<srm_id>SAF 237</srm_id>
 		<srm_description>Interior Ponderosa Pine</srm_description>
 		<overstory>0.43124405</overstory>
@@ -2123,7 +2123,7 @@
 		<natural_fire_regime>3</natural_fire_regime>
 		<cover_type>118,144</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 210</srm_id>
 		<srm_description>Interior Douglas-Fir</srm_description>
 		<overstory>0.90561247</overstory>
@@ -2260,7 +2260,7 @@
 		<natural_fire_regime>1</natural_fire_regime>
 		<cover_type>144,154</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>3</efg_activity>
 		<srm_id>SAF 237</srm_id>
 		<srm_description>Interior Ponderosa Pine</srm_description>
 		<overstory>7.400147</overstory>
@@ -2326,7 +2326,7 @@
 		<natural_fire_regime>3</natural_fire_regime>
 		<cover_type>141</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 234</srm_id>
 		<srm_description>Douglas-Fir-Tanoak-Pacific Madrone</srm_description>
 		<overstory>4.829933</overstory>
@@ -2385,7 +2385,7 @@
 		<natural_fire_regime>1</natural_fire_regime>
 		<cover_type>150,151</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>4</efg_activity>
 		<srm_id>SAF 243</srm_id>
 		<srm_description>Sierra Nevada Mixed Conifer</srm_description>
 		<overstory>4.657436</overstory>
@@ -2874,7 +2874,7 @@
 		<natural_fire_regime>3</natural_fire_regime>
 		<cover_type>139</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 232</srm_id>
 		<srm_description>Redwood</srm_description>
 		<overstory>4.2261915</overstory>
@@ -2944,7 +2944,7 @@
 		<natural_fire_regime>3</natural_fire_regime>
 		<cover_type>141</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 234</srm_id>
 		<srm_description>Douglas-Fir-Tanoak-Pacific Madrone</srm_description>
 		<overstory>9.87941</overstory>
@@ -3130,7 +3130,7 @@
 		<natural_fire_regime>3</natural_fire_regime>
 		<cover_type>118</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 210</srm_id>
 		<srm_description>Interior Douglas-Fir</srm_description>
 		<overstory>1.816831</overstory>
@@ -3268,7 +3268,7 @@
 		<natural_fire_regime>1</natural_fire_regime>
 		<cover_type>118,119,144</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 210</srm_id>
 		<srm_description>Interior Douglas-Fir</srm_description>
 		<overstory>3.3356729</overstory>
@@ -3554,7 +3554,7 @@
 		<natural_fire_regime>4</natural_fire_regime>
 		<cover_type>113</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>4</efg_activity>
 		<srm_id>SAF 206</srm_id>
 		<srm_description>Engelmann Spruce-Subalpine Fir</srm_description>
 		<overstory>0.34700763</overstory>
@@ -3671,7 +3671,7 @@
 		<natural_fire_regime>5</natural_fire_regime>
 		<cover_type>115</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>3</efg_activity>
 		<srm_id>SAF 208</srm_id>
 		<srm_description>Whitebark Pine</srm_description>
 		<overstory>7.67255</overstory>
@@ -3947,7 +3947,7 @@
 		<natural_fire_regime>1</natural_fire_regime>
 		<cover_type>118,144</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 210</srm_id>
 		<srm_description>Interior Douglas-Fir</srm_description>
 		<overstory>2.529965</overstory>
@@ -4075,7 +4075,7 @@
 		<natural_fire_regime>4</natural_fire_regime>
 		<cover_type>113,122,125</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>4</efg_activity>
 		<srm_id>SAF 206</srm_id>
 		<srm_description>Engelmann Spruce-Subalpine Fir</srm_description>
 		<overstory>6.9166155</overstory>
@@ -9748,7 +9748,7 @@
 		<natural_fire_regime>3</natural_fire_regime>
 		<cover_type>121,136</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>4</efg_activity>
 		<srm_id>SAF 213</srm_id>
 		<srm_description>Grand Fir</srm_description>
 		<overstory>4.6574354</overstory>
@@ -10062,7 +10062,7 @@
 		<natural_fire_regime>1</natural_fire_regime>
 		<cover_type>150</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>4</efg_activity>
 		<srm_id>SAF 243</srm_id>
 		<srm_description>Sierra Nevada Mixed Conifer</srm_description>
 		<overstory>2.8051348</overstory>
@@ -10126,7 +10126,7 @@
 		<natural_fire_regime>3</natural_fire_regime>
 		<cover_type>141</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 234</srm_id>
 		<srm_description>Douglas-Fir-Tanoak-Pacific Madrone</srm_description>
 		<overstory>4.9204946</overstory>
@@ -10373,7 +10373,7 @@
 		<natural_fire_regime>3</natural_fire_regime>
 		<cover_type>118,119,144</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 210</srm_id>
 		<srm_description>Interior Douglas-Fir</srm_description>
 		<overstory>1.3809611</overstory>
@@ -10436,7 +10436,7 @@
 		<natural_fire_regime>3</natural_fire_regime>
 		<cover_type>118,119,144</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 210</srm_id>
 		<srm_description>Interior Douglas-Fir</srm_description>
 		<overstory>1.1416465</overstory>
@@ -10622,7 +10622,7 @@
 		<natural_fire_regime>3</natural_fire_regime>
 		<cover_type>118,119,144</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 210</srm_id>
 		<srm_description>Interior Douglas-Fir</srm_description>
 		<overstory>8.435394</overstory>
@@ -10820,7 +10820,7 @@
 		<natural_fire_regime>3</natural_fire_regime>
 		<cover_type>119,209</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>4</efg_activity>
 		<srm_id>SAF 211</srm_id>
 		<srm_description>White Fir</srm_description>
 		<overstory>5.091293</overstory>
@@ -10888,7 +10888,7 @@
 		<natural_fire_regime>3</natural_fire_regime>
 		<cover_type>119,209</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>4</efg_activity>
 		<srm_id>SAF 211</srm_id>
 		<srm_description>White Fir</srm_description>
 		<overstory>3.2451117</overstory>
@@ -10953,7 +10953,7 @@
 		<natural_fire_regime>1</natural_fire_regime>
 		<cover_type>144</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>3</efg_activity>
 		<srm_id>SAF 237</srm_id>
 		<srm_description>Interior Ponderosa Pine</srm_description>
 		<overstory>4.64306</overstory>
@@ -11019,7 +11019,7 @@
 		<natural_fire_regime>1</natural_fire_regime>
 		<cover_type>144,146</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>3</efg_activity>
 		<srm_id>SAF 237</srm_id>
 		<srm_description>Interior Ponderosa Pine</srm_description>
 		<overstory>8.301448</overstory>
@@ -11474,7 +11474,7 @@
 		<natural_fire_regime>5</natural_fire_regime>
 		<cover_type>112,113,164,171</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 205</srm_id>
 		<srm_description>Mountain Hemlock</srm_description>
 		<overstory>0</overstory>
@@ -11526,7 +11526,7 @@
 		<natural_fire_regime>5</natural_fire_regime>
 		<cover_type>112,133</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 205</srm_id>
 		<srm_description>Mountain Hemlock</srm_description>
 		<overstory>6.3975058</overstory>
@@ -11590,7 +11590,7 @@
 		<natural_fire_regime>3</natural_fire_regime>
 		<cover_type>136,141,150</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 229</srm_id>
 		<srm_description>Pacific Douglas-Fir</srm_description>
 		<overstory>4.254941</overstory>
@@ -12643,7 +12643,7 @@
 		<natural_fire_regime>3</natural_fire_regime>
 		<cover_type>113,118,119,144</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>4</efg_activity>
 		<srm_id>SAF 206</srm_id>
 		<srm_description>Engelmann Spruce-Subalpine Fir</srm_description>
 		<overstory>4.3124394</overstory>
@@ -13298,7 +13298,7 @@
 		<natural_fire_regime>1</natural_fire_regime>
 		<cover_type>126,144</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>3</efg_activity>
 		<srm_id>SAF 219</srm_id>
 		<srm_description>Limber Pine</srm_description>
 		<overstory>0.7331148</overstory>
@@ -13619,7 +13619,7 @@
 		<natural_fire_regime>3</natural_fire_regime>
 		<cover_type>118</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 210</srm_id>
 		<srm_description>Interior Douglas-Fir</srm_description>
 		<overstory>1.816831</overstory>
@@ -13690,7 +13690,7 @@
 		<natural_fire_regime>3</natural_fire_regime>
 		<cover_type>118</cover_type>
 		<efg_natural>8</efg_natural>
-		<efg_activity>8</efg_activity>
+		<efg_activity>1</efg_activity>
 		<srm_id>SAF 210</srm_id>
 		<srm_description>Interior Douglas-Fir</srm_description>
 		<overstory>1.816831</overstory>
