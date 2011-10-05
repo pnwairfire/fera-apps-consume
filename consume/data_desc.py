@@ -100,4 +100,8 @@ LoadDefs = (('fuelbed_number', 'fccs_id', 0),
             ('site_name', 'site_name', 59),
             ('site_description', 'site_desc', 60),
             ('g_BasLoading', 'bas_loading', 61),
-            ('g_SMLoading', 'sqm_loading', 62) )
+            ('g_SMLoading', 'sqm_loading', 62),
+            ('efg_natural', 'efg_natural', 63),
+            ('efg_activity', 'efg_activity', 64),
+            ('srm_id', 'srm_id', 65),
+            ('srm_description', 'srm_description', 66) )

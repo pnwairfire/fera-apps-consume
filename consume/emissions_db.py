@@ -33,7 +33,7 @@ class EmissionsFactorDB:
 
         root = get_rootnode(self.xml_file)
         self.data = self._load_emissions_factor_groups(root)
-        self.fccs_emissions_groups = self._load_emissions_factor_eqid(root)
+        self.fccs_emissions_groups = self._load_emissions_factor_eqid()
         # - only used in the info() method
         #self.cover_type_descriptions = self._load_from_xml_db(root)
 
@@ -52,16 +52,14 @@ class EmissionsFactorDB:
             efg_map[id] = components
         return efg_map
 
-    def _load_emissions_factor_eqid(self, root):
+    def _load_emissions_factor_eqid(self):
         ef_eqid_map = {}
-        ef_eqid = root.iterfind('FCCS_EFG')
-        for node in ef_eqid:
-            kids = node.getchildren()
-            id = get_item('fccs_id', kids)
+        l = self.FCobj.fuelbed_fccs_ids
+        for node in self.FCobj.FCCS.data:
+            id = node[0]
             components = {}
-            components['all_nat'] = get_item('all_nat', kids)
-            components['all_act_west'] = get_item('all_act_west', kids)
-            components['all_act_other'] = get_item('all_act_other', kids)
+            components['natural'] = int(node[63])
+            components['activity'] = int(node[64])
             ef_eqid_map[id] = components
         return ef_eqid_map
 
@@ -79,20 +77,11 @@ class EmissionsFactorDB:
         return ctype_map
 
     def get_key(self, burn_type):
-        key = 'bogus'
         # could be single element list or simply a string
-        type = burn_type[0] if 1 == len(burn_type) else burn_type
-        if 'natural' == type:
-            key = 'all_nat'
-        elif 'activity' == type:
-            key = 'all_act_other'
+        key = burn_type[0] if 1 == len(burn_type) else burn_type
+        assert key == 'natural' or key == 'activity'
         return key
 
-    def get_group_id(self, efgs, key):
-        id = 0
-        group = efgs[key]
-        id = group.split('|')[0] if '|' in group else group
-        return id
 
     def get_efgs(self, fuelbed_list, ecoregion):
         """Gets the appropriate emissions factor groups for the given FCCS IDs
@@ -103,12 +92,12 @@ class EmissionsFactorDB:
         """
         ef_nums = []
         for f in range(0, len(fuelbed_list)):
-            fuelbed_id = fuelbed_list[f]
+            fuelbed_id = int(fuelbed_list[f])
             eq_id_key = self.get_key(self.FCobj.burn_type.value)
             if fuelbed_id in self.fccs_emissions_groups:
                 efgs = self.fccs_emissions_groups[fuelbed_id]
                 group = efgs[eq_id_key]
-                ef_nums.append(self.get_group_id(efgs, eq_id_key))
+                ef_nums.append(group)
             else:
                 print("Error: emissions database does not contain equation id for fuelbed {}".
                     format(fuelbed_id))

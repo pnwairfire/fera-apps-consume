@@ -35,7 +35,8 @@ class FCCSDB():
 
         """
 
-        text_data = ['site_name', 'ecoregion', 'cover_type', 'site_description']
+        text_data = ['site_name', 'ecoregion', 'cover_type', 'site_description',
+            'srm_id', 'srm_description']
 
         pct_data = ['shrubs_Primary_perc_live', 'shrubs_Secondary_perc_live',
                     'nw_Primary_perc_live', 'nw_Secondary_perc_live',
