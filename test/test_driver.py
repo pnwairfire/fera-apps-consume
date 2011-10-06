@@ -3,7 +3,7 @@
 # Author:      kjells
 # Created:     9/22/2011
 # Copyright:   (c) kjells 2011
-# Purpose:     Use to generate results for regression tests.
+# Purpose:     Use to generate results and run regression tests.
 #-------------------------------------------------------------------------------
 
 # - run via batch file that sets PYTHONPATH correctly
@@ -12,27 +12,43 @@ import os
 import consume
 from tester import DataObj as compareCSV
 
+def get_this_location():
+    ''' Return the absolute directory path for this file
+    '''
+    return os.path.dirname(os.path.abspath(__file__))
+
+def out_name(dir, filename):
+    ''' Return the absolute directory path of this file
+         with the supplied directory name and filename appended
+    '''
+    return os.path.join(
+        os.path.join(get_this_location(), dir),
+        filename)
+
 def get_input_file():
     ''' Judge the location of the input file based on its relation to this file
     '''
     #DATA_INPUT_FILE = "./consume/input_data/fccs_pyconsume_input.xml"
     DATA_INPUT_FILE = "consume/input_data/input_without_1000fb.xml"
-    here = os.path.dirname(os.path.abspath(__file__))
+    here = get_this_location()
     here = here[:-len('test')]
     return os.path.normpath(os.path.join(here, DATA_INPUT_FILE))
 
 def wrap_input_display(inputs):
+    ''' Print all the inputs with the exception of the fuelbed array
+    '''
     if inputs:
         chunks = inputs.split('\n')
         print('')
         for line in chunks:
-            # print everything with the exception of the fuelbed array
             if line and not line.startswith('FCCS'):
                 print(line)
     else:
         print("\nError: missing input display")
 
 def get_consumption_object():
+    ''' Return a "ready to go" consumption object
+    '''
     consumer = consume.FuelConsumption(fccs_file = get_input_file())
     set_defaults(consumer, {})
     # run over all the fuelbeds
@@ -49,7 +65,8 @@ def write_columns(results, catagories, stream, first_element, index, header=Fals
             if not header:
                 out += str(results[cat][key]['total'][index])
             else:
-                # 'primary live', 'seconday live' occur in multiple catagories, ensure unique column headings
+                # 'primary live', 'seconday live' occur in multiple catagories,
+                #   ensure unique column headings
                 if 'primary' in key or 'secondary' in key:
                     key = cat + " " + key
                 out += key
@@ -103,12 +120,16 @@ def write_csv_emissions(results, fuelbed_list, stream):
         out += '\n'
         stream.write(out)
 
-
 def run_tests(consumer, fuelbed_list, outfile):
+    ''' Run consumption-based tests
+    '''
     results = consumer.results()
     write_csv(results['consumption'], fuelbed_list, outfile)
 
 def set_defaults(consumer, map):
+    ''' If a map is supplied, use the values from it (doesn't have to contain all values)
+         Otherwise, use the defaults
+    '''
     consumer.burn_type = map['burn_type'] if 'burn_type' in map else 'natural'
     consumer.fuelbed_area_acres = map['fuelbed_area_acres'] if 'fuelbed_area_acres' in map else 100
     consumer.fuel_moisture_1000hr_pct = map['fuel_moisture_1000hr_pct'] if 'fuel_moisture_1000hr_pct' in map else 20
@@ -125,12 +146,14 @@ def set_defaults(consumer, map):
     consumer.windspeed = map['windspeed'] if 'windspeed' in map else 5
 
 def run_basic_scenarios(consumer, fuelbed_list):
+    ''' Run basic consumption scenarios
+    '''
     scenario_list = ['western', 'southern', 'boreal', 'activity']
     for scene in scenario_list:
         consumer.fuelbed_ecoregion = scene if scene != 'activity' else 'western'
         consumer.burn_type = 'activity' if scene == 'activity' else 'natural'
-        outfilename = "results/{}_out.csv".format(scene)
-        reference_values = "./expected/{}_expected.csv".format(scene)
+        outfilename = out_name("results", "{}_out.csv".format(scene))
+        reference_values = out_name("expected", "{}_expected.csv".format(scene))
         run_and_test(consumer, fuelbed_list, outfilename, reference_values)
 
 def run_additional_activity_scenarios(consumer, fuelbed_list):
@@ -158,16 +181,20 @@ def run_additional_activity_scenarios(consumer, fuelbed_list):
         set_defaults(consumer, scene)
         consumer.fuelbed_ecoregion = 'western'
         consumer.burn_type = 'activity'
-        outfilename = "results/activity{}_out.csv".format(counter)
-        reference_values = "./expected/scen{}_activity_expected.csv".format(counter)
+        outfilename = out_name("results", "{}_out.csv".format(counter))
+        reference_values = out_name("expected", "scen{}_activity_expected.csv".format(counter))
         counter += 1
         run_and_test(consumer, fuelbed_list, outfilename, reference_values)
 
+#-------------------------------------------------------------------------------
+# Use a new emissions object because switching units causes an internal state
+#  problem for subsequent runs. todo ks
+#-------------------------------------------------------------------------------
 def run_emissions_western(fuelbed_list):
     consumer = get_consumption_object()
     em = consume.Emissions(consumer)
     outfilename ='western_emissions.csv'
-    reference_file = "./expected/{}_expected.csv".format(outfilename.split('.')[0])
+    reference_file = "{}_expected.csv".format(outfilename.split('.')[0])
     run_and_test_emissions(em, fuelbed_list, outfilename, reference_file)
 
 def run_emissions_activity(fuelbed_list):
@@ -175,7 +202,7 @@ def run_emissions_activity(fuelbed_list):
     consumer.burn_type = 'activity'
     em = consume.Emissions(consumer)
     outfilename ='activity_emissions.csv'
-    reference_file = "./expected/{}_expected.csv".format(outfilename.split('.')[0])
+    reference_file = "{}_expected.csv".format(outfilename.split('.')[0])
     run_and_test_emissions(em, fuelbed_list, outfilename, reference_file)
 
 def run_emissions_activity_with_unit_conversion(fuelbed_list):
@@ -184,9 +211,12 @@ def run_emissions_activity_with_unit_conversion(fuelbed_list):
     em = consume.Emissions(consumer)
     em.output_units = 'kg_ha'
     outfilename ='activity_emissions_kgha.csv'
-    reference_file = "./expected/{}_expected.csv".format(outfilename.split('.')[0])
+    reference_file = "{}_expected.csv".format(outfilename.split('.')[0])
     run_and_test_emissions(em, fuelbed_list, outfilename, reference_file)
 
+#-------------------------------------------------------------------------------
+# Currently need consumption-specific and emissions-specific runners
+#-------------------------------------------------------------------------------
 def run_and_test(consumer, fuelbed_list, outfilename, reference_values):
     wrap_input_display(consumer.display_inputs(print_to_console=False))
     with open(outfilename, 'w') as outfile:
@@ -198,18 +228,20 @@ def run_and_test(consumer, fuelbed_list, outfilename, reference_values):
 
 def run_and_test_emissions(emissions, fuelbed_list, outfilename, reference_values):
     wrap_input_display(emissions.display_inputs(print_to_console=False))
-    with open(outfilename, 'w') as outfile:
+    oname = out_name("results", outfilename)
+    with open(oname, 'w') as outfile:
         results = emissions.results()
         write_csv_emissions(results, fuelbed_list, outfile)
-    ref = compareCSV(reference_values, console=False)
-    computed = compareCSV(outfilename, console=False)
+    rname = out_name("expected", reference_values)
+    ref = compareCSV(rname, console=False)
+    computed = compareCSV(oname, console=False)
     (failed, compared) = ref.Compare(computed)
     print("{} = failed, {} compared:\t{}".format(failed, compared, outfilename))
 
 #-------------------------------------------------------------------------------
 # Start
 #-------------------------------------------------------------------------------
-# Current the emissions database doesn't have data for the 1000, 1001 fuelbeds
+# The emissions database doesn't have data for the 1000, 1001 fuelbeds
 #  and we don't have a database/input generator to create the file as yet. When
 #  that occurs, we can use the larger file
 consumer = consume.FuelConsumption(fccs_file = get_input_file())

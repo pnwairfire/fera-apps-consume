@@ -1,0 +1,1 @@
+@set PYTHONPATH=%PYTHONPATH%;%cd%\consume && c:\progfiles_x86\Python27\python.exe .\test\test_driver.py | findstr failed
