@@ -575,7 +575,7 @@ class Emissions:
                 text.close()
 
 
-    def display_inputs(self):
+    def display_inputs(self, print_to_console=True):
         """Lists the input parameters for the emissions scenario.
 
         Displays the input parameters for the consumption and emissions
@@ -583,10 +583,11 @@ class Emissions:
         scenario parameters have been correctly set.
 
         """
-        print "\nCONSUMPTION"
-        self.FCobj.InSet.display_input_values()
-        print "\nEMISSIONS"
-        self.InSet.display_input_values()
+        out_consumption = self.FCobj.InSet.display_input_values(print_to_console)
+        self._build_input_set()
+        out_emission = self.InSet.display_input_values(print_to_console)
+        if not print_to_console:
+            return out_consumption + out_emission
 
 
     def _wfeis_return(self,   fuelbed_fccs_ids = [1],
