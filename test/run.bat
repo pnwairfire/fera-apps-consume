@@ -1,1 +1,0 @@
-@set PYTHONPATH=%PYTHONPATH%;C:\1src\fera_src\consume4 && c:\progfiles_x86\Python27\python.exe test_driver.py
