@@ -11,6 +11,9 @@ import sys
 import consume
 from tester import DataObj as compareCSV
 
+DATA_INPUT_FILE = "../consume/input_data/input_without_1000fb.xml"
+#DATA_INPUT_FILE = "../consume/input_data/fccs_pyconsume_input.xml"
+
 def wrap_input_display(inputs):
     chunks = inputs.split('\n')
     print('')
@@ -21,8 +24,7 @@ def wrap_input_display(inputs):
 
 def get_consumption_object():
     consumer = consume.FuelConsumption(
-                #fccs_file = "../consume/input_data/fccs_pyconsume_input.xml")
-                fccs_file = "../consume/input_data/input_without_1000fb.xml")
+                fccs_file = DATA_INPUT_FILE)
     set_defaults(consumer, {})
 
     # run over all the fuelbeds
@@ -215,20 +217,16 @@ def run_and_test(consumer, fuelbed_list, outfilename, reference_values):
     (failed, compared) = ref.Compare(computed)
     print("{} = failed, {} compared:\t{}".format(failed, compared, outfilename))
 
-
-
 #-------------------------------------------------------------------------------
 # Start
 #-------------------------------------------------------------------------------
 # Current the emissions database doesn't have data for the 1000, 1001 fuelbeds
 #  and we don't have a database/input generator to create the file as yet. When
 #  that occurs, we can use the larger file
-consumer = consume.FuelConsumption(
-            #fccs_file = "../consume/input_data/fccs_pyconsume_input.xml")
-            fccs_file = "../consume/input_data/input_without_1000fb.xml")
+consumer = consume.FuelConsumption(fccs_file = DATA_INPUT_FILE)
 set_defaults(consumer, {})
 
-# run over all the fuelbeds
+# run over all the fuelbeds in the input file
 fuelbed_list = [str(i[0]) for i in consumer.FCCS.data]
 consumer.fuelbed_fccs_ids = fuelbed_list
 
