@@ -9,6 +9,8 @@ from data_desc import list_valid_combustion_stages
 from data_desc import list_valid_consumption_strata
 from data_desc import perarea
 
+import pkg_resources
+pkg_resources.declare_namespace(__name__)
 
 """
 Consume 3.0 was developed and designed originally in Java by US Forest

@@ -10,6 +10,7 @@
 #-------------------------------------------------------------------------------
 import shutil
 import os
+from contextlib import contextmanager
 
 PKG_DIR = './consume'
 PKG_SOURCE_DIR = './consume/consume'
@@ -23,7 +24,7 @@ def build_dirs():
 
 def copy_files(file_list, dest):
     for file in file_list:
-        print("{}\t->\t{}".format(file, dest))
+        #print("{}\t->\t{}".format(file, dest))
         shutil.copy(file, dest)
 
 def copy_non_source():
@@ -60,15 +61,48 @@ def copy_datafiles():
     copy_files(datafiles, PKG_DATAFILES_DIR)
 
 def run_setup():
-    print("\nChange to consume dir and run setup.")
-    print("\tpython setup.py sdist\n")
+    if os.path.exists(PKG_DIR):
+        os.chdir(PKG_DIR)
+        CMD = 'python setup.py sdist > NUL'
+        os.system(CMD)
+        output = os.listdir('./dist')
+        if len(output) and 'zip' in output[0]:
+            archive = os.path.abspath(os.path.join('./dist', output[0]))
+            print("\nSuccess !!!\n\tThe archive is: {}.\n".format(archive))
+        else:
+            print("\nHmmm... something went wrong building the package.\n")
 
+    else:
+        print("\nError: \'{}\' does not exist".format(PKG_DIR))
+
+def change_to_this():
+    ''' Return the current working directory. Change to the root of
+         the build_distribution directory
+    '''
+    here = os.path.dirname(os.path.abspath(__file__))
+    cwd = os.getcwd()
+    os.chdir(here)
+    return cwd
+
+@contextmanager
+def run_enclosed(setup, teardown):
+    ''' Encapsulate directory changes
+    '''
+    cwd = setup()
+    yield
+    teardown(cwd)
+
+
+#-------------------------------------------------------------------------------
+# Start
+#-------------------------------------------------------------------------------
 def main():
-    build_dirs()
-    copy_source()
-    copy_non_source()
-    copy_datafiles()
-    run_setup()
+    with run_enclosed(change_to_this, os.chdir):
+        build_dirs()
+        copy_source()
+        copy_non_source()
+        copy_datafiles()
+        run_setup()
 
 
 if __name__ == '__main__':
