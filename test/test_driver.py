@@ -8,11 +8,18 @@
 
 # - run via batch file that sets PYTHONPATH correctly
 import sys
+import os
 import consume
 from tester import DataObj as compareCSV
 
-DATA_INPUT_FILE = "../consume/input_data/input_without_1000fb.xml"
-#DATA_INPUT_FILE = "../consume/input_data/fccs_pyconsume_input.xml"
+def get_input_file():
+    ''' Judge the location of the input file based on its relation to this file
+    '''
+    #DATA_INPUT_FILE = "./consume/input_data/fccs_pyconsume_input.xml"
+    DATA_INPUT_FILE = "consume/input_data/input_without_1000fb.xml"
+    here = os.path.dirname(os.path.abspath(__file__))
+    here = here[:-len('test')]
+    return os.path.normpath(os.path.join(here, DATA_INPUT_FILE))
 
 def wrap_input_display(inputs):
     if inputs:
@@ -22,17 +29,16 @@ def wrap_input_display(inputs):
             # print everything with the exception of the fuelbed array
             if line and not line.startswith('FCCS'):
                 print(line)
+    else:
+        print("\nError: missing input display")
 
 def get_consumption_object():
-    consumer = consume.FuelConsumption(
-                fccs_file = DATA_INPUT_FILE)
+    consumer = consume.FuelConsumption(fccs_file = get_input_file())
     set_defaults(consumer, {})
-
     # run over all the fuelbeds
     fuelbed_list = [str(i[0]) for i in consumer.FCCS.data]
     consumer.fuelbed_fccs_ids = fuelbed_list
     return consumer
-
 
 def write_columns(results, catagories, stream, first_element, index, header=False):
     out = first_element
@@ -206,7 +212,7 @@ def run_and_test_emissions(emissions, fuelbed_list, outfilename, reference_value
 # Current the emissions database doesn't have data for the 1000, 1001 fuelbeds
 #  and we don't have a database/input generator to create the file as yet. When
 #  that occurs, we can use the larger file
-consumer = consume.FuelConsumption(fccs_file = DATA_INPUT_FILE)
+consumer = consume.FuelConsumption(fccs_file = get_input_file())
 set_defaults(consumer, {})
 
 # run over all the fuelbeds in the input file
