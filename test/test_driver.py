@@ -63,11 +63,14 @@ def write_columns(results, catagories, stream, first_element, index, header=Fals
         for key in sorted_keys:
             out += ","
             if not header:
-                out += str(results[cat][key]['total'][index])
+                if cat != 'heat release':
+                    out += str(results[cat][key]['total'][index])
+                else:
+                    out += str(results[cat][key][index])
             else:
                 # 'primary live', 'seconday live' occur in multiple catagories,
                 #   ensure unique column headings
-                if 'primary' in key or 'secondary' in key:
+                if ('primary' in key or 'secondary' in key) or (cat == 'heat release'):
                     key = cat + " " + key
                 out += key
     out += '\n'
@@ -86,10 +89,12 @@ def write_header_emissions(catagory_list, stream):
 def write_csv(results, fuelbed_list, stream):
 	# - top-level catagory list
     catagory_list = ['summary', 'canopy', 'ground fuels',
-        'litter-lichen-moss', 'nonwoody', 'shrub', 'woody fuels']
-    write_header(results, catagory_list, stream)
+        'litter-lichen-moss', 'nonwoody', 'shrub', 'woody fuels', 'heat release']
+    cresults = results['consumption']
+    cresults['heat release'] = results['heat release']
+    write_header(cresults, catagory_list, stream)
     for fb_index in xrange(0, len(fuelbed_list)):
-        write_columns(results, catagory_list, stream, fuelbed_list[fb_index], fb_index)
+        write_columns(cresults, catagory_list, stream, fuelbed_list[fb_index], fb_index)
 
 def write_csv_emissions(results, fuelbed_list, stream):
     # use all the emission keys except 'stratum'
@@ -124,7 +129,7 @@ def run_tests(consumer, fuelbed_list, outfile):
     ''' Run consumption-based tests
     '''
     results = consumer.results()
-    write_csv(results['consumption'], fuelbed_list, outfile)
+    write_csv(results, fuelbed_list, outfile)
 
 def set_defaults(consumer, map):
     ''' If a map is supplied, use the values from it (doesn't have to contain all values)
