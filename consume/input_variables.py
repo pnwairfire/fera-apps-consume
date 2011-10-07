@@ -1,5 +1,6 @@
 import data_desc as dd
 import numpy as np
+import util_consume as util
 
 InputVarParameters =[
 #kw, name, intname, validvals, defvalue, array, spec to activity equations
@@ -423,11 +424,7 @@ class InputVarSet:
 
         header =  ("\n" + head + ":\n" + "\n" + tabs("Parameter")
                + tabs(kwhead) + "\n" +
-               "--------------------------------------------------------------")
-        #ks -mods
-        out = header + txtout
-        if out:
-            return out
-        else:
-            import traceback
-            traceback.print_stack()
+               "--------------------------------------------------------------\n")
+        version = util.get_version()
+        out = header + version + txtout
+        return out
