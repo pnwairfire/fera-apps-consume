@@ -297,19 +297,33 @@ def csdist(tot, csd):
 def propcons(x):
     """ Equation to calculate proportion consumed for various strata"""
     return math.e ** (x) / (1 + math.e ** x)
+    
+try:
+    from version import get_consume_version
+except ImportError:
+    def get_consume_version():
+        from datetime import date
+        today = date.today()
+        version_string = 'Consume version 4.1 Revision 000 Date {} (unofficial)'.format(today)
+        return version_string
 
+def get_version():
+    return get_consume_version()
+
+def get_version_short():
+    ver = get_consume_version()
+    chunks = ver.split(' ')
+    version = "Ver{}_Rev{}_{}".format(chunks[2], chunks[4], chunks[6])
+    if 'unofficial' in ver:
+        version += '_unofficial'
+    return version
+    
 #-------------------------------------------------------------------------------
 #   For testing
 #-------------------------------------------------------------------------------
 def main():
-    a = 42.3847781507
-    b = 23.2962946918
-
-    for i in ['tons_ac', 'lbs_ac', 'lbs', 'kg', 'kg_ha', 'kg_m^2', 'kg_km^2', 'tonnes', 'tonnes_ha', 'tonnes_km^2']:
-        for j in ['tons_ac', 'lbs_ac', 'lbs', 'kg_ha', 'kg_m^2', 'kg_km^2', 'tonnes', 'tonnes_ha', 'tonnes_km^2']:
-            print(unit_conversion(a, 100, i, j ))
-            print(unit_conversion(b, 100, i, j))
-
+    print(get_version())
+    print(get_version_short())
 if __name__ == '__main__':
     main()
 

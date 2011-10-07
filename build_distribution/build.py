@@ -10,11 +10,16 @@
 #-------------------------------------------------------------------------------
 import shutil
 import os
+import sys
 from contextlib import contextmanager
+from datetime import date
 
 PKG_DIR = './consume'
 PKG_SOURCE_DIR = './consume/consume'
 PKG_DATAFILES_DIR = PKG_SOURCE_DIR + '/input_data'
+REVISION_FILE = 'mercurial_rev.txt'
+VERSION_FILE = '../consume/version.py'
+
 
 def build_dirs():
     if os.path.exists(PKG_DIR):
@@ -48,7 +53,8 @@ def copy_source():
         '../consume/fccs_db.py',
         '../consume/fuel_consumption.py',
         '../consume/input_variables.py',
-        '../consume/util_consume.py'
+        '../consume/util_consume.py',
+        VERSION_FILE
     ]
     copy_files(SOURCE_FILES, PKG_SOURCE_DIR)
     all_py_files = [i for i in os.listdir('../consume') if i.endswith('.py')]
@@ -59,6 +65,15 @@ def copy_source():
 def copy_datafiles():
     datafiles = ['../consume/input_data/' + i for i in os.listdir('../consume/input_data')]
     copy_files(datafiles, PKG_DATAFILES_DIR)
+
+def build_version_file():
+    with open(REVISION_FILE, 'r') as infile:
+        revision = infile.readline().rstrip()
+    with open(VERSION_FILE, 'w') as outfile:
+        today = date.today()
+        version = "    return \'Consume version 4.1 Revision {} Date {}\'\n".format(revision, today)
+        outfile.write('def get_consume_version():\n')
+        outfile.write(version)
 
 def run_setup():
     if os.path.exists(PKG_DIR):
@@ -99,6 +114,7 @@ def run_enclosed(setup, teardown):
 def main():
     with run_enclosed(change_to_this, os.chdir):
         build_dirs()
+        build_version_file()
         copy_source()
         copy_non_source()
         copy_datafiles()
