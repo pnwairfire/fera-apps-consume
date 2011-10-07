@@ -99,6 +99,15 @@ def change_to_this():
     os.chdir(here)
     return cwd
 
+def cleanup(pop_to_directory):
+    version_file = os.path.join('../', VERSION_FILE)
+    if os.path.exists(version_file):
+        os.unlink(version_file)
+    else:
+        print("Error: unable to delete version file!!!")
+        print(os.getcwd())
+    os.chdir(pop_to_directory)
+
 @contextmanager
 def run_enclosed(setup, teardown):
     ''' Encapsulate directory changes
@@ -112,7 +121,7 @@ def run_enclosed(setup, teardown):
 # Start
 #-------------------------------------------------------------------------------
 def main():
-    with run_enclosed(change_to_this, os.chdir):
+    with run_enclosed(change_to_this, cleanup):
         build_dirs()
         build_version_file()
         copy_source()
