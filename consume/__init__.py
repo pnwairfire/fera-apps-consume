@@ -8,6 +8,8 @@ from data_desc import list_valid_emissions_species
 from data_desc import list_valid_combustion_stages
 from data_desc import list_valid_consumption_strata
 from data_desc import perarea
+from util_consume import get_version
+from util_consume import get_version_short
 
 import pkg_resources
 pkg_resources.declare_namespace(__name__)
