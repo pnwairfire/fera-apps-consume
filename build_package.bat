@@ -1,1 +1,1 @@
-@python build_distribution\build.py
+@%py2%\python build_distribution\build.py
