@@ -1,1 +1,1 @@
-@set PYTHONPATH=%PYTHONPATH%;%cd%\consume && %py2%\Scripts\nosetests.exe -w unittest  --detailed-errors
+@set PYTHONPATH=%PYTHONPATH%;%cd%\consume && %py2_path%\Scripts\nosetests.exe -w unittest  --detailed-errors
