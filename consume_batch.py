@@ -52,7 +52,7 @@ def get_stratum_cols(results, decider):
         for j in results[i].keys():
             subcol = add_FSRT_cols(j, decider)
             for s_col in subcol:
-                out.append("stratum~{}".format(s_col))
+                out.append("stratum~{}~{}".format(i, s_col))
     return out
 
 def get_emissions_cols(results, cols):
@@ -72,8 +72,9 @@ def get_emissions_cols(results, cols):
 def get_consumption_cols(results, cols):
     if cols.consumption_col.include:
         parents = [i for i in results.keys()]
+        parents.remove('debug')
         out = []
-        for i in results.keys():
+        for i in parents:
             for j in results[i].keys():
                 subcol = add_FSRT_cols(j, cols.consumption_col.detail)
                 for s_col in subcol:
@@ -108,26 +109,32 @@ def get_column_data(results, key_string, index):
     code = 'results{}[{}]'.format(deref, index)
     try:
         return eval(code)
+    except ValueError:
+        print "ValueError.", code
+    except IndexError:
+        code = 'results{}[{}]'.format(deref, 0)
+        return eval(code)
+    except TypeError:
+        print "TypeError.", code
     except:
-        print(code)
-        return '0.0'
+        print "Unexpected error:", code
 
 def write_computed_results(results, columns, fuelbed_list, outfile):
     # for each fuelbed
-    line = []
+    line = ""
     for number, fuelbed in enumerate(fuelbed_list):
-        line.append(fuelbed)
+        line += fuelbed
         for column in columns:
-            line.append(get_column_data(results, column, number))
-        line.append('\n')
-    line_str = ",".join(line)
-    outfile.write(line[1:])
+            line += ','
+            line += str(get_column_data(results, column, number))
+        line += '\n'
+    outfile.write(line)
 
 
 def write_results(all_results, cols, fuelbed_list):
     p = get_simple_cols(all_results['parameters'], 'parameters', cols.parameters_col)
     e = get_emissions_cols(all_results['emissions'], cols)
-    h = get_simple_cols(all_results['heat release'], 'heat_release', cols.heat_release_col.include)
+    h = get_simple_cols(all_results['heat release'], 'heat release', cols.heat_release_col.include)
     c = get_consumption_cols(all_results['consumption'], cols)
     keys = [p, e, h, c]
     columns = [subkey for key in keys for subkey in key]

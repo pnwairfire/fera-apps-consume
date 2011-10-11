@@ -27,7 +27,7 @@ class CustomCol(object):
         parameters_col = True,
         heat_release_col = ColumnCfg(True, 'all'),
         emissions_col = ColumnCfg(True, 'all'),
-        emissions_stratum_col = ColumnCfg(True, 'total'),
+        emissions_stratum_col = ColumnCfg(True, 'all'),
         consumption_col = ColumnCfg(True, 'all')
         ):
         self._parameters_col = parameters_col
