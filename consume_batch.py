@@ -86,10 +86,14 @@ def print_results(all_results, cols):
                 for i, n in enumerate(out):
                     print("{} - {}".format(i, n))
 
-    do_print(get_simple_cols(all_results['parameters'], 'parameters', cols.parameters_col))
-    do_print(get_emissions_cols(all_results['emissions'], cols))
-    do_print(get_simple_cols(all_results['heat release'], 'heat_release', cols.heat_release_col.include))
-    do_print(get_consumption_cols(all_results['consumption'], cols))
+    p = get_simple_cols(all_results['parameters'], 'parameters', cols.parameters_col)
+    e = get_emissions_cols(all_results['emissions'], cols)
+    h = get_simple_cols(all_results['heat release'], 'heat_release', cols.heat_release_col.include)
+    c = get_consumption_cols(all_results['consumption'], cols)
+    p.extend(e)
+    p.extend(h)
+    p.extend(c)
+    do_print(p)
 
 def write_header(columns, outfile):
     header = 'fuelbed,'
