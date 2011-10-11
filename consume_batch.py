@@ -41,7 +41,6 @@ def add_FSRT_cols(parent_col, decider):
         out.append("{}~{}".format(parent_col, i))
     return out
 
-
 def get_simple_cols(results, prefix, include):
     if include:
         return ["{}~{}".format(prefix, i) for i in results.keys()]
@@ -81,13 +80,12 @@ def get_consumption_cols(results, cols):
                     out.append("consumption~{}~{}".format(i, s_col))
         return out
 
-def do_print(out):
-    if out:
-        for i, n in enumerate(out):
-            print("{} - {}".format(i, n))
-
-
 def print_results(all_results, cols):
+    def do_print(out):
+            if out:
+                for i, n in enumerate(out):
+                    print("{} - {}".format(i, n))
+
     do_print(get_simple_cols(all_results['parameters'], 'parameters', cols.parameters_col))
     do_print(get_emissions_cols(all_results['emissions'], cols))
     do_print(get_simple_cols(all_results['heat release'], 'heat_release', cols.heat_release_col.include))
@@ -120,7 +118,6 @@ def get_column_data(results, key_string, index):
         print "Unexpected error:", code
 
 def write_computed_results(results, columns, fuelbed_list, outfile):
-    # for each fuelbed
     line = ""
     for number, fuelbed in enumerate(fuelbed_list):
         line += fuelbed
@@ -129,7 +126,6 @@ def write_computed_results(results, columns, fuelbed_list, outfile):
             line += str(get_column_data(results, column, number))
         line += '\n'
     outfile.write(line)
-
 
 def write_results(all_results, cols, fuelbed_list):
     p = get_simple_cols(all_results['parameters'], 'parameters', cols.parameters_col)
@@ -141,7 +137,6 @@ def write_results(all_results, cols, fuelbed_list):
     with open('batch_results.csv', 'w') as outfile:
         write_header(columns, outfile)
         write_computed_results(all_results, columns, fuelbed_list, outfile)
-
 
 def run(csv_input):
     if os.path.exists(csv_input):
@@ -155,10 +150,6 @@ def run(csv_input):
         write_results(results, cols, fuelbed_list)
     else:
         print("Error: Can't find input file {}".format(csv_input))
-
-
-
-
 
 #-------------------------------------------------------------------------------
 # Main
