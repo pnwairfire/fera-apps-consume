@@ -10,7 +10,7 @@
 import consume
 import os
 import sys
-import custom_col
+from custom_col import CustomCol
 
 def get_this_location():
     ''' Return the absolute directory path for this file
@@ -41,9 +41,13 @@ def add_FSRT_cols(parent_col, decider):
         out.append("{}~{}".format(parent_col, i))
     return out
 
-def get_simple_cols(results, prefix, include):
+def get_parameter_cols(results, prefix, include):
     if include:
         return ["{}~{}".format(prefix, i) for i in results.keys()]
+
+def get_heatrelease_cols(results, prefix, cols):
+    if cols.include:
+        return add_FSRT_cols(prefix, cols.detail)
 
 def get_stratum_cols(results, decider):
     out = []
@@ -86,14 +90,16 @@ def print_results(all_results, cols):
                 for i, n in enumerate(out):
                     print("{} - {}".format(i, n))
 
-    p = get_simple_cols(all_results['parameters'], 'parameters', cols.parameters_col)
+    p = get_parameter_cols(all_results['parameters'], 'parameters', cols.parameters_col)
     e = get_emissions_cols(all_results['emissions'], cols)
-    h = get_simple_cols(all_results['heat release'], 'heat_release', cols.heat_release_col.include)
+    h = get_heatrelease_cols(all_results['heat release'], 'heat release', cols.heat_release_col)
     c = get_consumption_cols(all_results['consumption'], cols)
-    p.extend(e)
-    p.extend(h)
-    p.extend(c)
-    do_print(p)
+    out = []
+    if p: out.extend(p)
+    if e: out.extend(e)
+    if h: out.extend(h)
+    if c: out.extend(c)
+    do_print(out)
 
 def write_header(columns, outfile):
     header = 'fuelbed,'
@@ -132,37 +138,34 @@ def write_computed_results(results, columns, fuelbed_list, outfile):
     outfile.write(line)
 
 def write_results(all_results, cols, fuelbed_list):
-    p = get_simple_cols(all_results['parameters'], 'parameters', cols.parameters_col)
+    p = get_parameter_cols(all_results['parameters'], 'parameters', cols.parameters_col)
     e = get_emissions_cols(all_results['emissions'], cols)
-    h = get_simple_cols(all_results['heat release'], 'heat release', cols.heat_release_col.include)
+    h = get_heatrelease_cols(all_results['heat release'], 'heat release', cols.heat_release_col)
     c = get_consumption_cols(all_results['consumption'], cols)
-    keys = [p, e, h, c]
+    tmp = [p, e, h, c]
+    keys = [i for i in tmp if i]
     columns = [subkey for key in keys for subkey in key]
     with open('batch_results.csv', 'w') as outfile:
         write_header(columns, outfile)
         write_computed_results(all_results, columns, fuelbed_list, outfile)
 
-def run(csv_input):
-    if os.path.exists(csv_input):
-        consumer = consume.FuelConsumption(fccs_file=get_input_file())
-        consumer.load_scenario(csv_input)
-        emissions = consume.Emissions(consumer)
-        results = emissions.results()
-        cols = custom_col.CustomCol()
-        #print_results(results, cols)
-        fuelbed_list = consumer.fuelbed_fccs_ids.value
-        write_results(results, cols, fuelbed_list)
-    else:
-        print("Error: Can't find input file {}".format(csv_input))
+def run(csv_input, col_cfg=None):
+    consumer = consume.FuelConsumption(fccs_file=get_input_file())
+    consumer.load_scenario(csv_input)
+    emissions = consume.Emissions(consumer)
+    results = emissions.results()
+    cols = CustomCol() if not col_cfg else CustomCol.from_file(col_cfg)
+    fuelbed_list = consumer.fuelbed_fccs_ids.value
+    write_results(results, cols, fuelbed_list)
+    #print_results(results, cols)
 
 #-------------------------------------------------------------------------------
 # Main
 #-------------------------------------------------------------------------------
+import cmdline
 def main():
-    if len(sys.argv) == 2:
-        run(sys.argv[1])
-    else:
-        print("\nError - Please specify a .csv input file.")
+    parser = cmdline.ConsumeParser(sys.argv)
+    run(parser.csv_file, parser.col_cfg_file)
 
 if __name__ == '__main__':
     main()
