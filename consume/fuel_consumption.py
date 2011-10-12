@@ -860,7 +860,7 @@ class FuelConsumption:
         self.InSet.save(save_file)
 
 
-    def load_scenario(self, load_file=''):
+    def load_scenario(self, load_file='', display=True):
         """Loads scenario input parameters from a CSV file
 
         Required argument:
@@ -870,7 +870,7 @@ class FuelConsumption:
                      formatting guidance.
 
         """
-        self.InSet.load(load_file)
+        self.InSet.load(load_file, display=display)
 
     def _display_report(self, csv, stratum = 'all', incl_heat = False, ret=False, tsize=8):
         """Displays an in-shell report on consumption values"""

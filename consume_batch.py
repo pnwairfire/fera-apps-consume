@@ -12,6 +12,8 @@ import os
 import sys
 from custom_col import CustomCol
 
+RESULTS_FILE = 'batch_results.csv'
+
 def get_this_location():
     ''' Return the absolute directory path for this file
     '''
@@ -145,18 +147,19 @@ def write_results(all_results, cols, fuelbed_list):
     tmp = [p, e, h, c]
     keys = [i for i in tmp if i]    # - only include columns that exist
     columns = [subkey for key in keys for subkey in key] # - flatten into single list
-    with open('batch_results.csv', 'w') as outfile:
+    with open(RESULTS_FILE, 'w') as outfile:
         write_header(columns, outfile)
         write_computed_results(all_results, columns, fuelbed_list, outfile)
 
 def run(csv_input, col_cfg=None):
     consumer = consume.FuelConsumption(fccs_file=get_input_file())
-    consumer.load_scenario(csv_input)
+    consumer.load_scenario(csv_input, display=False)
     emissions = consume.Emissions(consumer)
     results = emissions.results()
     cols = CustomCol() if not col_cfg else CustomCol.from_file(col_cfg)
     fuelbed_list = consumer.fuelbed_fccs_ids.value
     write_results(results, cols, fuelbed_list)
+    print("\nSuccess!!! Results are in \"{}\"".format(RESULTS_FILE))
     #print_results(results, cols)
 
 #-------------------------------------------------------------------------------

@@ -68,6 +68,8 @@ def make_parser():
 
 class ConsumeParser(object):
     def __init__(self, argv):
+        self._csv_file = None
+        self._col_cfg_file = None
         parser = make_parser()
         if 1 == len(argv):
             parser.parse_args(['--help'])
@@ -76,9 +78,13 @@ class ConsumeParser(object):
             if args.gen_col_cfg:
                 print_default_column_config_xml(args.gen_col_cfg)
                 exit(0)
-            if self.exists(args.csv_file[0]):
-                self._csv_file = args.csv_file[0]
-            if self.exists(args.col_cfg_file[0]):
+            if args.csv_file:
+                if self.exists(args.csv_file[0]):
+                    self._csv_file = args.csv_file[0]
+            else:
+                print("\nError: an input file is required.\n")
+                exit(1)
+            if args.col_cfg_file and self.exists(args.col_cfg_file[0]):
                 self._col_cfg_file = args.col_cfg_file[0]
 
     def exists(self, filename):

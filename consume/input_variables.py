@@ -252,7 +252,7 @@ class InputVarSet:
             method) from the 'load_file'
             Set display to 'False' to not view the loaded data"""
 
-        print "Loading input parameter file: " + load_file
+        if display: print "Loading input parameter file: " + load_file
 
         # reset all inputs
         for par in self.params:
