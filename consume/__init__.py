@@ -11,8 +11,10 @@ from data_desc import perarea
 from util_consume import get_version
 from util_consume import get_version_short
 
+'''
 import pkg_resources
 pkg_resources.declare_namespace(__name__)
+'''
 
 """
 Consume 3.0 was developed and designed originally in Java by US Forest
