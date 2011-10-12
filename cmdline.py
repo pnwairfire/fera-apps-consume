@@ -13,8 +13,25 @@ import argparse
 
 def print_default_column_config_xml(filename):
     DEFAULT_XML = r'''
+<!--
+This file allows you to customize the consume output results.
+
+There are 4 top-level catagories. Display or exclude the data from the catagory by
+setting the "include" attribute to "yes" or "no".
+
+The data from the heat release, emissions, and combustion catagories can be
+displayed 2 different ways. The "detail" attribute is responsible for this choice.
+Choose "all" to see the data in flaming, smoldering, residual, and total columns.
+Choose "total" to limit the display to simply the total column.
+
+When generated this file reflects the application defaults.
+
+Be mindful that regenerating this file will overwrite any changes you have made.
+Save the file to a name of your choice to avoid having it overwritten.
+-->
+
 <consume_output>
-    <!-- Include the parameters data? yes/no. How much detail? all/total. -->
+    <!-- Include the parameters data? yes/no. -->
     <parameters_column include="yes" />
 
     <!-- Include the heat release data? yes/no. How much detail? all/total. -->
@@ -32,6 +49,7 @@ def print_default_column_config_xml(filename):
     with open(filename, 'w') as outfile:
         for line in DEFAULT_XML:
             outfile.write(line)
+        print("\nSuccess: Consume column configuration file written - {}\n".format(filename))
 
 def make_parser():
     parser = argparse.ArgumentParser(
@@ -44,8 +62,7 @@ def make_parser():
     parser.add_argument('-g', '--generate_column_config', action='store', nargs='?',
         default="", const="output_config.xml", dest='gen_col_cfg',
         help='This option will print a default column configuration xml file to the console. \
-            Redirect to a file and customize to suit your needs.\
-            %(prog)s --generate_column_config > my_config.xml\n'
+            Modify this file as needed and save it to another name.'
         )
     return parser
 

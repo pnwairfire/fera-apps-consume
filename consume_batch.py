@@ -143,8 +143,8 @@ def write_results(all_results, cols, fuelbed_list):
     h = get_heatrelease_cols(all_results['heat release'], 'heat release', cols.heat_release_col)
     c = get_consumption_cols(all_results['consumption'], cols)
     tmp = [p, e, h, c]
-    keys = [i for i in tmp if i]
-    columns = [subkey for key in keys for subkey in key]
+    keys = [i for i in tmp if i]    # - only include columns that exist
+    columns = [subkey for key in keys for subkey in key] # - flatten into single list
     with open('batch_results.csv', 'w') as outfile:
         write_header(columns, outfile)
         write_computed_results(all_results, columns, fuelbed_list, outfile)
