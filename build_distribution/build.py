@@ -17,7 +17,7 @@ from datetime import date
 PKG_DIR = './consume'
 PKG_SOURCE_DIR = './consume/consume'
 PKG_DATAFILES_DIR = PKG_SOURCE_DIR + '/input_data'
-REVISION_FILE = 'mercurial_rev.txt'
+REVISION_FILE = '../mercurial_rev.txt'
 VERSION_FILE = '../consume/version.py'
 
 
