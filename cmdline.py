@@ -77,20 +77,20 @@ class ConsumeParser(object):
             args = parser.parse_args(argv[1:])
             if args.gen_col_cfg:
                 print_default_column_config_xml(args.gen_col_cfg)
-                exit(0)
+                sys.exit(0)
             if args.csv_file:
                 if self.exists(args.csv_file[0]):
                     self._csv_file = args.csv_file[0]
             else:
                 print("\nError: an input file is required.\n")
-                exit(1)
+                sys.exit(1)
             if args.col_cfg_file and self.exists(args.col_cfg_file[0]):
                 self._col_cfg_file = args.col_cfg_file[0]
 
     def exists(self, filename):
         if not os.path.exists(filename):
             print("Error: file not found \"{}\"".format(filename))
-            exit(1)
+            sys.exit(1)
         return True
 
     @property

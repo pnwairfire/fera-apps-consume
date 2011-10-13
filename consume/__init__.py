@@ -17,6 +17,8 @@ try:
     #  this failure is harmless. ks todo
     import pkg_resources
     pkg_resources.declare_namespace(__name__)
+except:
+    pass
 
 """
 Consume 3.0 was developed and designed originally in Java by US Forest

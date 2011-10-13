@@ -11,28 +11,21 @@ import consume
 import os
 import sys
 from custom_col import CustomCol
+import module_locator
 
 RESULTS_FILE = 'batch_results.csv'
 
-def get_this_location():
-    ''' Return the absolute directory path for this file
-    '''
-    return os.path.dirname(os.path.abspath(__file__))
-
-def out_name(dir, filename):
-    ''' Return the absolute directory path of this file
-         with the supplied directory name and filename appended
-    '''
-    return os.path.join(
-        os.path.join(get_this_location(), dir),
-        filename)
+def can_run():
+    mod_location = module_locator.module_path()
+    cwd = os.getcwd()
+    return True if mod_location == cwd else False
 
 def get_input_file():
     ''' Judge the location of the input file based on its relation to this file
     '''
-    DATA_INPUT_FILE = "consume/input_data/input_without_1000fb.xml"
-    here = get_this_location()
-    return os.path.normpath(out_name(here, DATA_INPUT_FILE))
+    DATA_INPUT_FILE = "./consume/input_data/input_without_1000fb.xml"
+    #return os.path.normpath(DATA_INPUT_FILE)
+    return DATA_INPUT_FILE
 
 def add_FSRT_cols(parent_col, decider):
     FSRT_ALL = ['flaming', 'smoldering', 'residual', 'total']
@@ -167,8 +160,11 @@ def run(csv_input, col_cfg=None):
 #-------------------------------------------------------------------------------
 import cmdline
 def main():
-    parser = cmdline.ConsumeParser(sys.argv)
-    run(parser.csv_file, parser.col_cfg_file)
+    if can_run():
+        parser = cmdline.ConsumeParser(sys.argv)
+        run(parser.csv_file, parser.col_cfg_file)
+    else:
+        print("Error: this program must be run from the location of the exe/script.")
 
 if __name__ == '__main__':
     main()
