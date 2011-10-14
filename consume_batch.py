@@ -198,9 +198,9 @@ def run(csv_input, col_cfg=None):
     results = emissions.results()
     cols = CustomCol() if not col_cfg else CustomCol.from_file(col_cfg)
     fuelbed_list = consumer.fuelbed_fccs_ids.value
-    #write_results(results, cols, fuelbed_list)
+    write_results(results, cols, fuelbed_list)
     print("\nSuccess!!! Results are in \"{}\"".format(RESULTS_FILE))
-    print_results(results, cols)
+    #print_results(results, cols)
 
 #-------------------------------------------------------------------------------
 # Main

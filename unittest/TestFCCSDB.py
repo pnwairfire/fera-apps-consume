@@ -30,10 +30,10 @@ class TestFCCSDB(unittest.TestCase):
     def short_info(self):
         short_info = self.db.info(1, detail=False, ret=True)
         chunks = short_info.split('\n')
-        nose.tools.ok_(5 == len(chunks), "Got = {}".format(len(chunks)))
-        nose.tools.ok_('1' in chunks[1], "Got {}".format(chunks[1]))
-        nose.tools.ok_('sitename' in chunks[2], "Got {}".format(chunks[2]))
-        nose.tools.ok_('sitedescription' in chunks[4], "Got {}".format(chunks[4]))
+        nose.tools.ok_(5 == len(chunks), "Got: {}".format(len(chunks)))
+        nose.tools.ok_('1' in chunks[1], "Got: {}".format(chunks[1]))
+        nose.tools.ok_('Site name' in chunks[2], "Got: {}".format(chunks[2]))
+        nose.tools.ok_('Site description' in chunks[4], "Got: {}".format(chunks[4]))
 
     def long_info(self):
         expected = {
@@ -104,7 +104,7 @@ class TestFCCSDB(unittest.TestCase):
             if ':' in item:
                 parts = item.split(':')
                 key = parts[0].strip()
-                match = re.search('[0-9\.]+', parts[1])
+                match = re.match('^[0-9\.]+$', parts[1])
                 if match:
                     if expected.has_key(key):
                         nose.tools.eq_(
