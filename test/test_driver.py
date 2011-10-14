@@ -101,6 +101,7 @@ def write_csv_emissions(results, fuelbed_list, stream):
     emissions_keys = sorted(results['emissions'].keys())
     emissions_keys = [key for key in emissions_keys if key != 'stratum']
     cons_keys = sorted(results['consumption']['summary']['total'].keys())
+    hr_keys = sorted(results['heat release'].keys())
 
     # build up the column headers
     columns = []
@@ -109,6 +110,8 @@ def write_csv_emissions(results, fuelbed_list, stream):
     for i in emissions_keys:
         for j in cons_keys:
             columns.append("{}_{}".format(i, j))
+    for key in hr_keys:
+        columns.append("heat release {}".format(key))
 
     write_header_emissions(columns, stream)
     for fb_index in xrange(0, len(fuelbed_list)):
@@ -117,11 +120,14 @@ def write_csv_emissions(results, fuelbed_list, stream):
         # print the consumption column values
         for key in cons_keys:
             out += "," + str(results['consumption']['summary']['total'][key][fb_index])
-
         # print the emission column values
         for i in emissions_keys:
             for j in cons_keys:
                 out += "," + str(results['emissions'][i][j][fb_index])
+        # print the heat release column values
+        for key in hr_keys:
+            out += "," + str(results['heat release'][key][fb_index])
+
         out += '\n'
         stream.write(out)
 
