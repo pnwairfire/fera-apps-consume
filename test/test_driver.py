@@ -238,7 +238,7 @@ def run_and_test(consumer, fuelbed_list, outfilename, reference_values):
     print("{} = failed, {} compared:\t{}".format(failed, compared, outfilename))
 
 def run_and_test_emissions(emissions, fuelbed_list, outfilename, reference_values):
-    wrap_input_display(emissions.display_inputs(print_to_console=False))
+    wrap_input_display(emissions.FCobj.display_inputs(print_to_console=False))
     oname = out_name("results", outfilename)
     with open(oname, 'w') as outfile:
         results = emissions.results()

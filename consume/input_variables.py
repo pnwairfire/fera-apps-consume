@@ -119,7 +119,7 @@ class InputVarSet:
 
     def __repr__(self):
         print('--__repr__ --')
-        rep = self.display_input_values(print_to_console=True)
+        rep = self.display_input_values(None, print_to_console=True)
         return rep if rep else "Error: no data for InputVarSet"
 
     def validate(self):
@@ -277,7 +277,7 @@ class InputVarSet:
         if display: self.display_input_values()
 
 
-    def display_input_values(self, print_to_console=True, tsize=8):
+    def display_input_values(self, data_source_info, print_to_console=True, tsize=8):
         """Lists the input parameters for the consumption scenario.
 
         Displays the input parameters for the consumption in the shell. Useful
@@ -285,7 +285,7 @@ class InputVarSet:
         correctly set.
 
         """
-        out = self._display("value", "Value(s)", "Scenario parameters", tsize)
+        out = self._display(data_source_info, "value", "Value(s)", "Scenario parameters", tsize)
 
         if print_to_console: print out
         else: return out
@@ -391,10 +391,10 @@ class InputVarSet:
                     s = validate_other_inputs(prompt, yes + no, str)
                     skipenv = True if s in yes else False
 
-            self.display_input_values()
+            self.display_input_values(None)
 
 
-    def _display(self, kwd, kwhead, head, tsize=8):
+    def _display(self, data_source_information, kwd, kwhead, head, tsize=8):
         """ Displays parameters data based on keyword """
         def tabs(nm):
             t = 4 - (int(len(nm)) / tsize)
@@ -426,5 +426,12 @@ class InputVarSet:
                + tabs(kwhead) + "\n" +
                "--------------------------------------------------------------\n")
         version = util.get_version()
-        out = header + version + txtout
+        name = ds_version = date = 'unknown'
+        if data_source_information:
+            name = data_source_information.generator_name
+            ds_version = data_source_information.generator_version
+            date = data_source_information.date_generated
+        dsi = "\nData source information: {} : {} : {}".format(name, ds_version, date)
+
+        out = header + version + dsi + txtout
         return out

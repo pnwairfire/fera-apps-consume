@@ -840,7 +840,7 @@ class FuelConsumption:
 
         """
         self._build_input_set()
-        return self.InSet.display_input_values(print_to_console)
+        return self.InSet.display_input_values(self.FCCS.data_source_info, print_to_console)
 
 
     def list_variable_names(self):
