@@ -1338,10 +1338,10 @@ class FuelConsumption:
         """ Calculates heat release from consumption data """
 
         # conversion factors- according to source code (2000 btu/lb.)
-        btu_dict = {'tons' : 4000000.0,
-                    'tonnes' : 4409245.24,
-                    'kg' : 4409.24524,
-                    'lbs' : 2000.0}
+        btu_dict = {'tons' : 16000000.0,
+                    'tonnes' : 17636980.96,
+                    'kg' : 17636.98096,
+                    'lbs' : 8000.0}
 
         BTU_PER_UNIT = btu_dict[self.units.split('_')[0]]
 
