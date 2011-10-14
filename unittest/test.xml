@@ -1,6 +1,11 @@
 <FCCS_file>
 	<!-- Generator: FCCS -->
 	<!-- GeneratorVersion:  2.2 : 10/05/2011 -->
+    <generator_info>
+        <generator_name>FCCS</generator_name>
+        <generator_version>2.2</generator_version>
+        <date_generated>10/05/2011</date_generated>
+    </generator_info>
 	<FCCS>
 		<fuelbed_number>1</fuelbed_number>
 		<site_name>Black cottonwood -- Douglas-fir -- quaking aspen riparian forest</site_name>

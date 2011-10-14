@@ -26,6 +26,11 @@ class TestFCCSDB(unittest.TestCase):
     def testlist_fuel_loading_names(self):
         pass
     """
+    def test_data_info(self):
+        di = self.db.data_source_info
+        nose.tools.ok_(di.generator_name == 'FCCS', "Expecting 'FCCS' got: {}".format(di.generator_name))
+        nose.tools.ok_(di.generator_version == '2.2', "Expecting '2.2' got: {}".format(di.generator_version))
+        nose.tools.ok_(di.date_generated == '10/05/2011', "Expecting '10/05/2011' got: {}".format(di.date_generated))
 
     def short_info(self):
         short_info = self.db.info(1, detail=False, ret=True)

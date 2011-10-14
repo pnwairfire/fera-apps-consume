@@ -1,5 +1,6 @@
 import data_desc as dd
 import os
+from collections import namedtuple
 
 class FCCSDB():
     """ A class the stores, retrieves, and distributes FCCS fuelbed information
@@ -18,12 +19,14 @@ class FCCSDB():
         if fccs_file == "":
             self.xml_file = os.path.join('./input_data/FCCS_loadings.xml')
 
-        self.data = self._load_data_from_xml()
+        (self.data, self.data_info) = self._load_data_from_xml()
         self.data.sort()
         self.valids = []
         for f in self.data:
             self.valids.append(str(f[0]))
 
+    @property
+    def data_source_info(self): return self.data_info
 
     def _load_data_from_xml(self):
         """Load FCCS data from an external file.
@@ -74,15 +77,32 @@ class FCCSDB():
         root = tree.getroot()
         del tree
 
+        data_info = self._get_data_info(root)
+
         fccs = []
         for node in root:
+            if node.tag == "generator_info": continue
+
             temp = [0] * len(dd.LoadDefs)
             for ld in dd.LoadDefs:
                 temp[ld[2]] = load_data(node, ld[0])
             fccs.append(temp)
 
         del root
-        return fccs
+        return (fccs, data_info)
+
+    def _get_data_info(self, root):
+        DataInfo = namedtuple('DataInfo', ['generator_name', 'generator_version', 'date_generated'])
+        node = root.find('generator_info')
+        if None != node:
+            name = node.find('generator_name')
+            version = node.find('generator_version')
+            date = node.find('date_generated')
+            g_name = name.text if None != name else "unknown"
+            g_version = version.text if None != version else "unknown"
+            g_date = date.text if None != date else "unknown"
+            data_info = DataInfo(g_name, g_version, g_date)
+        return data_info
 
     def get_canopy_pct(self, fcs):
         """Returns the auto-calculated canopy consumption percent value for the
