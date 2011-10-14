@@ -26,6 +26,7 @@ class TestFuelConsumption(unittest.TestCase):
         self._consumer.days_since_rain = 20
         self._consumer.windspeed = 5
         self._consumer.fm_type = 'MEAS-Th'
+        self._consumer.fuelbed_fccs_ids.value = [str(i[0]) for i in self._consumer.FCCS.data]
 
     def tearDown(self):
         pass
@@ -63,10 +64,13 @@ class TestFuelConsumption(unittest.TestCase):
 
     def test_display_report(self):
         pass
+    """
 
     def test_wfeis_return(self):
-        pass
+        out = self._consumer._wfeis_return()
+        print(out)
 
+    """
     def test_build_input_set(self):
         pass
 

@@ -88,16 +88,18 @@ def ren_emissions_col(col_in):
     col_out = col_out.replace('woody fuels', 'wood', 1)
     col_out = col_out.replace('litter-lichen-moss', 'llm', 1)
     col_out = col_out.replace('ground fuels', 'ground', 1)
+    col_out = col_out.replace('stratum', 'st', 1)
     return col_out.replace("~", "_")
 
 def ren_consumption_col(col_in):
     col_out = col_in.replace('consumption', "C", 1)
-##    col_out = col_out.replace('canopy', 'Canopy', 1)
-##    col_out = col_out.replace('shrub', 'Shrub', 1)
+    ##    col_out = col_out.replace('canopy', 'canopy', 1)
+    ##    col_out = col_out.replace('shrub', 'shrub', 1)
     col_out = col_out.replace('nonwoody', 'nonwood', 1)
     col_out = col_out.replace('woody fuels', 'wood', 1)
     col_out = col_out.replace('litter-lichen-moss', 'llm', 1)
     col_out = col_out.replace('ground fuels', 'ground', 1)
+    col_out = col_out.replace('summary', 'sum', 1)
     return col_out.replace("~", "_")
 
 def ren_heatrelease_col(col_in):
@@ -126,16 +128,6 @@ def order_consumption_cols(cols):
                 strata_out.append(col)
     assert len(strata_out) == len(cols)
     return strata_out
-##    class_out = []
-##    for i in [1, 2, 3]:
-##        marker = "class {}".format(i)
-##        for col in strata_out:
-##            if marker in col:
-##                class_out.append(col)
-##                strata_out.remove(col)
-##    class_out.extend(strata_out)
-##    assert len(class_out) == len(cols)
-##    return class_out
 
 def get_results_list(all_results, cols):
     p = get_parameter_cols(all_results['parameters'], 'parameters', cols.parameters_col)
@@ -206,9 +198,9 @@ def run(csv_input, col_cfg=None):
     results = emissions.results()
     cols = CustomCol() if not col_cfg else CustomCol.from_file(col_cfg)
     fuelbed_list = consumer.fuelbed_fccs_ids.value
-    write_results(results, cols, fuelbed_list)
+    #write_results(results, cols, fuelbed_list)
     print("\nSuccess!!! Results are in \"{}\"".format(RESULTS_FILE))
-    #print_results(results, cols)
+    print_results(results, cols)
 
 #-------------------------------------------------------------------------------
 # Main
