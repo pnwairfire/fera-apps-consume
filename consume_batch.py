@@ -24,7 +24,6 @@ def get_input_file():
     ''' Judge the location of the input file based on its relation to this file
     '''
     DATA_INPUT_FILE = "./consume/input_data/input_without_1000fb.xml"
-    #return os.path.normpath(DATA_INPUT_FILE)
     return DATA_INPUT_FILE
 
 def add_FSRT_cols(parent_col, decider):
@@ -79,22 +78,84 @@ def get_consumption_cols(results, cols):
                     out.append("consumption~{}~{}".format(i, s_col))
         return out
 
+def ren_parameters_col(col_in):
+    col_out = col_in.replace('parameters', "P", 1)
+    return col_out.replace("~", "_")
+
+def ren_emissions_col(col_in):
+    col_out = col_in.replace('emissions', "E", 1)
+    col_out = col_out.replace('nonwoody', 'nonwood', 1)
+    col_out = col_out.replace('woody fuels', 'wood', 1)
+    col_out = col_out.replace('litter-lichen-moss', 'llm', 1)
+    col_out = col_out.replace('ground fuels', 'ground', 1)
+    return col_out.replace("~", "_")
+
+def ren_consumption_col(col_in):
+    col_out = col_in.replace('consumption', "C", 1)
+##    col_out = col_out.replace('canopy', 'Canopy', 1)
+##    col_out = col_out.replace('shrub', 'Shrub', 1)
+    col_out = col_out.replace('nonwoody', 'nonwood', 1)
+    col_out = col_out.replace('woody fuels', 'wood', 1)
+    col_out = col_out.replace('litter-lichen-moss', 'llm', 1)
+    col_out = col_out.replace('ground fuels', 'ground', 1)
+    return col_out.replace("~", "_")
+
+def ren_heatrelease_col(col_in):
+    col_out = col_in.replace('heat release', "HR", 1)
+    return col_out.replace("~", "_")
+
+def rename_columns(cols):
+    new_cols = []
+    for col in cols:
+        new_col = ""
+        if col.startswith("p"): new_col = ren_parameters_col(col)
+        if col.startswith("c"): new_col = ren_consumption_col(col)
+        if col.startswith("e"): new_col = ren_emissions_col(col)
+        if col.startswith("h"): new_col = ren_heatrelease_col(col)
+        new_cols.append(new_col)
+    return new_cols
+
+def order_consumption_cols(cols):
+    stratum = ['canopy', 'shrub', 'nonwoody',
+        'woody fuels', 'litter-lichen-moss', 'ground fuels', 'summary']
+    strata_out = []
+    for strata in stratum:
+        marker = "consumption~{}".format(strata)
+        for col in cols:
+            if marker in col:
+                strata_out.append(col)
+    assert len(strata_out) == len(cols)
+    return strata_out
+##    class_out = []
+##    for i in [1, 2, 3]:
+##        marker = "class {}".format(i)
+##        for col in strata_out:
+##            if marker in col:
+##                class_out.append(col)
+##                strata_out.remove(col)
+##    class_out.extend(strata_out)
+##    assert len(class_out) == len(cols)
+##    return class_out
+
+def get_results_list(all_results, cols):
+    p = get_parameter_cols(all_results['parameters'], 'parameters', cols.parameters_col)
+    c = get_consumption_cols(all_results['consumption'], cols)
+    e = get_emissions_cols(all_results['emissions'], cols)
+    h = get_heatrelease_cols(all_results['heat release'], 'heat release', cols.heat_release_col)
+    if c:
+        c = order_consumption_cols(c)
+    tmp = [p, c, e, h]
+    keys = [i for i in tmp if i]    # - only include columns that exist
+    columns = [subkey for key in keys for subkey in key] # - flatten into single list
+    return columns
+
 def print_results(all_results, cols):
     def do_print(out):
             if out:
                 for i, n in enumerate(out):
                     print("{} - {}".format(i, n))
-
-    p = get_parameter_cols(all_results['parameters'], 'parameters', cols.parameters_col)
-    e = get_emissions_cols(all_results['emissions'], cols)
-    h = get_heatrelease_cols(all_results['heat release'], 'heat release', cols.heat_release_col)
-    c = get_consumption_cols(all_results['consumption'], cols)
-    out = []
-    if p: out.extend(p)
-    if e: out.extend(e)
-    if h: out.extend(h)
-    if c: out.extend(c)
-    do_print(out)
+    columns = get_results_list(all_results, cols)
+    do_print(rename_columns(columns))
 
 def write_header(columns, outfile):
     header = 'fuelbed,'
@@ -133,15 +194,9 @@ def write_computed_results(results, columns, fuelbed_list, outfile):
     outfile.write(line)
 
 def write_results(all_results, cols, fuelbed_list):
-    p = get_parameter_cols(all_results['parameters'], 'parameters', cols.parameters_col)
-    e = get_emissions_cols(all_results['emissions'], cols)
-    h = get_heatrelease_cols(all_results['heat release'], 'heat release', cols.heat_release_col)
-    c = get_consumption_cols(all_results['consumption'], cols)
-    tmp = [p, e, h, c]
-    keys = [i for i in tmp if i]    # - only include columns that exist
-    columns = [subkey for key in keys for subkey in key] # - flatten into single list
+    columns = get_results_list(all_results, cols)
     with open(RESULTS_FILE, 'w') as outfile:
-        write_header(columns, outfile)
+        write_header(rename_columns(columns), outfile)
         write_computed_results(all_results, columns, fuelbed_list, outfile)
 
 def run(csv_input, col_cfg=None):
