@@ -20,11 +20,23 @@ def can_run():
     cwd = os.getcwd()
     return True if mod_location == cwd else False
 
-def get_input_file():
+def validate_fuel_loadings(alt_loadings_file):
+    pass
+
+def get_input_file(fuel_loadings):
     ''' Judge the location of the input file based on its relation to this file
     '''
     DATA_INPUT_FILE = "./consume/input_data/input_without_1000fb.xml"
-    return DATA_INPUT_FILE
+    print(0)
+    if fuel_loadings:
+        print(1)
+        if validate_fuel_loadings(fuel_loadings):
+            print(2)
+            return fuel_loadings
+        else:
+            print("Error: \'{}\' is not a valid fuel loadings file.".format(fuel_loadings))
+    else:
+        return DATA_INPUT_FILE
 
 def add_FSRT_cols(parent_col, decider):
     FSRT_ALL = ['flaming', 'smoldering', 'residual', 'total']
@@ -191,8 +203,8 @@ def write_results(all_results, cols, fuelbed_list):
         write_header(rename_columns(columns), outfile)
         write_computed_results(all_results, columns, fuelbed_list, outfile)
 
-def run(csv_input, col_cfg=None):
-    consumer = consume.FuelConsumption(fccs_file=get_input_file())
+def run(csv_input, fuel_loadings=None, col_cfg=None):
+    consumer = consume.FuelConsumption(fccs_file=get_input_file(fuel_loadings))
     consumer.load_scenario(csv_input, display=False)
     emissions = consume.Emissions(consumer)
     results = emissions.results()
@@ -209,7 +221,7 @@ import cmdline
 def main():
     if can_run():
         parser = cmdline.ConsumeParser(sys.argv)
-        run(parser.csv_file, parser.col_cfg_file)
+        run(parser.csv_file, parser.fuel_loadings_file, parser.col_cfg_file)
     else:
         print("Error: this program must be run from the location of the exe/script.")
 
