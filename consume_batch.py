@@ -21,20 +21,32 @@ def can_run():
     return True if mod_location == cwd else False
 
 def validate_fuel_loadings(alt_loadings_file):
-    pass
+    ''' Valid currently means that the generator_info element is present
+        kjells todo: move this into consume proper?
+    '''
+    from xml.etree import ElementTree as ET
+    tree = ET.parse(alt_loadings_file)
+    root = tree.getroot()
+    del tree
+
+    node = root.find('generator_info')
+    if None != node:
+        name = node.find('generator_name')
+        version = node.find('generator_version')
+        date = node.find('date_generated')
+        return True
+    return False
 
 def get_input_file(fuel_loadings):
     ''' Judge the location of the input file based on its relation to this file
     '''
     DATA_INPUT_FILE = "./consume/input_data/input_without_1000fb.xml"
-    print(0)
     if fuel_loadings:
-        print(1)
         if validate_fuel_loadings(fuel_loadings):
-            print(2)
             return fuel_loadings
         else:
-            print("Error: \'{}\' is not a valid fuel loadings file.".format(fuel_loadings))
+            print("\nError: \'{}\' is not a valid fuel loadings file.\n".format(fuel_loadings))
+            sys.exit(1)
     else:
         return DATA_INPUT_FILE
 
