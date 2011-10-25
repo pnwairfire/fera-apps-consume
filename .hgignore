@@ -8,3 +8,4 @@ test/*
 build_distribution/consume/*
 build_distribution/mercurial_rev.txt
 consume/version.py
+windows_exe/winexe/*
