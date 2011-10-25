@@ -10,6 +10,7 @@ setup(
     #author_email='',
     packages=['consume'],
     namespace_packages=['consume'],
+    package_data={'consume': ['input_data/*.xml']},
     url=' www.fs.fed.us/pnw/fera',
     license='LICENSE.txt',
     description='Provides a calculator for estimating fuel consumption and emissions as a result of fire.',

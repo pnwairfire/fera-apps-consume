@@ -1,5 +1,5 @@
 import os
-
+import module_locator
 
 class EmissionsFactorDB:
     """ Emissions Factor Database object
@@ -27,12 +27,8 @@ class EmissionsFactorDB:
         self.xml_file = emissions_file
         self.FCobj = FCobj
         if emissions_file == "":
-            if os.path.exists('./input_data/EmissionsFactorDatabase.xml'):
-                self.xml_file = './input_data/EmissionsFactorDatabase.xml'
-            elif os.path.exists('./consume/input_data/EmissionsFactorDatabase.xml'):
-                self.xml_file = './consume/input_data/EmissionsFactorDatabase.xml'
-            else:
-                print("Error - can't locate emissions database.")
+            mod_path = module_locator.module_path()
+            self.xml_file = os.path.join(mod_path, './input_data/EmissionsFactorDatabase.xml')
 
         root = get_rootnode(self.xml_file)
         self.data = self._load_emissions_factor_groups(root)

@@ -6,9 +6,7 @@ import py2exe
 
 consume_data_files = [
     ('./consume/input_data', ['./consume/input_data/EmissionsFactorDatabase.xml']),
-    ('./consume/input_data', ['./consume/input_data/FCCS_loadings.xml']),
-    ('./consume/input_data', ['./consume/input_data/fccs_pyconsume_input.xml']),
-    ('./consume/input_data', ['./consume/input_data/input_without_1000fb.xml']),
+    ('./consume/input_data', ['./consume/input_data/fccs_loadings_1_458.xml.xml']),
 ]
 
 setup(

@@ -672,7 +672,7 @@ class FuelConsumption:
 
         fccs_file   : Location of the .xml file that contains all FCCS fuel
                       loading information. The default location is:
-                      "[python-consume dir.]/input_data/FCCS_loadings.xml"
+                      "[python-consume dir.]/input_data/fccs_loadings_1_458.xml.xml"
 
         """
 

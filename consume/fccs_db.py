@@ -1,6 +1,7 @@
-import data_desc as dd
 import os
+import data_desc as dd
 from collections import namedtuple
+import module_locator
 
 class FCCSDB():
     """ A class the stores, retrieves, and distributes FCCS fuelbed information
@@ -17,7 +18,8 @@ class FCCSDB():
 
         self.xml_file = fccs_file
         if fccs_file == "":
-            self.xml_file = os.path.join('./input_data/FCCS_loadings.xml')
+            mod_path = module_locator.module_path()
+            self.xml_file = os.path.join(mod_path, './input_data/fccs_loadings_1_458.xml')
 
         (self.data, self.data_info) = self._load_data_from_xml()
         self.data.sort()

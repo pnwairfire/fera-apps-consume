@@ -53,6 +53,7 @@ def copy_source():
         '../consume/fccs_db.py',
         '../consume/fuel_consumption.py',
         '../consume/input_variables.py',
+        '../consume/module_locator.py',
         '../consume/util_consume.py',
         VERSION_FILE
     ]
