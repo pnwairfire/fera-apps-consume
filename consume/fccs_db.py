@@ -104,6 +104,8 @@ class FCCSDB():
             g_version = version.text if None != version else "unknown"
             g_date = date.text if None != date else "unknown"
             data_info = DataInfo(g_name, g_version, g_date)
+        else:
+            print("\nWarning: consume loadings file has no generator information!\n")
         return data_info
 
     def get_canopy_pct(self, fcs):

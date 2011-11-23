@@ -40,15 +40,11 @@ def validate_fuel_loadings(alt_loadings_file):
 def get_input_file(fuel_loadings):
     ''' Judge the location of the input file based on its relation to this file
     '''
-    DATA_INPUT_FILE = "./consume/input_data/input_without_1000fb.xml"
-    if fuel_loadings:
-        if validate_fuel_loadings(fuel_loadings):
-            return fuel_loadings
-        else:
-            print("\nError: \'{}\' is not a valid fuel loadings file.\n".format(fuel_loadings))
-            sys.exit(1)
+    if validate_fuel_loadings(fuel_loadings):
+        return fuel_loadings
     else:
-        return DATA_INPUT_FILE
+        print("\nError: \'{}\' is not a valid fuel loadings file.\n".format(fuel_loadings))
+        sys.exit(1)
 
 def add_FSRT_cols(parent_col, decider):
     FSRT_ALL = ['flaming', 'smoldering', 'residual', 'total']
@@ -216,7 +212,8 @@ def write_results(all_results, cols, fuelbed_list):
         write_computed_results(all_results, columns, fuelbed_list, outfile)
 
 def run(csv_input, fuel_loadings=None, col_cfg=None):
-    consumer = consume.FuelConsumption(fccs_file=get_input_file(fuel_loadings))
+    consumer = consume.FuelConsumption(fccs_file=get_input_file(fuel_loadings)) \
+        if fuel_loadings else consume.FuelConsumption()
     consumer.load_scenario(csv_input, display=False)
     emissions = consume.Emissions(consumer)
     results = emissions.results()
