@@ -28,8 +28,7 @@ def out_name(dir, filename):
 def get_input_file():
     ''' Judge the location of the input file based on its relation to this file
     '''
-    #DATA_INPUT_FILE = "./consume/input_data/fccs_pyconsume_input.xml"
-    DATA_INPUT_FILE = "consume/input_data/input_without_1000fb.xml"
+    DATA_INPUT_FILE = "consume/input_data/fccs_loadings_1_458.xml"
     here = get_this_location()
     here = here[:-len('test')]
     return os.path.normpath(os.path.join(here, DATA_INPUT_FILE))
@@ -46,13 +45,18 @@ def wrap_input_display(inputs):
     else:
         print("\nError: missing input display")
 
+def get_fuelbed_list(consumer):
+    ''' The expected values against which we test go to the max below '''
+    MAX_REFERENCE_FUELBED = 291
+    return [str(i[0]) for i in consumer.FCCS.data if MAX_REFERENCE_FUELBED >= i[0]]
+
 def get_consumption_object():
     ''' Return a "ready to go" consumption object
     '''
     consumer = consume.FuelConsumption(fccs_file = get_input_file())
     set_defaults(consumer, {})
-    # run over all the fuelbeds
-    fuelbed_list = [str(i[0]) for i in consumer.FCCS.data]
+    # run over the reference fuelbeds
+    fuelbed_list = get_fuelbed_list(consumer)
     consumer.fuelbed_fccs_ids = fuelbed_list
     return consumer
 
@@ -259,7 +263,7 @@ consumer = consume.FuelConsumption(fccs_file = get_input_file())
 set_defaults(consumer, {})
 
 # run over all the fuelbeds in the input file
-fuelbed_list = [str(i[0]) for i in consumer.FCCS.data]
+fuelbed_list = get_fuelbed_list(consumer)
 consumer.fuelbed_fccs_ids = fuelbed_list
 
 run_basic_scenarios(consumer, fuelbed_list)
