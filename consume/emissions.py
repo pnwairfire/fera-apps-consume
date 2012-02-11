@@ -583,9 +583,9 @@ class Emissions:
         scenario parameters have been correctly set.
 
         """
-        out_consumption = self.FCobj.InSet.display_input_values(print_to_console)
+        out_consumption = self.FCobj.InSet.display_input_values(self.FCobj.FCCS.data_source_info, print_to_console)
         self._build_input_set()
-        out_emission = self.InSet.display_input_values(print_to_console)
+        out_emission = self.InSet.display_input_values(self.FCobj.FCCS.data_source_info, print_to_console)
         if not print_to_console:
             return out_consumption + out_emission
 
