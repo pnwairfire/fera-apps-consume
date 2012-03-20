@@ -232,12 +232,13 @@ def run_emissions_activity_with_unit_conversion(fuelbed_list):
 #-------------------------------------------------------------------------------
 # Currently need consumption-specific and emissions-specific runners
 #-------------------------------------------------------------------------------
+VERBOSE = True
 def run_and_test(consumer, fuelbed_list, outfilename, reference_values):
     wrap_input_display(consumer.display_inputs(print_to_console=False))
     with open(outfilename, 'w') as outfile:
         run_tests(consumer, fuelbed_list, outfile)
-    ref = compareCSV(reference_values, console=False)
-    computed = compareCSV(outfilename, console=False)
+    ref = compareCSV(reference_values, console=VERBOSE)
+    computed = compareCSV(outfilename, console=VERBOSE)
     (failed, compared) = ref.Compare(computed)
     print("{} = failed, {} compared:\t{}".format(failed, compared, outfilename))
 
@@ -248,8 +249,8 @@ def run_and_test_emissions(emissions, fuelbed_list, outfilename, reference_value
         results = emissions.results()
         write_csv_emissions(results, fuelbed_list, outfile)
     rname = out_name("expected", reference_values)
-    ref = compareCSV(rname, console=False)
-    computed = compareCSV(oname, console=False)
+    ref = compareCSV(rname, console=VERBOSE)
+    computed = compareCSV(oname, console=VERBOSE)
     (failed, compared) = ref.Compare(computed)
     print("{} = failed, {} compared:\t{}".format(failed, compared, outfilename))
 

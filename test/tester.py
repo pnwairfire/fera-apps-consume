@@ -64,13 +64,13 @@ class DataObj(object):
                 tolerance = self.GetTolerance(max(aa, bb))
                 if not WithinThisManyULP(aa, bb, tolerance):
                     if self._console_output:
-                        print "{}:\t{}\t:\t{}\t:\t{}".format(key, column, aa, bb)
+                        print("{}:\t{}\t:\t{}\t:\t{}".format(key, column, aa, bb))
                     compare = False
                 else:
                     if self._debug:
-                        print "Good - {} : {} : {} : {}".format(key, column, aa, bb)
+                        print("Good - {} : {} : {} : {}".format(key, column, aa, bb))
             elif(self._debug):
-                print "Not compared {} : {}".format(a, b)
+                print("Not compared {} : {}".format(a, b))
             return compare
         else:
             print("Missing value for key = {}".format(key))
@@ -88,8 +88,8 @@ class DataObj(object):
             if not re.search('^[A-Z].*$', i.strip()):
                 diffMinusMarkerCols.append(i)
         if self._console_output:
-            print "\nColumns checked:\n\t{}\n".format("\n\t".join(common))
-            print "Columns not checked:\n\t{}\n".format("\n\t".join(diffMinusMarkerCols))
+            print("\nColumns checked:\n\t{}\n".format("\n\t".join(common)))
+            print("Columns not checked:\n\t{}\n".format("\n\t".join(diffMinusMarkerCols)))
 
     def GetCommonKeys(self, keysA, keysB):
         aa = set(keysA)
@@ -115,8 +115,8 @@ class DataObj(object):
                     comparisons += 1
                     failures += 1 if not check else 0
         if self._console_output:
-            print "\n{} comparisons {} failures".format(comparisons, failures)
-            print "Left value = {}   Right values = {}".format(self._filename, other._filename)
+            print("\n{} comparisons {} failures".format(comparisons, failures))
+            print("Left value = {}   Right values = {}".format(self._filename, other._filename))
         return failures, comparisons
 
 def main():
@@ -125,7 +125,7 @@ def main():
         two = DataObj(sys.argv[2])
         one.Compare(two)
     else:
-        print "\nError: Please specify the two files to compare.\n"
+        print("\nError: Please specify the two files to compare.\n")
 
 if __name__ == '__main__':
     main()
