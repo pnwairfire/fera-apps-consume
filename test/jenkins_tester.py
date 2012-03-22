@@ -10,7 +10,7 @@ from subprocess import Popen, PIPE
 import os
 
 def check_lines(results):
-    ERROR_NUMBER_BAR = 10
+    ERROR_NUMBER_BAR = 1
     failing_scenarios = []
     for line in results:
         errors = int(line.split()[0])

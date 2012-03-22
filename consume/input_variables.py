@@ -2,25 +2,31 @@ import data_desc as dd
 import numpy as np
 import util_consume as util
 
-InputVarParameters =[
+NaturalInputVarParameters =[
 #kw, name, intname, validvals, defvalue, array, spec to activity equations
-['fuelbeds', 'FCCS fuelbeds (ID#)', '.fuelbed_fccs_ids', [], '1', False, False],
-['area', 'Fuelbed area (acres)', '.fuelbed_area_acres', [0,1000000], 1.0, True, False],
-['ecoregion', 'Fuelbed ecoregion', '.fuelbed_ecoregion', dd.list_valid_ecoregions(), 'western', False, False],
-['fm_1000hr', 'Fuel moisture (1000-hr, %)', '.fuel_moisture_1000hr_pct', [0,140], 50.0, True, False],
-['fm_10hr', 'Fuel moisture (10-hr, %)', '.fuel_moisture_10hr_pct', [0,100], 50.0, True, True],
-['fm_duff', 'Fuel moisture (duff, %)', '.fuel_moisture_duff_pct', [0,400], 50.0, True, False],
-['can_con_pct', 'Canopy consumption (%)', '.canopy_consumption_pct', [0,100], 0, True, False],
-['shrub_black_pct', 'Shrub blackened (%)', '.shrub_blackened_pct', [0,100], 50.0, True, False],
-['burn_type', 'Burn type', '.burn_type', dd.list_valid_burntypes(), 'natural', False, False],
-['units', 'Output units', '.output_units', dd.list_valid_units(), 'tons_ac', False, False],
-['slope', 'Slope (%)', '.slope_pct', [0,100], 5.0, True, True],
-['windspeed', 'Mid-flame windspeed (mph)', '.windspeed', [0, 35], 5.0, True, True],
-['fm_type', '1000hr fuel moisture type', '.fm_type', dd.list_valid_fm_types(), 'MEAS-Th', False, True],
-['days_since_rain', 'Days since sgnf. rainfall', '.days_since_rain', [0,365], 20, True, True],
-['lengthOfIgnition', 'Length of ignition (min.)', '.lengthOfIgnition', [0,10000], 30.0, True, True],
-['efg', 'Emissions factor group(s)', '.emissions_factor_group', [0,20], 0, False, False]]
+    ['fuelbeds', 'FCCS fuelbeds (ID#)', '.fuelbed_fccs_ids', [], '1', False, False],
+    ['area', 'Fuelbed area (acres)', '.fuelbed_area_acres', [0,1000000], 1.0, True, False],
+    ['ecoregion', 'Fuelbed ecoregion', '.fuelbed_ecoregion', dd.list_valid_ecoregions(), 'western', False, False],
+    ['fm_1000hr', 'Fuel moisture (1000-hr, %)', '.fuel_moisture_1000hr_pct', [0,140], 50.0, True, False],
+    ['fm_duff', 'Fuel moisture (duff, %)', '.fuel_moisture_duff_pct', [0,400], 50.0, True, False],
+    ['can_con_pct', 'Canopy consumption (%)', '.canopy_consumption_pct', [0,100], 0, True, False],
+    ['shrub_black_pct', 'Shrub blackened (%)', '.shrub_blackened_pct', [0,100], 50.0, True, False],
+    ['burn_type', 'Burn type', '.burn_type', dd.list_valid_burntypes(), 'natural', False, False],
+    ['units', 'Output units', '.output_units', dd.list_valid_units(), 'tons_ac', False, False],
+    ['efg', 'Emissions factor group(s)', '.emissions_factor_group', [0,20], 0, False, False]
+]
 
+ActivityInputVarParameters =[
+#kw, name, intname, validvals, defvalue, array, spec to activity equations
+    ['slope', 'Slope (%)', '.slope_pct', [0,100], 5.0, True, True],
+    ['windspeed', 'Mid-flame windspeed (mph)', '.windspeed', [0, 35], 5.0, True, True],
+    ['fm_type', '1000hr fuel moisture type', '.fm_type', dd.list_valid_fm_types(), 'MEAS-Th', False, True],
+    ['days_since_rain', 'Days since sgnf. rainfall', '.days_since_rain', [0,365], 20, True, True],
+    ['fm_10hr', 'Fuel moisture (10-hr, %)', '.fuel_moisture_10hr_pct', [0,100], 50.0, True, True],
+    ['lengthOfIgnition', 'Length of ignition (min.)', '.lengthOfIgnition', [0,10000], 30.0, True, True]
+]
+
+InputVarParameters = NaturalInputVarParameters + ActivityInputVarParameters
 
 class InputVar:
     """ A class the stores and validates input parameter data used in the
