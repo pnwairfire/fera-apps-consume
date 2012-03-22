@@ -132,8 +132,12 @@ def calc_intensity_reduction_factor(area, lengthOfIgnition, fm_10hr, fm_1000hr):
     return irf
 
 def high_intensity_adjustment(diam_reduction, area, lengthOfIgnition, fm_10hr, fm_1000hr):
-    assert 1 == len(area) and 1 == len(lengthOfIgnition)
-    assert 1 == len(fm_10hr) and 1 == len(fm_1000hr)
+    # - all values within the parameter sets should be the same
+    assert np.sum(area) / len(area) == area[0]
+    assert np.sum(lengthOfIgnition) / len(lengthOfIgnition) == lengthOfIgnition[0]
+    assert np.sum(fm_10hr) / len(fm_10hr) == fm_10hr[0]
+    assert np.sum(fm_1000hr) / len(fm_1000hr) == fm_1000hr[0]
+
     reduxFactor = calc_intensity_reduction_factor(
             area[0], lengthOfIgnition[0], fm_10hr[0], fm_1000hr[0])
     return diam_reduction * reduxFactor

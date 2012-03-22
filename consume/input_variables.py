@@ -3,7 +3,7 @@ import numpy as np
 import util_consume as util
 
 NaturalInputVarParameters =[
-#kw, name, intname, validvals, defvalue, array, spec to activity equations
+#keyword, name, intname, validvals, defvalue, array, spec to activity equations
     ['fuelbeds', 'FCCS fuelbeds (ID#)', '.fuelbed_fccs_ids', [], '1', False, False],
     ['area', 'Fuelbed area (acres)', '.fuelbed_area_acres', [0,1000000], 1.0, True, False],
     ['ecoregion', 'Fuelbed ecoregion', '.fuelbed_ecoregion', dd.list_valid_ecoregions(), 'western', False, False],
@@ -17,7 +17,7 @@ NaturalInputVarParameters =[
 ]
 
 ActivityInputVarParameters =[
-#kw, name, intname, validvals, defvalue, array, spec to activity equations
+#keyword, name, intname, validvals, defvalue, array, spec to activity equations
     ['slope', 'Slope (%)', '.slope_pct', [0,100], 5.0, True, True],
     ['windspeed', 'Mid-flame windspeed (mph)', '.windspeed', [0, 35], 5.0, True, True],
     ['fm_type', '1000hr fuel moisture type', '.fm_type', dd.list_valid_fm_types(), 'MEAS-Th', False, True],
@@ -31,15 +31,15 @@ InputVarParameters = NaturalInputVarParameters + ActivityInputVarParameters
 class InputVar:
     """ A class the stores and validates input parameter data used in the
         FuelConsumption and Emissions objects"""
-    def __init__(self, kw = ""):
+    def __init__(self, keyword = ""):
         """ InputVar class constructor.
 
             Upon initialization, loads attributes from the InputVarParameters
             internal data table according to the specified keyword ('kw')."""
 
         for ivp in InputVarParameters:
-            if ivp[0] == kw:
-                self.kw = ivp[0]
+            if ivp[0] == keyword:
+                self.keyword = ivp[0]
                 self.name = ivp[1]
                 self.intname = ivp[2]
                 self.valids = ivp[3]
@@ -159,7 +159,7 @@ class InputVarSet:
             # Compile input parameters to pass into the dictionary maker method
             for param in self.params:
                 tmp = self.params[param]
-                self.validated_inputs[tmp.kw] = tmp.value
+                self.validated_inputs[tmp.keyword] = tmp.value
 
         return valid
 
@@ -217,7 +217,7 @@ class InputVarSet:
             for vi in self.validated_inputs:
                 if vi in px:
                     for par in self.params:
-                        if par.kw == vi:
+                        if par.keyword == vi:
                             if par.array:
                                 self.unique_inputs[vi] = np.array(mod_runs[px[vi]])
                             else:
@@ -386,10 +386,10 @@ class InputVarSet:
 
                 if not skipenv:
                     print "\nEnvironment parameters: "
-                    for kw in order:
-                        pact = self.params[kw].activity
+                    for keyword in order:
+                        pact = self.params[keyword].activity
                         if not pact or (pact and act):
-                            validate_input(self.params[kw])
+                            validate_input(self.params[keyword])
 
                 if i == 0 and number > 1:
                     prompt = ("\nUse the same environment variables for all" +
@@ -417,7 +417,7 @@ class InputVarSet:
             for par in self.params:
                 p = self.params[par]
                 dc = {'intname':p.intname, 'value':p.value}
-                if o == p.kw:
+                if o == p.keyword:
                     if o == 'burn_type':
                         bt = p.value
                         if bt in ['activity', ['activity']]:
