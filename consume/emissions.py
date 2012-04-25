@@ -489,7 +489,7 @@ class Emissions:
 
         """
 
-        if self._calculate(emissions_factor_group = efg):
+        if self._calculate():
             self._convert_units()
             categories = ["pm", "pm10", "pm2.5", "co", "co2", "ch4", "nmhc"]
             area = self.FCobj.InSet.params['area'].value
@@ -497,7 +497,7 @@ class Emissions:
             ecoregion =  self.FCobj.InSet.params['ecoregion'].value
             fccs_ids = self.FCobj.InSet.params['fuelbeds'].value
             efgs = self.InSet.params['efg'].value
-            str_au = units
+            str_au = units[0]
 
             if units in dd.perarea() and sum(area) > 0:
                 str_au = "/".join(units.split("_"))
