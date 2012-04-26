@@ -689,7 +689,6 @@ class Emissions:
             self.scenLen = len(self.FCobj._cons_data[0][0])
 
         self._build_input_set()
-        self._convert_units()
 
         efnums = self.efDB.get_efgs(
                  self.FCobj.InSet.validated_inputs['fuelbeds'],
@@ -698,7 +697,6 @@ class Emissions:
         self.InSet.params['efg'].value = efnums
         self.InSet.validated_inputs['efg'] = efnums
         self.emissions_factor_group.value = efnums
-        #self.units = 'lbs_ac'
         self._emissions_calc(efg = efnums)
         return True
 

@@ -260,20 +260,28 @@ def run_and_test_emissions(emissions, fuelbed_list, outfilename, reference_value
 # The emissions database doesn't have data for the 1000, 1001 fuelbeds
 #  and we don't have a database/input generator to create the file as yet. When
 #  that occurs, we can use the larger file
+NORMAL = True
+#NORMAL = False
 consumer = consume.FuelConsumption(fccs_file = get_input_file())
 set_defaults(consumer, {})
 
-# run over all the fuelbeds in the input file
-fuelbed_list = get_fuelbed_list(consumer)
-consumer.fuelbed_fccs_ids = fuelbed_list
+if NORMAL:
+    # run over all the fuelbeds in the input file
+    fuelbed_list = get_fuelbed_list(consumer)
+    consumer.fuelbed_fccs_ids = fuelbed_list
 
-run_basic_scenarios(consumer, fuelbed_list)
-run_additional_activity_scenarios(consumer, fuelbed_list)
+    run_basic_scenarios(consumer, fuelbed_list)
+    run_additional_activity_scenarios(consumer, fuelbed_list)
 
-set_defaults(consumer, {})
-run_emissions_activity_with_unit_conversion(fuelbed_list)
-run_emissions_western(fuelbed_list)
-run_emissions_activity(fuelbed_list)
+    set_defaults(consumer, {})
+    run_emissions_activity_with_unit_conversion(fuelbed_list)
+    run_emissions_western(fuelbed_list)
+    run_emissions_activity(fuelbed_list)
+else:
+    # - debugging
+    fuelbed_list = ['1']
+    consumer.fuelbed_fccs_ids = fuelbed_list
+    run_emissions_activity_with_unit_conversion(fuelbed_list)
 
 
 
