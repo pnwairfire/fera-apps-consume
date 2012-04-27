@@ -766,7 +766,7 @@ class FuelConsumption:
                                           emis_data = [],
                                           inputs = self.InSet.validated_inputs)
 
-    def report(self, csv = "", stratum = "all", ret=False, tsize=8):
+    def report(self, csv = "", stratum = "all", ret=False, incl_heat=False, tsize=8):
         """Output fuel consumption results as a TABULAR REPORT and/or CSV FILE
 
         Displays (in shell) consumption data in tabular format, similar to
@@ -789,9 +789,9 @@ class FuelConsumption:
             self._convert_units()
             if self._conv_success:
                 if not ret:
-                    self._display_report(csv, stratum, incl_heat = False, ret=ret, tsize=tsize)
+                    self._display_report(csv, stratum, incl_heat = incl_heat, ret=ret, tsize=tsize)
                 else:
-                    return self._display_report(csv, stratum, incl_heat = False, ret=ret, tsize=tsize)
+                    return self._display_report(csv, stratum, incl_heat = incl_heat, ret=ret, tsize=tsize)
 
 
 
