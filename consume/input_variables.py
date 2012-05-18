@@ -85,7 +85,7 @@ class InputVar:
                     self.invalids.append(val)
 
         if not self.valid:
-            print "\nInvalid input for *" + self.name + "* parameter: "
+            print "\nInvalid input for *" + val + "* parameter: "
             #ks print "\t" + str(self.invalids)
             #ks self.display_valid_values()
 
@@ -280,7 +280,7 @@ class InputVarSet:
                         self.params[h].value.append(ln[header.index(h)])
 
         self.validate()
-        if display: self.display_input_values()
+        if display: self.display_input_values(None)
 
 
     def display_input_values(self, data_source_info, print_to_console=True, tsize=8):
