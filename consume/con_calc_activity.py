@@ -109,6 +109,7 @@ def calc_mb(x, fm_type, mask_spring, mask_summer, mask_trans, spring_ff):
      (mask_summer * sumr) +
      (mask_trans * ((spring_ff + sprg) * (sumr - sprg))))
 
+
 def calc_intensity_reduction_factor(area, lengthOfIgnition, fm_10hr, fm_1000hr):
     """ The intensity of fire can limit the consumption of large woody fuels.
         Mass ignition causes small fuels to be consumed more rapidly, thereby
@@ -117,29 +118,26 @@ def calc_intensity_reduction_factor(area, lengthOfIgnition, fm_10hr, fm_1000hr):
         takes this into account by reducing the amount of diameter reduction of 1000-hr
         and 10,000-hr fuels as fires increase in intensity
         """
-    extreme = 0 if 10 > area else area if area >=10 and area < 20 else (0.5 * area + 10)
-    very_high = (2.0 * area) if area < 20 else (area + 20)
-    high = (4 * area) if area < 20 else (2 * area + 40)
+    extreme = np.where(area < 10, 0,
+        np.where(((area >=10) & (area < 20)), area, (0.5 * area + 10)))
 
-    irf = 1 # no reduction
-    if fm_10hr <= 15 and fm_1000hr <= 40 and lengthOfIgnition <= extreme:
-        irf = 2.0/3.0
-    elif fm_10hr <= 15 and fm_1000hr <= 50 and lengthOfIgnition <= very_high:
-        irf = 0.78
-    elif fm_10hr <= 18 and fm_1000hr <= 50 and lengthOfIgnition <= high:
-        irf = 0.89
+    vhigh = np.where(area < 20, 2.0 * area, (area + 20))
 
+    high = np.where(area < 20, (4.0 * area), (2 * area + 40))
+
+    LARGE_RF = 2.0 / 3.0
+    MEDIUM_RF = 0.78
+    SMALL_RF = 0.89
+    NO_RF = 1.0
+    irf = np.where(((fm_10hr <= 15) & (fm_1000hr <= 40) & (lengthOfIgnition <= extreme)), LARGE_RF,
+        np.where(((fm_10hr <= 15) & (fm_1000hr <= 50) & (lengthOfIgnition <= vhigh)), MEDIUM_RF,
+        np.where(((fm_10hr <= 18) & (fm_1000hr <= 50) & (lengthOfIgnition <= high)),
+        SMALL_RF, NO_RF)))
     return irf
 
 def high_intensity_adjustment(diam_reduction, area, lengthOfIgnition, fm_10hr, fm_1000hr):
-    # - all values within the parameter sets should be the same
-    assert np.sum(area) / len(area) == area[0]
-    assert np.sum(lengthOfIgnition) / len(lengthOfIgnition) == lengthOfIgnition[0]
-    assert np.sum(fm_10hr) / len(fm_10hr) == fm_10hr[0]
-    assert np.sum(fm_1000hr) / len(fm_1000hr) == fm_1000hr[0]
-
     reduxFactor = calc_intensity_reduction_factor(
-            area[0], lengthOfIgnition[0], fm_10hr[0], fm_1000hr[0])
+            area, lengthOfIgnition, fm_10hr, fm_1000hr)
     return diam_reduction * reduxFactor
 
 def diam_redux_calc(pct_hun_hr, fm_10hr, fm_1000hr, fm_type, area, lengthOfIgnition):
