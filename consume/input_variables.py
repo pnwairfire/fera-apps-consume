@@ -84,11 +84,6 @@ class InputVar:
                     self.valid = False
                     self.invalids.append(val)
 
-        if not self.valid:
-            print "\nInvalid input for *" + val + "* parameter: "
-            #ks print "\t" + str(self.invalids)
-            #ks self.display_valid_values()
-
         return self.valid
 
     def display_valid_values(self):
@@ -143,6 +138,7 @@ class InputVarSet:
             # validate input ranges
             if not param.validate():
                 valid = False
+                print("Invalid parameter '{}' with value of {}".format(par, param))
 
             # validate input lengths
             if type(param.value) in [list, np.ndarray]:
