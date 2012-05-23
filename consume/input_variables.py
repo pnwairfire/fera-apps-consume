@@ -4,7 +4,7 @@ import util_consume as util
 
 NaturalInputVarParameters =[
 #keyword, name, intname, validvals, defvalue, array, spec to activity equations
-    ['fuelbeds', 'FCCS fuelbeds (ID#)', '.fuelbed_fccs_ids', [], '1', False, False],
+    ['fuelbeds', 'FCCS fuelbeds (ID#)', '.fuelbed_fccs_ids', [], None, False, False],
     ['area', 'Fuelbed area (acres)', '.fuelbed_area_acres', [0,1000000], 1.0, True, False],
     ['ecoregion', 'Fuelbed ecoregion', '.fuelbed_ecoregion', dd.list_valid_ecoregions(), 'western', False, False],
     ['fm_1000hr', 'Fuel moisture (1000-hr, %)', '.fuel_moisture_1000hr_pct', [0,140], 50.0, True, False],
@@ -79,10 +79,11 @@ class InputVar:
                     self.invalids.append(val)
 
         else:
-            for val in self.value:
-                if val not in self.valids and str(val) not in self.valids:
-                    self.valid = False
-                    self.invalids.append(val)
+            if self.value:
+                for val in self.value:
+                    if val not in self.valids and str(val) not in self.valids:
+                        self.valid = False
+                        self.invalids.append(val)
 
         return self.valid
 
