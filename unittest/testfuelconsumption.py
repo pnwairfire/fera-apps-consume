@@ -2,7 +2,6 @@
 
 import unittest
 import consume
-import nose
 import helper
 
 class TestFuelConsumption(unittest.TestCase):
@@ -73,8 +72,7 @@ class TestFuelConsumption(unittest.TestCase):
         out = self._consumer._wfeis_return()
         for key in out.keys():
             for i in ['smoldering', 'total', 'flaming', 'residual']:
-                nose.tools.ok_(out[key][i] == 0.0,
-                    "Not zero {}:{}".format(key, i))
+                self.assertTrue(out[key][i] == 0.0, msg="Not zero {}:{}".format(key, i))
 
     """
     def test_build_input_set(self):

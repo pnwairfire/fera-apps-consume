@@ -33,9 +33,11 @@ class InputVar:
         FuelConsumption and Emissions objects"""
     def __init__(self, keyword = ""):
         """ InputVar class constructor.
-
-            Upon initialization, loads attributes from the InputVarParameters
-            internal data table according to the specified keyword ('kw')."""
+        Upon initialization, loads attributes from the InputVarParameters
+        internal data table according to the specified keyword ('kw')."""
+        self.is_range = False
+        self.valid = False
+        self.invalids = []
 
         for ivp in InputVarParameters:
             if ivp[0] == keyword:
@@ -48,17 +50,35 @@ class InputVar:
                 self.array = ivp[5]
                 self.activity = ivp[6]
 
-        self.invalids = []
 
     def __repr__(self):
         return str(self.value)
 
     def validate(self):
-        """ Reformats and validates parameter values """
-        self.invalids = []
-        self.valid = True
-        self.rge = False
+        """ Reformats and validates parameter values
+            The mapper allows for more specific validation routines if necessary
+        """
+        validation_mapper = {
+            'fuelbeds' : self.validate_base,
+            'area' : self.validate_base,
+            'ecoregion' : self.validate_base,
+            'fm_1000hr' : self.validate_base,
+            'fm_duff' : self.validate_base,
+            'can_con_pct' : self.validate_base,
+            'shrub_black_pct' : self.validate_base,
+            'burn_type' : self.validate_base,
+            'units' : self.validate_base,
+            'efg' : self.validate_base,
+            'slope' : self.validate_base,
+            'windspeed' : self.validate_base,
+            'fm_type' : self.validate_base,
+            'days_since_rain' : self.validate_base,
+            'fm_10hr' : self.validate_base,
+            'lengthOfIgnition' : self.validate_base }
+        return validation_mapper[self.keyword]()
 
+    def validate_base(self):
+        # make these into arrays
         if type(self.value) in (int, float, str):
             self.value = [self.value]
 
@@ -68,8 +88,9 @@ class InputVar:
         except:
             self.valid = False
 
+        ### - compare the value to the range limits if it is a range
         if len(self.valids) == 2 and self.array:
-            self.rge = True
+            self.is_range = True
             for val in self.value:
                 if val < self.valids[0]:
                     self.valid = False
@@ -77,7 +98,6 @@ class InputVar:
                 if val > self.valids[1]:
                     self.valid = False
                     self.invalids.append(val)
-
         else:
             if self.value:
                 for val in self.value:
@@ -85,12 +105,14 @@ class InputVar:
                         self.valid = False
                         self.invalids.append(val)
 
+        self.valid = True if 0 == len(self.invalids) else False
+
         return self.valid
 
     def display_valid_values(self):
         """ Displays the range/grouping of valid values for the parameters """
-        tmp = 'range' if self.rge else 'values'
-        tmp2 = '-'.join([str(q) for q in self.valids]) if self.rge else ', '.join(self.valids)
+        tmp = 'range' if self.is_range else 'values'
+        tmp2 = '-'.join([str(q) for q in self.valids]) if self.is_range else ', '.join(self.valids)
         print "\n\tDefault value: " + str(self.default)
         print "\tValid " + tmp + ": " + tmp2
 
@@ -120,7 +142,6 @@ class InputVarSet:
             print('Error: InputVarSet with no parameters')
 
     def __repr__(self):
-        print('--__repr__ --')
         rep = self.display_input_values(None, print_to_console=True)
         return rep if rep else "Error: no data for InputVarSet"
 
