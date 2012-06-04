@@ -35,7 +35,7 @@ class TestInputVariables(unittest.TestCase):
             'fm_type': { 'good' : ['MEAS-Th'], 'bad' : ['bogusFM']},
             'days_since_rain': { 'good' : [0, 365], 'bad' : [-1, 366, 'a']},
             'fm_10hr': { 'good' : [0, 100], 'bad' : [-1, 101, 'a']},
-            'lengthOfIgnition': { 'good' : [0,10000], 'bad' : [-1, 10001, 'a']}
+            'length_of_ignition': { 'good' : [0,10000], 'bad' : [-1, 10001, 'a']}
             }
 
         for key, val in tests.iteritems():
@@ -47,6 +47,15 @@ class TestInputVariables(unittest.TestCase):
             for item in val['bad']:
                 testVar.value = item
                 self.assertFalse(testVar.validate(), msg="\n\tItem is: '{}' value is: {}".format(key, item))
+
+    def testLoadScenario(self):
+        parameters = {x[0] : iv.InputVar(x[0]) for x in iv.InputVarParameters}
+        tester = iv.InputVarSet(parameters)
+        self.assertTrue(tester.load_2('unittest/natural.csv', 'natural'))
+        parameters = {x[0] : iv.InputVar(x[0]) for x in iv.InputVarParameters}
+        tester = iv.InputVarSet(parameters)
+        self.assertTrue(tester.load_2('unittest/activity.csv', 'activity'))
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -23,7 +23,7 @@ ActivityInputVarParameters =[
     ['fm_type', '1000hr fuel moisture type', '.fm_type', dd.list_valid_fm_types(), 'MEAS-Th', False, True],
     ['days_since_rain', 'Days since sgnf. rainfall', '.days_since_rain', [0,365], 20, True, True],
     ['fm_10hr', 'Fuel moisture (10-hr, %)', '.fuel_moisture_10hr_pct', [0,100], 50.0, True, True],
-    ['lengthOfIgnition', 'Length of ignition (min.)', '.lengthOfIgnition', [0,10000], 30.0, True, True]
+    ['length_of_ignition', 'Length of ignition (min.)', '.length_of_ignition', [0,10000], 30.0, True, True]
 ]
 
 InputVarParameters = NaturalInputVarParameters + ActivityInputVarParameters
@@ -74,7 +74,7 @@ class InputVar:
             'fm_type' : self.validate_base,
             'days_since_rain' : self.validate_base,
             'fm_10hr' : self.validate_base,
-            'lengthOfIgnition' : self.validate_base }
+            'length_of_ignition' : self.validate_base }
         return validation_mapper[self.keyword]()
 
     def validate_base(self):
@@ -144,6 +144,11 @@ class InputVarSet:
     def __repr__(self):
         rep = self.display_input_values(None, print_to_console=True)
         return rep if rep else "Error: no data for InputVarSet"
+
+    def _reset(self):
+        ''' reset all inputs '''
+        for par in self.params:
+            self.params[par].value = []
 
     def validate(self):
         """ Validates input parameters lengths and values, returns 'True' if
@@ -270,11 +275,13 @@ class InputVarSet:
         fl.close()
         print "\nInput parameter set saved here: " + save_file
 
-
     def load(self, load_file='', display=True):
-        """ Loads an input parameter set (that has been saved by the .save()
+        """
+        !!! Deprecated !!!
+        Loads an input parameter set (that has been saved by the .save()
             method) from the 'load_file'
             Set display to 'False' to not view the loaded data"""
+        util.deprecated_function(self.load.__name__)
 
         if display: print "Loading input parameter file: " + load_file
 
@@ -300,6 +307,65 @@ class InputVarSet:
         self.validate()
         if display: self.display_input_values(None)
 
+    def _valid_file(self, type, supplied_columns):
+        common_cols = ['fuelbeds', 'area', 'can_con_pct', 'shrub_black_pct', 'fm_duff', 'fm_10hr', 'fm_1000hr', 'ecoregion']
+        activity_cols = ['length_of_ignition', 'days_since_rain', 'slope', 'windspeed', 'fm_type']
+        if 'natural' == type:
+            required_cols = common_cols
+        elif 'activity' == type:
+            required_cols = common_cols + activity_cols
+        else:
+            print("\nError: bad type in '_valid_file()'")
+
+        required_params = {}
+        for i in required_cols:
+            required_params[i] = self.params[i]
+        self.params = required_params
+
+        s1 = set(required_cols)
+        s2 = set(supplied_columns)
+        if s1 == s2:
+            return True
+        else:
+            print("\nError: invalid input file for this burn_type")
+            if s2.issubset(s1):
+                print("The following columns are missing:")
+                for item in s1.difference(s2):
+                    print("\t{}".format(item))
+            else:
+                print("The following columns are not required:")
+                for item in s2.difference(s1):
+                    print("\t{}".format(item))
+            return False
+
+
+    def load_2(self, load_file, burn_type, display=True):
+        """ Loads an input parameter set (that has been saved by the .save()
+            method) from the 'load_file'
+            Set display to 'False' to not view the loaded data"""
+        if display: print "Loading input parameter file: " + load_file
+
+        self._reset()
+        loaded_successfully = False
+
+        txt = open(load_file, 'r')
+        lines = txt.readlines()
+        txt.close()
+
+        header = lines[0].replace('\n','').lower().split(',')
+
+        if len(lines) > 1:    ### - need 2 lines at minimum
+            if self._valid_file(burn_type, header):
+                for l,line in enumerate(lines):
+                    if l == 0: continue ### - skip the header
+                    ln = line.replace('\n','').split(',')
+                    for h in header:
+                        self.params[h].value.append(ln[header.index(h)])
+                if(self.validate()):
+                    loaded_successfully = True
+                    if display: self.display_input_values(None)
+
+        return loaded_successfully
 
     def display_input_values(self, data_source_info, print_to_console=True, tsize=8):
         """Lists the input parameters for the consumption scenario.
@@ -314,11 +380,9 @@ class InputVarSet:
         if print_to_console: print out
         else: return out
 
-
     def display_variable_names(self):
         """ Displays variable names for all parameters """
         print self._display("intname", "Var. Name", "Input parameter variable names")
-
 
     def prompt_for_inputs(self):
         """Load scenario inputs from the user.
@@ -372,7 +436,7 @@ class InputVarSet:
         no = ['n', 'N', 'no', 'NO', 'No', 'naw', 'not really', 'no way', 'get outta here']
         order = ['ecoregion', 'can_con_pct', 'shrub_black_pct',
                  'fm_duff', 'fm_1000hr', 'fm_10hr', 'slope', 'windspeed',
-                 'fm_type', 'days_since_rain', 'lengthOfIgnition']
+                 'fm_type', 'days_since_rain', 'length_of_ignition']
         skipenv = False
 
         if 'burn_type' not in self.params:
@@ -427,7 +491,7 @@ class InputVarSet:
         order = ['burn_type', 'fm_type', 'fuelbeds', 'area', 'ecoregion',
                  'fm_1000hr', 'fm_10hr', 'fm_duff', 'can_con_pct',
                  'shrub_black_pct', 'slope', 'windspeed', 'days_since_rain',
-                 'lengthOfIgnition', 'efg', 'units']
+                 'length_of_ignition', 'efg', 'units']
 
         txtout = ""
         act = False

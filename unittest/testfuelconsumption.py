@@ -21,7 +21,7 @@ class TestFuelConsumption(unittest.TestCase):
         self._consumer.shrub_blackened_pct.value = 50
         self._consumer.output_units.value = 'tons_ac'
         self._consumer.slope.value = 5
-        self._consumer.lengthOfIgnition.value = 30
+        self._consumer.length_of_ignition.value = 30
         self._consumer.days_since_rain.value = 20
         self._consumer.windspeed.value = 5
         self._consumer.fm_type.value = 'MEAS-Th'

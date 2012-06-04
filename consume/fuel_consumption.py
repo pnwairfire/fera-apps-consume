@@ -52,7 +52,7 @@ There are a number of alternative options for setting input values:
         >>> fc_obj.windspeed = [Windspeed#1, Windspeed#2, ...]
         >>> fc_obj.fm_type = <'MEAS-Th', 'ADJ-Th', or 'NFDRS-Th'>
         >>> fc_obj.days_since_rain = [Days#1, Days#2, ...]
-        >>> fc_obj.lengthOfIgnition = [Length#1, Length#2, ...]
+        >>> fc_obj.length_of_ignition = [Length#1, Length#2, ...]
 
 
         --Note: When setting input values, the user can also select a SINGLE
@@ -61,7 +61,7 @@ There are a number of alternative options for setting input values:
             These environment variables include the following:
             ecoregion, fuel_moisture_1000hr_pct,  fuel_moisture_duff_pct,
             canopy_consumption_pct, shrub_blackened_pct, slope, windpseed,
-            fm_type, days_since_rain, lengthOfIgnition
+            fm_type, days_since_rain, length_of_ignition
 
 
      Description of the input parameters:
@@ -161,7 +161,7 @@ There are a number of alternative options for setting input values:
                   inch in a 48-hour period." Used to predict duff consumption
                   in 'activity' fuelbeds.
 
-        lengthOfIgnition
+        length_of_ignition
                 : <specific to 'activity' burns>
                   The amount of time (minutes) it will take to ignite the area
                   to be burned. Used to determine if a fire will be of high
@@ -644,7 +644,7 @@ class FuelConsumption:
                   inch in a 48-hour period." Used to predict duff consumption
                   in 'activity' fuelbeds.
 
-        lengthOfIgnition
+        length_of_ignition
                 : <specific to 'activity' burns>
                   The amount of time (minutes) it will take to ignite the area
                   to be burned. Used to determine if a fire will be of high
@@ -698,7 +698,7 @@ class FuelConsumption:
         self.windspeed = iv.InputVar('windspeed')
         self.fm_type = iv.InputVar('fm_type')
         self.days_since_rain = iv.InputVar('days_since_rain')
-        self.lengthOfIgnition = iv.InputVar('lengthOfIgnition')
+        self.length_of_ignition = iv.InputVar('length_of_ignition')
         #self.display_inputs()
 
         self.customized_fuel_loadings = []
@@ -1186,7 +1186,7 @@ class FuelConsumption:
                       'windspeed': self.windspeed,
                       'fm_type': self.fm_type,
                       'days_since_rain': self.days_since_rain,
-                      'lengthOfIgnition': self.lengthOfIgnition}
+                      'length_of_ignition': self.length_of_ignition}
 
         else: params = self._params
 
@@ -1211,7 +1211,7 @@ class FuelConsumption:
         self.windspeed = params['windspeed']
         self.fm_type = params['fm_type']
         self.days_since_rain = params['days_since_rain']
-        self.lengthOfIgnition = params['lengthOfIgnition']
+        self.length_of_ignition = params['length_of_ignition']
 
     def validate_customized_fuel_loadings(self):
         """ Validate customized fuel loading inputs """
@@ -1406,7 +1406,7 @@ class FuelConsumption:
                           fm_duff=50.0, burn_type = 'natural', can_con_pct=50.0,
                           shrub_black_pct = 50.0, fm_10hr = 50.0,
                           slope = 30.0, windspeed = 20.0, fm_type = "MEAS-Th",
-                          days_since_rain = 2, lengthOfIgnition = 1, area=1,
+                          days_since_rain = 2, length_of_ignition = 1, area=1,
                           units = ""):
 
         """Calculates fuel consumption estimates.
@@ -1516,7 +1516,7 @@ class FuelConsumption:
                   inch in a 48-hour period." Used to predict duff consumption
                   in 'activity' fuelbeds.
 
-        lengthOfIgnition
+        length_of_ignition
                 : <specific to 'activity' burns>
                   The amount of time (minutes) it will take to ignite the area
                   to be burned. Used to determine if a fire will be of high
@@ -1576,7 +1576,7 @@ class FuelConsumption:
             [tenK_hr_snd_fsrt, tenK_hr_rot_fsrt],
             [tnkp_hr_snd_fsrt, tnkp_hr_rot_fsrt],
             LD['ff_reduction']] = cca.ccon_activity(fm_1000hr, fm_type,
-                windspeed, slope, area, days_since_rain, fm_10hr, lengthOfIgnition, LD)
+                windspeed, slope, area, days_since_rain, fm_10hr, length_of_ignition, LD)
             LD['ff_reduction_successive'] = LD['ff_reduction']
 
         lch_fsrt = ccn.ccon_lch(LD)

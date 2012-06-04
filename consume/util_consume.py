@@ -297,7 +297,7 @@ def csdist(tot, csd):
 def propcons(x):
     """ Equation to calculate proportion consumed for various strata"""
     return math.e ** (x) / (1 + math.e ** x)
-    
+
 try:
     from version import get_consume_version
 except ImportError:
@@ -317,7 +317,11 @@ def get_version_short():
     if 'unofficial' in ver:
         version += '_unofficial'
     return version
-    
+
+def deprecated_function(name):
+    print("\n !!! This function '{}' has been deprecated. Please us {}_#().\n".format(name, name))
+
+
 #-------------------------------------------------------------------------------
 #   For testing
 #-------------------------------------------------------------------------------
