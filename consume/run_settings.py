@@ -25,7 +25,16 @@ def validate_list(input_vals, permitted_vals):
     return (0 == len(invalid), valid, invalid)
 
 class RunSettings(object):
-    #keyword, name, intname, validvals, validator
+    '''
+    TODO:  how should errors be displayed?
+    
+    Settings for a consume run.
+    burn_type dictates how many settings are necessary
+    There are no defaults.
+    
+    '''
+
+    #keyword, name, internal name, permitted values, validator function
     ActivityInputVarParameters = {
         'slope' : ['Slope (%)',  [0,100], validate_range],
         'windspeed' : ['Mid-flame windspeed (mph)', [0, 35], validate_range],

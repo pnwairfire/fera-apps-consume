@@ -13,6 +13,7 @@ class TestRunSettings(unittest.TestCase):
         pass
 
     def testInitial(self):
+        ''' Everything should be empty '''
         s = setting.RunSettings()
         self.assertFalse(s.units)
         self.assertFalse(s.burn_type)
@@ -22,6 +23,7 @@ class TestRunSettings(unittest.TestCase):
             self.assertFalse(s.get(i))
 
     def testSetProperties(self):
+        ''' Exercise setting the 1-value properties '''
         s = setting.RunSettings()
         s.burn_type = 'natural'
         self.assertEqual('natural', s.burn_type)
@@ -40,7 +42,8 @@ class TestRunSettings(unittest.TestCase):
         s.fm_type = 'kjell'
         self.assertEqual('MEAS-Th', s.fm_type)
 
-    def testAddSettings(self):       
+    def testAddSettings(self):
+        ''' Add settings and verify completeness '''
         s = setting.RunSettings()
         items = [1, 2, 4]
         self.assertFalse(s.add('fuelbeds', items))  # need to specify burn_type before adding settings
