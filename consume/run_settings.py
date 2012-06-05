@@ -17,21 +17,21 @@ def validate_range(input_vals, permitted_vals):
     return (0 == len(invalid), valid, invalid)
 
 def validate_list(input_vals, permitted_vals):
+    valid = []
     invalid = []
     for val in input_vals:
         if val not in permitted_vals:
             invalid.append(val)
-    return (0 == len(invalid), invalid)
+    return (0 == len(invalid), valid, invalid)
 
 class RunSettings(object):
     #keyword, name, intname, validvals, validator
     ActivityInputVarParameters = {
-        'slope' : ['Slope (%)', '.slope_pct', [0,100], validate_range],
-        'windspeed' : ['Mid-flame windspeed (mph)', '.windspeed', [0, 35], validate_range],
-        'fm_type' : ['1000hr fuel moisture type', '.fm_type', dd.list_valid_fm_types(), validate_list],
-        'days_since_rain' : ['Days since sgnf. rainfall', '.days_since_rain', [0,365], validate_range],
-        'fm_10hr' : ['Fuel moisture (10-hr, %)', '.fuel_moisture_10hr_pct', [0,100], validate_range],
-        'length_of_ignition' : ['Length of ignition (min.)', '.length_of_ignition', [0,10000], validate_range]}
+        'slope' : ['Slope (%)',  [0,100], validate_range],
+        'windspeed' : ['Mid-flame windspeed (mph)', [0, 35], validate_range],
+        'days_since_rain' : ['Days since sgnf. rainfall', [0,365], validate_range],
+        'fm_10hr' : ['Fuel moisture (10-hr, %)', [0,100], validate_range],
+        'length_of_ignition' : ['Length of ignition (min.)', [0,10000], validate_range]}
     NaturalInputVarParameters = {
         'fuelbeds' : ['FCCS fuelbeds (ID#)', [1,10000], validate_range],
         'area' : ['Fuelbed area (acres)', [0,1000000], validate_range],
@@ -46,6 +46,7 @@ class RunSettings(object):
 
     NaturalSNames = [s for s in NaturalInputVarParameters]
     ActivitySNames = [s for s in ActivityInputVarParameters]
+    AllSNames = NaturalSNames + ActivitySNames
 
     def __init__(self):
         ### - these are single value settings
@@ -64,7 +65,9 @@ class RunSettings(object):
         if tmp in dd.list_valid_burntypes():
             self._burn_type = tmp
         else:
-            print("Error: the only permitted values for burn_type are: 'natural' and 'activity'.")
+            print("Error: the only permitted values for burn_type are:")
+            for i in dd.list_valid_burntypes():
+                print("\t{}".format(i))
 
     @property
     def units(self): return self._units
@@ -85,14 +88,14 @@ class RunSettings(object):
         if value in dd.list_valid_fm_types():
             self._fm_type = value
         else:
-            print("Error: the only permitted values for units are:")
+            print("Error: the only permitted values for fm_type are:")
             for i in dd.list_valid_fm_types():
                 print("\t{}".format(i))
         
     def add(self, name, sequence):
         result = False
         if self._burn_type:
-            valid_names = RunSettings.NaturalSNames if 'natural' == self._burn_type else RunSettings.NaturalSNames + ActivitySNames 
+            valid_names = RunSettings.NaturalSNames if 'natural' == self._burn_type else RunSettings.AllSNames 
             if name in valid_names:
                 validator = RunSettings.AllInputParameters[name][2]
                 permitted_values = RunSettings.AllInputParameters[name][1]
@@ -116,4 +119,16 @@ class RunSettings(object):
             return self._settings[name]
         else:
             print("Error: '{}' is not a current setting".format(name))
+
+    def settings_are_complete(self):
+        check_props = self._burn_type and self._units and (self._fm_type if 'activity' == self._burn_type else True)
+        if check_props:
+            valid_names = set(RunSettings.NaturalSNames if 'natural' == self._burn_type else RunSettings.AllSNames)
+            current_settings = set(self._settings.keys())
+            if valid_names == current_settings:
+                return True
+            else:
+                assert(current_settings.issubset(valid_names))
+        return False
+            
 
