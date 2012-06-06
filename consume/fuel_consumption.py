@@ -678,11 +678,9 @@ class FuelConsumption:
 
         self.FCCS = fccs.FCCSDB(fccs_file)
         iv.InputVarParameters[0][3] = self._val_fccs = self.FCCS.valids
-        self.reset_inputs_and_outputs()
+        #self.reset_inputs_and_outputs()
 
-    def reset_inputs_and_outputs(self):
-        """Resets all the input parameters and all output data."""
-
+        ### - initialize inputs
         self._params = None
         self.fuelbed_fccs_ids = iv.InputVar('fuelbeds')
         self.fuelbed_area_acres = iv.InputVar('area')
@@ -699,19 +697,19 @@ class FuelConsumption:
         self.fm_type = iv.InputVar('fm_type')
         self.days_since_rain = iv.InputVar('days_since_rain')
         self.length_of_ignition = iv.InputVar('length_of_ignition')
-        #self.display_inputs()
-
-        self.customized_fuel_loadings = []
-        self._fccs_loadings = []
         self.units = "tons_ac"
         self._build_input_set()
+        #self.display_inputs()
+
+        ### - reset outputs
+        self.customized_fuel_loadings = []
+        self._fccs_loadings = []
         self._cons_data = np.array([])
         self._cons_debug_data = np.array([])
         self._emis_data = np.array([])
         self._calc_success = False
         self._conv_success = False
         self._unique_check = False
-
 
     def load_example(self):
         """Load example scenario data.
@@ -1164,7 +1162,7 @@ class FuelConsumption:
             else:
                 out = baseDat[stratum][combustion_stage]
 
-        self.reset_inputs_and_outputs()
+        #ks self.reset_inputs_and_outputs()
 
         if verbose: return out, baseDict
         else: return out
