@@ -156,7 +156,7 @@ def set_defaults(consumer, map):
     consumer.days_since_rain = map['days_since_rain'] if 'days_since_rain' in map else 20
     consumer.fuel_moisture_10hr_pct = map['fuel_moisture_10hr_pct'] if 'fuel_moisture_10hr_pct' in map else 10
     consumer.fm_type = map['fm_type'] if 'fm_type' in map else 'MEAS-Th'
-    consumer.lengthOfIgnition = map['lengthOfIgnition'] if 'lengthOfIgnition' in map else 30
+    consumer.length_of_ignition = map['length_of_ignition'] if 'length_of_ignition' in map else 30
     consumer.slope = map['slope'] if 'slope' in map else 5
     consumer.windspeed = map['windspeed'] if 'windspeed' in map else 5
 
@@ -176,7 +176,7 @@ def run_additional_activity_scenarios(consumer, fuelbed_list):
         'fuel_moisture_10hr_pct':15,
         'fuel_moisture_1000hr_pct':39,
         'fuelbed_area_acres':10,
-        'lengthOfIgnition':5 }
+        'length_of_ignition':5 }
     activityThree = {
         'fuel_moisture_10hr_pct':15,
         'fuel_moisture_1000hr_pct':45,
