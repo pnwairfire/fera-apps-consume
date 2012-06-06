@@ -677,7 +677,7 @@ class FuelConsumption:
         """
 
         self.FCCS = fccs.FCCSDB(fccs_file)
-        iv.InputVarParameters[0][3] = self._val_fccs = self.FCCS.valids
+        iv.InputVarParameters[0][3] = self.FCCS.valids
         #self.reset_inputs_and_outputs()
 
         ### - initialize inputs
