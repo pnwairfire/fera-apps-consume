@@ -9,23 +9,15 @@ class TestFuelConsumption(unittest.TestCase):
     def setUp(self):
         infile = helper.get_test_inputfile()
         self._consumer = consume.FuelConsumption(fccs_file = infile)
-        self.reset_consumer()
-
-    def reset_consumer(self):
-        self._consumer.burn_type.value = 'natural'
-        self._consumer.fuelbed_area_acres.value = 100
-        self._consumer.fuel_moisture_1000hr_pct.value = 20
-        self._consumer.fuel_moisture_duff_pct.value = 20
-        self._consumer.fuel_moisture_10hr_pct.value = 10
-        self._consumer.canopy_consumption_pct.value = 20
-        self._consumer.shrub_blackened_pct.value = 50
-        self._consumer.output_units.value = 'tons_ac'
-        self._consumer.slope.value = 5
-        self._consumer.length_of_ignition.value = 30
-        self._consumer.days_since_rain.value = 20
-        self._consumer.windspeed.value = 5
-        self._consumer.fm_type.value = 'MEAS-Th'
-        self._consumer.fuelbed_fccs_ids.value = [str(i[0]) for i in self._consumer.FCCS.data]
+        
+        self._consumer.burn_type = 'natural'
+        self._consumer.fuelbed_area_acres = [100]
+        self._consumer.fuel_moisture_1000hr_pct = [20]
+        self._consumer.fuel_moisture_duff_pct = [20]
+        self._consumer.canopy_consumption_pct = [20]
+        self._consumer.shrub_blackened_pct = [50]
+        self._consumer.output_units = 'tons_ac'
+        self._consumer.fuelbed_fccs_ids = [i for i in self._consumer.FCCS.data]
 
     def tearDown(self):
         pass
@@ -68,11 +60,11 @@ class TestFuelConsumption(unittest.TestCase):
     def test_wfeis_return(self):
         ''' We don't use this method, but presumably MTI does.
             Make sure it is callable
-        '''
         out = self._consumer._wfeis_return()
         for key in out.keys():
             for i in ['smoldering', 'total', 'flaming', 'residual']:
                 self.assertTrue(out[key][i] == 0.0, msg="Not zero {}:{}".format(key, i))
+        '''
 
     """
     def test_build_input_set(self):

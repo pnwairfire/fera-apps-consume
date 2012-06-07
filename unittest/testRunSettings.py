@@ -46,26 +46,26 @@ class TestRunSettings(unittest.TestCase):
         ''' Add settings and verify completeness '''
         s = setting.RunSettings()
         items = [1, 2, 4]
-        self.assertFalse(s.add('fuelbeds', items))  # need to specify burn_type before adding settings
+        self.assertFalse(s.set('fuelbeds', items))  # need to specify burn_type before adding settings
         s.burn_type = 'activity'
-        self.assertTrue(s.add('fuelbeds', items))
+        self.assertTrue(s.set('fuelbeds', items))
         fb = s.get('fuelbeds')
         i = 0
         while i < len(fb):
             self.assertEqual(fb[i], items[i])
             i += 1
-        self.assertTrue(s.add('slope', [1, 2, 4]))
-        self.assertTrue(s.add('windspeed', [1, 2, 4]))
-        self.assertTrue(s.add('days_since_rain', [1, 2, 4]))
-        self.assertTrue(s.add('fm_10hr', [1, 2, 4]))
-        self.assertTrue(s.add('length_of_ignition', [1, 2, 4]))
-        self.assertTrue(s.add('area', [1, 2, 4]))
-        self.assertTrue(s.add('ecoregion', ['western', 'southern', 'boreal']))
-        self.assertTrue(s.add('fm_1000hr', [1, 2, 4]))
-        self.assertTrue(s.add('fm_duff', [1, 2, 4]))
-        self.assertTrue(s.add('can_con_pct', [1, 2, 4]))
-        self.assertTrue(s.add('shrub_black_pct', [1, 2, 4]))
-        self.assertTrue(s.add('efg', [1, 2, 4]))
+        self.assertTrue(s.set('slope', [1, 2, 4]))
+        self.assertTrue(s.set('windspeed', [1, 2, 4]))
+        self.assertTrue(s.set('days_since_rain', [1, 2, 4]))
+        self.assertTrue(s.set('fm_10hr', [1, 2, 4]))
+        self.assertTrue(s.set('length_of_ignition', [1, 2, 4]))
+        self.assertTrue(s.set('area', [1, 2, 4]))
+        self.assertTrue(s.set('ecoregion', ['western', 'southern', 'boreal']))
+        self.assertTrue(s.set('fm_1000hr', [1, 2, 4]))
+        self.assertTrue(s.set('fm_duff', [1, 2, 4]))
+        self.assertTrue(s.set('can_con_pct', [1, 2, 4]))
+        self.assertTrue(s.set('shrub_black_pct', [1, 2, 4]))
+        self.assertTrue(s.set('efg', [1, 2, 4]))
         s.fm_type = 'MEAS-Th'
         s.units = 'kg_ha'
         self.assertTrue(s.settings_are_complete())

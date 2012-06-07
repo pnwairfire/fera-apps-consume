@@ -101,7 +101,7 @@ class RunSettings(object):
             for i in dd.list_valid_fm_types():
                 print("\t{}".format(i))
         
-    def add(self, name, sequence):
+    def set(self, name, sequence):
         result = False
         if self._burn_type:
             valid_names = RunSettings.NaturalSNames if 'natural' == self._burn_type else RunSettings.AllSNames 
@@ -126,8 +126,7 @@ class RunSettings(object):
     def get(self, name):
         if name in self._settings.keys():
             return self._settings[name]
-        else:
-            print("Error: '{}' is not a current setting".format(name))
+        return None
 
     def settings_are_complete(self):
         check_props = self._burn_type and self._units and (self._fm_type if 'activity' == self._burn_type else True)

@@ -523,12 +523,14 @@ import input_variables as iv
 import util_consume as util
 import con_calc_natural as ccn
 import con_calc_activity as cca
+import run_settings as settings
 
 # Variables that need to be defined for these equations
 #snow_free_days = 30 # need for curing eval, if still valid
 
 
-class FuelConsumption:
+#class FuelConsumption(FrozenClass):
+class FuelConsumption(util.FrozenClass):
     """A class that estimates fuel consumption due to fire.
 
     This class implements the CONSUME model equations for estimating fuel
@@ -657,40 +659,82 @@ class FuelConsumption:
                   help(consume.FCCSDB) to view available methods.
 
     """
-        @property
-        def fuelbed_fccs_ids(self): return self._settings.set('')
-        @fuelbed_fccs_ids.setter
-        def fuelbed_fccs_ids(self, value):
-            self._settings.set('fuelbeds', value)
-        @property
-        def fuelbed_area_acres(self): return self._settings.set('')
-        @property
-        def fuelbed_ecoregion(self): return self._settings.set('')
-        @property
-        def fuel_moisture_1000hr_pct(self): return self._settings.set('')
-        @property
-        def fuel_moisture_duff_pct(self): return self._settings.set('')
-        @property
-        def fuel_moisture_10hr_pct(self): return self._settings.set('')
-        @property
-        def canopy_consumption_pct(self): return self._settings.set('')
-        @property
-        def shrub_blackened_pct(self): return self._settings.set('')
-        @property
-        def burn_type(self): return self._settings.burn_type
-        @property
-        def output_units(self): return self._settings.units
-        @property
-        def slope(self): return self._settings.set('')
-        @property
-        def windspeed(self): return self._settings.set('')
-        @property
-        def fm_type(self): return self._settings.fm_type
-        @property
-        def days_since_rain(self): return self._settings.set('')
-        @property
-        def length_of_ignition(self): return self._settings.set('')
+    @property
+    def fm_type(self): return self._settings.fm_type
+    @fm_type.setter
+    def fm_type(self, value):
+        self._settings.fm_type = value
+    @property
+    def burn_type(self): return self._settings.burn_type
+    @burn_type.setter
+    def burn_type(self, value):
+        self._settings.burn_type = value
+    @property
+    def output_units(self): return self._settings.units
+    @output_units.setter
+    def output_units(self, value):
+        self._settings.units =  value
     
+    @property
+    def fuelbed_fccs_ids(self): return self._settings.get('fuelbed_fccs_ids')
+    @fuelbed_fccs_ids.setter
+    def fuelbed_fccs_ids(self, value):
+        self._settings.set('fuelbed_fccs_ids', value)
+    @property
+    def fuelbed_area_acres(self): return self._settings.get('fuelbed_area_acres')
+    @fuelbed_area_acres.setter
+    def fuelbed_area_acres(self, value):
+        self._settings.set('fuelbed_area_acres', value)
+    @property
+    def fuelbed_ecoregion(self): return self._settings.get('fuelbed_ecoregion')
+    @fuelbed_ecoregion.setter
+    def fuelbed_ecoregion(self, value):
+        self._settings.set('fuelbed_ecoregion', value)
+    @property
+    def fuel_moisture_1000hr_pct(self): return self._settings.get('fuel_moisture_1000hr_pct')
+    @fuel_moisture_1000hr_pct.setter
+    def fuel_moisture_1000hr_pct(self, value):
+        self._settings.set('fuel_moisture_1000hr_pct', value)
+    @property
+    def fuel_moisture_duff_pct(self): return self._settings.get('fuel_moisture_duff_pct')
+    @fuel_moisture_duff_pct.setter
+    def fuel_moisture_duff_pct(self, value):
+        self._settings.set('fuel_moisture_duff_pct', value)
+    @property
+    def fuel_moisture_10hr_pct(self): return self._settings.get('fuel_moisture_10hr_pct')
+    @fuel_moisture_10hr_pct.setter
+    def fuel_moisture_10hr_pct(self, value):
+        self._settings.set('fuel_moisture_10hr_pct', value)
+    @property
+    def canopy_consumption_pct(self): return self._settings.get('canopy_consumption_pct')
+    @canopy_consumption_pct.setter
+    def canopy_consumption_pct(self, value):
+        self._settings.set('canopy_consumption_pct', value)
+    @property
+    def shrub_blackened_pct(self): return self._settings.get('shrub_blackened_pct')
+    @shrub_blackened_pct.setter
+    def shrub_blackened_pct(self, value):
+        self._settings.set('shrub_blackened_pct', value)
+    @property
+    def slope(self): return self._settings.get('slope')
+    @slope.setter
+    def slope(self, value):
+        self._settings.set('slope', value)
+    @property
+    def windspeed(self): return self._settings.get('windspeed')
+    @windspeed.setter
+    def windspeed(self, value):
+        self._settings.set('windspeed', value)
+    @property
+    def days_since_rain(self): return self._settings.get('days_since_rain')
+    @days_since_rain.setter
+    def days_since_rain(self, value):
+        self._settings.set('days_since_rain', value)
+    @property
+    def length_of_ignition(self): return self._settings.get('length_of_ignition')
+    @length_of_ignition.setter
+    def length_of_ignition(self, value):
+        self._settings.set('length_of_ignition', value)
 
     def __init__(self, fccs_file = ""):
         """FuelConsumption class constructor
@@ -713,9 +757,11 @@ class FuelConsumption:
         self.FCCS = fccs.FCCSDB(fccs_file)
         iv.InputVarParameters[0][3] = self.FCCS.valids
         #self.reset_inputs_and_outputs()
+        self._settings = settings.RunSettings()
 
         ### - initialize inputs
         self._params = None
+        '''
         self.fuelbed_fccs_ids = iv.InputVar('fuelbeds')
         self.fuelbed_area_acres = iv.InputVar('area')
         self.fuelbed_ecoregion = iv.InputVar('ecoregion')
@@ -732,8 +778,9 @@ class FuelConsumption:
         self.days_since_rain = iv.InputVar('days_since_rain')
         self.length_of_ignition = iv.InputVar('length_of_ignition')
         self.units = "tons_ac"
-        self._build_input_set()
+        #self._build_input_set()
         #self.display_inputs()
+        '''
 
         ### - reset outputs
         self.customized_fuel_loadings = []
@@ -744,6 +791,7 @@ class FuelConsumption:
         self._calc_success = False
         self._conv_success = False
         self._unique_check = False
+        self._freeze()
 
     def load_example(self):
         """Load example scenario data.
@@ -1159,14 +1207,14 @@ class FuelConsumption:
 
         """
 
-        self.fuelbed_fccs_ids.value = fuelbed_fccs_ids
-        self.fuelbed_area_acres.value = [a * 247.105381 for a in fuelbed_area_km2]
-        self.fuelbed_ecoregion.value = fuelbed_ecoregion
-        self.fuel_moisture_1000hr_pct.value = fuel_moisture_1000hr_pct
-        self.fuel_moisture_duff_pct.value = fuel_moisture_duff_pct
-        self.canopy_consumption_pct.value = canopy_consumption_pct
-        self.shrub_blackened_pct.value = shrub_blackened_pct
-        self.output_units.value = output_units
+        self.fuelbed_fccs_ids = fuelbed_fccs_ids
+        self.fuelbed_area_acres = [a * 247.105381 for a in fuelbed_area_km2]
+        self.fuelbed_ecoregion = fuelbed_ecoregion
+        self.fuel_moisture_1000hr_pct = fuel_moisture_1000hr_pct
+        self.fuel_moisture_duff_pct = fuel_moisture_duff_pct
+        self.canopy_consumption_pct = canopy_consumption_pct
+        self.shrub_blackened_pct = shrub_blackened_pct
+        self.output_units = output_units
         self.customized_fuel_loadings = customized_fuel_loadings
 
         baseDict = self.results()

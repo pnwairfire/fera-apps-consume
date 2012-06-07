@@ -2,6 +2,22 @@ import numpy as np
 import math
 import data_desc as dd
 
+class FrozenClass(object):
+    '''
+    Inherit from this class to make sure attributes are set in one
+    place and there are not typos
+
+    '''
+    __isfrozen = False
+    def __setattr__(self, key, value):
+        if self.__isfrozen and not hasattr(self, key):
+            raise TypeError( "%r is a frozen class" % self )
+        object.__setattr__(self, key, value)
+
+    def _freeze(self):
+        self.__isfrozen = True        
+
+
 def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs, cons_debug_data=""):
     """
 
