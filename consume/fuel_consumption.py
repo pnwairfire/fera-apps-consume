@@ -657,6 +657,40 @@ class FuelConsumption:
                   help(consume.FCCSDB) to view available methods.
 
     """
+        @property
+        def fuelbed_fccs_ids(self): return self._settings.set('')
+        @fuelbed_fccs_ids.setter
+        def fuelbed_fccs_ids(self, value):
+            self._settings.set('fuelbeds', value)
+        @property
+        def fuelbed_area_acres(self): return self._settings.set('')
+        @property
+        def fuelbed_ecoregion(self): return self._settings.set('')
+        @property
+        def fuel_moisture_1000hr_pct(self): return self._settings.set('')
+        @property
+        def fuel_moisture_duff_pct(self): return self._settings.set('')
+        @property
+        def fuel_moisture_10hr_pct(self): return self._settings.set('')
+        @property
+        def canopy_consumption_pct(self): return self._settings.set('')
+        @property
+        def shrub_blackened_pct(self): return self._settings.set('')
+        @property
+        def burn_type(self): return self._settings.burn_type
+        @property
+        def output_units(self): return self._settings.units
+        @property
+        def slope(self): return self._settings.set('')
+        @property
+        def windspeed(self): return self._settings.set('')
+        @property
+        def fm_type(self): return self._settings.fm_type
+        @property
+        def days_since_rain(self): return self._settings.set('')
+        @property
+        def length_of_ignition(self): return self._settings.set('')
+    
 
     def __init__(self, fccs_file = ""):
         """FuelConsumption class constructor
