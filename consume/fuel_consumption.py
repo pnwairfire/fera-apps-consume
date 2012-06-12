@@ -676,45 +676,45 @@ class FuelConsumption(util.FrozenClass):
         self._settings.units =  value
     
     @property
-    def fuelbed_fccs_ids(self): return self._settings.get('fuelbed_fccs_ids')
+    def fuelbed_fccs_ids(self): return self._settings.get('fuelbeds')
     @fuelbed_fccs_ids.setter
     def fuelbed_fccs_ids(self, value):
-        self._settings.set('fuelbed_fccs_ids', value)
+        self._settings.set('fuelbeds', value)
     @property
-    def fuelbed_area_acres(self): return self._settings.get('fuelbed_area_acres')
+    def fuelbed_area_acres(self): return self._settings.get('area')
     @fuelbed_area_acres.setter
     def fuelbed_area_acres(self, value):
-        self._settings.set('fuelbed_area_acres', value)
+        self._settings.set('area', value)
     @property
-    def fuelbed_ecoregion(self): return self._settings.get('fuelbed_ecoregion')
+    def fuelbed_ecoregion(self): return self._settings.get('ecoregion')
     @fuelbed_ecoregion.setter
     def fuelbed_ecoregion(self, value):
-        self._settings.set('fuelbed_ecoregion', value)
+        self._settings.set('ecoregion', value)
     @property
-    def fuel_moisture_1000hr_pct(self): return self._settings.get('fuel_moisture_1000hr_pct')
+    def fuel_moisture_1000hr_pct(self): return self._settings.get('fm_1000hr')
     @fuel_moisture_1000hr_pct.setter
     def fuel_moisture_1000hr_pct(self, value):
-        self._settings.set('fuel_moisture_1000hr_pct', value)
+        self._settings.set('fm_1000hr', value)
     @property
-    def fuel_moisture_duff_pct(self): return self._settings.get('fuel_moisture_duff_pct')
+    def fuel_moisture_duff_pct(self): return self._settings.get('fm_duff')
     @fuel_moisture_duff_pct.setter
     def fuel_moisture_duff_pct(self, value):
-        self._settings.set('fuel_moisture_duff_pct', value)
+        self._settings.set('fm_duff', value)
     @property
     def fuel_moisture_10hr_pct(self): return self._settings.get('fuel_moisture_10hr_pct')
     @fuel_moisture_10hr_pct.setter
     def fuel_moisture_10hr_pct(self, value):
         self._settings.set('fuel_moisture_10hr_pct', value)
     @property
-    def canopy_consumption_pct(self): return self._settings.get('canopy_consumption_pct')
+    def canopy_consumption_pct(self): return self._settings.get('can_con_pct')
     @canopy_consumption_pct.setter
     def canopy_consumption_pct(self, value):
-        self._settings.set('canopy_consumption_pct', value)
+        self._settings.set('can_con_pct', value)
     @property
-    def shrub_blackened_pct(self): return self._settings.get('shrub_blackened_pct')
+    def shrub_blackened_pct(self): return self._settings.get('shrub_black_pct')
     @shrub_blackened_pct.setter
     def shrub_blackened_pct(self, value):
-        self._settings.set('shrub_blackened_pct', value)
+        self._settings.set('shrub_black_pct', value)
     @property
     def slope(self): return self._settings.get('slope')
     @slope.setter
@@ -791,6 +791,11 @@ class FuelConsumption(util.FrozenClass):
         self._calc_success = False
         self._conv_success = False
         self._unique_check = False
+
+        self._calc_success = False
+        self._unq_inputs = []
+        self._runlnk = []
+        
         self._freeze()
 
     def load_example(self):
@@ -919,8 +924,9 @@ class FuelConsumption(util.FrozenClass):
         correctly set.
 
         """
-        self._build_input_set()
-        return self.InSet.display_input_values(self.FCCS.data_source_info, print_to_console)
+        #ks self._build_input_set()
+        #ks return self.InSet.display_input_values(self.FCCS.data_source_info, print_to_console)
+        return self._settings.display_settings()
 
 
     def list_variable_names(self):
@@ -1368,21 +1374,13 @@ class FuelConsumption(util.FrozenClass):
         self._calc_success = False
         self._unq_inputs = []
         self._runlnk = []
-        self._build_input_set()
+        #self._build_input_set()
 
-        if self.InSet.validate() and self.validate_customized_fuel_loadings():
-            can = self.InSet.validated_inputs['can_con_pct']
-            for j, jval in enumerate(can):
-                if jval == -1:
-                    self.InSet.validated_inputs['can_con_pct'][j] = (
-                            float(self._fccs_canopy_consumption_pct[int(
-                            self.InSet.validated_inputs['fuelbeds'][j])]))
-
-            self.canopy_consumption_pct.value = self.InSet.validated_inputs['can_con_pct']
-
-            self.units = 'tons_ac'
-            [self._unq_inputs, self._runlnk] = self.InSet.getuniques(self._unique_check)
-            self._consumption_calc(**self._unq_inputs)
+        if self._settings.settings_are_complete():
+            #self.units = 'tons_ac'
+            #[self._unq_inputs, self._runlnk] = self.InSet.getuniques(self._unique_check)
+            #self._consumption_calc(**self._unq_inputs)
+            self._consumption_calc(**self._settings.package())
             self._heat_release_calc()
             self._calc_success = True
 

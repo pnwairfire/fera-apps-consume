@@ -69,6 +69,29 @@ class TestRunSettings(unittest.TestCase):
         s.fm_type = 'MEAS-Th'
         s.units = 'kg_ha'
         self.assertTrue(s.settings_are_complete())
+
+    def testDisplaySettings(self):
+        items = [1, 2, 4]
+        s = setting.RunSettings()
+        s.burn_type = 'activity'
+        self.assertTrue(s.set('fuelbeds', items))
+        fb = s.get('fuelbeds')
+        self.assertTrue(s.set('slope', [1, 2, 4]))
+        self.assertTrue(s.set('windspeed', [1, 2, 4]))
+        self.assertTrue(s.set('days_since_rain', [1, 2, 4]))
+        self.assertTrue(s.set('fm_10hr', [1, 2, 4]))
+        self.assertTrue(s.set('length_of_ignition', [1, 2, 4]))
+        self.assertTrue(s.set('area', [1, 2, 4]))
+        self.assertTrue(s.set('ecoregion', ['western', 'southern', 'boreal']))
+        self.assertTrue(s.set('fm_1000hr', [1, 2, 4]))
+        self.assertTrue(s.set('fm_duff', [1, 2, 4]))
+        self.assertTrue(s.set('can_con_pct', [1, 2, 4]))
+        self.assertTrue(s.set('shrub_black_pct', [1, 2, 4]))
+        self.assertTrue(s.set('efg', [1, 2, 4]))
+        s.fm_type = 'MEAS-Th'
+        s.units = 'kg_ha'
+        result = s.display_settings()
+        ### - todo, no test here yet
             
 
 

@@ -22,6 +22,8 @@ def validate_list(input_vals, permitted_vals):
     for val in input_vals:
         if val not in permitted_vals:
             invalid.append(val)
+    if 0 == len(invalid):
+        valid = input_vals
     return (0 == len(invalid), valid, invalid)
 
 class RunSettings(object):
@@ -49,7 +51,8 @@ class RunSettings(object):
         'fm_duff' : ['Fuel moisture (duff, %)', [0,400], validate_range],
         'can_con_pct' : ['Canopy consumption (%)', [0,100], validate_range],
         'shrub_black_pct' : ['Shrub blackened (%)', [0,100], validate_range],
-        'efg' : ['Emissions factor group(s)', [0,20], validate_range]}
+        }
+        #'efg' : ['Emissions factor group(s)', [0,20], validate_range]}
 
     AllInputParameters = dict(NaturalInputVarParameters.items() + ActivityInputVarParameters.items())
 
@@ -138,5 +141,22 @@ class RunSettings(object):
             else:
                 assert(current_settings.issubset(valid_names))
         return False
-            
+
+    def display_settings(self):
+        settings = []
+        settings.append("burn_type\t{}".format(self._burn_type))
+        settings.append("units\t{}".format(self._units))
+        if 'activity' == self._burn_type:
+            settings.append("fm_type\t{}".format(self._fm_type))
+        for k, v in self._settings.iteritems():
+            settings.append("{}\t{}".format(k, v))
+        return "\n".join(settings)
+
+    def package(self):
+        if self.settings_are_complete():
+            add_me = {}
+            add_me['burn_type'] = self._burn_type
+            add_me['units'] = self._units
+            if 'activity' == self.burn_type: add_me['fm_type'] = self.fm_type
+            return dict(self._settings.items() + add_me.items())
 
