@@ -137,6 +137,7 @@ class RunSettings(object):
             valid_names = set(RunSettings.NaturalSNames if 'natural' == self._burn_type else RunSettings.AllSNames)
             current_settings = set(self._settings.keys())
             if valid_names == current_settings:
+                self._settings['fuelbeds'] = self._settings['fuelbeds'].astype(int)
                 return True
             else:
                 assert(current_settings.issubset(valid_names))

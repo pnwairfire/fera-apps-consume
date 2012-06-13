@@ -1455,6 +1455,7 @@ class FuelConsumption(util.FrozenClass):
         data = zip(*loadings)
         for lds in dd.LoadDefs:
             if lds[1] not in skips:
+                print("Indices {} : {}".format(lds[1], lds[2]))
                 LD[lds[1]] = data[lds[2]]
 
         # convert to numpy arrays
