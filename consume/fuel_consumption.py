@@ -1380,7 +1380,7 @@ class FuelConsumption(util.FrozenClass):
             #self.units = 'tons_ac'
             #[self._unq_inputs, self._runlnk] = self.InSet.getuniques(self._unique_check)
             #self._consumption_calc(**self._unq_inputs)
-            self._consumption_calc(**self._settings.package())
+            self._consumption_calc()
             self._heat_release_calc()
             self._calc_success = True
 
@@ -1426,7 +1426,14 @@ class FuelConsumption(util.FrozenClass):
         self._heat_data = (self._cons_data * BTU_PER_UNIT)
 
     def _get_fuel_loadings(self, fuelbeds):
-        """ Retrieves FCCS loadings values based on scenario FCCS IDs """
+        """ Retrieves FCCS loadings values based on scenario FCCS IDs 
+            The result of this is a dictionary keyed on the internal tag (second element) of the LoadDefs structure
+                LoadDefs = (('fuelbed_number', 'fccs_id', 0),
+                            ('ecoregion', 'ecoregion', 1),
+                            ('cover_type', 'cover_type', 2),
+            The value is a list of all the values of that type from the valid fuelbeds.
+            
+        """
         def _setup_loading_dictionary():
             """ Sets up the FCCS fuel loadings dictionary """
             LD = {} # fuel loading dictionary
@@ -1480,6 +1487,7 @@ class FuelConsumption(util.FrozenClass):
 
         return ff_redux_proportion
 
+    '''
     def _consumption_calc(self, fuelbeds, ecoregion = 'western', fm_1000hr=50.0,
                           fm_duff=50.0, burn_type = 'natural', can_con_pct=50.0,
                           shrub_black_pct = 50.0, fm_10hr = 50.0,
@@ -1603,6 +1611,7 @@ class FuelConsumption(util.FrozenClass):
 
         """
         if type(fm_type) == list:
+            assert(len(fm_type) == 1)
             fm_type = fm_type[0]
 
         LD = self._get_fuel_loadings(fuelbeds)
@@ -1755,3 +1764,183 @@ class FuelConsumption(util.FrozenClass):
             self._cons_data = _unpack(self._ucons_data, self._runlnk)
         else:
             self._cons_data = self._ucons_data
+    '''
+
+    def _consumption_calc(self):
+        """Calculates fuel consumption estimates.
+
+        Calculates fuel consumption for each of 36 sub-categories and 7 major
+        categories of fuel types from the given inputs using the equations
+        found in the Consume 3.0 User's Manual.
+
+        Input parameters include fuel loadings (from FCCS data), ecoregion,
+        and fuel moisture indicators (1000 hour fuel moisture, duff moisture,
+        percent canopy consumed, and percent blackened shrub). See CONSUME 3.0
+        manual for more information.
+
+        Page numbers documented in the code correspond to the manual pages from
+        which the equations were derived. Line numbers (ln ####) refer to
+        corresponding lines in the original source code.
+
+
+        """
+        LD = self._get_fuel_loadings(self._settings.get('fuelbeds'))
+
+        # Setup ecoregion masks for equations that vary by ecoregion
+        ecodict = {"maskb": {"boreal":1, "western":0, "southern":0},
+                     "masks": {"boreal":0, "western":0, "southern":1},
+                     "maskw": {"boreal":0, "western":1, "southern":0}}
+
+        ecob_mask = [ecodict["maskb"][e] for e in ecoregion]
+        ecos_mask = [ecodict["masks"][e] for e in ecoregion]
+        ecow_mask = [ecodict["maskw"][e] for e in ecoregion]
+
+        zeroes = np.array([0.0] * len(LD['fccs_id']), dtype=float)
+
+           ########################################################
+        ############ Fuel Consumption Calculation Execution ##########
+           ########################################################
+
+        [can_over_fsrt, can_mid_fsrt, can_under_fsrt, can_snag1f_fsrt,
+         can_snag1w_fsrt, can_snag1nf_fsrt, can_snag2_fsrt, can_snag3_fsrt,
+         can_ladder_fsrt] = ccn.ccon_canopy(self._settings.get('can_con_pct'), LD)
+
+        [shb_prim_live_fsrt, shb_prim_dead_fsrt,
+         shb_seco_live_fsrt, shb_seco_dead_fsrt] = ccn.ccon_shrub(self._settings.get('shrub_black_pct'), LD)
+
+        [nw_prim_live_fsrt, nw_prim_dead_fsrt,
+         nw_seco_live_fsrt, nw_seco_dead_fsrt] = ccn.ccon_nw(LD)
+
+        [stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt] = ccn.ccon_stumps(LD)
+
+        fm_1000hr = self._settings.get('fm_1000hr')
+        fm_duff =  self._settings.get('fm_duff')
+        if self._settings.burn_type in ['natural', ['natural']]:
+
+            one_hr_fsrt = ccn.ccon_one_nat(LD)
+            ten_hr_fsrt = ccn.ccon_ten_nat(LD)
+            hun_hr_fsrt = ccn.ccon_hun_nat(ecos_mask, LD)
+            oneK_hr_snd_fsrt = ccn.ccon_oneK_snd_nat(fm_duff, fm_1000hr, ecos_mask, LD)
+            tenK_hr_snd_fsrt = ccn.ccon_tenK_snd_nat(fm_1000hr, LD)
+            tnkp_hr_snd_fsrt = ccn.ccon_tnkp_snd_nat(fm_1000hr, LD)
+            oneK_hr_rot_fsrt = ccn.ccon_oneK_rot_nat(fm_1000hr, ecos_mask, LD)
+            tenK_hr_rot_fsrt = ccn.ccon_tenK_rot_nat(fm_1000hr, LD)
+            tnkp_hr_rot_fsrt = ccn.ccon_tnkp_rot_nat(fm_1000hr, LD)
+            [LD['ff_reduction'], y_b, duff_depth] = ccn.ccon_ffr(fm_duff, self._settings.burn_type, ecoregion, LD)
+            LD['ff_reduction_successive'] = LD['ff_reduction']
+        else:
+            fm_type = self._settings.fm_type
+            windspeed =  self._settings.get('windspeed')
+            slope =  self._settings.get('slope')
+            area =  self._settings.get('area')
+            days_since_rain =  self._settings.get('days_since_rain')
+            fm_10hr =  self._settings.get('fm_10hr')
+            length_of_ignition =  self._settings.get('length_of_ignition')
+
+            [one_hr_fsrt, ten_hr_fsrt, hun_hr_fsrt,
+            [oneK_hr_snd_fsrt, oneK_hr_rot_fsrt],
+            [tenK_hr_snd_fsrt, tenK_hr_rot_fsrt],
+            [tnkp_hr_snd_fsrt, tnkp_hr_rot_fsrt],
+            LD['ff_reduction']] = cca.ccon_activity(fm_1000hr, fm_type,
+                windspeed, slope, area, days_since_rain, fm_10hr, length_of_ignition, LD)
+            LD['ff_reduction_successive'] = LD['ff_reduction']
+
+        lch_fsrt = ccn.ccon_lch(LD)
+        moss_fsrt = ccn.ccon_moss(LD)
+        lit_fsrt = ccn.ccon_litter(LD)
+        [duff_upper_fsrt, duff_lower_fsrt] = ccn.ccon_duff(LD)
+
+        ff_redux_proportion = self.calc_ff_redux_proportion(LD)
+        bas_fsrt = ccn.ccon_bas(LD['bas_loading'], ff_redux_proportion)
+        sqm_fsrt = ccn.ccon_sqm(LD['sqm_loading'], ff_redux_proportion)
+
+
+        # Category summations
+        can_fsrt = sum([can_over_fsrt, can_mid_fsrt, can_under_fsrt,
+                        can_snag1f_fsrt, can_snag1w_fsrt, can_snag1nf_fsrt,
+                        can_snag2_fsrt, can_snag3_fsrt, can_ladder_fsrt])
+        shb_fsrt = sum([shb_prim_live_fsrt, shb_prim_dead_fsrt,
+                        shb_seco_live_fsrt, shb_seco_dead_fsrt])
+        nw_fsrt = sum([nw_prim_live_fsrt, nw_prim_dead_fsrt,
+                       nw_seco_live_fsrt, nw_seco_dead_fsrt])
+        llm_fsrt = sum([lch_fsrt, moss_fsrt, lit_fsrt])
+        gf_fsrt = sum([duff_upper_fsrt, duff_lower_fsrt, bas_fsrt, sqm_fsrt])
+        woody_fsrt = sum([stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt,
+                    one_hr_fsrt, ten_hr_fsrt, hun_hr_fsrt, oneK_hr_snd_fsrt,
+                    oneK_hr_rot_fsrt, tenK_hr_snd_fsrt, tenK_hr_rot_fsrt,
+                    tnkp_hr_snd_fsrt, tnkp_hr_rot_fsrt])
+
+        all_fsrt = sum([can_fsrt, shb_fsrt, nw_fsrt,
+                        llm_fsrt, gf_fsrt, woody_fsrt])
+
+        #######################
+        #### OUTPUT EXPORT ####
+        #######################
+
+        self._ucons_data = np.array(
+            [all_fsrt,
+            can_fsrt,
+            shb_fsrt,
+            nw_fsrt,
+            llm_fsrt,
+            gf_fsrt,
+            woody_fsrt,
+            can_over_fsrt,
+            can_mid_fsrt,
+            can_under_fsrt,
+            can_snag1f_fsrt,
+            can_snag1w_fsrt,
+            can_snag1nf_fsrt,
+            can_snag2_fsrt,
+            can_snag3_fsrt,
+            can_ladder_fsrt,
+            shb_prim_live_fsrt,
+            shb_prim_dead_fsrt,
+            shb_seco_live_fsrt,
+            shb_seco_dead_fsrt,
+            nw_prim_live_fsrt,
+            nw_prim_dead_fsrt,
+            nw_seco_live_fsrt,
+            nw_seco_dead_fsrt,
+            lit_fsrt,
+            lch_fsrt,
+            moss_fsrt,
+            duff_upper_fsrt,
+            duff_lower_fsrt,
+            bas_fsrt,
+            sqm_fsrt,
+            stump_snd_fsrt,
+            stump_rot_fsrt,
+            stump_ltr_fsrt,
+            one_hr_fsrt,
+            ten_hr_fsrt,
+            hun_hr_fsrt,
+            oneK_hr_snd_fsrt,
+            oneK_hr_rot_fsrt,
+            tenK_hr_snd_fsrt,
+            tenK_hr_rot_fsrt,
+            tnkp_hr_snd_fsrt,
+            tnkp_hr_rot_fsrt]
+            )
+
+        self._cons_debug_data = np.array([LD['lit_mean_bd'], LD['ff_reduction']])
+
+        # delete extraneous memory hogging variables
+        del (all_fsrt, can_fsrt, shb_fsrt, nw_fsrt, llm_fsrt,
+                gf_fsrt,woody_fsrt, can_over_fsrt, can_mid_fsrt, can_under_fsrt,
+                can_snag1f_fsrt, can_snag1w_fsrt, can_snag1nf_fsrt,
+                can_snag2_fsrt, can_snag3_fsrt, can_ladder_fsrt,
+                shb_prim_live_fsrt, shb_prim_dead_fsrt, shb_seco_live_fsrt,
+                shb_seco_dead_fsrt, nw_prim_live_fsrt, nw_prim_dead_fsrt,
+                nw_seco_live_fsrt, nw_seco_dead_fsrt, lit_fsrt, lch_fsrt,
+                moss_fsrt, duff_upper_fsrt, duff_lower_fsrt, bas_fsrt,
+                sqm_fsrt, stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt,
+                one_hr_fsrt, ten_hr_fsrt, hun_hr_fsrt, oneK_hr_snd_fsrt,
+                oneK_hr_rot_fsrt, tenK_hr_snd_fsrt, tenK_hr_rot_fsrt,
+                tnkp_hr_snd_fsrt, tnkp_hr_rot_fsrt)
+
+        if self._unique_check:
+            self._cons_data = _unpack(self._ucons_data, self._runlnk)
+        else:
+            self._cons_data = self._ucons_data
+   

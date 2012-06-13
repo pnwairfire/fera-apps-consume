@@ -51,7 +51,10 @@ class FCCSDB():
                     'litterDep_perc'] # gBasPercent not included purposefully
 
         def load_data(node, tag_name):
-            """ Loads data from xml file for the given tag name """
+            """ Loads data from xml file for the given tag name
+                The data structue returned is a list of lists of the values in the 
+                dd.LoadDefs structure
+            """
 
             if tag_name in text_data:
                 return node.findtext(tag_name)
@@ -85,6 +88,7 @@ class FCCSDB():
         for node in root:
             if node.tag == "generator_info": continue
 
+            ### - zero initialized list size of LoadDefs
             temp = [0] * len(dd.LoadDefs)
             for ld in dd.LoadDefs:
                 temp[ld[2]] = load_data(node, ld[0])
