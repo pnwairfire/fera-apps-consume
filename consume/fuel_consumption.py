@@ -795,6 +795,10 @@ class FuelConsumption(util.FrozenClass):
         self._calc_success = False
         self._unq_inputs = []
         self._runlnk = []
+        self._conv_sucess = False
+        self._ucons_data = None
+        self._heat_data = None
+        self._cons_data = None
         
         self._freeze()
 
@@ -843,13 +847,15 @@ class FuelConsumption(util.FrozenClass):
         """
         self._calculate()
         if self._calc_success:
-            self._convert_units()
+            #ks self._convert_units()
+            self._conv_success = True
             if self._conv_success:
                 return util.make_dictionary_of_lists(cons_data = self._cons_data,
                                           cons_debug_data = self._cons_debug_data,
                                           heat_data = self._heat_data,
                                           emis_data = [],
-                                          inputs = self.InSet.validated_inputs)
+                                          inputs = self._settings.package())
+                                          #inputs = self.InSet.validated_inputs)
 
     def report(self, csv = "", stratum = "all", ret=False, incl_heat=False, tsize=8):
         """Output fuel consumption results as a TABULAR REPORT and/or CSV FILE
@@ -1421,7 +1427,7 @@ class FuelConsumption(util.FrozenClass):
                     'kg' : 17636.98096,
                     'lbs' : 8000.0}
 
-        BTU_PER_UNIT = btu_dict[self.units.split('_')[0]]
+        BTU_PER_UNIT = btu_dict[self._settings.units.split('_')[0]]
 
         self._heat_data = (self._cons_data * BTU_PER_UNIT)
 
@@ -1792,6 +1798,7 @@ class FuelConsumption(util.FrozenClass):
                      "masks": {"boreal":0, "western":0, "southern":1},
                      "maskw": {"boreal":0, "western":1, "southern":0}}
 
+        ecoregion = self._settings.get('ecoregion')
         ecob_mask = [ecodict["maskb"][e] for e in ecoregion]
         ecos_mask = [ecodict["masks"][e] for e in ecoregion]
         ecow_mask = [ecodict["maskw"][e] for e in ecoregion]
