@@ -26,6 +26,13 @@ def validate_list(input_vals, permitted_vals):
         valid = input_vals
     return (0 == len(invalid), valid, invalid)
 
+def is_sequence(maybe_seq):
+    try:
+        iter(maybe_seq)
+        return True
+    except:
+        return False
+
 class RunSettings(object):
     '''
     TODO:  how should errors be displayed?
@@ -111,6 +118,7 @@ class RunSettings(object):
             if name in valid_names:
                 validator = RunSettings.AllInputParameters[name][2]
                 permitted_values = RunSettings.AllInputParameters[name][1]
+                sequence = sequence if is_sequence(sequence) else [sequence]
                 valid, valid_values, invalid_values = validator(sequence, permitted_values)
                 if valid:
                     self._settings[name] = valid_values
