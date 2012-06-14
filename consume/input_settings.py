@@ -115,10 +115,10 @@ class ConsumeInputSettings(object):
         result = False
         if self._burn_type:
             print("\nSetting {} ...".format(name))
-            valid_names = RunSettings.NaturalSNames if 'natural' == self._burn_type else RunSettings.AllSNames
+            valid_names = ConsumeInputSettings.NaturalSNames if 'natural' == self._burn_type else ConsumeInputSettings.AllSNames
             if name in valid_names:
-                validator = RunSettings.AllInputParameters[name][2]
-                permitted_values = RunSettings.AllInputParameters[name][1]
+                validator = ConsumeInputSettings.AllInputParameters[name][2]
+                permitted_values = ConsumeInputSettings.AllInputParameters[name][1]
                 sequence = sequence if is_sequence(sequence) else [sequence]
                 valid, valid_values, invalid_values = validator(sequence, permitted_values)
                 if valid:
@@ -143,7 +143,7 @@ class ConsumeInputSettings(object):
     def settings_are_complete(self):
         check_props = self._burn_type and self._units and (self._fm_type if 'activity' == self._burn_type else True)
         if check_props:
-            valid_names = set(RunSettings.NaturalSNames if 'natural' == self._burn_type else RunSettings.AllSNames)
+            valid_names = set(ConsumeInputSettings.NaturalSNames if 'natural' == self._burn_type else ConsumeInputSettings.AllSNames)
             current_settings = set(self._settings.keys())
             if valid_names == current_settings:
                 self._settings['fuelbeds'] = self._settings['fuelbeds'].astype(int)
@@ -172,5 +172,26 @@ class ConsumeInputSettings(object):
             return dict(self._settings.items() + add_me.items())
 
 class EmissionsInputSettings(object):
+    '''
+    User-settable input parameters
+    '''
+    #keyword, name, internal name, permitted values, validator function
+    ActivityInputVarParameters = {
+        'fuelbeds' : ['FCCS fuelbeds (ID#)', [1,10000], validate_range],
+        'area' : ['Fuelbed area (acres)', [0,1000000], validate_range],
+        'ecoregion' : ['Fuelbed ecoregion',  dd.list_valid_ecoregions(), validate_list]},
+        
+    def __init__(self):
+        pass
 
+
+
+
+
+
+
+
+
+
+    
 

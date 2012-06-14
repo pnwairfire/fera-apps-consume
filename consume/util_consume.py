@@ -303,7 +303,7 @@ def unit_conversion(data, area, from_units, output_units):
             return [output_units, data]
     else:
         print("From units: {}\tTo units: {}".format(from_units, output_units))
-        assert(from_units != output_units, "Don't call this function if the no conversion is necessary")
+        #assert(from_units != output_units, "Don't call this function if no conversion is necessary")
 
 # Repeated functions
 def csdist(tot, csd):

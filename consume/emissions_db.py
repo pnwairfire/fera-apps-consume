@@ -73,7 +73,7 @@ class EmissionsFactorDB:
         return key
 
 
-    def get_efgs(self, fuelbed_list, ecoregion):
+    def get_efgs(self, fuelbed_list):
         """Gets the appropriate emissions factor groups for the given FCCS IDs
 
         Links the SAF Cover Type data provided in the FCCS data to the

@@ -523,7 +523,7 @@ import input_variables as iv
 import util_consume as util
 import con_calc_natural as ccn
 import con_calc_activity as cca
-import run_settings as settings
+import input_settings as settings
 
 # Variables that need to be defined for these equations
 #snow_free_days = 30 # need for curing eval, if still valid
@@ -755,7 +755,7 @@ class FuelConsumption(util.FrozenClass):
         """
 
         self.FCCS = fccs.FCCSDB(fccs_file)
-        self._settings = settings.RunSettings()
+        self._settings = settings.ConsumeInputSettings()
 
         ### - initialize inputs
         self._params = None
@@ -794,6 +794,7 @@ class FuelConsumption(util.FrozenClass):
         self._unq_inputs = []
         self._runlnk = []
         self._internal_units = 'tons_ac'
+        self.output_units = self._internal_units
         self._conv_success = False
         self._ucons_data = None
         self._heat_data = None
@@ -1405,15 +1406,15 @@ class FuelConsumption(util.FrozenClass):
         #    self.output_units = self.InSet.params['units'] = tmp
 
         if self._calc_success:
-            if self._internal_units != self._settings.get('units'):
-                print("Converting units: {} -> {}".format(self._internal_units, self._settings.get('units')))
+            if self._internal_units != self._settings.units:
+                print("Converting units: {} -> {}".format(self._internal_units, self._settings.units))
                 new_units = None
                 [new_units, self._cons_data] = util.unit_conversion(
                                                     self._cons_data,
                                                     self._settings.get('area'),
                                                     self._internal_units,
-                                                    self._settings.get('units'))
-                self._settings.set('units', new_units)
+                                                    self._settings.units)
+                self._settings.units = new_units
                 self._heat_release_calc()
                 self._conv_success = True
             else:
@@ -1463,7 +1464,6 @@ class FuelConsumption(util.FrozenClass):
         data = zip(*loadings)
         for lds in dd.LoadDefs:
             if lds[1] not in skips:
-                print("Indices {} : {}".format(lds[1], lds[2]))
                 LD[lds[1]] = data[lds[2]]
 
         # convert to numpy arrays

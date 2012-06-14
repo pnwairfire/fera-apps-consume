@@ -1,7 +1,8 @@
 import unittest
-import run_settings as setting
+from input_settings import ConsumeInputSettings
 
-class TestRunSettings(unittest.TestCase):
+
+class TestInputSettings(unittest.TestCase):
 
     def setUp(self):
         pass
@@ -14,17 +15,17 @@ class TestRunSettings(unittest.TestCase):
 
     def testInitial(self):
         ''' Everything should be empty '''
-        s = setting.RunSettings()
+        s = ConsumeInputSettings()
         self.assertFalse(s.units)
         self.assertFalse(s.burn_type)
         self.assertFalse(s.fm_type)
-        settings = setting.RunSettings.NaturalSNames + setting.RunSettings.ActivitySNames
+        settings = ConsumeInputSettings.NaturalSNames + ConsumeInputSettings.ActivitySNames
         for i in settings:
             self.assertFalse(s.get(i))
 
     def testSetProperties(self):
         ''' Exercise setting the 1-value properties '''
-        s = setting.RunSettings()
+        s = ConsumeInputSettings()
         s.burn_type = 'natural'
         self.assertEqual('natural', s.burn_type)
         s.burn_type = 'activity'
@@ -44,7 +45,7 @@ class TestRunSettings(unittest.TestCase):
 
     def testAddSettings(self):
         ''' Add settings and verify completeness '''
-        s = setting.RunSettings()
+        s = ConsumeInputSettings()
         items = [1, 2, 4]
         self.assertFalse(s.set('fuelbeds', items))  # need to specify burn_type before adding settings
         s.burn_type = 'activity'
@@ -72,7 +73,7 @@ class TestRunSettings(unittest.TestCase):
 
     def testDisplaySettings(self):
         items = [1, 2, 4]
-        s = setting.RunSettings()
+        s = ConsumeInputSettings()
         s.burn_type = 'activity'
         self.assertTrue(s.set('fuelbeds', items))
         fb = s.get('fuelbeds')

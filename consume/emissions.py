@@ -329,6 +329,17 @@ class Emissions(util.FrozenClass):
     due to fire based on fuel consumption data.
 
     """
+    @property
+    def output_units(self): return self._output_units
+    @output_units.setter
+    def output_units(self, value):
+        tmp = value.lower()
+        if tmp in dd.list_valid_units():
+            self._output_units = tmp
+        else:
+            print("Error: the only permitted values for units are:")
+            for i in dd.list_valid_units():
+                print("\t{}".format(i))
 
     def __init__(self, fuel_consumption_object = None, emissions_xml = ""):
         """Emissions class constuctor.
@@ -352,32 +363,14 @@ class Emissions(util.FrozenClass):
             self._cons_object = fuel_consumption_object
             self._cons_object._calculate() # to generate consumption values
             self._emission_factor_db = edb.EmissionsFactorDB(emissions_xml, FCobj)
-            self._num_fuelbeds = len(self._cons_object._cons_data[0][0])
+            self._have_cons_data = len(self._cons_object._cons_data[0][0])
             self._internal_units = "lbs_ac"
+            self._output_units = "lbs_ac"
             self._emissions_factor_group = None
 
             ### - output variables
             self._emis_data = None
             self._emis_summ = None
-            
-
-    def _build_input_set(self):
-        """Builds the InputVarSet object from the individual input parameters"""
-
-        params = {'fuelbeds': self._cons_object.InSet.params['fuelbeds'],
-                  'area': self._cons_object.InSet.params['area'],
-                  'ecoregion': self._cons_object.InSet.params['ecoregion'],
-                  'efg': 0, # ks-todo
-                  'units': self.output_units}
-
-        for p in params:
-            if type(params[p]) in (int, str, list, float, np.array, tuple):
-                tmp = iv.InputVar(p)
-                tmp.value = params[p]
-                params[p] = tmp
-
-        self.InSet = iv.InputVarSet(params)
-
 
     def results(self, efg = -1):
         """Returns a python DICTIONARY of emissions estimates.
@@ -455,13 +448,12 @@ class Emissions(util.FrozenClass):
         self._convert_units()
 
         #ks todo
-        ins = self._cons_object.InSet.validated_inputs
-        ins['emissions_fac_group'] = self.InSet.validated_inputs['efg']
-        ins['units_emissions'] = self.InSet.validated_inputs['units']
+        ins = self._cons_object._settings.package()
+        ins['emissions_fac_group'] = self._emissions_factor_group
+        ins['units_emissions'] = self._output_units
         return util.make_dictionary_of_lists(cons_data = self._cons_object._cons_data,
                                         heat_data = self._cons_object._heat_data,
-                                        emis_data = self._emis_data,
-                                        inputs = ins)
+                                        emis_data = self._emis_data, inputs = ins)
 
     def report(self, efg = -1, csv = ""):
         """Displays a report of emissions estimates.
@@ -484,12 +476,12 @@ class Emissions(util.FrozenClass):
         if self._calculate():
             self._convert_units()
             categories = ["pm", "pm10", "pm2.5", "co", "co2", "ch4", "nmhc"]
-            area = self._cons_object.InSet.params['area'].value
-            units = self._cons_object.InSet.params['units'].value
-            ecoregion =  self._cons_object.InSet.params['ecoregion'].value
-            fccs_ids = self._cons_object.InSet.params['fuelbeds'].value
-            efgs = self.InSet.params['efg'].value
-            str_au = units[0]
+            area = self._cons_object._settings.get('area')
+            units = self._cons_object._settings.units
+            ecoregion =  self._cons_object._settings.get('ecoregion')
+            fccs_ids = self._cons_object._settings.get('fuelbeds')
+            efgs = self._emissions_factor_group
+            str_au = units
 
             if units in dd.perarea() and sum(area) > 0:
                 str_au = "/".join(units.split("_"))
@@ -504,7 +496,7 @@ class Emissions(util.FrozenClass):
                          + ",species,flaming,smoldering,residual,total\n")
 
 
-            print "\n\nEMISSIONS\nUnits: " + self._internal_units
+            print "\n\nEMISSIONS\nUnits: " + self._output_units
             for i in range(0, len(fccs_ids)):
                 ha = area[i] * 0.404685642
                 print ("\nFCCS ID: " + str(fccs_ids[i])
@@ -529,7 +521,7 @@ class Emissions(util.FrozenClass):
                             str(dat[0][i]) + ',' + str(dat[1][i]) + ',' +
                             str(dat[2][i]) + ',' + str(dat[3][i]) + '\n')
 
-            print ("\nALL FUELBEDS:\nUnits: " + self._internal_units
+            print ("\nALL FUELBEDS:\nUnits: " + self._output_units
                    + "\nTotal area: %.0f" % sum(area)
                    + " ac. (%.1f" % (sum(area) * 0.404685642) + " ha)")
 
@@ -575,11 +567,9 @@ class Emissions(util.FrozenClass):
         scenario parameters have been correctly set.
 
         """
-        out_consumption = self._cons_object.InSet.display_input_values(self._cons_object.FCCS.data_source_info, print_to_console)
-        self._build_input_set()
-        out_emission = self.InSet.display_input_values(self._cons_object.FCCS.data_source_info, print_to_console)
+        out_consumption = self._cons_object._settings.display_settings()
         if not print_to_console:
-            return out_consumption + out_emission
+            return out_consumption
 
 
     def _wfeis_return(self,   fuelbed_fccs_ids = [1],
@@ -620,18 +610,18 @@ class Emissions(util.FrozenClass):
 
         """
 
-        self._cons_object.fuelbed_fccs_ids.value = fuelbed_fccs_ids
-        self._cons_object.fuelbed_area_acres.value = [a * 247.105381 for a in fuelbed_area_km2]
-        self._cons_object.fuelbed_ecoregion.value = fuelbed_ecoregion
-        self._cons_object.fuel_moisture_1000hr_pct.value = fuel_moisture_1000hr_pct
-        self._cons_object.fuel_moisture_duff_pct.value = fuel_moisture_duff_pct
-        self._cons_object.canopy_consumption_pct.value = canopy_consumption_pct
-        self._cons_object.shrub_blackened_pct.value = shrub_blackened_pct
-        self._cons_object.customized_fuel_loadings = customized_fuel_loadings
+        self._cons_object.fuelbed_fccs_ids = fuelbed_fccs_ids
+        self._cons_object.fuelbed_area_acres = [a * 247.105381 for a in fuelbed_area_km2]
+        self._cons_object.fuelbed_ecoregion = fuelbed_ecoregion
+        self._cons_object.fuel_moisture_1000hr_pct = fuel_moisture_1000hr_pct
+        self._cons_object.fuel_moisture_duff_pct = fuel_moisture_duff_pct
+        self._cons_object.canopy_consumption_pct = canopy_consumption_pct
+        self._cons_object.shrub_blackened_pct = shrub_blackened_pct
+        #ks self._cons_object.customized_fuel_loadings = customized_fuel_loadings
 
-        self.output_units.value = output_units
-        self._cons_object.output_units.value = output_units
-        self._num_fuelbeds = 0 # to trigger the consumption equations to run
+        self.output_units = output_units
+        self._cons_object.output_units = output_units
+        self._have_cons_data = 0 # to trigger the consumption equations to run
 
         baseDict = self.results()
         if emission_species == 'all':
@@ -675,51 +665,32 @@ class Emissions(util.FrozenClass):
         consumption data, which is set upon object initialization.
 
         """
-
-        if self._num_fuelbeds == 0:
+        if self._have_cons_data == 0:
             self._cons_object._calculate() # to generate consumption values
-            self._num_fuelbeds = len(self._cons_object._cons_data[0][0])
+            self._have_cons_data = len(self._cons_object._cons_data[0][0])
 
-        self._build_input_set()
+        self._emissions_factor_groups = self._emission_factor_db.get_efgs(self._cons_object._settings.get('fuelbeds'))
 
-        efnums = self._emission_factor_db.get_efgs(
-                 self._cons_object.InSet.validated_inputs['fuelbeds'],
-                 self._cons_object.InSet.validated_inputs['ecoregion'][0])
-
-        self.InSet.params['efg'].value = efnums
-        self.InSet.validated_inputs['efg'] = efnums
-        self._emissions_factor_group.value = efnums
-        self._emissions_calc(efg = efnums)
+        self._emissions_calc(efg = self._emissions_factor_group)
         return True
 
     def _convert_units(self, reset = False):
         """Converts units of consumption and emissions data"""
-        bads = (int, str, list, float, np.array, tuple)
-        area = self.InSet.params['area'].value
-        propagate_units = False
-
-        if type(self.output_units) in bads:
-            tmp = iv.InputVar('units')
-            tmp.value = self.output_units
-            self.output_units = self.InSet.params['units'] = tmp
-            propagate_units = True
-
-        if self.output_units.validate() and not reset:
+        area = self._cons_object._settings.get('area')
+        if self._internal_units != self._output_units:
             orig_units = self._internal_units
 
             [self._internal_units, self._emis_data] = util.unit_conversion(self._emis_data,
                                                    area,
                                                    self._internal_units,
-                                                   self.output_units.value[0])
+                                                   self._output_units)
 
             [self._internal_units, self._emis_summ] = util.unit_conversion(self._emis_summ,
                                                    sum(area),
                                                    orig_units,
-                                                   self.output_units.value[0])
-
-        #ks if reset: self._cons_object.output_units = 'tons_ac'
-        if propagate_units:
-            self._cons_object._convert_units(explicit_units=self._internal_units)
+                                                   self._output_units)
+            ### - pass on to fuel consumption object
+            self._cons_object._convert_units(explicit_units=self._output_units)
 
 
     def _emissions_calc(self, efg):
@@ -755,7 +726,7 @@ class Emissions(util.FrozenClass):
 
         # Load default emissions factors (average of all factors...)
         t = self._emission_factor_db.data[0]
-        num_fuelbeds = int(self._num_fuelbeds)# <<< ucons
+        num_fuelbeds = int(self._have_cons_data[0][0])# <<< ucons
 
         ef_flamg_pm = np.array([t['PM_flaming']] * num_fuelbeds, dtype = float)
         ef_flamg_pm10 = np.array([t['PM10b_flaming']] * num_fuelbeds, dtype = float)
@@ -812,7 +783,7 @@ class Emissions(util.FrozenClass):
 
         #print "ADDING PER AREA STUFF"
         # And emissions per-unit-area summaries:
-        area = self._cons_object.InSet.validated_inputs['area']
+        area = self._cons_object._settings.get('area')
         if len(area) == 1:
             area = np.array(np.array([1] * num_fuelbeds), dtype=float) * area
         tot_area = sum(area)
