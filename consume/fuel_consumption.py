@@ -674,7 +674,7 @@ class FuelConsumption(util.FrozenClass):
     @output_units.setter
     def output_units(self, value):
         self._settings.units =  value
-    
+
     @property
     def fuelbed_fccs_ids(self): return self._settings.get('fuelbeds')
     @fuelbed_fccs_ids.setter
@@ -701,10 +701,10 @@ class FuelConsumption(util.FrozenClass):
     def fuel_moisture_duff_pct(self, value):
         self._settings.set('fm_duff', value)
     @property
-    def fuel_moisture_10hr_pct(self): return self._settings.get('fuel_moisture_10hr_pct')
+    def fuel_moisture_10hr_pct(self): return self._settings.get('fm_10hr')
     @fuel_moisture_10hr_pct.setter
     def fuel_moisture_10hr_pct(self, value):
-        self._settings.set('fuel_moisture_10hr_pct', value)
+        self._settings.set('fm_10hr', value)
     @property
     def canopy_consumption_pct(self): return self._settings.get('can_con_pct')
     @canopy_consumption_pct.setter
@@ -799,7 +799,7 @@ class FuelConsumption(util.FrozenClass):
         self._ucons_data = None
         self._heat_data = None
         self._cons_data = None
-        
+
         self._freeze()
 
     def load_example(self):
@@ -1432,13 +1432,13 @@ class FuelConsumption(util.FrozenClass):
         self._heat_data = (self._cons_data * BTU_PER_UNIT)
 
     def _get_fuel_loadings(self, fuelbeds):
-        """ Retrieves FCCS loadings values based on scenario FCCS IDs 
+        """ Retrieves FCCS loadings values based on scenario FCCS IDs
             The result of this is a dictionary keyed on the internal tag (second element) of the LoadDefs structure
                 LoadDefs = (('fuelbed_number', 'fccs_id', 0),
                             ('ecoregion', 'ecoregion', 1),
                             ('cover_type', 'cover_type', 2),
             The value is a list of all the values of that type from the valid fuelbeds.
-            
+
         """
         def _setup_loading_dictionary():
             """ Sets up the FCCS fuel loadings dictionary """
@@ -1951,4 +1951,4 @@ class FuelConsumption(util.FrozenClass):
             self._cons_data = _unpack(self._ucons_data, self._runlnk)
         else:
             self._cons_data = self._ucons_data
-   
+

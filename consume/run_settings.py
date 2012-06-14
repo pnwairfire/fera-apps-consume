@@ -36,11 +36,11 @@ def is_sequence(maybe_seq):
 class RunSettings(object):
     '''
     TODO:  how should errors be displayed?
-    
+
     Settings for a consume run.
     burn_type dictates how many settings are necessary
     There are no defaults.
-    
+
     '''
 
     #keyword, name, internal name, permitted values, validator function
@@ -110,11 +110,12 @@ class RunSettings(object):
             print("Error: the only permitted values for fm_type are:")
             for i in dd.list_valid_fm_types():
                 print("\t{}".format(i))
-        
+
     def set(self, name, sequence):
         result = False
         if self._burn_type:
-            valid_names = RunSettings.NaturalSNames if 'natural' == self._burn_type else RunSettings.AllSNames 
+            print("\nSetting {} ...".format(name))
+            valid_names = RunSettings.NaturalSNames if 'natural' == self._burn_type else RunSettings.AllSNames
             if name in valid_names:
                 validator = RunSettings.AllInputParameters[name][2]
                 permitted_values = RunSettings.AllInputParameters[name][1]
@@ -149,6 +150,7 @@ class RunSettings(object):
                 return True
             else:
                 assert(current_settings.issubset(valid_names))
+                print("Settings problem ---> {}".format(valid_names.difference(current_settings)))
         return False
 
     def display_settings(self):

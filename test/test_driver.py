@@ -48,7 +48,7 @@ def wrap_input_display(inputs):
 def get_fuelbed_list(consumer):
     ''' The expected values against which we test go to the max below '''
     MAX_REFERENCE_FUELBED = 291
-    return [str(i[0]) for i in consumer.FCCS.data if MAX_REFERENCE_FUELBED >= i[0]]
+    return [i[0] for i in consumer.FCCS.data if MAX_REFERENCE_FUELBED >= i[0]]
 
 def get_consumption_object():
     ''' Return a "ready to go" consumption object
@@ -61,7 +61,7 @@ def get_consumption_object():
     return consumer
 
 def write_columns(results, catagories, stream, first_element, index, header=False):
-    out = first_element
+    out = str(first_element)
     for cat in catagories:
         sorted_keys = sorted(results[cat].keys())
         for key in sorted_keys:
@@ -152,7 +152,10 @@ def set_defaults(consumer, map):
     consumer.canopy_consumption_pct = map['canopy_consumption_pct'] if 'canopy_consumption_pct' in map else 20
     consumer.shrub_blackened_pct = map['shrub_blackened_pct'] if 'shrub_blackened_pct' in map else 50
     consumer.output_units = map['output_units'] if 'output_units' in map else 'tons_ac'
-    # - activity specific
+    if 'activity' == consumer.burn_type:
+        set_activity_defaults(consumer, map)
+
+def set_activity_defaults(consumer, map):
     consumer.days_since_rain = map['days_since_rain'] if 'days_since_rain' in map else 20
     consumer.fuel_moisture_10hr_pct = map['fuel_moisture_10hr_pct'] if 'fuel_moisture_10hr_pct' in map else 10
     consumer.fm_type = map['fm_type'] if 'fm_type' in map else 'MEAS-Th'
@@ -163,12 +166,16 @@ def set_defaults(consumer, map):
 def run_basic_scenarios(consumer, fuelbed_list):
     ''' Run basic consumption scenarios
     '''
-    scenario_list = ['western', 'southern', 'boreal', 'activity']
+    scenario_list = [['western'], ['southern'], ['boreal'], ['activity']]
     for scene in scenario_list:
-        consumer.fuelbed_ecoregion = scene if scene != 'activity' else 'western'
-        consumer.burn_type = 'activity' if scene == 'activity' else 'natural'
-        outfilename = out_name("results", "{}_out.csv".format(scene))
-        reference_values = out_name("expected", "{}_expected.csv".format(scene))
+        consumer.fuelbed_ecoregion = list(scene) if 'activity' not in scene else ['western']
+        if 'activity' in scene:
+            consumer.burn_type = scene[0]
+            set_activity_defaults(consumer, {})
+        else:
+            consumer.burn_type = 'natural'
+        outfilename = out_name("results", "{}_out.csv".format(scene[0]))
+        reference_values = out_name("expected", "{}_expected.csv".format(scene[0]))
         run_and_test(consumer, fuelbed_list, outfilename, reference_values)
 
 def run_additional_activity_scenarios(consumer, fuelbed_list):
@@ -194,7 +201,7 @@ def run_additional_activity_scenarios(consumer, fuelbed_list):
     counter = 2
     for scene in scenario_list:
         set_defaults(consumer, scene)
-        consumer.fuelbed_ecoregion = 'western'
+        consumer.fuelbed_ecoregion = ['western']
         consumer.burn_type = 'activity'
         outfilename = out_name("results", "{}_out.csv".format(counter))
         reference_values = out_name("expected", "scen{}_activity_expected.csv".format(counter))
@@ -279,9 +286,10 @@ if NORMAL:
     run_emissions_activity(fuelbed_list)
 else:
     # - debugging
-    fuelbed_list = ['1']
+    fuelbed_list = [1]
+    #fuelbed_list = get_fuelbed_list(consumer)
     consumer.fuelbed_fccs_ids = fuelbed_list
-    run_emissions_activity_with_unit_conversion(fuelbed_list)
+    run_basic_scenarios(consumer, fuelbed_list)
 
 
 
