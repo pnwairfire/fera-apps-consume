@@ -321,7 +321,8 @@ import input_variables as iv
 import data_desc as dd
 import util_consume as util
 
-class Emissions:
+#class Emissions(object):
+class Emissions(util.FrozenClass):
     """A class that estimates emissions from fire.
 
     This class implements the CONSUME model equations for estimating emissions
@@ -329,7 +330,7 @@ class Emissions:
 
     """
 
-    def __init__(self, FCobj = None, emissions_xml = ""):
+    def __init__(self, fuel_consumption_object = None, emissions_xml = ""):
         """Emissions class constuctor.
 
         Upon initialization of the Emissions object, all input
@@ -347,21 +348,25 @@ class Emissions:
                           XML. Leave blank to load the default database.
 
         """
+        if fuel_consumption_object is not None:
+            self._cons_object = fuel_consumption_object
+            self._cons_object._calculate() # to generate consumption values
+            self._emission_factor_db = edb.EmissionsFactorDB(emissions_xml, FCobj)
+            self._num_fuelbeds = len(self._cons_object._cons_data[0][0])
+            self._internal_units = "lbs_ac"
+            self._emissions_factor_group = None
 
-        self.efDB = edb.EmissionsFactorDB(emissions_xml, FCobj)
-        self.reset_inputs_and_outputs()
-
-        if FCobj is not None:
-            self.FCobj = FCobj
-            self.FCobj._calculate() # to generate consumption values
-            self.scenLen = len(self.FCobj._cons_data[0][0])
+            ### - output variables
+            self._emis_data = None
+            self._emis_summ = None
+            
 
     def _build_input_set(self):
         """Builds the InputVarSet object from the individual input parameters"""
 
-        params = {'fuelbeds': self.FCobj.InSet.params['fuelbeds'],
-                  'area': self.FCobj.InSet.params['area'],
-                  'ecoregion': self.FCobj.InSet.params['ecoregion'],
+        params = {'fuelbeds': self._cons_object.InSet.params['fuelbeds'],
+                  'area': self._cons_object.InSet.params['area'],
+                  'ecoregion': self._cons_object.InSet.params['ecoregion'],
                   'efg': 0, # ks-todo
                   'units': self.output_units}
 
@@ -372,21 +377,6 @@ class Emissions:
                 params[p] = tmp
 
         self.InSet = iv.InputVarSet(params)
-
-
-    def reset_inputs_and_outputs(self):
-        """Clears all input parameters and output data"""
-
-        self._emis_data = 1
-        self._emis_summ = 1
-        self.scenLen = 0
-        self.InSet = None
-
-        self.units = "lbs_ac"
-        self.output_units = iv.InputVar('units')
-        self.output_units.value = "lbs_ac"
-
-        self.emissions_factor_group = iv.InputVar('efg')
 
 
     def results(self, efg = -1):
@@ -463,11 +453,13 @@ class Emissions:
         """
         self._calculate()
         self._convert_units()
-        ins = self.FCobj.InSet.validated_inputs
+
+        #ks todo
+        ins = self._cons_object.InSet.validated_inputs
         ins['emissions_fac_group'] = self.InSet.validated_inputs['efg']
         ins['units_emissions'] = self.InSet.validated_inputs['units']
-        return util.make_dictionary_of_lists(cons_data = self.FCobj._cons_data,
-                                        heat_data = self.FCobj._heat_data,
+        return util.make_dictionary_of_lists(cons_data = self._cons_object._cons_data,
+                                        heat_data = self._cons_object._heat_data,
                                         emis_data = self._emis_data,
                                         inputs = ins)
 
@@ -492,10 +484,10 @@ class Emissions:
         if self._calculate():
             self._convert_units()
             categories = ["pm", "pm10", "pm2.5", "co", "co2", "ch4", "nmhc"]
-            area = self.FCobj.InSet.params['area'].value
-            units = self.FCobj.InSet.params['units'].value
-            ecoregion =  self.FCobj.InSet.params['ecoregion'].value
-            fccs_ids = self.FCobj.InSet.params['fuelbeds'].value
+            area = self._cons_object.InSet.params['area'].value
+            units = self._cons_object.InSet.params['units'].value
+            ecoregion =  self._cons_object.InSet.params['ecoregion'].value
+            fccs_ids = self._cons_object.InSet.params['fuelbeds'].value
             efgs = self.InSet.params['efg'].value
             str_au = units[0]
 
@@ -512,13 +504,13 @@ class Emissions:
                          + ",species,flaming,smoldering,residual,total\n")
 
 
-            print "\n\nEMISSIONS\nUnits: " + self.units
+            print "\n\nEMISSIONS\nUnits: " + self._internal_units
             for i in range(0, len(fccs_ids)):
                 ha = area[i] * 0.404685642
                 print ("\nFCCS ID: " + str(fccs_ids[i])
                         + "\nArea:\t%.0f" % area[i] + " ac. (%.1f" % ha
                         + " ha)\nEmissions factor group: "
-                        + str(self.emissions_factor_group.value[i])
+                        + str(self._emissions_factor_group.value[i])
                         + "\nSPECIES\tFlaming\t\tSmoldering\tResidual\tTOTAL")
 
 
@@ -537,14 +529,14 @@ class Emissions:
                             str(dat[0][i]) + ',' + str(dat[1][i]) + ',' +
                             str(dat[2][i]) + ',' + str(dat[3][i]) + '\n')
 
-            print ("\nALL FUELBEDS:\nUnits: " + self.units
+            print ("\nALL FUELBEDS:\nUnits: " + self._internal_units
                    + "\nTotal area: %.0f" % sum(area)
                    + " ac. (%.1f" % (sum(area) * 0.404685642) + " ha)")
 
             all_hed =  'ALL,ALL,' + str(sum(area)) + ',ALL,' + str_au + ','
 
 
-            if self.units in dd.perarea() and sum(area) > 0:
+            if self._internal_units in dd.perarea() and sum(area) > 0:
                 em_sum = self._emis_summ[0]
                 for j in range(0, 7):
                     print (categories[j] + "\t%.2e" % em_sum[j][0]
@@ -583,9 +575,9 @@ class Emissions:
         scenario parameters have been correctly set.
 
         """
-        out_consumption = self.FCobj.InSet.display_input_values(self.FCobj.FCCS.data_source_info, print_to_console)
+        out_consumption = self._cons_object.InSet.display_input_values(self._cons_object.FCCS.data_source_info, print_to_console)
         self._build_input_set()
-        out_emission = self.InSet.display_input_values(self.FCobj.FCCS.data_source_info, print_to_console)
+        out_emission = self.InSet.display_input_values(self._cons_object.FCCS.data_source_info, print_to_console)
         if not print_to_console:
             return out_consumption + out_emission
 
@@ -628,18 +620,18 @@ class Emissions:
 
         """
 
-        self.FCobj.fuelbed_fccs_ids.value = fuelbed_fccs_ids
-        self.FCobj.fuelbed_area_acres.value = [a * 247.105381 for a in fuelbed_area_km2]
-        self.FCobj.fuelbed_ecoregion.value = fuelbed_ecoregion
-        self.FCobj.fuel_moisture_1000hr_pct.value = fuel_moisture_1000hr_pct
-        self.FCobj.fuel_moisture_duff_pct.value = fuel_moisture_duff_pct
-        self.FCobj.canopy_consumption_pct.value = canopy_consumption_pct
-        self.FCobj.shrub_blackened_pct.value = shrub_blackened_pct
-        self.FCobj.customized_fuel_loadings = customized_fuel_loadings
+        self._cons_object.fuelbed_fccs_ids.value = fuelbed_fccs_ids
+        self._cons_object.fuelbed_area_acres.value = [a * 247.105381 for a in fuelbed_area_km2]
+        self._cons_object.fuelbed_ecoregion.value = fuelbed_ecoregion
+        self._cons_object.fuel_moisture_1000hr_pct.value = fuel_moisture_1000hr_pct
+        self._cons_object.fuel_moisture_duff_pct.value = fuel_moisture_duff_pct
+        self._cons_object.canopy_consumption_pct.value = canopy_consumption_pct
+        self._cons_object.shrub_blackened_pct.value = shrub_blackened_pct
+        self._cons_object.customized_fuel_loadings = customized_fuel_loadings
 
         self.output_units.value = output_units
-        self.FCobj.output_units.value = output_units
-        self.scenLen = 0 # to trigger the consumption equations to run
+        self._cons_object.output_units.value = output_units
+        self._num_fuelbeds = 0 # to trigger the consumption equations to run
 
         baseDict = self.results()
         if emission_species == 'all':
@@ -684,19 +676,19 @@ class Emissions:
 
         """
 
-        if self.scenLen == 0:
-            self.FCobj._calculate() # to generate consumption values
-            self.scenLen = len(self.FCobj._cons_data[0][0])
+        if self._num_fuelbeds == 0:
+            self._cons_object._calculate() # to generate consumption values
+            self._num_fuelbeds = len(self._cons_object._cons_data[0][0])
 
         self._build_input_set()
 
-        efnums = self.efDB.get_efgs(
-                 self.FCobj.InSet.validated_inputs['fuelbeds'],
-                 self.FCobj.InSet.validated_inputs['ecoregion'][0])
+        efnums = self._emission_factor_db.get_efgs(
+                 self._cons_object.InSet.validated_inputs['fuelbeds'],
+                 self._cons_object.InSet.validated_inputs['ecoregion'][0])
 
         self.InSet.params['efg'].value = efnums
         self.InSet.validated_inputs['efg'] = efnums
-        self.emissions_factor_group.value = efnums
+        self._emissions_factor_group.value = efnums
         self._emissions_calc(efg = efnums)
         return True
 
@@ -713,21 +705,21 @@ class Emissions:
             propagate_units = True
 
         if self.output_units.validate() and not reset:
-            orig_units = self.units
+            orig_units = self._internal_units
 
-            [self.units, self._emis_data] = util.unit_conversion(self._emis_data,
+            [self._internal_units, self._emis_data] = util.unit_conversion(self._emis_data,
                                                    area,
-                                                   self.units,
+                                                   self._internal_units,
                                                    self.output_units.value[0])
 
-            [self.units, self._emis_summ] = util.unit_conversion(self._emis_summ,
+            [self._internal_units, self._emis_summ] = util.unit_conversion(self._emis_summ,
                                                    sum(area),
                                                    orig_units,
                                                    self.output_units.value[0])
 
-        #ks if reset: self.FCobj.output_units = 'tons_ac'
+        #ks if reset: self._cons_object.output_units = 'tons_ac'
         if propagate_units:
-            self.FCobj._convert_units(explicit_units=self.units)
+            self._cons_object._convert_units(explicit_units=self._internal_units)
 
 
     def _emissions_calc(self, efg):
@@ -750,41 +742,40 @@ class Emissions:
             """ Sums emissions data by area for each species/fccs id """
             alls = []
             base = self._emis_data[p]
-            for i in range(0, len(self.FCobj._cons_data)):
+            for i in range(0, len(self._cons_object._cons_data)):
                 base2 = area * np.array(base[i])
                 alls.append(np.sum(base2, axis=1))
-
             return alls / tot_area
 
         def arrayize(d):
             """ Converts list to numpy array """
             return np.array(d)
 
-        all_fsrt = self.FCobj._cons_data # <<< ucons
+        all_fsrt = self._cons_object._cons_data # <<< ucons
 
         # Load default emissions factors (average of all factors...)
-        t = self.efDB.data[0]
-        fidlen = int(self.scenLen)# <<< ucons
+        t = self._emission_factor_db.data[0]
+        num_fuelbeds = int(self._num_fuelbeds)# <<< ucons
 
-        ef_flamg_pm = np.array([t['PM_flaming']] * fidlen, dtype = float)
-        ef_flamg_pm10 = np.array([t['PM10b_flaming']] * fidlen, dtype = float)
-        ef_flamg_pm25 = np.array([t['PM25_flaming']] * fidlen, dtype = float)
-        ef_flamg_co = np.array([t['CO_flaming']] * fidlen, dtype = float)
-        ef_flamg_co2 = np.array([t['CO2_flaming']] * fidlen, dtype = float)
-        ef_flamg_ch4 = np.array([t['CH4_flaming']] * fidlen, dtype = float)
-        ef_flamg_nmhc = np.array([t['NMHC_flaming']] * fidlen, dtype = float)
+        ef_flamg_pm = np.array([t['PM_flaming']] * num_fuelbeds, dtype = float)
+        ef_flamg_pm10 = np.array([t['PM10b_flaming']] * num_fuelbeds, dtype = float)
+        ef_flamg_pm25 = np.array([t['PM25_flaming']] * num_fuelbeds, dtype = float)
+        ef_flamg_co = np.array([t['CO_flaming']] * num_fuelbeds, dtype = float)
+        ef_flamg_co2 = np.array([t['CO2_flaming']] * num_fuelbeds, dtype = float)
+        ef_flamg_ch4 = np.array([t['CH4_flaming']] * num_fuelbeds, dtype = float)
+        ef_flamg_nmhc = np.array([t['NMHC_flaming']] * num_fuelbeds, dtype = float)
 
-        ef_smres_pm = np.array([t['PM_smold_resid']] * fidlen, dtype = float)
-        ef_smres_pm10 = np.array([t['PM10b_smold_resid']] * fidlen, dtype = float)
-        ef_smres_pm25 = np.array([t['PM25_smold_resid']] * fidlen, dtype = float)
-        ef_smres_co = np.array([t['CO_smold_resid']] * fidlen, dtype = float)
-        ef_smres_co2 = np.array([t['CO2_smold_resid']] * fidlen, dtype = float)
-        ef_smres_ch4 = np.array([t['CH4_smold_resid']] * fidlen, dtype = float)
-        ef_smres_nmhc = np.array([t['NMHC_smold_resid']] * fidlen, dtype = float)
+        ef_smres_pm = np.array([t['PM_smold_resid']] * num_fuelbeds, dtype = float)
+        ef_smres_pm10 = np.array([t['PM10b_smold_resid']] * num_fuelbeds, dtype = float)
+        ef_smres_pm25 = np.array([t['PM25_smold_resid']] * num_fuelbeds, dtype = float)
+        ef_smres_co = np.array([t['CO_smold_resid']] * num_fuelbeds, dtype = float)
+        ef_smres_co2 = np.array([t['CO2_smold_resid']] * num_fuelbeds, dtype = float)
+        ef_smres_ch4 = np.array([t['CH4_smold_resid']] * num_fuelbeds, dtype = float)
+        ef_smres_nmhc = np.array([t['NMHC_smold_resid']] * num_fuelbeds, dtype = float)
 
         # And go fetch factors from the chosen emissions factor groups
-        for i in range(0, fidlen):
-            data = self.efDB.data[int(efg[i])]
+        for i in range(0, num_fuelbeds):
+            data = self._emission_factor_db.data[int(efg[i])]
             ef_flamg_pm25[i] = data['PM25_flaming']; ef_smres_pm25[i] = data['PM25_smold_resid']
             ef_flamg_co[i] = data['CO_flaming']; ef_smres_co[i] = data['CO_smold_resid']
             ef_flamg_co2[i] = data['CO2_flaming']; ef_smres_co2[i] = data['CO2_smold_resid']
@@ -793,7 +784,7 @@ class Emissions:
             ef_flamg_pm[i] = data['PM_flaming']; ef_smres_pm[i] = data['PM_smold_resid']
             ef_flamg_pm10[i] = data['PM10b_flaming']; ef_smres_pm10[i] = data['PM10b_smold_resid']
 
-        fill = [np.array([0] * fidlen, dtype=float)]
+        fill = [np.array([0] * num_fuelbeds, dtype=float)]
         ef_pm = np.array([ef_flamg_pm] + [ef_smres_pm] + [ef_smres_pm] + fill)
         ef_pm10 = np.array([ef_flamg_pm10] + [ef_smres_pm10] + [ef_smres_pm10] + fill)
         ef_pm25 = np.array([ef_flamg_pm25] + [ef_smres_pm25] + [ef_smres_pm25] + fill)
@@ -821,9 +812,9 @@ class Emissions:
 
         #print "ADDING PER AREA STUFF"
         # And emissions per-unit-area summaries:
-        area = self.FCobj.InSet.validated_inputs['area']
+        area = self._cons_object.InSet.validated_inputs['area']
         if len(area) == 1:
-            area = np.array(np.array([1] * fidlen), dtype=float) * area
+            area = np.array(np.array([1] * num_fuelbeds), dtype=float) * area
         tot_area = sum(area)
 
         pm_all = get_emis_summ(0)
@@ -834,5 +825,5 @@ class Emissions:
         ch4_all = get_emis_summ(5)
         nmhc_all = get_emis_summ(6)
 
-        self._emis_summ = np.array([pm_all, pm10_all, pm25_all, co_all, co2_all,
-                             ch4_all, nmhc_all])
+        self._emis_summ = np.array([pm_all, pm10_all, pm25_all, co_all, co2_all, ch4_all, nmhc_all])
+        

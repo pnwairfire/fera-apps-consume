@@ -33,7 +33,7 @@ def is_sequence(maybe_seq):
     except:
         return False
 
-class RunSettings(object):
+class ConsumeInputSettings(object):
     '''
     TODO:  how should errors be displayed?
 
@@ -170,4 +170,7 @@ class RunSettings(object):
             add_me['units'] = self._units
             if 'activity' == self.burn_type: add_me['fm_type'] = self.fm_type
             return dict(self._settings.items() + add_me.items())
+
+class EmissionsInputSettings(object):
+
 

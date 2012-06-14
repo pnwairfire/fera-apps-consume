@@ -529,7 +529,7 @@ import run_settings as settings
 #snow_free_days = 30 # need for curing eval, if still valid
 
 
-#class FuelConsumption(FrozenClass):
+#class FuelConsumption(object):
 class FuelConsumption(util.FrozenClass):
     """A class that estimates fuel consumption due to fire.
 
@@ -755,8 +755,6 @@ class FuelConsumption(util.FrozenClass):
         """
 
         self.FCCS = fccs.FCCSDB(fccs_file)
-        iv.InputVarParameters[0][3] = self.FCCS.valids
-        #self.reset_inputs_and_outputs()
         self._settings = settings.RunSettings()
 
         ### - initialize inputs
@@ -795,7 +793,8 @@ class FuelConsumption(util.FrozenClass):
         self._calc_success = False
         self._unq_inputs = []
         self._runlnk = []
-        self._conv_sucess = False
+        self._internal_units = 'tons_ac'
+        self._conv_success = False
         self._ucons_data = None
         self._heat_data = None
         self._cons_data = None
@@ -847,7 +846,7 @@ class FuelConsumption(util.FrozenClass):
         """
         self._calculate()
         if self._calc_success:
-            #ks self._convert_units()
+            self._convert_units()
             self._conv_success = True
             if self._conv_success:
                 return util.make_dictionary_of_lists(cons_data = self._cons_data,
@@ -1394,28 +1393,31 @@ class FuelConsumption(util.FrozenClass):
     def _convert_units(self, explicit_units=None):
         """ Checks units and runs the unit conversion method for output data """
         # Convert to the desired output units
-        self._conv_sucess = False
+        self._conv_success = False
 
         if explicit_units:
-            self.output_units = str(explicit_units)
+            self._settings.set('units', str(explicit_units))
 
-        if type(self.output_units) in (int, str, list, float, np.array, tuple):
-            tmp = iv.InputVar('units')
-            tmp.value = self.output_units
-            self.output_units = self.InSet.params['units'] = tmp
+        ### - what is the intent here?
+        #if type(self.output_units) in (int, str, list, float, np.array, tuple):
+        #    tmp = iv.InputVar('units')
+        #    tmp.value = self.output_units
+        #    self.output_units = self.InSet.params['units'] = tmp
 
-        if self._calc_success and self.output_units.validate():
-            [self.units, self._cons_data] = util.unit_conversion(
-                                                self._cons_data,
-                                                self.fuelbed_area_acres.value,
-                                                self.units,
-                                                self.output_units.value[0])
-
-            print(self.units)   #ks
-            self.InSet.params['units'].value = self.units
-            self.InSet.validated_inputs['units'] = self.units
-            #self._heat_release_calc()
-            self._conv_success = True
+        if self._calc_success:
+            if self._internal_units != self._settings.get('units'):
+                print("Converting units: {} -> {}".format(self._internal_units, self._settings.get('units')))
+                new_units = None
+                [new_units, self._cons_data] = util.unit_conversion(
+                                                    self._cons_data,
+                                                    self._settings.get('area'),
+                                                    self._internal_units,
+                                                    self._settings.get('units'))
+                self._settings.set('units', new_units)
+                self._heat_release_calc()
+                self._conv_success = True
+            else:
+                print("Not converting units...")
 
 
     def _heat_release_calc(self):

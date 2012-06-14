@@ -281,10 +281,7 @@ def unit_conversion(data, area, from_units, output_units):
                       #      'tonnes_ha' : 2.24170231,
                        #     'tonnes_km^2' : 224.170231}}"""
 
-    if from_units == output_units:
-        return [output_units, data]
-
-    else:
+    if from_units != output_units:
         # Convert everything to tons right off the bat...
         cv = undict[from_units]
 
@@ -304,6 +301,9 @@ def unit_conversion(data, area, from_units, output_units):
                  data /= area
 
             return [output_units, data]
+    else:
+        print("From units: {}\tTo units: {}".format(from_units, output_units))
+        assert(from_units != output_units, "Don't call this function if the no conversion is necessary")
 
 # Repeated functions
 def csdist(tot, csd):
