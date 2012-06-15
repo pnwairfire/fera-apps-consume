@@ -855,9 +855,8 @@ class FuelConsumption(util.FrozenClass):
                                           heat_data = self._heat_data,
                                           emis_data = [],
                                           inputs = self._settings.package())
-                                          #inputs = self.InSet.validated_inputs)
 
-    def report(self, csv = "", stratum = "all", ret=False, incl_heat=False, tsize=8):
+    def report(self, csv = "", stratum = "all", ret=False, incl_heat=False):
         """Output fuel consumption results as a TABULAR REPORT and/or CSV FILE
 
         Displays (in shell) consumption data in tabular format, similar to
@@ -880,9 +879,9 @@ class FuelConsumption(util.FrozenClass):
             self._convert_units()
             if self._conv_success:
                 if not ret:
-                    self._display_report(csv, stratum, incl_heat = incl_heat, ret=ret, tsize=tsize)
+                    self._display_report(csv, stratum, incl_heat = incl_heat, ret=ret)
                 else:
-                    return self._display_report(csv, stratum, incl_heat = incl_heat, ret=ret, tsize=tsize)
+                    return self._display_report(csv, stratum, incl_heat = incl_heat, ret=ret)
 
 
 
@@ -964,7 +963,7 @@ class FuelConsumption(util.FrozenClass):
         """
         self.InSet.load(load_file, display=display)
 
-    def _display_report(self, csv, stratum = 'all', incl_heat = False, ret=False, tsize=8):
+    def _display_report(self, csv, stratum = 'all', incl_heat = False, ret=False):
         """Displays an in-shell report on consumption values"""
 
         categories = ["canopy\t", "shrub\t", "nonwoody", "llm  \t",
@@ -1836,7 +1835,7 @@ class FuelConsumption(util.FrozenClass):
             oneK_hr_rot_fsrt = ccn.ccon_oneK_rot_nat(fm_1000hr, ecos_mask, LD)
             tenK_hr_rot_fsrt = ccn.ccon_tenK_rot_nat(fm_1000hr, LD)
             tnkp_hr_rot_fsrt = ccn.ccon_tnkp_rot_nat(fm_1000hr, LD)
-            [LD['ff_reduction'], y_b, duff_depth] = ccn.ccon_ffr(fm_duff, self._settings.burn_type, ecoregion, LD)
+            [LD['ff_reduction'], y_b, duff_depth] = ccn.ccon_ffr(fm_duff, ecoregion, LD)
             LD['ff_reduction_successive'] = LD['ff_reduction']
         else:
             fm_type = self._settings.fm_type

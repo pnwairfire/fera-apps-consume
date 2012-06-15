@@ -92,7 +92,7 @@ def ccon_nw(LD):
 ###################################################################
 # p. 175 in the manual
 
-def ccon_ffr(fm_duff, burn_type, ecoregion, LD):
+def ccon_ffr(fm_duff, ecoregion, LD):
     """ Forest-floor reduction calculation, p.177  """
     # total duff depth (inches)
     duff_depth = LD['duff_upper_depth'] + LD['duff_lower_depth']
@@ -103,22 +103,18 @@ def ccon_ffr(fm_duff, burn_type, ecoregion, LD):
     y_b = 1.2383 - (0.0114 * fm_duff) # used to calc squirrel mid. redux
 
     ffr = np.array([])
-    if 'activity' in burn_type:
-        activity_duff_reduction = duff_redux_activity()
-        ffr = (activity_duff_reduction / duff_depth) * ff_depth
-    else:
-        if 'boreal' in ecoregion:
-            ffr = ff_depth * util.propcons(y_b)
-        elif 'southern' in ecoregion:
-            ffr = (-0.0061 * fm_duff) + (0.6179 * ff_depth)
-            ffr = np.where(
-                        np.less_equal(ffr, 0.25), # if ffr south <= .25
-                        (0.006181 * math.e**(0.398983 * (ff_depth - # true
-                        (0.00987 * (fm_duff-60.0))))), ffr) # false
-        elif 'western' in ecoregion:
-            y = -0.8085 - (0.0213 * fm_duff) + (1.0625 * ff_depth)
-            ffr = ff_depth * util.propcons(y)
-        else: assert False
+    if 'boreal' in ecoregion:
+        ffr = ff_depth * util.propcons(y_b)
+    elif 'southern' in ecoregion:
+        ffr = (-0.0061 * fm_duff) + (0.6179 * ff_depth)
+        ffr = np.where(
+                    np.less_equal(ffr, 0.25), # if ffr south <= .25
+                    (0.006181 * math.e**(0.398983 * (ff_depth - # true
+                    (0.00987 * (fm_duff-60.0))))), ffr) # false
+    elif 'western' in ecoregion:
+        y = -0.8085 - (0.0213 * fm_duff) + (1.0625 * ff_depth)
+        ffr = ff_depth * util.propcons(y)
+    else: assert False
 
     return [ffr, y_b, duff_depth]
 

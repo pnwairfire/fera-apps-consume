@@ -44,22 +44,21 @@ class EmissionsFactorDB:
         efg = root.iterfind('EFG')
         for node in efg:
             kids = node.getchildren()
-            id = int(get_item('ID', kids))
+            efg_id = int(get_item('ID', kids))
             components = {}
             for kid in kids:
                 components[kid.tag] = get_float(kid.text)
-            efg_map[id] = components
+            efg_map[efg_id] = components
         return efg_map
 
     def _load_emissions_factor_eqid(self):
         ef_eqid_map = {}
-        l = self._fco.fuelbed_fccs_ids
         for node in self._fco.FCCS.data:
-            id = node[0]
+            node_id = node[0]
             components = {}
             components['natural'] = int(node[63])
             components['activity'] = int(node[64])
-            ef_eqid_map[id] = components
+            ef_eqid_map[node_id] = components
         return ef_eqid_map
 
     def _load_covertype(self):
@@ -170,9 +169,9 @@ def get_item(tag, container):
             else: print("Error - empty tag {}".format(item.tag))
     print("Error: incorrect file format. Missing tag {}".format(tag))
 
-def get_rootnode(file):
+def get_rootnode(filename):
     from xml.etree import ElementTree as ET
-    tree = ET.parse(file)
+    tree = ET.parse(filename)
     root = tree.getroot()
     del tree
     return root

@@ -1,6 +1,5 @@
 import data_desc as dd
 import numpy as np
-import util_consume as util
 
 def validate_range(input_vals, permitted_vals):
     valid = []
@@ -180,21 +179,6 @@ class ConsumeInputSettings(object):
             add_me['units'] = self._units
             if 'activity' == self.burn_type: add_me['fm_type'] = self.fm_type
             return dict(self._settings.items() + add_me.items())
-
-class EmissionsInputSettings(object):
-    '''
-    User-settable input parameters
-    '''
-    #keyword, name, internal name, permitted values, validator function
-    ActivityInputVarParameters = {
-        'fuelbeds' : ['FCCS fuelbeds (ID#)', [1,10000], validate_range],
-        'area' : ['Fuelbed area (acres)', [0,1000000], validate_range],
-        'ecoregion' : ['Fuelbed ecoregion',  dd.list_valid_ecoregions(), validate_list]},
-        
-    def __init__(self):
-        pass
-
-
 
 
 

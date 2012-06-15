@@ -113,29 +113,6 @@ class FCCSDB():
             data_info = DataInfo("unknown", "unknown", "unknown")
         return data_info
 
-    def get_canopy_pct(self, fcs):
-        """Returns the auto-calculated canopy consumption percent value for the
-           given FCCS fuelbed ID#"""
-
-        err = ("No auto-calculated canopy consumption percent value " +
-                       "for the selected fuelbed ID: ")
-        if type(fcs) in (str, int, float):
-            if int(fcs) in self.fccs_canopy_consumption_pct:
-                return self.fccs_canopy_consumption_pct[int(fcs)]
-            else:
-                print err + str(fcs)
-
-        else:
-            ccs = []
-            for f in fcs:
-                if int(f) in self.fccs_canopy_consumption_pct:
-                    ccs.append(self.fccs_canopy_consumption_pct[int(f)])
-                else:
-                    print err + str(f)
-                    return ""
-            return ccs
-
-
     def browse(self):
         """Display a list of FCCS fuelbeds.
 

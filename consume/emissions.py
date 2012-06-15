@@ -317,7 +317,6 @@ Index 1           Index 2              Index 3                     Index 4      
 """
 import numpy as np
 import emissions_db as edb
-import input_variables as iv
 import data_desc as dd
 import util_consume as util
 
@@ -370,8 +369,9 @@ class Emissions(util.FrozenClass):
             ### - output variables
             self._emis_data = None
             self._emis_summ = None
+            self._freeze()
 
-    def results(self, efg = -1):
+    def results(self):
         """Returns a python DICTIONARY of emissions estimates.
 
         Returns a python dictionary variable comprised of input and output data.
@@ -380,73 +380,10 @@ class Emissions(util.FrozenClass):
         top of this file for detailed information on the structure of
         the dictionary and examples on how to extract information from the
         dictionary.
-
-        Optional argument:
-
-        efg :
-              Valid values:  integer b/t -5 and 17.
-              Default value:  -10
-              Value functionality:
-
-                    -1 :  will programmatically select the appropriate emissions
-                          factors for ALL burns, using the majority if
-                          multiple valid groups exist. If no majority exists,
-                          the first emissions factor group in the list will be
-                          selected
-
-                    -2 :  will programmatically select the appropriate emissions
-                          factors for ALL burns, BUT will prompt the user
-                          to choose if multiple valid emissions factor groups
-                          exist for a particular FCCS fuelbed
-
-                    -5  : Bypasses the automatic selection process for users
-                          wishing to either use manually input emissions factor
-                          groups or to preserve previously selected emissions
-                          factor groups
-
-                     0  : Default emissions factors (according to Consume 3.0
-                          source code and original developers)
-
-                  1-15  : Different sets of emissions factors, from
-                          various sources for various fuel types.
-                          Use the .emissions_factor_info(#) function to view
-                          actual emissions factor figures for the specified
-                          emissions factor group (#)
-
-                 16-17  : Alternate default values - "16" gives average values
-                          derived from all sources. "17" gives default values
-                          derived from the Consume 3.0 User's Guide (which
-                          differ from those used in the code and recommended by
-                          the original developers)
-
-
-               * The following value sets had been proposed for usage by original
-                 developers R. Ottmar and S. Prichard, but are not validated
-                 and are not used in the official version:
-
-                    -11 : will programmatically select the appropriate emissions
-                          factors for NATURAL burns, using the majority if
-                          multiple valid groups exist.
-
-                    -12 : will programmatically select the apprsopriate emissions
-                          factors for NATURAL burns, BUT will prompt the user
-                          to choose if multiple valid emissions factor groups
-                          exist for a particular FCCS fuelbed
-
-                    -13 : will programmatically select the appropriate emissions
-                          factors for ACTIVITY burns, using the majority if
-                          multiple valid groups exist
-
-                    -14 : will programmatically select the appropriate emissions
-                          factors for ACTIVITY burns, BUT will prompt the user
-                          to choose if multiple valid emissions factor groups
-                          exist for a particular FCCS fuelbed
-
         """
         self._calculate()
         self._convert_units()
 
-        #ks todo
         ins = self._cons_object._settings.package()
         ins['emissions_fac_group'] = self._emissions_factor_groups
         ins['units_emissions'] = self._output_units
@@ -649,8 +586,6 @@ class Emissions(util.FrozenClass):
             else:
                 out = baseDict['emissions'][emission_species][combustion_stage]
 
-        self.reset_inputs_and_outputs()
-
         if verbose:
             return out, baseDict
         else:
@@ -675,7 +610,7 @@ class Emissions(util.FrozenClass):
         else:
             return False
 
-    def _convert_units(self, reset = False):
+    def _convert_units(self):
         """Converts units of consumption and emissions data"""
         area = self._cons_object._settings.get('area')
         if self._internal_units != self._output_units:
