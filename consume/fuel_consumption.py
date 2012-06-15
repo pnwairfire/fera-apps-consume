@@ -1397,7 +1397,7 @@ class FuelConsumption(util.FrozenClass):
         self._conv_success = False
 
         if explicit_units:
-            self._settings.set('units', str(explicit_units))
+            self._settings.units = str(explicit_units)
 
         ### - what is the intent here?
         #if type(self.output_units) in (int, str, list, float, np.array, tuple):

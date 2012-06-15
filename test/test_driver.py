@@ -301,5 +301,5 @@ else:
     fuelbed_list = [1]
     #fuelbed_list = get_fuelbed_list(consumer)
     consumer.fuelbed_fccs_ids = fuelbed_list
-    run_additional_activity_scenarios(consumer, fuelbed_list)
+    run_emissions_activity_with_unit_conversion(fuelbed_list)
 
