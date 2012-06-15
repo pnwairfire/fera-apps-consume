@@ -35,7 +35,7 @@ Default output units for emissions are lbs/ac.
 To change the FuelConsumption units, simply modify the units of the FC object
 that is nested within the Emissions object:
 
->>> e_obj.FCobj.output_units = 'kg_ha'
+>>> e_obj._cons_object.output_units = 'kg_ha'
 
 
 ### OUTPUTS ###
@@ -349,7 +349,7 @@ class Emissions(util.FrozenClass):
 
         Optional arguments:
 
-        FCobj           : a FuelConsumption object. Emissions objects have a
+        _cons_object           : a FuelConsumption object. Emissions objects have a
                           FuelConsumption object nested within them from which
                           fuel consumption outputs are used to derive emissions
                           data. If a specific FuelConsumption object is not
@@ -361,12 +361,11 @@ class Emissions(util.FrozenClass):
         """
         if fuel_consumption_object is not None:
             self._cons_object = fuel_consumption_object
-            self._cons_object._calculate() # to generate consumption values
-            self._emission_factor_db = edb.EmissionsFactorDB(emissions_xml, FCobj)
-            self._have_cons_data = len(self._cons_object._cons_data[0][0])
+            self._emission_factor_db = edb.EmissionsFactorDB(emissions_xml, fuel_consumption_object)
+            self._have_cons_data = 0
             self._internal_units = "lbs_ac"
             self._output_units = "lbs_ac"
-            self._emissions_factor_group = None
+            self._emissions_factor_groups = None
 
             ### - output variables
             self._emis_data = None
@@ -449,7 +448,7 @@ class Emissions(util.FrozenClass):
 
         #ks todo
         ins = self._cons_object._settings.package()
-        ins['emissions_fac_group'] = self._emissions_factor_group
+        ins['emissions_fac_group'] = self._emissions_factor_groups
         ins['units_emissions'] = self._output_units
         return util.make_dictionary_of_lists(cons_data = self._cons_object._cons_data,
                                         heat_data = self._cons_object._heat_data,
@@ -480,7 +479,7 @@ class Emissions(util.FrozenClass):
             units = self._cons_object._settings.units
             ecoregion =  self._cons_object._settings.get('ecoregion')
             fccs_ids = self._cons_object._settings.get('fuelbeds')
-            efgs = self._emissions_factor_group
+            efgs = self._emissions_factor_groups
             str_au = units
 
             if units in dd.perarea() and sum(area) > 0:
@@ -502,7 +501,7 @@ class Emissions(util.FrozenClass):
                 print ("\nFCCS ID: " + str(fccs_ids[i])
                         + "\nArea:\t%.0f" % area[i] + " ac. (%.1f" % ha
                         + " ha)\nEmissions factor group: "
-                        + str(self._emissions_factor_group.value[i])
+                        + str(self._emissions_factor_groups.value[i])
                         + "\nSPECIES\tFlaming\t\tSmoldering\tResidual\tTOTAL")
 
 
@@ -667,12 +666,14 @@ class Emissions(util.FrozenClass):
         """
         if self._have_cons_data == 0:
             self._cons_object._calculate() # to generate consumption values
-            self._have_cons_data = len(self._cons_object._cons_data[0][0])
+            self._have_cons_data = len(self._cons_object._cons_data[0][0]) if None != self._cons_object._cons_data else 0
 
-        self._emissions_factor_groups = self._emission_factor_db.get_efgs(self._cons_object._settings.get('fuelbeds'))
-
-        self._emissions_calc(efg = self._emissions_factor_group)
-        return True
+        if self._have_cons_data:
+            self._emissions_factor_groups = self._emission_factor_db.get_efgs(self._cons_object._settings.get('fuelbeds'))
+            self._emissions_calc(efg = self._emissions_factor_groups)
+            return None != self._emis_data and None != self._emis_summ
+        else:
+            return False
 
     def _convert_units(self, reset = False):
         """Converts units of consumption and emissions data"""
@@ -726,7 +727,7 @@ class Emissions(util.FrozenClass):
 
         # Load default emissions factors (average of all factors...)
         t = self._emission_factor_db.data[0]
-        num_fuelbeds = int(self._have_cons_data[0][0])# <<< ucons
+        num_fuelbeds = int(self._have_cons_data)# <<< ucons
 
         ef_flamg_pm = np.array([t['PM_flaming']] * num_fuelbeds, dtype = float)
         ef_flamg_pm10 = np.array([t['PM10b_flaming']] * num_fuelbeds, dtype = float)
@@ -797,4 +798,4 @@ class Emissions(util.FrozenClass):
         nmhc_all = get_emis_summ(6)
 
         self._emis_summ = np.array([pm_all, pm10_all, pm25_all, co_all, co2_all, ch4_all, nmhc_all])
-        
+

@@ -150,7 +150,17 @@ class ConsumeInputSettings(object):
                 return True
             else:
                 assert(current_settings.issubset(valid_names))
-                print("Settings problem ---> {}".format(valid_names.difference(current_settings)))
+                print("\nError settings problem ---> {}".format(valid_names.difference(current_settings)))
+        else:
+            def dbg_msg():
+                needed = []
+                if None == self._burn_type: needed.append('burn_type')
+                if None == self._units: needed.append('units')
+                if 'activity' == self._burn_type and None == self._fm_type: needed.append("fm_type")
+                print("\n !!! Error settings problem, the following are required:")
+                for i in needed:
+                    print("\t{}".format(i))
+            dbg_msg()             
         return False
 
     def display_settings(self):

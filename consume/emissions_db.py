@@ -11,7 +11,7 @@ class EmissionsFactorDB:
         An EmissionsFactorDB is stored within each Emissions object as
         e_obj.efDB"""
 
-    def __init__(self, emissions_file = "", FCobj = None):
+    def __init__(self, emissions_file = "", fuel_consumption_object = None):
         """EmissionsFactorDB class contructor
 
            Upon initialization, loads emissions factor data from the
@@ -25,7 +25,7 @@ class EmissionsFactorDB:
                               database.
         """
         self.xml_file = emissions_file
-        self.FCobj = FCobj
+        self._fco = fuel_consumption_object
         if emissions_file == "":
             mod_path = module_locator.module_path()
             self.xml_file = os.path.join(mod_path, './input_data/EmissionsFactorDatabase.xml')
@@ -53,8 +53,8 @@ class EmissionsFactorDB:
 
     def _load_emissions_factor_eqid(self):
         ef_eqid_map = {}
-        l = self.FCobj.fuelbed_fccs_ids
-        for node in self.FCobj.FCCS.data:
+        l = self._fco.fuelbed_fccs_ids
+        for node in self._fco.FCCS.data:
             id = node[0]
             components = {}
             components['natural'] = int(node[63])
@@ -83,7 +83,7 @@ class EmissionsFactorDB:
         ef_nums = []
         for f in range(0, len(fuelbed_list)):
             fuelbed_id = int(fuelbed_list[f])
-            eq_id_key = self.get_key(self.FCobj.burn_type.value)
+            eq_id_key = self.get_key(self._fco.burn_type)
             if fuelbed_id in self.fccs_emissions_groups:
                 efgs = self.fccs_emissions_groups[fuelbed_id]
                 group = efgs[eq_id_key]

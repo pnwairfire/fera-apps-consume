@@ -1383,12 +1383,12 @@ class FuelConsumption(util.FrozenClass):
         #self._build_input_set()
 
         if self._settings.settings_are_complete():
-            #self.units = 'tons_ac'
-            #[self._unq_inputs, self._runlnk] = self.InSet.getuniques(self._unique_check)
-            #self._consumption_calc(**self._unq_inputs)
             self._consumption_calc()
             self._heat_release_calc()
             self._calc_success = True
+            return True
+        else:
+            return False
 
 
     def _convert_units(self, explicit_units=None):

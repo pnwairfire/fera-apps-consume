@@ -8,6 +8,15 @@
 
 # - run via batch file that sets PYTHONPATH correctly
 import sys
+def pp():
+    new_path = []
+    for i in sys.path:
+        if not 'fera_src' in i:
+            new_path.append(i)
+    sys.path = new_path
+    sys.path.append('c:/Users/ks/Google Drive/consume4.2')
+
+pp()
 import os
 import consume
 from tester import DataObj as compareCSV
@@ -50,11 +59,11 @@ def get_fuelbed_list(consumer):
     MAX_REFERENCE_FUELBED = 291
     return [i[0] for i in consumer.FCCS.data if MAX_REFERENCE_FUELBED >= i[0]]
 
-def get_consumption_object():
+def get_consumption_object(burn_type):
     ''' Return a "ready to go" consumption object
     '''
     consumer = consume.FuelConsumption(fccs_file = get_input_file())
-    set_defaults(consumer, {})
+    set_defaults(consumer, {'burn_type' : burn_type})
     # run over the reference fuelbeds
     fuelbed_list = get_fuelbed_list(consumer)
     consumer.fuelbed_fccs_ids = fuelbed_list
@@ -119,7 +128,7 @@ def write_csv_emissions(results, fuelbed_list, stream):
 
     write_header_emissions(columns, stream)
     for fb_index in xrange(0, len(fuelbed_list)):
-        out = fuelbed_list[fb_index]
+        out = str(fuelbed_list[fb_index])
 
         # print the consumption column values
         for key in cons_keys:
@@ -152,6 +161,7 @@ def set_defaults(consumer, map):
     consumer.canopy_consumption_pct = map['canopy_consumption_pct'] if 'canopy_consumption_pct' in map else 20
     consumer.shrub_blackened_pct = map['shrub_blackened_pct'] if 'shrub_blackened_pct' in map else 50
     consumer.output_units = map['output_units'] if 'output_units' in map else 'tons_ac'
+    consumer.fuelbed_ecoregion = map['fuelbed_ecoregion'] if 'fuelbed_ecoregion' in map else ['western']
     if 'activity' == consumer.burn_type:
         set_activity_defaults(consumer, map)
 
@@ -180,19 +190,23 @@ def run_basic_scenarios(consumer, fuelbed_list):
 
 def run_additional_activity_scenarios(consumer, fuelbed_list):
     activityTwo = {
+        'burn_type': 'activity',
         'fuel_moisture_10hr_pct':15,
         'fuel_moisture_1000hr_pct':39,
         'fuelbed_area_acres':10,
         'length_of_ignition':5 }
     activityThree = {
+        'burn_type': 'activity',
         'fuel_moisture_10hr_pct':15,
         'fuel_moisture_1000hr_pct':45,
         'fuelbed_area_acres':25 }
     activityFour = {
+        'burn_type': 'activity',
         'fuel_moisture_10hr_pct':17,
         'fuel_moisture_1000hr_pct':50,
         'fuelbed_area_acres':100 }
     activityFive = {
+        'burn_type': 'activity',
         'fuel_moisture_10hr_pct':25,
         'fuel_moisture_1000hr_pct':55,
         'fuelbed_area_acres':100 }
@@ -202,7 +216,6 @@ def run_additional_activity_scenarios(consumer, fuelbed_list):
     for scene in scenario_list:
         set_defaults(consumer, scene)
         consumer.fuelbed_ecoregion = ['western']
-        consumer.burn_type = 'activity'
         outfilename = out_name("results", "{}_out.csv".format(counter))
         reference_values = out_name("expected", "scen{}_activity_expected.csv".format(counter))
         counter += 1
@@ -213,23 +226,22 @@ def run_additional_activity_scenarios(consumer, fuelbed_list):
 #  problem for subsequent runs. todo ks
 #-------------------------------------------------------------------------------
 def run_emissions_western(fuelbed_list):
-    consumer = get_consumption_object()
+    consumer = get_consumption_object('natural')
     em = consume.Emissions(consumer)
     outfilename ='western_emissions.csv'
     reference_file = "{}_expected.csv".format(outfilename.split('.')[0])
     run_and_test_emissions(em, fuelbed_list, outfilename, reference_file)
 
 def run_emissions_activity(fuelbed_list):
-    consumer = get_consumption_object()
-    consumer.burn_type = 'activity'
+    consumer = get_consumption_object('activity')
     em = consume.Emissions(consumer)
     outfilename ='activity_emissions.csv'
     reference_file = "{}_expected.csv".format(outfilename.split('.')[0])
     run_and_test_emissions(em, fuelbed_list, outfilename, reference_file)
 
 def run_emissions_activity_with_unit_conversion(fuelbed_list):
-    consumer = get_consumption_object()
-    consumer.burn_type = 'activity'
+    consumer = get_consumption_object('activity')
+    consumer.fuelbed_ecoregion = ['western']
     em = consume.Emissions(consumer)
     em.output_units = 'kg_ha'
     outfilename ='activity_emissions_kgha.csv'
@@ -250,7 +262,7 @@ def run_and_test(consumer, fuelbed_list, outfilename, reference_values):
     print("{} = failed, {} compared:\t{}".format(failed, compared, outfilename))
 
 def run_and_test_emissions(emissions, fuelbed_list, outfilename, reference_values):
-    wrap_input_display(emissions.FCobj.display_inputs(print_to_console=False))
+    wrap_input_display(emissions._cons_object.display_inputs(print_to_console=False))
     oname = out_name("results", outfilename)
     with open(oname, 'w') as outfile:
         results = emissions.results()
@@ -289,7 +301,5 @@ else:
     fuelbed_list = [1]
     #fuelbed_list = get_fuelbed_list(consumer)
     consumer.fuelbed_fccs_ids = fuelbed_list
-    run_basic_scenarios(consumer, fuelbed_list)
-
-
+    run_additional_activity_scenarios(consumer, fuelbed_list)
 
