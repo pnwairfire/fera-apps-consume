@@ -916,7 +916,7 @@ class FuelConsumption(util.FrozenClass):
                         in the output csv file. Default is 'False'.
         """
 
-        self.InSet.load(csv_in)
+        #ks self.InSet.load(csv_in)
         self.report(csv = csv_out, stratum = stratum)
         print "\nFile saved to: " + csv_out
 
@@ -936,7 +936,7 @@ class FuelConsumption(util.FrozenClass):
 
     def list_variable_names(self):
         """Lists variable names of each of the input parameters for reference"""
-        self.InSet.display_variable_names()
+        #ks self.InSet.display_variable_names()
 
 
     def save_scenario(self, save_file=''):
@@ -948,7 +948,7 @@ class FuelConsumption(util.FrozenClass):
                      will be saved
 
         """
-        self.InSet.save(save_file)
+        #ks self.InSet.save(save_file)
 
 
     def load_scenario(self, load_file='', display=True):
@@ -969,14 +969,14 @@ class FuelConsumption(util.FrozenClass):
         categories = ["canopy\t", "shrub\t", "nonwoody", "llm  \t",
                       "ground fuels", "woody fuels"]
 
-        units = self.InSet.validated_inputs['units']
-        fccs_ids = self.InSet.validated_inputs['fuelbeds']
-        area = self.InSet.validated_inputs['area']
-        ecoregion = self.InSet.validated_inputs['ecoregion']
-        fm_1000hr = self.InSet.validated_inputs['fm_1000hr']
-        fm_duff = self.InSet.validated_inputs['fm_duff']
-        fm_can = self.InSet.validated_inputs['can_con_pct']
-        fm_shb = self.InSet.validated_inputs['shrub_black_pct']
+        units = self._settings.units
+        fccs_ids = self._settings.get('fuelbeds')
+        area = self._settings.get('area')
+        ecoregion = self._settings.get('ecoregion')
+        fm_1000hr = self._settings.get('fm_1000hr')
+        fm_duff = self._settings.get('fm_duff')
+        fm_can = self._settings.get('can_con_pct')
+        fm_shb = self._settings.get('shrub_black_pct')
         hr_au = "btu"
         str_au = units
 
@@ -1255,118 +1255,8 @@ class FuelConsumption(util.FrozenClass):
             else:
                 out = baseDat[stratum][combustion_stage]
 
-        #ks self.reset_inputs_and_outputs()
-
         if verbose: return out, baseDict
         else: return out
-
-    def _build_input_set(self):
-        """Builds the InputVarSet object from the individual input parameters"""
-        if self._params == None:
-            params = {'fuelbeds': self.fuelbed_fccs_ids,
-                      'area': self.fuelbed_area_acres,
-                      'ecoregion': self.fuelbed_ecoregion,
-                      'fm_1000hr': self.fuel_moisture_1000hr_pct,
-                      'fm_10hr': self.fuel_moisture_10hr_pct,
-                      'fm_duff': self.fuel_moisture_duff_pct,
-                      'can_con_pct': self.canopy_consumption_pct,
-                      'shrub_black_pct': self.shrub_blackened_pct,
-                      'burn_type': self.burn_type,
-                      'units': self.output_units,
-                      'slope': self.slope,
-                      'windspeed': self.windspeed,
-                      'fm_type': self.fm_type,
-                      'days_since_rain': self.days_since_rain,
-                      'length_of_ignition': self.length_of_ignition}
-
-        else: params = self._params
-
-        for p in params:
-            if type(params[p]) in (int, str, list, float, np.array, tuple):
-                tmp = iv.InputVar(p)
-                tmp.value = params[p]
-                params[p] = tmp
-
-        self.InSet = iv.InputVarSet(params)
-        self.fuelbed_fccs_ids = params['fuelbeds']
-        self.fuelbed_area_acres = params['area']
-        self.fuelbed_ecoregion = params['ecoregion']
-        self.fuel_moisture_1000hr_pct = params['fm_1000hr']
-        self.fuel_moisture_10hr_pct = params['fm_10hr']
-        self.fuel_moisture_duff_pct = params['fm_duff']
-        self.canopy_consumption_pct = params['can_con_pct']
-        self.shrub_blackened_pct = params['shrub_black_pct']
-        self.burn_type = params['burn_type']
-        self.output_units = params['units']
-        self.slope = params['slope']
-        self.windspeed = params['windspeed']
-        self.fm_type = params['fm_type']
-        self.days_since_rain = params['days_since_rain']
-        self.length_of_ignition = params['length_of_ignition']
-
-    def validate_customized_fuel_loadings(self):
-        """ Validate customized fuel loading inputs """
-        cfl_format_check = True
-        cfl_index_check = True
-        cfl_name_check = True
-        cfl_value_check = True
-        cfl_name_bads = []
-        cfl_value_bads = []
-
-        cfl = self.customized_fuel_loadings
-        if len(cfl) != 0:
-            if type(cfl[0]) is not list and len(cfl) == 3:
-                self.customized_fuel_loadings = [cfl]
-
-        for cfl in self.customized_fuel_loadings:
-            if type(cfl) is list and len(cfl) == 3:
-                if cfl[0] < 0 or cfl[0] > self.InSet.set_length:
-                    cfl_index_check = False
-
-                if cfl[1] not in zip(*dd.LoadDefs)[1]:
-                    cfl_name_check = False
-                    cfl_name_bads.append(cfl[1])
-
-                try:
-                    t = float(cfl[2])
-                    if t < 0:
-                        cfl_value_check = False
-                        cfl_value_bads.append(cfl[2])
-                except:
-                    cfl_value_check = False
-                    cfl_value_bads.append(cfl[2])
-            else:
-                cfl_format_check = False
-
-        if not cfl_index_check:
-            print ("ERROR: invalid customized fuel loading input:\n" +
-                   "Fuelbed index must be between 1 and " + str(p))
-            return False
-
-        elif not cfl_name_check:
-            print ("ERROR: invalid customized fuel loading input:\n" +
-                   "The following strata name(s) are invalid: ")
-            print cfl_name_bads
-            print ("To view a list of valid strata names, use the" +
-                   ".FCCS.list_fuel_loading_names() method.")
-            return False
-
-        elif not cfl_value_check:
-            print ("ERROR: invalid customized fuel loading input:\n" +
-                   "The following value(s) is either less than zero or " +
-                   "cannot be converted to a number:")
-            print cfl_value_bads
-            return False
-
-        elif not cfl_format_check:
-            print ("ERROR: invalid customized fuel loading input:\n" +
-                   "The .customized_fuel_loadings variable must be formatted as"
-                  + " a list of 3 value lists, e.g.:\n[[1, 'overstory',4.5]," +
-                    " [1, 'shrub_prim', 3.0],...]")
-            return False
-        else:
-            return True
-
 
     def _calculate(self):
         """ Validates input parameters before executing Consume 3.0 equations
@@ -1379,7 +1269,6 @@ class FuelConsumption(util.FrozenClass):
         self._calc_success = False
         self._unq_inputs = []
         self._runlnk = []
-        #self._build_input_set()
 
         if self._settings.settings_are_complete():
             self._consumption_calc()
@@ -1398,12 +1287,6 @@ class FuelConsumption(util.FrozenClass):
         if explicit_units:
             self._settings.units = str(explicit_units)
 
-        ### - what is the intent here?
-        #if type(self.output_units) in (int, str, list, float, np.array, tuple):
-        #    tmp = iv.InputVar('units')
-        #    tmp.value = self.output_units
-        #    self.output_units = self.InSet.params['units'] = tmp
-
         if self._calc_success:
             if self._internal_units != self._settings.units:
                 print("Converting units: {} -> {}".format(self._internal_units, self._settings.units))
@@ -1417,7 +1300,8 @@ class FuelConsumption(util.FrozenClass):
                 self._heat_release_calc()
                 self._conv_success = True
             else:
-                print("Not converting units...")
+                pass
+                #print("Not converting units...")
 
 
     def _heat_release_calc(self):
@@ -1495,287 +1379,10 @@ class FuelConsumption(util.FrozenClass):
 
         return ff_redux_proportion
 
-    '''
-    def _consumption_calc(self, fuelbeds, ecoregion = 'western', fm_1000hr=50.0,
-                          fm_duff=50.0, burn_type = 'natural', can_con_pct=50.0,
-                          shrub_black_pct = 50.0, fm_10hr = 50.0,
-                          slope = 30.0, windspeed = 20.0, fm_type = "MEAS-Th",
-                          days_since_rain = 2, length_of_ignition = 1, area=1,
-                          units = ""):
-
-        """Calculates fuel consumption estimates.
-
-        Calculates fuel consumption for each of 36 sub-categories and 7 major
-        categories of fuel types from the given inputs using the equations
-        found in the Consume 3.0 User's Manual.
-
-        Input parameters include fuel loadings (from FCCS data), ecoregion,
-        and fuel moisture indicators (1000 hour fuel moisture, duff moisture,
-        percent canopy consumed, and percent blackened shrub). See CONSUME 3.0
-        manual for more information.
-
-        Page numbers documented in the code correspond to the manual pages from
-        which the equations were derived. Line numbers (ln ####) refer to
-        corresponding lines in the original source code.
-
-        Arguments:
-
-        burn_type
-                : Use this variable to select ['natural'] burn equations or
-                  ['activity'] (i.e. prescribed) burn equations. Note that
-                  'activity' burns require 6 additional input parameters:
-                  10hr fuel moisture, slope, windpseed, fuel moisture type,
-                  days since significant rainfall, and length of ignition.
-
-        fuelbeds
-                : a list of Fuel Characteristic Classification System (FCCS)
-                  (http://www.fs.fed.us/pnw/fera/fccs/index.shtml) fuelbed ID
-                  numbers (1-900).
-
-        area
-                : a nparray (or single number to be used for all fuelbeds) of
-                  numbers in acres that represents area for the corresponding
-                  FCCS fuelbed ID listed in the 'fuelbeds_fccs_ids' variable.
-
-        ecoregion
-                : a list (or single region to be used for all fuelbeds) of
-                  ecoregions ('western', 'southern', or 'boreal') that
-                  represent the ecoregion for the corresponding FCCS fuelbed ID
-                  listed in the 'fuelbeds_fccs_ids' variable. Regions within the
-                  US that correspond to each broad regional description can be
-                  found in the official Consume 3.0 User's Guide, p. 60. Further
-                  info on Bailey's ecoregions can be found here:
-                www.eoearth.org/article/Ecoregions_of_the_United_States_(Bailey)
-                  Default is 'western'
-
-        fm_1000hr
-                : 1000-hr fuel moisture in the form of a number or nparray of
-                  numbers ranging from 0-100 representing a percentage.
-                  Default is 50%
-
-        fm_10hr
-                : <specific to 'activity' burns>
-                  10-hr fuel moisture in the form of a number or nparray of
-                  numbers ranging from 0-100 representing a percentage.
-                  Default is 50%
-
-        fm_duff
-                : Duff fuel moisture. A number or nparray of numbers ranging from
-                  0-100 representing a percentage.
-                  Default is 50%.
-
-        can_con_pct
-                : Percent canopy consumed. A number or nparray of numbers ranging
-                  from 0-100 representing a percentage. Set to '-1' to
-                  use an FCCS-fuelbed dependent precalculated canopy consumption
-                  percentage based on crown fire initiation potential, crown to
-                  crown transmissivity, and crown fire spreading potential.
-                  (note: auto-calc is not available for FCCS ID's 401-456)
-                  Default is -1
-
-        shrub_black_pct
-                : Percent of shrub that has been blackened. A number or nparray
-                  of numbers ranging from 0-100 representing a percentage.
-                  Default is 50%
-
-        slope
-                : <specific to 'activity' burns>
-                  Percent slope of a fuelbed unit. Used in predicting 100-hr
-                  (1-3" diameter) fuel consumption in 'activity' fuelbeds.
-                  Valid values: a number or list of numbers ranging from 0-100
-                  representing a percentage.
-                  Default is 5%
-
-        windspeed
-                : <specific to 'activity' burns>
-                  Mid-flame wind speed (mph) during the burn. Maximum is 35 mph.
-                  Used in predicting 100-hr (1-3" diameter) fuel consumption in
-                  'activity' fuelbeds.
-                  Default is 5 mph
-
-        fm_type
-                : <specific to 'activity' burns>
-                  Source of 1000-hr fuel moisture data.
-                    "Meas-Th" (default) : measured directly
-                    "NFDRS-Th" : calculated from NFDRS
-                    "ADJ-Th" : adjusted for PNW conifer types
-                  Note: 1000-hr fuel moisture is NOT calculated by Consume,
-                  i.e. user must derive 1000-hr fuel moisture & simply select
-                  the method used.
-
-        days_since_rain
-                : <specific to 'activity' burns>
-                  Number of days since significant rainfall. According to the
-                  Consume 3.0 User's Guide, "Significant rainfall is one-quarter
-                  inch in a 48-hour period." Used to predict duff consumption
-                  in 'activity' fuelbeds.
-
-        length_of_ignition
-                : <specific to 'activity' burns>
-                  The amount of time (minutes) it will take to ignite the area
-                  to be burned. Used to determine if a fire will be of high
-                  intensity, which affects diameter reduction of large woody
-                  fuels in 'activity' fuelbeds.
-
-        """
-        if type(fm_type) == list:
-            assert(len(fm_type) == 1)
-            fm_type = fm_type[0]
-
-        LD = self._get_fuel_loadings(fuelbeds)
-        # Setup ecoregion masks for equations that vary by ecoregion
-        ecodict = {"maskb": {"boreal":1, "western":0, "southern":0},
-                     "masks": {"boreal":0, "western":0, "southern":1},
-                     "maskw": {"boreal":0, "western":1, "southern":0}}
-
-        ecob_mask = [ecodict["maskb"][e] for e in ecoregion]
-        ecos_mask = [ecodict["masks"][e] for e in ecoregion]
-        ecow_mask = [ecodict["maskw"][e] for e in ecoregion]
-
-        zeroes = np.array([0.0] * len(LD['fccs_id']), dtype=float)
-
-
-
-
-           ########################################################
-        ############ Fuel Consumption Calculation Execution ##########
-           ########################################################
-
-        [can_over_fsrt, can_mid_fsrt, can_under_fsrt, can_snag1f_fsrt,
-         can_snag1w_fsrt, can_snag1nf_fsrt, can_snag2_fsrt, can_snag3_fsrt,
-         can_ladder_fsrt] = ccn.ccon_canopy(can_con_pct, LD)
-
-        [shb_prim_live_fsrt, shb_prim_dead_fsrt,
-         shb_seco_live_fsrt, shb_seco_dead_fsrt] = ccn.ccon_shrub(shrub_black_pct, LD)
-
-        [nw_prim_live_fsrt, nw_prim_dead_fsrt,
-         nw_seco_live_fsrt, nw_seco_dead_fsrt] = ccn.ccon_nw(LD)
-
-        [stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt] = ccn.ccon_stumps(LD)
-
-        if burn_type in ['natural', ['natural']]:
-            one_hr_fsrt = ccn.ccon_one_nat(LD)
-            ten_hr_fsrt = ccn.ccon_ten_nat(LD)
-            hun_hr_fsrt = ccn.ccon_hun_nat(ecos_mask, LD)
-            oneK_hr_snd_fsrt = ccn.ccon_oneK_snd_nat(fm_duff, fm_1000hr, ecos_mask, LD)
-            tenK_hr_snd_fsrt = ccn.ccon_tenK_snd_nat(fm_1000hr, LD)
-            tnkp_hr_snd_fsrt = ccn.ccon_tnkp_snd_nat(fm_1000hr, LD)
-            oneK_hr_rot_fsrt = ccn.ccon_oneK_rot_nat(fm_1000hr, ecos_mask, LD)
-            tenK_hr_rot_fsrt = ccn.ccon_tenK_rot_nat(fm_1000hr, LD)
-            tnkp_hr_rot_fsrt = ccn.ccon_tnkp_rot_nat(fm_1000hr, LD)
-            [LD['ff_reduction'], y_b, duff_depth] = ccn.ccon_ffr(fm_duff, burn_type, ecoregion, LD)
-            LD['ff_reduction_successive'] = LD['ff_reduction']
-        else:
-            [one_hr_fsrt, ten_hr_fsrt, hun_hr_fsrt,
-            [oneK_hr_snd_fsrt, oneK_hr_rot_fsrt],
-            [tenK_hr_snd_fsrt, tenK_hr_rot_fsrt],
-            [tnkp_hr_snd_fsrt, tnkp_hr_rot_fsrt],
-            LD['ff_reduction']] = cca.ccon_activity(fm_1000hr, fm_type,
-                windspeed, slope, area, days_since_rain, fm_10hr, length_of_ignition, LD)
-            LD['ff_reduction_successive'] = LD['ff_reduction']
-
-        lch_fsrt = ccn.ccon_lch(LD)
-        moss_fsrt = ccn.ccon_moss(LD)
-        lit_fsrt = ccn.ccon_litter(LD)
-        [duff_upper_fsrt, duff_lower_fsrt] = ccn.ccon_duff(LD)
-
-        ff_redux_proportion = self.calc_ff_redux_proportion(LD)
-        bas_fsrt = ccn.ccon_bas(LD['bas_loading'], ff_redux_proportion)
-        sqm_fsrt = ccn.ccon_sqm(LD['sqm_loading'], ff_redux_proportion)
-
-
-        # Category summations
-        can_fsrt = sum([can_over_fsrt, can_mid_fsrt, can_under_fsrt,
-                        can_snag1f_fsrt, can_snag1w_fsrt, can_snag1nf_fsrt,
-                        can_snag2_fsrt, can_snag3_fsrt, can_ladder_fsrt])
-        shb_fsrt = sum([shb_prim_live_fsrt, shb_prim_dead_fsrt,
-                        shb_seco_live_fsrt, shb_seco_dead_fsrt])
-        nw_fsrt = sum([nw_prim_live_fsrt, nw_prim_dead_fsrt,
-                       nw_seco_live_fsrt, nw_seco_dead_fsrt])
-        llm_fsrt = sum([lch_fsrt, moss_fsrt, lit_fsrt])
-        gf_fsrt = sum([duff_upper_fsrt, duff_lower_fsrt, bas_fsrt, sqm_fsrt])
-        woody_fsrt = sum([stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt,
-                    one_hr_fsrt, ten_hr_fsrt, hun_hr_fsrt, oneK_hr_snd_fsrt,
-                    oneK_hr_rot_fsrt, tenK_hr_snd_fsrt, tenK_hr_rot_fsrt,
-                    tnkp_hr_snd_fsrt, tnkp_hr_rot_fsrt])
-
-        all_fsrt = sum([can_fsrt, shb_fsrt, nw_fsrt,
-                        llm_fsrt, gf_fsrt, woody_fsrt])
-
-        #######################
-        #### OUTPUT EXPORT ####
-        #######################
-
-        self._ucons_data = np.array(
-            [all_fsrt,
-            can_fsrt,
-            shb_fsrt,
-            nw_fsrt,
-            llm_fsrt,
-            gf_fsrt,
-            woody_fsrt,
-            can_over_fsrt,
-            can_mid_fsrt,
-            can_under_fsrt,
-            can_snag1f_fsrt,
-            can_snag1w_fsrt,
-            can_snag1nf_fsrt,
-            can_snag2_fsrt,
-            can_snag3_fsrt,
-            can_ladder_fsrt,
-            shb_prim_live_fsrt,
-            shb_prim_dead_fsrt,
-            shb_seco_live_fsrt,
-            shb_seco_dead_fsrt,
-            nw_prim_live_fsrt,
-            nw_prim_dead_fsrt,
-            nw_seco_live_fsrt,
-            nw_seco_dead_fsrt,
-            lit_fsrt,
-            lch_fsrt,
-            moss_fsrt,
-            duff_upper_fsrt,
-            duff_lower_fsrt,
-            bas_fsrt,
-            sqm_fsrt,
-            stump_snd_fsrt,
-            stump_rot_fsrt,
-            stump_ltr_fsrt,
-            one_hr_fsrt,
-            ten_hr_fsrt,
-            hun_hr_fsrt,
-            oneK_hr_snd_fsrt,
-            oneK_hr_rot_fsrt,
-            tenK_hr_snd_fsrt,
-            tenK_hr_rot_fsrt,
-            tnkp_hr_snd_fsrt,
-            tnkp_hr_rot_fsrt]
-            )
-
-        self._cons_debug_data = np.array([LD['lit_mean_bd'], LD['ff_reduction']])
-
-        # delete extraneous memory hogging variables
-        del (all_fsrt, can_fsrt, shb_fsrt, nw_fsrt, llm_fsrt,
-                gf_fsrt,woody_fsrt, can_over_fsrt, can_mid_fsrt, can_under_fsrt,
-                can_snag1f_fsrt, can_snag1w_fsrt, can_snag1nf_fsrt,
-                can_snag2_fsrt, can_snag3_fsrt, can_ladder_fsrt,
-                shb_prim_live_fsrt, shb_prim_dead_fsrt, shb_seco_live_fsrt,
-                shb_seco_dead_fsrt, nw_prim_live_fsrt, nw_prim_dead_fsrt,
-                nw_seco_live_fsrt, nw_seco_dead_fsrt, lit_fsrt, lch_fsrt,
-                moss_fsrt, duff_upper_fsrt, duff_lower_fsrt, bas_fsrt,
-                sqm_fsrt, stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt,
-                one_hr_fsrt, ten_hr_fsrt, hun_hr_fsrt, oneK_hr_snd_fsrt,
-                oneK_hr_rot_fsrt, tenK_hr_snd_fsrt, tenK_hr_rot_fsrt,
-                tnkp_hr_snd_fsrt, tnkp_hr_rot_fsrt)
-
-        if self._unique_check:
-            self._cons_data = _unpack(self._ucons_data, self._runlnk)
-        else:
-            self._cons_data = self._ucons_data
-    '''
-
     def _consumption_calc(self):
         """Calculates fuel consumption estimates.
+
+        Input parameters must be set prior to running this method.
 
         Calculates fuel consumption for each of 36 sub-categories and 7 major
         categories of fuel types from the given inputs using the equations

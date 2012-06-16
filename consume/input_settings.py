@@ -1,5 +1,7 @@
 import data_desc as dd
 import numpy as np
+import pandas as pan
+import os
 
 def validate_range(input_vals, permitted_vals):
     valid = []
@@ -41,7 +43,6 @@ class ConsumeInputSettings(object):
     There are no defaults.
 
     '''
-
     #keyword, name, internal name, permitted values, validator function
     ActivityInputVarParameters = {
         'slope' : ['Slope (%)',  [0,100], validate_range],
@@ -128,7 +129,7 @@ class ConsumeInputSettings(object):
                     print(invalid_values)
             else:
                 print("\nError: '{}' is not a valid setting name".format(name))
-                print("Valid names for the current burn_type ({}) are".format(self._burn_type))
+                print("Valid names for the current burn_type ({}) are:".format(self._burn_type))
                 for i in valid_names: print("\t{}".format(i))
         else:
             print("Error: burn_type must be specified before adding other settings")
@@ -180,6 +181,62 @@ class ConsumeInputSettings(object):
             if 'activity' == self.burn_type: add_me['fm_type'] = self.fm_type
             return dict(self._settings.items() + add_me.items())
 
+    def _get_valid_column_names(self, burn_type):
+        valid_names = None
+        if type == 'natural':
+            valid_names = ConsumeInputSettings.NaturalSName
+        elif type == 'activity':
+            valid_names = ConsumeInputSettings.AllSNames
+        return valid_names
+
+    def _valid_file_columns(self, type, supplied_columns):
+        valid_names = self._get_valid_column_names(type)
+        if valid_names:
+            s1 = set(required_cols)
+            s2 = set(supplied_columns)
+            if s1 == s2:
+                return True
+            else:
+                print("\nError: invalid input file for this burn_type")
+                if s2.issubset(s1):
+                    print("The following columns are missing:")
+                    for item in s1.difference(s2):
+                        print("\t{}".format(item))
+                else:
+                    print("The following columns are not required:")
+                    for item in s2.difference(s1):
+                        print("\t{}".format(item))
+        else:
+            print("\nError: burn_type must be 'natural' or 'activity'.")
+        return False
+
+    def _column_content_identical(column):
+        ''' results in a 1-element list if all the column elements are the same
+        '''
+        return 1 == len(column.unique())
+            
+    def load_from_file(self, filename):            
+        result = False
+        if os.path.exists(filename):
+            contents = pan.read_csv(filename)    
+            burn_type = contents.burn_type[0]
+            if self._valid_file_columns(burn_type, contents.columns):
+                bt_check = self._column_content_identical(contents.burn_type)
+                unit_check = self._column_content_identical(contents.units)
+                fm_type_check = self._column_content_identical(contents.fm_type) if 'activity' == burn_type else True
+                if bt_check and unit_check and fm_type_check:
+                    self.burn_type = burn_type
+                    self.units = contents.units
+                    if 'activity' == burn_type: self.fm_type = contents.fm_type
+
+                    valid_names = self._get_valid_column_names(type)
+                    for name in valid_names:
+                        self._settings.set(name, contents.get(name))
+                else:
+                    print("\nError: burn_type, units, and fm_type columns must have identical values.")
+        else:
+            print("\nError: filename '{}' does not exist".format(filename))
+        return result
 
 
 
