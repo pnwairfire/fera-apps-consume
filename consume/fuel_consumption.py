@@ -1405,15 +1405,11 @@ class FuelConsumption(util.FrozenClass):
         ecodict = {"maskb": {"boreal":1, "western":0, "southern":0},
                      "masks": {"boreal":0, "western":0, "southern":1},
                      "maskw": {"boreal":0, "western":1, "southern":0}}
-
         ecoregion = self._settings.get('ecoregion')
         ecob_mask = [ecodict["maskb"][e] for e in ecoregion]
         ecos_mask = [ecodict["masks"][e] for e in ecoregion]
         ecow_mask = [ecodict["maskw"][e] for e in ecoregion]
-
         ecoregion_masks = {'boreal':ecob_mask, 'southern':ecos_mask , 'western':ecow_mask}
-
-        zeroes = np.array([0.0] * len(LD['fccs_id']), dtype=float)
 
            ########################################################
         ############ Fuel Consumption Calculation Execution ##########
