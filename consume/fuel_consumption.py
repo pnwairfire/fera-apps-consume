@@ -1411,6 +1411,8 @@ class FuelConsumption(util.FrozenClass):
         ecos_mask = [ecodict["masks"][e] for e in ecoregion]
         ecow_mask = [ecodict["maskw"][e] for e in ecoregion]
 
+        ecoregion_masks = {'boreal':ecob_mask, 'southern':ecos_mask , 'western':ecow_mask}
+
         zeroes = np.array([0.0] * len(LD['fccs_id']), dtype=float)
 
            ########################################################
@@ -1442,7 +1444,7 @@ class FuelConsumption(util.FrozenClass):
             oneK_hr_rot_fsrt = ccn.ccon_oneK_rot_nat(fm_1000hr, ecos_mask, LD)
             tenK_hr_rot_fsrt = ccn.ccon_tenK_rot_nat(fm_1000hr, LD)
             tnkp_hr_rot_fsrt = ccn.ccon_tnkp_rot_nat(fm_1000hr, LD)
-            [LD['ff_reduction'], y_b, duff_depth] = ccn.ccon_ffr(fm_duff, ecoregion, LD)
+            [LD['ff_reduction'], y_b, duff_depth] = ccn.ccon_ffr(fm_duff, ecoregion_masks, LD)
             LD['ff_reduction_successive'] = LD['ff_reduction']
         else:
             fm_type = self._settings.fm_type

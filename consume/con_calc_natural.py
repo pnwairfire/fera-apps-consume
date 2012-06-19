@@ -92,31 +92,36 @@ def ccon_nw(LD):
 ###################################################################
 # p. 175 in the manual
 
-def ccon_ffr(fm_duff, ecoregion, LD):
+def ccon_ffr(fm_duff, ecoregion_masks, LD):
     """ Forest-floor reduction calculation, p.177  """
+
     # total duff depth (inches)
     duff_depth = LD['duff_upper_depth'] + LD['duff_lower_depth']
-
     # total forest floor depth (inches)
     ff_depth = (duff_depth + LD['lit_depth'] +
                 LD['lch_depth'] + LD['moss_depth'])
+
+    # boreal
     y_b = 1.2383 - (0.0114 * fm_duff) # used to calc squirrel mid. redux
+    ffr_boreal = ff_depth * util.propcons(y_b)
 
-    ffr = np.array([])
-    if 'boreal' in ecoregion:
-        ffr = ff_depth * util.propcons(y_b)
-    elif 'southern' in ecoregion:
-        ffr = (-0.0061 * fm_duff) + (0.6179 * ff_depth)
-        ffr = np.where(
-                    np.less_equal(ffr, 0.25), # if ffr south <= .25
-                    (0.006181 * math.e**(0.398983 * (ff_depth - # true
-                    (0.00987 * (fm_duff-60.0))))), ffr) # false
-    elif 'western' in ecoregion:
-        y = -0.8085 - (0.0213 * fm_duff) + (1.0625 * ff_depth)
-        ffr = ff_depth * util.propcons(y)
-    else: assert False
+    # southern
+    ffr_southern = (-0.0061 * fm_duff) + (0.6179 * ff_depth)
+    ffr_southern = np.where(
+                np.less_equal(ffr_southern, 0.25), # if ffr south <= .25
+                (0.006181 * math.e**(0.398983 * (ff_depth - # true
+                (0.00987 * (fm_duff-60.0))))),
+                ffr_southern)                               # false
 
+    # western
+    y = -0.8085 - (0.0213 * fm_duff) + (1.0625 * ff_depth)
+    ffr_western = ff_depth * util.propcons(y)
+
+    ffr = ((ecoregion_masks['southern'] * ffr_southern) +
+            (ecoregion_masks['boreal'] * ffr_boreal) +
+            (ecoregion_masks['western'] * ffr_western))
     return [ffr, y_b, duff_depth]
+
 
 def calc_and_reduce_ff(LD, key):
     # if the depth of the layer (LD[key]) is less than the available reduction

@@ -115,7 +115,7 @@ class ConsumeInputSettings(object):
         result = False
         if self._burn_type:
             print("\nSetting {} ...".format(name))
-            valid_names = ConsumeInputSettings.NaturalSNames if 'natural' == self._burn_type else ConsumeInputSettings.AllSNames
+            valid_names = list(ConsumeInputSettings.NaturalSNames) if 'natural' == self._burn_type else list(ConsumeInputSettings.AllSNames)
             if name in valid_names:
                 validator = ConsumeInputSettings.AllInputParameters[name][2]
                 permitted_values = ConsumeInputSettings.AllInputParameters[name][1]
@@ -181,18 +181,31 @@ class ConsumeInputSettings(object):
             if 'activity' == self.burn_type: add_me['fm_type'] = self.fm_type
             return dict(self._settings.items() + add_me.items())
 
-    def _get_valid_column_names(self, burn_type):
-        valid_names = None
-        if type == 'natural':
-            valid_names = ConsumeInputSettings.NaturalSName
-        elif type == 'activity':
-            valid_names = ConsumeInputSettings.AllSNames
+    def _get_valid_column_names_all(self, burn_type):
+        ''' includes all valid names, even attribute names.
+            used for reading from a file
+        '''
+        valid_names = self._get_valid_column_names_no_attributes(burn_type)
+        if valid_names:
+            valid_names.append('burn_type')
+            valid_names.append('units')
+            if 'activity' == burn_type: valid_names.append('fm_type')
         return valid_names
 
-    def _valid_file_columns(self, type, supplied_columns):
-        valid_names = self._get_valid_column_names(type)
+    def _get_valid_column_names_no_attributes(self, burn_type):
+        ''' valid names, not including attribute names
+        '''
+        valid_names = None
+        if burn_type == 'natural':
+            valid_names = list(ConsumeInputSettings.NaturalSNames)
+        elif burn_type == 'activity':
+            valid_names = list(ConsumeInputSettings.AllSNames)
+        return valid_names
+
+    def _valid_file_columns(self, burn_type, supplied_columns):
+        valid_names = self._get_valid_column_names_all(burn_type)
         if valid_names:
-            s1 = set(required_cols)
+            s1 = set(valid_names)
             s2 = set(supplied_columns)
             if s1 == s2:
                 return True
@@ -207,10 +220,11 @@ class ConsumeInputSettings(object):
                     for item in s2.difference(s1):
                         print("\t{}".format(item))
         else:
-            print("\nError: burn_type must be 'natural' or 'activity'.")
+            print("\nError: burn_burn_type must be 'natural' or 'activity'.")
+            print(" ---- > {}".format(burn_type))
         return False
 
-    def _column_content_identical(column):
+    def _column_content_identical(self, column):
         ''' results in a 1-element list if all the column elements are the same
         '''
         return 1 == len(column.unique())
@@ -221,17 +235,22 @@ class ConsumeInputSettings(object):
             contents = pan.read_csv(filename)    
             burn_type = contents.burn_type[0]
             if self._valid_file_columns(burn_type, contents.columns):
+                # - all of the values should be the same in the following 3 columns
                 bt_check = self._column_content_identical(contents.burn_type)
                 unit_check = self._column_content_identical(contents.units)
                 fm_type_check = self._column_content_identical(contents.fm_type) if 'activity' == burn_type else True
+                
                 if bt_check and unit_check and fm_type_check:
+                    # - assign the single-input-value / property items
                     self.burn_type = burn_type
-                    self.units = contents.units
-                    if 'activity' == burn_type: self.fm_type = contents.fm_type
+                    self.units = contents.units[0]
+                    if 'activity' == burn_type: self.fm_type = contents.fm_type[0]
 
-                    valid_names = self._get_valid_column_names(type)
+                    # - set the 'tagged' input items
+                    valid_names = self._get_valid_column_names_no_attributes(burn_type)
+                    print(valid_names)
                     for name in valid_names:
-                        self._settings.set(name, contents.get(name))
+                        self.set(name, contents.get(name))
                 else:
                     print("\nError: burn_type, units, and fm_type columns must have identical values.")
         else:
