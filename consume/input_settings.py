@@ -1,9 +1,15 @@
+''' ---------------------------------------------------------------------------
+Code in this file deals with input settings to consume
+---------------------------------------------------------------------------- '''
 import data_desc as dd
 import numpy as np
 import pandas as pan
 import os
 
 def validate_range(input_vals, permitted_vals):
+    ''' Check submitted values against permitted values and convert to
+        numpy array
+    '''
     valid = []
     invalid = []
     for val in input_vals:
@@ -14,10 +20,12 @@ def validate_range(input_vals, permitted_vals):
             valid = np.array(input_vals, dtype=float)
         except:
             invalid.append(0.0)
-            print("Error: can't convert sequence to numpy array")
+            print("\nError: can't convert sequence to numpy array")
     return (0 == len(invalid), valid, invalid)
 
 def validate_list(input_vals, permitted_vals):
+    ''' Is the input value part of the permitted list?
+    '''
     valid = []
     invalid = []
     for val in input_vals:
@@ -240,7 +248,8 @@ class ConsumeInputSettings(object):
         return False
 
     def _column_content_identical(self, column):
-        ''' results in a 1-element list if all the column elements are the same
+        ''' results in a 1-element list if all the column elements are the same.
+            column is a pandas Series / numpy array
         '''
         return 1 == len(column.unique())
             
@@ -249,8 +258,8 @@ class ConsumeInputSettings(object):
              - some values are not settable on a per-fuelbed basis. Given the csv
                format, they get specified for every fuelbed and validation ensures
                that they are all the same
-             - to give better error messages, input files have 2 sets of valid columnar
-               input. This is based on the burn_type that is specified.
+             - The burn_type specified dictates the set of valid columns. The 
+               'activity' column set is a superset of the 'natural' set.
         '''
         result = False
         if os.path.exists(filename):
