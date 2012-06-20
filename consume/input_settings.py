@@ -112,6 +112,10 @@ class ConsumeInputSettings(object):
                 print("\t{}".format(i))
 
     def set(self, name, sequence):
+        ''' All "tagged" settings get set here. burn_type must be specified prior to 
+            setting anything via this method because burn_type dictates what settings
+            are valid.
+        '''
         result = False
         if self._burn_type:
             print("\nSetting {} ...".format(name))
@@ -136,11 +140,15 @@ class ConsumeInputSettings(object):
         return result
 
     def get(self, name):
+        ''' The getter for "tagged" settings
+        '''
         if name in self._settings.keys():
             return self._settings[name]
         return None
 
     def settings_are_complete(self):
+        ''' Have all the required settings been set?
+        '''
         check_props = self._burn_type and self._units and (self._fm_type if 'activity' == self._burn_type else True)
         if check_props:
             valid_names = set(ConsumeInputSettings.NaturalSNames if 'natural' == self._burn_type else ConsumeInputSettings.AllSNames)
@@ -164,6 +172,8 @@ class ConsumeInputSettings(object):
         return False
 
     def display_settings(self):
+        ''' TODO: very basic settings display
+        '''
         settings = []
         settings.append("burn_type\t{}".format(self._burn_type))
         settings.append("units\t{}".format(self._units))
@@ -174,6 +184,9 @@ class ConsumeInputSettings(object):
         return "\n".join(settings)
 
     def package(self):
+        ''' TODO - this simply packages names and values. It really shouldn't be
+            necessary. I created it to work with older code
+        '''
         if self.settings_are_complete():
             add_me = {}
             add_me['burn_type'] = self._burn_type
@@ -203,6 +216,8 @@ class ConsumeInputSettings(object):
         return valid_names
 
     def _valid_file_columns(self, burn_type, supplied_columns):
+        ''' Are the columns in the input file valid based on the burn_type?
+        '''
         valid_names = self._get_valid_column_names_all(burn_type)
         if valid_names:
             s1 = set(valid_names)
@@ -230,6 +245,13 @@ class ConsumeInputSettings(object):
         return 1 == len(column.unique())
             
     def load_from_file(self, filename):            
+        ''' Load settings from a csv file. Some anomalies:
+             - some values are not settable on a per-fuelbed basis. Given the csv
+               format, they get specified for every fuelbed and validation ensures
+               that they are all the same
+             - to give better error messages, input files have 2 sets of valid columnar
+               input. This is based on the burn_type that is specified.
+        '''
         result = False
         if os.path.exists(filename):
             contents = pan.read_csv(filename)    
