@@ -127,7 +127,7 @@ class TestInputSettings(unittest.TestCase):
             os.close(tmp_file[0])
             return tmp_file
 
-        def write_simplest_natural():
+        def load_simplest_natural():
             cols = ['area', 'burn_type', 'can_con_pct', 'ecoregion', 'fm_1000hr', 'fm_duff', 'fuelbeds', 'shrub_black_pct', 'units']
             row = [['10', 'natural', '20', 'western', '30', '40', '1', '50', 'kg_ha']]
             
@@ -139,7 +139,6 @@ class TestInputSettings(unittest.TestCase):
 
             infile = write_file(cols, row)
             s = ConsumeInputSettings()
-            print(" ---> {}".format(infile[1]))
             self.assertTrue(s.load_from_file(infile[1]))
             self.assertEqual(s.burn_type, 'natural')
             self.assertEqual(s.units, 'kg_ha')
@@ -152,7 +151,7 @@ class TestInputSettings(unittest.TestCase):
             self.assertEqual(s.get('shrub_black_pct'), 50)
             os.unlink(infile[1])
 
-        def write_activity():
+        def load_activity():
             cols = ['area', 'burn_type', 'can_con_pct', 'ecoregion', 'fm_1000hr', 'fm_duff', 'fuelbeds', 'shrub_black_pct', 'units']
             cols.append('slope')
             cols.append('windspeed')
@@ -181,8 +180,8 @@ class TestInputSettings(unittest.TestCase):
             self.assertEqual(s.fm_type, 'NFDRS-Th')
             os.unlink(infile[1])
 
-        write_simplest_natural()            
-        write_activity()
+        load_simplest_natural()            
+        load_activity()
             
 
             

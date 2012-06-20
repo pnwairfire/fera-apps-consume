@@ -757,29 +757,6 @@ class FuelConsumption(util.FrozenClass):
         self.FCCS = fccs.FCCSDB(fccs_file)
         self._settings = settings.ConsumeInputSettings()
 
-        ### - initialize inputs
-        self._params = None
-        '''
-        self.fuelbed_fccs_ids = iv.InputVar('fuelbeds')
-        self.fuelbed_area_acres = iv.InputVar('area')
-        self.fuelbed_ecoregion = iv.InputVar('ecoregion')
-        self.fuel_moisture_1000hr_pct = iv.InputVar('fm_1000hr')
-        self.fuel_moisture_duff_pct = iv.InputVar('fm_duff')
-        self.fuel_moisture_10hr_pct = iv.InputVar('fm_10hr')
-        self.canopy_consumption_pct = iv.InputVar('can_con_pct')
-        self.shrub_blackened_pct = iv.InputVar('shrub_black_pct')
-        self.burn_type = iv.InputVar('burn_type')
-        self.output_units = iv.InputVar('units')
-        self.slope = iv.InputVar('slope')
-        self.windspeed = iv.InputVar('windspeed')
-        self.fm_type = iv.InputVar('fm_type')
-        self.days_since_rain = iv.InputVar('days_since_rain')
-        self.length_of_ignition = iv.InputVar('length_of_ignition')
-        self.units = "tons_ac"
-        #self._build_input_set()
-        #self.display_inputs()
-        '''
-
         ### - reset outputs
         self.customized_fuel_loadings = []
         self._fccs_loadings = []
@@ -802,6 +779,8 @@ class FuelConsumption(util.FrozenClass):
 
         self._freeze()
 
+    '''
+    delete?
     def load_example(self):
         """Load example scenario data.
 
@@ -811,18 +790,18 @@ class FuelConsumption(util.FrozenClass):
         shrub).
 
         """
-
         self.burn_type = 'natural'
-        self.fuelbed_fccs_ids.value = [27, 18]
-        self.fuelbed_area_acres.value = [100.0, 100.0]
-        self.fuelbed_ecoregion.value = 'western'
-        self.fuel_moisture_1000hr_pct.value = 20.0
-        self.fuel_moisture_duff_pct.value = 20.0
-        self.canopy_consumption_pct.value = 20.0
-        self.shrub_blackened_pct.value = 0.0
+        self.fuelbed_fccs_ids = [27, 18]
+        self.fuelbed_area_acres = [100.0, 100.0]
+        self.fuelbed_ecoregion = ['western']
+        self.fuel_moisture_1000hr_pct = 20.0
+        self.fuel_moisture_duff_pct = 20.0
+        self.canopy_consumption_pct = 20.0
+        self.shrub_blackened_pct = 0.0
 
         self.display_inputs()
 
+    delete?
     def prompt_for_inputs(self):
         """Load scenario inputs from the user.
 
@@ -831,6 +810,7 @@ class FuelConsumption(util.FrozenClass):
 
         """
         self.InSet.prompt_for_inputs()
+    '''
 
 
     def results(self):
@@ -915,8 +895,6 @@ class FuelConsumption(util.FrozenClass):
             incl_heat : Specifies whether or not to include heat release data
                         in the output csv file. Default is 'False'.
         """
-
-        #ks self.InSet.load(csv_in)
         self.report(csv = csv_out, stratum = stratum)
         print "\nFile saved to: " + csv_out
 
@@ -929,16 +907,17 @@ class FuelConsumption(util.FrozenClass):
         correctly set.
 
         """
-        #ks self._build_input_set()
-        #ks return self.InSet.display_input_values(self.FCCS.data_source_info, print_to_console)
         return self._settings.display_settings()
 
-
+    '''
+    delete?
     def list_variable_names(self):
         """Lists variable names of each of the input parameters for reference"""
         #ks self.InSet.display_variable_names()
+    '''
 
-
+    '''
+    delete?
     def save_scenario(self, save_file=''):
         """Saves the scenario input parameters to a CSV file
 
@@ -949,7 +928,7 @@ class FuelConsumption(util.FrozenClass):
 
         """
         #ks self.InSet.save(save_file)
-
+    '''
 
     def load_scenario(self, load_file='', display=True):
         """Loads scenario input parameters from a CSV file
@@ -1136,7 +1115,6 @@ class FuelConsumption(util.FrozenClass):
                        str(sum(heat_data[0][1])) + ',' + str(sum(heat_data[0][2]))
                        + ',' + str(sum(heat_data[0][3])))
 
-        self._csvlines = csv_lines
         if csv != "":
             text = open(csv,'w')
             text.write(csv_lines)
@@ -1148,7 +1126,7 @@ class FuelConsumption(util.FrozenClass):
 
     def _wfeis_return(self, fuelbed_fccs_ids = [1],
                           fuelbed_area_km2 = [0],
-                          fuelbed_ecoregion = 'western',
+                          fuelbed_ecoregion = ['western'],
                           fuel_moisture_1000hr_pct = 50,
                           fuel_moisture_duff_pct = 50,
                           canopy_consumption_pct = 50,
@@ -1217,7 +1195,7 @@ class FuelConsumption(util.FrozenClass):
 
 
         """
-
+        self.burn_type = 'natural'
         self.fuelbed_fccs_ids = fuelbed_fccs_ids
         self.fuelbed_area_acres = [a * 247.105381 for a in fuelbed_area_km2]
         self.fuelbed_ecoregion = fuelbed_ecoregion

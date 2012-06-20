@@ -126,7 +126,7 @@ class ConsumeInputSettings(object):
         '''
         result = False
         if self._burn_type:
-            print("\nSetting {} ...".format(name))
+            #print("\nSetting {} ...".format(name))
             valid_names = list(ConsumeInputSettings.NaturalSNames) if 'natural' == self._burn_type else list(ConsumeInputSettings.AllSNames)
             if name in valid_names:
                 validator = ConsumeInputSettings.AllInputParameters[name][2]
