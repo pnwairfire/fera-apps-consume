@@ -152,7 +152,37 @@ class TestInputSettings(unittest.TestCase):
             self.assertEqual(s.get('shrub_black_pct'), 50)
             os.unlink(infile[1])
 
+        def write_activity():
+            cols = ['area', 'burn_type', 'can_con_pct', 'ecoregion', 'fm_1000hr', 'fm_duff', 'fuelbeds', 'shrub_black_pct', 'units']
+            cols.append('slope')
+            cols.append('windspeed')
+            cols.append('days_since_rain')
+            cols.append('fm_10hr')
+            cols.append('length_of_ignition')
+            row = [
+                ['10', 'activity', '20', 'western', '30', '40', '1', '50', 'kg_ha', '5', '10', '3', '20', '30', 'NFDRS-Th'],
+                ['15', 'activity', '21', 'western', '35', '35', '2', '45', 'kg_ha', '10', '15', '4', '25', '35', 'NFDRS-Th'],
+                ['20', 'activity', '22', 'western', '40', '30', '3', '40', 'kg_ha', '15', '20', '5', '30', '40', 'NFDRS-Th']
+                ]
+            
+            s1 = set(cols)
+            s2 = set(ConsumeInputSettings.AllSNames)
+            s2.add("burn_type")
+            s2.add("units")
+            cols.append('fm_type')
+            self.assertEqual(s1, s2)
+
+            infile = write_file(cols, row)
+            s = ConsumeInputSettings()
+            print(" ---> {}".format(infile[1]))
+            self.assertTrue(s.load_from_file(infile[1]))
+            self.assertEqual(s.burn_type, 'activity')
+            self.assertEqual(s.units, 'kg_ha')
+            self.assertEqual(s.fm_type, 'NFDRS-Th')
+            os.unlink(infile[1])
+
         write_simplest_natural()            
+        write_activity()
             
 
             
