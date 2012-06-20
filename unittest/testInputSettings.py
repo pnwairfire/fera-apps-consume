@@ -1,4 +1,6 @@
 import unittest
+import tempfile as tf
+import os
 from input_settings import ConsumeInputSettings
 
 
@@ -93,6 +95,66 @@ class TestInputSettings(unittest.TestCase):
         s.units = 'kg_ha'
         result = s.display_settings()
         ### - todo, no test here yet
+
+    '''
+    ActivityInputVarParameters = {
+        'slope' : ['Slope (%)',  [0,100], validate_range],
+        'windspeed' : ['Mid-flame windspeed (mph)', [0, 35], validate_range],
+        'days_since_rain' : ['Days since sgnf. rainfall', [0,365], validate_range],
+        'fm_10hr' : ['Fuel moisture (10-hr, %)', [0,100], validate_range],
+        'length_of_ignition' : ['Length of ignition (min.)', [0,10000], validate_range]}
+    NaturalInputVarParameters = {
+        'fuelbeds' : ['FCCS fuelbeds (ID#)', [1,10000], validate_range],
+        'area' : ['Fuelbed area (acres)', [0,1000000], validate_range],
+        'ecoregion' : ['Fuelbed ecoregion',  dd.list_valid_ecoregions(), validate_list],
+        'fm_1000hr' : ['Fuel moisture (1000-hr, %)', [0,140], validate_range],
+        'fm_duff' : ['Fuel moisture (duff, %)', [0,400], validate_range],
+        'can_con_pct' : ['Canopy consumption (%)', [0,100], validate_range],
+        'shrub_black_pct' : ['Shrub blackened (%)', [0,100], validate_range],
+        }
+    '''
+
+    def testLoadFromFile(self):        
+        def write_file(columns, values):
+            tmp_file = tf.mkstemp()
+            header = ",".join(columns)
+            header += '\n'
+            os.write(tmp_file[0], header)
+            for line in values:
+                out_line = ",".join(line)
+                out_line += '\n'
+                os.write(tmp_file[0], out_line)
+            os.close(tmp_file[0])
+            return tmp_file
+
+        def write_simplest_natural():
+            cols = ['area', 'burn_type', 'can_con_pct', 'ecoregion', 'fm_1000hr', 'fm_duff', 'fuelbeds', 'shrub_black_pct', 'units']
+            row = [['10', 'natural', '20', 'western', '30', '40', '1', '50', 'kg_ha']]
+            
+            s1 = set(cols)
+            s2 = set(ConsumeInputSettings.NaturalSNames)
+            s2.add("burn_type")
+            s2.add("units")
+            self.assertEqual(s1, s2)
+
+            infile = write_file(cols, row)
+            s = ConsumeInputSettings()
+            print(" ---> {}".format(infile[1]))
+            self.assertTrue(s.load_from_file(infile[1]))
+            self.assertEqual(s.burn_type, 'natural')
+            self.assertEqual(s.units, 'kg_ha')
+            self.assertEqual(s.get('area'), 10)
+            self.assertEqual(s.get('can_con_pct'), 20)
+            self.assertEqual(s.get('ecoregion'), 'western')
+            self.assertEqual(s.get('fm_1000hr'), 30)
+            self.assertEqual(s.get('fm_duff'), 40)
+            self.assertEqual(s.get('fuelbeds'), 1)
+            self.assertEqual(s.get('shrub_black_pct'), 50)
+            os.unlink(infile[1])
+
+        write_simplest_natural()            
+            
+
             
 
 
