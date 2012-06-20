@@ -279,7 +279,6 @@ class ConsumeInputSettings(object):
 
                     # - set the 'tagged' input items
                     valid_names = self._get_valid_column_names_no_attributes(burn_type)
-                    print(valid_names)
                     for name in valid_names:
                         self.set(name, contents.get(name))
                     result = True

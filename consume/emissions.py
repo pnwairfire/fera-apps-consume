@@ -438,7 +438,7 @@ class Emissions(util.FrozenClass):
                 print ("\nFCCS ID: " + str(fccs_ids[i])
                         + "\nArea:\t%.0f" % area[i] + " ac. (%.1f" % ha
                         + " ha)\nEmissions factor group: "
-                        + str(self._emissions_factor_groups.value[i])
+                        + str(self._emissions_factor_groups[i])
                         + "\nSPECIES\tFlaming\t\tSmoldering\tResidual\tTOTAL")
 
 
@@ -510,10 +510,10 @@ class Emissions(util.FrozenClass):
 
     def _wfeis_return(self,   fuelbed_fccs_ids = [1],
                               fuelbed_area_km2 = [0],
-                              fuelbed_ecoregion = 'western',
+                              fuelbed_ecoregion = ['western'],
                               fuel_moisture_1000hr_pct = 50,
                               fuel_moisture_duff_pct = 50,
-                              canopy_consumption_pct = -1,
+                              canopy_consumption_pct = 50,
                               shrub_blackened_pct = 50,
                               customized_fuel_loadings = [],
                               emission_species = 'all',
@@ -545,7 +545,7 @@ class Emissions(util.FrozenClass):
                        for consumption outputs: 'consumption', 'carbon'
 
         """
-
+        self._cons_object.burn_type = 'natural'
         self._cons_object.fuelbed_fccs_ids = fuelbed_fccs_ids
         self._cons_object.fuelbed_area_acres = [a * 247.105381 for a in fuelbed_area_km2]
         self._cons_object.fuelbed_ecoregion = fuelbed_ecoregion
