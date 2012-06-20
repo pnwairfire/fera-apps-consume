@@ -961,7 +961,7 @@ class FuelConsumption(util.FrozenClass):
                      formatting guidance.
 
         """
-        self.InSet.load(load_file, display=display)
+        self._settings.load_from_file(load_file)
 
     def _display_report(self, csv, stratum = 'all', incl_heat = False, ret=False):
         """Displays an in-shell report on consumption values"""

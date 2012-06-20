@@ -251,6 +251,7 @@ class ConsumeInputSettings(object):
                     print(valid_names)
                     for name in valid_names:
                         self.set(name, contents.get(name))
+                    result = True
                 else:
                     print("\nError: burn_type, units, and fm_type columns must have identical values.")
         else:

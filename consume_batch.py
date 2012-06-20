@@ -198,7 +198,7 @@ def get_column_data(results, key_string, index):
 def write_computed_results(results, columns, fuelbed_list, outfile):
     line = ""
     for number, fuelbed in enumerate(fuelbed_list):
-        line += fuelbed
+        line += str(fuelbed)
         for column in columns:
             line += ','
             line += str(get_column_data(results, column, number))
@@ -222,12 +222,12 @@ def run(csv_input, fuel_loadings=None, col_cfg=None):
     consumer = consume.FuelConsumption(fccs_file=get_input_file(fuel_loadings)) \
         if fuel_loadings else consume.FuelConsumption()
     consumer.load_scenario(csv_input, display=False)
-    if 1 == len(consumer.fuelbed_fccs_ids.value) and consumer.fuelbed_fccs_ids.value[0] == '':
+    if 0 == len(consumer.fuelbed_fccs_ids):
         consumer.fuelbed_fccs_ids = get_fuelbed_list(consumer)
     emissions = consume.Emissions(consumer)
     results = emissions.results()
     cols = CustomCol() if not col_cfg else CustomCol.from_file(col_cfg)
-    fuelbed_list = consumer.fuelbed_fccs_ids.value
+    fuelbed_list = consumer.fuelbed_fccs_ids
     write_results(results, cols, fuelbed_list)
     print("\nSuccess!!! Results are in \"{}\"".format(RESULTS_FILE))
     #print_results(results, cols)
