@@ -12,6 +12,8 @@ import os
 import argparse
 
 def print_default_column_config_xml(filename):
+    ''' output the text for a default column configuration file
+    '''
     DEFAULT_XML = r'''
 <!--
 This file allows you to customize the consume output results.

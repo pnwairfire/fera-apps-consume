@@ -98,35 +98,39 @@ def get_consumption_cols(results, cols):
                     out.append("consumption~{}~{}".format(i, s_col))
         return out
 
-def ren_parameters_col(col_in):
-    col_out = col_in.replace('parameters', "P", 1)
-    return col_out.replace("~", "_")
-
-def ren_emissions_col(col_in):
-    col_out = col_in.replace('emissions', "E", 1)
-    col_out = col_out.replace('nonwoody', 'nonwood', 1)
-    col_out = col_out.replace('woody fuels', 'wood', 1)
-    col_out = col_out.replace('litter-lichen-moss', 'llm', 1)
-    col_out = col_out.replace('ground fuels', 'ground', 1)
-    col_out = col_out.replace('stratum', 'st', 1)
-    return col_out.replace("~", "_")
-
-def ren_consumption_col(col_in):
-    col_out = col_in.replace('consumption', "C", 1)
-    ##    col_out = col_out.replace('canopy', 'canopy', 1)
-    ##    col_out = col_out.replace('shrub', 'shrub', 1)
-    col_out = col_out.replace('nonwoody', 'nonwood', 1)
-    col_out = col_out.replace('woody fuels', 'wood', 1)
-    col_out = col_out.replace('litter-lichen-moss', 'llm', 1)
-    col_out = col_out.replace('ground fuels', 'ground', 1)
-    col_out = col_out.replace('summary', 'sum', 1)
-    return col_out.replace("~", "_")
-
-def ren_heatrelease_col(col_in):
-    col_out = col_in.replace('heat release', "HR", 1)
-    return col_out.replace("~", "_")
 
 def rename_columns(cols):
+    ''' The number of possible output columns is unwieldy and long column names exacerbate
+        the problem. Shorten the column names.
+    '''
+    def ren_parameters_col(col_in):
+        col_out = col_in.replace('parameters', "P", 1)
+        return col_out.replace("~", "_")
+
+    def ren_emissions_col(col_in):
+        col_out = col_in.replace('emissions', "E", 1)
+        col_out = col_out.replace('nonwoody', 'nonwood', 1)
+        col_out = col_out.replace('woody fuels', 'wood', 1)
+        col_out = col_out.replace('litter-lichen-moss', 'llm', 1)
+        col_out = col_out.replace('ground fuels', 'ground', 1)
+        col_out = col_out.replace('stratum', 'st', 1)
+        return col_out.replace("~", "_")
+
+    def ren_consumption_col(col_in):
+        col_out = col_in.replace('consumption', "C", 1)
+        ##    col_out = col_out.replace('canopy', 'canopy', 1)
+        ##    col_out = col_out.replace('shrub', 'shrub', 1)
+        col_out = col_out.replace('nonwoody', 'nonwood', 1)
+        col_out = col_out.replace('woody fuels', 'wood', 1)
+        col_out = col_out.replace('litter-lichen-moss', 'llm', 1)
+        col_out = col_out.replace('ground fuels', 'ground', 1)
+        col_out = col_out.replace('summary', 'sum', 1)
+        return col_out.replace("~", "_")
+
+    def ren_heatrelease_col(col_in):
+        col_out = col_in.replace('heat release', "HR", 1)
+        return col_out.replace("~", "_")
+    #-------------------------------------------------------------------------------
     new_cols = []
     for col in cols:
         new_col = ""
