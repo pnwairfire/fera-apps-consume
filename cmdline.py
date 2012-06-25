@@ -54,18 +54,46 @@ Save the file to a name of your choice to avoid having it overwritten.
         print("\nSuccess: Consume column configuration file written - {}\n".format(filename))
 
 def make_parser():
+    USAGE = r'''
+Generate consumption, emissions, and heat release data.
+
+The Consume batch calculator can be used 2 different ways and with a number of different
+options. In either case, an input file specifying additional parameters is necessary.
+
+1.) Prompt for inputs. This path will interactively prompt for required input data.
+
+2.) Supply all inputs via command line arguments. As mentioned above, the only required argument 
+is an input file in comma-separated (csv) format. The input file can contain 1 of 2 parameter sets
+depending on the burn_type specified. See input_natural.csv and input_activity.csv for examples of the
+required input parameters.
+
+Additional options, detailed below, are available when all inputs are specified via command line arguments.
+    '''
     parser = argparse.ArgumentParser(
-        description="Generate consumption, emissions, and heat release data."
+        description=USAGE,
+        formatter_class=argparse.RawDescriptionHelpFormatter
     )
-    parser.add_argument('-c', '--csv', action='store', nargs=1, dest='csv_file',
-        help='Specify the csv input file for consume to use')
-    parser.add_argument('-x', '--xml_column_cfg', action='store', nargs=1, dest='col_cfg_file',
-        help='Specify the output column configuration file for consume to use')
-    parser.add_argument('-f', '--fuel_loadings', action='store', nargs=1, dest='fuel_loadings_file',
+    # - required parameter
+    parser.add_argument('-c', action='store', nargs=1, dest='csv_file', required=True,
+        help='REQUIRED - Specify the csv input file. See input_natural.csv and input_activity.csv \
+        for examples of the required parameter sets')
+
+    # - invoke the prompt-for-input path
+    parser.add_argument('-p', action='store_true', dest='do_prompt', default=False,
+        help='Prompt for required inputs (burn_type, input file, 1000hr fuel moisture (activity))')
+
+    # - specify an alternative loadings file
+    parser.add_argument('-f', action='store', nargs=1, dest='fuel_loadings_file',
         help='Specify the fuel loadings file for consume to use. Run the FCCS batch processor over \
             the fuelbeds for which you want to generate consumption/emission results to create\
             a fuel loadings file.')
-    parser.add_argument('-g', '--generate_column_config', action='store', nargs='?',
+
+    # - customize the output column configuration
+    parser.add_argument('-x', action='store', nargs=1, dest='col_cfg_file',
+        help='Specify the output column configuration file for consume to use')
+
+    # - generate a default column configuration file from which to work
+    parser.add_argument('-g', action='store', nargs='?',
         default="", const="output_config.xml", dest='gen_col_cfg',
         help='This option will print a default column configuration xml file. The output file is \
             called \"output_config.xml\". Modify this file as needed and save it to another name. \
@@ -83,10 +111,15 @@ class ConsumeParser(object):
             parser.parse_args(['--help'])
         else:
             args = parser.parse_args(argv[1:])
+            print(args)
 
             # Generate a column configuration file
             if args.gen_col_cfg:
                 print_default_column_config_xml(args.gen_col_cfg)
+                sys.exit(0)
+
+            if args.do_prompt:
+                print('\nPrompting for required inputs...')
                 sys.exit(0)
 
             # check for valid input file and optional fuel loadings file
