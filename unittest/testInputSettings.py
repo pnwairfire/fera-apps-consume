@@ -48,7 +48,11 @@ class TestInputSettings(unittest.TestCase):
         self.assertEqual('MEAS-Th', s.fm_type)
 
     def testAddSettings(self):
-        ''' Add settings and verify completeness '''
+        ''' Add settings and check:
+                - need to specify burn_type first
+                - individual values will be turned into a sequence if necessary
+                - the object knows when it has all required settings
+        '''
         s = ConsumeInputSettings()
         items = [1, 2, 4]
         self.assertFalse(s.set('fuelbeds', items))  # need to specify burn_type before adding settings
@@ -72,6 +76,7 @@ class TestInputSettings(unittest.TestCase):
         self.assertTrue(s.set('shrub_black_pct', [1, 2, 4]))
         #self.assertTrue(s.set('efg', [1, 2, 4]))
         s.fm_type = 'MEAS-Th'
+        self.assertFalse(s.settings_are_complete())
         s.units = 'kg_ha'
         self.assertTrue(s.settings_are_complete())
 
