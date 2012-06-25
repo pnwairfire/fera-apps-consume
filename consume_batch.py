@@ -225,16 +225,15 @@ def get_fuelbed_list(consumer):
 def run(csv_input, fuel_loadings=None, col_cfg=None):
     consumer = consume.FuelConsumption(fccs_file=get_input_file(fuel_loadings)) \
         if fuel_loadings else consume.FuelConsumption()
-    consumer.load_scenario(csv_input, display=False)
-    if 0 == len(consumer.fuelbed_fccs_ids):
-        consumer.fuelbed_fccs_ids = get_fuelbed_list(consumer)
-    emissions = consume.Emissions(consumer)
-    results = emissions.results()
-    cols = CustomCol() if not col_cfg else CustomCol.from_file(col_cfg)
-    fuelbed_list = consumer.fuelbed_fccs_ids
-    write_results(results, cols, fuelbed_list)
-    print("\nSuccess!!! Results are in \"{}\"".format(RESULTS_FILE))
-    #print_results(results, cols)
+    if consumer.load_scenario(csv_input, display=False):
+        if 0 == len(consumer.fuelbed_fccs_ids):
+            consumer.fuelbed_fccs_ids = get_fuelbed_list(consumer)
+        emissions = consume.Emissions(consumer)
+        results = emissions.results()
+        cols = CustomCol() if not col_cfg else CustomCol.from_file(col_cfg)
+        fuelbed_list = consumer.fuelbed_fccs_ids
+        write_results(results, cols, fuelbed_list)
+        print("\nSuccess!!! Results are in \"{}\"".format(RESULTS_FILE))
 
 #-------------------------------------------------------------------------------
 # Main

@@ -111,7 +111,6 @@ class ConsumeParser(object):
             parser.parse_args(['--help'])
         else:
             args = parser.parse_args(argv[1:])
-            print(args)
 
             # Generate a column configuration file
             if args.gen_col_cfg:

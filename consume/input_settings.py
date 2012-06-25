@@ -49,7 +49,6 @@ class ConsumeInputSettings(object):
     Settings for a consume run.
     burn_type dictates how many settings are necessary
     There are no defaults.
-
     '''
     #keyword, name, internal name, permitted values, validator function
     ActivityInputVarParameters = {
@@ -112,12 +111,18 @@ class ConsumeInputSettings(object):
     def fm_type(self): return self._fm_type
     @fm_type.setter
     def fm_type(self, value):
-        if value in dd.list_valid_fm_types():
-            self._fm_type = value
+        if self._burn_type:
+            if self._burn_type == 'activity':
+                if value in dd.list_valid_fm_types():
+                    self._fm_type = value
+                else:
+                    print("\nError: the only permitted values for fm_type are:")
+                    for i in dd.list_valid_fm_types():
+                        print("\t{}".format(i))
+            else:
+                print("\nError: fm_type is valid only when the burn_type is 'activity'.")
         else:
-            print("Error: the only permitted values for fm_type are:")
-            for i in dd.list_valid_fm_types():
-                print("\t{}".format(i))
+            print("\nError: burn_type must be set first as the valid parameter set depends on it.")
 
     def set(self, name, sequence):
         ''' All "tagged" settings get set here. burn_type must be specified prior to 
@@ -269,9 +274,14 @@ class ConsumeInputSettings(object):
                 # - all of the values should be the same in the following 3 columns
                 bt_check = self._column_content_identical(contents.burn_type)
                 unit_check = self._column_content_identical(contents.units)
-                fm_type_check = self._column_content_identical(contents.fm_type) if 'activity' == burn_type else True
+                eco_check_must_be_western = True
+                fm_type_check = True
+                if 'activity' == burn_type:
+                    fm_type_check = self._column_content_identical(contents.fm_type)
+                    eco_check_must_be_western = self._column_content_identical(contents.ecoregion)
+                    eco_check_must_be_western = eco_check_must_be_western and 'western' == contents.ecoregion[0]
                 
-                if bt_check and unit_check and fm_type_check:
+                if bt_check and unit_check and fm_type_check and eco_check_must_be_western:
                     # - assign the single-input-value / property items
                     self.burn_type = burn_type
                     self.units = contents.units[0]
@@ -284,6 +294,7 @@ class ConsumeInputSettings(object):
                     result = True
                 else:
                     print("\nError: burn_type, units, and fm_type columns must have identical values.")
+                    print("Additionally, if the burn_type is 'activity', the ecoregion must be 'western'.")
         else:
             print("\nError: filename '{}' does not exist".format(filename))
         return result

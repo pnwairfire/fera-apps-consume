@@ -2,6 +2,8 @@ import unittest
 import tempfile as tf
 import os
 from input_settings import ConsumeInputSettings
+import pandas as pan
+
 
 
 class TestInputSettings(unittest.TestCase):
@@ -115,72 +117,90 @@ class TestInputSettings(unittest.TestCase):
     '''
 
     def testLoadFromFile(self):        
-        def write_file(columns, values):
+        ### - natural test data
+        ncols = ['area', 'burn_type', 'can_con_pct', 'ecoregion', 'fm_1000hr', 'fm_duff', 'fuelbeds', 'shrub_black_pct', 'units']
+        nrows = [
+            ['10', 'natural', '20', 'western', '30', '40', '1', '50', 'kg_ha'],
+            ['20', 'natural', '30', 'western', '40', '50', '1', '60', 'kg_ha']]
+            
+        ### - activity test data
+        acols = ['area', 'burn_type', 'can_con_pct', 'ecoregion', 'fm_1000hr', 'fm_duff', \
+            'fuelbeds', 'shrub_black_pct', 'units', 'slope', 'windspeed', 'days_since_rain', \
+            'fm_10hr', 'length_of_ignition', 'fm_type']
+        arows = [
+            ['10', 'activity', '20', 'western', '30', '40', '1', '50', 'kg_ha', '5', '10', '3', '20', '30', 'NFDRS-Th'],
+            ['15', 'activity', '21', 'western', '35', '35', '2', '45', 'kg_ha', '10', '15', '4', '25', '35', 'NFDRS-Th'],
+            ['20', 'activity', '22', 'western', '40', '30', '3', '40', 'kg_ha', '15', '20', '5', '30', '40', 'NFDRS-Th']
+            ]
+            
+        nat_data = pan.DataFrame(nrows, columns=ncols)
+        act_data =  pan.DataFrame(arows, columns=acols)
+       
+        def write_file(in_data):
             tmp_file = tf.mkstemp()
-            header = ",".join(columns)
-            header += '\n'
-            os.write(tmp_file[0], header)
-            for line in values:
-                out_line = ",".join(line)
-                out_line += '\n'
-                os.write(tmp_file[0], out_line)
+            in_data.to_csv(tmp_file[1], index=False)
             os.close(tmp_file[0])
             return tmp_file
 
-        def load_simplest_natural():
-            cols = ['area', 'burn_type', 'can_con_pct', 'ecoregion', 'fm_1000hr', 'fm_duff', 'fuelbeds', 'shrub_black_pct', 'units']
-            row = [['10', 'natural', '20', 'western', '30', '40', '1', '50', 'kg_ha']]
-            
-            s1 = set(cols)
+        def load_natural():
+            ''' Write a temp file, load the temp file and verify that the settings are equal to the 
+                values written. Close tempfile
+            '''
+            s1 = set(nat_data.columns)
             s2 = set(ConsumeInputSettings.NaturalSNames)
             s2.add("burn_type")
             s2.add("units")
             self.assertEqual(s1, s2)
 
-            infile = write_file(cols, row)
+            infile = write_file(nat_data)
             s = ConsumeInputSettings()
             self.assertTrue(s.load_from_file(infile[1]))
             self.assertEqual(s.burn_type, 'natural')
             self.assertEqual(s.units, 'kg_ha')
-            self.assertEqual(s.get('area'), 10)
-            self.assertEqual(s.get('can_con_pct'), 20)
-            self.assertEqual(s.get('ecoregion'), 'western')
-            self.assertEqual(s.get('fm_1000hr'), 30)
-            self.assertEqual(s.get('fm_duff'), 40)
-            self.assertEqual(s.get('fuelbeds'), 1)
-            self.assertEqual(s.get('shrub_black_pct'), 50)
+            self.assertEqual(list(s.get('area')), [float(x) for x in list(nat_data.area)])
+            self.assertEqual(list(s.get('can_con_pct')), [float(x) for x in list(nat_data.can_con_pct)])
+            self.assertEqual(list(s.get('ecoregion')), list(nat_data.ecoregion))
+            self.assertEqual(list(s.get('fm_1000hr')), [float(x) for x in list(nat_data.fm_1000hr)])
+            self.assertEqual(list(s.get('fm_duff')), [float(x) for x in list(nat_data.fm_duff)])
+            self.assertEqual(list(s.get('fuelbeds')), [float(x) for x in list(nat_data.fuelbeds)])
+            self.assertEqual(list(s.get('shrub_black_pct')), [float(x) for x in list(nat_data.shrub_black_pct)])
             os.unlink(infile[1])
 
         def load_activity():
-            cols = ['area', 'burn_type', 'can_con_pct', 'ecoregion', 'fm_1000hr', 'fm_duff', 'fuelbeds', 'shrub_black_pct', 'units']
-            cols.append('slope')
-            cols.append('windspeed')
-            cols.append('days_since_rain')
-            cols.append('fm_10hr')
-            cols.append('length_of_ignition')
-            row = [
-                ['10', 'activity', '20', 'western', '30', '40', '1', '50', 'kg_ha', '5', '10', '3', '20', '30', 'NFDRS-Th'],
-                ['15', 'activity', '21', 'western', '35', '35', '2', '45', 'kg_ha', '10', '15', '4', '25', '35', 'NFDRS-Th'],
-                ['20', 'activity', '22', 'western', '40', '30', '3', '40', 'kg_ha', '15', '20', '5', '30', '40', 'NFDRS-Th']
-                ]
-            
-            s1 = set(cols)
+            ''' Write a temp file, load the temp file and verify that the settings are equal to the 
+                values written. Close tempfile
+            '''
+            s1 = set(act_data.columns)
             s2 = set(ConsumeInputSettings.AllSNames)
             s2.add("burn_type")
             s2.add("units")
-            cols.append('fm_type')
+            s2.add("fm_type")
             self.assertEqual(s1, s2)
 
-            infile = write_file(cols, row)
+            infile = write_file(act_data)
             s = ConsumeInputSettings()
-            print(" ---> {}".format(infile[1]))
             self.assertTrue(s.load_from_file(infile[1]))
             self.assertEqual(s.burn_type, 'activity')
             self.assertEqual(s.units, 'kg_ha')
             self.assertEqual(s.fm_type, 'NFDRS-Th')
-            os.unlink(infile[1])
 
-        load_simplest_natural()            
+            self.assertEqual(list(s.get('area')), [float(x) for x in list(act_data.area)])
+            self.assertEqual(list(s.get('can_con_pct')), [float(x) for x in list(act_data.can_con_pct)])
+            self.assertEqual(list(s.get('ecoregion')), list(act_data.ecoregion))
+            self.assertEqual(list(s.get('fm_1000hr')), [float(x) for x in list(act_data.fm_1000hr)])
+            self.assertEqual(list(s.get('fm_duff')), [float(x) for x in list(act_data.fm_duff)])
+            self.assertEqual(list(s.get('fuelbeds')), [float(x) for x in list(act_data.fuelbeds)])
+            self.assertEqual(list(s.get('shrub_black_pct')), [float(x) for x in list(act_data.shrub_black_pct)])
+
+            self.assertEqual(list(s.get('slope')), [float(x) for x in list(act_data.slope)])
+            self.assertEqual(list(s.get('windspeed')), [float(x) for x in list(act_data.windspeed)])
+            self.assertEqual(list(s.get('days_since_rain')), [float(x) for x in list(act_data.days_since_rain)])
+            self.assertEqual(list(s.get('fm_10hr')), [float(x) for x in list(act_data.fm_10hr)])
+            self.assertEqual(list(s.get('length_of_ignition')), [float(x) for x in list(act_data.length_of_ignition)])
+            
+            os.unlink(infile[1])
+        # - Start function ----------------------------------------------------
+        load_natural()            
         load_activity()
             
 
