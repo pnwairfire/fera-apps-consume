@@ -8,16 +8,17 @@
 
 # - run via batch file that sets PYTHONPATH correctly
 import sys
+import os
 def pp():
-    new_path = []
-    for i in sys.path:
-        if not 'fera_src' in i:
-            new_path.append(i)
-    sys.path = new_path
-    sys.path.append('c:/Users/ks/Google Drive/consume4.2')
+    curdir = os.path.abspath(os.path.curdir)
+    pardir = os.path.abspath(os.path.pardir)
+    if pardir not in sys.path:
+        sys.path.append(pardir)
+    if curdir not in sys.path:
+        sys.path.append(curdir)
+    print(sys.path)
 
 pp()
-import os
 import consume
 from tester import DataObj as compareCSV
 
