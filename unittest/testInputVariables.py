@@ -1,6 +1,5 @@
 import unittest
 from consume import input_variables as iv
-import nose
 import helper
 
 class TestInputVariables(unittest.TestCase):

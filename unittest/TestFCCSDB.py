@@ -2,7 +2,6 @@
 
 import unittest
 import fccs_db
-import nose
 import re
 import helper
 
@@ -28,17 +27,17 @@ class TestFCCSDB(unittest.TestCase):
     """
     def test_data_info(self):
         di = self.db.data_source_info
-        nose.tools.ok_(di.generator_name == 'FCCS', "Expecting 'FCCS' got: {}".format(di.generator_name))
-        nose.tools.ok_(di.generator_version == '2.2', "Expecting '2.2' got: {}".format(di.generator_version))
-        nose.tools.ok_(di.date_generated == '10/05/2011', "Expecting '10/05/2011' got: {}".format(di.date_generated))
+        self.assertTrue(di.generator_name == 'FCCS', "Expecting 'FCCS' got: {}".format(di.generator_name))
+        self.assertTrue(di.generator_version == '2.2', "Expecting '2.2' got: {}".format(di.generator_version))
+        self.assertTrue(di.date_generated == '10/05/2011', "Expecting '10/05/2011' got: {}".format(di.date_generated))
 
     def short_info(self):
         short_info = self.db.info(1, detail=False, ret=True)
         chunks = short_info.split('\n')
-        nose.tools.ok_(5 == len(chunks), "Got: {}".format(len(chunks)))
-        nose.tools.ok_('1' in chunks[1], "Got: {}".format(chunks[1]))
-        nose.tools.ok_('Site name' in chunks[2], "Got: {}".format(chunks[2]))
-        nose.tools.ok_('Site description' in chunks[4], "Got: {}".format(chunks[4]))
+        self.assertTrue(5 == len(chunks), "Got: {}".format(len(chunks)))
+        self.assertTrue('1' in chunks[1], "Got: {}".format(chunks[1]))
+        self.assertTrue('Site name' in chunks[2], "Got: {}".format(chunks[2]))
+        self.assertTrue('Site description' in chunks[4], "Got: {}".format(chunks[4]))
 
     def long_info(self):
         expected = {
@@ -117,13 +116,13 @@ class TestFCCSDB(unittest.TestCase):
                             "\"{}\" {} {}".format(key, float(expected[key]),
                             float(match.group(0))))
                     else:
-                        nose.tools.ok_(False, "Missing key \"{}\"".format(key))
+                        self.assertTrue(False, "Missing key \"{}\"".format(key))
 
     def check_info(self):
         check_good = self.db.info(1, detail=False, ret=True)
-        nose.tools.ok_('not found' not in check_good)
+        self.assertTrue('not found' not in check_good)
         check_bad = self.db.info(14, detail=False, ret=True)
-        nose.tools.ok_('not found' in check_bad)
+        self.assertTrue('not found' in check_bad)
 
     def testinfo(self):
         self.check_info()
