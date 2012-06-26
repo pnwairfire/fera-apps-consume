@@ -1,7 +1,7 @@
 import unittest
 import tempfile as tf
 import os
-from input_settings import ConsumeInputSettings
+from consume.input_settings import ConsumeInputSettings
 import pandas as pan
 
 
