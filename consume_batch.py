@@ -11,12 +11,12 @@ import consume
 import os
 import sys
 from custom_col import CustomCol
-import module_locator
+import batch_locator
 
 RESULTS_FILE = 'batch_results.csv'
 
 def can_run():
-    mod_location = module_locator.module_path()
+    mod_location = batch_locator.module_path()
     cwd = os.getcwd()
     return True if mod_location == cwd else False
 

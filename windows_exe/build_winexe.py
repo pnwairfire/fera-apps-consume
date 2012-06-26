@@ -52,6 +52,7 @@ def copy_consume_source():
         '../consume/fccs_db.py',
         '../consume/fuel_consumption.py',
         '../consume/input_variables.py',
+        '../consume/input_settings.py',
         '../consume/util_consume.py',
         VERSION_FILE
     ]
@@ -65,6 +66,7 @@ def copy_batch_source():
     BATCH_SOURCE_FILES = [
         '../cmdline.py',
         '../consume_batch.py',
+        '../batch_locator.py',
         '../custom_col.py'
     ]
     copy_files(BATCH_SOURCE_FILES, PKG_DIR)
