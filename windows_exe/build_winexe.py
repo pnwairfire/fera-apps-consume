@@ -126,6 +126,9 @@ def run_enclosed(setup, teardown):
     yield
     teardown(cwd)
 
+def do_trim_warning():
+    print("\n\nNOTE: py2exe appears to try and include *everything* in the lib/site-packages dir.")
+    print("Come up with a strategy to trim it down.\n.")
 
 #-------------------------------------------------------------------------------
 # Start
