@@ -213,7 +213,6 @@ class ConsumeInputSettings(object):
         '''
         valid_names = self._get_valid_column_names_no_attributes(burn_type)
         if valid_names:
-            valid_names.append('burn_type')
             valid_names.append('units')
             if 'activity' == burn_type: valid_names.append('fm_type')
         return valid_names
@@ -259,44 +258,40 @@ class ConsumeInputSettings(object):
         return 1 == len(column.unique())
             
     def load_from_file(self, filename):            
-        ''' Load settings from a csv file. Some anomalies:
-             - some values are not settable on a per-fuelbed basis. Given the csv
-               format, they get specified for every fuelbed and validation ensures
-               that they are all the same
-             - The burn_type specified dictates the set of valid columns. The 
-               'activity' column set is a superset of the 'natural' set.
+        ''' Load settings from a csv file.
+            burn_type MUST be set at this point
         '''
         result = False
-        if os.path.exists(filename):
-            contents = pan.read_csv(filename)    
-            burn_type = contents.burn_type[0]
-            if self._valid_file_columns(burn_type, contents.columns):
-                # - all of the values should be the same in the following 3 columns
-                bt_check = self._column_content_identical(contents.burn_type)
-                unit_check = self._column_content_identical(contents.units)
-                eco_check_must_be_western = True
-                fm_type_check = True
-                if 'activity' == burn_type:
-                    fm_type_check = self._column_content_identical(contents.fm_type)
-                    eco_check_must_be_western = self._column_content_identical(contents.ecoregion)
-                    eco_check_must_be_western = eco_check_must_be_western and 'western' == contents.ecoregion[0]
-                
-                if bt_check and unit_check and fm_type_check and eco_check_must_be_western:
-                    # - assign the single-input-value / property items
-                    self.burn_type = burn_type
-                    self.units = contents.units[0]
-                    if 'activity' == burn_type: self.fm_type = contents.fm_type[0]
+        if self.burn_type:
+            if os.path.exists(filename):
+                contents = pan.read_csv(filename)    
+                if self._valid_file_columns(self.burn_type, contents.columns):
+                    # - all of the values should be the same in the following 3 columns
+                    unit_check = self._column_content_identical(contents.units)
+                    fm_type_check = True
+                    if 'activity' == self.burn_type:
+                        fm_type_check = self._column_content_identical(contents.fm_type)
+                        eco_check_must_be_western = self._column_content_identical(contents.ecoregion)
+                        # - brute force, ensure ecoregion is western for activity burn_types
+                        contents.ecoregion = 'western'
+                    
+                    if unit_check and fm_type_check:
+                        # - assign the single-input-value / property items
+                        self.units = contents.units[0]
+                        if 'activity' == self.burn_type: self.fm_type = contents.fm_type[0]
 
-                    # - set the 'tagged' input items
-                    valid_names = self._get_valid_column_names_no_attributes(burn_type)
-                    for name in valid_names:
-                        self.set(name, contents.get(name))
-                    result = True
-                else:
-                    print("\nError: burn_type, units, and fm_type columns must have identical values.")
-                    print("Additionally, if the burn_type is 'activity', the ecoregion must be 'western'.")
+                        # - set the 'tagged' input items
+                        valid_names = self._get_valid_column_names_no_attributes(self.burn_type)
+                        for name in valid_names:
+                            self.set(name, contents.get(name))
+                        result = True
+                    else:
+                        print("\nError: burn_type, units, and fm_type columns must have identical values.")
+                        print("Additionally, if the burn_type is 'activity', the ecoregion must be 'western'.")
+            else:
+                print("\nError: filename '{}' does not exist".format(filename))
         else:
-            print("\nError: filename '{}' does not exist".format(filename))
+            print("\nError: burn_type must be set prior to loading an input file")
         return result
 
 

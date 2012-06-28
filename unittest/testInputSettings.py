@@ -107,19 +107,19 @@ class TestInputSettings(unittest.TestCase):
     #   File loading tests
     # -------------------------------------------------------------------------
     ### - natural test data
-    ncols = ['area', 'burn_type', 'can_con_pct', 'ecoregion', 'fm_1000hr', 'fm_duff', 'fuelbeds', 'shrub_black_pct', 'units']
+    ncols = ['area', 'can_con_pct', 'ecoregion', 'fm_1000hr', 'fm_duff', 'fuelbeds', 'shrub_black_pct', 'units']
     nrows = [
-        ['10', 'natural', '20', 'western', '30', '40', '1', '50', 'kg_ha'],
-        ['20', 'natural', '30', 'western', '40', '50', '1', '60', 'kg_ha']]
+        ['10', '20', 'western', '30', '40', '1', '50', 'kg_ha'],
+        ['20', '30', 'western', '40', '50', '1', '60', 'kg_ha']]
         
     ### - activity test data
-    acols = ['area', 'burn_type', 'can_con_pct', 'ecoregion', 'fm_1000hr', 'fm_duff', \
+    acols = ['area', 'can_con_pct', 'ecoregion', 'fm_1000hr', 'fm_duff', \
         'fuelbeds', 'shrub_black_pct', 'units', 'slope', 'windspeed', 'days_since_rain', \
         'fm_10hr', 'length_of_ignition', 'fm_type']
     arows = [
-        ['10', 'activity', '20', 'western', '30', '40', '1', '50', 'kg_ha', '5', '10', '3', '20', '30', 'NFDRS-Th'],
-        ['15', 'activity', '21', 'western', '35', '35', '2', '45', 'kg_ha', '10', '15', '4', '25', '35', 'NFDRS-Th'],
-        ['20', 'activity', '22', 'western', '40', '30', '3', '40', 'kg_ha', '15', '20', '5', '30', '40', 'NFDRS-Th']
+        ['10', '20', 'western', '30', '40', '1', '50', 'kg_ha', '5', '10', '3', '20', '30', 'NFDRS-Th'],
+        ['15', '21', 'western', '35', '35', '2', '45', 'kg_ha', '10', '15', '4', '25', '35', 'NFDRS-Th'],
+        ['20', '22', 'western', '40', '30', '3', '40', 'kg_ha', '15', '20', '5', '30', '40', 'NFDRS-Th']
         ]
         
     nat_data = pan.DataFrame(nrows, columns=ncols)
@@ -138,12 +138,12 @@ class TestInputSettings(unittest.TestCase):
         data = TestInputSettings.nat_data
         s1 = set(data.columns)
         s2 = set(ConsumeInputSettings.NaturalSNames)
-        s2.add("burn_type")
         s2.add("units")
         self.assertEqual(s1, s2)
 
         infile = self.write_file(data)
         s = ConsumeInputSettings()
+        s.burn_type = 'natural'
         self.assertTrue(s.load_from_file(infile[1]))
         self.assertEqual(s.burn_type, 'natural')
         self.assertEqual(s.units, 'kg_ha')
@@ -163,13 +163,13 @@ class TestInputSettings(unittest.TestCase):
         data = TestInputSettings.act_data
         s1 = set(data.columns)
         s2 = set(ConsumeInputSettings.AllSNames)
-        s2.add("burn_type")
         s2.add("units")
         s2.add("fm_type")
         self.assertEqual(s1, s2)
 
         infile = self.write_file(data)
         s = ConsumeInputSettings()
+        s.burn_type = 'activity'
         self.assertTrue(s.load_from_file(infile[1]))
         self.assertEqual(s.burn_type, 'activity')
         self.assertEqual(s.units, 'kg_ha')
@@ -207,7 +207,6 @@ class TestInputSettings(unittest.TestCase):
         
         data = TestInputSettings.act_data
         do_failed_load(data, 'units', 'tons_ac')
-        do_failed_load(data, 'burn_type', 'natural')
         do_failed_load(data, 'fm_type', 'MEAS-Th')
         do_failed_load(data, 'ecoregion', 'southern')
             

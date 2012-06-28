@@ -121,11 +121,11 @@ class ConsumeParser(object):
         self._csv_file = None
         self._fuel_loadings_file = None
         self._col_cfg_file = None
-        self.do_parse(argv)
+        self.do_parse(argv[1:]) ### - remove the calling script name
     
     def do_parse(self, argv):
         parser = make_parser()
-        if 1 == len(argv):
+        if 0 == len(argv):
             parser.parse_args(['--help'])
         else:
             args = parser.parse_args(argv)

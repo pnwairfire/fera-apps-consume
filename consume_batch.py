@@ -222,9 +222,10 @@ def get_fuelbed_list(consumer):
     return [str(i[0]) for i in consumer.FCCS.data if MAX_REFERENCE_FUELBED >= i[0]]
 
 
-def run(csv_input, fuel_loadings=None, col_cfg=None):
+def run(burn_type, csv_input, fuel_loadings=None, col_cfg=None):
     consumer = consume.FuelConsumption(fccs_file=get_input_file(fuel_loadings)) \
         if fuel_loadings else consume.FuelConsumption()
+    consumer.burn_type = burn_type
     if consumer.load_scenario(csv_input, display=False):
         if 0 == len(consumer.fuelbed_fccs_ids):
             consumer.fuelbed_fccs_ids = get_fuelbed_list(consumer)
@@ -242,7 +243,7 @@ import cmdline
 def main():
     if can_run():
         parser = cmdline.ConsumeParser(sys.argv)
-        run(parser.csv_file, parser.fuel_loadings_file, parser.col_cfg_file)
+        run(parser.burn_type, parser.csv_file, parser.fuel_loadings_file, parser.col_cfg_file)
     else:
         print("Error: this program must be run from the location of the exe/script.")
 
