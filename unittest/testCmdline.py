@@ -15,18 +15,18 @@ class TestCmdline(unittest.TestCase):
         pass
 
     def testPassing(self):
-        p = cmd.ConsumeParser(['activity', 'consume_batch.py'])
+        p = cmd.ConsumeParser(['app_name_placeholder', 'activity', 'consume_batch.py'])
         self.assertEqual(p.csv_file, os.path.abspath('consume_batch.py'))
         self.assertEqual(p.burn_type, 'activity')
         
     def testPassingWithLoadingsFile(self):
-        p = cmd.ConsumeParser(['activity', 'consume_batch.py', '-f', 'consume_batch.py'])
+        p = cmd.ConsumeParser(['app_name_placeholder', 'activity', 'consume_batch.py', '-f', 'consume_batch.py'])
         self.assertEqual(p.burn_type, 'activity')
         self.assertEqual(p.csv_file, os.path.abspath('consume_batch.py'))
         self.assertEqual(p.fuel_loadings_file, os.path.abspath('consume_batch.py'))
         
     def testPassingWithLoadingsFileAndColCfgFile(self):
-        p = cmd.ConsumeParser(['activity', 'consume_batch.py', '-f', 'consume_batch.py', '-x', 'consume_batch.py'])
+        p = cmd.ConsumeParser(['app_name_placeholder', 'activity', 'consume_batch.py', '-f', 'consume_batch.py', '-x', 'consume_batch.py'])
         self.assertEqual(p.burn_type, 'activity')
         self.assertEqual(p.csv_file, os.path.abspath('consume_batch.py'))
         self.assertEqual(p.fuel_loadings_file, os.path.abspath('consume_batch.py'))
