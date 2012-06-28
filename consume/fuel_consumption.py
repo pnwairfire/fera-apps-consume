@@ -523,6 +523,13 @@ import con_calc_natural as ccn
 import con_calc_activity as cca
 import input_settings as settings
 
+### - uncomment to enable basic file tracing of just the consume calls
+#import os
+#import sys
+#import sysconfig
+#sys.settrace(util.trace_calls)
+
+
 # Variables that need to be defined for these equations
 #snow_free_days = 30 # need for curing eval, if still valid
 

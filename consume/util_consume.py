@@ -5,7 +5,8 @@ import data_desc as dd
 class FrozenClass(object):
     '''
     Inherit from this class to make sure attributes are set in one
-    place and there are not typos
+    place and there are not typos. Call _freeze() as the last item
+    of business in __init__().
 
     '''
     __isfrozen = False
@@ -15,7 +16,20 @@ class FrozenClass(object):
         object.__setattr__(self, key, value)
 
     def _freeze(self):
-        self.__isfrozen = True        
+        self.__isfrozen = True
+
+def trace_calls(frame, event, arg):
+    ''' Derived from:
+        http://www.doughellmann.com/PyMOTW/sys/tracing.html
+    '''
+    if event == 'call':
+        co = frame.f_code
+        func_name = co.co_name
+        func_filename = co.co_filename
+        if 'consume' in func_filename:
+            # - target our code, ignore other calls
+            print("{} : {}".format(func_name, func_filename))
+        
 
 
 def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs, cons_debug_data=""):
