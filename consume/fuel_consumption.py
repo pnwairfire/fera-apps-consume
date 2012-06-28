@@ -514,12 +514,10 @@ Index 1           Index 2              Index 3                     Index 4      
 -----------------------------------------------------------------------------------------------------------------------------
 
 """
-
 import math
 import numpy as np
 import fccs_db as fccs
 import data_desc as dd
-import input_variables as iv
 import util_consume as util
 import con_calc_natural as ccn
 import con_calc_activity as cca
@@ -779,40 +777,6 @@ class FuelConsumption(util.FrozenClass):
 
         self._freeze()
 
-    '''
-    delete?
-    def load_example(self):
-        """Load example scenario data.
-
-        Loads an example 'natural' burn scenario (mostly for testing), setting
-        input parameters (fuelbeds, area, ecoregion, 1000-hr fuel moisture,
-        duff fuel moisture, percent canopy consumed, and percent blackened
-        shrub).
-
-        """
-        self.burn_type = 'natural'
-        self.fuelbed_fccs_ids = [27, 18]
-        self.fuelbed_area_acres = [100.0, 100.0]
-        self.fuelbed_ecoregion = ['western']
-        self.fuel_moisture_1000hr_pct = 20.0
-        self.fuel_moisture_duff_pct = 20.0
-        self.canopy_consumption_pct = 20.0
-        self.shrub_blackened_pct = 0.0
-
-        self.display_inputs()
-
-    delete?
-    def prompt_for_inputs(self):
-        """Load scenario inputs from the user.
-
-        Prompts user for the input parameters via the shell in somewhat
-        user-friendly manner.
-
-        """
-        self.InSet.prompt_for_inputs()
-    '''
-
-
     def results(self):
         """Output fuel consumption results as a python DICTIONARY object
 
@@ -908,27 +872,6 @@ class FuelConsumption(util.FrozenClass):
 
         """
         return self._settings.display_settings()
-
-    '''
-    delete?
-    def list_variable_names(self):
-        """Lists variable names of each of the input parameters for reference"""
-        #ks self.InSet.display_variable_names()
-    '''
-
-    '''
-    delete?
-    def save_scenario(self, save_file=''):
-        """Saves the scenario input parameters to a CSV file
-
-        Required argument:
-
-        save_file  : directory location of the CSV file to which the scenario
-                     will be saved
-
-        """
-        #ks self.InSet.save(save_file)
-    '''
 
     def load_scenario(self, load_file='', display=True):
         """Loads scenario input parameters from a CSV file

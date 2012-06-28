@@ -74,7 +74,6 @@ class TestInputSettings(unittest.TestCase):
         self.assertTrue(s.set('fm_duff', [1, 2, 4]))
         self.assertTrue(s.set('can_con_pct', 4))    ### - manufacture a sequence if necessary
         self.assertTrue(s.set('shrub_black_pct', [1, 2, 4]))
-        #self.assertTrue(s.set('efg', [1, 2, 4]))
         s.fm_type = 'MEAS-Th'
         self.assertFalse(s.settings_are_complete())
         s.units = 'kg_ha'
@@ -97,7 +96,6 @@ class TestInputSettings(unittest.TestCase):
         self.assertTrue(s.set('fm_duff', [1, 2, 4]))
         self.assertTrue(s.set('can_con_pct', [1, 2, 4]))
         self.assertTrue(s.set('shrub_black_pct', [1, 2, 4]))
-        #self.assertTrue(s.set('efg', [1, 2, 4]))
         s.fm_type = 'MEAS-Th'
         s.units = 'kg_ha'
         result = s.display_settings()

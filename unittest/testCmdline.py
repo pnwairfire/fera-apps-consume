@@ -4,7 +4,8 @@ import cmdline as cmd
 
 
 class TestCmdline(unittest.TestCase):
-
+    ''' This file tests the consume_batch (wrapper around consume module) command line parser 
+    '''
     def setUp(self):
         pass
 

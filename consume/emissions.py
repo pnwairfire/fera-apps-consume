@@ -391,15 +391,13 @@ class Emissions(util.FrozenClass):
                                         heat_data = self._cons_object._heat_data,
                                         emis_data = self._emis_data, inputs = ins)
 
-    def report(self, efg = -1, csv = ""):
+    def report(self, csv = ""):
         """Displays a report of emissions estimates.
 
         Displays (in shell) emissions data in tabular format, similar to
         how the official GUI CONSUME reports emissions by combustion stage.
 
         -Optional arguments-
-
-            efg :   see .results() help for information
 
             csv :   Valid values: any valid file location
                     Default value: ""
@@ -553,7 +551,6 @@ class Emissions(util.FrozenClass):
         self._cons_object.fuel_moisture_duff_pct = fuel_moisture_duff_pct
         self._cons_object.canopy_consumption_pct = canopy_consumption_pct
         self._cons_object.shrub_blackened_pct = shrub_blackened_pct
-        #ks self._cons_object.customized_fuel_loadings = customized_fuel_loadings
 
         self.output_units = output_units
         self._cons_object.output_units = output_units

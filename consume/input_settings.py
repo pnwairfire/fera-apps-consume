@@ -66,7 +66,6 @@ class ConsumeInputSettings(object):
         'can_con_pct' : ['Canopy consumption (%)', [0,100], validate_range],
         'shrub_black_pct' : ['Shrub blackened (%)', [0,100], validate_range],
         }
-        #'efg' : ['Emissions factor group(s)', [0,20], validate_range]}
 
     AllInputParameters = dict(NaturalInputVarParameters.items() + ActivityInputVarParameters.items())
 

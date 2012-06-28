@@ -27,7 +27,6 @@ class TestInputVariables(unittest.TestCase):
             'shrub_black_pct': { 'good' :[0, 100], 'bad' : [-1, 101, 'a']},
             'burn_type': { 'good' : ['natural', 'activity'], 'bad' : [1, 'bogus']},
             'units': { 'good' : ['tons_ac'], 'bad' : ['bogusUnit']},
-            'efg': { 'good' : [0, 20], 'bad' : [-1, 21, 'a']},
             'slope': { 'good' : [0, 100], 'bad' : [-1, 101, 'a']},
             'windspeed': { 'good' : [0, 35], 'bad' : [-1, 36, 'a']},
             'fm_type': { 'good' : ['MEAS-Th'], 'bad' : ['bogusFM']},
