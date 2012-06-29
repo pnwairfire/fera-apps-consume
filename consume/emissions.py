@@ -386,7 +386,8 @@ class Emissions(util.FrozenClass):
 
         ins = self._cons_object._settings.package()
         ins['emissions_fac_group'] = self._emissions_factor_groups
-        ins['units_emissions'] = self._output_units
+        # - single-value settings must be converted to a list so that results can be treated the same way
+        ins['units_emissions'] = list([self._output_units] * len(self._cons_object._settings.get('fuelbeds')))
         return util.make_dictionary_of_lists(cons_data = self._cons_object._cons_data,
                                         heat_data = self._cons_object._heat_data,
                                         emis_data = self._emis_data, inputs = ins)

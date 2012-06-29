@@ -196,14 +196,14 @@ class ConsumeInputSettings(object):
         return "\n".join(settings)
 
     def package(self):
-        ''' TODO - this simply packages names and values. It really shouldn't be
-            necessary. I created it to work with older code
-        '''
         if self.settings_are_complete():
             add_me = {}
-            add_me['burn_type'] = self._burn_type
-            add_me['units'] = self._units
-            if 'activity' == self.burn_type: add_me['fm_type'] = self.fm_type
+            # - make these settings occur for each line. Allows iterating over results
+            #   in a uniform way.
+            add_me['burn_type'] = list([self._burn_type] * len(self._settings.get('fuelbeds')))
+            add_me['units'] = list([self._units] * len(self._settings.get('fuelbeds')))
+            if 'activity' == self.burn_type:
+                add_me['fm_type'] = list([self.fm_type] * len(self._settings.get('fuelbeds')))
             return dict(self._settings.items() + add_me.items())
 
     def _get_valid_column_names_all(self, burn_type):

@@ -7,11 +7,6 @@
 # Created:     10/10/2011
 # Copyright:   (c) kjells 2011
 #-------------------------------------------------------------------------------
-
-import logging
-logger = logging.getLogger(__name__)
-logger.addHandler(logging.StreamHandler())
-
 import consume
 import os
 import sys
@@ -252,7 +247,6 @@ def main():
     try:
         can_run()
         parser = cmdline.ConsumeParser(sys.argv)
-        logger.setLevel(parser.msg_level)
         run(parser.burn_type, parser.csv_file, parser.msg_level, parser.fuel_loadings_file, parser.col_cfg_file)
     except Exception as e:
         print(e)

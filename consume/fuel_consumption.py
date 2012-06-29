@@ -772,11 +772,10 @@ class FuelConsumption(util.FrozenClass):
         """
         self.msg_level = msg_level
         msg.setLevel(self.msg_level)
-        
-        msg.debug("debug message")
-        msg.info("info message")
-        msg.warning("warning message")
-        msg.error("error message")
+        # msg.debug("debug message")
+        # msg.info("info message")
+        # msg.warning("warning message")
+        # msg.error("error message")
 
         self.FCCS = fccs.FCCSDB(fccs_file)
         self._settings = settings.ConsumeInputSettings()
