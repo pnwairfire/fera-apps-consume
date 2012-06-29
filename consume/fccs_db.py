@@ -32,10 +32,6 @@ class FCCSDB():
 
     def _load_data_from_xml(self):
         """Load FCCS data from an external file.
-
-        Loads FCCS data from an XML file in the format of the FCCS XML file
-        that is used by the official GUI version of CONSUME
-
         """
 
         text_data = ['site_name', 'ecoregion', 'cover_type', 'site_description',
@@ -67,7 +63,7 @@ class FCCSDB():
                 data = node.findtext(tag_name)
                 if not data or float(data) < 0:
                     data = 0.0
-               #FCCS shrub loadings are multipled by 3 for use by Consume.
+               #todo: ks FCCS shrub loadings are multipled by 3 for use by Consume.
                #Not sure why, but it's in the CONSUME 3.0 manual (p. 75)
                 if tag_name in ['shrubs_Primary', 'shrubs_Secondary']:
                     data = float(data) * 3.0

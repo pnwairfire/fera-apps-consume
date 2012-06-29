@@ -37,7 +37,7 @@ def perarea():
     return ['tons_ac', 'lbs_ac', 'kg_ha', 'kg_m^2', 'tonnes_ha', 'kg_km^2',
                    'tonnes_km^2']
 
-# xml tag, internal tag, index
+# xml tag in the FCCS/FFA generated input file, internal consume tag, index
 LoadDefs = (('fuelbed_number', 'fccs_id', 0),
             ('ecoregion', 'ecoregion', 1),
             ('cover_type', 'cover_type', 2),
@@ -104,4 +104,8 @@ LoadDefs = (('fuelbed_number', 'fccs_id', 0),
             ('efg_natural', 'efg_natural', 63),
             ('efg_activity', 'efg_activity', 64),
             ('srm_id', 'srm_id', 65),
-            ('srm_description', 'srm_description', 66) )
+            ('srm_description', 'srm_description', 66))
+            # ('litter_loading', 'litter_loading', 67)
+            # ('moss_loading', 'moss_loading', 68)
+            # ('duff_upper_loading', 'duff_upper_loading', 69)
+            # ('duff_lower_loading', 'duff_lower_loading', 70))
