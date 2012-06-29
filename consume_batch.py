@@ -7,18 +7,27 @@
 # Created:     10/10/2011
 # Copyright:   (c) kjells 2011
 #-------------------------------------------------------------------------------
+
+import logging
+logger = logging.getLogger(__name__)
+logger.addHandler(logging.StreamHandler())
+
 import consume
 import os
 import sys
 from custom_col import CustomCol
 import batch_locator
+import cmdline
 
 RESULTS_FILE = 'batch_results.csv'
 
 def can_run():
     mod_location = batch_locator.module_path()
     cwd = os.getcwd()
-    return True if mod_location == cwd else False
+    if mod_location == cwd:
+        return True 
+    else:
+        raise(Exception("This program must be run from the location of the exe/script."))
 
 def validate_fuel_loadings(alt_loadings_file):
     ''' Valid currently means that the generator_info element is present
@@ -43,7 +52,7 @@ def get_input_file(fuel_loadings):
     if validate_fuel_loadings(fuel_loadings):
         return fuel_loadings
     else:
-        print("\nError: \'{}\' is not a valid fuel loadings file.\n".format(fuel_loadings))
+        msg.error("\n\'{}\' is not a valid fuel loadings file.\n".format(fuel_loadings))
         sys.exit(1)
 
 def add_FSRT_cols(parent_col, decider):
@@ -222,9 +231,9 @@ def get_fuelbed_list(consumer):
     return [str(i[0]) for i in consumer.FCCS.data if MAX_REFERENCE_FUELBED >= i[0]]
 
 
-def run(burn_type, csv_input, fuel_loadings=None, col_cfg=None):
-    consumer = consume.FuelConsumption(fccs_file=get_input_file(fuel_loadings)) \
-        if fuel_loadings else consume.FuelConsumption()
+def run(burn_type, csv_input, msg_level, fuel_loadings=None, col_cfg=None):
+    consumer = consume.FuelConsumption(fccs_file=get_input_file(fuel_loadings), msg_level=msg_level) \
+        if fuel_loadings else consume.FuelConsumption(msg_level=msg_level)
     consumer.burn_type = burn_type
     if consumer.load_scenario(csv_input, display=False):
         if 0 == len(consumer.fuelbed_fccs_ids):
@@ -239,13 +248,14 @@ def run(burn_type, csv_input, fuel_loadings=None, col_cfg=None):
 #-------------------------------------------------------------------------------
 # Main
 #-------------------------------------------------------------------------------
-import cmdline
 def main():
-    if can_run():
+    try:
+        can_run()
         parser = cmdline.ConsumeParser(sys.argv)
-        run(parser.burn_type, parser.csv_file, parser.fuel_loadings_file, parser.col_cfg_file)
-    else:
-        print("Error: this program must be run from the location of the exe/script.")
-
+        logger.setLevel(parser.msg_level)
+        run(parser.burn_type, parser.csv_file, parser.msg_level, parser.fuel_loadings_file, parser.col_cfg_file)
+    except Exception as e:
+        print(e)
+        
 if __name__ == '__main__':
     main()

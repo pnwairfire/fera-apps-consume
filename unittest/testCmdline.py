@@ -22,6 +22,14 @@ class TestCmdline(unittest.TestCase):
         self.assertEqual(p.csv_file, os.path.abspath('consume_batch.py'))
         self.assertEqual(p.burn_type, 'activity')
         
+    def testPassingWithMsgLevel(self):
+        ''' Use consume_batch.py as a file that should always be there
+        '''
+        p = cmd.ConsumeParser(['app_name_placeholder', 'activity', 'consume_batch.py', '-l', '3'])
+        self.assertEqual(p.csv_file, os.path.abspath('consume_batch.py'))
+        self.assertEqual(p.burn_type, 'activity')
+        self.assertEqual(p.msg_level, 10)   # - logging.DEBUG
+        
     def testPassingWithLoadingsFile(self):
         ''' Use consume_batch.py as a file that should always be there
         '''

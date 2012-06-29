@@ -10,6 +10,7 @@
 import sys
 import os
 import argparse
+import logging
 
 def print_default_column_config_xml(filename):
     ''' output the text for a default column configuration file
@@ -101,6 +102,10 @@ Examples:
     parser.add_argument('-x', action='store', nargs=1, dest='col_cfg_file', metavar='output columns',
         help='Specify the output column configuration file for consume to use')
 
+    # - customize the message output
+    parser.add_argument('-l', action='store', nargs=1, dest='msg_level', metavar='message level',
+        help='Specify the detail level of messages (1 | 2 | 3). 1 = fewest messages 3 = most messages')
+
     # - generate a default column configuration file from which to work
     parser.add_argument('-g', action='store', nargs='?',
         default="", const="output_config.xml", dest='gen_col_cfg', metavar='col cfg file',
@@ -121,6 +126,7 @@ class ConsumeParser(object):
         self._csv_file = None
         self._fuel_loadings_file = None
         self._col_cfg_file = None
+        self._msg_level = logging.ERROR
         self.do_parse(argv[1:]) ### - remove the calling script name
     
     def do_parse(self, argv):
@@ -160,6 +166,13 @@ class ConsumeParser(object):
                     raise(ConsumeParserException("\nError: The column config file '{}' does not exist.".format(args.col_cfg_file[0])))
                 self._col_cfg_file = os.path.abspath(args.col_cfg_file[0])
 
+            if args.msg_level:
+                level = int(args.msg_level[0])
+                if level in [1, 2, 3]:
+                    if 1 == level: self._msg_level = logging.ERROR
+                    if 2 == level: self._msg_level = logging.WARNING
+                    if 3 == level: self._msg_level = logging.DEBUG
+
 
     def exists(self, filename):
         return True if os.path.exists(filename) else False
@@ -170,6 +183,8 @@ class ConsumeParser(object):
     def csv_file(self): return self._csv_file
     @property
     def col_cfg_file(self): return self._col_cfg_file
+    @property
+    def msg_level(self): return self._msg_level
     @property
     def fuel_loadings_file(self): return self._fuel_loadings_file
 

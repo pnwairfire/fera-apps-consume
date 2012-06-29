@@ -522,6 +522,10 @@ import util_consume as util
 import con_calc_natural as ccn
 import con_calc_activity as cca
 import input_settings as settings
+import logging
+
+msg = logging.getLogger(__name__)
+msg.addHandler(logging.StreamHandler())
 
 ### - uncomment to enable basic file tracing of just the consume calls
 #import os
@@ -740,8 +744,16 @@ class FuelConsumption(util.FrozenClass):
     @length_of_ignition.setter
     def length_of_ignition(self, value):
         self._settings.set('length_of_ignition', value)
+        
+    @property
+    def msg_level(self): return self._msg_level
+    @msg_level.setter
+    def msg_level(self, value):
+        assert 0 <= value and value <= 50
+        self._msg_level = value
+        
 
-    def __init__(self, fccs_file = ""):
+    def __init__(self, fccs_file = "", msg_level=logging.ERROR):
         """FuelConsumption class constructor
 
         Upon initialization of the FuelConsumption object, all input
@@ -758,6 +770,13 @@ class FuelConsumption(util.FrozenClass):
                       "[python-consume dir.]/input_data/fccs_loadings_1_458.xml.xml"
 
         """
+        self.msg_level = msg_level
+        msg.setLevel(self.msg_level)
+        
+        msg.debug("debug message")
+        msg.info("info message")
+        msg.warning("warning message")
+        msg.error("error message")
 
         self.FCCS = fccs.FCCSDB(fccs_file)
         self._settings = settings.ConsumeInputSettings()
@@ -772,6 +791,7 @@ class FuelConsumption(util.FrozenClass):
         self._conv_success = False
         self._unique_check = False
 
+        self._msg_level = logging.ERROR
         self._calc_success = False
         self._unq_inputs = []
         self._runlnk = []
