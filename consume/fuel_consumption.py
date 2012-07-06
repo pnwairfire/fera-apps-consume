@@ -1484,7 +1484,7 @@ class FuelConsumption(util.FrozenClass):
             tnkp_hr_rot_fsrt]
             )
 
-        self._cons_debug_data = np.array([LD['lit_mean_bd'], LD['ff_reduction']])
+        self._cons_debug_data = np.array([LD['ff_reduction']])
 
         # delete extraneous memory hogging variables
         del (all_fsrt, can_fsrt, shb_fsrt, nw_fsrt, llm_fsrt,

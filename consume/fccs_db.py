@@ -37,14 +37,11 @@ class FCCSDB():
         text_data = ['site_name', 'ecoregion', 'cover_type', 'site_description',
             'srm_id', 'srm_description']
 
-        pct_data = ['shrubs_Primary_perc_live', 'shrubs_Secondary_perc_live',
-                    'nw_Primary_perc_live', 'nw_Secondary_perc_live',
-                    'lichenDep_perc', 'mossDep_perc', 'litterShortNeedle_perc',
-                    'litterLongNeedle_perc', 'litterOtherConf_perc',
-                    'litterBroadleafDecid_perc', 'litterBroadleafEver_perc',
-                    'litterPalmFrond_perc', 'litterGrass_perc',
-                    'g_DuffDep_Upper_perc', 'g_DuffDep_Lower_perc',
-                    'litterDep_perc'] # gBasPercent not included purposefully
+        pct_data = ['shrubs_primary_perc_live', 'shrubs_secondary_perc_live',
+                    'nw_primary_perc_live', 'nw_secondary_perc_live',
+                    'lichen_percentcover', 'moss_percentcover',
+                    'duff_upper_percentcover', 'duff_lower_percentcover',
+                    'litter_percentcover'] # gBasPercent not included purposefully
 
         def load_data(node, tag_name):
             """ Loads data from xml file for the given tag name
@@ -63,10 +60,6 @@ class FCCSDB():
                 data = node.findtext(tag_name)
                 if not data or float(data) < 0:
                     data = 0.0
-               #todo: ks FCCS shrub loadings are multipled by 3 for use by Consume.
-               #Not sure why, but it's in the CONSUME 3.0 manual (p. 75)
-                if tag_name in ['shrubs_Primary', 'shrubs_Secondary']:
-                    data = float(data) * 3.0
 
                 if tag_name in pct_data:
                     data = float(data) / 100.0
@@ -230,8 +223,8 @@ class FCCSDB():
                 check = False
                 data = self.data[i]
                 text += "\nFCCS ID# : " + str(data[0])
-                text += "\nSite name: " + str(data[59])
-                text += "\n\nSite description: " + str(data[60])
+                text += "\nSite name: " + str(data[1])
+                text += "\n\nSite description: " + str(data[2])
 
                 if detail:
                     lu = ' tons/ac'     # loading units
@@ -239,76 +232,68 @@ class FCCSDB():
                     pu = '%'             # percent units
                     nu = ' #/acre'      # density units (basal acc., sq. middens)
                     ru = ' feet'         # radius units
-                    text += "\n\n\tBailey's ecoregion division(s): " + str(data[1])
-                    text += "\n\tSAM/SRM cover type(s): " + str(data[2])
+                    text += "\n\n\tBailey's ecoregion division(s): " + str(data[3])
+                    text += "\n\tSAM/SRM cover type(s): " + str(data[4])
 
                     text += "\n\n\tCanopy loadings"
-                    text += "\n\t   Overstory: " + str(data[3]) + lu
-                    text += "\n\t   Midstory: " + str(data[4]) + lu
-                    text += "\n\t   Understory: " + str(data[5]) + lu
-                    text += "\n\t   Snags, class 1, foliage: " + str(data[6]) + lu
-                    text += "\n\t   Snags, class 1, wood: " + str(data[7]) + lu
-                    text += "\n\t   Snags, class 1, w/o foliage: " + str(data[8]) + lu
-                    text += "\n\t   Snags, class 2: " + str(data[9]) + lu
-                    text += "\n\t   Snags, class 3: " + str(data[10]) + lu
-                    text += "\n\t   Ladder fuels: " + str(data[11]) + lu
+                    text += "\n\t   Overstory: " + str(data[5]) + lu
+                    text += "\n\t   Midstory: " + str(data[6]) + lu
+                    text += "\n\t   Understory: " + str(data[7]) + lu
+                    text += "\n\t   Snags, class 1, foliage: " + str(data[8]) + lu
+                    text += "\n\t   Snags, class 1, wood: " + str(data[9]) + lu
+                    text += "\n\t   Snags, class 1, w/o foliage: " + str(data[9]) + lu
+                    text += "\n\t   Snags, class 2: " + str(data[11]) + lu
+                    text += "\n\t   Snags, class 3: " + str(data[12]) + lu
+                    text += "\n\t   Ladder fuels: " + str(data[13]) + lu
 
                     text += "\n\n\tShrub loadings"
-                    text += "\n\t   Shrub Primary: " + str(data[12]) + lu
-                    text += "\n\t   Shrub Primary % live: " + str(data[13]*100) + pu
-                    text += "\n\t   Shrub Secondary: " + str(data[14]) + lu
-                    text += "\n\t   Shrub Secondary % live: " + str(data[15]*100) + pu
+                    text += "\n\t   Shrub Primary: " + str(data[14]) + lu
+                    text += "\n\t   Shrub Primary % live: " + str(data[15]*100) + pu
+                    text += "\n\t   Shrub Secondary: " + str(data[16]) + lu
+                    text += "\n\t   Shrub Secondary % live: " + str(data[17]*100) + pu
 
                     text += "\n\n\tNonwoody loadings"
-                    text += "\n\t   NW Primary: " + str(data[16]) + lu
-                    text += "\n\t   NW Primary % live: " + str(data[17]*100) + pu
-                    text += "\n\t   NW Secondary: " + str(data[18]) + lu
-                    text += "\n\t   NW Secondary % live: " + str(data[19]*100) + pu
+                    text += "\n\t   NW Primary: " + str(data[18]) + lu
+                    text += "\n\t   NW Primary % live: " + str(data[19]*100) + pu
+                    text += "\n\t   NW Secondary: " + str(data[20]) + lu
+                    text += "\n\t   NW Secondary % live: " + str(data[21]*100) + pu
 
                     text += "\n\n\tLitter-lichen-moss loadings"
-                    text += "\n\t   Litter depth: " + str(data[23]) + du
-                    text += "\n\t   Litter % cover: " + str(data[24]*100) + pu
-                    text += "\n\t   Litter type distribution:"
-                    text += "\n\t      Short needle: " + str(data[30]*100) + pu
-                    text += "\n\t      Long needle: " + str(data[31]*100) + pu
-                    text += "\n\t      Other conifer: " + str(data[32]*100) + pu
-                    text += "\n\t      Broadleaf deciduous: " + str(data[33]*100) + pu
-                    text += "\n\t      Broadleaf evergreen: " + str(data[34]*100) + pu
-                    text += "\n\t      Palm frond: " + str(data[35]*100) + pu
-                    text += "\n\t      Grass: " + str(data[36]*100) + pu
-                    text += "\n\t   Lichen depth: " + str(data[25]) + du
-                    text += "\n\t   Lichen % cover: " + str(data[26]*100) + pu
-                    text += "\n\t   Moss depth: " + str(data[27]) + du
-                    text += "\n\t   Moss % cover: " + str(data[28]*100) + pu
-                    text += "\n\t   Moss type: " + str(data[29])
+                    text += "\n\t   Litter depth: " + str(data[25]) + du
+                    text += "\n\t   Litter % cover: " + str(data[26]*100) + pu
+                    text += "\n\t   Litter loading: " + str(data[50]) + lu
+                    
+                    text += "\n\t   Lichen depth: " + str(data[27]) + du
+                    text += "\n\t   Lichen % cover: " + str(data[28]*100) + pu
+                    text += "\n\t   Lichen loading: " + str(data[51]) + lu
+                    
+                    text += "\n\t   Moss depth: " + str(data[29]) + du
+                    text += "\n\t   Moss % cover: " + str(data[30]*100) + pu
+                    text += "\n\t   Moss loading: " + str(data[52]) + lu
 
                     text += "\n\n\tGround fuel loadings"
-                    text += "\n\t   Duff depth, upper: " + str(data[37]) + du
-                    text += "\n\t   Duff % cover, upper: " + str(data[38]*100) + pu
-                    text += "\n\t   Duff derivation, upper: " + str(data[39])
-                    text += "\n\t   Duff depth, lower: " + str(data[40]) + du
-                    text += "\n\t   Duff % cover, lower: " + str(data[41]*100) + pu
-                    text += "\n\t   Duff derivation, lower: " + str(data[42])
-                    text += "\n\t   Basal accumulations depth: " + str(data[43]) + du
-                    text += "\n\t   Basal accum. % cover: " + str(data[44]*100) + pu
-                    text += "\n\t   Basal accumulations radius: " + str(data[45]) + ru
-                    text += "\n\t   Squirrel midden depth: " + str(data[46]) + du
-                    text += "\n\t   Squirrel midden density: " + str(data[47]) + nu
-                    text += "\n\t   Squirrel midden radius: " + str(data[48]) + ru
+                    text += "\n\t   Duff depth, upper: " + str(data[31]) + du
+                    text += "\n\t   Duff % cover, upper: " + str(data[32]*100) + pu
+                    text += "\n\t   Duff loading, upper: " + str(data[53]) + lu
+                    text += "\n\t   Duff depth, lower: " + str(data[33]) + du
+                    text += "\n\t   Duff % cover, lower: " + str(data[34]*100) + pu
+                    text += "\n\t   Duff loading, lower: " + str(data[54]) + lu
+                    text += "\n\t   Basal accumulations loading: " + str(data[44]) + lu
+                    text += "\n\t   Squirrel midden loading: " + str(data[45]) + ru
 
                     text += "\n\n\tWoody fuel loadings"
-                    text += '\n\t   1-hr (0-0.25"): ' + str(data[49]) + lu
-                    text += '\n\t   10-hr (0.25-1"): ' + str(data[50]) + lu
-                    text += '\n\t   100-hr (1-3"): ' + str(data[51]) + lu
-                    text += '\n\t   1000-hr (3-9"), sound: ' + str(data[52]) + lu
-                    text += '\n\t   10,000-hr (9-20"), sound: ' + str(data[53]) + lu
-                    text += '\n\t   10,000-hr+ (>20"), sound: ' + str(data[54]) + lu
-                    text += '\n\t   1000-hr (3-9"), rotten: ' + str(data[55]) + lu
-                    text += '\n\t   10,000-hr (9-20"), rotten: ' + str(data[56]) + lu
-                    text += '\n\t   10,000-hr+ (>20"), rotten: ' + str(data[57]) + lu
-                    text += "\n\t   Stumps, sound: " + str(data[20]) + lu
-                    text += "\n\t   Stumps, rotten: " + str(data[21]) + lu
-                    text += "\n\t   Stumps, lightered: " + str(data[22]) + lu
+                    text += '\n\t   1-hr (0-0.25"): ' + str(data[35]) + lu
+                    text += '\n\t   10-hr (0.25-1"): ' + str(data[36]) + lu
+                    text += '\n\t   100-hr (1-3"): ' + str(data[37]) + lu
+                    text += '\n\t   1000-hr (3-9"), sound: ' + str(data[38]) + lu
+                    text += '\n\t   10,000-hr (9-20"), sound: ' + str(data[39]) + lu
+                    text += '\n\t   10,000-hr+ (>20"), sound: ' + str(data[40]) + lu
+                    text += '\n\t   1000-hr (3-9"), rotten: ' + str(data[41]) + lu
+                    text += '\n\t   10,000-hr (9-20"), rotten: ' + str(data[42]) + lu
+                    text += '\n\t   10,000-hr+ (>20"), rotten: ' + str(data[43]) + lu
+                    text += "\n\t   Stumps, sound: " + str(data[22]) + lu
+                    text += "\n\t   Stumps, rotten: " + str(data[23]) + lu
+                    text += "\n\t   Stumps, lightered: " + str(data[24]) + lu
 
         if check:
             text += ("\nFuelbed ID# " + str(fccs_id) + " was not found." +

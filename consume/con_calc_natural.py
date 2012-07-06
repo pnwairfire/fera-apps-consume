@@ -138,29 +138,21 @@ def ccon_lch(LD):
     """ Lichen consumption, activity & natural"""
     csd_lch = [0.95, 0.05, 0.00]
     lch_pretot = calc_and_reduce_ff(LD, 'lch_depth')
-    lch_total = (lch_pretot * 0.5 * LD['lch_pctcv'])
+    lch_total = (lch_pretot * LD['lch_pctcv'] * LD['lichen_loading'])
     return util.csdist(lch_total, csd_lch)
 
 def ccon_moss(LD):
     """ Moss consumption, activity & natural"""
     csd_moss = [0.95, 0.05, 0.00]
     moss_pretot = calc_and_reduce_ff(LD, 'moss_depth')
-    moss_total = (moss_pretot * 1.5 * LD['moss_pctcv'])
+    moss_total = (moss_pretot * LD['moss_pctcv'] * LD['moss_loading'])
     return util.csdist(moss_total, csd_moss)
 
 def ccon_litter(LD):
     """ Litter consumption, activity & natural"""
     csd_lit = [0.90, 0.10, 0.00]
     lit_pretot = calc_and_reduce_ff(LD, 'lit_depth')
-    mean_weighted_litterbd = ((LD['lit_s_ndl_pct'] * 3.0)
-                        + (LD['lit_l_ndl_pct'] * 3.0)
-                        + (LD['lit_o_ndl_pct'] * 3.0)
-                        + (LD['lit_blf_d_pct'] * 1.5)
-                        + (LD['lit_blf_e_pct'] * 1.5)
-                        + (LD['lit_palm_pct'] * 0.3)
-                        + (LD['lit_grass_pct'] * 0.5))
-    LD['lit_mean_bd'] = mean_weighted_litterbd
-    lit_total = (lit_pretot * LD['lit_pctcv'] * mean_weighted_litterbd)
+    lit_total = (lit_pretot * LD['lit_pctcv'] * LD['litter_loading'])
     return util.csdist(lit_total, csd_lit)
 
 
@@ -196,14 +188,13 @@ def ccon_duff(LD):
     csd_duffl = [0.0, 0.20, 0.80]
 
     upperduff_pretot = calc_and_reduce_ff(LD, 'duff_upper_depth')
-    duff_upper = np.maximum(upperduff_pretot * 8.0 * LD['duff_upper_pctcv'], 0.0)
+    duff_upper = np.maximum( \
+        upperduff_pretot * LD['duff_upper_loading'] * LD['duff_upper_pctcv'], 0.0)
 
     lowerduff_pretot = calc_and_reduce_ff(LD, 'duff_lower_depth')
     lo_total = lowerduff_pretot * LD['duff_lower_pctcv']
 
-    bulk_dens = (np.where(np.equal(LD['duff_lower_deriv'], 3), 18.0, 0.0) +
-                 np.where(np.equal(LD['duff_lower_deriv'], 4), 22.0, 0.0))
-    duff_lower = np.maximum(lo_total * bulk_dens, 0.0)
+    duff_lower = np.maximum(lo_total * LD['duff_lower_loading'], 0.0)
 
     return (util.csdist(duff_upper, csd_duffu),
             util.csdist(duff_lower, csd_duffl))

@@ -127,8 +127,7 @@ def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs, cons_debug
     wd_hr10kp_snd = cons_dict(41)
     wd_hr10kp_rot = cons_dict(42)
 
-    lit_mean_bd = cons_debug_dict(0)
-    ff_reduction = cons_debug_dict(1)
+    ff_reduction = cons_debug_dict(0)
 
     results = {'parameters' : inputs,
                'heat release' : all_heat,
@@ -184,7 +183,6 @@ def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs, cons_debug
                                     '10k+-hr fuels sound' : wd_hr10kp_snd,
                                     '10k+-hr fuels rotten' : wd_hr10kp_rot},
                                 'debug' : {
-                                    'litter_bulk_density' : lit_mean_bd,
                                     'forest floor reduction' : ff_reduction}
                                     }}
 

@@ -56,8 +56,8 @@ class EmissionsFactorDB:
         for node in self._fco.FCCS.data:
             node_id = node[0]
             components = {}
-            components['natural'] = int(node[63])
-            components['activity'] = int(node[64])
+            components['natural'] = int(node[46])
+            components['activity'] = int(node[47])
             ef_eqid_map[node_id] = components
         return ef_eqid_map
 
