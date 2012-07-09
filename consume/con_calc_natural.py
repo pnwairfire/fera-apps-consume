@@ -138,21 +138,21 @@ def ccon_lch(LD):
     """ Lichen consumption, activity & natural"""
     csd_lch = [0.95, 0.05, 0.00]
     lch_pretot = calc_and_reduce_ff(LD, 'lch_depth')
-    lch_total = (lch_pretot * LD['lch_pctcv'] * LD['lichen_loading'])
+    lch_total = (lch_pretot * LD['lichen_loading'])
     return util.csdist(lch_total, csd_lch)
 
 def ccon_moss(LD):
     """ Moss consumption, activity & natural"""
     csd_moss = [0.95, 0.05, 0.00]
     moss_pretot = calc_and_reduce_ff(LD, 'moss_depth')
-    moss_total = (moss_pretot * LD['moss_pctcv'] * LD['moss_loading'])
+    moss_total = (moss_pretot * LD['moss_loading'])
     return util.csdist(moss_total, csd_moss)
 
 def ccon_litter(LD):
     """ Litter consumption, activity & natural"""
     csd_lit = [0.90, 0.10, 0.00]
     lit_pretot = calc_and_reduce_ff(LD, 'lit_depth')
-    lit_total = (lit_pretot * LD['lit_pctcv'] * LD['litter_loading'])
+    lit_total = (lit_pretot * LD['litter_loading'])
     return util.csdist(lit_total, csd_lit)
 
 
@@ -189,12 +189,10 @@ def ccon_duff(LD):
 
     upperduff_pretot = calc_and_reduce_ff(LD, 'duff_upper_depth')
     duff_upper = np.maximum( \
-        upperduff_pretot * LD['duff_upper_loading'] * LD['duff_upper_pctcv'], 0.0)
+        upperduff_pretot * LD['duff_upper_loading'], 0.0)
 
     lowerduff_pretot = calc_and_reduce_ff(LD, 'duff_lower_depth')
-    lo_total = lowerduff_pretot * LD['duff_lower_pctcv']
-
-    duff_lower = np.maximum(lo_total * LD['duff_lower_loading'], 0.0)
+    duff_lower = np.maximum(lowerduff_pretot * LD['duff_lower_loading'], 0.0)
 
     return (util.csdist(duff_upper, csd_duffu),
             util.csdist(duff_lower, csd_duffl))
