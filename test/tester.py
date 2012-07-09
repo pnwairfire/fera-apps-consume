@@ -16,11 +16,14 @@ import re
 import math
 
 def isNumber(s):
+    result = False
     try:
-        float(s)
-        return True
+        converted = float(s)
+        if converted != float('inf') and not math.isnan(converted):
+            result =  True
     except ValueError:
-        return False
+        pass
+    return result
 
 class DataObj(object):
     """ Read a csv file and create a map keyed by lines and columns

@@ -132,28 +132,21 @@ def calc_and_reduce_ff(LD, key):
     LD['ff_reduction_successive'] = LD['ff_reduction_successive'] - layer_reduction
     # should never be less than zero
     assert(0 == len(np.where(LD['ff_reduction_successive'] < 0)[0]))
+    assert(False == np.isnan(LD['ff_reduction_successive']).any())
     return layer_reduction
 
-def ccon_lch(LD):
-    """ Lichen consumption, activity & natural"""
-    csd_lch = [0.95, 0.05, 0.00]
-    lch_pretot = calc_and_reduce_ff(LD, 'lch_depth')
-    lch_total = (lch_pretot * LD['lichen_loading'])
-    return util.csdist(lch_total, csd_lch)
+def ccon_forest_floor(LD, key_depth, key_loading, csd):
+    ''' Same procedure for litter, lichen, moss, upper and lower duff
+    '''
+    # - get per-layer reduction
+    layer_reduction = calc_and_reduce_ff(LD, key_depth)
 
-def ccon_moss(LD):
-    """ Moss consumption, activity & natural"""
-    csd_moss = [0.95, 0.05, 0.00]
-    moss_pretot = calc_and_reduce_ff(LD, 'moss_depth')
-    moss_total = (moss_pretot * LD['moss_loading'])
-    return util.csdist(moss_total, csd_moss)
+    # - how much was it reduced relative to the layer depth
+    proportional_reduction = np.where(LD[key_depth] > 0.0,
+        layer_reduction / LD[key_depth], 0.0)
 
-def ccon_litter(LD):
-    """ Litter consumption, activity & natural"""
-    csd_lit = [0.90, 0.10, 0.00]
-    lit_pretot = calc_and_reduce_ff(LD, 'lit_depth')
-    lit_total = (lit_pretot * LD['litter_loading'])
-    return util.csdist(lit_total, csd_lit)
+    total = proportional_reduction * LD[key_loading]
+    return util.csdist(total, csd)
 
 
 ################################
@@ -175,27 +168,6 @@ def ccon_sqm(sqm_loading, ff_redux_proportion):
     csd_sqm = [0.10, 0.30, 0.60]
     sqm_consumption = sqm_loading * ff_redux_proportion
     return util.csdist(sqm_consumption, csd_sqm)
-
-def ccon_duff(LD):
-    """ Duff consumption, activity & natural*
-        * note that there are different equations for activity/natural
-          to calculate duff_reduction
-    #   Refer to p. 181-184 in the 3.0 manual
-    #   General equation:
-    Consumption(tons/ac.) = Reduction(in.) * Bulk density(tons/acre-in.)
-    """
-    csd_duffu = [0.10, 0.70, 0.20]
-    csd_duffl = [0.0, 0.20, 0.80]
-
-    upperduff_pretot = calc_and_reduce_ff(LD, 'duff_upper_depth')
-    duff_upper = np.maximum( \
-        upperduff_pretot * LD['duff_upper_loading'], 0.0)
-
-    lowerduff_pretot = calc_and_reduce_ff(LD, 'duff_lower_depth')
-    duff_lower = np.maximum(lowerduff_pretot * LD['duff_lower_loading'], 0.0)
-
-    return (util.csdist(duff_upper, csd_duffu),
-            util.csdist(duff_lower, csd_duffl))
 
 
 ##############################

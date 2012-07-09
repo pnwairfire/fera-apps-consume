@@ -274,6 +274,12 @@ def run_and_test_emissions(emissions, fuelbed_list, outfilename, reference_value
     (failed, compared) = ref.Compare(computed)
     print("{} = failed, {} compared:\t{}".format(failed, compared, outfilename))
 
+def exception_wrapper(func, *args):
+    try:
+        print("Running {}".format(func.__name__))
+        func(*args)
+    except:
+        print('Exception running {}'.format(func.__name__))
 #-------------------------------------------------------------------------------
 # Start
 #-------------------------------------------------------------------------------
@@ -290,17 +296,17 @@ if NORMAL:
     fuelbed_list = get_fuelbed_list(consumer)
     consumer.fuelbed_fccs_ids = fuelbed_list
 
-    run_basic_scenarios(consumer, fuelbed_list)
-    run_additional_activity_scenarios(consumer, fuelbed_list)
+    exception_wrapper(run_basic_scenarios, consumer, fuelbed_list)
+    exception_wrapper(run_additional_activity_scenarios, consumer, fuelbed_list)
 
     set_defaults(consumer, {})
-    run_emissions_activity_with_unit_conversion(fuelbed_list)
-    run_emissions_western(fuelbed_list)
-    run_emissions_activity(fuelbed_list)
+    exception_wrapper(run_emissions_activity_with_unit_conversion, fuelbed_list)
+    exception_wrapper(run_emissions_western, fuelbed_list)
+    exception_wrapper(run_emissions_activity, fuelbed_list)
 else:
     # - debugging
-    fuelbed_list = [1]
+    fuelbed_list = [5]
     #fuelbed_list = get_fuelbed_list(consumer)
     consumer.fuelbed_fccs_ids = fuelbed_list
-    run_emissions_activity_with_unit_conversion(fuelbed_list)
+    run_basic_scenarios(consumer, fuelbed_list)
 
