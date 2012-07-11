@@ -164,27 +164,14 @@ class FCCSDB():
         print header
         print "\n Litter-lichen-moss loadings"
         print "   Litter depth\t\t\tlit_depth\t\t" + du
-        print "   Litter % cover\t\tlit_pctcv\t\t" + pu
-        print "   Litter type distribution:"
-        print "      Short needle\t\tlit_s_ndl_pct\t\t" + pu
-        print "      Long needle\t\tlit_l_ndl_pct\t\t" + pu
-        print "      Other conifer\t\tlit_o_ndl_pct\t\t" + pu
-        print "      Broadleaf deciduous\tlit_blf_d_pct\t\t" + pu
-        print "      Broadleaf evergreen\tlit_blf_e_pct\t\t" + pu
-        print "      Palm frond\t\tlit_palm_pct\t\t" + pu
-        print "      Grass\t\t\tlit_grass_pct\t\t" + pu
         print "   Lichen depth\t\t\tlch_depth\t\t" + du
-        print "   Lichen % cover\t\tlch_pctcv\t\t" + pu
         print "   Moss depth\t\t\tmoss_depth\t\t" + du
-        print "   Moss % cover\t\t\tmoss_pctcv\t\t" + pu
         print "   Moss type\t\t\tmoss_type\t\t" + nau
         print header
         print "\n Ground fuel loadings"
         print "   Duff depth, upper\t\tduff_upper_depth\t" + du
-        print "   Duff % cover, upper\t\tduff_upper_pctcv\t" + pu
         print "   Duff derivation, upper\tduff_upper_deriv\t" + nau
         print "   Duff depth, lower\t\tduff_lower_depth\t" + du
-        print "   Duff % cover, lower\t\tduff_lower_pctcv\t" + pu
         print "   Duff derivation, lower\tduff_lower_deriv\t" + nau
         print "   Basal accumulations depth\tbas_depth\t\t" + du
         print "   Basal accumulations % cover\tbas_pct\t\t\t" + pu

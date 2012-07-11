@@ -1269,7 +1269,6 @@ class FuelConsumption(util.FrozenClass):
             The result of this is a dictionary keyed on the internal tag (second element) of the LoadDefs structure
                 LoadDefs = (('fuelbed_number', 'fccs_id', 0),
                             ('ecoregion', 'ecoregion', 1),
-                            ('cover_type', 'cover_type', 2),
             The value is a list of all the values of that type from the valid fuelbeds.
 
         """
