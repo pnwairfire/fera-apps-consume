@@ -53,7 +53,7 @@ class EmissionsFactorDB:
 
     def _load_emissions_factor_eqid(self):
         ef_eqid_map = {}
-        for node in self._fco.FCCS.data:
+        for node in self._fco.FCCS.loadings_data_:
             node_id = node[0]
             components = {}
             components['natural'] = int(node[45])

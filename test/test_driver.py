@@ -58,7 +58,7 @@ def wrap_input_display(inputs):
 def get_fuelbed_list(consumer):
     ''' The expected values against which we test go to the max below '''
     MAX_REFERENCE_FUELBED = 291
-    return [i[0] for i in consumer.FCCS.data if MAX_REFERENCE_FUELBED >= i[0]]
+    return [i[0] for i in consumer.FCCS.loadings_data_ if MAX_REFERENCE_FUELBED >= i[0]]
 
 def get_consumption_object(burn_type):
     ''' Return a "ready to go" consumption object

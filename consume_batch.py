@@ -20,7 +20,7 @@ def can_run():
     mod_location = batch_locator.module_path()
     cwd = os.getcwd()
     if mod_location == cwd:
-        return True 
+        return True
     else:
         raise(Exception("This program must be run from the location of the exe/script."))
 
@@ -223,7 +223,7 @@ def write_results(all_results, cols, fuelbed_list):
 def get_fuelbed_list(consumer):
     ''' kjell - temporary solution '''
     MAX_REFERENCE_FUELBED = 291
-    return [str(i[0]) for i in consumer.FCCS.data if MAX_REFERENCE_FUELBED >= i[0]]
+    return [str(i[0]) for i in consumer.FCCS.loadings_data_ if MAX_REFERENCE_FUELBED >= i[0]]
 
 
 def run(burn_type, csv_input, msg_level, fuel_loadings=None, col_cfg=None):
@@ -250,6 +250,6 @@ def main():
         run(parser.burn_type, parser.csv_file, parser.msg_level, parser.fuel_loadings_file, parser.col_cfg_file)
     except Exception as e:
         print(e)
-        
+
 if __name__ == '__main__':
     main()

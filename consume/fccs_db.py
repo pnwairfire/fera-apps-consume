@@ -21,11 +21,11 @@ class FCCSDB():
             mod_path = module_locator.module_path()
             self.xml_file = os.path.join(mod_path, './input_data/fccs_loadings_1_458.xml')
 
-        (self.data, self.data_info) = self._load_data_from_xml()
-        self.data.sort()
-        self.valids = []
-        for f in self.data:
-            self.valids.append(str(f[0]))
+        (self.loadings_data_, self.data_info) = self._load_data_from_xml()
+        self.loadings_data_.sort()
+        self.valid_fuelbeds_ = []
+        for f in self.loadings_data_:
+            self.valid_fuelbeds_.append(str(f[0]))
 
     @property
     def data_source_info(self): return self.data_info
@@ -35,7 +35,7 @@ class FCCSDB():
         """
 
         text_data = ['site_name', 'ecoregion', 'cover_type', 'site_description',
-            'srm_id', 'srm_description']
+                     'srm_id', 'srm_description']
 
         pct_data = ['shrubs_primary_perc_live', 'shrubs_secondary_perc_live',
                     'nw_primary_perc_live', 'nw_secondary_perc_live',
@@ -56,7 +56,6 @@ class FCCSDB():
                 fb_num = int(node.findtext(tag_name))
                 return fb_num
             else:
-                data = 0
                 data = node.findtext(tag_name)
                 if not data or float(data) < 0:
                     data = 0.0
@@ -86,6 +85,19 @@ class FCCSDB():
         del root
         return (fccs, data_info)
 
+    def _load_data_from_csv(self):
+        """Load FCCS data from an external file.
+        """
+        pct_data = ['shrubs_primary_perc_live', 'shrubs_secondary_perc_live',
+                    'nw_primary_perc_live', 'nw_secondary_perc_live',
+                    'lichen_percentcover', 'moss_percentcover',
+                    'duff_upper_percentcover', 'duff_lower_percentcover',
+                    'litter_percentcover'] # gBasPercent not included purposefully
+        import pandas as pan
+        loadings_data = pan.read_csv('input_data/consume.csv')
+
+        return (fccs, data_info)
+
     def _get_data_info(self, root):
         DataInfo = namedtuple('DataInfo', ['generator_name', 'generator_version', 'date_generated'])
         node = root.find('generator_info')
@@ -110,7 +122,7 @@ class FCCSDB():
 
         """
 
-        for c in self.data:
+        for c in self.loadings_data_:
             print "ID# " + str(c[0]) + "\t: " + str(c[59])
 
         print ("\nFor more information on a specific fuelbed, use the " +
@@ -205,10 +217,10 @@ class FCCSDB():
 
         check = True
         text = ""
-        for i in range(0, len(self.data)):
-            if int(self.data[i][0]) == int(fccs_id):
+        for i in range(0, len(self.loadings_data_)):
+            if int(self.loadings_data_[i][0]) == int(fccs_id):
                 check = False
-                data = self.data[i]
+                data = self.loadings_data_[i]
                 text += "\nFCCS ID# : " + str(data[0])
                 text += "\nSite name: " + str(data[1])
                 text += "\n\nSite description: " + str(data[2])

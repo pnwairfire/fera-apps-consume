@@ -17,7 +17,7 @@ class TestFuelConsumption(unittest.TestCase):
         self._consumer.canopy_consumption_pct = [20]
         self._consumer.shrub_blackened_pct = [50]
         self._consumer.output_units = 'tons_ac'
-        self._consumer.fuelbed_fccs_ids = [i for i in self._consumer.FCCS.data]
+        self._consumer.fuelbed_fccs_ids = [i for i in self._consumer.FCCS.loadings_data_]
 
     def tearDown(self):
         pass

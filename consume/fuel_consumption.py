@@ -1286,7 +1286,7 @@ class FuelConsumption(util.FrozenClass):
         # load all fuel loadings for all corresponding fccs id's
         loadings = []
         for f in fuelbeds:
-            for bed in self.FCCS.data:
+            for bed in self.FCCS.loadings_data_:
                 if str(f) == str(bed[0]):
                     loadings.append(bed)
 
