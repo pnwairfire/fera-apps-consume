@@ -50,7 +50,7 @@ with open(sys.argv[1], 'r') as infile:
         out = ",".join(chunks)
         counter += 1
         print(out)
-'''        
+'''
 LoadDefs = (('fuelbed_number', 'fccs_id', 0),
             ('site_name', 'site_name', 1),
             ('site_description', 'site_desc', 2),

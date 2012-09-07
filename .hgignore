@@ -4,6 +4,7 @@ output/*
 ./*.orig
 ./*.pyc
 ./*.csv
+.idea
 build_distribution/consume/*
 build_distribution/mercurial_rev.txt
 consume/version.py

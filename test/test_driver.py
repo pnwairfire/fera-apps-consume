@@ -38,7 +38,8 @@ def out_name(dir, filename):
 def get_input_file():
     ''' Judge the location of the input file based on its relation to this file
     '''
-    DATA_INPUT_FILE = "consume/input_data/fccs_loadings_1_458.xml"
+    #DATA_INPUT_FILE = "consume/input_data/fccs_loadings_1_458.xml"
+    DATA_INPUT_FILE = "consume/input_data/fccs_loadings_1_458.csv"
     here = get_this_location()
     here = here[:-len('test')]
     return os.path.normpath(os.path.join(here, DATA_INPUT_FILE))
@@ -58,7 +59,7 @@ def wrap_input_display(inputs):
 def get_fuelbed_list(consumer):
     ''' The expected values against which we test go to the max below '''
     MAX_REFERENCE_FUELBED = 291
-    return [i[0] for i in consumer.FCCS.loadings_data_ if MAX_REFERENCE_FUELBED >= i[0]]
+    return [i for i in consumer.FCCS.get_available_fuelbeds() if MAX_REFERENCE_FUELBED >= i]
 
 def get_consumption_object(burn_type):
     ''' Return a "ready to go" consumption object
@@ -281,7 +282,7 @@ def exception_wrapper(func, *args):
     except Exception as e:
         print('\nException running {}'.format(func.__name__))
         print(e)
-        
+
 #-------------------------------------------------------------------------------
 # Start
 #-------------------------------------------------------------------------------

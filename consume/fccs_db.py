@@ -21,11 +21,16 @@ class FCCSDB():
             mod_path = module_locator.module_path()
             self.xml_file = os.path.join(mod_path, './input_data/fccs_loadings_1_458.xml')
 
-        (self.loadings_data_, self.data_info) = self._load_data_from_xml()
+        #(self.loadings_data_, self.data_info) = self._load_data_from_xml()
+        (self.loadings_data_, self.data_info) = self._load_data_from_csv()
+        self.valid_fuelbeds_ = [int(i) for i in self.loadings_data_.fccs_id]
+
+        '''
         self.loadings_data_.sort()
         self.valid_fuelbeds_ = []
         for f in self.loadings_data_:
             self.valid_fuelbeds_.append(str(f[0]))
+        '''
 
     @property
     def data_source_info(self): return self.data_info
@@ -45,14 +50,14 @@ class FCCSDB():
 
         def load_data(node, tag_name):
             """ Loads data from xml file for the given tag name
-                The data structue returned is a list of lists of the values in the 
+                The data structue returned is a list of lists of the values in the
                 dd.LoadDefs structure
             """
 
             if tag_name in text_data:
                 return node.findtext(tag_name)
 
-            elif tag_name in ['fuelbed_number', 'fccs_id']:
+            elif tag_name in ['fccs_id', 'fccs_id']:
                 fb_num = int(node.findtext(tag_name))
                 return fb_num
             else:
@@ -88,15 +93,19 @@ class FCCSDB():
     def _load_data_from_csv(self):
         """Load FCCS data from an external file.
         """
+        DataInfo = namedtuple('DataInfo', ['generator_name', 'generator_version', 'date_generated'])
         pct_data = ['shrubs_primary_perc_live', 'shrubs_secondary_perc_live',
-                    'nw_primary_perc_live', 'nw_secondary_perc_live',
-                    'lichen_percentcover', 'moss_percentcover',
-                    'duff_upper_percentcover', 'duff_lower_percentcover',
-                    'litter_percentcover'] # gBasPercent not included purposefully
+                    'nw_primary_perc_live', 'nw_secondary_perc_live']
         import pandas as pan
-        loadings_data = pan.read_csv('input_data/consume.csv')
+        loadings_data = pan.read_csv(self.xml_file)
 
-        return (fccs, data_info)
+        # - todo: convert percentage data. should this be done in FCCS?
+        loadings_data[pct_data] = loadings_data[pct_data] * 0.01
+
+        for item in dd.LoadDefs:
+            loadings_data.rename(columns={item[0] : item[1]}, inplace=True)
+
+        return(loadings_data, DataInfo("unknown", "unknown", "unknown"))
 
     def _get_data_info(self, root):
         DataInfo = namedtuple('DataInfo', ['generator_name', 'generator_version', 'date_generated'])
@@ -113,6 +122,9 @@ class FCCSDB():
             print("\nWarning: consume loadings file has no generator information!\n")
             data_info = DataInfo("unknown", "unknown", "unknown")
         return data_info
+
+    def get_available_fuelbeds(self):
+        return self.valid_fuelbeds_
 
     def browse(self):
         """Display a list of FCCS fuelbeds.
@@ -258,10 +270,10 @@ class FCCSDB():
                     text += "\n\n\tLitter-lichen-moss loadings"
                     text += "\n\t   Litter depth: " + str(data[24]) + du
                     text += "\n\t   Litter loading: " + str(data[25]) + lu
-                    
+
                     text += "\n\t   Lichen depth: " + str(data[26]) + du
                     text += "\n\t   Lichen loading: " + str(data[27]) + lu
-                    
+
                     text += "\n\t   Moss depth: " + str(data[28]) + du
                     text += "\n\t   Moss loading: " + str(data[29]) + lu
 

@@ -656,6 +656,9 @@ class Emissions(util.FrozenClass):
             """ Converts list to numpy array """
             return np.array(d)
 
+        self._emis_data = None
+        self._emis_summ = None
+
         all_fsrt = self._cons_object._cons_data # <<< ucons
 
         # Load default emissions factors (average of all factors...)

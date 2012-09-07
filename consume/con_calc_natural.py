@@ -131,8 +131,8 @@ def calc_and_reduce_ff(LD, key):
     # reduce the available reduction by the calculated amount
     LD['ff_reduction_successive'] = LD['ff_reduction_successive'] - layer_reduction
     # should never be less than zero
-    assert(0 == len(np.where(LD['ff_reduction_successive'] < 0)[0]))
-    assert(False == np.isnan(LD['ff_reduction_successive']).any())
+    assert 0 == len(np.where(LD['ff_reduction_successive'] < 0)[0]), "Error: Negative ff reduction found in calc_and_reduce_ff()"
+    assert False == np.isnan(LD['ff_reduction_successive']).any(), "Error: NaN found in calc_and_reduce_ff()"
     return layer_reduction
 
 def ccon_forest_floor(LD, key_depth, key_loading, csd):
