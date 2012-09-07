@@ -60,7 +60,6 @@ class DataObj(object):
         a = a if a else '0'
         b = b if b else '0'
         compare = True
-        check = HowManyULP(23.0001, 23.0002)
         PLACES = dec.Decimal('0.0001')
         if isNumber(a) and isNumber(b):
             aa = dec.Decimal(a.lstrip('-')).quantize(PLACES)

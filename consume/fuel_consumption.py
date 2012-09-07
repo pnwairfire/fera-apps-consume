@@ -744,14 +744,14 @@ class FuelConsumption(util.FrozenClass):
     @length_of_ignition.setter
     def length_of_ignition(self, value):
         self._settings.set('length_of_ignition', value)
-        
+
     @property
     def msg_level(self): return self._msg_level
     @msg_level.setter
     def msg_level(self, value):
         assert 0 <= value and value <= 50
         self._msg_level = value
-        
+
 
     def __init__(self, fccs_file = "", msg_level=logging.ERROR):
         """FuelConsumption class constructor
@@ -802,6 +802,27 @@ class FuelConsumption(util.FrozenClass):
         self._cons_data = None
 
         self._freeze()
+
+    def _reset_outputs(self):
+        self.customized_fuel_loadings = []
+        self._fccs_loadings = []
+        self._cons_data = np.array([])
+        self._cons_debug_data = np.array([])
+        self._emis_data = np.array([])
+        self._calc_success = False
+        self._conv_success = False
+        self._unique_check = False
+
+        self._msg_level = logging.ERROR
+        self._calc_success = False
+        self._unq_inputs = []
+        self._runlnk = []
+        self._internal_units = 'tons_ac'
+        self.output_units = self._internal_units
+        self._conv_success = False
+        self._ucons_data = None
+        self._heat_data = None
+        self._cons_data = None
 
     def results(self):
         """Output fuel consumption results as a python DICTIONARY object
@@ -1213,9 +1234,7 @@ class FuelConsumption(util.FrozenClass):
 
         """
         # reset calculated variables
-        self._calc_success = False
-        self._unq_inputs = []
-        self._runlnk = []
+        self._reset_outputs()
 
         if self._settings.settings_are_complete():
             self._consumption_calc()
@@ -1264,6 +1283,13 @@ class FuelConsumption(util.FrozenClass):
 
         self._heat_data = (self._cons_data * BTU_PER_UNIT)
 
+    def _get_loadings_for_specified_files(self, ids):
+        # gets the specified fuelbeds from the dataframe. The return from nonzero is a
+        #  tuple, hence the weird array reference
+        selector_mask = [np.nonzero(self.FCCS.loadings_data_.fccs_id == i)[0][0] \
+            for i in self.FCCS.loadings_data_.fccs_id if i in ids]
+        return self.FCCS.loadings_data_.ix[selector_mask]
+
     def _get_fuel_loadings(self, fuelbeds):
         """ Retrieves FCCS loadings values based on scenario FCCS IDs
             The result of this is a dictionary keyed on the internal tag (second element) of the LoadDefs structure
@@ -1286,7 +1312,7 @@ class FuelConsumption(util.FrozenClass):
         # load all fuel loadings for all corresponding fccs id's
         loadings = []
         for f in fuelbeds:
-            for bed in self.FCCS.data:
+            for bed in self.FCCS.loadings_data_:
                 if str(f) == str(bed[0]):
                     loadings.append(bed)
 
@@ -1345,7 +1371,9 @@ class FuelConsumption(util.FrozenClass):
 
 
         """
-        LD = self._get_fuel_loadings(self._settings.get('fuelbeds'))
+        #LD = self._get_fuel_loadings(self._settings.get('fuelbeds'))
+        #LD = self.FCCS.loadings_data_
+        LD = self._get_loadings_for_specified_files(self._settings.get('fuelbeds'))
 
         # Setup ecoregion masks for equations that vary by ecoregion
         ecodict = {"maskb": {"boreal":1, "western":0, "southern":0},

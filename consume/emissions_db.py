@@ -53,13 +53,23 @@ class EmissionsFactorDB:
 
     def _load_emissions_factor_eqid(self):
         ef_eqid_map = {}
-        for node in self._fco.FCCS.data:
+        for i in range(0, self._fco.FCCS.loadings_data_.fccs_id.idxmax() + 1):
+            node_id = self._fco.FCCS.loadings_data_.fccs_id[i]
+            components = {}
+            components['natural'] = int(self._fco.FCCS.loadings_data_.efg_natural[i])
+            components['activity'] = int(self._fco.FCCS.loadings_data_.efg_activity[i])
+            ef_eqid_map[node_id] = components
+        return ef_eqid_map
+        '''
+        ef_eqid_map = {}
+        for node in self._fco.FCCS.loadings_data_:
             node_id = node[0]
             components = {}
             components['natural'] = int(node[45])
             components['activity'] = int(node[46])
             ef_eqid_map[node_id] = components
         return ef_eqid_map
+        '''
 
     def _load_covertype(self):
         assert False # - this may not be necessary
