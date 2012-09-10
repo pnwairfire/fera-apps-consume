@@ -11,8 +11,8 @@ def get_test_inputfile():
     """ In-editor unit tests versus command line unit tests have a different
     working directory. Make both work."""
     infile = ""
-    if os.path.exists("unittest/test.xml"):
-        infile = "unittest/test.xml"
+    if os.path.exists("unittest/test.csv"):
+        infile = "unittest/test.csv"
     else:
-        infile = "test.xml"
+        infile = "test.csv"
     return infile

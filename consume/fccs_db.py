@@ -130,10 +130,11 @@ class FCCSDB():
 
         """
 
-        for c in self.loadings_data_:
-            print "ID# " + str(c[0]) + "\t: " + str(c[59])
+        for c in self.loadings_data_.index:
+            print "ID# " + str(self.loadings_data_.ix[c].get('fccs_id')) \
+                 + "\t: " + str(self.loadings_data_.ix[c].get('site_name'))
 
-        print ("\nFor more information on a specific fuelbed, use the " +
+        print("\nFor more information on a specific fuelbed, use the " +
                ".info(id#, detail=True/False) method.\n")
 
 
@@ -222,81 +223,76 @@ class FCCSDB():
         ID. For a list of valid FCCS IDs, use the .browse_fccs() method.
 
         """
+        try:
+            fb_index = (self.loadings_data_.fccs_id == fccs_id).nonzero()[0][0]
+            row = self.loadings_data_.ix[fb_index]
+            text = "\nFCCS ID# : " + str(row.get('fccs_id'))
+            text += "\nSite name: " + str(row.get('site_name'))
+            text += "\n\nSite description: " + str(row.get('site_description'))
 
-        check = True
-        text = ""
-        for i in range(0, len(self.loadings_data_)):
-            if int(self.loadings_data_[i][0]) == int(fccs_id):
-                check = False
-                data = self.loadings_data_[i]
-                text += "\nFCCS ID# : " + str(data[0])
-                text += "\nSite name: " + str(data[1])
-                text += "\n\nSite description: " + str(data[2])
+            if detail:
+                lu = ' tons/ac'     # loading units
+                du = ' in'          # depth units
+                pu = '%'             # percent units
+                nu = ' #/acre'      # density units (basal acc., sq. middens)
+                ru = ' feet'         # radius units
+                text += "\n\n\tBailey's ecoregion division(s): " + str(row.get(''))
+                text += "\n\n\tCanopy loadings"
+                text += "\n\t   Overstory: " + str(row.get('overstory')) + lu
+                text += "\n\t   Midstory: " + str(row.get('midstory')) + lu
+                text += "\n\t   Understory: " + str(row.get('understory')) + lu
+                text += "\n\t   Snags, class 1, foliage: " + str(row.get('snag1f')) + lu
+                text += "\n\t   Snags, class 1, wood: " + str(row.get('snag1w')) + lu
+                text += "\n\t   Snags, class 1, w/o foliage: " + str(row.get('snag1nf')) + lu
+                text += "\n\t   Snags, class 2: " + str(row.get('snag2')) + lu
+                text += "\n\t   Snags, class 3: " + str(row.get('snag3')) + lu
+                text += "\n\t   Ladder fuels: " + str(row.get('ladder')) + lu
 
-                if detail:
-                    lu = ' tons/ac'     # loading units
-                    du = ' in'          # depth units
-                    pu = '%'             # percent units
-                    nu = ' #/acre'      # density units (basal acc., sq. middens)
-                    ru = ' feet'         # radius units
-                    text += "\n\n\tBailey's ecoregion division(s): " + str(data[3])
-                    text += "\n\n\tCanopy loadings"
-                    text += "\n\t   Overstory: " + str(data[4]) + lu
-                    text += "\n\t   Midstory: " + str(data[5]) + lu
-                    text += "\n\t   Understory: " + str(data[6]) + lu
-                    text += "\n\t   Snags, class 1, foliage: " + str(data[7]) + lu
-                    text += "\n\t   Snags, class 1, wood: " + str(data[8]) + lu
-                    text += "\n\t   Snags, class 1, w/o foliage: " + str(data[9]) + lu
-                    text += "\n\t   Snags, class 2: " + str(data[10]) + lu
-                    text += "\n\t   Snags, class 3: " + str(data[11]) + lu
-                    text += "\n\t   Ladder fuels: " + str(data[12]) + lu
+                text += "\n\n\tShrub loadings"
+                text += "\n\t   Shrub Primary: " + str(row.get('shrub_prim')) + lu
+                text += "\n\t   Shrub Primary % live: " + str(row.get('shrub_prim_pctlv')*100) + pu
+                text += "\n\t   Shrub Secondary: " + str(row.get('shrub_seco')) + lu
+                text += "\n\t   Shrub Secondary % live: " + str(row.get('shrub_seco_pctlv')*100) + pu
 
-                    text += "\n\n\tShrub loadings"
-                    text += "\n\t   Shrub Primary: " + str(data[13]) + lu
-                    text += "\n\t   Shrub Primary % live: " + str(data[14]*100) + pu
-                    text += "\n\t   Shrub Secondary: " + str(data[15]) + lu
-                    text += "\n\t   Shrub Secondary % live: " + str(data[16]*100) + pu
+                text += "\n\n\tNonwoody loadings"
+                text += "\n\t   NW Primary: " + str(row.get('nw_prim')) + lu
+                text += "\n\t   NW Primary % live: " + str(row.get('nw_prim_pctlv')*100) + pu
+                text += "\n\t   NW Secondary: " + str(row.get('nw_seco')) + lu
+                text += "\n\t   NW Secondary % live: " + str(row.get('nw_seco_pctlv')*100) + pu
 
-                    text += "\n\n\tNonwoody loadings"
-                    text += "\n\t   NW Primary: " + str(data[17]) + lu
-                    text += "\n\t   NW Primary % live: " + str(data[18]*100) + pu
-                    text += "\n\t   NW Secondary: " + str(data[19]) + lu
-                    text += "\n\t   NW Secondary % live: " + str(data[20]*100) + pu
+                text += "\n\n\tLitter-lichen-moss loadings"
+                text += "\n\t   Litter depth: " + str(row.get('lit_depth')) + du
+                text += "\n\t   Litter loading: " + str(row.get('litter_loading')) + lu
 
-                    text += "\n\n\tLitter-lichen-moss loadings"
-                    text += "\n\t   Litter depth: " + str(data[24]) + du
-                    text += "\n\t   Litter loading: " + str(data[25]) + lu
+                text += "\n\t   Lichen depth: " + str(row.get('lch_depth')) + du
+                text += "\n\t   Lichen loading: " + str(row.get('lichen_loading')) + lu
 
-                    text += "\n\t   Lichen depth: " + str(data[26]) + du
-                    text += "\n\t   Lichen loading: " + str(data[27]) + lu
+                text += "\n\t   Moss depth: " + str(row.get('moss_depth')) + du
+                text += "\n\t   Moss loading: " + str(row.get('moss_loading')) + lu
 
-                    text += "\n\t   Moss depth: " + str(data[28]) + du
-                    text += "\n\t   Moss loading: " + str(data[29]) + lu
+                text += "\n\n\tGround fuel loadings"
+                text += "\n\t   Duff depth, upper: " + str(row.get('duff_upper_depth')) + du
+                text += "\n\t   Duff loading, upper: " + str(row.get('duff_upper_loadin')) + lu
+                text += "\n\t   Duff depth, lower: " + str(row.get('duff_lower_depth')) + du
+                text += "\n\t   Duff loading, lower: " + str(row.get('duff_lower_loading')) + lu
+                text += "\n\t   Basal accumulations loading: " + str(row.get('bas_loading')) + lu
+                text += "\n\t   Squirrel midden loading: " + str(row.get('sqm_loading')) + ru
 
-                    text += "\n\n\tGround fuel loadings"
-                    text += "\n\t   Duff depth, upper: " + str(data[30]) + du
-                    text += "\n\t   Duff loading, upper: " + str(data[31]) + lu
-                    text += "\n\t   Duff depth, lower: " + str(data[32]) + du
-                    text += "\n\t   Duff loading, lower: " + str(data[33]) + lu
-                    text += "\n\t   Basal accumulations loading: " + str(data[34]) + lu
-                    text += "\n\t   Squirrel midden loading: " + str(data[35]) + ru
-
-                    text += "\n\n\tWoody fuel loadings"
-                    text += '\n\t   1-hr (0-0.25"): ' + str(data[36]) + lu
-                    text += '\n\t   10-hr (0.25-1"): ' + str(data[37]) + lu
-                    text += '\n\t   100-hr (1-3"): ' + str(data[38]) + lu
-                    text += '\n\t   1000-hr (3-9"), sound: ' + str(data[39]) + lu
-                    text += '\n\t   10,000-hr (9-20"), sound: ' + str(data[40]) + lu
-                    text += '\n\t   10,000-hr+ (>20"), sound: ' + str(data[41]) + lu
-                    text += '\n\t   1000-hr (3-9"), rotten: ' + str(data[42]) + lu
-                    text += '\n\t   10,000-hr (9-20"), rotten: ' + str(data[43]) + lu
-                    text += '\n\t   10,000-hr+ (>20"), rotten: ' + str(data[44]) + lu
-                    text += "\n\t   Stumps, sound: " + str(data[21]) + lu
-                    text += "\n\t   Stumps, rotten: " + str(data[22]) + lu
-                    text += "\n\t   Stumps, lightered: " + str(data[23]) + lu
-
-        if check:
-            text += ("\nFuelbed ID# " + str(fccs_id) + " was not found." +
+                text += "\n\n\tWoody fuel loadings"
+                text += '\n\t   1-hr (0-0.25"): ' + str(row.get('one_hr_sound')) + lu
+                text += '\n\t   10-hr (0.25-1"): ' + str(row.get('ten_hr_sound')) + lu
+                text += '\n\t   100-hr (1-3"): ' + str(row.get('hun_hr_sound')) + lu
+                text += '\n\t   1000-hr (3-9"), sound: ' + str(row.get('oneK_hr_sound')) + lu
+                text += '\n\t   10,000-hr (9-20"), sound: ' + str(row.get('tenK_hr_sound')) + lu
+                text += '\n\t   10,000-hr+ (>20"), sound: ' + str(row.get('tnkp_hr_sound')) + lu
+                text += '\n\t   1000-hr (3-9"), rotten: ' + str(row.get('oneK_hr_rotten')) + lu
+                text += '\n\t   10,000-hr (9-20"), rotten: ' + str(row.get('tenK_hr_rotten')) + lu
+                text += '\n\t   10,000-hr+ (>20"), rotten: ' + str(row.get('tnkp_hr_rotten')) + lu
+                text += "\n\t   Stumps, sound: " + str(row.get('stump_sound')) + lu
+                text += "\n\t   Stumps, rotten: " + str(row.get('stump_rotten')) + lu
+                text += "\n\t   Stumps, lightered: " + str(row.get('stump_lightered')) + lu
+        except:
+            text = ("\nFuelbed ID# " + str(fccs_id) + " was not found." +
                    "  Use the .browse_fccs() method to view a list of valid "
                    + "fuelbeds.")
 

@@ -8,8 +8,8 @@ class TestFuelConsumption(unittest.TestCase):
 
     def setUp(self):
         infile = helper.get_test_inputfile()
-        self._consumer = consume.FuelConsumption(fccs_file = infile)
-        
+        self._consumer = consume.FuelConsumption()
+        '''
         self._consumer.burn_type = 'natural'
         self._consumer.fuelbed_area_acres = [100]
         self._consumer.fuel_moisture_1000hr_pct = [20]
@@ -18,6 +18,7 @@ class TestFuelConsumption(unittest.TestCase):
         self._consumer.shrub_blackened_pct = [50]
         self._consumer.output_units = 'tons_ac'
         self._consumer.fuelbed_fccs_ids = [i for i in self._consumer.FCCS.loadings_data_]
+        '''
 
     def tearDown(self):
         pass
