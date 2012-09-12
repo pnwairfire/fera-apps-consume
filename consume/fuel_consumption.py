@@ -1273,14 +1273,13 @@ class FuelConsumption(util.FrozenClass):
     def _heat_release_calc(self):
         """ Calculates heat release from consumption data """
 
-        # conversion factors- according to source code (2000 btu/lb.)
         btu_dict = {'tons' : 16000000.0,
                     'tonnes' : 17636980.96,
                     'kg' : 17636.98096,
                     'lbs' : 8000.0}
-
-        BTU_PER_UNIT = btu_dict[self._settings.units.split('_')[0]]
-
+        key = self._settings.units.split('_')[0]
+        assert key in btu_dict.keys()
+        BTU_PER_UNIT = btu_dict[key]
         self._heat_data = (self._cons_data * BTU_PER_UNIT)
 
     def _get_loadings_for_specified_files(self, ids):
