@@ -220,20 +220,12 @@ def write_results(all_results, cols, fuelbed_list):
         write_computed_results(all_results, columns, fuelbed_list, outfile)
 
 
-def get_fuelbed_list(consumer):
-    ''' kjell - temporary solution '''
-    MAX_REFERENCE_FUELBED = 291
-    return [str(i[0]) for i in consumer.FCCS.loadings_data_ if MAX_REFERENCE_FUELBED >= i[0]]
-
-
 def run(burn_type, csv_input, msg_level, fuel_loadings=None, col_cfg=None):
     #consumer = consume.FuelConsumption(fccs_file=get_input_file(fuel_loadings), msg_level=msg_level) \
     consumer = consume.FuelConsumption(fccs_file=fuel_loadings, msg_level=msg_level) \
         if fuel_loadings else consume.FuelConsumption(msg_level=msg_level)
     consumer.burn_type = burn_type
     if consumer.load_scenario(csv_input, display=False):
-        if 0 == len(consumer.fuelbed_fccs_ids):
-            consumer.fuelbed_fccs_ids = get_fuelbed_list(consumer)
         emissions = consume.Emissions(consumer)
         results = emissions.results()
         cols = CustomCol() if not col_cfg else CustomCol.from_file(col_cfg)

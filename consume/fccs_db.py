@@ -2,6 +2,7 @@ import os
 import data_desc as dd
 from collections import namedtuple
 import module_locator
+import pandas as pan
 
 class FCCSDB():
     """ A class the stores, retrieves, and distributes FCCS fuelbed information
@@ -90,34 +91,42 @@ class FCCSDB():
     def _load_data_from_csv(self):
         """Load FCCS data from an external file.
         """
-        DataInfo = namedtuple('DataInfo', ['generator_name', 'generator_version', 'date_generated'])
-        pct_data = ['shrubs_primary_perc_live', 'shrubs_secondary_perc_live', 'nw_primary_perc_live', 'nw_secondary_perc_live']
-        import pandas as pan
-        loadings_data = pan.read_csv(self.xml_file)
+        found_data_info, data_info = self._get_data_info()
+        column_header_begins = 1 if found_data_info else 0
+        loadings_data = pan.read_csv(self.xml_file, header=column_header_begins)
 
         # - todo: convert percentage data. should this be done in FCCS?
+        pct_data = ['shrubs_primary_perc_live', 'shrubs_secondary_perc_live', 'nw_primary_perc_live', 'nw_secondary_perc_live']
         loadings_data[pct_data] = loadings_data[pct_data] * 0.01
 
         for item in dd.LoadDefs:
             loadings_data.rename(columns={item[0] : item[1]}, inplace=True)
 
-        return(loadings_data, DataInfo("unknown", "unknown", "unknown"))
+        return(loadings_data, data_info)
 
-    def _get_data_info(self, root):
+    def _get_data_info(self):
+        ''' The calculator information is in the first line of the file. It
+            should look like this:
+
+                GeneratorName=FCCS 3.0,GeneratorVersion=3.0.0,DateCreated=09/14/2012
+
+            Return a tuple of (found|not found, parsed data or stubs)
+        '''
         DataInfo = namedtuple('DataInfo', ['generator_name', 'generator_version', 'date_generated'])
-        node = root.find('generator_info')
-        if None != node:
-            name = node.find('generator_name')
-            version = node.find('generator_version')
-            date = node.find('date_generated')
-            g_name = name.text if None != name else "unknown"
-            g_version = version.text if None != version else "unknown"
-            g_date = date.text if None != date else "unknown"
-            data_info = DataInfo(g_name, g_version, g_date)
-        else:
-            print("\nWarning: consume loadings file has no generator information!\n")
-            data_info = DataInfo("unknown", "unknown", "unknown")
-        return data_info
+        found = False
+        with open(self.xml_file, 'r') as infile:
+            first_line = infile.readline().rstrip()
+            if 'GeneratorName' in first_line:
+                found = True
+                chunks = first_line.split(',')
+                name = chunks[0].split('=')[1]
+                version = chunks[1].split('=')[1]
+                date = chunks[2].split('=')[1]
+                data_info = DataInfo(name, version, date)
+            else:
+                print("\nWarning: consume loadings file has no generator information!\n")
+                data_info = DataInfo("unknown", "unknown", "unknown")
+        return (found, data_info)
 
     def get_available_fuelbeds(self):
         return self.valid_fuelbeds_
