@@ -99,8 +99,15 @@ class FCCSDB():
         pct_data = ['shrubs_primary_perc_live', 'shrubs_secondary_perc_live', 'nw_primary_perc_live', 'nw_secondary_perc_live']
         loadings_data[pct_data] = loadings_data[pct_data] * 0.01
 
+        # - rename columns to match internal names
         for item in dd.LoadDefs:
             loadings_data.rename(columns={item[0] : item[1]}, inplace=True)
+
+        # - sort by fuelbed number
+        loadings_data.sort(columns='fccs_id', inplace=True)
+
+        # - bring the index back in line with the sorted data
+        loadings_data.index = pan.Int64Index(sorted(loadings_data.index))
 
         return(loadings_data, data_info)
 
