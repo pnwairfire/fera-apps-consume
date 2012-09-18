@@ -523,6 +523,7 @@ import con_calc_natural as ccn
 import con_calc_activity as cca
 import input_settings as settings
 import logging
+import pandas as pan
 
 msg = logging.getLogger(__name__)
 msg.addHandler(logging.StreamHandler())
@@ -1282,59 +1283,39 @@ class FuelConsumption(util.FrozenClass):
         BTU_PER_UNIT = btu_dict[key]
         self._heat_data = (self._cons_data * BTU_PER_UNIT)
 
+    '''
+    This is an efficient way to get the specified fuelbeds. However, if the user has
+    specified the same fuelbed number multiple times (likely with different equation
+    sets) this returns just one copy of the data. Unfortunately, it is impossible to
+    correctly broadcast this structure when doing calculations. Keep for explanatory
+    value or reimplementation.
     def _get_loadings_for_specified_files(self, ids):
         # gets the specified fuelbeds from the dataframe. The return from nonzero is a
         #  tuple, hence the weird array reference
         selector_mask = [np.nonzero(self.FCCS.loadings_data_.fccs_id == i)[0][0] \
             for i in self.FCCS.loadings_data_.fccs_id if i in ids]
         return self.FCCS.loadings_data_.ix[selector_mask]
+    '''
 
-    def _get_fuel_loadings(self, fuelbeds):
-        """ Retrieves FCCS loadings values based on scenario FCCS IDs
-            The result of this is a dictionary keyed on the internal tag (second element) of the LoadDefs structure
-                LoadDefs = (('fuelbed_number', 'fccs_id', 0),
-                            ('ecoregion', 'ecoregion', 1),
-            The value is a list of all the values of that type from the valid fuelbeds.
-
-        """
-        def _setup_loading_dictionary():
-            """ Sets up the FCCS fuel loadings dictionary """
-            LD = {} # fuel loading dictionary
-            for t in zip(*dd.LoadDefs)[1]: # lists internal tags
-                LD[t] = []
-            return LD
-
-        LD = _setup_loading_dictionary()
-        # skip loading these b/c will just hog memory
-        skips = ['ecoregion', 'cover_type', 'site_desc']
-
-        # load all fuel loadings for all corresponding fccs id's
-        loadings = []
-        for f in fuelbeds:
-            for bed in self.FCCS.loadings_data_:
-                if str(f) == str(bed[0]):
-                    loadings.append(bed)
-
-        data = zip(*loadings)
-        for lds in dd.LoadDefs:
-            if lds[1] not in skips:
-                LD[lds[1]] = data[lds[2]]
-
-        # convert to numpy arrays
-        for t in zip(*dd.LoadDefs)[1]:
-            if t != 'fccs_id':
-                LD[t] = np.array(LD[t])
-
-        if len(self.customized_fuel_loadings) != 0:
-            for flc in self.customized_fuel_loadings:
-                f_index = flc[0] - 1
-                ld_name = flc[1]
-                ld_value = float(flc[2])
-                LD[ld_name][f_index] = ld_value
-
-        self._fccs_loadings = LD
-
-        return LD
+    def _get_loadings_for_specified_files(self, ids):
+        # gets the specified fuelbeds from the dataframe.
+        if None == ids or 0 == len(ids):
+            # - return everything
+            return self.FCCS.loadings_data_
+        else:
+            # - I want a slot for each specified fuelbed. This may include duplicates.
+            ids_tmp = ids.copy()
+            ids_sorted = sorted(ids_tmp)
+            results = []
+            for id in ids_sorted:
+                try:
+                    # - searchsorted() returns a index position
+                    #tmp =  self.FCCS.loadings_data_.ix[self.FCCS.loadings_data_.fccs_id.searchsorted(id)]
+                    tmp =  self.FCCS.loadings_data_.fccs_id.searchsorted(id)
+                    results.append(tmp)
+                except:
+                    assert False, "Error: Invalid fuelbed specified"
+            return self.FCCS.loadings_data_.ix[results]
 
     def calc_ff_redux_proportion(self, LD):
         duff_depth = LD['duff_upper_depth'] + LD['duff_lower_depth']
@@ -1370,9 +1351,8 @@ class FuelConsumption(util.FrozenClass):
 
 
         """
-        #LD = self._get_fuel_loadings(self._settings.get('fuelbeds'))
-        #LD = self.FCCS.loadings_data_
         LD = self._get_loadings_for_specified_files(self._settings.get('fuelbeds'))
+        print("Kjell\n{}".format(LD.columns))
 
         # Setup ecoregion masks for equations that vary by ecoregion
         ecodict = {"maskb": {"boreal":1, "western":0, "southern":0},
