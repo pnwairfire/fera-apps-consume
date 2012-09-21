@@ -17,83 +17,23 @@ class FCCSDB():
         fccs_file : directory location of the FCCS Loadings XML provided
                     with the consume.py package"""
 
-        self.xml_file = fccs_file
+        self.loadings_file_ = fccs_file
         if fccs_file == "":
             mod_path = module_locator.module_path()
-            self.xml_file = os.path.join(mod_path, './input_data/fccs_loadings_1_458.csv')
+            self.loadings_file_ = os.path.join(mod_path, './input_data/fccs_loadings_1_458.csv')
 
-        #(self.loadings_data_, self.data_info) = self._load_data_from_xml()
-        (self.loadings_data_, self.data_info) = self._load_data_from_csv()
+        (self.loadings_data_, self.loadings_metadata_) = self._load_data_from_csv()
         self.valid_fuelbeds_ = [int(i) for i in self.loadings_data_.fccs_id]
 
-        '''
-        self.loadings_data_.sort()
-        self.valid_fuelbeds_ = []
-        for f in self.loadings_data_:
-            self.valid_fuelbeds_.append(str(f[0]))
-        '''
-
     @property
-    def data_source_info(self): return self.data_info
-
-    def _load_data_from_xml(self):
-        """Load FCCS data from an external file.
-        """
-
-        text_data = ['site_name', 'ecoregion', 'cover_type', 'site_description',
-                     'srm_id', 'srm_description']
-
-        pct_data = ['shrubs_primary_perc_live', 'shrubs_secondary_perc_live', \
-                    'nw_primary_perc_live', 'nw_secondary_perc_live']
-
-        def load_data(node, tag_name):
-            """ Loads data from xml file for the given tag name
-                The data structue returned is a list of lists of the values in the
-                dd.LoadDefs structure
-            """
-
-            if tag_name in text_data:
-                return node.findtext(tag_name)
-
-            elif tag_name in ['fccs_id', 'fccs_id']:
-                fb_num = int(node.findtext(tag_name))
-                return fb_num
-            else:
-                data = node.findtext(tag_name)
-                if not data or float(data) < 0:
-                    data = 0.0
-
-                if tag_name in pct_data:
-                    data = float(data) / 100.0
-
-            return float(data)
-
-        from xml.etree import ElementTree as ET
-        tree = ET.parse(self.xml_file)
-        root = tree.getroot()
-        del tree
-
-        data_info = self._get_data_info(root)
-
-        fccs = []
-        for node in root:
-            if node.tag == "generator_info": continue
-
-            ### - zero initialized list size of LoadDefs
-            temp = [0] * len(dd.LoadDefs)
-            for ld in dd.LoadDefs:
-                temp[ld[2]] = load_data(node, ld[0])
-            fccs.append(temp)
-
-        del root
-        return (fccs, data_info)
+    def data_source_info(self): return self.loadings_metadata_
 
     def _load_data_from_csv(self):
         """Load FCCS data from an external file.
         """
-        found_data_info, data_info = self._get_data_info()
-        column_header_begins = 1 if found_data_info else 0
-        loadings_data = pan.read_csv(self.xml_file, header=column_header_begins)
+        found_loadings_metadata, loadings_metadata = self._get_loadings_metadata()
+        column_header_begins = 1 if found_loadings_metadata else 0
+        loadings_data = pan.read_csv(self.loadings_file_, header=column_header_begins)
 
         # - todo: convert percentage data. should this be done in FCCS?
         pct_data = ['shrubs_primary_perc_live', 'shrubs_secondary_perc_live', 'nw_primary_perc_live', 'nw_secondary_perc_live']
@@ -109,9 +49,9 @@ class FCCSDB():
         # - bring the index back in line with the sorted data
         loadings_data.index = pan.Int64Index(sorted(loadings_data.index))
 
-        return(loadings_data, data_info)
+        return(loadings_data, loadings_metadata)
 
-    def _get_data_info(self):
+    def _get_loadings_metadata(self):
         ''' The calculator information is in the first line of the file. It
             should look like this:
 
@@ -121,7 +61,7 @@ class FCCSDB():
         '''
         DataInfo = namedtuple('DataInfo', ['generator_name', 'generator_version', 'date_generated'])
         found = False
-        with open(self.xml_file, 'r') as infile:
+        with open(self.loadings_file_, 'r') as infile:
             first_line = infile.readline().rstrip()
             if 'GeneratorName' in first_line:
                 found = True
@@ -129,11 +69,11 @@ class FCCSDB():
                 name = chunks[0].split('=')[1]
                 version = chunks[1].split('=')[1]
                 date = chunks[2].split('=')[1]
-                data_info = DataInfo(name, version, date)
+                loadings_metadata = DataInfo(name, version, date)
             else:
-                print("\nWarning: consume loadings file has no generator information!\n")
-                data_info = DataInfo("unknown", "unknown", "unknown")
-        return (found, data_info)
+                print("\nWarning: consume loadings file has no metadata information!\n")
+                loadings_metadata = DataInfo("unknown", "unknown", "unknown")
+        return (found, loadings_metadata)
 
     def get_available_fuelbeds(self):
         return self.valid_fuelbeds_
@@ -145,7 +85,6 @@ class FCCSDB():
         as a quick reference.
 
         """
-
         for c in self.loadings_data_.index:
             print "ID# " + str(self.loadings_data_.ix[c].get('fccs_id')) \
                  + "\t: " + str(self.loadings_data_.ix[c].get('site_name'))
@@ -162,7 +101,6 @@ class FCCSDB():
         '.customized_fuel_loadings' method.
 
         """
-
         lu = ' tons/acre'     # loading units
         du = ' inches'          # depth units
         pu = ' %'             # percent units
@@ -315,14 +253,3 @@ class FCCSDB():
         if ret:
             return text
         else: print text
-
-"""class FuelLoadingParameter(object):
-    def __init__(self, xmltag, inttag, strtag, idx, units):
-        self.xmltag = xmltag
-        self.inttag = inttag
-        self.strtag = strtag
-        self.idx = idx
-        self.units = units
-
-    def __repr__(self):
-        return self.strtag"""

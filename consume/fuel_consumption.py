@@ -1352,7 +1352,6 @@ class FuelConsumption(util.FrozenClass):
 
         """
         LD = self._get_loadings_for_specified_files(self._settings.get('fuelbeds'))
-        print("Kjell\n{}".format(LD.columns))
 
         # Setup ecoregion masks for equations that vary by ecoregion
         ecodict = {"maskb": {"boreal":1, "western":0, "southern":0},
