@@ -1298,24 +1298,21 @@ class FuelConsumption(util.FrozenClass):
     '''
 
     def _get_loadings_for_specified_files(self, ids):
-        # gets the specified fuelbeds from the dataframe.
-        if None == ids or 0 == len(ids):
-            # - return everything
-            return self.FCCS.loadings_data_
-        else:
-            # - I want a slot for each specified fuelbed. This may include duplicates.
-            ids_tmp = ids.copy()
-            ids_sorted = sorted(ids_tmp)
-            results = []
-            for id in ids_sorted:
-                try:
-                    # - searchsorted() returns a index position
-                    #tmp =  self.FCCS.loadings_data_.ix[self.FCCS.loadings_data_.fccs_id.searchsorted(id)]
-                    tmp =  self.FCCS.loadings_data_.fccs_id.searchsorted(id)
-                    results.append(tmp)
-                except:
-                    assert False, "Error: Invalid fuelbed specified"
-            return self.FCCS.loadings_data_.ix[results]
+        ''' gets the specified fuelbeds from the dataframe.
+        '''
+        # - I want a slot for each specified fuelbed. This may include duplicates.
+        ids_tmp = ids.copy()
+        ids_sorted = sorted(ids_tmp)
+        results = []
+        for id in ids_sorted:
+            try:
+                # - searchsorted() returns a index position
+                #tmp =  self.FCCS.loadings_data_.ix[self.FCCS.loadings_data_.fccs_id.searchsorted(id)]
+                tmp =  self.FCCS.loadings_data_.fccs_id.searchsorted(id)
+                results.append(tmp)
+            except:
+                assert False, "Error: Invalid fuelbed specified"
+        return self.FCCS.loadings_data_.ix[results]
 
     def calc_ff_redux_proportion(self, LD):
         duff_depth = LD['duff_upper_depth'] + LD['duff_lower_depth']
