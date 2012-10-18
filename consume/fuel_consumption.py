@@ -1275,8 +1275,8 @@ class FuelConsumption(util.FrozenClass):
         """ Calculates heat release from consumption data """
 
         btu_dict = {'tons' : 16000000.0,
-                    'tonnes' : 17636980.96,
-                    'kg' : 17636.98096,
+                    'tonnes' : 18607977.8,
+                    'kg' : 18607.9778,         ### - 8000 * 1.05505585 * 2.20462
                     'lbs' : 8000.0}
         key = self._settings.units.split('_')[0]
         assert key in btu_dict.keys()
