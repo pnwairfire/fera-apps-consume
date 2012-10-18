@@ -82,7 +82,7 @@ class DataObj(object):
         setA = set(a)
         setB = set(b)
         common = sorted(list(setA & setB))
-        difference = sorted(list(setB - setA))
+        difference = sorted(list(setB ^ setA))
         diffMinusMarkerCols = []
         for i in difference:
             ### - eliminate 'marker' columns
