@@ -34,9 +34,9 @@ def copy_files(file_list, dest):
 
 def copy_non_source():
     NON_SOURCE_FILES = [
-        'AUTHORS.txt',
-        'LICENSE.txt',
-        'README.txt',
+        '../common_build/AUTHORS.txt',
+        '../common_build/LICENSE.txt',
+        '../common_build/README.txt',
         'setup.py',
         'MANIFEST.in'
     ]
@@ -52,7 +52,7 @@ def copy_source():
         '../consume/emissions_db.py',
         '../consume/fccs_db.py',
         '../consume/fuel_consumption.py',
-        '../consume/input_variables.py',
+        '../consume/input_settings.py',
         '../consume/module_locator.py',
         '../consume/util_consume.py',
         VERSION_FILE
