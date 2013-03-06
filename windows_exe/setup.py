@@ -10,6 +10,11 @@ consume_data_files = [
 ]
 
 setup(
+    options = {
+            "py2exe":{
+            "dll_excludes": ["MSVCP90.dll", "HID.DLL", "w9xpopen.exe"],
+        }
+    },
     name='consume_batch',
     version='1.0',
     author='Fire and Environmental Research Applications Team (FERA), Michigan Tech Research',

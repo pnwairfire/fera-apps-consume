@@ -51,7 +51,6 @@ def copy_consume_source():
         '../consume/emissions_db.py',
         '../consume/fccs_db.py',
         '../consume/fuel_consumption.py',
-        '../consume/input_variables.py',
         '../consume/input_settings.py',
         '../consume/util_consume.py',
         VERSION_FILE
