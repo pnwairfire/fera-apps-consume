@@ -12,47 +12,6 @@ import os
 import argparse
 import logging
 
-def print_default_column_config_xml(filename):
-    ''' output the text for a default column configuration file
-    '''
-    DEFAULT_XML = r'''
-<!--
-This file allows you to customize the consume output results.
-
-There are 4 top-level catagories. Display or exclude the data from the catagory by
-setting the "include" attribute to "yes" or "no".
-
-The data from the heat release, emissions, and combustion catagories can be
-displayed 2 different ways. The "detail" attribute is responsible for this choice.
-Choose "all" to see the data in flaming, smoldering, residual, and total columns.
-Choose "total" to limit the display to simply the total column.
-
-When generated this file reflects the application defaults.
-
-Be mindful that regenerating this file will overwrite any changes you have made.
-Save the file to a name of your choice to avoid having it overwritten.
--->
-
-<consume_output>
-    <!-- Include the parameters data? yes/no. -->
-    <parameters_column include="yes" />
-
-    <!-- Include the heat release data? yes/no. How much detail? all/total. -->
-    <heat_release_column include="no" detail="all" />
-
-    <!-- Include the emissions data? yes/no. How much detail? all/total. -->
-    <emissions_column include="no" detail="all">
-        <stratum_column  include="no" detail="total"  />
-    </emissions_column>
-
-    <!-- Include the consumption data? yes/no. How much detail? all/total. -->
-    <consumption_column include="yes" detail="total"  />
-</consume_output>
-    '''
-    with open(filename, 'w') as outfile:
-        for line in DEFAULT_XML:
-            outfile.write(line)
-        print("\nSuccess: Consume column configuration file written - {}\n".format(filename))
 
 def make_parser():
     ''' This is the parser for the consume_batch command line
@@ -72,7 +31,7 @@ Additional options are detailed below.'''
 Examples:
     // simple case
     consume_batch.exe natural input_natural.csv
-    
+
     // same thing on linux
     python consume_batch.py natural input_natural.csv
 
@@ -106,15 +65,13 @@ Examples:
     parser.add_argument('-l', action='store', nargs=1, dest='msg_level', metavar='message level',
         help='Specify the detail level of messages (1 | 2 | 3). 1 = fewest messages 3 = most messages')
 
-    # - generate a default column configuration file from which to work
-    parser.add_argument('-g', action='store', nargs='?',
-        default="", const="output_config.xml", dest='gen_col_cfg', metavar='col cfg file',
-        help='This option will print a default column configuration xml file. The output file is \
-            called \"output_config.xml\". Modify this file as needed and save it to another name. \
-            Each time the -g option is run the configuration file is overwritten.'
+    # - specify an output filename
+    parser.add_argument('-o', action='store', nargs=1, default='consume_results.csv',
+        dest='output_filename', metavar='output filename',
+        help='Specify the name of the Consume output results file.'
         )
     return parser
-    
+
 class ConsumeParserException(Exception):
     pass
 
@@ -128,18 +85,13 @@ class ConsumeParser(object):
         self._col_cfg_file = None
         self._msg_level = logging.ERROR
         self.do_parse(argv[1:]) ### - remove the calling script name
-    
+
     def do_parse(self, argv):
         parser = make_parser()
         if 0 == len(argv):
             parser.parse_args(['--help'])
         else:
             args = parser.parse_args(argv)
-
-            # Generate a column configuration file and exit
-            if args.gen_col_cfg:
-                print_default_column_config_xml(args.gen_col_cfg)
-                sys.exit(0)
 
             # - verify burn_type
             if not args.burn_type:
@@ -165,6 +117,9 @@ class ConsumeParser(object):
                 if not self.exists(args.col_cfg_file[0]):
                     raise(ConsumeParserException("\nError: The column config file '{}' does not exist.".format(args.col_cfg_file[0])))
                 self._col_cfg_file = os.path.abspath(args.col_cfg_file[0])
+
+            if args.output_filename:
+                self.output_filename = os.path.abspath(args.output_filename[0])
 
             if args.msg_level:
                 level = int(args.msg_level[0])

@@ -15,8 +15,6 @@ import batch_locator
 import cmdline
 import pandas as pan
 
-RESULTS_FILE = 'batch_results.csv'
-
 # -- From stackoverflow.com ---
 from collections import *
 from itertools import *
@@ -95,7 +93,7 @@ def read_col_cfg_file(filename):
                     assert false, "Malformed line: {}".format(line)
     return retval
 
-def write_results(all_results, col_cfg_file=None):
+def write_results(all_results, outfile, col_cfg_file=None):
     default_cols = [
         ('parameters_fuelbeds', 'Fuelbeds'),
         ('consumption_summary_total_total', 'Total Consumption'),
@@ -139,9 +137,9 @@ def write_results(all_results, col_cfg_file=None):
         if tmp.has_key(key):
             add_these.append((new_key, tmp[key]))
     newdf = pan.DataFrame.from_items(add_these)
-    newdf.to_csv(RESULTS_FILE, index=False)
+    newdf.to_csv(outfile, index=False)
 
-def run(burn_type, csv_input, msg_level, fuel_loadings=None, col_cfg=None):
+def run(burn_type, csv_input, msg_level, outfile, fuel_loadings=None, col_cfg=None):
     consumer = consume.FuelConsumption(fccs_file=fuel_loadings, msg_level=msg_level) \
         if fuel_loadings else consume.FuelConsumption(msg_level=msg_level)
     consumer.burn_type = burn_type
@@ -149,8 +147,8 @@ def run(burn_type, csv_input, msg_level, fuel_loadings=None, col_cfg=None):
         emissions = consume.Emissions(consumer)
         results = emissions.results()
         fuelbed_list = consumer.fuelbed_fccs_ids
-        write_results(results, col_cfg_file=col_cfg)
-        print("\nSuccess!!! Results are in \"{}\"".format(RESULTS_FILE))
+        write_results(results, outfile, col_cfg_file=col_cfg)
+        print("\nSuccess!!! Results are in \"{}\"".format(outfile))
 
 #-------------------------------------------------------------------------------
 # Main
@@ -159,7 +157,8 @@ def main():
     try:
         can_run()
         parser = cmdline.ConsumeParser(sys.argv)
-        run(parser.burn_type, parser.csv_file, parser.msg_level, parser.fuel_loadings_file, parser.col_cfg_file)
+        run(parser.burn_type, parser.csv_file, parser.msg_level, parser.output_filename,
+            parser.fuel_loadings_file, parser.col_cfg_file)
     except Exception as e:
         print(e)
 
