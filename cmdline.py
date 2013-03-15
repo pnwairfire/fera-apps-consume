@@ -66,7 +66,7 @@ Examples:
         help='Specify the detail level of messages (1 | 2 | 3). 1 = fewest messages 3 = most messages')
 
     # - specify an output filename
-    parser.add_argument('-o', action='store', nargs=1, default='consume_results.csv',
+    parser.add_argument('-o', action='store', nargs=1, default=['consume_results.csv'],
         dest='output_filename', metavar='output filename',
         help='Specify the name of the Consume output results file.'
         )
