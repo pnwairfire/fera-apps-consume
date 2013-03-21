@@ -1,0 +1,54 @@
+/* ========================================================================
+    Consume simply needs to have the source and input files zipped
+   ======================================================================= */
+apply plugin: 'java'
+
+task zip(type: Zip) {
+    copy {
+        from '.'
+        into 'dist'
+        include '*.py'
+        include 'output*.csv'
+    }
+    copy {
+        from 'consume'
+        into 'dist/consume'
+        include '*.py'
+    }
+    copy {
+        from 'consume/input_data'
+        into 'dist/consume/input_data'
+        include '*.*'
+    }
+    archiveName = "consume.zip"
+    from 'dist'
+    into archiveName
+}
+
+defaultTasks 'uploadZip'
+ 
+/* ========================================================================
+    Publish artifacts
+   ======================================================================= */
+task uploadZip(type: Upload) {
+    configurations {
+        zipConf
+    }
+    artifacts {
+        def pathToZip = "build/distributions/consume.zip"
+        zipConf file(pathToZip)
+    }
+    configuration = configurations.zipConf
+    repositories { 
+    mavenRepo url: "http://172.16.0.128:8081/artifactory/libs-release-local"; 
+    repositories.mavenDeployer { 
+            repository(url: "http://172.16.0.128:8081/artifactory/libs-release-local") { 
+            authentication(userName: 'jenkins', password: 'jenkins') 
+            }
+        } 
+    } 
+}
+
+/* ========================================================================
+    EmptyBlock
+   ======================================================================= */
