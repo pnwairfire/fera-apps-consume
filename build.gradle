@@ -39,6 +39,7 @@ task uploadZip(type: Upload) {
         def pathToZip = "build/distributions/consume.zip"
         zipConf file(pathToZip)
     }
+    project.group = "apps"
     configuration = configurations.zipConf
     repositories { 
     mavenRepo url: "http://172.16.0.128:8081/artifactory/libs-release-local"; 
