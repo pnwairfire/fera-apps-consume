@@ -10,7 +10,6 @@
 import consume
 import os
 import sys
-from custom_col import CustomCol
 import batch_locator
 import cmdline
 import pandas as pan
