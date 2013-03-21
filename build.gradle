@@ -2,6 +2,7 @@
     Consume simply needs to have the source and input files zipped
    ======================================================================= */
 apply plugin: 'java'
+apply plugin: 'maven'
 
 task zip(type: Zip) {
     copy {
