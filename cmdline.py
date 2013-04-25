@@ -39,7 +39,7 @@ Examples:
     consume_batch.exe natural input_natural.csv -f my_loadings.xml
 
     // specify a column configuration file
-    consume_batch.exe activity input_activity.csv -x column_config.xml'''
+    consume_batch.exe activity input_activity.csv -x output_summary.csv'''
 
     # - build the parser
     parser = argparse.ArgumentParser(

@@ -4,7 +4,7 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 
-task zip(type: Zip) {
+task copy_source() {
     copy {
         from '.'
         into 'dist'
@@ -21,10 +21,14 @@ task zip(type: Zip) {
         into 'dist/consume/input_data'
         include '*.*'
     }
-    archiveName = "consume.zip"
+}
+
+task zip(type: Zip) {
+    archiveName = "consume_calc.zip"
     from 'dist'
     into archiveName
 }
+zip.dependsOn copy_source
 
 defaultTasks 'uploadZip'
  
@@ -36,7 +40,7 @@ task uploadZip(type: Upload) {
         zipConf
     }
     artifacts {
-        def pathToZip = "build/distributions/consume.zip"
+        def pathToZip = "build/distributions/consume_calc.zip"
         zipConf file(pathToZip)
     }
     project.group = "apps"
