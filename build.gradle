@@ -46,9 +46,9 @@ task uploadZip(type: Upload) {
     project.group = "apps"
     configuration = configurations.zipConf
     repositories { 
-    mavenRepo url: "http://172.16.0.128:8081/artifactory/libs-release-local"; 
+    mavenRepo url: "http://172.16.0.120:8081/artifactory/libs-release-local"; 
     repositories.mavenDeployer { 
-            repository(url: "http://172.16.0.128:8081/artifactory/libs-release-local") { 
+            repository(url: "http://172.16.0.120:8081/artifactory/libs-release-local") { 
             authentication(userName: 'jenkins', password: 'jenkins') 
             }
         } 
