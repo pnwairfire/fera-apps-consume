@@ -41,7 +41,7 @@ def get_tip():
 
 def make_archive():
     print("In {} ...".format('make_archive'))
-    ARCHIVE = "Consume_4-4.2.{}.zip".format(get_tip())
+    ARCHIVE = "Consume-4.2.{}.zip".format(get_tip())
 
     def clean_files():
         try:
