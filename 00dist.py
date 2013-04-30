@@ -1,6 +1,7 @@
 #-------------------------------------------------------------------------------
 # Name:        00dist.py
-# Purpose:     Build a zip file of the necessary components for consume batch
+# Purpose:     Build a zip file of the necessary components for consume batch.
+#                   NOTE: the intent is that is run from the CI Server
 #
 # Author:      kjells
 #
@@ -29,10 +30,17 @@ def copy_files():
     for f in glob.glob('output*.csv'):
         shutil.copyfile(f, '{}/{}'.format(DIST_DIR, f))
     shutil.copytree('consume', '{}/consume'.format(DIST_DIR))
+    
+def get_tip():
+    import subprocess
+    proc = subprocess.Popen(['hg', 'tip', '--template', '{rev}'],stdout=subprocess.PIPE)
+    tip = proc.stdout.readline().strip()
+    print(tip)
+    return tip
 
 def make_archive():
     print("In {} ...".format('make_archive'))
-    ARCHIVE = "Consume_{}_{}_{}.zip".format(datetime.date.today().month, datetime.date.today().day, datetime.date.today().year)
+    ARCHIVE = "Consume_4-4.2.{}.zip".format(get_tip())
 
     def clean_files():
         try:
