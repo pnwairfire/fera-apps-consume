@@ -14,6 +14,7 @@ import zipfile
 import os
 import shutil
 import glob
+import subprocess
 from glob import iglob # lower memory footprint than glob
 
 DIST_DIR = 'dist'
@@ -32,11 +33,10 @@ def copy_files():
     shutil.copytree('consume', '{}/consume'.format(DIST_DIR))
     
 def get_tip():
-    import subprocess
     proc = subprocess.Popen(['hg', 'tip', '--template', '{rev}'],stdout=subprocess.PIPE)
     tip = proc.stdout.readline().strip()
     with open('build_num.properties', 'w+') as outfile:
-        outfile.write('BUILD_NUMBER={}'.format(tip)
+        outfile.write('BUILD_NUMBER={}'.format(tip))
     return tip
 
 def make_archive():
