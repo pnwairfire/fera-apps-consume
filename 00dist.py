@@ -35,7 +35,8 @@ def get_tip():
     import subprocess
     proc = subprocess.Popen(['hg', 'tip', '--template', '{rev}'],stdout=subprocess.PIPE)
     tip = proc.stdout.readline().strip()
-    print(tip)
+    with open('build_num.properties', 'w+') as outfile:
+        outfile.write('BUILD_NUMBER={}'.format(tip)
     return tip
 
 def make_archive():
