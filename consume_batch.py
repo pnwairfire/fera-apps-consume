@@ -13,6 +13,10 @@ import sys
 import batch_locator
 import cmdline
 import pandas as pan
+import pickle
+
+DO_PICKLE_OUTPUT = 'pickle'
+PICKLE_OUTPUT_FILE = 'consume_pickle.p'
 
 # -- From stackoverflow.com ---
 from collections import *
@@ -44,6 +48,13 @@ def flattenDict(dictionary, keyReducer=add, keyLift=_tuple, init=()):
         )
     return dict(_flattenIter(dictionary.items()))
 # -- end from stackoverflow.com ---
+
+def pickle_output(col_cfg_file):
+    ''' use 'pickle' as the argument for the column configuration file
+        to simply write out the entire dataset. This allows for loading it
+        later when the preferred output format is known
+    '''
+    return DO_PICKLE_OUTPUT == col_cfg_file.lower() if col_cfg_file else False
 
 def can_run():
     mod_location = batch_locator.module_path()
@@ -120,23 +131,27 @@ def write_results(all_results, outfile, col_cfg_file=None):
         ('parameters_shrub_black_pct', 'Shrub Blackened (%)'),
         ('parameters_units', 'Units') ]
 
-    columns_to_print = default_cols
-    if col_cfg_file:
-        columns_to_print = read_col_cfg_file(col_cfg_file)
-
     tmp = {}
     for k,v in flattenDict(all_results).iteritems():
         colname = '_'.join(k)
         colname = colname.replace(' ', '_')
         tmp[colname] = v
-    add_these = []
-    for col in columns_to_print:
-        key = col[0]
-        new_key = col[1]
-        if tmp.has_key(key):
-            add_these.append((new_key, tmp[key]))
-    newdf = pan.DataFrame.from_items(add_these)
-    newdf.to_csv(outfile, index=False)
+
+    if pickle_output(col_cfg_file):
+        pickle.dump(tmp, open(PICKLE_OUTPUT_FILE, 'wb'))
+    else:
+        columns_to_print = default_cols
+        if col_cfg_file:
+            columns_to_print = read_col_cfg_file(col_cfg_file)
+
+        add_these = []
+        for col in columns_to_print:
+            key = col[0]
+            new_key = col[1]
+            if tmp.has_key(key):
+                add_these.append((new_key, tmp[key]))
+        newdf = pan.DataFrame.from_items(add_these)
+        newdf.to_csv(outfile, index=False)
 
 def run(burn_type, csv_input, msg_level, outfile, fuel_loadings=None, col_cfg=None):
     consumer = consume.FuelConsumption(fccs_file=fuel_loadings, msg_level=msg_level) \
@@ -147,7 +162,8 @@ def run(burn_type, csv_input, msg_level, outfile, fuel_loadings=None, col_cfg=No
         results = emissions.results()
         fuelbed_list = consumer.fuelbed_fccs_ids
         write_results(results, outfile, col_cfg_file=col_cfg)
-        print("\nSuccess!!! Results are in \"{}\"".format(outfile))
+        if not pickle_output(col_cfg):
+            print("\nSuccess!!! Results are in \"{}\"".format(outfile))
 
 #-------------------------------------------------------------------------------
 # Main
@@ -155,7 +171,8 @@ def run(burn_type, csv_input, msg_level, outfile, fuel_loadings=None, col_cfg=No
 def main():
     try:
         can_run()
-        parser = cmdline.ConsumeParser(sys.argv)
+        parser = cmdline.ConsumeParser(DO_PICKLE_OUTPUT)
+        parser.do_parse(sys.argv)
         run(parser.burn_type, parser.csv_file, parser.msg_level, parser.output_filename,
             parser.fuel_loadings_file, parser.col_cfg_file)
     except Exception as e:

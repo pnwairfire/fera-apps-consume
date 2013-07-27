@@ -78,16 +78,17 @@ class ConsumeParserException(Exception):
 class ConsumeParser(object):
     ''' Parse the consume_batch command line arguments
     '''
-    def __init__(self, argv):
+    def __init__(self, pickle_string):
+        self._pickle_string = pickle_string.lower()
         self._burn_type = None
         self._csv_file = None
         self._fuel_loadings_file = None
         self._col_cfg_file = None
         self._msg_level = logging.ERROR
-        self.do_parse(argv[1:]) ### - remove the calling script name
 
     def do_parse(self, argv):
         parser = make_parser()
+        argv = argv[1:] ### - remove the calling script name
         if 0 == len(argv):
             parser.parse_args(['--help'])
         else:
@@ -114,9 +115,13 @@ class ConsumeParser(object):
                 self._fuel_loadings_file = os.path.abspath(args.fuel_loadings_file[0])
 
             if args.col_cfg_file:
-                if not self.exists(args.col_cfg_file[0]):
-                    raise(ConsumeParserException("\nError: The column config file '{}' does not exist.".format(args.col_cfg_file[0])))
-                self._col_cfg_file = os.path.abspath(args.col_cfg_file[0])
+                if args.col_cfg_file[0].lower() == self._pickle_string:
+                    # no need to validate anything
+                    self._col_cfg_file = args.col_cfg_file[0]
+                else:
+                    if not self.exists(args.col_cfg_file[0]):
+                        raise(ConsumeParserException("\nError: The column config file '{}' does not exist.".format(args.col_cfg_file[0])))
+                    self._col_cfg_file = os.path.abspath(args.col_cfg_file[0])
 
             if args.output_filename:
                 self.output_filename = os.path.abspath(args.output_filename[0])
