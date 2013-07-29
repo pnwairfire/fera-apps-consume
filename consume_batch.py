@@ -1,11 +1,13 @@
 #-------------------------------------------------------------------------------
 # Name:        consume_batch.py
-# Purpose:
+# Purpose:     This module wraps the consume module and provides input validation
+#              as well as output format specification. Output format can be
+#              specified at runtime, or, all calculations can be pickled and the
+#              output format chosen later.
 #
 # Author:      kjells
 #
 # Created:     10/10/2011
-# Copyright:   (c) kjells 2011
 #-------------------------------------------------------------------------------
 import consume
 import os
@@ -57,6 +59,8 @@ def pickle_output(col_cfg_file):
     return DO_PICKLE_OUTPUT == col_cfg_file.lower() if col_cfg_file else False
 
 def can_run():
+    ''' Are we in the correct location to run?
+    '''
     mod_location = batch_locator.module_path()
     cwd = os.getcwd()
     if mod_location == cwd:
@@ -66,28 +70,17 @@ def can_run():
 
 def validate_fuel_loadings(alt_loadings_file):
     ''' Valid currently means that the generator_info element is present
+        in the loadings file.
         kjells todo: move this into consume proper?
     '''
-    from xml.etree import ElementTree as ET
-    tree = ET.parse(alt_loadings_file)
-    root = tree.getroot()
-    del tree
-
-    node = root.find('generator_info')
-    if None != node:
-        name = node.find('generator_name')
-        version = node.find('generator_version')
-        date = node.find('date_generated')
+    validate = False
+    with open(alt_loadings_file, 'r') as infile:
+        header = infile.readline()
+        valid = True if header.startswith('GeneratorName') else False
+    if valid:
         return True
-    return False
-
-def get_input_file(fuel_loadings):
-    ''' Judge the location of the input file based on its relation to this file
-    '''
-    if validate_fuel_loadings(fuel_loadings):
-        return fuel_loadings
     else:
-        msg.error("\n\'{}\' is not a valid fuel loadings file.\n".format(fuel_loadings))
+        print("\n!!! Error !!!\n\t\'{}\' is not a valid fuel loadings file.\n".format(alt_loadings_file))
         sys.exit(1)
 
 def read_col_cfg_file(filename):
@@ -104,6 +97,7 @@ def read_col_cfg_file(filename):
     return retval
 
 def write_results(all_results, outfile, col_cfg_file=None):
+    # this is the default set of columns for the output format
     default_cols = [
         ('parameters_fuelbeds', 'Fuelbeds'),
         ('consumption_summary_total_total', 'Total Consumption'),
@@ -131,12 +125,15 @@ def write_results(all_results, outfile, col_cfg_file=None):
         ('parameters_shrub_black_pct', 'Shrub Blackened (%)'),
         ('parameters_units', 'Units') ]
 
+    # calculated results are in a hierarchical dictionary. Flatten the entire structure
+    #  so that any chosen datum can be specified
     tmp = {}
     for k,v in flattenDict(all_results).iteritems():
         colname = '_'.join(k)
         colname = colname.replace(' ', '_')
         tmp[colname] = v
 
+    # output format will be done later so simply persist the calculate results
     if pickle_output(col_cfg_file):
         pickle.dump(tmp, open(PICKLE_OUTPUT_FILE, 'wb'))
     else:
@@ -154,8 +151,15 @@ def write_results(all_results, outfile, col_cfg_file=None):
         newdf.to_csv(outfile, index=False)
 
 def run(burn_type, csv_input, msg_level, outfile, fuel_loadings=None, col_cfg=None):
+    # validate alternate loadings file if provide. Throws exception on invalid
+    if fuel_loadings: validate_fuel_loadings(fuel_loadings)
+
+    # obtain a FuelConsumption object
     consumer = consume.FuelConsumption(fccs_file=fuel_loadings, msg_level=msg_level) \
         if fuel_loadings else consume.FuelConsumption(msg_level=msg_level)
+
+    # run the calculator and either pickle results for later output
+    #  or output as specified
     consumer.burn_type = burn_type
     if consumer.load_scenario(csv_input, display=False):
         emissions = consume.Emissions(consumer)

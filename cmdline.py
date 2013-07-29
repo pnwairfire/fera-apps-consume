@@ -78,8 +78,8 @@ class ConsumeParserException(Exception):
 class ConsumeParser(object):
     ''' Parse the consume_batch command line arguments
     '''
-    def __init__(self, pickle_string):
-        self._pickle_string = pickle_string.lower()
+    def __init__(self, pickle_string=None):
+        self._pickle_string = pickle_string.lower() if pickle_string else None
         self._burn_type = None
         self._csv_file = None
         self._fuel_loadings_file = None

@@ -13,6 +13,7 @@ import pandas as pan
 import pickle
 
 PICKLE_OUTPUT = 'consume_pickle.p'
+CONSUME_RESULTS = 'consume_results.csv'
 
 def read_col_cfg_file(filename):
     retval = []
@@ -85,8 +86,9 @@ def get_pickled_results():
 # Main
 #-------------------------------------------------------------------------------
 def main():
+    col_cfg_file = sys.argv[1] if len(sys.argv) > 1 else None
     try:
-        write_results(get_pickled_results(), "kjell.csv", col_cfg_file=None)
+        write_results(get_pickled_results(), CONSUME_RESULTS, col_cfg_file=col_cfg_file)
     except Exception as e:
         print(e)
 
