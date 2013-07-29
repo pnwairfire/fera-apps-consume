@@ -18,7 +18,6 @@ import pandas as pan
 import pickle
 
 DO_PICKLE_OUTPUT = 'pickle'
-PICKLE_OUTPUT_FILE = 'consume_pickle.p'
 
 # -- From stackoverflow.com ---
 from collections import *
@@ -135,7 +134,7 @@ def write_results(all_results, outfile, col_cfg_file=None):
 
     # output format will be done later so simply persist the calculate results
     if pickle_output(col_cfg_file):
-        pickle.dump(tmp, open(PICKLE_OUTPUT_FILE, 'wb'))
+        pickle.dump(tmp, open(outfile, 'wb'))
     else:
         columns_to_print = default_cols
         if col_cfg_file:
