@@ -12,8 +12,79 @@ import sys
 import pandas as pan
 import pickle
 
-PICKLE_OUTPUT = 'consume_pickle.p'
-CONSUME_RESULTS = 'consume_results.csv'
+import argparse
+import logging
+
+#-------------------------------------------------------------------------------
+# Simple command line parser for post_process
+#-------------------------------------------------------------------------------
+def make_parser():
+    ''' This is the parser for the post_process command line
+    '''
+    # - build the parser
+    parser = argparse.ArgumentParser()
+
+    # - specify a pickle file
+    parser.add_argument('-p', action='store', nargs=1, dest='pickle_file', metavar='pickle file',
+        help='Specify the name of the file with pickled results.')
+
+    # - customize the output column configuration
+    parser.add_argument('-x', action='store', nargs=1, dest='col_cfg_file', metavar='output columns',
+        help='Specify the output column configuration file.')
+
+    # - specify an output filename
+    parser.add_argument('-o', action='store', nargs=1, default=['consume_results.csv'],
+        dest='output_file', metavar='output file',
+        help='Specify the name of the post_process output file.'
+        )
+    return parser
+
+class PostProcessException(Exception):
+    pass
+
+class PostProcessParser(object):
+    ''' Parse the post_process command line arguments
+    '''
+    def __init__(self):
+        self._pickle_file = None
+        self._col_cfg_file = None
+        self._output_file = None
+
+    def do_parse(self, argv):
+        parser = make_parser()
+        argv = argv[1:] ### - remove the calling script name
+        if 0 == len(argv):
+            exit(1)
+        else:
+            args = parser.parse_args(argv)
+
+            # check for valid input file
+            if not args.pickle_file:
+                raise(PostProcessException("\nError: A file with pickle results is required."))
+            if not self.exists(args.pickle_file[0]):
+                raise(PostProcessException("\nError: The file '{}' does not exist.".format(args.pickle_file[0])))
+            self._pickle_file = os.path.abspath(args.pickle_file[0])
+
+            if args.col_cfg_file:
+                if not self.exists(args.col_cfg_file[0]):
+                    raise(PostProcessException("\nError: The column config file '{}' does not exist.".format(args.col_cfg_file[0])))
+                self._col_cfg_file = os.path.abspath(args.col_cfg_file[0])
+
+            if args.output_file:
+                self._output_file = os.path.abspath(args.output_file[0])
+
+    def exists(self, filename):
+        return True if os.path.exists(filename) else False
+
+    @property
+    def pickle_file(self): return self._pickle_file
+    @property
+    def col_cfg_file(self): return self._col_cfg_file
+    @property
+    def output_file(self): return self._output_file
+#-------------------------------------------------------------------------------
+# End command line parser for post_process
+#-------------------------------------------------------------------------------
 
 def read_col_cfg_file(filename):
     retval = []
@@ -73,10 +144,10 @@ def write_results(all_results, outfile, col_cfg_file=None):
     else:
         print("\nError: results file corrupted.\n")
 
-def get_pickled_results():
+def get_pickled_results(pickle_file):
     results = None
-    if os.path.exists(PICKLE_OUTPUT):
-        results = pickle.load(open(PICKLE_OUTPUT, "rb"))
+    if os.path.exists(pickle_file):
+        results = pickle.load(open(pickle_file, "rb"))
     else:
         print("\nError: results file not found.\n")
 
@@ -86,9 +157,11 @@ def get_pickled_results():
 # Main
 #-------------------------------------------------------------------------------
 def main():
-    col_cfg_file = sys.argv[1] if len(sys.argv) > 1 else None
+    parser = PostProcessParser()
+    parser.do_parse(sys.argv)
     try:
-        write_results(get_pickled_results(), CONSUME_RESULTS, col_cfg_file=col_cfg_file)
+        write_results(get_pickled_results(parser.pickle_file),
+            parser.output_file, col_cfg_file=parser.col_cfg_file)
     except Exception as e:
         print(e)
 
