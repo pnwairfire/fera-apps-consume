@@ -1,4 +1,0 @@
-include AUTHORS.txt
-include LICENSE.txt
-recursive-include consume/input_data *.*
-

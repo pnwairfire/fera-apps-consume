@@ -1,1 +1,0 @@
-@%py2_path%\python windows_exe\build_winexe.py
