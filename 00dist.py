@@ -33,10 +33,12 @@ def copy_files():
     shutil.copytree('consume', '{}/consume'.format(DIST_DIR))
     
 def get_tip():
-    proc = subprocess.Popen(['hg', 'tip', '--template', '{rev}'],stdout=subprocess.PIPE)
-    tip = proc.stdout.readline().strip()
-    with open('build_num.properties', 'w+') as outfile:
-        outfile.write('BUILD_NUMBER={}\n'.format(tip))
+    #proc = subprocess.Popen(['hg', 'tip', '--template', '{rev}'],stdout=subprocess.PIPE)
+    #tip = proc.stdout.readline().strip()
+    tip = 000
+    with open('build_num.properties', 'r') as infile:
+        line = infile.readline()
+        tip = line.split('=')[1]
     return tip
 
 def make_archive():
@@ -48,7 +50,6 @@ def make_archive():
             for f in glob.glob('*.pyc'):
                 os.unlink(f)
             os.unlink(DISTRIBUTION_BUILDER)
-            os.unlink
             os.system('del *.pyc /s')
             os.system('del *.pyc /s')
         except:
