@@ -38,7 +38,7 @@ def get_tip():
     tip = 000
     with open('build_num.properties', 'r') as infile:
         line = infile.readline()
-        tip = line.split('=')[1]
+        tip = line.split('=')[1].strip()
     return tip
 
 def make_archive():
