@@ -48,7 +48,7 @@ def make_archive():
 
     def clean_files():
         try:
-            cmd = 'rm -fr *.pyc'
+            cmd = "find . -name '*.pyc' -delete"
             os.system(cmd)
             os.unlink(DISTRIBUTION_BUILDER)
             os.unlink(BUILD_HELPER)
