@@ -21,44 +21,55 @@ except:
     pass
 
 """
-Consume 3.0 was developed and designed originally in Java by US Forest
-Service Fire and Environmental Research Applications (FERA) team.
+Consume 4.1 release information
 
-This is a recoded version (2010) developed by Michigan Tech Research
-Institute (MTRI) in consultation with FERA.  This version was developed
-for use in MTRI's Wildfire Emissions Information System (WFEIS)
+Consume 4.1 contains the most up-to-date version of Consume's consumption
+and emissions algorithms for wildland fuels.  This is a recoded version
+developed by Michigan Tech Research Institute (MTRI) in consultation
+with the Fire and Environmental Applications Team (US Forest Service,
+Pacific Northwest Research Station, Seattle, WA).  Consume 4.1 as
+developed in 2010 for use in MTRI's Wildfire Emissions Information System (WFEIS)
 (wfeis.mtri.org), but was also designed to include more user-friendly
-shell-based analysis options.
+shell-based analysis options and to be used as a calculation module within
+multiple platforms, including BlueSky and IFT-DSS.  It is based on Consume 3.0 code,
+which was originally written in Java by the FERA team and Gary Anderson, a private
+consultant.
 
 During the recoding process, several errors were identified in the original
 Consume 3.0 source code, but were fixed (via consultation with original
 developers Roger Ottmar and Susan Prichard) for this version. For this reason,
 results from this version will not always align with results from the official
-Consume 3.0 GUI version of the software. Notable errors include:
+Consume 3.0 GUI version of the software.
 
-    (1) incorrect calculation of 'duff' reduction (p. 182 in the Consume 3.0
-    (2) a bug that interchanges 'squirrel midden' density and radius when FCCS
+Notable Consume 3.0 errors included:
+    (1) incorrect calculation of 'duff' reduction (p. 182 in the Consume 3.0)
+    (2) a bug that interchanged 'squirrel midden' density and radius when FCCS
         values are loaded
-    (3) a typo that incorrectly calculates pm2.5 emissions from 'canopy'
+    (3) a typo that incorrectly calculated pm2.5 emissions from 'canopy'
         consumption (thus influencing total pm2.5 emissions values as well)
 
-    * For users familiar with the original Consume 3.0 GUI software, see the
-      notes section below for functionality and operational differences between
-      this version and the original.
+* For users familiar with the original Consume 3.0 GUI software, see the
+   notes section below for functionality and operational differences between
+   this version and the original.
 
-References:
+Web references:
     CONSUME: http://www.fs.fed.us/pnw/fera/research/smoke/consume/index.shtml
     FCCS: http://www.fs.fed.us/pnw/fera/fccs/
     FERA: www.fs.fed.us/pnw/fera/F
     MTRI: www.mtri.org
+    BlueSky: http://www.airfire.org/data/playground/
+    IFT-DSS: http://iftdss.sonomatech.com/
 
 Requirements:
-    Python 2.4 or above (free from www.python.org)
-    w/ np extension (free from http://np.scipy.org/)
+    Python 2.7 or above (free from www.python.org)
+    Additional modules required:
+        numpy (http://www.numpy.org/)
+        pandas (http://pandas.pydata.org/)
+        lxml (http://lxml.de/)
 
 For questions/comments, contact:
-    Michael G. Billmire mgbillmi@mtu.edu
-    Tyler A. Erickson taericks@mtu.edu
+    Susan Prichard, Consume manager, sprich@uw.edu
+    Kjell Swedin, software engineer, kjells@uw.edu
 
 
 ##################################################
@@ -74,7 +85,8 @@ For questions/comments, contact:
 
 -Instead of selecting a specific ecoregion from Bailey's set, this version only
  requires the user to specify whether the fuelbed is located in 'western',
- 'boreal', or 'southern' regions. See the original Consume 3.0 User's Manual
- to view which Bailey's ecoregions fit into these broader categories.
+ 'boreal', or 'southern' regions if using the Consume natural fuel consumption equations.
+ See the original Consume 3.0 User's Manual to view which Bailey's ecoregions
+ fit into these broader categories.
 
 """
