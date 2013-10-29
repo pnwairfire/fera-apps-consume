@@ -19,6 +19,7 @@ from glob import iglob # lower memory footprint than glob
 
 DIST_DIR = 'dist'
 DISTRIBUTION_BUILDER = '00dist.py'
+BUILD_HELPER = 'get_tip.py'
 
 def make_dist_dir():
     if os.path.exists(DIST_DIR):
@@ -47,11 +48,10 @@ def make_archive():
 
     def clean_files():
         try:
-            for f in glob.glob('*.pyc'):
-                os.unlink(f)
+            cmd = 'rm -fr *.pyc'
+            os.system(cmd)
             os.unlink(DISTRIBUTION_BUILDER)
-            os.system('del *.pyc /s')
-            os.system('del *.pyc /s')
+            os.unlink(BUILD_HELPER)
         except:
             pass
 
