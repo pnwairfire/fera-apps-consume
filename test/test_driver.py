@@ -67,8 +67,8 @@ def get_consumption_object(burn_type):
     consumer = consume.FuelConsumption(fccs_file = get_input_file())
     set_defaults(consumer, {'burn_type' : burn_type})
     # run over the reference fuelbeds
-    fuelbed_list = get_fuelbed_list(consumer)
-    consumer.fuelbed_fccs_ids = fuelbed_list
+    fb_list = get_fuelbed_list(consumer)
+    consumer.fuelbed_fccs_ids = fb_list
     return consumer
 
 def write_columns(results, catagories, stream, first_element, index, header=False):
@@ -101,17 +101,17 @@ def write_header_emissions(catagory_list, stream):
     out += '\n'
     stream.write(out)
 
-def write_csv(results, fuelbed_list, stream):
+def write_csv(results, fb_list, stream):
 	# - top-level catagory list
     catagory_list = ['summary', 'canopy', 'ground fuels',
         'litter-lichen-moss', 'nonwoody', 'shrub', 'woody fuels', 'heat release']
     cresults = results['consumption']
     cresults['heat release'] = results['heat release']
     write_header(cresults, catagory_list, stream)
-    for fb_index in xrange(0, len(fuelbed_list)):
-        write_columns(cresults, catagory_list, stream, fuelbed_list[fb_index], fb_index)
+    for fb_index in xrange(0, len(fb_list)):
+        write_columns(cresults, catagory_list, stream, fb_list[fb_index], fb_index)
 
-def write_csv_emissions(results, fuelbed_list, stream):
+def write_csv_emissions(results, fb_list, stream):
     # use all the emission keys except 'stratum'
     emissions_keys = sorted(results['emissions'].keys())
     emissions_keys = [key for key in emissions_keys if key != 'stratum']
@@ -129,8 +129,8 @@ def write_csv_emissions(results, fuelbed_list, stream):
         columns.append("heat release {}".format(key))
 
     write_header_emissions(columns, stream)
-    for fb_index in xrange(0, len(fuelbed_list)):
-        out = str(fuelbed_list[fb_index])
+    for fb_index in xrange(0, len(fb_list)):
+        out = str(fb_list[fb_index])
 
         # print the consumption column values
         for key in cons_keys:
@@ -146,11 +146,11 @@ def write_csv_emissions(results, fuelbed_list, stream):
         out += '\n'
         stream.write(out)
 
-def run_tests(consumer, fuelbed_list, outfile):
+def run_tests(consumer, fb_list, outfile):
     ''' Run consumption-based tests
     '''
     results = consumer.results()
-    write_csv(results, fuelbed_list, outfile)
+    write_csv(results, fb_list, outfile)
 
 def set_defaults(consumer, map):
     ''' If a map is supplied, use the values from it (doesn't have to contain all values)
@@ -175,7 +175,7 @@ def set_activity_defaults(consumer, map):
     consumer.slope = map['slope'] if 'slope' in map else 5
     consumer.windspeed = map['windspeed'] if 'windspeed' in map else 5
 
-def run_basic_scenarios(consumer, fuelbed_list):
+def run_basic_scenarios(consumer, fb_list):
     ''' Run basic consumption scenarios
     '''
     scenario_list = [['western'], ['southern'], ['boreal'], ['activity']]
@@ -188,9 +188,9 @@ def run_basic_scenarios(consumer, fuelbed_list):
             consumer.burn_type = 'natural'
         outfilename = out_name("results", "{}_out.csv".format(scene[0]))
         reference_values = out_name("expected", "{}_expected.csv".format(scene[0]))
-        run_and_test(consumer, fuelbed_list, outfilename, reference_values)
+        run_and_test(consumer, fb_list, outfilename, reference_values)
 
-def run_additional_activity_scenarios(consumer, fuelbed_list):
+def run_additional_activity_scenarios(consumer, fb_list):
     activityTwo = {
         'burn_type': 'activity',
         'fuel_moisture_10hr_pct':15,
@@ -221,54 +221,54 @@ def run_additional_activity_scenarios(consumer, fuelbed_list):
         outfilename = out_name("results", "{}_out.csv".format(counter))
         reference_values = out_name("expected", "scen{}_activity_expected.csv".format(counter))
         counter += 1
-        run_and_test(consumer, fuelbed_list, outfilename, reference_values)
+        run_and_test(consumer, fb_list, outfilename, reference_values)
 
 #-------------------------------------------------------------------------------
 # Use a new emissions object because switching units causes an internal state
 #  problem for subsequent runs. todo ks
 #-------------------------------------------------------------------------------
-def run_emissions_western(fuelbed_list):
+def run_emissions_western(fb_list):
     consumer = get_consumption_object('natural')
     em = consume.Emissions(consumer)
     outfilename ='western_emissions.csv'
     reference_file = "{}_expected.csv".format(outfilename.split('.')[0])
-    run_and_test_emissions(em, fuelbed_list, outfilename, reference_file)
+    run_and_test_emissions(em, fb_list, outfilename, reference_file)
 
-def run_emissions_activity(fuelbed_list):
+def run_emissions_activity(fb_list):
     consumer = get_consumption_object('activity')
     em = consume.Emissions(consumer)
     outfilename ='activity_emissions.csv'
     reference_file = "{}_expected.csv".format(outfilename.split('.')[0])
-    run_and_test_emissions(em, fuelbed_list, outfilename, reference_file)
+    run_and_test_emissions(em, fb_list, outfilename, reference_file)
 
-def run_emissions_activity_with_unit_conversion(fuelbed_list):
+def run_emissions_activity_with_unit_conversion(fb_list):
     consumer = get_consumption_object('activity')
     consumer.fuelbed_ecoregion = ['western']
     em = consume.Emissions(consumer)
     em.output_units = 'kg_ha'
     outfilename ='activity_emissions_kgha.csv'
     reference_file = "{}_expected.csv".format(outfilename.split('.')[0])
-    run_and_test_emissions(em, fuelbed_list, outfilename, reference_file)
+    run_and_test_emissions(em, fb_list, outfilename, reference_file)
 
 #-------------------------------------------------------------------------------
 # Currently need consumption-specific and emissions-specific runners
 #-------------------------------------------------------------------------------
 VERBOSE = True
-def run_and_test(consumer, fuelbed_list, outfilename, reference_values):
+def run_and_test(consumer, fb_list, outfilename, reference_values):
     wrap_input_display(consumer.display_inputs(print_to_console=False))
     with open(outfilename, 'w') as outfile:
-        run_tests(consumer, fuelbed_list, outfile)
+        run_tests(consumer, fb_list, outfile)
     ref = compareCSV(reference_values, console=VERBOSE)
     computed = compareCSV(outfilename, console=VERBOSE)
     (failed, compared) = ref.Compare(computed)
     print("{} = failed, {} compared:\t{}".format(failed, compared, outfilename))
 
-def run_and_test_emissions(emissions, fuelbed_list, outfilename, reference_values):
+def run_and_test_emissions(emissions, fb_list, outfilename, reference_values):
     wrap_input_display(emissions._cons_object.display_inputs(print_to_console=False))
     oname = out_name("results", outfilename)
     with open(oname, 'w') as outfile:
         results = emissions.results()
-        write_csv_emissions(results, fuelbed_list, outfile)
+        write_csv_emissions(results, fb_list, outfile)
     rname = out_name("expected", reference_values)
     ref = compareCSV(rname, console=VERBOSE)
     computed = compareCSV(oname, console=VERBOSE)

@@ -1187,14 +1187,9 @@ class FuelConsumption(util.FrozenClass):
     def _get_loadings_for_specified_files(self, ids):
         ''' gets the specified fuelbeds from the dataframe.
         '''
-        # - I want a slot for each specified fuelbed. This may include duplicates.
-        ids_tmp = ids.copy()
-        ids_sorted = sorted(ids_tmp)
         results = []
-        for id in ids_sorted:
+        for id in ids:
             try:
-                # - searchsorted() returns a index position
-                #tmp =  self.FCCS.loadings_data_.ix[self.FCCS.loadings_data_.fccs_id.searchsorted(id)]
                 tmp =  self.FCCS.loadings_data_.fccs_id.searchsorted(id)
                 results.append(tmp)
             except:
