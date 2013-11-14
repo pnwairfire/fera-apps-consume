@@ -133,7 +133,7 @@ def read_col_cfg_file(filename):
     return retval
 
 #-------------------------------------------------------------------------------
-# Take a list of unpickled results, grab the correct colums, combine if necessary,
+# Take a list of unpickled results, grab the correct columms, combine if necessary,
 #  and write to output file. You could have a list of results because FFT
 #  runs activity and natural scenarios and then combines the results.
 #-------------------------------------------------------------------------------
