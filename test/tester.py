@@ -97,8 +97,7 @@ class DataObj(object):
         bb = set(keysB)
         commonKeys = []
         for key in (aa & bb):
-            if key.isdigit():
-                commonKeys.append(int(key))
+            commonKeys.append(key)
         return sorted(commonKeys)
 
     def Compare(self, other, debug=False):

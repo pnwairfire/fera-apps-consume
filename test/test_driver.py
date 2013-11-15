@@ -37,14 +37,17 @@ def out_name(dir, filename):
         os.path.join(get_this_location(), dir),
         filename)
 
-def get_input_file():
+LOADINGS_FILES = [
+    "test/loadings_numeric.csv",
+    "test/loadings_alphanumeric.csv",
+    "test/loadings_random.csv",
+]
+def get_input_file(infile):
     ''' Judge the location of the input file based on its relation to this file
     '''
-    #DATA_INPUT_FILE = "consume/input_data/fccs_loadings_1_458.xml"
-    DATA_INPUT_FILE = "consume/input_data/fccs_loadings_1_458.csv"
     here = get_this_location()
     here = here[:-len('test')]
-    return os.path.normpath(os.path.join(here, DATA_INPUT_FILE))
+    return os.path.normpath(os.path.join(here, infile))
 
 def wrap_input_display(inputs):
     ''' Print all the inputs with the exception of the fuelbed array
@@ -60,15 +63,14 @@ def wrap_input_display(inputs):
 
 def get_fuelbed_list(consumer):
     ''' The expected values against which we test go to the max below '''
-    MAX_REFERENCE_FUELBED = 291
-    tmp = [i for i in consumer.FCCS.get_available_fuelbeds() if MAX_REFERENCE_FUELBED >= i]
+    tmp = [i for i in consumer.FCCS.get_available_fuelbeds()]
     random.shuffle(tmp)
     return tmp
 
-def get_consumption_object(burn_type):
+def get_consumption_object(burn_type, loadings_file=LOADINGS_FILES[0]):
     ''' Return a "ready to go" consumption object
     '''
-    consumer = consume.FuelConsumption(fccs_file = get_input_file())
+    consumer = consume.FuelConsumption(fccs_file = get_input_file(loadings_file))
     set_defaults(consumer, {'burn_type' : burn_type})
     # run over the reference fuelbeds
     fb_list = get_fuelbed_list(consumer)
@@ -105,6 +107,12 @@ def write_header_emissions(catagory_list, stream):
     out += '\n'
     stream.write(out)
 
+def coerce_if_possible(x):
+    try:
+        return int(x)
+    except:
+        return x
+
 def write_csv(results, fb_list, stream):
 	# - top-level catagory list
     catagory_list = ['summary', 'canopy', 'ground fuels',
@@ -114,7 +122,7 @@ def write_csv(results, fb_list, stream):
     write_header(cresults, catagory_list, stream)
     idx = 0
     for item in fb_list:
-        write_columns(cresults, catagory_list, stream, int(item), idx)
+        write_columns(cresults, catagory_list, stream, coerce_if_possible(item), idx)
         idx += 1
 
 def write_csv_emissions(results, fb_list, stream):
@@ -137,7 +145,7 @@ def write_csv_emissions(results, fb_list, stream):
     write_header_emissions(columns, stream)
     idx = 0
     for item in fb_list:
-        out = str(int(item))
+        out = str(coerce_if_possible(item))
 
         # print the consumption column values
         for key in cons_keys:
@@ -258,6 +266,17 @@ def run_emissions_activity_with_unit_conversion():
     reference_file = "{}_expected.csv".format(outfilename.split('.')[0])
     run_and_test_emissions(em, fb_list, outfilename, reference_file)
 
+def run_emissions_activity_with_unit_conversion_and_permute_fuelbed_ids():
+    for ffile in [(LOADINGS_FILES[1], 'activity_emissions_kgha_alpha.csv'),
+                            (LOADINGS_FILES[2],'activity_emissions_kgha_random.csv')]:
+        consumer, fb_list = get_consumption_object('activity', loadings_file=ffile[0])
+        consumer.fuelbed_ecoregion = ['western']
+        em = consume.Emissions(consumer)
+        em.output_units = 'kg_ha'
+        outfilename = ffile[1]
+        reference_file = "{}_expected.csv".format(outfilename.split('.')[0])
+        run_and_test_emissions(em, fb_list, outfilename, reference_file)
+
 #-------------------------------------------------------------------------------
 # Currently need consumption-specific and emissions-specific runners
 #-------------------------------------------------------------------------------
@@ -299,7 +318,7 @@ def exception_wrapper(func, *args):
 #  that occurs, we can use the larger file
 NORMAL = True
 #NORMAL = False
-consumer = consume.FuelConsumption(fccs_file = get_input_file())
+consumer = consume.FuelConsumption(fccs_file = get_input_file(LOADINGS_FILES[0]))
 set_defaults(consumer, {})
 
 if NORMAL:
@@ -310,10 +329,10 @@ if NORMAL:
     exception_wrapper(run_basic_scenarios, consumer, fuelbed_list)
     exception_wrapper(run_additional_activity_scenarios, consumer, fuelbed_list)
 
-    set_defaults(consumer, {})
     exception_wrapper(run_emissions_activity_with_unit_conversion)
     exception_wrapper(run_emissions_western)
     exception_wrapper(run_emissions_activity)
+    exception_wrapper(run_emissions_activity_with_unit_conversion_and_permute_fuelbed_ids)
 else:
     # - debugging
     fuelbed_list = [5]
