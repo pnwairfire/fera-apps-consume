@@ -23,7 +23,7 @@ class FCCSDB():
             self.loadings_file_ = os.path.join(mod_path, './input_data/fccs_loadings_1_458.csv')
 
         (self.loadings_data_, self.loadings_metadata_) = self._load_data_from_csv()
-        self.valid_fuelbeds_ = [int(i) for i in self.loadings_data_.fccs_id]
+        self.valid_fuelbeds_ = [i for i in self.loadings_data_.fccs_id]
 
     @property
     def data_source_info(self): return self.loadings_metadata_

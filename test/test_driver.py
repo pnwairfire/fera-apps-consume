@@ -112,8 +112,10 @@ def write_csv(results, fb_list, stream):
     cresults = results['consumption']
     cresults['heat release'] = results['heat release']
     write_header(cresults, catagory_list, stream)
-    for fb_index in xrange(0, len(fb_list)):
-        write_columns(cresults, catagory_list, stream, fb_list[fb_index], fb_index)
+    idx = 0
+    for item in fb_list:
+        write_columns(cresults, catagory_list, stream, int(item), idx)
+        idx += 1
 
 def write_csv_emissions(results, fb_list, stream):
     # use all the emission keys except 'stratum'
@@ -133,22 +135,24 @@ def write_csv_emissions(results, fb_list, stream):
         columns.append("heat release {}".format(key))
 
     write_header_emissions(columns, stream)
-    for fb_index in xrange(0, len(fb_list)):
-        out = str(fb_list[fb_index])
+    idx = 0
+    for item in fb_list:
+        out = str(int(item))
 
         # print the consumption column values
         for key in cons_keys:
-            out += "," + str(results['consumption']['summary']['total'][key][fb_index])
+            out += "," + str(results['consumption']['summary']['total'][key][idx])
         # print the emission column values
         for i in emissions_keys:
             for j in cons_keys:
-                out += "," + str(results['emissions'][i][j][fb_index])
+                out += "," + str(results['emissions'][i][j][idx])
         # print the heat release column values
         for key in hr_keys:
-            out += "," + str(results['heat release'][key][fb_index])
+            out += "," + str(results['heat release'][key][idx])
 
         out += '\n'
         stream.write(out)
+        idx += 1
 
 def run_tests(consumer, fb_list, outfile):
     ''' Run consumption-based tests

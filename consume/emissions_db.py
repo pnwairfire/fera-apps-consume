@@ -53,11 +53,12 @@ class EmissionsFactorDB:
 
     def _load_emissions_factor_eqid(self):
         ef_eqid_map = {}
-        for i in range(0, self._fco.FCCS.loadings_data_.fccs_id.idxmax() + 1):
-            node_id = self._fco.FCCS.loadings_data_.fccs_id[i]
+        loadings = self._fco.FCCS.loadings_data_
+        for i in loadings.fccs_id:
+            node_id = i
             components = {}
-            components['natural'] = int(self._fco.FCCS.loadings_data_.efg_natural[i])
-            components['activity'] = int(self._fco.FCCS.loadings_data_.efg_activity[i])
+            components['natural'] = int(loadings.ix[loadings.fccs_id==i].efg_natural)
+            components['activity'] = int(loadings.ix[loadings.fccs_id==i].efg_activity)
             ef_eqid_map[node_id] = components
         return ef_eqid_map
         '''
@@ -90,11 +91,10 @@ class EmissionsFactorDB:
         If multiple cover types exist the first is chosen and mapped to SAF data.
         """
         ef_nums = []
-        for f in range(0, len(fuelbed_list)):
-            fuelbed_id = int(fuelbed_list[f])
+        for f in fuelbed_list:
             eq_id_key = self.get_key(self._fco.burn_type)
-            if fuelbed_id in self.fccs_emissions_groups:
-                efgs = self.fccs_emissions_groups[fuelbed_id]
+            if f in self.fccs_emissions_groups:
+                efgs = self.fccs_emissions_groups[f]
                 group = efgs[eq_id_key]
                 ef_nums.append(group)
             else:

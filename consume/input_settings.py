@@ -6,6 +6,9 @@ import numpy as np
 import pandas as pan
 import os
 
+def validate_null(input_vals, permitted=None):
+    return (True, input_vals, [])
+
 def validate_range(input_vals, permitted_vals):
     ''' Check submitted values against permitted values and convert to
         numpy array
@@ -58,7 +61,7 @@ class ConsumeInputSettings(object):
         'fm_10hr' : ['Fuel moisture (10-hr, %)', [0,100], validate_range],
         'length_of_ignition' : ['Length of ignition (min.)', [0,10000], validate_range]}
     NaturalInputVarParameters = {
-        'fuelbeds' : ['FCCS fuelbeds (ID#)', [1,10000], validate_range],
+        'fuelbeds' : ['FCCS fuelbeds (ID#)', "", validate_null],
         'area' : ['Fuelbed area (acres)', [0,1000000], validate_range],
         'ecoregion' : ['Fuelbed ecoregion',  dd.list_valid_ecoregions(), validate_list],
         'fm_1000hr' : ['Fuel moisture (1000-hr, %)', [0,140], validate_range],
@@ -124,7 +127,7 @@ class ConsumeInputSettings(object):
             print("\nError: burn_type must be set first as the valid parameter set depends on it.")
 
     def set(self, name, sequence):
-        ''' All "tagged" settings get set here. burn_type must be specified prior to 
+        ''' All "tagged" settings get set here. burn_type must be specified prior to
             setting anything via this method because burn_type dictates what settings
             are valid.
         '''
@@ -166,7 +169,7 @@ class ConsumeInputSettings(object):
             valid_names = set(ConsumeInputSettings.NaturalSNames if 'natural' == self._burn_type else ConsumeInputSettings.AllSNames)
             current_settings = set(self._settings.keys())
             if valid_names == current_settings:
-                self._settings['fuelbeds'] = self._settings['fuelbeds'].astype(int)
+                self._settings['fuelbeds'] = self._settings['fuelbeds']
                 return True
             else:
                 assert(current_settings.issubset(valid_names))
@@ -180,7 +183,7 @@ class ConsumeInputSettings(object):
                 print("\n !!! Error settings problem, the following are required:")
                 for i in needed:
                     print("\t{}".format(i))
-            dbg_msg()             
+            dbg_msg()
         return False
 
     def display_settings(self):
@@ -255,15 +258,15 @@ class ConsumeInputSettings(object):
             column is a pandas Series / numpy array
         '''
         return 1 == len(column.unique())
-            
-    def load_from_file(self, filename):            
+
+    def load_from_file(self, filename):
         ''' Load settings from a csv file.
             burn_type MUST be set at this point
         '''
         result = False
         if self.burn_type:
             if os.path.exists(filename):
-                contents = pan.read_csv(filename)    
+                contents = pan.read_csv(filename)
                 if self._valid_file_columns(self.burn_type, contents.columns):
                     # - all of the values should be the same in the following 3 columns
                     unit_check = self._column_content_identical(contents.units)
@@ -273,7 +276,7 @@ class ConsumeInputSettings(object):
                         eco_check_must_be_western = self._column_content_identical(contents.ecoregion)
                         # - brute force, ensure ecoregion is western for activity burn_types
                         contents.ecoregion = 'western'
-                    
+
                     if unit_check and fm_type_check:
                         # - assign the single-input-value / property items
                         self.units = contents.units[0]
@@ -299,5 +302,5 @@ class ConsumeInputSettings(object):
 
 
 
-    
+
 
