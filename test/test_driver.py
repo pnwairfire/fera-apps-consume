@@ -9,6 +9,8 @@
 # - run via batch file that sets PYTHONPATH correctly
 import sys
 import os
+import random
+
 def pp():
     curdir = os.path.abspath(os.path.curdir)
     pardir = os.path.abspath(os.path.pardir)
@@ -59,7 +61,9 @@ def wrap_input_display(inputs):
 def get_fuelbed_list(consumer):
     ''' The expected values against which we test go to the max below '''
     MAX_REFERENCE_FUELBED = 291
-    return [i for i in consumer.FCCS.get_available_fuelbeds() if MAX_REFERENCE_FUELBED >= i]
+    tmp = [i for i in consumer.FCCS.get_available_fuelbeds() if MAX_REFERENCE_FUELBED >= i]
+    random.shuffle(tmp)
+    return tmp
 
 def get_consumption_object(burn_type):
     ''' Return a "ready to go" consumption object
@@ -69,7 +73,7 @@ def get_consumption_object(burn_type):
     # run over the reference fuelbeds
     fb_list = get_fuelbed_list(consumer)
     consumer.fuelbed_fccs_ids = fb_list
-    return consumer
+    return (consumer, fb_list)
 
 def write_columns(results, catagories, stream, first_element, index, header=False):
     out = str(first_element)
@@ -227,22 +231,22 @@ def run_additional_activity_scenarios(consumer, fb_list):
 # Use a new emissions object because switching units causes an internal state
 #  problem for subsequent runs. todo ks
 #-------------------------------------------------------------------------------
-def run_emissions_western(fb_list):
-    consumer = get_consumption_object('natural')
+def run_emissions_western():
+    consumer, fb_list = get_consumption_object('natural')
     em = consume.Emissions(consumer)
     outfilename ='western_emissions.csv'
     reference_file = "{}_expected.csv".format(outfilename.split('.')[0])
     run_and_test_emissions(em, fb_list, outfilename, reference_file)
 
-def run_emissions_activity(fb_list):
-    consumer = get_consumption_object('activity')
+def run_emissions_activity():
+    consumer, fb_list = get_consumption_object('activity')
     em = consume.Emissions(consumer)
     outfilename ='activity_emissions.csv'
     reference_file = "{}_expected.csv".format(outfilename.split('.')[0])
     run_and_test_emissions(em, fb_list, outfilename, reference_file)
 
-def run_emissions_activity_with_unit_conversion(fb_list):
-    consumer = get_consumption_object('activity')
+def run_emissions_activity_with_unit_conversion():
+    consumer, fb_list = get_consumption_object('activity')
     consumer.fuelbed_ecoregion = ['western']
     em = consume.Emissions(consumer)
     em.output_units = 'kg_ha'
@@ -303,9 +307,9 @@ if NORMAL:
     exception_wrapper(run_additional_activity_scenarios, consumer, fuelbed_list)
 
     set_defaults(consumer, {})
-    exception_wrapper(run_emissions_activity_with_unit_conversion, fuelbed_list)
-    exception_wrapper(run_emissions_western, fuelbed_list)
-    exception_wrapper(run_emissions_activity, fuelbed_list)
+    exception_wrapper(run_emissions_activity_with_unit_conversion)
+    exception_wrapper(run_emissions_western)
+    exception_wrapper(run_emissions_activity)
 else:
     # - debugging
     fuelbed_list = [5]
