@@ -306,9 +306,11 @@ def exception_wrapper(func, *args):
     try:
         print("Running {}".format(func.__name__))
         func(*args)
+        return 0
     except Exception as e:
         print('\nException running {}'.format(func.__name__))
         print(e)
+        return 1
 
 #-------------------------------------------------------------------------------
 # Start

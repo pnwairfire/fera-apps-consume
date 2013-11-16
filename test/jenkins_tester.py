@@ -19,7 +19,7 @@ def check_lines(results):
     return failing_scenarios
 
 def check_results(output):
-    NUMBER_OF_TESTS = 11
+    NUMBER_OF_TESTS = 13
     results = []
     for line in output:
         if '= failed,' in line:
