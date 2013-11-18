@@ -99,7 +99,7 @@ class EmissionsFactorDB:
                 ef_nums.append(group)
             else:
                 print("Error: emissions database does not contain equation id for fuelbed {}".
-                    format(fuelbed_id))
+                    format(f))
         return ef_nums
 
     def browse(self):
