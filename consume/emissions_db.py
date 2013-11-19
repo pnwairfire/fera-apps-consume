@@ -55,22 +55,11 @@ class EmissionsFactorDB:
         ef_eqid_map = {}
         loadings = self._fco.FCCS.loadings_data_
         for i in loadings.fccs_id:
-            node_id = i
             components = {}
             components['natural'] = int(loadings.ix[loadings.fccs_id==i].efg_natural)
             components['activity'] = int(loadings.ix[loadings.fccs_id==i].efg_activity)
-            ef_eqid_map[node_id] = components
+            ef_eqid_map[i] = components
         return ef_eqid_map
-        '''
-        ef_eqid_map = {}
-        for node in self._fco.FCCS.loadings_data_:
-            node_id = node[0]
-            components = {}
-            components['natural'] = int(node[45])
-            components['activity'] = int(node[46])
-            ef_eqid_map[node_id] = components
-        return ef_eqid_map
-        '''
 
     def _load_covertype(self):
         assert False # - this may not be necessary
@@ -98,8 +87,7 @@ class EmissionsFactorDB:
                 group = efgs[eq_id_key]
                 ef_nums.append(group)
             else:
-                print("Error: emissions database does not contain equation id for fuelbed {}".
-                    format(f))
+                print("Error: emissions database does not contain equation id for fuelbed {}".format(f))
         return ef_nums
 
     def browse(self):
