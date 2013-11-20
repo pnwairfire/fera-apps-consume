@@ -29,7 +29,12 @@ def trace_calls(frame, event, arg):
         if 'consume' in func_filename:
             # - target our code, ignore other calls
             print("{} : {}".format(func_name, func_filename))
-        
+
+def coerce_if_possible(x):
+    try:
+        return int(x)
+    except:
+        return x
 
 
 def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs, cons_debug_data=""):

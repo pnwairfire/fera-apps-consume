@@ -191,14 +191,15 @@ def set_activity_defaults(consumer, map):
     consumer.slope = map['slope'] if 'slope' in map else 5
     consumer.windspeed = map['windspeed'] if 'windspeed' in map else 5
 
-def run_basic_scenarios(consumer, fb_list):
+def run_basic_scenarios():
     ''' Run basic consumption scenarios
     '''
     scenario_list = [['western'], ['southern'], ['boreal'], ['activity']]
     for scene in scenario_list:
+        burn_type = 'activity' if 'activity' in scene else 'natural'
+        consumer, fb_list = get_consumption_object(burn_type)
         consumer.fuelbed_ecoregion = list(scene) if 'activity' not in scene else ['western']
         if 'activity' in scene:
-            consumer.burn_type = scene[0]
             set_activity_defaults(consumer, {})
         else:
             consumer.burn_type = 'natural'
@@ -206,7 +207,7 @@ def run_basic_scenarios(consumer, fb_list):
         reference_values = out_name("expected", "{}_expected.csv".format(scene[0]))
         run_and_test(consumer, fb_list, outfilename, reference_values)
 
-def run_additional_activity_scenarios(consumer, fb_list):
+def run_additional_activity_scenarios():
     activityTwo = {
         'burn_type': 'activity',
         'fuel_moisture_10hr_pct':15,
@@ -232,12 +233,13 @@ def run_additional_activity_scenarios(consumer, fb_list):
     scenario_list = [activityTwo, activityThree, activityFour, activityFive]
     counter = 2
     for scene in scenario_list:
+        consumer, fb_list = get_consumption_object(scene['burn_type'])
         set_defaults(consumer, scene)
         consumer.fuelbed_ecoregion = ['western']
         outfilename = out_name("results", "{}_out.csv".format(counter))
         reference_values = out_name("expected", "scen{}_activity_expected.csv".format(counter))
         counter += 1
-        run_and_test(consumer, fb_list, outfilename, reference_values)
+        run_and_test(consumer, consumer.fuelbed_fccs_ids, outfilename, reference_values)
 
 #-------------------------------------------------------------------------------
 # Use a new emissions object because switching units causes an internal state
@@ -320,16 +322,10 @@ def exception_wrapper(func, *args):
 #  that occurs, we can use the larger file
 NORMAL = True
 #NORMAL = False
-consumer = consume.FuelConsumption(fccs_file = get_input_file(LOADINGS_FILES[0]))
-set_defaults(consumer, {})
 
 if NORMAL:
-    # run over all the fuelbeds in the input file
-    fuelbed_list = get_fuelbed_list(consumer)
-    consumer.fuelbed_fccs_ids = fuelbed_list
-
-    exception_wrapper(run_basic_scenarios, consumer, fuelbed_list)
-    exception_wrapper(run_additional_activity_scenarios, consumer, fuelbed_list)
+    exception_wrapper(run_basic_scenarios)
+    exception_wrapper(run_additional_activity_scenarios)
 
     exception_wrapper(run_emissions_activity_with_unit_conversion)
     exception_wrapper(run_emissions_western)
