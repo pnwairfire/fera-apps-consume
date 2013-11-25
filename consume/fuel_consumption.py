@@ -1190,11 +1190,11 @@ class FuelConsumption(util.FrozenClass):
         results = []
         for id in ids:
             try:
-                tmp =  self.FCCS.loadings_data_.fccs_id.searchsorted(id)
+                tmp =  self.FCCS.loadings_data_[self.FCCS.loadings_data_.fccs_id==id].index[0]
                 results.append(tmp)
             except:
                 assert False, "Error: Invalid fuelbed specified"
-        return self.FCCS.loadings_data_.ix[results]
+        return self.FCCS.loadings_data_.iloc[results]
 
     def calc_ff_redux_proportion(self, LD):
         duff_depth = LD['duff_upper_depth'] + LD['duff_lower_depth']

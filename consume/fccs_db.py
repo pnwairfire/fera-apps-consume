@@ -33,7 +33,9 @@ class FCCSDB():
         """
         found_loadings_metadata, loadings_metadata = self._get_loadings_metadata()
         column_header_begins = 1 if found_loadings_metadata else 0
-        loadings_data = pan.read_csv(self.loadings_file_, header=column_header_begins)
+
+        # - Note that fuelbed_number is treated as an object (basically 'string' versus 'number')
+        loadings_data = pan.read_csv(self.loadings_file_, dtype={'fuelbed_number': object}, header=column_header_begins)
 
         # - todo: convert percentage data. should this be done in FCCS?
         pct_data = ['shrubs_primary_perc_live', 'shrubs_secondary_perc_live', 'nw_primary_perc_live', 'nw_secondary_perc_live']
@@ -42,12 +44,6 @@ class FCCSDB():
         # - rename columns to match internal names
         for item in dd.LoadDefs:
             loadings_data.rename(columns={item[0] : item[1]}, inplace=True)
-
-        # - sort by fuelbed number
-        loadings_data.sort(columns='fccs_id', inplace=True)
-
-        # - bring the index back in line with the sorted data
-        loadings_data.index = pan.Int64Index(sorted(loadings_data.index))
 
         return(loadings_data, loadings_metadata)
 
