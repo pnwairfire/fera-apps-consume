@@ -6,8 +6,8 @@ import numpy as np
 import pandas as pan
 import os
 
-def validate_null(input_vals, permitted=None):
-    return (True, input_vals, [])
+def validate_fuelbed_number(input_vals, permitted=None):
+    return (True, [str(i) for i in input_vals], [])
 
 def validate_range(input_vals, permitted_vals):
     ''' Check submitted values against permitted values and convert to
@@ -61,7 +61,7 @@ class ConsumeInputSettings(object):
         'fm_10hr' : ['Fuel moisture (10-hr, %)', [0,100], validate_range],
         'length_of_ignition' : ['Length of ignition (min.)', [0,10000], validate_range]}
     NaturalInputVarParameters = {
-        'fuelbeds' : ['FCCS fuelbeds (ID#)', "", validate_null],
+        'fuelbeds' : ['FCCS fuelbeds (ID#)', "", validate_fuelbed_number],
         'area' : ['Fuelbed area (acres)', [0,1000000], validate_range],
         'ecoregion' : ['Fuelbed ecoregion',  dd.list_valid_ecoregions(), validate_list],
         'fm_1000hr' : ['Fuel moisture (1000-hr, %)', [0,140], validate_range],
