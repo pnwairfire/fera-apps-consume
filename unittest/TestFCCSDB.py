@@ -35,7 +35,7 @@ class TestFCCSDB(unittest.TestCase):
     """
 
     def short_info(self):
-        short_info = self.db.info(1, detail=False, ret=True)
+        short_info = self.db.info('1', detail=False, ret=True)
         chunks = short_info.split('\n')
         self.assertTrue(5 == len(chunks), "Got: {}".format(len(chunks)))
         self.assertTrue('1' in chunks[1], "Got: {}".format(chunks[1]))
@@ -122,7 +122,7 @@ class TestFCCSDB(unittest.TestCase):
                         self.assertTrue(False, "Missing key \"{}\"".format(key))
 
     def check_info(self):
-        check_good = self.db.info(1, detail=False, ret=True)
+        check_good = self.db.info('1', detail=False, ret=True)
         self.assertTrue('not found' not in check_good)
         check_bad = self.db.info(55, detail=False, ret=True)
         self.assertTrue('not found' in check_bad)

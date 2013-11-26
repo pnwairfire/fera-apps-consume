@@ -61,7 +61,7 @@ class TestInputSettings(unittest.TestCase):
         fb = s.get('fuelbeds')
         i = 0
         while i < len(fb):
-            self.assertEqual(fb[i], items[i])
+            self.assertEqual(fb[i], str(items[i]))
             i += 1
         self.assertTrue(s.set('slope', [1, 2, 4]))
         self.assertTrue(s.set('windspeed', [1, 2, 4]))
@@ -150,7 +150,7 @@ class TestInputSettings(unittest.TestCase):
         self.assertEqual(list(s.get('ecoregion')), list(data.ecoregion))
         self.assertEqual(list(s.get('fm_1000hr')), [float(x) for x in list(data.fm_1000hr)])
         self.assertEqual(list(s.get('fm_duff')), [float(x) for x in list(data.fm_duff)])
-        self.assertEqual(list(s.get('fuelbeds')), [float(x) for x in list(data.fuelbeds)])
+        self.assertEqual(list(s.get('fuelbeds')), [str(x) for x in list(data.fuelbeds)])
         self.assertEqual(list(s.get('shrub_black_pct')), [float(x) for x in list(data.shrub_black_pct)])
         os.unlink(infile[1])
 
@@ -178,7 +178,7 @@ class TestInputSettings(unittest.TestCase):
         self.assertEqual(list(s.get('ecoregion')), list(data.ecoregion))
         self.assertEqual(list(s.get('fm_1000hr')), [float(x) for x in list(data.fm_1000hr)])
         self.assertEqual(list(s.get('fm_duff')), [float(x) for x in list(data.fm_duff)])
-        self.assertEqual(list(s.get('fuelbeds')), [float(x) for x in list(data.fuelbeds)])
+        self.assertEqual(list(s.get('fuelbeds')), [str(x) for x in list(data.fuelbeds)])
         self.assertEqual(list(s.get('shrub_black_pct')), [float(x) for x in list(data.shrub_black_pct)])
 
         self.assertEqual(list(s.get('slope')), [float(x) for x in list(data.slope)])
