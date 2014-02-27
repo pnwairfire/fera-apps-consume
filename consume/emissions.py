@@ -384,7 +384,7 @@ class Emissions(util.FrozenClass):
         self._calculate()
         self._convert_units()
 
-        ins = self._cons_object._settings.package()
+        ins = self._cons_object._settings.package(self._cons_object.FCCS.loadings_data_)
         ins['emissions_fac_group'] = self._emissions_factor_groups
         # - single-value settings must be converted to a list so that results can be treated the same way
         ins['units_emissions'] = list([self._output_units] * len(self._cons_object._settings.get('fuelbeds')))

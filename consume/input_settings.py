@@ -198,11 +198,14 @@ class ConsumeInputSettings(object):
             settings.append("{}\t{}".format(k, v))
         return "\n".join(settings)
 
-    def package(self):
+    def package(self, dataframeLoadings):
         if self.settings_are_complete():
             add_me = {}
             # - make these settings occur for each line. Allows iterating over results
             #   in a uniform way.
+            get_these = [np.where(i == dataframeLoadings.fccs_id)[0][0] for i in self._settings['fuelbeds']]
+            if 'filename' in dataframeLoadings.columns:
+                add_me['filename'] = dataframeLoadings.filename[get_these].values
             add_me['burn_type'] = list([self._burn_type] * len(self._settings.get('fuelbeds')))
             add_me['units'] = list([self._units] * len(self._settings.get('fuelbeds')))
             if 'activity' == self.burn_type:

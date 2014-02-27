@@ -1,4 +1,5 @@
 parameters_fuelbeds, Fuelbeds
+parameters_filename Filename
 consumption_canopy_overstory_flaming,C_over_crown_F
 consumption_canopy_overstory_smoldering,C_over_crown_S
 consumption_canopy_overstory_residual,C_over_crown_R

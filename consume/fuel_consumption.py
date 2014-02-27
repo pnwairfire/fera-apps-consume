@@ -846,7 +846,7 @@ class FuelConsumption(util.FrozenClass):
                                           cons_debug_data = self._cons_debug_data,
                                           heat_data = self._heat_data,
                                           emis_data = [],
-                                          inputs = self._settings.package())
+                                          inputs = self._settings.package(self.FCCS.loadings_data_))
 
     def report(self, csv = "", stratum = "all", ret=False, incl_heat=False):
         """Output fuel consumption results as a TABULAR REPORT and/or CSV FILE
