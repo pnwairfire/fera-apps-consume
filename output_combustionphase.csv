@@ -1,5 +1,5 @@
 parameters_fuelbeds, Fuelbeds
-parameters_filename Filename
+parameters_filename, Filename
 consumption_summary_total_flaming,C_total_F
 consumption_summary_total_smoldering,C_total_S
 consumption_summary_total_residual,C_total_R

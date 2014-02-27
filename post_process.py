@@ -129,7 +129,7 @@ def read_col_cfg_file(filename):
                 if 2 == len(chunks):
                     retval.append((chunks[0].strip(), chunks[1].strip()))
                 else:
-                    assert false, "Malformed line: {}".format(line)
+                    assert False, "Malformed line: {}".format(line)
     return retval
 
 #-------------------------------------------------------------------------------

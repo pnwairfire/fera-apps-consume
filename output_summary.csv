@@ -1,5 +1,5 @@
 parameters_fuelbeds, Fuelbeds
-parameters_filename Filename
+parameters_filename, Filename
 consumption_summary_total_total,Total Consumption
 consumption_summary_canopy_total,Canopy Consumption
 consumption_summary_shrub_total,Shrub Consumption
