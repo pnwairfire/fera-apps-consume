@@ -14,3 +14,7 @@ emissions_nmhc_total,NMHC Emissions
 emissions_pm_total,PM Emissions
 emissions_pm10_total,PM10 Emissions
 emissions_pm25_total,PM25 Emissions
+heat_release_total,Total Heat Release
+heat_release_flaming,Flaming Heat Release
+heat_release_smoldering,Smoldering Heat Release
+heat_release_residual,Residual Heat Release
