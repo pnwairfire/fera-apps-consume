@@ -1,0 +1,7 @@
+#
+# This mapper gets required values for a FEPS input file
+#
+consumption_summary_total_flaming,cons_flm
+consumption_summary_total_smoldering,cons_sts
+consumption_summary_total_residual,cons_lts
+parameters_fm_duff, moist_duff
