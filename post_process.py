@@ -21,7 +21,7 @@ import logging
 #  a column configuration file.
 #-------------------------------------------------------------------------------
 DEFAULT_COLS = [
-    ('parameters_fuelbeds', 'Fuelbeds'),
+     ('parameters_fuelbeds', 'Fuelbeds'),
     ('consumption_summary_total_total', 'Total Consumption'),
     ('consumption_summary_canopy_total', 'Canopy Consumption'),
     ('consumption_summary_ground_fuels_total', 'GroundFuel Consumption'),
@@ -119,17 +119,30 @@ class PostProcessParser(object):
 # End command line parser for post_process
 #-------------------------------------------------------------------------------
 
+def parse_column_line(line):
+    ''' Format is:
+     2 sections divided by ':'
+        1.) comma separated list of columns to sum (in most cases just a single column)
+        2.) right hand side is a single string that is the name for the output column
+     Returns a tuple of list columns to sum and column output name
+     '''
+    retval = ()
+    if 1 == line.count(':'):
+        chunks = line.split(':')
+        columns_to_sum = chunks[0].split(',')
+        column_output_name = chunks[1].strip()
+        retval = ([i.strip() for i in columns_to_sum], column_output_name)
+    else:
+        raise(Exception("\nMalformed line '{}'".format(line)))
+    return retval
+
 def read_col_cfg_file(filename):
     retval = []
     with open(filename, 'r') as infile:
         for line in infile:
             line = line.strip()
             if len(line) and not line.startswith('#'):
-                chunks = line.split(',')
-                if 2 == len(chunks):
-                    retval.append((chunks[0].strip(), chunks[1].strip()))
-                else:
-                    assert False, "Malformed line: {}".format(line)
+                retval.append(parse_column_line(line))
     return retval
 
 #-------------------------------------------------------------------------------
@@ -145,14 +158,18 @@ def write_results(all_results, outfile, col_cfg_file=None):
             columns_to_print = read_col_cfg_file(col_cfg_file)
 
         # - loop through the list of results. Use a list to preserve column order
+        #   In 99% of cases, the summed_colums variable is a single column, however, we do have cases
+        #   where columns are combined.
         add_these = []
         for result in all_results:
             current = []
-            for col in columns_to_print:
-                key = col[0]
-                new_key = col[1]
-                if result.has_key(key):
-                    current.append((new_key, result[key]))
+            for item in columns_to_print:
+                columns_to_sum = item[0]
+                summed_columns = 0.0
+                for col in columns_to_sum:
+                    summed_columns += result[col]
+                new_key = item[1]
+                current.append((new_key, summed_columns))
             add_these.append(current)
 
         # assume one result set, but check for a second
