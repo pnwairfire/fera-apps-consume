@@ -21,7 +21,7 @@ import logging
 #  a column configuration file.
 #-------------------------------------------------------------------------------
 DEFAULT_COLS = [
-     ('parameters_fuelbeds', 'Fuelbeds'),
+    ('parameters_fuelbeds', 'Fuelbeds'),
     ('consumption_summary_total_total', 'Total Consumption'),
     ('consumption_summary_canopy_total', 'Canopy Consumption'),
     ('consumption_summary_ground_fuels_total', 'GroundFuel Consumption'),
@@ -47,6 +47,13 @@ DEFAULT_COLS = [
     ('parameters_shrub_black_pct', 'Shrub Blackened (%)'),
     ('parameters_units', 'Units') ]
 
+FEPS_COLS = [
+    (['consumption_summary_total_flaming'], 'cons_flm'),
+    (['consumption_summary_total_smoldering'], 'cons_sts'),
+    (['consumption_summary_total_residual'], 'cons_lts'),
+    (['consumption_ground_fuels_duff_upper_total', 'consumption_ground_fuels_duff_lower_total'], 'cons_duff')
+]
+
 #-------------------------------------------------------------------------------
 # Simple command line parser for post_process
 #-------------------------------------------------------------------------------
@@ -63,6 +70,10 @@ def make_parser():
     # - customize the output column configuration
     parser.add_argument('-x', action='store', nargs=1, dest='col_cfg_file', metavar='output columns',
         help='Specify the output column configuration file.')
+
+    # - specify special processing for FEPS input file
+    parser.add_argument('--feps', dest='do_feps', action='store_true',
+        help='Indicate that a FEPS input file should be generated.')
 
     # - specify an output filename
     parser.add_argument('-o', action='store', nargs=1, default=['consume_results.csv'],
@@ -81,6 +92,7 @@ class PostProcessParser(object):
         self._pickle_files = None
         self._col_cfg_file = None
         self._output_file = None
+        self._do_feps = False
 
     def do_parse(self, argv):
         parser = make_parser()
@@ -106,6 +118,9 @@ class PostProcessParser(object):
             if args.output_file:
                 self._output_file = os.path.abspath(args.output_file[0])
 
+            if args.do_feps:
+                self._do_feps = True
+
     def exists(self, filename):
         return True if os.path.exists(filename) else False
 
@@ -115,26 +130,11 @@ class PostProcessParser(object):
     def col_cfg_file(self): return self._col_cfg_file
     @property
     def output_file(self): return self._output_file
+    @property
+    def do_feps(self): return self._do_feps
 #-------------------------------------------------------------------------------
 # End command line parser for post_process
 #-------------------------------------------------------------------------------
-
-def parse_column_line(line):
-    ''' Format is:
-     2 sections divided by ':'
-        1.) comma separated list of columns to sum (in most cases just a single column)
-        2.) right hand side is a single string that is the name for the output column
-     Returns a tuple of list columns to sum and column output name
-     '''
-    retval = ()
-    if 1 == line.count(':'):
-        chunks = line.split(':')
-        columns_to_sum = chunks[0].split(',')
-        column_output_name = chunks[1].strip()
-        retval = ([i.strip() for i in columns_to_sum], column_output_name)
-    else:
-        raise(Exception("\nMalformed line '{}'".format(line)))
-    return retval
 
 def read_col_cfg_file(filename):
     retval = []
@@ -142,7 +142,11 @@ def read_col_cfg_file(filename):
         for line in infile:
             line = line.strip()
             if len(line) and not line.startswith('#'):
-                retval.append(parse_column_line(line))
+                chunks = line.split(',')
+                if 2 == len(chunks):
+                    retval.append((chunks[0].strip(), chunks[1].strip()))
+                else:
+                    assert False, "Malformed line: {}".format(line)
     return retval
 
 #-------------------------------------------------------------------------------
@@ -158,18 +162,14 @@ def write_results(all_results, outfile, col_cfg_file=None):
             columns_to_print = read_col_cfg_file(col_cfg_file)
 
         # - loop through the list of results. Use a list to preserve column order
-        #   In 99% of cases, the summed_colums variable is a single column, however, we do have cases
-        #   where columns are combined.
         add_these = []
         for result in all_results:
             current = []
-            for item in columns_to_print:
-                columns_to_sum = item[0]
-                summed_columns = 0.0
-                for col in columns_to_sum:
-                    summed_columns += result[col]
-                new_key = item[1]
-                current.append((new_key, summed_columns))
+            for col in columns_to_print:
+                key = col[0]
+                new_key = col[1]
+                if result.has_key(key):
+                    current.append((new_key, result[key]))
             add_these.append(current)
 
         # assume one result set, but check for a second
@@ -195,17 +195,71 @@ def get_pickled_results(pickle_files):
             print("\nError: results file not found.\n")
     return results
 
+def parse_column_line(line):
+    retval = ()
+    columns_to_sum = line[0]
+    column_output_name = line[1].strip()
+    retval = ([i.strip() for i in columns_to_sum], column_output_name)
+    return retval
+
+def read_col_cfg_special(filename):
+    retval = []
+    with open(filename, 'r') as infile:
+        for line in infile:
+            line = line.strip()
+            if len(line) and not line.startswith('#'):
+                retval.append(parse_column_line(line))
+    return retval
+
+def write_results_feps(all_results, outfile):
+    if len(all_results) > 0:
+        # - set up column configuration
+        columns_to_print = [parse_column_line(i) for i in FEPS_COLS]
+
+        # - loop through the list of results. Use a list to preserve column order
+        totals = {}
+        result = all_results[0]
+        for item in columns_to_print:
+            columns_to_sum = item[0]
+            summed_columns = 0.0
+            for col in columns_to_sum:
+                summed_columns += result[col]
+            new_key = item[1]
+            totals[new_key] = np.sum(summed_columns)
+
+        with open(outfile, 'w+') as o:
+            for key in totals.keys():
+                o.write('{}={}\n'.format(key, totals[key]))
+            o.write('moist_duff={}\n'.format(result['parameters_fm_duff'][0]))
+    else:
+        print("\nError: results file corrupted.\n")
+
+def get_pickled_results(pickle_files):
+    results = []
+    for file in pickle_files:
+        if os.path.exists(file):
+            results.append(pickle.load(open(file, "rb")))
+        else:
+            print("\nError: results file not found.\n")
+    return results
+
 #-------------------------------------------------------------------------------
 # Main
 #-------------------------------------------------------------------------------
 def main():
     parser = PostProcessParser()
     parser.do_parse(sys.argv)
-    try:
-        write_results(get_pickled_results(parser.pickle_files),
-            parser.output_file, col_cfg_file=parser.col_cfg_file)
-    except Exception as e:
-        print(e)
+    results = get_pickled_results(parser.pickle_files)
+    if parser.do_feps:
+        try:
+            write_results_feps(results, parser.output_file)
+        except Exception as e:
+            print('\nException in write_results_feps() : {}'.format(e))
+    else:
+        try:
+            write_results(results, parser.output_file, col_cfg_file=parser.col_cfg_file)
+        except Exception as e:
+            print('\nException in write_results() : {}'.format(e))
 
 if __name__ == '__main__':
     main()
