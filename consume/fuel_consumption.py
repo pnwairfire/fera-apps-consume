@@ -726,6 +726,11 @@ class FuelConsumption(util.FrozenClass):
     def shrub_blackened_pct(self, value):
         self._settings.set('shrub_black_pct', value)
     @property
+    def pile_blackened_pct(self): return self._settings.get('pile_black_pct')
+    @pile_blackened_pct.setter
+    def pile_blackened_pct(self, value):
+        self._settings.set('pile_black_pct', value)
+    @property
     def slope(self): return self._settings.get('slope')
     @slope.setter
     def slope(self, value):
@@ -1258,6 +1263,8 @@ class FuelConsumption(util.FrozenClass):
 
         [stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt] = ccn.ccon_stumps(LD)
 
+        pile_fsrt = ccn.ccon_piles(self._settings.get('pile_black_pct'), LD)
+
         fm_1000hr = self._settings.get('fm_1000hr')
         fm_duff =  self._settings.get('fm_duff')
         if self._settings.burn_type in ['natural', ['natural']]:
@@ -1311,7 +1318,7 @@ class FuelConsumption(util.FrozenClass):
                        nw_seco_live_fsrt, nw_seco_dead_fsrt])
         llm_fsrt = sum([lch_fsrt, moss_fsrt, lit_fsrt])
         gf_fsrt = sum([duff_upper_fsrt, duff_lower_fsrt, bas_fsrt, sqm_fsrt])
-        woody_fsrt = sum([stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt,
+        woody_fsrt = sum([pile_fsrt, stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt,
                     one_hr_fsrt, ten_hr_fsrt, hun_hr_fsrt, oneK_hr_snd_fsrt,
                     oneK_hr_rot_fsrt, tenK_hr_snd_fsrt, tenK_hr_rot_fsrt,
                     tnkp_hr_snd_fsrt, tnkp_hr_rot_fsrt])
@@ -1355,6 +1362,7 @@ class FuelConsumption(util.FrozenClass):
             duff_lower_fsrt,
             bas_fsrt,
             sqm_fsrt,
+            pile_fsrt,
             stump_snd_fsrt,
             stump_rot_fsrt,
             stump_ltr_fsrt,
@@ -1380,7 +1388,7 @@ class FuelConsumption(util.FrozenClass):
                 shb_seco_dead_fsrt, nw_prim_live_fsrt, nw_prim_dead_fsrt,
                 nw_seco_live_fsrt, nw_seco_dead_fsrt, lit_fsrt, lch_fsrt,
                 moss_fsrt, duff_upper_fsrt, duff_lower_fsrt, bas_fsrt,
-                sqm_fsrt, stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt,
+                sqm_fsrt, pile_fsrt, stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt,
                 one_hr_fsrt, ten_hr_fsrt, hun_hr_fsrt, oneK_hr_snd_fsrt,
                 oneK_hr_rot_fsrt, tenK_hr_snd_fsrt, tenK_hr_rot_fsrt,
                 tnkp_hr_snd_fsrt, tnkp_hr_rot_fsrt)

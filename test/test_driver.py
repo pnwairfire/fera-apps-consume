@@ -178,6 +178,7 @@ def set_defaults(consumer, map):
     consumer.fuel_moisture_duff_pct = map['fuel_moisture_duff_pct'] if 'fuel_moisture_duff_pct' in map else 20
     consumer.canopy_consumption_pct = map['canopy_consumption_pct'] if 'canopy_consumption_pct' in map else 20
     consumer.shrub_blackened_pct = map['shrub_blackened_pct'] if 'shrub_blackened_pct' in map else 50
+    consumer.pile_blackened_pct = map['pile_blackened_pct'] if 'pile_blackened_pct' in map else 90
     consumer.output_units = map['output_units'] if 'output_units' in map else 'tons_ac'
     consumer.fuelbed_ecoregion = map['fuelbed_ecoregion'] if 'fuelbed_ecoregion' in map else ['western']
     if 'activity' == consumer.burn_type:

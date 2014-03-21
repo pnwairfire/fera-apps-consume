@@ -122,6 +122,7 @@ def write_results(all_results, outfile, col_cfg_file=None):
         ('parameters_fm_1000hr', '1000hr Fuel Moisture'),
         ('parameters_fm_duff', 'Duff Fuel Moisture'),
         ('parameters_shrub_black_pct', 'Shrub Blackened (%)'),
+        ('parameters_pile_black_pct', 'Pile Blackened (%)'),
         ('parameters_units', 'Units') ]
 
     # calculated results are in a hierarchical dictionary. Flatten the entire structure
@@ -131,6 +132,9 @@ def write_results(all_results, outfile, col_cfg_file=None):
         colname = '_'.join(k)
         colname = colname.replace(' ', '_')
         tmp[colname] = v
+
+    #for key in sorted(tmp.keys()):
+    #    print('{}:   {}'.format(key, str(tmp[key])))
 
     # output format will be done later so simply persist the calculate results
     if pickle_output(col_cfg_file):

@@ -119,18 +119,19 @@ def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs, cons_debug
     gf_duff_lower = cons_dict(28)
     gf_ba = cons_dict(29)
     gf_sm = cons_dict(30)
-    wd_stumps_snd = cons_dict(31)
-    wd_stumps_rot = cons_dict(32)
-    wd_stumps_lgt = cons_dict(33)
-    wd_hr1 = cons_dict(34)
-    wd_hr10 = cons_dict(35)
-    wd_hr100 = cons_dict(36)
-    wd_hr1000_snd = cons_dict(37)
-    wd_hr1000_rot = cons_dict(38)
-    wd_hr10000_snd = cons_dict(39)
-    wd_hr10000_rot = cons_dict(40)
-    wd_hr10kp_snd = cons_dict(41)
-    wd_hr10kp_rot = cons_dict(42)
+    piles = cons_dict(31)
+    wd_stumps_snd = cons_dict(32)
+    wd_stumps_rot = cons_dict(33)
+    wd_stumps_lgt = cons_dict(34)
+    wd_hr1 = cons_dict(35)
+    wd_hr10 = cons_dict(36)
+    wd_hr100 = cons_dict(37)
+    wd_hr1000_snd = cons_dict(38)
+    wd_hr1000_rot = cons_dict(39)
+    wd_hr10000_snd = cons_dict(40)
+    wd_hr10000_rot = cons_dict(41)
+    wd_hr10kp_snd = cons_dict(42)
+    wd_hr10kp_rot = cons_dict(43)
 
     ff_reduction = cons_debug_dict(0)
 
@@ -175,6 +176,7 @@ def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs, cons_debug
                                     'basal accumulations' : gf_ba,
                                     'squirrel middens' : gf_sm},
                                 'woody fuels' : {
+                                    'piles' : piles,
                                     'stumps sound' : wd_stumps_snd,
                                     'stumps rotten' : wd_stumps_rot,
                                     'stumps lightered' : wd_stumps_lgt,

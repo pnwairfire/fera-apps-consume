@@ -68,6 +68,7 @@ class ConsumeInputSettings(object):
         'fm_duff' : ['Fuel moisture (duff, %)', [0,400], validate_range],
         'can_con_pct' : ['Canopy consumption (%)', [0,100], validate_range],
         'shrub_black_pct' : ['Shrub blackened (%)', [0,100], validate_range],
+        'pile_black_pct' : ['Pile blackened (%)', [0,100], validate_range],
         }
 
     AllInputParameters = dict(NaturalInputVarParameters.items() + ActivityInputVarParameters.items())

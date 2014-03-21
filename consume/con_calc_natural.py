@@ -183,6 +183,15 @@ def ccon_stumps(LD):
 
     return [util.csdist(LD[s[0]] * s[1], s[2]) for s in stump_params]
 
+def ccon_piles(pct_consumed, LD):
+    """  pile loading appears as clean, dirty, and verydirty """
+    # Flaming, smoldering, residual
+    csd = [0.70, 0.15, 0.15]
+    pct = pct_consumed * 0.01
+    total_pile_loading = LD['pile_clean_loading'] + LD['pile_dirty_loading'] + LD['pile_vdirty_loading']
+    total_consumed = pct * total_pile_loading
+    return util.csdist(total_consumed, csd)
+
 ### WOODY FUEL CONSUMPTION NATURAL EQUATIONS ###
 def ccon_one_nat(LD):
     """ 1-hr (0 to 1/4"), natural """
