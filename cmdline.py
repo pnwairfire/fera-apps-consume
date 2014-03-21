@@ -33,7 +33,7 @@ def make_parser():
 Examples:
     // display help (this text)
     python consume_batch.py
-    
+
     // Simple case, natural fuel types, required input file (uses built-in loadings file)
     python consume_batch.py natural input_natural.csv
 
@@ -80,8 +80,8 @@ class ConsumeParserException(Exception):
 class ConsumeParser(object):
     ''' Parse the consume_batch command line arguments
     '''
-    def __init__(self, pickle_string=None):
-        self._pickle_string = pickle_string.lower() if pickle_string else None
+    def __init__(self, special_args=None):
+        self._special_args = [i.lower() for i in special_args] if special_args else None
         self._burn_type = None
         self._csv_file = None
         self._fuel_loadings_file = None
@@ -117,7 +117,7 @@ class ConsumeParser(object):
                 self._fuel_loadings_file = os.path.abspath(args.fuel_loadings_file[0])
 
             if args.col_cfg_file:
-                if args.col_cfg_file[0].lower() == self._pickle_string:
+                if args.col_cfg_file[0].lower() in self._special_args:
                     # no need to validate anything
                     self._col_cfg_file = args.col_cfg_file[0]
                 else:

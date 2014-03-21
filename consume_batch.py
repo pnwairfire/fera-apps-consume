@@ -18,6 +18,7 @@ import pandas as pan
 import pickle
 
 DO_PICKLE_OUTPUT = 'pickle'
+DO_RAW_OUTPUT = 'raw'
 
 # -- From stackoverflow.com ---
 from collections import *
@@ -55,7 +56,14 @@ def pickle_output(col_cfg_file):
         to simply write out the entire dataset. This allows for loading it
         later when the preferred output format is known
     '''
-    return DO_PICKLE_OUTPUT == col_cfg_file.lower() if col_cfg_file else False
+    return DO_PICKLE_OUTPUT == col_cfg_file.lower().strip() if col_cfg_file else False
+
+def do_raw_output(col_cfg_file):
+    ''' use 'raw' as the argument for the column configuration file
+        to print the entire dataset with the "flattened" names.
+        Useful for debugging and for creating column mapping files.
+    '''
+    return DO_RAW_OUTPUT == col_cfg_file.lower().strip() if col_cfg_file else False
 
 def can_run():
     ''' Are we in the correct location to run?
@@ -133,12 +141,12 @@ def write_results(all_results, outfile, col_cfg_file=None):
         colname = colname.replace(' ', '_')
         tmp[colname] = v
 
-    #for key in sorted(tmp.keys()):
-    #    print('{}:   {}'.format(key, str(tmp[key])))
-
     # output format will be done later so simply persist the calculate results
     if pickle_output(col_cfg_file):
         pickle.dump(tmp, open(outfile, 'wb'))
+    elif do_raw_output(col_cfg_file):
+        for key in sorted(tmp.keys()):
+            print('{}:   {}'.format(key, str(tmp[key])))
     else:
         columns_to_print = default_cols
         if col_cfg_file:
@@ -178,7 +186,7 @@ def run(burn_type, csv_input, msg_level, outfile, fuel_loadings=None, col_cfg=No
 def main():
     try:
         can_run()
-        parser = cmdline.ConsumeParser(DO_PICKLE_OUTPUT)
+        parser = cmdline.ConsumeParser([DO_PICKLE_OUTPUT, DO_RAW_OUTPUT])
         parser.do_parse(sys.argv)
         run(parser.burn_type, parser.csv_file, parser.msg_level, parser.output_filename,
             parser.fuel_loadings_file, parser.col_cfg_file)
