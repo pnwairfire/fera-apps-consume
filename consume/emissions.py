@@ -542,6 +542,10 @@ class Emissions(util.FrozenClass):
             ### - pass on to fuel consumption object
             self._cons_object._convert_units(explicit_units=self._output_units)
 
+    def _emissions_calc_piles(self):
+        cons_pile_fsrt = self._cons_object._cons_data_piles
+        self._cons_object.fccs
+
 
     def _emissions_calc(self, efg):
         """Calculates emissions estimates.
@@ -551,9 +555,9 @@ class Emissions(util.FrozenClass):
         each emissions species.
 
         """
-        def calc_species(ef):
+        def calc_species(cons_data, ef):
             """ Gets summed data """
-            temp = all_fsrt * ef
+            temp = cons_data * ef
             for i in range(0, len(temp)):
                 temp[i][3] = sum(temp[i])
             return temp
@@ -575,7 +579,7 @@ class Emissions(util.FrozenClass):
         self._emis_data = None
         self._emis_summ = None
 
-        all_fsrt = self._cons_object._cons_data # <<< ucons
+        all_fsrt = self._cons_object._cons_data - self._cons_object._cons_data_piles
 
         # Load default emissions factors (average of all factors...)
         t = self._emission_factor_db.data[0]
@@ -621,13 +625,13 @@ class Emissions(util.FrozenClass):
        # Emissions calculations:
        # consumption (tons/acre) * emissions factor (lb/ton) = lbs/ac emissions
        # Emissions for all fuels combined
-        emis_pm_fsrt = calc_species(ef_pm)
-        emis_pm10_fsrt = calc_species(ef_pm10)
-        emis_pm25_fsrt = calc_species(ef_pm25)
-        emis_co_fsrt = calc_species(ef_co)
-        emis_co2_fsrt = calc_species(ef_co2)
-        emis_ch4_fsrt = calc_species(ef_ch4)
-        emis_nmhc_fsrt = calc_species(ef_nmhc)
+        emis_pm_fsrt = calc_species(all_fsrt, ef_pm)
+        emis_pm10_fsrt = calc_species(all_fsrt, ef_pm10)
+        emis_pm25_fsrt = calc_species(all_fsrt, ef_pm25)
+        emis_co_fsrt = calc_species(all_fsrt, ef_co)
+        emis_co2_fsrt = calc_species(all_fsrt, ef_co2)
+        emis_ch4_fsrt = calc_species(all_fsrt, ef_ch4)
+        emis_nmhc_fsrt = calc_species(all_fsrt, ef_nmhc)
 
         #print "UNPACKING"
         self._emis_data = arrayize([emis_pm_fsrt,

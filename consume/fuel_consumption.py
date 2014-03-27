@@ -790,6 +790,7 @@ class FuelConsumption(util.FrozenClass):
         self.customized_fuel_loadings = []
         self._fccs_loadings = []
         self._cons_data = np.array([])
+        self._cons_data_piles = np.array([]) ### - special case piles
         self._cons_debug_data = np.array([])
         self._emis_data = np.array([])
         self._calc_success = False
@@ -1215,6 +1216,14 @@ class FuelConsumption(util.FrozenClass):
 
         return ff_redux_proportion
 
+    def _get_clean_dirty_vdirty_ratio(self, loadings):
+         pile_loading_total = loadings['pile_clean_loading'] + loadings['pile_dirty_loading'] + loadings['pile_vdirty_loading']
+         pile_loading_ratios = np.array([
+            loadings['pile_clean_loading'] / pile_loading_total,
+            loadings['pile_dirty_loading'] / pile_loading_total,
+            loadings['pile_vdirty_loading'] / pile_loading_total])
+         return pile_loading_ratios
+
     def _consumption_calc(self):
         """Calculates fuel consumption estimates.
 
@@ -1263,7 +1272,10 @@ class FuelConsumption(util.FrozenClass):
 
         [stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt] = ccn.ccon_stumps(LD)
 
+        # special case for piles
         pile_fsrt = ccn.ccon_piles(self._settings.get('pile_black_pct'), LD)
+        self._cons_data_piles = pile_fsrt
+        ks = self._get_clean_dirty_vdirty_ratio(LD)
 
         fm_1000hr = self._settings.get('fm_1000hr')
         fm_duff =  self._settings.get('fm_duff')
