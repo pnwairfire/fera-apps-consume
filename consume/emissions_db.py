@@ -13,23 +13,6 @@ class EmissionsFactorDB:
         e_obj.efDB
         """
 
-    # - Piles were added later and need to be treated differently
-    #   so they do not use values from the emission factor file
-    pile_particulatematter_emission_factors = {
-                    # Clean	Dirty	Really Dirty
-        'PM': np.array([21.9, 27, 36]),
-        'PM10': np.array([15.5, 20, 28]),
-        'PM25': np.array([13.5, 17, 23.6])
-        }
-
-    pile_pollutant_emission_factors = {
-                    # Flaming	Smoldering	Residual
-        'CO': np.array([52.66, 130.37, 130.37]),
-        'CO2': np.array([3429.24, 3089.88, 3089.88]),
-        'CH4': np.array([3.28, 11.03, 11.03]),
-        'NMHC': np.array([3.56, 6.78, 6.78])
-        }
-
     def __init__(self, emissions_file = "", fuel_consumption_object = None):
         """EmissionsFactorDB class contructor
 

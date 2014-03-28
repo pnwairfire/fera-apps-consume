@@ -543,9 +543,43 @@ class Emissions(util.FrozenClass):
             self._cons_object._convert_units(explicit_units=self._output_units)
 
     def _emissions_calc_piles(self):
-        cons_pile_fsrt = self._cons_object._cons_data_piles
-        self._cons_object.fccs
+        # helper functions
+        def get_clean_dirty_vdirty_ratio(loadings, pile_loading_total):
+             clean_ratio =  np.where(pile_loading_total, loadings['pile_clean_loading']  / pile_loading_total, 0.0)
+             dirty_ratio =  np.where(pile_loading_total, loadings['pile_dirty_loading']  / pile_loading_total, 0.0)
+             vdirty_ratio = np.where(pile_loading_total, loadings['pile_vdirty_loading'] / pile_loading_total, 0.0)
+             pile_loading_ratios = np.array([clean_ratio, dirty_ratio, vdirty_ratio])
+             return pile_loading_ratios
 
+        def calc_pm(pile_loadings, cdv_ratios, pm_type, pile_black_pct):
+            tmp_1 = np.vstack(pm_type) * cdv_ratios
+            total = np.zeros(len(pile_loadings))
+
+            # Multiply total pile loadings by the product of emission factor by ratio of that
+            #  type (clean, dirty, vdirty)
+            for row in tmp_1:
+                total += row * pile_loadings
+
+            # Multiply the results by the percent consumed
+            total = pile_black_pct * total
+            return total
+
+        # Start main function
+        loadings = \
+            self._cons_object._get_loadings_for_specified_files(
+            self._cons_object._settings.get('fuelbeds'))
+
+        pile_black_pct = (self._cons_object._settings.get('pile_black_pct') * 0.01)
+
+        pile_loading_total = loadings['pile_clean_loading'] \
+                            + loadings['pile_dirty_loading'] \
+                            + loadings['pile_vdirty_loading']
+
+        pile_ratios = get_clean_dirty_vdirty_ratio(loadings, pile_loading_total)
+        pm_piles = calc_pm(pile_loading_total, pile_ratios, util.pile_particulatematter_emission_factors['PM'], pile_black_pct)
+        pm10_piles = calc_pm(pile_loading_total, pile_ratios, util.pile_particulatematter_emission_factors['PM10'], pile_black_pct)
+        pm25_piles = calc_pm(pile_loading_total, pile_ratios, util.pile_particulatematter_emission_factors['PM25'], pile_black_pct)
+        return (pm_piles, pm10_piles, pm25_piles)
 
     def _emissions_calc(self, efg):
         """Calculates emissions estimates.
@@ -559,7 +593,8 @@ class Emissions(util.FrozenClass):
             """ Gets summed data """
             temp = cons_data * ef
             for i in range(0, len(temp)):
-                temp[i][3] = sum(temp[i])
+                summ = sum(temp[i])
+                temp[i][3] = summ
             return temp
 
 
@@ -579,6 +614,7 @@ class Emissions(util.FrozenClass):
         self._emis_data = None
         self._emis_summ = None
 
+        # - subtract out pile loading
         all_fsrt = self._cons_object._cons_data - self._cons_object._cons_data_piles
 
         # Load default emissions factors (average of all factors...)
@@ -632,6 +668,18 @@ class Emissions(util.FrozenClass):
         emis_co2_fsrt = calc_species(all_fsrt, ef_co2)
         emis_ch4_fsrt = calc_species(all_fsrt, ef_ch4)
         emis_nmhc_fsrt = calc_species(all_fsrt, ef_nmhc)
+
+        (pile_pm, pile_pm10, pile_pm25) = self._emissions_calc_piles()
+        print(emis_pm_fsrt.shape)
+        print(emis_pm_fsrt[3].shape)
+        emis_pm_fsrt[3] = emis_pm_fsrt[3] + pile_pm
+        print(' -- {}'.format(emis_pm_fsrt[3]))
+        print(emis_pm10_fsrt[3])
+        emis_pm10_fsrt[3] = emis_pm10_fsrt[3] + pile_pm10
+        print(' -- {}'.format(emis_pm10_fsrt[3]))
+        print(emis_pm25_fsrt[3])
+        emis_pm25_fsrt[3] = emis_pm25_fsrt[3] + pile_pm25
+        print(' -- {}'.format(emis_pm25_fsrt[3]))
 
         #print "UNPACKING"
         self._emis_data = arrayize([emis_pm_fsrt,
