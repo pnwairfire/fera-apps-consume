@@ -357,7 +357,7 @@ except ImportError:
     def get_consume_version():
         from datetime import date
         today = date.today()
-        version_string = 'Consume version 4.1 Revision 000 Date {} (unofficial)'.format(today)
+        version_string = 'Consume version 4.2 Revision 000 Date {} (unofficial)'.format(today)
         return version_string
 
 def get_version():

@@ -548,21 +548,24 @@ class Emissions(util.FrozenClass):
              clean_ratio =  np.where(pile_loading_total, loadings['pile_clean_loading']  / pile_loading_total, 0.0)
              dirty_ratio =  np.where(pile_loading_total, loadings['pile_dirty_loading']  / pile_loading_total, 0.0)
              vdirty_ratio = np.where(pile_loading_total, loadings['pile_vdirty_loading'] / pile_loading_total, 0.0)
-             pile_loading_ratios = np.array([clean_ratio, dirty_ratio, vdirty_ratio])
-             return pile_loading_ratios
+             pile_loading_ratios = np.array([clean_ratio] + [dirty_ratio] + [vdirty_ratio])
+             return pile_loading_ratios.transpose()
 
         def calc_pm(pile_loadings, cdv_ratios, pm_type, pile_black_pct):
-            tmp_1 = np.vstack(pm_type) * cdv_ratios
-            total = np.zeros(len(pile_loadings))
+            # - emission factor * clean/dirty/vdirty ratio
+            adjusted_pm_value = pm_type * cdv_ratios
 
-            # Multiply total pile loadings by the product of emission factor by ratio of that
-            #  type (clean, dirty, vdirty)
-            for row in tmp_1:
-                total += row * pile_loadings
+            # get consumed mass
+            total_consumed = pile_loadings * pile_black_pct
 
-            # Multiply the results by the percent consumed
-            total = pile_black_pct * total
-            return total
+            cdv_results = np.zeros(len(total_consumed))
+            for i in range(0, len(total_consumed)):
+                summ = 0.0
+                for adj_value in adjusted_pm_value[i]:
+                    summ += total_consumed[i] * adj_value
+                cdv_results[i] = summ
+
+            return util.csdist(cdv_results, [0.70, 0.15, 0.15])
 
         # Start main function
         loadings = \
@@ -574,8 +577,8 @@ class Emissions(util.FrozenClass):
         pile_loading_total = loadings['pile_clean_loading'] \
                             + loadings['pile_dirty_loading'] \
                             + loadings['pile_vdirty_loading']
-
         pile_ratios = get_clean_dirty_vdirty_ratio(loadings, pile_loading_total)
+
         pm_piles = calc_pm(pile_loading_total, pile_ratios, util.pile_particulatematter_emission_factors['PM'], pile_black_pct)
         pm10_piles = calc_pm(pile_loading_total, pile_ratios, util.pile_particulatematter_emission_factors['PM10'], pile_black_pct)
         pm25_piles = calc_pm(pile_loading_total, pile_ratios, util.pile_particulatematter_emission_factors['PM25'], pile_black_pct)
@@ -597,7 +600,6 @@ class Emissions(util.FrozenClass):
                 temp[i][3] = summ
             return temp
 
-
         def get_emis_summ(p):
             """ Sums emissions data by area for each species/fccs id """
             alls = []
@@ -614,8 +616,9 @@ class Emissions(util.FrozenClass):
         self._emis_data = None
         self._emis_summ = None
 
-        # - subtract out pile loading
-        all_fsrt = self._cons_object._cons_data - self._cons_object._cons_data_piles
+        # - subtract out pile loading -- restore it at the end of routine
+        all_fsrt = self._cons_object._cons_data
+        all_fsrt[6] = all_fsrt[6] - self._cons_object._cons_data_piles
 
         # Load default emissions factors (average of all factors...)
         t = self._emission_factor_db.data[0]
@@ -669,17 +672,14 @@ class Emissions(util.FrozenClass):
         emis_ch4_fsrt = calc_species(all_fsrt, ef_ch4)
         emis_nmhc_fsrt = calc_species(all_fsrt, ef_nmhc)
 
+        # Add pile PM contribution in. Add to the totals (index 0) and the woody stratum (index 6)
         (pile_pm, pile_pm10, pile_pm25) = self._emissions_calc_piles()
-        print(emis_pm_fsrt.shape)
-        print(emis_pm_fsrt[3].shape)
-        emis_pm_fsrt[3] = emis_pm_fsrt[3] + pile_pm
-        print(' -- {}'.format(emis_pm_fsrt[3]))
-        print(emis_pm10_fsrt[3])
-        emis_pm10_fsrt[3] = emis_pm10_fsrt[3] + pile_pm10
-        print(' -- {}'.format(emis_pm10_fsrt[3]))
-        print(emis_pm25_fsrt[3])
-        emis_pm25_fsrt[3] = emis_pm25_fsrt[3] + pile_pm25
-        print(' -- {}'.format(emis_pm25_fsrt[3]))
+        emis_pm_fsrt[0] = emis_pm_fsrt[0] + pile_pm
+        emis_pm_fsrt[6] = emis_pm_fsrt[6] + pile_pm
+        emis_pm10_fsrt[0] = emis_pm10_fsrt[0] + pile_pm10
+        emis_pm10_fsrt[6] = emis_pm10_fsrt[6] + pile_pm10
+        emis_pm25_fsrt[0] = emis_pm25_fsrt[0] + pile_pm25
+        emis_pm25_fsrt[6] = emis_pm25_fsrt[6] + pile_pm25
 
         #print "UNPACKING"
         self._emis_data = arrayize([emis_pm_fsrt,
@@ -701,5 +701,12 @@ class Emissions(util.FrozenClass):
         ch4_all = get_emis_summ(5)
         nmhc_all = get_emis_summ(6)
 
+        # ks todo - what does this do?
         self._emis_summ = np.array([pm_all, pm10_all, pm25_all, co_all, co2_all, ch4_all, nmhc_all])
+        # the only problem this line causes is if unit conversion is involved
+        # self._emis_summ = np.array([0, 0, 0, 0, 0, 0, 0])
+
+        # - restore pile consumption
+        all_fsrt[6] = all_fsrt[6] + self._cons_object._cons_data_piles
+
 
