@@ -14,10 +14,10 @@ pile_particulatematter_emission_factors = {
 
 pile_pollutant_emission_factors = {
                 # Flaming	Smoldering	Residual
-    'CO': np.array([52.66, 130.37, 130.37]),
-    'CO2': np.array([3429.24, 3089.88, 3089.88]),
-    'CH4': np.array([3.28, 11.03, 11.03]),
-    'NMHC': np.array([3.56, 6.78, 6.78])
+    'CO': np.array([52.66, 130.37, 130.37, 0.0]),
+    'CO2': np.array([3429.24, 3089.88, 3089.88, 0.0]),
+    'CH4': np.array([3.28, 11.03, 11.03, 0.0]),
+    'NMHC': np.array([3.56, 6.78, 6.78, 0.0])
     }
 
 class FrozenClass(object):

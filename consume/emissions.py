@@ -542,7 +542,7 @@ class Emissions(util.FrozenClass):
             ### - pass on to fuel consumption object
             self._cons_object._convert_units(explicit_units=self._output_units)
 
-    def _emissions_calc_piles(self):
+    def _emissions_calc_pm_piles(self, all_loadings, pile_loadings, pile_black_pct):
         # helper functions
         def get_clean_dirty_vdirty_ratio(loadings, pile_loading_total):
              clean_ratio =  np.where(pile_loading_total, loadings['pile_clean_loading']  / pile_loading_total, 0.0)
@@ -567,22 +567,32 @@ class Emissions(util.FrozenClass):
 
             return util.csdist(cdv_results, [0.70, 0.15, 0.15])
 
-        # Start main function
-        loadings = \
-            self._cons_object._get_loadings_for_specified_files(
-            self._cons_object._settings.get('fuelbeds'))
-
-        pile_black_pct = (self._cons_object._settings.get('pile_black_pct') * 0.01)
-
-        pile_loading_total = loadings['pile_clean_loading'] \
-                            + loadings['pile_dirty_loading'] \
-                            + loadings['pile_vdirty_loading']
-        pile_ratios = get_clean_dirty_vdirty_ratio(loadings, pile_loading_total)
-
-        pm_piles = calc_pm(pile_loading_total, pile_ratios, util.pile_particulatematter_emission_factors['PM'], pile_black_pct)
-        pm10_piles = calc_pm(pile_loading_total, pile_ratios, util.pile_particulatematter_emission_factors['PM10'], pile_black_pct)
-        pm25_piles = calc_pm(pile_loading_total, pile_ratios, util.pile_particulatematter_emission_factors['PM25'], pile_black_pct)
+        # Start -----------
+        pile_ratios = get_clean_dirty_vdirty_ratio(all_loadings, pile_loadings)
+        pm_piles = calc_pm(pile_loadings, pile_ratios, util.pile_particulatematter_emission_factors['PM'], pile_black_pct)
+        pm10_piles = calc_pm(pile_loadings, pile_ratios, util.pile_particulatematter_emission_factors['PM10'], pile_black_pct)
+        pm25_piles = calc_pm(pile_loadings, pile_ratios, util.pile_particulatematter_emission_factors['PM25'], pile_black_pct)
         return (pm_piles, pm10_piles, pm25_piles)
+
+    def _emissions_calc_pollutants_piles(self, pile_loadings, pile_black_pct):
+        # helper function
+        def calc_pollutant(pile_loadings, pollutant_type, pile_black_pct):
+            # get consumed mass
+            total_consumed = pile_loadings * pile_black_pct
+            phase_consumed = util.csdist(total_consumed.values, [0.70, 0.15, 0.15])
+
+            results = np.zeros_like(phase_consumed)
+            for i in range(0, len(pile_loadings)):
+                tmp = phase_consumed[:,i] * pollutant_type
+                results[:,i] = np.array([tmp[0]] + [tmp[1]] + [tmp[2]] + [sum(tmp)])
+            return results
+
+        # Start -----------
+        pile_co = calc_pollutant(pile_loadings, util.pile_pollutant_emission_factors['CO'], pile_black_pct)
+        pile_co2 = calc_pollutant(pile_loadings, util.pile_pollutant_emission_factors['CO2'], pile_black_pct)
+        pile_ch4= calc_pollutant(pile_loadings, util.pile_pollutant_emission_factors['CH4'], pile_black_pct)
+        pile_nmhc = calc_pollutant(pile_loadings, util.pile_pollutant_emission_factors['NMHC'], pile_black_pct)
+        return (pile_co, pile_co2, pile_ch4, pile_nmhc)
 
     def _emissions_calc(self, efg):
         """Calculates emissions estimates.
@@ -612,6 +622,16 @@ class Emissions(util.FrozenClass):
         def arrayize(d):
             """ Converts list to numpy array """
             return np.array(d)
+
+        def pile_info(cons_obj):
+            """ Get commonly used pile information """
+            loadings = \
+                cons_obj._get_loadings_for_specified_files(cons_obj._settings.get('fuelbeds'))
+            pile_black_pct = (cons_obj._settings.get('pile_black_pct') * 0.01)
+            pile_loading_total = loadings['pile_clean_loading'] \
+                                + loadings['pile_dirty_loading'] \
+                                + loadings['pile_vdirty_loading']
+            return (loadings, pile_loading_total, pile_black_pct)
 
         self._emis_data = None
         self._emis_summ = None
@@ -672,14 +692,31 @@ class Emissions(util.FrozenClass):
         emis_ch4_fsrt = calc_species(all_fsrt, ef_ch4)
         emis_nmhc_fsrt = calc_species(all_fsrt, ef_nmhc)
 
+
+        # --- Seperate pile calculations ---
+        (all_loadings, pile_loadings, pile_black_pct) = pile_info(self._cons_object)
+        (pile_pm, pile_pm10, pile_pm25) = \
+            self._emissions_calc_pm_piles(all_loadings, pile_loadings, pile_black_pct)
+
         # Add pile PM contribution in. Add to the totals (index 0) and the woody stratum (index 6)
-        (pile_pm, pile_pm10, pile_pm25) = self._emissions_calc_piles()
         emis_pm_fsrt[0] = emis_pm_fsrt[0] + pile_pm
         emis_pm_fsrt[6] = emis_pm_fsrt[6] + pile_pm
         emis_pm10_fsrt[0] = emis_pm10_fsrt[0] + pile_pm10
         emis_pm10_fsrt[6] = emis_pm10_fsrt[6] + pile_pm10
         emis_pm25_fsrt[0] = emis_pm25_fsrt[0] + pile_pm25
         emis_pm25_fsrt[6] = emis_pm25_fsrt[6] + pile_pm25
+
+        (pile_co, pile_co2, pile_ch4, pile_nmhc) = \
+            self._emissions_calc_pollutants_piles(pile_loadings, pile_black_pct)
+        emis_co_fsrt[0] = emis_co_fsrt[0] + pile_co
+        emis_co_fsrt[6] = emis_co_fsrt[6] + pile_co
+        emis_co2_fsrt[0] = emis_co2_fsrt[0] + pile_co2
+        emis_co2_fsrt[6] = emis_co2_fsrt[6] + pile_co2
+        emis_ch4_fsrt[0] = emis_ch4_fsrt[0] + pile_ch4
+        emis_ch4_fsrt[6] = emis_ch4_fsrt[6] + pile_ch4
+        emis_nmhc_fsrt[0] = emis_nmhc_fsrt[0] + pile_nmhc
+        emis_nmhc_fsrt[6] = emis_nmhc_fsrt[6] + pile_nmhc
+        # ^^^ Seperate pile calculations ^^^
 
         #print "UNPACKING"
         self._emis_data = arrayize([emis_pm_fsrt,
