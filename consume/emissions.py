@@ -556,7 +556,7 @@ class Emissions(util.FrozenClass):
             adjusted_pm_value = pm_type * cdv_ratios
 
             # get consumed mass
-            total_consumed = pile_loadings * pile_black_pct
+            total_consumed = (pile_loadings * pile_black_pct).values
 
             cdv_results = np.zeros(len(total_consumed))
             for i in range(0, len(total_consumed)):
@@ -638,6 +638,7 @@ class Emissions(util.FrozenClass):
 
         # - subtract out pile loading -- restore it at the end of routine
         all_fsrt = self._cons_object._cons_data
+        all_fsrt[0] = all_fsrt[0] - self._cons_object._cons_data_piles
         all_fsrt[6] = all_fsrt[6] - self._cons_object._cons_data_piles
 
         # Load default emissions factors (average of all factors...)
@@ -744,6 +745,7 @@ class Emissions(util.FrozenClass):
         # self._emis_summ = np.array([0, 0, 0, 0, 0, 0, 0])
 
         # - restore pile consumption
+        all_fsrt[0] = all_fsrt[0] + self._cons_object._cons_data_piles
         all_fsrt[6] = all_fsrt[6] + self._cons_object._cons_data_piles
 
 
