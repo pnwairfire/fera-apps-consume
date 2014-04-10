@@ -545,11 +545,14 @@ class Emissions(util.FrozenClass):
     def _emissions_calc_pm_piles(self, all_loadings, pile_loadings, pile_black_pct):
         # helper functions
         def get_clean_dirty_vdirty_ratio(loadings, pile_loading_total):
-             clean_ratio =  np.where(pile_loading_total, loadings['pile_clean_loading']  / pile_loading_total, 0.0)
-             dirty_ratio =  np.where(pile_loading_total, loadings['pile_dirty_loading']  / pile_loading_total, 0.0)
-             vdirty_ratio = np.where(pile_loading_total, loadings['pile_vdirty_loading'] / pile_loading_total, 0.0)
-             pile_loading_ratios = np.array([clean_ratio] + [dirty_ratio] + [vdirty_ratio])
-             return pile_loading_ratios.transpose()
+            # - ensure float for divisior
+            plt_as_float = pile_loading_total.view(np.float)
+            plt_as_float[:] = pile_loading_total
+            clean_ratio =  np.where(pile_loading_total, loadings['pile_clean_loading']  / plt_as_float, 0.0)
+            dirty_ratio =  np.where(pile_loading_total, loadings['pile_dirty_loading']  / plt_as_float, 0.0)
+            vdirty_ratio = np.where(pile_loading_total, loadings['pile_vdirty_loading'] / plt_as_float, 0.0)
+            pile_loading_ratios = np.array([clean_ratio] + [dirty_ratio] + [vdirty_ratio])
+            return pile_loading_ratios.transpose()
 
         def calc_pm(pile_loadings, cdv_ratios, pm_type, pile_black_pct):
             # - emission factor * clean/dirty/vdirty ratio
