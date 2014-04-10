@@ -57,10 +57,13 @@ class EmissionsFactorDB:
         ef_eqid_map = {}
         loadings = self._fco.FCCS.loadings_data_
         for i in loadings.fccs_id:
-            components = {}
-            components['natural'] = int(loadings.ix[loadings.fccs_id==i].efg_natural)
-            components['activity'] = int(loadings.ix[loadings.fccs_id==i].efg_activity)
-            ef_eqid_map[i] = components
+            try:
+                components = {}
+                components['natural'] = int(loadings.ix[loadings.fccs_id==i].efg_natural)
+                components['activity'] = int(loadings.ix[loadings.fccs_id==i].efg_activity)
+                ef_eqid_map[i] = components
+            except:
+                print('Function "_load_emissions_factor_eqid()". Error with fuelbed id: {}'.format(i))
         return ef_eqid_map
 
     def _load_covertype(self):
