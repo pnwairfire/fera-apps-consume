@@ -12,7 +12,12 @@ import os
 import argparse
 import logging
 
-
+def safe_sequence(item):
+    try:
+       return item[0]
+    except TypeError:
+      return item
+   
 def make_parser():
     ''' This is the parser for the consume_batch command line
     '''
@@ -81,7 +86,7 @@ class ConsumeParser(object):
     ''' Parse the consume_batch command line arguments
     '''
     def __init__(self, special_args=None):
-        self._special_args = [i.lower() for i in special_args] if special_args else None
+        self._special_args = [i.lower() for i in special_args] if special_args else []
         self._burn_type = None
         self._csv_file = None
         self._fuel_loadings_file = None
@@ -117,13 +122,14 @@ class ConsumeParser(object):
                 self._fuel_loadings_file = os.path.abspath(args.fuel_loadings_file[0])
 
             if args.col_cfg_file:
-                if args.col_cfg_file[0].lower() in self._special_args:
+                tmp_file = safe_sequence(args.col_cfg_file)
+                if tmp_file.lower() in self._special_args:
                     # no need to validate anything
-                    self._col_cfg_file = args.col_cfg_file[0]
+                    self._col_cfg_file = tmp_file
                 else:
-                    if not self.exists(args.col_cfg_file[0]):
-                        raise(ConsumeParserException("\nError: The column config file '{}' does not exist.".format(args.col_cfg_file[0])))
-                    self._col_cfg_file = os.path.abspath(args.col_cfg_file[0])
+                    if not self.exists(tmp_file):
+                        raise(ConsumeParserException("\nError: The column config file '{}' does not exist.".format(tmp_file)))
+                    self._col_cfg_file = os.path.abspath(tmp_file)
 
             if args.output_filename:
                 self.output_filename = os.path.abspath(args.output_filename[0])

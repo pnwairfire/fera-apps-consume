@@ -74,6 +74,7 @@ class TestInputSettings(unittest.TestCase):
         self.assertTrue(s.set('fm_duff', [1, 2, 4]))
         self.assertTrue(s.set('can_con_pct', 4))    ### - manufacture a sequence if necessary
         self.assertTrue(s.set('shrub_black_pct', [1, 2, 4]))
+        self.assertTrue(s.set('pile_black_pct', [1, 2, 4]))
         s.fm_type = 'MEAS-Th'
         self.assertFalse(s.settings_are_complete())
         s.units = 'kg_ha'
@@ -105,19 +106,19 @@ class TestInputSettings(unittest.TestCase):
     #   File loading tests
     # -------------------------------------------------------------------------
     ### - natural test data
-    ncols = ['area', 'can_con_pct', 'ecoregion', 'fm_1000hr', 'fm_duff', 'fuelbeds', 'shrub_black_pct', 'units']
+    ncols = ['area', 'can_con_pct', 'ecoregion', 'fm_1000hr', 'fm_duff', 'fuelbeds', 'shrub_black_pct', 'units', 'pile_black_pct']
     nrows = [
-        ['10', '20', 'western', '30', '40', '1', '50', 'kg_ha'],
-        ['20', '30', 'western', '40', '50', '1', '60', 'kg_ha']]
+        ['10', '20', 'western', '30', '40', '1', '50', 'kg_ha', '90'],
+        ['20', '30', 'western', '40', '50', '1', '60', 'kg_ha', '90']]
         
     ### - activity test data
     acols = ['area', 'can_con_pct', 'ecoregion', 'fm_1000hr', 'fm_duff', \
         'fuelbeds', 'shrub_black_pct', 'units', 'slope', 'windspeed', 'days_since_rain', \
-        'fm_10hr', 'length_of_ignition', 'fm_type']
+        'fm_10hr', 'length_of_ignition', 'fm_type', 'pile_black_pct']
     arows = [
-        ['10', '20', 'western', '30', '40', '1', '50', 'kg_ha', '5', '10', '3', '20', '30', 'NFDRS-Th'],
-        ['15', '21', 'western', '35', '35', '2', '45', 'kg_ha', '10', '15', '4', '25', '35', 'NFDRS-Th'],
-        ['20', '22', 'western', '40', '30', '3', '40', 'kg_ha', '15', '20', '5', '30', '40', 'NFDRS-Th']
+        ['10', '20', 'western', '30', '40', '1', '50', 'kg_ha', '5', '10', '3', '20', '30', 'NFDRS-Th', '90'],
+        ['15', '21', 'western', '35', '35', '2', '45', 'kg_ha', '10', '15', '4', '25', '35', 'NFDRS-Th', '90'],
+        ['20', '22', 'western', '40', '30', '3', '40', 'kg_ha', '15', '20', '5', '30', '40', 'NFDRS-Th', '90']
         ]
         
     nat_data = pan.DataFrame(nrows, columns=ncols)
