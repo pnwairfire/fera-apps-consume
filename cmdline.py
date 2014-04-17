@@ -17,7 +17,7 @@ def safe_sequence(item):
        return item[0]
     except TypeError:
       return item
-   
+
 def make_parser():
     ''' This is the parser for the consume_batch command line
     '''
@@ -72,6 +72,10 @@ Examples:
     parser.add_argument('-l', action='store', nargs=1, dest='msg_level', metavar='message level',
         help='Specify the detail level of messages (1 | 2 | 3). 1 = fewest messages 3 = most messages')
 
+    # - specify metric conversion for all columns
+    parser.add_argument('--metric', dest='do_metric', action='store_true',
+        help='Indicate that columns should be converted to metric units.')
+
     # - specify an output filename
     parser.add_argument('-o', action='store', nargs=1, default=['consume_results.csv'],
         dest='output_filename', metavar='output filename',
@@ -92,6 +96,7 @@ class ConsumeParser(object):
         self._fuel_loadings_file = None
         self._col_cfg_file = None
         self._msg_level = logging.ERROR
+        self._do_metric = False
 
     def do_parse(self, argv):
         parser = make_parser()
@@ -141,6 +146,9 @@ class ConsumeParser(object):
                     if 2 == level: self._msg_level = logging.WARNING
                     if 3 == level: self._msg_level = logging.DEBUG
 
+            if args.do_metric:
+                self._do_metric = True
+
 
     def exists(self, filename):
         return True if os.path.exists(filename) else False
@@ -155,6 +163,8 @@ class ConsumeParser(object):
     def msg_level(self): return self._msg_level
     @property
     def fuel_loadings_file(self): return self._fuel_loadings_file
+    @property
+    def do_metric(self): return self._do_metric
 
 
 def main():

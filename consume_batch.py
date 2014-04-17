@@ -16,6 +16,7 @@ import batch_locator
 import cmdline
 import pandas as pan
 import pickle
+import unit_convert
 
 DO_PICKLE_OUTPUT = 'pickle'
 DO_RAW_OUTPUT = 'raw'
@@ -103,7 +104,7 @@ def read_col_cfg_file(filename):
                     assert false, "Malformed line: {}".format(line)
     return retval
 
-def write_results(all_results, outfile, col_cfg_file=None):
+def write_results(all_results, outfile, do_metric, col_cfg_file=None):
     # this is the default set of columns for the output format
     default_cols = [
         ('parameters_fuelbeds', 'Fuelbeds'),
@@ -148,6 +149,9 @@ def write_results(all_results, outfile, col_cfg_file=None):
         for key in sorted(tmp.keys()):
             print('{}:   {}'.format(key, str(tmp[key])))
     else:
+        # - pick conversion method
+        converter = unit_convert.column_convert if do_metric else unit_convert.column_convert_none
+
         columns_to_print = default_cols
         if col_cfg_file:
             columns_to_print = read_col_cfg_file(col_cfg_file)
@@ -157,11 +161,11 @@ def write_results(all_results, outfile, col_cfg_file=None):
             key = col[0]
             new_key = col[1]
             if tmp.has_key(key):
-                add_these.append((new_key, tmp[key]))
+                add_these.append((new_key, converter(key, tmp[key])))
         newdf = pan.DataFrame.from_items(add_these)
         newdf.to_csv(outfile, index=False)
 
-def run(burn_type, csv_input, msg_level, outfile, fuel_loadings=None, col_cfg=None):
+def run(burn_type, csv_input, do_metric, msg_level, outfile, fuel_loadings=None, col_cfg=None):
     # validate alternate loadings file if provide. Throws exception on invalid
     if fuel_loadings: validate_fuel_loadings(fuel_loadings)
 
@@ -176,7 +180,7 @@ def run(burn_type, csv_input, msg_level, outfile, fuel_loadings=None, col_cfg=No
         emissions = consume.Emissions(consumer)
         results = emissions.results()
         fuelbed_list = consumer.fuelbed_fccs_ids
-        write_results(results, outfile, col_cfg_file=col_cfg)
+        write_results(results, outfile, do_metric, col_cfg_file=col_cfg)
         if not pickle_output(col_cfg):
             print("\nSuccess!!! Results are in \"{}\"".format(outfile))
 
@@ -188,7 +192,7 @@ def main():
         can_run()
         parser = cmdline.ConsumeParser([DO_PICKLE_OUTPUT, DO_RAW_OUTPUT])
         parser.do_parse(sys.argv)
-        run(parser.burn_type, parser.csv_file, parser.msg_level, parser.output_filename,
+        run(parser.burn_type, parser.csv_file, parser.do_metric, parser.msg_level, parser.output_filename,
             parser.fuel_loadings_file, parser.col_cfg_file)
     except Exception as e:
         print(e)

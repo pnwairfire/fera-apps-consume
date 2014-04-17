@@ -15,6 +15,7 @@ import pickle
 
 import argparse
 import logging
+import unit_convert
 
 #-------------------------------------------------------------------------------
 # Default columns to include in output file. Can be overridden by specifying
@@ -75,6 +76,10 @@ def make_parser():
     parser.add_argument('--feps', dest='do_feps', action='store_true',
         help='Indicate that a FEPS input file should be generated.')
 
+    # - specify metric conversion for all columns
+    parser.add_argument('--metric', dest='do_metric', action='store_true',
+        help='Indicate that columns should be converted to metric units.')
+
     # - specify an output filename
     parser.add_argument('-o', action='store', nargs=1, default=['consume_results.csv'],
         dest='output_file', metavar='output file',
@@ -93,6 +98,7 @@ class PostProcessParser(object):
         self._col_cfg_file = None
         self._output_file = None
         self._do_feps = False
+        self._do_metric = False
 
     def do_parse(self, argv):
         parser = make_parser()
@@ -121,6 +127,9 @@ class PostProcessParser(object):
             if args.do_feps:
                 self._do_feps = True
 
+            if args.do_metric:
+                self._do_metric = True
+
     def exists(self, filename):
         return True if os.path.exists(filename) else False
 
@@ -132,6 +141,8 @@ class PostProcessParser(object):
     def output_file(self): return self._output_file
     @property
     def do_feps(self): return self._do_feps
+    @property
+    def do_metric(self): return self._do_metric
 #-------------------------------------------------------------------------------
 # End command line parser for post_process
 #-------------------------------------------------------------------------------
@@ -154,8 +165,11 @@ def read_col_cfg_file(filename):
 #  and write to output file. You could have a list of results because FFT
 #  runs activity and natural scenarios and then combines the results.
 #-------------------------------------------------------------------------------
-def write_results(all_results, outfile, col_cfg_file=None):
+def write_results(all_results, outfile, do_metric, col_cfg_file=None):
     if len(all_results) > 0:
+        # pick conversion routine
+        converter = unit_convert.column_convert if do_metric else unit_convert.column_convert_none
+
         # - set up column configuration
         columns_to_print = DEFAULT_COLS
         if col_cfg_file:
@@ -169,7 +183,7 @@ def write_results(all_results, outfile, col_cfg_file=None):
                 key = col[0]
                 new_key = col[1]
                 if result.has_key(key):
-                    current.append((new_key, result[key]))
+                    current.append((new_key, converter(key, result[key])))
             add_these.append(current)
 
         # assume one result set, but check for a second
@@ -257,7 +271,7 @@ def main():
             print('\nException in write_results_feps() : {}'.format(e))
     else:
         try:
-            write_results(results, parser.output_file, col_cfg_file=parser.col_cfg_file)
+            write_results(results, parser.output_file, parser.do_metric, col_cfg_file=parser.col_cfg_file)
         except Exception as e:
             print('\nException in write_results() : {}'.format(e))
 
