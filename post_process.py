@@ -12,10 +12,13 @@ import sys
 import pandas as pan
 import numpy as np
 import pickle
+from collections import defaultdict
 
 import argparse
 import logging
 import unit_convert
+
+FEPS_FILE = 'feps_input_from_consume.csv'
 
 #-------------------------------------------------------------------------------
 # Default columns to include in output file. Can be overridden by specifying
@@ -200,6 +203,31 @@ def write_results(all_results, outfile, do_metric, col_cfg_file=None):
     else:
         print("\nError: results file corrupted.\n")
 
+def write_results_feps(all_results, outfile):
+    if len(all_results) > 0:
+        # - set up column configuration
+        columns_to_print = [parse_column_line(i) for i in FEPS_COLS]
+
+        # - loop through the list of results. Use a list to preserve column order
+        totals = defaultdict(float)
+        for result in all_results:
+            print(' - result - ')
+            for item in columns_to_print:
+                columns_to_sum = item[0]
+                summed_columns = 0.0
+                for col in columns_to_sum:
+                    print(col)
+                    summed_columns += result[col]
+                new_key = item[1]
+                totals[new_key] += np.sum(summed_columns)
+
+        with open(outfile, 'w+') as o:
+            for key in totals.keys():
+                o.write('{}={}\n'.format(key, totals[key]))
+            o.write('moist_duff={}\n'.format(result['parameters_fm_duff'][0]))
+    else:
+        print("\nError: results file corrupted.\n")
+
 def get_pickled_results(pickle_files):
     results = []
     for file in pickle_files:
@@ -225,38 +253,6 @@ def read_col_cfg_special(filename):
                 retval.append(parse_column_line(line))
     return retval
 
-def write_results_feps(all_results, outfile):
-    if len(all_results) > 0:
-        # - set up column configuration
-        columns_to_print = [parse_column_line(i) for i in FEPS_COLS]
-
-        # - loop through the list of results. Use a list to preserve column order
-        totals = {}
-        result = all_results[0]
-        for item in columns_to_print:
-            columns_to_sum = item[0]
-            summed_columns = 0.0
-            for col in columns_to_sum:
-                summed_columns += result[col]
-            new_key = item[1]
-            totals[new_key] = np.sum(summed_columns)
-
-        with open(outfile, 'w+') as o:
-            for key in totals.keys():
-                o.write('{}={}\n'.format(key, totals[key]))
-            o.write('moist_duff={}\n'.format(result['parameters_fm_duff'][0]))
-    else:
-        print("\nError: results file corrupted.\n")
-
-def get_pickled_results(pickle_files):
-    results = []
-    for file in pickle_files:
-        if os.path.exists(file):
-            results.append(pickle.load(open(file, "rb")))
-        else:
-            print("\nError: results file not found.\n")
-    return results
-
 #-------------------------------------------------------------------------------
 # Main
 #-------------------------------------------------------------------------------
@@ -266,14 +262,13 @@ def main():
     results = get_pickled_results(parser.pickle_files)
     if parser.do_feps:
         try:
-            write_results_feps(results, parser.output_file)
+            write_results_feps(results, FEPS_FILE)
         except Exception as e:
             print('\nException in write_results_feps() : {}'.format(e))
-    else:
-        try:
-            write_results(results, parser.output_file, parser.do_metric, col_cfg_file=parser.col_cfg_file)
-        except Exception as e:
-            print('\nException in write_results() : {}'.format(e))
+    try:
+        write_results(results, parser.output_file, parser.do_metric, col_cfg_file=parser.col_cfg_file)
+    except Exception as e:
+        print('\nException in write_results() : {}'.format(e))
 
 if __name__ == '__main__':
     main()
