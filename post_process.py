@@ -262,7 +262,10 @@ def main():
     results = get_pickled_results(parser.pickle_files)
     if parser.do_feps:
         try:
-            write_results_feps(results, FEPS_FILE)
+            # - use the directory component of the main output file to preface the feps file
+            dir = os.path.split(parser.pickle_files[0])
+            feps_file = os.path.join(dir[0], FEPS_FILE)
+            write_results_feps(results, feps_file)
         except Exception as e:
             print('\nException in write_results_feps() : {}'.format(e))
     try:
