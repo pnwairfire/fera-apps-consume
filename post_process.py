@@ -199,6 +199,7 @@ def write_results(all_results, outfile, do_metric, col_cfg_file=None):
                 combined.append((v[0], np.concatenate((a, b))))
 
         newdf = pan.DataFrame.from_items(combined)
+        newdf.sort(['Fuelbeds'], inplace=True)
         newdf.to_csv(outfile, index=False)
     else:
         print("\nError: results file corrupted.\n")
