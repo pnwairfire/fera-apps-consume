@@ -163,6 +163,54 @@ def read_col_cfg_file(filename):
                     assert False, "Malformed line: {}".format(line)
     return retval
 
+
+#-------------------------------------------------------------------------------
+# Custom sorting strategy. Needs to stay in sync with FFT
+#-------------------------------------------------------------------------------
+def sort_fuelbeds(df):
+    ''' Fuelbed number is actually a string and can be anything. However, to get nicer sorting
+        we are using the following strategy:
+            - try to break the string into an initial numeric component and a string remainder
+            - sort on the components
+        To sort the dataframe you need to add a column that ties the sorting strategy to an existing
+        column. Then you sort by the ranking column (the one you added).
+    '''
+    def sort_chunkify(s):
+        ''' Break into numeric and other '''
+        m = re.match('^([0-9]+)(.*$)', s)
+        retval = (sys.maxint, s, s)
+        if m:
+            if 2 == m.lastindex:
+                retval = (int(m.group(1)), m.group(2), s)
+        return retval
+
+    def sort_sort_and_flatten(results):
+        ''' Incoming argument is a dictionary of lists:
+            - the keys are the numeric component, sort them
+            - if the value portion has more than one element sort that list
+            - add single or sorted lists
+        '''
+        flattened = []
+        for key in sorted(results.keys()):
+            if 1 == len(results[key]):
+                flattened.extend(results[key])
+            else:
+                flattened.extend(sorted(results[key], key=lambda tup: tup[1]))
+        return flattened
+
+    result = {}
+    for item in df.Fuelbeds:
+        chunked = sort_chunkify(item)
+        if result.has_key(chunked[0]):
+            result[chunked[0]].append(chunked)
+        else:
+            result[chunked[0]] = [chunked]
+    sorted_list = sort_sort_and_flatten(result)
+    ranking_column = dict([(v[2], i) for i, v in enumerate(sorted_list)])
+    df['Fb_Rank'] = df.Fuelbeds.map(ranking_column)
+    df.sort(['Fb_Rank'], inplace = True)
+    df.drop('Fb_Rank', 1, inplace = True)
+
 #-------------------------------------------------------------------------------
 # Take a list of unpickled results, grab the correct columms, combine if necessary,
 #  and write to output file. You could have a list of results because FFT
@@ -199,7 +247,7 @@ def write_results(all_results, outfile, do_metric, col_cfg_file=None):
                 combined.append((v[0], np.concatenate((a, b))))
 
         newdf = pan.DataFrame.from_items(combined)
-        newdf.sort(['Fuelbeds'], inplace=True)
+        sort_fuelbeds(newdf)
         newdf.to_csv(outfile, index=False)
     else:
         print("\nError: results file corrupted.\n")
