@@ -13,6 +13,7 @@ import pandas as pan
 import numpy as np
 import pickle
 from collections import defaultdict
+import re
 
 import argparse
 import logging
@@ -209,7 +210,7 @@ def sort_fuelbeds(df):
     ranking_column = dict([(v[2], i) for i, v in enumerate(sorted_list)])
     df['Fb_Rank'] = df.Fuelbeds.map(ranking_column)
     df.sort(['Fb_Rank'], inplace = True)
-    df.drop('Fb_Rank', 1, inplace = True)
+    return df.drop('Fb_Rank', 1)
 
 #-------------------------------------------------------------------------------
 # Take a list of unpickled results, grab the correct columms, combine if necessary,
@@ -247,7 +248,7 @@ def write_results(all_results, outfile, do_metric, col_cfg_file=None):
                 combined.append((v[0], np.concatenate((a, b))))
 
         newdf = pan.DataFrame.from_items(combined)
-        sort_fuelbeds(newdf)
+        newdf = sort_fuelbeds(newdf)
         newdf.to_csv(outfile, index=False)
     else:
         print("\nError: results file corrupted.\n")
