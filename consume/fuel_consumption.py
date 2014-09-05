@@ -1282,7 +1282,6 @@ class FuelConsumption(util.FrozenClass):
             tenK_hr_rot_fsrt = ccn.ccon_tenK_rot_nat(fm_1000hr, LD)
             tnkp_hr_rot_fsrt = ccn.ccon_tnkp_rot_nat(fm_1000hr, LD)
             [LD['ff_reduction'], y_b, duff_depth] = ccn.ccon_ffr(fm_duff, ecoregion_masks, LD)
-            LD['ff_reduction_successive'] = LD['ff_reduction']
         else:
             fm_type = self._settings.fm_type
             windspeed =  self._settings.get('windspeed')
@@ -1298,8 +1297,8 @@ class FuelConsumption(util.FrozenClass):
             [tnkp_hr_snd_fsrt, tnkp_hr_rot_fsrt],
             LD['ff_reduction']] = cca.ccon_activity(fm_1000hr, fm_type,
                 windspeed, slope, area, days_since_rain, fm_10hr, length_of_ignition, LD)
-            LD['ff_reduction_successive'] = LD['ff_reduction']
-
+                
+        LD['ff_reduction_successive'] = LD['ff_reduction']
         lch_fsrt = ccn.ccon_forest_floor(LD, 'lch_depth', 'lichen_loading', [0.95, 0.05, 0.00])
         moss_fsrt = ccn.ccon_forest_floor(LD, 'moss_depth', 'moss_loading', [0.95, 0.05, 0.00])
         lit_fsrt = ccn.ccon_forest_floor(LD, 'lit_depth', 'litter_loading', [0.90, 0.10, 0.00])
