@@ -1297,13 +1297,13 @@ class FuelConsumption(util.FrozenClass):
             [tnkp_hr_snd_fsrt, tnkp_hr_rot_fsrt],
             LD['ff_reduction']] = cca.ccon_activity(fm_1000hr, fm_type,
                 windspeed, slope, area, days_since_rain, fm_10hr, length_of_ignition, LD)
-                
-        LD['ff_reduction_successive'] = LD['ff_reduction']
-        lch_fsrt = ccn.ccon_forest_floor(LD, 'lch_depth', 'lichen_loading', [0.95, 0.05, 0.00])
-        moss_fsrt = ccn.ccon_forest_floor(LD, 'moss_depth', 'moss_loading', [0.95, 0.05, 0.00])
-        lit_fsrt = ccn.ccon_forest_floor(LD, 'lit_depth', 'litter_loading', [0.90, 0.10, 0.00])
-        duff_upper_fsrt = ccn.ccon_forest_floor(LD, 'duff_upper_depth', 'duff_upper_loading', [0.10, 0.70, 0.20])
-        duff_lower_fsrt = ccn.ccon_forest_floor(LD, 'duff_lower_depth', 'duff_lower_loading', [0.00, 0.20, 0.80])
+
+        ff_reduction = np.array(LD['ff_reduction'].values)
+        lch_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'lch_depth', 'lichen_loading', [0.95, 0.05, 0.00])
+        moss_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'moss_depth', 'moss_loading', [0.95, 0.05, 0.00])
+        lit_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'lit_depth', 'litter_loading', [0.90, 0.10, 0.00])
+        duff_upper_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'duff_upper_depth', 'duff_upper_loading', [0.10, 0.70, 0.20])
+        duff_lower_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'duff_lower_depth', 'duff_lower_loading', [0.00, 0.20, 0.80])
 
         ff_redux_proportion = self.calc_ff_redux_proportion(LD)
         bas_fsrt = ccn.ccon_bas(LD['bas_loading'], ff_redux_proportion)

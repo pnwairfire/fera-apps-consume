@@ -123,23 +123,23 @@ def ccon_ffr(fm_duff, ecoregion_masks, LD):
     return [ffr, y_b, duff_depth]
 
 
-def calc_and_reduce_ff(LD, key):
+def calc_and_reduce_ff(LD, ff_reduction, key):
+    print('In calc_and_reduce_ff...')
     # if the depth of the layer (LD[key]) is less than the available reduction
     #  use the depth of the layer. Otherwise, use the available reduction
-    layer_reduction = np.where(LD[key] < LD['ff_reduction_successive'],
-            LD[key], LD['ff_reduction_successive'])
+    layer_reduction = np.where(LD[key] < ff_reduction, LD[key], ff_reduction)
     # reduce the available reduction by the calculated amount
-    LD['ff_reduction_successive'] = LD['ff_reduction_successive'] - layer_reduction
+    ff_reduction -= layer_reduction
     # should never be less than zero
-    assert 0 == len(np.where(LD['ff_reduction_successive'] < 0)[0]), "Error: Negative ff reduction found in calc_and_reduce_ff()"
-    assert False == np.isnan(LD['ff_reduction_successive']).any(), "Error: NaN found in calc_and_reduce_ff()"
+    assert 0 == len(np.where(ff_reduction < 0)[0]), "Error: Negative ff reduction found in calc_and_reduce_ff()"
+    assert False == np.isnan(ff_reduction).any(), "Error: NaN found in calc_and_reduce_ff()"
     return layer_reduction
 
-def ccon_forest_floor(LD, key_depth, key_loading, csd):
+def ccon_forest_floor(LD, ff_reduction, key_depth, key_loading, csd):
     ''' Same procedure for litter, lichen, moss, upper and lower duff
     '''
     # - get per-layer reduction
-    layer_reduction = calc_and_reduce_ff(LD, key_depth)
+    layer_reduction = calc_and_reduce_ff(LD, ff_reduction, key_depth)
 
     # - how much was it reduced relative to the layer depth
     proportional_reduction = np.where(LD[key_depth] > 0.0,
