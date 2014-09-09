@@ -53,10 +53,12 @@ DEFAULT_COLS = [
     ('parameters_units', 'Units') ]
 
 FEPS_COLS = [
-    (['consumption_summary_total_flaming'], 'cons_flm'),
-    (['consumption_summary_total_smoldering'], 'cons_sts'),
-    (['consumption_summary_total_residual'], 'cons_lts'),
-    (['consumption_ground_fuels_duff_upper_total', 'consumption_ground_fuels_duff_lower_total'], 'cons_duff')
+    ('parameters_fuelbeds', 'Fuelbeds'),
+    ('consumption_summary_total_flaming', 'cons_flm'),
+    ('consumption_summary_total_smoldering', 'cons_sts'),
+    ('consumption_summary_total_residual', 'cons_lts'),
+    ('consumption_ground_fuels_duff_upper_total',  'cons_duff_upper'),
+    ('consumption_ground_fuels_duff_lower_total', 'cons_duff_lower')
 ]
 
 #-------------------------------------------------------------------------------
@@ -255,26 +257,35 @@ def write_results(all_results, outfile, do_metric, col_cfg_file=None):
 
 def write_results_feps(all_results, outfile):
     if len(all_results) > 0:
+        # pick conversion routine
+        converter = unit_convert.column_convert_none
+        
         # - set up column configuration
-        columns_to_print = [parse_column_line(i) for i in FEPS_COLS]
+        columns_to_print = FEPS_COLS
 
         # - loop through the list of results. Use a list to preserve column order
-        totals = defaultdict(float)
+        add_these = []
         for result in all_results:
-            print(' - result - ')
-            for item in columns_to_print:
-                columns_to_sum = item[0]
-                summed_columns = 0.0
-                for col in columns_to_sum:
-                    print(col)
-                    summed_columns += result[col]
-                new_key = item[1]
-                totals[new_key] += np.sum(summed_columns)
+            current = []
+            for col in columns_to_print:
+                key = col[0]
+                new_key = col[1]
+                if result.has_key(key):
+                    current.append((new_key, converter(key, result[key])))
+            add_these.append(current)
 
-        with open(outfile, 'w+') as o:
-            for key in totals.keys():
-                o.write('{}={}\n'.format(key, totals[key]))
-            o.write('moist_duff={}\n'.format(result['parameters_fm_duff'][0]))
+        # assume one result set, but check for a second
+        combined = add_these[0]
+        if len(add_these) > 1:
+            combined = []
+            for i, v in enumerate(add_these[0]):
+                a = v[1]
+                b = add_these[1][i][1]
+                combined.append((v[0], np.concatenate((a, b))))
+
+        newdf = pan.DataFrame.from_items(combined)
+        newdf = sort_fuelbeds(newdf)
+        newdf.to_csv(outfile, index=False)
     else:
         print("\nError: results file corrupted.\n")
 
