@@ -125,7 +125,6 @@ def ccon_ffr(fm_duff, ecoregion_masks, LD):
 
 
 def calc_and_reduce_ff(LD, ff_reduction, key):
-    print('In calc_and_reduce_ff...')
     # if the depth of the layer (LD[key]) is less than the available reduction
     #  use the depth of the layer. Otherwise, use the available reduction
     layer_reduction = np.where(LD[key] < ff_reduction, LD[key], ff_reduction)
