@@ -1,5 +1,6 @@
 import math
 import numpy as np
+from util_consume import values
 import util_consume as util
 # "global"s
 
@@ -24,7 +25,7 @@ def pct_hun_hr_calc(windspeed, slope, fm_10hr, LD):
     hun_hr_def = 4.8
 
     # Eq. B: Heat flux correction, ln 4557
-    heat_flux_crx = ((LD['hun_hr_sound'] / hun_hr_def) *
+    heat_flux_crx = ((values(LD, 'hun_hr_sound') / hun_hr_def) *
                            (1.0 + ((slope - 20.0)/60.0) +
                            (windspeed / 4.0)))
 
@@ -162,7 +163,7 @@ def duff_redux_activity(
     # Eq. S: Drying period equations - This equation requires
     # "days since significant rainfall" data: the # of days since
     # at least 0.25 inches fell...
-    duff_depth = LD['duff_upper_depth'] + LD['duff_lower_depth']
+    duff_depth = values(LD, 'duff_upper_depth') + values(LD, 'duff_lower_depth')
     days_to_moist = 21.0 * ((duff_depth / 3.0)**1.18) # ln 4772
     days_to_dry = 57.0 * ((duff_depth / 3.0)**1.18) # ln 4773
 
@@ -258,13 +259,13 @@ def csdist_act(f, tots, rF):
 def ccon_one_act(LD):
     """ 1-hr (0 to 1/4") woody fuels consumption, activity """
     csd = [1.0, 0.0, 0.0]
-    return util.csdist(LD['one_hr_sound'], csd)
+    return util.csdist(values(LD, 'one_hr_sound'), csd)
 
 def ccon_ten_act(LD):
     """ 10-hr (1/4" to 1") woody fuels consumption, activity
         ln 4537 """
     csd = [1.0, 0.0, 0.0]
-    total = LD['ten_hr_sound']
+    total = values(LD, 'ten_hr_sound')
     return util.csdist(total, csd)
 
 def ccon_hun_act(pct_hun_hr, diam_reduction, QMDS, LD):
@@ -272,14 +273,14 @@ def ccon_hun_act(pct_hun_hr, diam_reduction, QMDS, LD):
         p.144 ln 4585"""
     resFrac = np.array([0.0])
     QMD_100hr = 1.68
-    total = LD['hun_hr_sound'] * pct_hun_hr
+    total = values(LD, 'hun_hr_sound') * pct_hun_hr
     [flamgDRED, flaming_portion] = flaming_DRED_calc(total, diam_reduction)
 
     # Flaming consumption for 100-hr fuels... ln 4657
     flamg = np.where(np.greater_equal(flamgDRED, QMD_100hr),
             total,
             flamg_portion(QMDs[0], [total],
-                          [LD['hun_hr_sound']], flamgDRED)[0]) # <<< confirm that this is correct- ln 4663
+                          [values(LD, 'hun_hr_sound')], flamgDRED)[0]) # <<< confirm that this is correct- ln 4663
 
     # make sure flaming doesn't exceed total... ln 4665
     flamg = np.where(np.greater(flamg, total), total, flamg)
@@ -289,7 +290,7 @@ def ccon_oneK_act(LD, QMDS, diam_reduction, flamgDRED):
     """ 1000-hr (3" - 9") woody fuels consumption, activity
         Eq. O, ln 4610-4613 """
     resFrac = np.array([[0.25], [0.63]]) # [snd, rot] non-flaming resid pct
-    totld = np.array([LD['oneK_hr_sound'], LD['oneK_hr_rotten']])
+    totld = np.array([values(LD, 'oneK_hr_sound'), values(LD, 'oneK_hr_rotten')])
     oneK_redux = qmd_redux_calc(QMDs[1], diam_reduction)
     total_snd = oneK_redux * totld[0]
     total_rot = oneK_redux * totld[1]
@@ -300,7 +301,7 @@ def ccon_tenK_act(LD, QMDS, diam_reduction, flamgDRED):
     """ 10K-hr (9 to 20") woody fuels consumption, activity
         Eq. O, ln 4615-4618 """
     resFrac = np.array([[0.33], [0.67]]) # [snd, rot] non-flaming resid pct
-    totld = np.array([LD['tenK_hr_sound'], LD['tenK_hr_rotten']])
+    totld = np.array([values(LD, 'tenK_hr_sound'), values(LD, 'tenK_hr_rotten')])
     tenK_redux = qmd_redux_calc(QMDs[2], diam_reduction)
     total_snd = tenK_redux * totld[0]
     total_rot = tenK_redux * totld[1]
@@ -318,12 +319,12 @@ def ccon_tnkp_act(adjfm_1000hr, flaming_portion, LD):
               0.05,                                   # true
              (35.0 - adjfm_1000hr) / 100.0)))       # false - Table P.
 
-    total_snd = pct_redux * LD['tnkp_hr_sound']
-    total_rot = pct_redux * LD['tnkp_hr_rotten']
+    total_snd = pct_redux * values(LD, 'tnkp_hr_sound')
+    total_rot = pct_redux * values(LD, 'tnkp_hr_rotten')
     # <<< DISCREPANCY b/t SOURCE and DOCUMENTATION here
     # corresponds to source code right now for testing-sake
-    flamgsnd = LD['tnkp_hr_sound'] * flaming_portion
-    flamgrot = LD['tnkp_hr_rotten'] * flaming_portion
+    flamgsnd = values(LD, 'tnkp_hr_sound') * flaming_portion
+    flamgrot = values(LD, 'tnkp_hr_rotten') * flaming_portion
     flamgsnd = np.where(np.greater(flamgsnd, total_snd),
                         total_snd, flamgsnd)
     flamgrot = np.where(np.greater(flamgrot, total_rot),
@@ -333,9 +334,9 @@ def ccon_tnkp_act(adjfm_1000hr, flaming_portion, LD):
 def ccon_ffr_activity(diam_reduction, oneK_fsrt, tenK_fsrt, tnkp_fsrt, days_since_rain, LD):
     duff_redux = duff_redux_activity(diam_reduction,
         oneK_fsrt, tenK_fsrt, tnkp_fsrt, days_since_rain, LD)
-    duff_depth = LD['duff_upper_depth'] + LD['duff_lower_depth']
-    ffr_total_depth = (duff_depth + LD['lit_depth'] +
-            LD['lch_depth'] + LD['moss_depth'])
+    duff_depth = values(LD, 'duff_upper_depth') + values(LD, 'duff_lower_depth')
+    ffr_total_depth = (duff_depth + values(LD, 'lit_depth') +
+            values(LD, 'lch_depth') + values(LD, 'moss_depth'))
 
     # - this works correctly but still generates a warning, use the
     #   context manager to swallow the benign warning
