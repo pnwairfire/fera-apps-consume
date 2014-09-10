@@ -2,6 +2,9 @@ import numpy as np
 import math
 import data_desc as dd
 
+# - use to approximate Pandas pre 0.13 behavior
+def values(df, key):
+    return df[key].values
 
 # - Piles were added later and need to be treated differently
 #   so they do not use values from the emission factor file

@@ -1,5 +1,6 @@
 import math
 import numpy as np
+from util_consume import values
 import util_consume as util
 
 # Consumption calculation methods
@@ -20,7 +21,7 @@ def ccon_canopy(can_con_pct, LD):
                   ['snag3', [0.10, 0.20, 0.20]],
                   ['ladder', [0.75, 0.10, 0.0]]]
 
-    return [util.csdist(LD[t[0]] * pct, t[1]) for t in can_params]
+    return [util.csdist(values(LD, t[0]) * pct, t[1]) for t in can_params]
 
 
 def ccon_shrub(shrub_black_pct, LD):
@@ -37,7 +38,7 @@ def ccon_shrub(shrub_black_pct, LD):
     csd_live = [0.95, 0.05, 0.0]
     csd_dead = [0.90, 0.10, 0.0]
 
-    shb_load_total = LD['shrub_prim'] + LD['shrub_seco']
+    shb_load_total = values(LD, 'shrub_prim') + values(LD, 'shrub_seco')
     if sum(shb_load_total) > 0:
 
         z = -2.6573 + (0.0956 * shb_load_total) + (0.0473 * shrub_black_pct)
@@ -49,13 +50,13 @@ def ccon_shrub(shrub_black_pct, LD):
         with np.errstate(divide='ignore', invalid='ignore'):
             nonzero_loading = np.not_equal(shb_load_total, 0.0)
             shb_prim_total = np.where(nonzero_loading,
-                  shb_cnsm_total * (LD['shrub_prim'] / shb_load_total), 0.0)
+                  shb_cnsm_total * (values(LD, 'shrub_prim') / shb_load_total), 0.0)
             shb_seco_total = np.where(nonzero_loading,
-                  shb_cnsm_total * (LD['shrub_seco'] / shb_load_total), 0.0)
+                  shb_cnsm_total * (values(LD, 'shrub_seco') / shb_load_total), 0.0)
 
-        pctlivep = LD['shrub_prim_pctlv']
+        pctlivep = values(LD, 'shrub_prim_pctlv')
         pctdeadp = 1 - pctlivep
-        pctlives = LD['shrub_seco_pctlv']
+        pctlives = values(LD, 'shrub_seco_pctlv')
         pctdeads = 1 - pctlives
 
         return (util.csdist(shb_prim_total * pctlivep, csd_live),
@@ -70,15 +71,15 @@ def ccon_shrub(shrub_black_pct, LD):
 def ccon_nw(LD):
     """ Nonwoody consumption, activity & natural, p.169 """
 
-    nw_prim_total = LD['nw_prim'] * 0.9274
-    nw_seco_total = LD['nw_seco'] * 0.9274
+    nw_prim_total = values(LD, 'nw_prim') * 0.9274
+    nw_seco_total = values(LD, 'nw_seco') * 0.9274
 
     csd_live = [0.95, 0.05, 0.0]
     csd_dead = [0.95, 0.05, 0.0]
 
-    pctlivep = LD['nw_prim_pctlv']
+    pctlivep = values(LD, 'nw_prim_pctlv')
     pctdeadp = 1 - pctlivep
-    pctlives = LD['nw_seco_pctlv']
+    pctlives = values(LD, 'nw_seco_pctlv')
     pctdeads = 1 - pctlives
 
     return (util.csdist(nw_prim_total * pctlivep, csd_live),
@@ -96,10 +97,10 @@ def ccon_ffr(fm_duff, ecoregion_masks, LD):
     """ Forest-floor reduction calculation, p.177  """
 
     # total duff depth (inches)
-    duff_depth = LD['duff_upper_depth'] + LD['duff_lower_depth']
+    duff_depth = values(LD, 'duff_upper_depth') + values(LD, 'duff_lower_depth')
     # total forest floor depth (inches)
-    ff_depth = (duff_depth + LD['lit_depth'] +
-                LD['lch_depth'] + LD['moss_depth'])
+    ff_depth = (duff_depth + values(LD, 'lit_depth') +
+                values(LD, 'lch_depth') + values(LD, 'moss_depth'))
 
     # boreal
     y_b = 1.2383 - (0.0114 * fm_duff) # used to calc squirrel mid. redux
@@ -145,7 +146,7 @@ def ccon_forest_floor(LD, ff_reduction, key_depth, key_loading, csd):
     proportional_reduction = np.where(LD[key_depth] > 0.0,
         layer_reduction / LD[key_depth], 0.0)
 
-    total = proportional_reduction * LD[key_loading]
+    total = proportional_reduction * values(LD, key_loading)
     return util.csdist(total, csd)
 
 
@@ -181,14 +182,14 @@ def ccon_stumps(LD):
                     ['stump_rotten', 0.50, [0.10, 0.30, 0.60]],
                     ['stump_lightered', 0.50, [0.40, 0.30, 0.30]]]
 
-    return [util.csdist(LD[s[0]] * s[1], s[2]) for s in stump_params]
+    return [util.csdist(values(LD, s[0]) * s[1], s[2]) for s in stump_params]
 
 def ccon_piles(pct_consumed, LD):
     """  pile loading appears as clean, dirty, and verydirty """
     # Flaming, smoldering, residual
     csd = [0.70, 0.15, 0.15]
     pct = pct_consumed * 0.01
-    total_pile_loading = LD['pile_clean_loading'] + LD['pile_dirty_loading'] + LD['pile_vdirty_loading']
+    total_pile_loading = values(LD, 'pile_clean_loading') + values(LD, 'pile_dirty_loading') + values(LD, 'pile_vdirty_loading')
     total_consumed = pct * total_pile_loading
     return util.csdist(total_consumed, csd)
 
@@ -196,12 +197,12 @@ def ccon_piles(pct_consumed, LD):
 def ccon_one_nat(LD):
     """ 1-hr (0 to 1/4"), natural """
     csd = [0.95, 0.05, 0.00]
-    return util.csdist(LD['one_hr_sound'], csd)
+    return util.csdist(values(LD, 'one_hr_sound'), csd)
 
 def ccon_ten_nat(LD):
     """ 10-hr (1/4" to 1"), natural, p.169"""
     csd = [0.90, 0.10, 0.00]
-    total = LD['ten_hr_sound'] * 0.8650
+    total = values(LD, 'ten_hr_sound') * 0.8650
     return util.csdist(total, csd)
 
 def ccon_hun_nat(ecos_mask, LD):
@@ -209,8 +210,8 @@ def ccon_hun_nat(ecos_mask, LD):
     csd = [0.85, 0.10, 0.05]
     total = np.where(
             np.equal(ecos_mask, 1),       # if southern ecoregion,
-            LD['hun_hr_sound'] * 0.4022,    # true
-            LD['hun_hr_sound'] * 0.7844)    # false
+            values(LD, 'hun_hr_sound') * 0.4022,    # true
+            values(LD, 'hun_hr_sound') * 0.7844)    # false
     return util.csdist(total, csd)
 
 def ccon_oneK_snd_nat(fm_duff, fm_1000hr, ecos_mask, LD):
@@ -220,46 +221,46 @@ def ccon_oneK_snd_nat(fm_duff, fm_1000hr, ecos_mask, LD):
     z = 3.1052 - (0.0559 * fm_1000hr)
     total = np.where(
            np.equal(ecos_mask, 1),      # if southern ecoregion,
-           LD['oneK_hr_sound'] * util.propcons(y),   # true
-           LD['oneK_hr_sound'] * util.propcons(z))   # false
+           values(LD, 'oneK_hr_sound') * util.propcons(y),   # true
+           values(LD, 'oneK_hr_sound') * util.propcons(z))   # false
     return util.csdist(total, csd)
 
 def ccon_tenK_snd_nat(fm_1000hr, LD):
     """ 10K-hr (9 to 20") sound, natural """
     csd = [0.40, 0.40, 0.20]
     x = 0.7869 - (0.0387 * fm_1000hr)
-    total = LD['tenK_hr_sound'] * util.propcons(x)
+    total = values(LD, 'tenK_hr_sound') * util.propcons(x)
     return util.csdist(total, csd)
 
 def ccon_tnkp_snd_nat(fm_1000hr, LD):
     """ 10K+ hr (>20") sound, natural """
     csd = [0.20, 0.40, 0.40]
     z = 0.3960 - (0.0389 * fm_1000hr)
-    total = LD['tnkp_hr_sound'] * util.propcons(z)
+    total = values(LD, 'tnkp_hr_sound') * util.propcons(z)
     return util.csdist(total, csd)
 
 def ccon_oneK_rot_nat(fm_duff, ecos_mask, LD):
     """ 1000-hr (3 to 9") rotten, natural """
     csd = [0.20, 0.30, 0.50]
-    y = 4.0139 - (0.0600 * fm_duff) + (0.8341 * LD['oneK_hr_rotten'])
+    y = 4.0139 - (0.0600 * fm_duff) + (0.8341 * values(LD, 'oneK_hr_rotten'))
     z = 0.5052 - (0.0434 * fm_duff)
     total = np.where(np.equal(ecos_mask, 1),    # if southern ecoegion,
-            LD['oneK_hr_rotten'] * util.propcons(z),     # true
-            LD['oneK_hr_rotten'] * util.propcons(y))     # false
+            values(LD, 'oneK_hr_rotten') * util.propcons(z),     # true
+            values(LD, 'oneK_hr_rotten') * util.propcons(y))     # false
     return util.csdist(total, csd)
 
 def ccon_tenK_rot_nat(fm_duff, LD):
     """ 10K-hr (9 to 20") rotten, natural """
     csd = [0.10, 0.30, 0.60]
     y = 2.1218 - (0.0438 * fm_duff)
-    total = LD['tenK_hr_rotten'] * util.propcons(y)
+    total = values(LD, 'tenK_hr_rotten') * util.propcons(y)
     return util.csdist(total, csd)
 
 def ccon_tnkp_rot_nat(fm_duff, LD):
     """ 10K+ hr (>20") rotten, natural """
     csd = [0.10, 0.30, 0.60]
     y = 0.8022 - (0.0266 * fm_duff)
-    total = LD['tnkp_hr_rotten'] * util.propcons(y)
+    total = values(LD, 'tnkp_hr_rotten') * util.propcons(y)
     return util.csdist(total, csd)
 
 

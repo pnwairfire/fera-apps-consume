@@ -524,6 +524,7 @@ import con_calc_activity as cca
 import input_settings as settings
 import logging
 import pandas as pan
+from util_consume import values
 
 msg = logging.getLogger(__name__)
 msg.addHandler(logging.StreamHandler())
@@ -1203,16 +1204,16 @@ class FuelConsumption(util.FrozenClass):
         return self.FCCS.loadings_data_.iloc[results]
 
     def calc_ff_redux_proportion(self, LD):
-        duff_depth = LD['duff_upper_depth'] + LD['duff_lower_depth']
         # total forest floor depth (inches)
-        ff_depth = (duff_depth + LD['lit_depth'] + LD['lch_depth'] + LD['moss_depth'])
+        ff_depth = (LD['duff_upper_depth'] + LD['duff_lower_depth'] + LD['lit_depth'] + LD['lch_depth'] + LD['moss_depth']).values
 
         # - this works correctly but still generates a warning, use the
         #   context manager to swallow the benign warning
         with np.errstate(divide='ignore', invalid='ignore'):
             nonzero_depth = np.not_equal(ff_depth, 0.0)
             # divide reduction by total ff depth to get proportion
-            ff_redux_proportion = np.where(nonzero_depth, (LD['ff_reduction'] / ff_depth), 0.0)
+            ff_redux_proportion = np.where(nonzero_depth,
+                (values(LD, 'ff_reduction') / ff_depth), 0.0)
 
         return ff_redux_proportion
 
@@ -1306,8 +1307,8 @@ class FuelConsumption(util.FrozenClass):
         duff_lower_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'duff_lower_depth', 'duff_lower_loading', [0.00, 0.20, 0.80])
 
         ff_redux_proportion = self.calc_ff_redux_proportion(LD)
-        bas_fsrt = ccn.ccon_bas(LD['bas_loading'], ff_redux_proportion)
-        sqm_fsrt = ccn.ccon_sqm(LD['sqm_loading'], ff_redux_proportion)
+        bas_fsrt = ccn.ccon_bas(values(LD, 'bas_loading'), ff_redux_proportion)
+        sqm_fsrt = ccn.ccon_sqm(values(LD, 'sqm_loading'), ff_redux_proportion)
 
 
         # Category summations
