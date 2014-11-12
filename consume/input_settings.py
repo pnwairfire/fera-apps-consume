@@ -304,6 +304,30 @@ class ConsumeInputSettings(object):
         return result
 
 
+    def load_from_dict(self, params):
+        ''' Load settings from a supplied dictionary
+            burn_type MUST be set at this point
+        '''
+        result = False
+        if self.burn_type:
+            if self._valid_file_columns(self.burn_type, params.keys):
+                # - assign the single-input-value / property items
+                self.units = params['units']
+
+                if 'activity' == self.burn_type:
+                    contents.ecoregion = 'western'
+                    self.fm_type = params['fm_10hr']
+
+                # - set the 'tagged' input items
+                valid_names = self._get_valid_column_names_no_attributes(self.burn_type)
+                for name in valid_names:
+                    self.set(name, params[name])
+                result = True
+        else:
+            print("\nError: burn_type must be set prior to loading an input file")
+        return result
+
+
 
 
 

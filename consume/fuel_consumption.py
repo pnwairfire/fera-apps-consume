@@ -834,7 +834,7 @@ class FuelConsumption(util.FrozenClass):
         
     def reset_all(self):
         self._reset_outputs()
-        self._setttings.reset_to_empty()
+        self._settings.reset_to_empty()
 
     def results(self):
         """Output fuel consumption results as a python DICTIONARY object
@@ -943,6 +943,18 @@ class FuelConsumption(util.FrozenClass):
 
         """
         return self._settings.load_from_file(load_file)
+
+    def load_scenario_from_dict(self, params, display=True):
+        """Loads scenario input parameters from a CSV file
+
+        Required argument:
+
+        load_file  : directory location of the CSV file from which the scenario
+                     will be loaded. See 'consume_batch_input_example.csv' for
+                     formatting guidance.
+
+        """
+        return self._settings.load_from_dict(params)
 
     def _display_report(self, csv, stratum = 'all', incl_heat = False, ret=False):
         """Displays an in-shell report on consumption values"""
