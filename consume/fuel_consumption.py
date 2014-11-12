@@ -831,6 +831,10 @@ class FuelConsumption(util.FrozenClass):
         self._ucons_data = None
         self._heat_data = None
         self._cons_data = None
+        
+    def reset_all(self):
+        self._reset_outputs()
+        self._setttings.reset_to_empty()
 
     def results(self):
         """Output fuel consumption results as a python DICTIONARY object

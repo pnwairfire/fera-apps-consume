@@ -198,6 +198,9 @@ class ConsumeInputSettings(object):
         for k, v in self._settings.iteritems():
             settings.append("{}\t{}".format(k, v))
         return "\n".join(settings)
+        
+    def reset_to_empty(self):
+        self._settings = {}
 
     def package(self, dataframeLoadings):
         if self.settings_are_complete():
