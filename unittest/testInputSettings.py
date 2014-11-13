@@ -155,6 +155,40 @@ class TestInputSettings(unittest.TestCase):
         self.assertEqual(list(s.get('shrub_black_pct')), [float(x) for x in list(data.shrub_black_pct)])
         os.unlink(infile[1])
 
+    def test_load_natural_from_dict(self):
+        ''' Package into dict, and verify that the settings
+            Bluesky uses this.
+        '''
+        def as_ints(in_list):
+            return [int(i) for i in in_list]
+                
+        data = TestInputSettings.nat_data
+        input_dict = {
+        'fuelbeds' : data.fuelbeds.values,
+        'area' : as_ints(data.area.values),
+        'units': data.units.ix[0],
+        'ecoregion' : data.ecoregion.values,
+        'fm_1000hr' : as_ints(data.fm_1000hr.values),
+        'fm_duff' : as_ints(data.fm_duff.values),
+        'can_con_pct' : as_ints(data.can_con_pct.values),
+        'shrub_black_pct' : as_ints(data.shrub_black_pct.values),
+        'pile_black_pct' : as_ints(data.pile_black_pct.values),
+        }
+
+        s = ConsumeInputSettings()
+        s.burn_type = 'natural'
+        
+        self.assertTrue(s.load_from_dict(input_dict))
+        self.assertEqual(s.burn_type, 'natural')
+        self.assertEqual(s.units, 'kg_ha')
+        self.assertEqual(list(s.get('area')), [float(x) for x in list(data.area)])
+        self.assertEqual(list(s.get('can_con_pct')), [float(x) for x in list(data.can_con_pct)])
+        self.assertEqual(list(s.get('ecoregion')), list(data.ecoregion))
+        self.assertEqual(list(s.get('fm_1000hr')), [float(x) for x in list(data.fm_1000hr)])
+        self.assertEqual(list(s.get('fm_duff')), [float(x) for x in list(data.fm_duff)])
+        self.assertEqual(list(s.get('fuelbeds')), [str(x) for x in list(data.fuelbeds)])
+        self.assertEqual(list(s.get('shrub_black_pct')), [float(x) for x in list(data.shrub_black_pct)])
+
     def test_load_activity(self):
         ''' Write a temp file, load the temp file and verify that the settings are equal to the 
             values written. Close tempfile
@@ -189,6 +223,7 @@ class TestInputSettings(unittest.TestCase):
         self.assertEqual(list(s.get('length_of_ignition')), [float(x) for x in list(data.length_of_ignition)])
         
         os.unlink(infile[1])
+        
 
     def test_load_same_column_values(self):
         ''' Some columns must contain the same values. Test that things fail if they don't
@@ -209,6 +244,15 @@ class TestInputSettings(unittest.TestCase):
         do_failed_load(data, 'fm_type', 'MEAS-Th')
         do_failed_load(data, 'ecoregion', 'southern')
             
+        '''
+                retval = {
+                    'slope' : slope,
+                    'windspeed' : windspeed,
+                    'days_since_rain' : days_since_rain,
+                    'fm_10hr' : fm_10hr,
+                    'length_of_ignition' : length_of_ignition
+                }
+        '''
 
             
 

@@ -310,7 +310,7 @@ class ConsumeInputSettings(object):
         '''
         result = False
         if self.burn_type:
-            if self._valid_file_columns(self.burn_type, params.keys):
+            if self._valid_file_columns(self.burn_type, params.keys()):
                 # - assign the single-input-value / property items
                 self.units = params['units']
 
