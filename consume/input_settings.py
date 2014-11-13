@@ -145,7 +145,7 @@ class ConsumeInputSettings(object):
                     self._settings[name] = valid_values
                     result = True
                 else:
-                    print("Error: the following values are not permitted:")
+                    print("Error: the following values are not permitted for setting {}:".format(name))
                     print(invalid_values)
             else:
                 print("\nError: '{}' is not a valid setting name".format(name))
