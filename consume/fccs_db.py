@@ -4,6 +4,8 @@ from collections import namedtuple
 import module_locator
 import pandas as pan
 
+FCCS_LOADINGS_FILE = './input_data/fccs_loadings.csv'
+
 class FCCSDB():
     """ A class the stores, retrieves, and distributes FCCS fuelbed information
     """
@@ -20,7 +22,7 @@ class FCCSDB():
         self.loadings_file_ = fccs_file
         if fccs_file == "":
             mod_path = module_locator.module_path()
-            self.loadings_file_ = os.path.join(mod_path, './input_data/fccs_loadings_1_458.csv')
+            self.loadings_file_ = os.path.join(mod_path, FCCS_LOADINGS_FILE)
 
         (self.loadings_data_, self.loadings_metadata_) = self._load_data_from_csv()
         self.valid_fuelbeds_ = [i for i in self.loadings_data_.fccs_id]
