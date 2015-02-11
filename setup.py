@@ -16,7 +16,10 @@ setup(
         'consume'
     ],
     package_data={
-        'consume': ['input_data/*.xml']
+        'consume': [
+            'input_data/*.xml',
+            'input_data/*.csv'
+        ]
     },
     scripts=[],
     url='ssh://hg@bitbucket.org/fera/apps-consume4',
