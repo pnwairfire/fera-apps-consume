@@ -10,7 +10,7 @@ with open('requirements.txt') as f:
 setup(
     name='consume',
     version='4.1',
-    author='Michigan Tech Research, Fire and Environmental Research Applications Team (FERA)',
+    author='Fire and Environmental Research Applications Team (FERA)',
     #author_email='',
     packages=[
         'consume'
