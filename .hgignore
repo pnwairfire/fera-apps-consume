@@ -11,3 +11,4 @@ consume/version.py
 windows_exe/winexe/*
 dist/*
 .gradle/*
+build/lib/
