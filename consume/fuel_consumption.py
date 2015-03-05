@@ -854,7 +854,6 @@ class FuelConsumption(util.FrozenClass):
             self._conv_success = True
             if self._conv_success:
                 return util.make_dictionary_of_lists(cons_data = self._cons_data,
-                                          cons_debug_data = self._cons_debug_data,
                                           heat_data = self._heat_data,
                                           emis_data = [],
                                           inputs = self._settings.package(self.FCCS.loadings_data_))

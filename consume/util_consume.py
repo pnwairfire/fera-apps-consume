@@ -58,7 +58,7 @@ def coerce_if_possible(x):
         return x
 
 
-def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs, cons_debug_data=""):
+def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs):
     """
 
     Creates a dictionary of lists (accessed by calling the 'results' property)
@@ -77,13 +77,6 @@ def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs, cons_debug
         'smoldering' : cons_data[s][1],
         'residual' : cons_data[s][2],
         'total' : cons_data[s][3]}
-
-    def cons_debug_dict(s):
-        """ Return consumption dictionary for specified index"""
-        if len(cons_debug_data):
-            return { 'total' : cons_debug_data[s] }
-        else:
-            return None
 
     def emis_dict(s, p):
         """ Return emissions dictionary for specified index & species """
@@ -154,8 +147,6 @@ def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs, cons_debug
     wd_hr10kp_snd = cons_dict(42)
     wd_hr10kp_rot = cons_dict(43)
 
-    ff_reduction = cons_debug_dict(0)
-
     results = {'parameters' : inputs,
                'heat release' : all_heat,
 
@@ -210,8 +201,6 @@ def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs, cons_debug
                                     '10000-hr fuels rotten' : wd_hr10000_rot,
                                     '10k+-hr fuels sound' : wd_hr10kp_snd,
                                     '10k+-hr fuels rotten' : wd_hr10kp_rot},
-                                'debug' : {
-                                    'forest floor reduction' : ff_reduction}
                                     }}
 
 
