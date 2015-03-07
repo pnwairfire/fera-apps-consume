@@ -27,11 +27,14 @@ def make_dist_dir():
     os.mkdir(DIST_DIR)
 
 def copy_files():
-    for f in glob.glob('*.py'):
+    PYFILES = ['batch_locator.py', 'cmdline.py', 'consume_batch.py', 'post_process.py', 'unit_convert.py']
+    for f in PYFILES:
         shutil.copyfile(f, '{}/{}'.format(DIST_DIR, f))
     for f in glob.glob('output*.csv'):
         shutil.copyfile(f, '{}/{}'.format(DIST_DIR, f))
     shutil.copytree('consume', '{}/consume'.format(DIST_DIR))
+    shutil.copytree('emitcalc/emitcalc', '{}/emitcalc'.format(DIST_DIR))
+    shutil.copytree('fccs2ef/fccs2ef', '{}/fccs2ef'.format(DIST_DIR))
     
 def get_tip():
     #proc = subprocess.Popen(['hg', 'tip', '--template', '{rev}'],stdout=subprocess.PIPE)

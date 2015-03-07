@@ -1,5 +1,7 @@
 syntax glob:
 
+emitcalc/*
+fccs2ef/*
 output/*
 ./*.orig
 ./*.pyc

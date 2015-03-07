@@ -14,9 +14,12 @@ import os
 import sys
 import batch_locator
 import cmdline
+import numpy as np
 import pandas as pan
 import pickle
 import unit_convert
+from emitcalc.calculator import EmissionsCalculator
+from fccs2ef.lookup import Fccs2Ef
 
 DO_PICKLE_OUTPUT = 'pickle'
 DO_RAW_OUTPUT = 'raw'
@@ -165,6 +168,34 @@ def write_results(all_results, outfile, do_metric, col_cfg_file=None):
         newdf = pan.DataFrame.from_items(add_these)
         newdf.to_csv(outfile, index=False)
 
+def print_keys(dict_obj, level):
+    if isinstance(dict_obj, dict):
+        for key in dict_obj.keys():
+            print('{}{}'.format('    ' * level, key))
+            print_keys(dict_obj[key], level + 1)
+
+def write_pickled_consume_results(results):
+    with open('consume_output.pickle', 'wb') as f:
+       pickle.dump(results, f)
+
+
+def write_emissions_results(emissions_results, fuelbed_ids):
+    pollutants = ['CO2','CO','PM10','PM2.5','SO2','CH4','NH3','NOx']
+    total_flaming_list = emissions_results['summary']['total']['flaming']
+    total_smolder_list = emissions_results['summary']['total']['smoldering']
+    header = 'Pollutant,' + ','.join(fuelbed_ids)
+    print(header)
+    total = np.zeros(len(fuelbed_ids))
+    for key in pollutants:
+        f = np.array(total_flaming_list[key])
+        s = np.array(total_smolder_list[key])
+        pollutant_totals = np.round((f + s), 2)
+        total += pollutant_totals
+        print('{},{}'.format(key, ','.join([str(i) for i in pollutant_totals])))
+    print('Total,' + ','.join([str(i.round(2)) for i in total]))
+
+
+
 def run(burn_type, csv_input, do_metric, msg_level, outfile, fuel_loadings=None, col_cfg=None):
     # validate alternate loadings file if provide. Throws exception on invalid
     if fuel_loadings: validate_fuel_loadings(fuel_loadings)
@@ -177,10 +208,15 @@ def run(burn_type, csv_input, do_metric, msg_level, outfile, fuel_loadings=None,
     #  or output as specified
     consumer.burn_type = burn_type
     if consumer.load_scenario(csv_input, display=False):
-        emissions = consume.Emissions(consumer)
-        results = emissions.results()
+        consumption_results = consumer.results()
+        emissions_calculator = EmissionsCalculator(Fccs2Ef())
+        emissions_results = emissions_calculator.calculate(consumer.fuelbed_fccs_ids, consumption_results['consumption'], False)
+        # Debugging
+        #write_pickled_consume_results(consumption_results['consumption'])
+        results = consumption_results
         fuelbed_list = consumer.fuelbed_fccs_ids
         write_results(results, outfile, do_metric, col_cfg_file=col_cfg)
+        write_emissions_results(emissions_results, fuelbed_list)
         if not pickle_output(col_cfg):
             print("\nSuccess!!! Results are in \"{}\"".format(outfile))
 
