@@ -179,21 +179,21 @@ def write_pickled_consume_results(results):
        pickle.dump(results, f)
 
 
-def write_emissions_results(emissions_results, fuelbed_ids):
+def massage_emissions_results(emissions_results, fuelbed_ids):
+    retval = {}
     pollutants = ['CO2','CO','PM10','PM2.5','SO2','CH4','NH3','NOx']
     total_flaming_list = emissions_results['summary']['total']['flaming']
     total_smolder_list = emissions_results['summary']['total']['smoldering']
-    header = 'Pollutant,' + ','.join(fuelbed_ids)
-    print(header)
+    total_residual_list = emissions_results['summary']['total']['residual']
     total = np.zeros(len(fuelbed_ids))
     for key in pollutants:
         f = np.array(total_flaming_list[key])
         s = np.array(total_smolder_list[key])
-        pollutant_totals = np.round((f + s), 2)
+        r = np.array(total_residual_list[key])
+        pollutant_totals = np.round((f + s + r), 2)
+        retval[key.lower()] = {'total' : pollutant_totals}
         total += pollutant_totals
-        print('{},{}'.format(key, ','.join([str(i) for i in pollutant_totals])))
-    print('Total,' + ','.join([str(i.round(2)) for i in total]))
-
+    return retval
 
 
 def run(burn_type, csv_input, do_metric, msg_level, outfile, fuel_loadings=None, col_cfg=None):
@@ -213,10 +213,11 @@ def run(burn_type, csv_input, do_metric, msg_level, outfile, fuel_loadings=None,
         emissions_results = emissions_calculator.calculate(consumer.fuelbed_fccs_ids, consumption_results['consumption'], False)
         # Debugging
         #write_pickled_consume_results(consumption_results['consumption'])
-        results = consumption_results
+
+        # Add the slightly transformed emissions results to the consumption dictionary
         fuelbed_list = consumer.fuelbed_fccs_ids
-        write_results(results, outfile, do_metric, col_cfg_file=col_cfg)
-        write_emissions_results(emissions_results, fuelbed_list)
+        consumption_results['emissions'] = massage_emissions_results(emissions_results, fuelbed_list)
+        write_results(consumption_results, outfile, do_metric, col_cfg_file=col_cfg)
         if not pickle_output(col_cfg):
             print("\nSuccess!!! Results are in \"{}\"".format(outfile))
 
