@@ -82,7 +82,6 @@ def can_run():
 def validate_fuel_loadings(alt_loadings_file):
     ''' Valid currently means that the generator_info element is present
         in the loadings file.
-        kjells todo: move this into consume proper?
     '''
     validate = False
     with open(alt_loadings_file, 'r') as infile:
@@ -181,7 +180,7 @@ def write_pickled_consume_results(results):
 
 def massage_emissions_results(emissions_results, fuelbed_ids):
     retval = {}
-    pollutants = ['CO2','CO','PM10','PM2.5','SO2','CH4','NH3','NOx']
+    pollutants = ['CO2','CO','PM10','PM2.5','SO2','CH4','NH3','NOx', 'NMOC']
     total_flaming_list = emissions_results['summary']['total']['flaming']
     total_smolder_list = emissions_results['summary']['total']['smoldering']
     total_residual_list = emissions_results['summary']['total']['residual']
@@ -196,7 +195,7 @@ def massage_emissions_results(emissions_results, fuelbed_ids):
     return retval
 
 def create_feps_emissions_input(emissions_results):
-    emissions = {'CO2': {}, 'CO': {}, 'PM10': {}, 'PM2.5': {}, 'SO2': {}, 'CH4': {}, 'NH3': {}, 'NOx': {}}
+    emissions = {'CO2': {}, 'CO': {}, 'PM10': {}, 'PM2.5': {}, 'SO2': {}, 'CH4': {}, 'NH3': {}, 'NOx': {}, 'NMOC': {}}
     total_flaming_list = emissions_results['summary']['total']['flaming']
     total_smolder_list = emissions_results['summary']['total']['smoldering']
     total_residual_list = emissions_results['summary']['total']['residual']
@@ -215,7 +214,7 @@ def create_feps_emissions_input(emissions_results):
     df['Total'] = pd.Series({'Flame': df.ix[0].sum(), 'Smold': df.ix[1].sum(),
                              'Resid': df.ix[2].sum(), 'Total': df.ix[3].sum()}, index=df.index)
     df.index.name = 'Phase'
-    df.rename(columns={'PM2.5': 'PM25'}, inplace=True)
+    df.rename(columns={'PM2.5': 'PM25', 'NMOC': 'VOC'}, inplace=True)
     df.to_csv('feps_emissions_input.csv')
 
 
@@ -249,7 +248,7 @@ def run(burn_type, csv_input, do_metric, msg_level, outfile, fuel_loadings=None,
 #-------------------------------------------------------------------------------
 def main():
     try:
-        can_run()
+        #can_run()
         parser = cmdline.ConsumeParser([DO_PICKLE_OUTPUT, DO_RAW_OUTPUT])
         parser.do_parse(sys.argv)
         run(parser.burn_type, parser.csv_file, parser.do_metric, parser.msg_level, parser.output_filename,
