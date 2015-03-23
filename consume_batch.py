@@ -160,7 +160,7 @@ def write_results(all_results, outfile, do_metric, col_cfg_file=None):
         for col in columns_to_print:
             key = col[0]
             new_key = col[1]
-            if tmp.has_key(key):
+            if key in tmp.keys():
                 add_these.append((new_key, converter(key, tmp[key])))
         newdf = pan.DataFrame.from_items(add_these)
         newdf.to_csv(outfile, index=False)

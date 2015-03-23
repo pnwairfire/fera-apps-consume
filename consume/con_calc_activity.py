@@ -284,7 +284,7 @@ def ccon_hun_act(pct_hun_hr, diam_reduction, QMDS, LD):
 
     # make sure flaming doesn't exceed total... ln 4665
     flamg = np.where(np.greater(flamg, total), total, flamg)
-    return np.array([zip(*csdist_act(flamg, total, resFrac))]), flamgDRED, flaming_portion
+    return np.array([list(zip(*csdist_act(flamg, total, resFrac)))]), flamgDRED, flaming_portion
 
 def ccon_oneK_act(LD, QMDS, diam_reduction, flamgDRED):
     """ 1000-hr (3" - 9") woody fuels consumption, activity

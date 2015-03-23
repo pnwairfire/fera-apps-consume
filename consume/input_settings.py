@@ -215,7 +215,9 @@ class ConsumeInputSettings(object):
             add_me['units'] = list([self._units] * len(self._settings.get('fuelbeds')))
             if 'activity' == self.burn_type:
                 add_me['fm_type'] = list([self.fm_type] * len(self._settings.get('fuelbeds')))
-            return dict(self._settings.items() + add_me.items())
+            retval = self._settings.copy()
+            retval.update(add_me)
+            return retval
 
     def _get_valid_column_names_all(self, burn_type):
         ''' includes all valid names, even attribute names.

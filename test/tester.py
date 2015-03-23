@@ -10,7 +10,7 @@
 #!/usr/bin/env python
 import csv
 import sys
-from ulp import WithinThisManyULP, HowManyULP
+from . ulp import WithinThisManyULP, HowManyULP
 import decimal as dec
 import re
 import math

@@ -22,7 +22,7 @@ def pp():
 
 pp()
 import consume
-from tester import DataObj as compareCSV
+from . tester import DataObj as compareCSV
 
 def get_this_location():
     ''' Return the absolute directory path for this file
