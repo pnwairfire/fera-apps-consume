@@ -516,15 +516,14 @@ Index 1           Index 2              Index 3                     Index 4      
 """
 import math
 import numpy as np
-import fccs_db as fccs
-import data_desc as dd
-import util_consume as util
-import con_calc_natural as ccn
-import con_calc_activity as cca
-import input_settings as settings
+from . import fccs_db as fccs
+from . import data_desc as dd
+from . import util_consume as util
+from . import con_calc_natural as ccn
+from . import con_calc_activity as cca
+from . import input_settings as settings
 import logging
-import pandas as pan
-from util_consume import values
+from . util_consume import values
 
 msg = logging.getLogger(__name__)
 msg.addHandler(logging.StreamHandler())
@@ -918,7 +917,7 @@ class FuelConsumption(util.FrozenClass):
                         in the output csv file. Default is 'False'.
         """
         self.report(csv = csv_out, stratum = stratum)
-        print "\nFile saved to: " + csv_out
+        print("\nFile saved to: {}".format(csv_out))
 
 
     def display_inputs(self, print_to_console=True):
@@ -1133,7 +1132,7 @@ class FuelConsumption(util.FrozenClass):
             text.write(csv_lines)
             text.close()
         if not ret:
-            print txt
+            print(txt)
         else: return txt
 
     def _calculate(self):

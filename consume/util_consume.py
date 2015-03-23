@@ -1,6 +1,6 @@
 import numpy as np
 import math
-import data_desc as dd
+from . import data_desc as dd
 
 # - use to approximate Pandas pre 0.13 behavior
 def values(df, key):

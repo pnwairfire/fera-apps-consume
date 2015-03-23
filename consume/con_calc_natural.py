@@ -1,7 +1,7 @@
 import math
 import numpy as np
-from util_consume import values
-import util_consume as util
+from . import util_consume as util
+from . util_consume import values
 
 # Consumption calculation methods
 def ccon_canopy(can_con_pct, LD):

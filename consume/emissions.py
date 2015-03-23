@@ -316,9 +316,9 @@ Index 1           Index 2              Index 3                     Index 4      
 
 """
 import numpy as np
-import emissions_db as edb
-import data_desc as dd
-import util_consume as util
+from . emissions_db import EmissionsFactorDB as edb
+from . import data_desc as dd
+from . import util_consume as util
 
 #class Emissions(object):
 class Emissions(util.FrozenClass):
@@ -360,7 +360,7 @@ class Emissions(util.FrozenClass):
         """
         if fuel_consumption_object is not None:
             self._cons_object = fuel_consumption_object
-            self._emission_factor_db = edb.EmissionsFactorDB(emissions_xml, fuel_consumption_object)
+            self._emission_factor_db = edb(emissions_xml, fuel_consumption_object)
             self._have_cons_data = 0
             self._internal_units = "lbs_ac"
             self._output_units = "lbs_ac"
@@ -431,7 +431,7 @@ class Emissions(util.FrozenClass):
                          + ",species,flaming,smoldering,residual,total\n")
 
 
-            print "\n\nEMISSIONS\nUnits: " + self._output_units
+            print("\n\nEMISSIONS\nUnits: {}".format(self._output_units))
             for i in range(0, len(fccs_ids)):
                 ha = area[i] * 0.404685642
                 print ("\nFCCS ID: " + str(fccs_ids[i])

@@ -1,7 +1,7 @@
 import math
 import numpy as np
-from util_consume import values
-import util_consume as util
+from . util_consume import values
+from . import util_consume as util
 # "global"s
 
 # quadratic mean diameters: [hun, oneK, tenK, tnkp]

@@ -1,15 +1,15 @@
-from emissions import Emissions
-from fuel_consumption import FuelConsumption
-from data_desc import list_valid_units
-from data_desc import list_valid_fm_types
-from data_desc import list_valid_burntypes
-from data_desc import list_valid_ecoregions
-from data_desc import list_valid_emissions_species
-from data_desc import list_valid_combustion_stages
-from data_desc import list_valid_consumption_strata
-from data_desc import perarea
-from util_consume import get_version
-from util_consume import get_version_short
+from . emissions import Emissions
+from . fuel_consumption import FuelConsumption
+from . data_desc import list_valid_units
+from . data_desc import list_valid_fm_types
+from . data_desc import list_valid_burntypes
+from . data_desc import list_valid_ecoregions
+from . data_desc import list_valid_emissions_species
+from . data_desc import list_valid_combustion_stages
+from . data_desc import list_valid_consumption_strata
+from . data_desc import perarea
+from . util_consume import get_version
+from . util_consume import get_version_short
 
 try:
     # Using consume in a non-install situation could uncover users without

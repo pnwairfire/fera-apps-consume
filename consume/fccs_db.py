@@ -1,8 +1,8 @@
 import os
-import data_desc as dd
-from collections import namedtuple
-import module_locator
 import pandas as pan
+from collections import namedtuple
+from . import data_desc as dd
+from . import module_locator
 
 FCCS_LOADINGS_FILE = './input_data/fccs_loadings.csv'
 
@@ -84,8 +84,8 @@ class FCCSDB():
 
         """
         for c in self.loadings_data_.index:
-            print "ID# " + str(self.loadings_data_.ix[c].get('fccs_id')) \
-                 + "\t: " + str(self.loadings_data_.ix[c].get('site_name'))
+            print("ID# " + str(self.loadings_data_.ix[c].get('fccs_id')) \
+                 + "\t: " + str(self.loadings_data_.ix[c].get('site_name')))
 
         print("\nFor more information on a specific fuelbed, use the " +
                ".info(id#, detail=True/False) method.\n")
@@ -111,61 +111,61 @@ class FCCSDB():
         "------------------------------------------------------------")
 
 
-        print header
-        print "\n Canopy loadings"
-        print "   Overstory\t\t\toverstory\t\t" + lu
-        print "   Midstory\t\t\tmidstory\t\t" + lu
-        print "   Understory\t\t\tunderstory\t\t" + lu
-        print "   Snags, class 1, foliage\tsnag1f\t\t\t" + lu
-        print "   Snags, class 1, wood\t\tsnag1w\t\t\t" + lu
-        print "   Snags, class 1, w/o foliage\tsnag1nf\t\t\t" + lu
-        print "   Snags, class 2\t\tsnag2\t\t\t" + lu
-        print "   Snags, class 3\t\tsnag3\t\t\t" + lu
-        print "   Ladder fuels\t\t\tladder\t\t\t" + lu
+        print(header)
+        print("\n Canopy loadings")
+        print("   Overstory\t\t\toverstory\t\t" + lu)
+        print("   Midstory\t\t\tmidstory\t\t" + lu)
+        print("   Understory\t\t\tunderstory\t\t" + lu)
+        print("   Snags, class 1, foliage\tsnag1f\t\t\t" + lu)
+        print("   Snags, class 1, wood\t\tsnag1w\t\t\t" + lu)
+        print("   Snags, class 1, w/o foliage\tsnag1nf\t\t\t" + lu)
+        print("   Snags, class 2\t\tsnag2\t\t\t" + lu)
+        print("   Snags, class 3\t\tsnag3\t\t\t" + lu)
+        print("   Ladder fuels\t\t\tladder\t\t\t" + lu)
 
-        print "\n Shrub loadings"
-        print "   Primary\t\t\tshrub_prim\t\t" + lu
-        print "   Primary % live\t\tshrub_prim_pctlv\t" + pu
-        print "   Secondary\t\t\tshrub_seco\t\t" + lu
-        print "   Secondary % live\t\tshrub_seco_pctlv\t" + pu
+        print("\n Shrub loadings")
+        print("   Primary\t\t\tshrub_prim\t\t" + lu)
+        print("   Primary % live\t\tshrub_prim_pctlv\t" + pu)
+        print("   Secondary\t\t\tshrub_seco\t\t" + lu)
+        print("   Secondary % live\t\tshrub_seco_pctlv\t" + pu)
 
-        print "\n Nonwoody loadings"
-        print "   Primary\t\t\tnw_prim\t\t\t" + lu
-        print "   Primary % live\t\tnw_prim_pctlv\t\t" + pu
-        print "   Secondary\t\t\tnw_seco\t\t\t" + lu
-        print "   Secondary % live\t\tnw_seco_pctlv\t\t" + pu
-        print header
-        print "\n Litter-lichen-moss loadings"
-        print "   Litter depth\t\t\tlit_depth\t\t" + du
-        print "   Lichen depth\t\t\tlch_depth\t\t" + du
-        print "   Moss depth\t\t\tmoss_depth\t\t" + du
-        print "   Moss type\t\t\tmoss_type\t\t" + nau
-        print header
-        print "\n Ground fuel loadings"
-        print "   Duff depth, upper\t\tduff_upper_depth\t" + du
-        print "   Duff derivation, upper\tduff_upper_deriv\t" + nau
-        print "   Duff depth, lower\t\tduff_lower_depth\t" + du
-        print "   Duff derivation, lower\tduff_lower_deriv\t" + nau
-        print "   Basal accumulations depth\tbas_depth\t\t" + du
-        print "   Basal accumulations % cover\tbas_pct\t\t\t" + pu
-        print "   Basal accumulations radius\tbas_rad\t\t\t" + ru
-        print "   Squirrel midden depth\tsqm_depth\t\t" + du
-        print "   Squirrel midden density\tsqm_density\t\t" + nu
-        print "   Squirrel midden radius\tsqm_radius\t\t" + ru
+        print("\n Nonwoody loadings")
+        print("   Primary\t\t\tnw_prim\t\t\t" + lu)
+        print("   Primary % live\t\tnw_prim_pctlv\t\t" + pu)
+        print("   Secondary\t\t\tnw_seco\t\t\t" + lu)
+        print("   Secondary % live\t\tnw_seco_pctlv\t\t" + pu)
+        print(header)
+        print("\n Litter-lichen-moss loadings")
+        print("   Litter depth\t\t\tlit_depth\t\t" + du)
+        print("   Lichen depth\t\t\tlch_depth\t\t" + du)
+        print("   Moss depth\t\t\tmoss_depth\t\t" + du)
+        print("   Moss type\t\t\tmoss_type\t\t" + nau)
+        print(header)
+        print("\n Ground fuel loadings")
+        print("   Duff depth, upper\t\tduff_upper_depth\t" + du)
+        print("   Duff derivation, upper\tduff_upper_deriv\t" + nau)
+        print("   Duff depth, lower\t\tduff_lower_depth\t" + du)
+        print("   Duff derivation, lower\tduff_lower_deriv\t" + nau)
+        print("   Basal accumulations depth\tbas_depth\t\t" + du)
+        print("   Basal accumulations % cover\tbas_pct\t\t\t" + pu)
+        print("   Basal accumulations radius\tbas_rad\t\t\t" + ru)
+        print("   Squirrel midden depth\tsqm_depth\t\t" + du)
+        print("   Squirrel midden density\tsqm_density\t\t" + nu)
+        print("   Squirrel midden radius\tsqm_radius\t\t" + ru)
 
-        print "\n Woody fuel loadings"
-        print '   1-hr (0-0.25")\t\tone_hr_sound\t\t' + lu
-        print '   10-hr (0.25-1")\t\tten_hr_sound\t\t' + lu
-        print '   100-hr (1-3")\t\thun_hr_sound\t\t' + lu
-        print '   1000-hr (3-9"), sound\toneK_hr_sound\t\t' + lu
-        print '   10,000-hr (9-20"), sound\ttenK_hr_sound\t\t' + lu
-        print '   10,000-hr+ (>20"), sound\ttnkp_hr_sound\t\t' + lu
-        print '   1000-hr (3-9"), rotten\toneK_hr_rotten\t\t' + lu
-        print '   10,000-hr (9-20"), rotten\ttenK_hr_rotten\t\t' + lu
-        print '   10,000-hr+ (>20"), rotten\ttnkp_hr_rotten\t\t' + lu
-        print "   Stumps, sound\t\tstump_sound\t\t" + lu
-        print "   Stumps, rotten\t\tstump_rotten\t\t" + lu
-        print "   Stumps, lightered\t\tstump_lightered\t\t" + lu
+        print("\n Woody fuel loadings")
+        print('   1-hr (0-0.25")\t\tone_hr_sound\t\t' + lu)
+        print('   10-hr (0.25-1")\t\tten_hr_sound\t\t' + lu)
+        print('   100-hr (1-3")\t\thun_hr_sound\t\t' + lu)
+        print('   1000-hr (3-9"), sound\toneK_hr_sound\t\t' + lu)
+        print('   10,000-hr (9-20"), sound\ttenK_hr_sound\t\t' + lu)
+        print('   10,000-hr+ (>20"), sound\ttnkp_hr_sound\t\t' + lu)
+        print('   1000-hr (3-9"), rotten\toneK_hr_rotten\t\t' + lu)
+        print('   10,000-hr (9-20"), rotten\ttenK_hr_rotten\t\t' + lu)
+        print('   10,000-hr+ (>20"), rotten\ttnkp_hr_rotten\t\t' + lu)
+        print("   Stumps, sound\t\tstump_sound\t\t" + lu)
+        print("   Stumps, rotten\t\tstump_rotten\t\t" + lu)
+        print("   Stumps, lightered\t\tstump_lightered\t\t" + lu)
 
     def info(self, fccs_id, detail=False, ret = False):
         """Display an FCCS fuelbed description.
@@ -250,4 +250,4 @@ class FCCSDB():
 
         if ret:
             return text
-        else: print text
+        else: print(text)

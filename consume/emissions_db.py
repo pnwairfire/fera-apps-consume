@@ -1,6 +1,5 @@
 import os
-import module_locator
-import numpy as np
+from .module_locator import module_path
 
 class EmissionsFactorDB:
     """ Emissions Factor Database object
@@ -29,7 +28,7 @@ class EmissionsFactorDB:
         self.xml_file = emissions_file
         self._fco = fuel_consumption_object
         if emissions_file == "":
-            mod_path = module_locator.module_path()
+            mod_path = module_path()
             self.xml_file = os.path.join(mod_path, './input_data/EmissionsFactorDatabase.xml')
 
         root = get_rootnode(self.xml_file)
@@ -151,7 +150,7 @@ class EmissionsFactorDB:
         if ret:
             return txt
         else:
-            print txt
+            print(txt)
 
 
 def tabs(tsize, nm):

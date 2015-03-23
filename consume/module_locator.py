@@ -8,9 +8,9 @@ def we_are_frozen():
 def module_path():
     encoding = sys.getfilesystemencoding()
     if we_are_frozen():
-        frozen_dir = os.path.abspath(os.path.dirname(unicode(sys.executable, encoding)))
+        frozen_dir = os.path.abspath(os.path.dirname(sys.executable))
         frozen_dir = os.path.join(frozen_dir, './consume')
         return frozen_dir
     else:
-        regular_dir = os.path.abspath(os.path.dirname(unicode(__file__, encoding)))
+        regular_dir = os.path.abspath(os.path.dirname(__file__))
         return regular_dir

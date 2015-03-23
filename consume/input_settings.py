@@ -1,10 +1,10 @@
 ''' ---------------------------------------------------------------------------
 Code in this file deals with input settings to consume
 ---------------------------------------------------------------------------- '''
-import data_desc as dd
 import numpy as np
 import pandas as pan
 import os
+from . import data_desc as dd
 
 def validate_fuelbed_number(input_vals, permitted=None):
     return (True, [str(i) for i in input_vals], [])
@@ -71,7 +71,8 @@ class ConsumeInputSettings(object):
         'pile_black_pct' : ['Pile blackened (%)', [0,100], validate_range],
         }
 
-    AllInputParameters = dict(NaturalInputVarParameters.items() + ActivityInputVarParameters.items())
+    AllInputParameters = ActivityInputVarParameters.copy()
+    AllInputParameters.update(NaturalInputVarParameters)
 
     NaturalSNames = [s for s in NaturalInputVarParameters]
     ActivitySNames = [s for s in ActivityInputVarParameters]
@@ -195,7 +196,7 @@ class ConsumeInputSettings(object):
         settings.append("units\t{}".format(self._units))
         if 'activity' == self._burn_type:
             settings.append("fm_type\t{}".format(self._fm_type))
-        for k, v in self._settings.iteritems():
+        for k, v in self._settings.items():
             settings.append("{}\t{}".format(k, v))
         return "\n".join(settings)
         

@@ -14,12 +14,9 @@ import os
 import sys
 import batch_locator
 import cmdline
-import numpy as np
-import pandas as pd
+import pandas as pan
 import pickle
 import unit_convert
-from emitcalc.calculator import EmissionsCalculator
-from fccs2ef.lookup import Fccs2Ef
 
 DO_PICKLE_OUTPUT = 'pickle'
 DO_RAW_OUTPUT = 'raw'
@@ -82,6 +79,7 @@ def can_run():
 def validate_fuel_loadings(alt_loadings_file):
     ''' Valid currently means that the generator_info element is present
         in the loadings file.
+        kjells todo: move this into consume proper?
     '''
     validate = False
     with open(alt_loadings_file, 'r') as infile:
@@ -103,7 +101,7 @@ def read_col_cfg_file(filename):
                 if 2 == len(chunks):
                     retval.append((chunks[0].strip(), chunks[1].strip()))
                 else:
-                    assert False, "Malformed line: {}".format(line)
+                    assert false, "Malformed line: {}".format(line)
     return retval
 
 def write_results(all_results, outfile, do_metric, col_cfg_file=None):
@@ -139,7 +137,7 @@ def write_results(all_results, outfile, do_metric, col_cfg_file=None):
     # calculated results are in a hierarchical dictionary. Flatten the entire structure
     #  so that any chosen datum can be specified
     tmp = {}
-    for k,v in flattenDict(all_results).iteritems():
+    for k,v in flattenDict(all_results).items():
         colname = '_'.join(k)
         colname = colname.replace(' ', '_')
         tmp[colname] = v
@@ -164,59 +162,8 @@ def write_results(all_results, outfile, do_metric, col_cfg_file=None):
             new_key = col[1]
             if tmp.has_key(key):
                 add_these.append((new_key, converter(key, tmp[key])))
-        newdf = pd.DataFrame.from_items(add_these)
+        newdf = pan.DataFrame.from_items(add_these)
         newdf.to_csv(outfile, index=False)
-
-def print_keys(dict_obj, level):
-    if isinstance(dict_obj, dict):
-        for key in dict_obj.keys():
-            print('{}{}'.format('    ' * level, key))
-            print_keys(dict_obj[key], level + 1)
-
-def write_pickled_consume_results(results):
-    with open('debug.pickle', 'wb') as f:
-       pickle.dump(results, f)
-
-
-def massage_emissions_results(emissions_results, fuelbed_ids):
-    retval = {}
-    pollutants = ['CO2','CO','PM10','PM2.5','SO2','CH4','NH3','NOx', 'NMOC']
-    total_flaming_list = emissions_results['summary']['total']['flaming']
-    total_smolder_list = emissions_results['summary']['total']['smoldering']
-    total_residual_list = emissions_results['summary']['total']['residual']
-    total = np.zeros(len(fuelbed_ids))
-    for key in pollutants:
-        f = np.array(total_flaming_list[key])
-        s = np.array(total_smolder_list[key])
-        r = np.array(total_residual_list[key])
-        pollutant_totals = np.round((f + s + r), 2)
-        retval[key.lower()] = {'total' : pollutant_totals}
-        total += pollutant_totals
-    return retval
-
-def create_feps_emissions_input(emissions_results):
-    emissions = {'CO2': {}, 'CO': {}, 'PM10': {}, 'PM2.5': {}, 'SO2': {}, 'CH4': {}, 'NH3': {}, 'NOx': {}, 'NMOC': {}}
-    total_flaming_list = emissions_results['summary']['total']['flaming']
-    total_smolder_list = emissions_results['summary']['total']['smoldering']
-    total_residual_list = emissions_results['summary']['total']['residual']
-    for key in emissions.keys():
-        f = np.array(total_flaming_list[key])
-        s = np.array(total_smolder_list[key])
-        r = np.array(total_residual_list[key])
-        pollutant_totals = np.round((f + s + r), 2)
-        tmp = {}
-        tmp['Flame'] = np.round(f.sum(), 2)
-        tmp['Smold'] = np.round(s.sum(), 2)
-        tmp['Resid'] = np.round(r.sum(), 2)
-        tmp['Total'] = np.round(pollutant_totals.sum(), 2)
-        emissions[key] = tmp
-    df = pd.DataFrame(emissions)
-    df['Total'] = pd.Series({'Flame': df.ix[0].sum(), 'Smold': df.ix[1].sum(),
-                             'Resid': df.ix[2].sum(), 'Total': df.ix[3].sum()}, index=df.index)
-    df.index.name = 'Phase'
-    df.rename(columns={'PM2.5': 'PM25', 'NMOC': 'VOC'}, inplace=True)
-    df.to_csv('feps_emissions_input.csv')
-
 
 def run(burn_type, csv_input, do_metric, msg_level, outfile, fuel_loadings=None, col_cfg=None):
     # validate alternate loadings file if provide. Throws exception on invalid
@@ -230,16 +177,10 @@ def run(burn_type, csv_input, do_metric, msg_level, outfile, fuel_loadings=None,
     #  or output as specified
     consumer.burn_type = burn_type
     if consumer.load_scenario(csv_input, display=False):
-        consumption_results = consumer.results()
-
-        emissions_calculator = EmissionsCalculator(Fccs2Ef())
-        emissions_results = emissions_calculator.calculate(consumer.fuelbed_fccs_ids, consumption_results['consumption'], False)
-
-        create_feps_emissions_input(emissions_results)
-
-        # Add the slightly transformed emissions results to the consumption dictionary
-        consumption_results['emissions'] = massage_emissions_results(emissions_results, consumer.fuelbed_fccs_ids)
-        write_results(consumption_results, outfile, do_metric, col_cfg_file=col_cfg)
+        emissions = consume.Emissions(consumer)
+        results = emissions.results()
+        fuelbed_list = consumer.fuelbed_fccs_ids
+        write_results(results, outfile, do_metric, col_cfg_file=col_cfg)
         if not pickle_output(col_cfg):
             print("\nSuccess!!! Results are in \"{}\"".format(outfile))
 
@@ -248,7 +189,7 @@ def run(burn_type, csv_input, do_metric, msg_level, outfile, fuel_loadings=None,
 #-------------------------------------------------------------------------------
 def main():
     try:
-        #can_run()
+        can_run()
         parser = cmdline.ConsumeParser([DO_PICKLE_OUTPUT, DO_RAW_OUTPUT])
         parser.do_parse(sys.argv)
         run(parser.burn_type, parser.csv_file, parser.do_metric, parser.msg_level, parser.output_filename,
