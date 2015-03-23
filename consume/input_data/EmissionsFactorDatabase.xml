@@ -280,44 +280,4 @@
     	<CH4_smold_resid>4.3</CH4_smold_resid>
     	<NMHC_smold_resid>4.3</NMHC_smold_resid>
     </EFG>
-    <EFG>
-    	<ID>14</ID>
-    	<fuel_type>Arizona Piles    </fuel_type>
-    	<n>76</n>
-    	<references>Baker 2011 DELETE</references>
-    	<PM_flaming>26.7</PM_flaming>
-    	<PM10b_flaming>16.8</PM10b_flaming>
-    	<PM25_flaming>7.7</PM25_flaming>
-    	<CO_flaming>52.7</CO_flaming>
-    	<CO2_flaming>1714.6</CO2_flaming>
-    	<CH4_flaming>3.3</CH4_flaming>
-    	<NMHC_flaming>3.6</NMHC_flaming>
-    	<PM_smold_resid>39.4</PM_smold_resid>
-    	<PM10b_smold_resid>27.9</PM10b_smold_resid>
-    	<PM25_smold_resid>21.1</PM25_smold_resid>
-    	<CO_smold_resid>130.4</CO_smold_resid>
-    	<CO2_smold_resid>1544.9</CO2_smold_resid>
-    	<CH4_smold_resid>11.0</CH4_smold_resid>
-    	<NMHC_smold_resid>6.8</NMHC_smold_resid>
-    </EFG>
-    <EFG>
-    	<ID>15</ID>
-    	<fuel_type>Grassland (source)  DELETE  </fuel_type>
-    	<n></n>
-    	<references>Source code default</references>
-    	<PM_flaming>20</PM_flaming>
-    	<PM10b_flaming>20</PM10b_flaming>
-    	<PM25_flaming>6.0</PM25_flaming>
-    	<CO_flaming>80.0</CO_flaming>
-    	<CO2_flaming>3400</CO2_flaming>
-    	<CH4_flaming>0</CH4_flaming>
-    	<NMHC_flaming>0</NMHC_flaming>
-    	<PM_smold_resid>20.0</PM_smold_resid>
-    	<PM10b_smold_resid>20.0</PM10b_smold_resid>
-    	<PM25_smold_resid>6.0</PM25_smold_resid>
-    	<CO_smold_resid>80.0</CO_smold_resid>
-    	<CO2_smold_resid>3400</CO2_smold_resid>
-    	<CH4_smold_resid>0</CH4_smold_resid>
-    	<NMHC_smold_resid>0</NMHC_smold_resid>
-    </EFG>
 </EMISSIONS_FACTOR_DATABASE>
