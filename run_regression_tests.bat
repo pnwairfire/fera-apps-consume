@@ -3,10 +3,10 @@ if "%1"=="full" goto FULL
 python -m test.test_driver > 00results.txt
 type 00results.txt | findstr Exception
 type 00results.txt | findstr failed
-python consume_batch.py natural test\1_458_english.csv
-diff consume_results.csv test\expected\1_458_english_out.csv
-python consume_batch.py natural test\1_458_metric.csv
-diff consume_results.csv test\expected\1_458_metric_out.csv
+rem python consume_batch.py natural test\1_458_english.csv
+rem diff consume_results.csv test\expected\1_458_english_out.csv
+rem python consume_batch.py natural test\1_458_metric.csv
+rem diff consume_results.csv test\expected\1_458_metric_out.csv
 goto DONE
 :FULL
 
