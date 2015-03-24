@@ -8,9 +8,11 @@
 # Copyright:   (c) kjells 2011
 #-------------------------------------------------------------------------------
 #!/usr/bin/env python
+from __future__ import absolute_import
 import csv
 import sys
 from . ulp import WithinThisManyULP, HowManyULP
+#from ulp import WithinThisManyULP, HowManyULP
 import decimal as dec
 import re
 import math
