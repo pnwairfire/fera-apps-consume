@@ -47,8 +47,8 @@ def remove_file(file):
 def run_test():
     OUTFILE = "test_results.txt"
     remove_file(OUTFILE)
-    linux_cmd = 'export PYTHONPATH=$PYTHONPATH:./consume && python ./test/test_driver.py'
-    windows_cmd = 'set PYTHONPATH=%PYTHONPATH%;%cd%\consume && python ./test/test_driver.py'
+    linux_cmd = 'export PYTHONPATH=$PYTHONPATH:./consume && python -m ./test/test_driver.py'
+    windows_cmd = 'set PYTHONPATH=%PYTHONPATH%;%cd%\consume && python -m ./test/test_driver.py'
     cmd = linux_cmd if os.name == 'posix' else windows_cmd
     cmd += " > {}".format(OUTFILE)
     print(cmd)
