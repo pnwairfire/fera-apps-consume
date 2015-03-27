@@ -33,8 +33,6 @@ def copy_files():
     for f in glob.glob('output*.csv'):
         shutil.copyfile(f, '{}/{}'.format(DIST_DIR, f))
     shutil.copytree('consume', '{}/consume'.format(DIST_DIR))
-    shutil.copytree('emitcalc/emitcalc', '{}/emitcalc'.format(DIST_DIR))
-    shutil.copytree('fccs2ef/fccs2ef', '{}/fccs2ef'.format(DIST_DIR))
     
 def get_tip():
     #proc = subprocess.Popen(['hg', 'tip', '--template', '{rev}'],stdout=subprocess.PIPE)
