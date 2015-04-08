@@ -101,7 +101,7 @@ def read_col_cfg_file(filename):
                 if 2 == len(chunks):
                     retval.append((chunks[0].strip(), chunks[1].strip()))
                 else:
-                    assert false, "Malformed line: {}".format(line)
+                    assert False, "Malformed line: {}".format(line)
     return retval
 
 def write_results(all_results, outfile, do_metric, col_cfg_file=None):
@@ -179,7 +179,6 @@ def run(burn_type, csv_input, do_metric, msg_level, outfile, fuel_loadings=None,
     if consumer.load_scenario(csv_input, display=False):
         emissions = consume.Emissions(consumer)
         results = emissions.results()
-        fuelbed_list = consumer.fuelbed_fccs_ids
         write_results(results, outfile, do_metric, col_cfg_file=col_cfg)
         if not pickle_output(col_cfg):
             print("\nSuccess!!! Results are in \"{}\"".format(outfile))
