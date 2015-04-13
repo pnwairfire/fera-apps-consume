@@ -14,12 +14,14 @@ import os
 import sys
 import batch_locator
 import cmdline
-import pandas as pan
+import pandas as pd
 import pickle
 import unit_convert
+import numpy as np
 
 DO_PICKLE_OUTPUT = 'pickle'
 DO_RAW_OUTPUT = 'raw'
+FEPS_EMISSIONS_INPUT = 'feps_emissions_input.csv'
 
 # -- From stackoverflow.com ---
 from collections import *
@@ -104,6 +106,48 @@ def read_col_cfg_file(filename):
                     assert False, "Malformed line: {}".format(line)
     return retval
 
+def write_feps_emissions_input(all_results):
+    '''
+    FEPS expects an input file that looks like this:
+        Phase,CO2,CO,CH4,PM25,PM10,NOx,SO2,NH3,VOC,Total
+        Flame,598943.21,15372.26,552.77,1829.97,2157.84,0.00,0.00,0.00,669.01,619525.06
+        Smold,425497.69,40625.54,2086.30,4798.19,5166.86,0.00,0.00,0.00,1377.66,479552.23
+        Resid,501526.64,47997.12,2463.88,5730.09,6153.71,0.00,0.00,0.00,1621.53,565492.98
+        Total,1525967.54,103994.91,5102.95,12358.26,13478.41,0.00,0.00,0.00,3668.19,1664570.26
+
+    NOTE: Consume doesn't supply NOx, SO2, or NH3 -- we simply supply 0 for those pollutants.
+    '''
+    emissions = {
+        'Phase' : ['Flame', 'Smold', 'Resid', 'Total'],
+        'CO2' : [np.sum(all_results['emissions_co2_flaming']), np.sum(all_results['emissions_co2_smoldering']),
+                    np.sum(all_results['emissions_co2_residual']), np.sum(all_results['emissions_co2_total']), ],
+        'CO' : [np.sum(all_results['emissions_co_flaming']), np.sum(all_results['emissions_co_smoldering']),
+                    np.sum(all_results['emissions_co_residual']), np.sum(all_results['emissions_co_total']), ],
+        'CH4' : [np.sum(all_results['emissions_ch4_flaming']), np.sum(all_results['emissions_ch4_smoldering']),
+                    np.sum(all_results['emissions_ch4_residual']), np.sum(all_results['emissions_ch4_total']), ],
+        'PM25' : [np.sum(all_results['emissions_pm25_flaming']), np.sum(all_results['emissions_pm25_smoldering']),
+                    np.sum(all_results['emissions_pm25_residual']), np.sum(all_results['emissions_pm25_total']), ],
+        'PM10' : [np.sum(all_results['emissions_pm10_flaming']), np.sum(all_results['emissions_pm10_smoldering']),
+                    np.sum(all_results['emissions_pm10_residual']), np.sum(all_results['emissions_pm10_total']), ],
+        'NOx' : [0.0, 0.0, 0.0, 0.0],
+        'SO2' : [0.0, 0.0, 0.0, 0.0],
+        'NH3' : [0.0, 0.0, 0.0, 0.0],
+        'VOC' : [np.sum(all_results['emissions_nmhc_flaming']), np.sum(all_results['emissions_nmhc_smoldering']),
+                    np.sum(all_results['emissions_nmhc_residual']), np.sum(all_results['emissions_nmhc_total']), ],
+    }
+    totals = []
+    for i,v in enumerate(['Flame', 'Smold', 'Resid', 'Total']):
+        summ = 0.0
+        for p in ['CO2', 'CO', 'CH4', 'PM25', 'PM10', 'VOC']:
+            summ += emissions[p][i]
+        totals.append(summ)
+    emissions['Total'] = totals
+    df = pd.DataFrame(emissions)
+    df = df[['Phase', 'CO2', 'CO', 'CH4', 'PM25', 'PM10', 'NOx', 'SO2', 'NH3', 'VOC', 'Total']]
+    df.to_csv(FEPS_EMISSIONS_INPUT, index=False, float_format='%.2f')
+
+
+
 def write_results(all_results, outfile, do_metric, col_cfg_file=None):
     # this is the default set of columns for the output format
     default_cols = [
@@ -142,7 +186,10 @@ def write_results(all_results, outfile, do_metric, col_cfg_file=None):
         colname = colname.replace(' ', '_')
         tmp[colname] = v
 
-    # output format will be done later so simply persist the calculate results
+    # always write the FEPS emissions input file
+    write_feps_emissions_input(tmp)
+
+    # output format will be done later so simply persist the calculated results
     if pickle_output(col_cfg_file):
         pickle.dump(tmp, open(outfile, 'wb'))
     elif do_raw_output(col_cfg_file):
@@ -162,7 +209,7 @@ def write_results(all_results, outfile, do_metric, col_cfg_file=None):
             new_key = col[1]
             if key in tmp.keys():
                 add_these.append((new_key, converter(key, tmp[key])))
-        newdf = pan.DataFrame.from_items(add_these)
+        newdf = pd.DataFrame.from_items(add_these)
         newdf.to_csv(outfile, index=False)
 
 def run(burn_type, csv_input, do_metric, msg_level, outfile, fuel_loadings=None, col_cfg=None):
