@@ -12,6 +12,8 @@ import os
 import argparse
 import logging
 
+DEFAULT_OUTPUT = 'output_all.csv'
+
 def safe_sequence(item):
     try:
        return item[0]
@@ -65,7 +67,8 @@ Examples:
             a fuel loadings file.')
 
     # - customize the output column configuration
-    parser.add_argument('-x', action='store', nargs=1, dest='col_cfg_file', metavar='output columns',
+    parser.add_argument('-x', action='store', nargs=1, dest='col_cfg_file',
+        metavar='output columns', default=['consume_all_out.csv'],
         help='Specify the output column configuration file for consume to use')
 
     # - customize the message output

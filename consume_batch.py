@@ -21,6 +21,7 @@ import numpy as np
 
 DO_PICKLE_OUTPUT = 'pickle'
 DO_RAW_OUTPUT = 'raw'
+
 FEPS_EMISSIONS_INPUT = 'feps_emissions_input.csv'
 
 # -- From stackoverflow.com ---
@@ -149,35 +150,6 @@ def write_feps_emissions_input(all_results):
 
 
 def write_results(all_results, outfile, do_metric, col_cfg_file=None):
-    # this is the default set of columns for the output format
-    default_cols = [
-        ('parameters_fuelbeds', 'Fuelbeds'),
-        ('consumption_summary_total_total', 'Total Consumption'),
-        ('consumption_summary_canopy_total', 'Canopy Consumption'),
-        ('consumption_summary_ground_fuels_total', 'GroundFuel Consumption'),
-        ('consumption_summary_litter-lichen-moss_total', 'LLM Consumption'),
-        ('consumption_summary_nonwoody_total', 'NonWoody Consumption'),
-        ('consumption_summary_shrub_total', 'Shrub Consumption'),
-        ('consumption_summary_woody_fuels_total', 'Woody Consumption'),
-        ('emissions_ch4_total', 'CH4 Emissions'),
-        ('emissions_co2_total', 'CO2 Emissions'),
-        ('emissions_co_total', 'CO Emissions'),
-        ('emissions_nmhc_total', 'NMHC Emissions'),
-        ('emissions_pm10_total', 'PM10 Emissions'),
-        ('emissions_pm25_total', 'PM25 Emissions'),
-        ('emissions_pm_total', 'PM Emissions'),
-        ('heat_release_total', 'Total Heat Release'),
-        ('parameters_area', 'Area'),
-        ('parameters_burn_type', 'Burn Type'),
-        ('parameters_can_con_pct', 'Canopy Consumption (%)'),
-        ('parameters_ecoregion', 'Region'),
-        ('parameters_emissions_fac_group', 'Emmissions Factor Group'),
-        ('parameters_fm_1000hr', '1000hr Fuel Moisture'),
-        ('parameters_fm_duff', 'Duff Fuel Moisture'),
-        ('parameters_shrub_black_pct', 'Shrub Blackened (%)'),
-        ('parameters_pile_black_pct', 'Pile Blackened (%)'),
-        ('parameters_units', 'Units') ]
-
     # calculated results are in a hierarchical dictionary. Flatten the entire structure
     #  so that any chosen datum can be specified
     tmp = {}
@@ -189,28 +161,33 @@ def write_results(all_results, outfile, do_metric, col_cfg_file=None):
     # always write the FEPS emissions input file
     write_feps_emissions_input(tmp)
 
-    # output format will be done later so simply persist the calculated results
+    # Idea: output format will be done later so simply persist the calculated results.
+    # I've retained this, but it is no longer the default action. We have a default
+    # output formatting file specified in the command line parser.
     if pickle_output(col_cfg_file):
         pickle.dump(tmp, open(outfile, 'wb'))
+    # this is for debugging or generating all the keys
     elif do_raw_output(col_cfg_file):
         for key in sorted(tmp.keys()):
             print('{}:   {}'.format(key, str(tmp[key])))
+    # This is the common case
     else:
         # - pick conversion method
         converter = unit_convert.column_convert if do_metric else unit_convert.column_convert_none
 
-        columns_to_print = default_cols
         if col_cfg_file:
             columns_to_print = read_col_cfg_file(col_cfg_file)
-
-        add_these = []
-        for col in columns_to_print:
-            key = col[0]
-            new_key = col[1]
-            if key in tmp.keys():
-                add_these.append((new_key, converter(key, tmp[key])))
-        newdf = pd.DataFrame.from_items(add_these)
-        newdf.to_csv(outfile, index=False)
+            add_these = []
+            for col in columns_to_print:
+                key = col[0]
+                new_key = col[1]
+                if key in tmp.keys():
+                    add_these.append((new_key, converter(key, tmp[key])))
+            newdf = pd.DataFrame.from_items(add_these)
+            newdf.to_csv(outfile, index=False)
+        else:
+            # The command line parser should preclude getting here.
+            print("\nError: bad or missing column configuration file!\n")
 
 def run(burn_type, csv_input, do_metric, msg_level, outfile, fuel_loadings=None, col_cfg=None):
     # validate alternate loadings file if provide. Throws exception on invalid
