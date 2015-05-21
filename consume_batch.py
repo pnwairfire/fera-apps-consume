@@ -24,8 +24,8 @@ DO_RAW_OUTPUT = 'raw'
 FEPS_EMISSIONS_INPUT = 'feps_emissions_input.csv'
 
 # -- From stackoverflow.com ---
-from collections import *
-from itertools import *
+import collections as colls
+import itertools as it
 
 same = lambda x:x  # identity function
 add = lambda a,b:a+b
@@ -38,11 +38,11 @@ def flattenDict(dictionary, keyReducer=add, keyLift=_tuple, init=()):
     #     r((...r((r((r((init,k1)),k2)),k3))...kn))
 
     def _flattenIter(pairs, _keyAccum=init):
-        atoms = ((k,v) for k,v in pairs if not isinstance(v, Mapping))
-        submaps = ((k,v) for k,v in pairs if isinstance(v, Mapping))
+        atoms = ((k,v) for k,v in pairs if not isinstance(v, colls.Mapping))
+        submaps = ((k,v) for k,v in pairs if isinstance(v, colls.Mapping))
         def compress(k):
             return keyReducer(_keyAccum, keyLift(k))
-        return chain(
+        return it.chain(
             (
                 (compress(k),v) for k,v in atoms
             ),
