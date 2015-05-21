@@ -68,7 +68,7 @@ Examples:
 
     # - customize the output column configuration
     parser.add_argument('-x', action='store', nargs=1, dest='col_cfg_file',
-        metavar='output columns', default=['consume_all_out.csv'],
+        metavar='output columns', default=[DEFAULT_OUTPUT],
         help='Specify the output column configuration file for consume to use')
 
     # - customize the message output
