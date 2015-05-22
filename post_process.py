@@ -189,8 +189,8 @@ def main():
     parser = PostProcessParser()
     parser.do_parse(sys.argv)
     results = get_combined_results(parser.results_files)
-    results.to_csv(parser.output_file)
     write_results_feps(results, os.path.split(parser.results_files[0])[0])
+    results.to_csv(parser.output_file, index=False)
 
 if __name__ == '__main__':
     main()
