@@ -119,33 +119,29 @@ def write_feps_emissions_input(all_results):
     NOTE: Consume doesn't supply NOx, SO2, or NH3 -- we simply supply 0 for those pollutants.
     '''
     emissions = {
-        'Phase' : ['Flame', 'Smold', 'Resid', 'Total'],
+        'Phase' : ['Flame', 'Smold', 'Resid'],
         'CO2' : [np.sum(all_results['emissions_co2_flaming']), np.sum(all_results['emissions_co2_smoldering']),
-                    np.sum(all_results['emissions_co2_residual']), np.sum(all_results['emissions_co2_total']), ],
+                    np.sum(all_results['emissions_co2_residual'])],
         'CO' : [np.sum(all_results['emissions_co_flaming']), np.sum(all_results['emissions_co_smoldering']),
-                    np.sum(all_results['emissions_co_residual']), np.sum(all_results['emissions_co_total']), ],
+                    np.sum(all_results['emissions_co_residual'])],
         'CH4' : [np.sum(all_results['emissions_ch4_flaming']), np.sum(all_results['emissions_ch4_smoldering']),
-                    np.sum(all_results['emissions_ch4_residual']), np.sum(all_results['emissions_ch4_total']), ],
+                    np.sum(all_results['emissions_ch4_residual'])],
         'PM25' : [np.sum(all_results['emissions_pm25_flaming']), np.sum(all_results['emissions_pm25_smoldering']),
-                    np.sum(all_results['emissions_pm25_residual']), np.sum(all_results['emissions_pm25_total']), ],
+                    np.sum(all_results['emissions_pm25_residual'])],
         'PM10' : [np.sum(all_results['emissions_pm10_flaming']), np.sum(all_results['emissions_pm10_smoldering']),
-                    np.sum(all_results['emissions_pm10_residual']), np.sum(all_results['emissions_pm10_total']), ],
-        'NOx' : [0.0, 0.0, 0.0, 0.0],
-        'SO2' : [0.0, 0.0, 0.0, 0.0],
-        'NH3' : [0.0, 0.0, 0.0, 0.0],
-        'VOC' : [np.sum(all_results['emissions_nmhc_flaming']), np.sum(all_results['emissions_nmhc_smoldering']),
-                    np.sum(all_results['emissions_nmhc_residual']), np.sum(all_results['emissions_nmhc_total']), ],
+                    np.sum(all_results['emissions_pm10_residual'])],
+        'NOx' : [0.0, 0.0, 0.0],
+        'SO2' : [0.0, 0.0, 0.0],
+        'NH3' : [0.0, 0.0, 0.0],
+        'NMHC' : [np.sum(all_results['emissions_nmhc_flaming']), np.sum(all_results['emissions_nmhc_smoldering']),
+                    np.sum(all_results['emissions_nmhc_residual'])],
     }
-    totals = []
-    for i,v in enumerate(['Flame', 'Smold', 'Resid', 'Total']):
-        summ = 0.0
-        for p in ['CO2', 'CO', 'CH4', 'PM25', 'PM10', 'VOC']:
-            summ += emissions[p][i]
-        totals.append(summ)
-    emissions['Total'] = totals
+    print('\nHere!!!\n')
     df = pd.DataFrame(emissions)
-    df = df[['Phase', 'CO2', 'CO', 'CH4', 'PM25', 'PM10', 'NOx', 'SO2', 'NH3', 'VOC', 'Total']]
+    df = df[['Phase', 'CO2', 'CO', 'CH4', 'PM25', 'PM10', 'NOx', 'SO2', 'NH3', 'NMHC']]
+    print('\nHere111!!!\n')
     df.to_csv(FEPS_EMISSIONS_INPUT, index=False, float_format='%.2f')
+    print('\nHere 222!!!\n')
 
 
 
