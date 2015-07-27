@@ -515,12 +515,13 @@ class Emissions(util.FrozenClass):
         """
         if self._have_cons_data == 0:
             self._cons_object._calculate() # to generate consumption values
-            self._have_cons_data = len(self._cons_object._cons_data[0][0]) if None != self._cons_object._cons_data else 0
+            if not None is self._cons_object._cons_data:
+                self._have_cons_data = len(self._cons_object._cons_data[0][0])
 
         if self._have_cons_data:
             self._emissions_factor_groups = self._emission_factor_db.get_efgs(self._cons_object._settings.get('fuelbeds'))
             self._emissions_calc(efg = self._emissions_factor_groups)
-            return None != self._emis_data and None != self._emis_summ
+            return (not None is self._emis_data) and (not None is self._emis_summ)
         else:
             return False
 

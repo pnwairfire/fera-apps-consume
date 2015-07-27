@@ -1217,7 +1217,7 @@ class FuelConsumption(util.FrozenClass):
                 assert False, "Error: Invalid fuelbed specified"
         return self.FCCS.loadings_data_.iloc[results]
 
-    def calc_ff_redux_proportion(self, LD):
+    def calc_ff_redux_proportion(self, LD, ff_reduction):
         # total forest floor depth (inches)
         ff_depth = (LD['duff_upper_depth'] + LD['duff_lower_depth'] + LD['lit_depth'] + LD['lch_depth'] + LD['moss_depth']).values
 
@@ -1227,7 +1227,7 @@ class FuelConsumption(util.FrozenClass):
             nonzero_depth = np.not_equal(ff_depth, 0.0)
             # divide reduction by total ff depth to get proportion
             ff_redux_proportion = np.where(nonzero_depth,
-                (values(LD, 'ff_reduction') / ff_depth), 0.0)
+                                           (ff_reduction / ff_depth), 0.0)
 
         return ff_redux_proportion
 
@@ -1296,7 +1296,7 @@ class FuelConsumption(util.FrozenClass):
             oneK_hr_rot_fsrt = ccn.ccon_oneK_rot_nat(fm_1000hr, ecos_mask, LD)
             tenK_hr_rot_fsrt = ccn.ccon_tenK_rot_nat(fm_1000hr, LD)
             tnkp_hr_rot_fsrt = ccn.ccon_tnkp_rot_nat(fm_1000hr, LD)
-            [LD['ff_reduction'], y_b, duff_depth] = ccn.ccon_ffr(fm_duff, ecoregion_masks, LD)
+            [ff_reduction, y_b, duff_depth] = ccn.ccon_ffr(fm_duff, ecoregion_masks, LD)
         else:
             fm_type = self._settings.fm_type
             windspeed =  self._settings.get('windspeed')
@@ -1310,17 +1310,19 @@ class FuelConsumption(util.FrozenClass):
             [oneK_hr_snd_fsrt, oneK_hr_rot_fsrt],
             [tenK_hr_snd_fsrt, tenK_hr_rot_fsrt],
             [tnkp_hr_snd_fsrt, tnkp_hr_rot_fsrt],
-            LD['ff_reduction']] = cca.ccon_activity(fm_1000hr, fm_type,
+            ff_reduction] = cca.ccon_activity(fm_1000hr, fm_type,
                 windspeed, slope, area, days_since_rain, fm_10hr, length_of_ignition, LD)
 
-        ff_reduction = np.array(LD['ff_reduction'].values)
+        # The ff reduction is a destructive process (modifies the ff_reduction array)
+        # Make a copy for use in basal area and sq midden calcs
+        ff_redux_copy = ff_reduction.copy()
         lch_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'lch_depth', 'lichen_loading', [0.95, 0.05, 0.00])
         moss_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'moss_depth', 'moss_loading', [0.95, 0.05, 0.00])
         lit_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'lit_depth', 'litter_loading', [0.90, 0.10, 0.00])
         duff_upper_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'duff_upper_depth', 'duff_upper_loading', [0.10, 0.70, 0.20])
         duff_lower_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'duff_lower_depth', 'duff_lower_loading', [0.00, 0.20, 0.80])
 
-        ff_redux_proportion = self.calc_ff_redux_proportion(LD)
+        ff_redux_proportion = self.calc_ff_redux_proportion(LD, ff_redux_copy)
         bas_fsrt = ccn.ccon_bas(values(LD, 'bas_loading'), ff_redux_proportion)
         sqm_fsrt = ccn.ccon_sqm(values(LD, 'sqm_loading'), ff_redux_proportion)
 
@@ -1394,7 +1396,7 @@ class FuelConsumption(util.FrozenClass):
             tnkp_hr_rot_fsrt]
             )
 
-        self._cons_debug_data = np.array([LD['ff_reduction']])
+        self._cons_debug_data = np.array(ff_reduction)
 
         # delete extraneous memory hogging variables
         del (all_fsrt, can_fsrt, shb_fsrt, nw_fsrt, llm_fsrt,

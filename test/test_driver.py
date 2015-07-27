@@ -307,15 +307,14 @@ def run_and_test_emissions(emissions, fb_list, outfilename, reference_values):
     print("{} = failed, {} compared:\t{}".format(failed, compared, outfilename))
 
 def exception_wrapper(func, *args):
+    print("Running {}".format(func.__name__))
     try:
-        print("Running {}".format(func.__name__))
         func(*args)
         return 0
     except Exception as e:
-        print('\nException running {}'.format(func.__name__))
         exc_type, exc_value, exc_traceback = sys.exc_info()
-        print("*** print_tb:")
-        traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
+        print('\nException running {}'.format(func.__name__))
+        traceback.print_tb(exc_traceback, limit=10, file=sys.stdout)
         return 1
 
 #-------------------------------------------------------------------------------
