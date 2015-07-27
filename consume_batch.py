@@ -136,12 +136,9 @@ def write_feps_emissions_input(all_results):
         'NMHC' : [np.sum(all_results['emissions_nmhc_flaming']), np.sum(all_results['emissions_nmhc_smoldering']),
                     np.sum(all_results['emissions_nmhc_residual'])],
     }
-    print('\nHere!!!\n')
     df = pd.DataFrame(emissions)
     df = df[['Phase', 'CO2', 'CO', 'CH4', 'PM25', 'PM10', 'NOx', 'SO2', 'NH3', 'NMHC']]
-    print('\nHere111!!!\n')
     df.to_csv(FEPS_EMISSIONS_INPUT, index=False, float_format='%.2f')
-    print('\nHere 222!!!\n')
 
 
 
