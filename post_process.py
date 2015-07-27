@@ -110,7 +110,7 @@ def sort_fuelbeds(df):
     def sort_chunkify(s):
         ''' Break into numeric and other '''
         m = re.match('^([0-9]+)(.*$)', s)
-        retval = (sys.maxint, s, s)
+        retval = (sys.maxsize, s, s)
         if m:
             if 2 == m.lastindex:
                 retval = (int(m.group(1)), m.group(2), s)
@@ -134,7 +134,7 @@ def sort_fuelbeds(df):
     df[['Fuelbeds']] = df[['Fuelbeds']].astype(str)
     for item in df.Fuelbeds:
         chunked = sort_chunkify(str(item))
-        if result.has_key(chunked[0]):
+        if chunked[0] in result.keys():
             result[chunked[0]].append(chunked)
         else:
             result[chunked[0]] = [chunked]
