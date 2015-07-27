@@ -10,6 +10,7 @@
 import sys
 import os
 import random
+import traceback
 
 def pp():
     curdir = os.path.abspath(os.path.curdir)
@@ -22,7 +23,7 @@ def pp():
 
 pp()
 import consume
-from tester import DataObj as compareCSV
+from .tester import DataObj as compareCSV
 
 def get_this_location():
     ''' Return the absolute directory path for this file
@@ -312,7 +313,9 @@ def exception_wrapper(func, *args):
         return 0
     except Exception as e:
         print('\nException running {}'.format(func.__name__))
-        print(e)
+        exc_type, exc_value, exc_traceback = sys.exc_info()
+        print("*** print_tb:")
+        traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
         return 1
 
 #-------------------------------------------------------------------------------
