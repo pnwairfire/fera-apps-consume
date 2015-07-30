@@ -9,7 +9,6 @@ from . data_desc import list_valid_combustion_stages
 from . data_desc import list_valid_consumption_strata
 from . data_desc import perarea
 from . util_consume import get_version
-from . util_consume import get_version_short
 
 try:
     # Using consume in a non-install situation could uncover users without

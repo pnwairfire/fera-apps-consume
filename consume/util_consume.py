@@ -343,25 +343,26 @@ def propcons(x):
     """ Equation to calculate proportion consumed for various strata"""
     return math.e ** (x) / (1 + math.e ** x)
 
+
+
+#-------------------------------------------------------------------------------
+#   Versioning strategy:
+#       The file "version.py" contains major and minor version numbers. These
+#       need to altered manually. Each CI build will append a line to this
+#       file with the BUILD_REVISION number.
+#-------------------------------------------------------------------------------
 try:
-    from version import get_consume_version
+    from . version import MAJOR_VERSION
+    from . version import MINOR_VERSION
+    from . version import BUILD_REVISION
 except ImportError:
-    def get_consume_version():
-        from datetime import date
-        today = date.today()
-        version_string = 'Consume version 4.2 Revision 000 Date {} (unofficial)'.format(today)
-        return version_string
+    BUILD_REVISION = 0
 
 def get_version():
-    return get_consume_version()
-
-def get_version_short():
-    ver = get_consume_version()
-    chunks = ver.split(' ')
-    version = "Ver{}_Rev{}_{}".format(chunks[2], chunks[4], chunks[6])
-    if 'unofficial' in ver:
-        version += '_unofficial'
-    return version
+    from datetime import date
+    today = date.today()
+    version_string = '{}.{}.{:0>4} | {}'.format(MAJOR_VERSION, MINOR_VERSION, BUILD_REVISION, today)
+    return version_string
 
 def deprecated_function(name):
     print("\n !!! This function '{}' has been deprecated. Please us {}_#().\n".format(name, name))
@@ -372,7 +373,6 @@ def deprecated_function(name):
 #-------------------------------------------------------------------------------
 def main():
     print(get_version())
-    print(get_version_short())
 if __name__ == '__main__':
     main()
 
