@@ -54,7 +54,7 @@ Examples:
 ```
 
 ### Building
-Consume is written in Python so there is no build. 
+Consume is written in Python so there is no build. Consume runs under both Python 2 an 3
 
 ### Tests
 Consume has regression tests. Run them like so (note that Consume runs under both Python 2 and 3):
