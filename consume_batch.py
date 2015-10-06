@@ -118,6 +118,7 @@ def write_feps_emissions_input(all_results):
 
     NOTE: Consume doesn't supply NOx, SO2, or NH3 -- we simply supply 0 for those pollutants.
     '''
+    LBS_PER_TON = 2000
     emissions = {
         'Phase' : ['Flame', 'Smold', 'Resid'],
         'CO2' : [np.sum(all_results['emissions_co2_flaming']), np.sum(all_results['emissions_co2_smoldering']),
@@ -138,7 +139,10 @@ def write_feps_emissions_input(all_results):
     }
     df = pd.DataFrame(emissions)
     df = df[['Phase', 'CO2', 'CO', 'CH4', 'PM25', 'PM10', 'NOx', 'SO2', 'NH3', 'NMHC']]
-    df.to_csv(FEPS_EMISSIONS_INPUT, index=False, float_format='%.2f')
+    pollutants = ['CO2', 'CO', 'CH4', 'PM25', 'PM10', 'NOx', 'SO2', 'NH3', 'NMHC']
+    for p in pollutants:
+        df[p] /= LBS_PER_TON
+    df.to_csv(FEPS_EMISSIONS_INPUT, index=False, float_format='%.3f')
 
 
 
