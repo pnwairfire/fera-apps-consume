@@ -76,7 +76,7 @@ There are a number of alternative options for setting input values:
         fuelbed_fccs_ids
                 : a list of Fuel Characteristic Classification System (FCCS)
                   (http://www.fs.fed.us/pnw/fera/fccs/index.shtml) fuelbed ID
-                  numbers (1-291).  Use the .FCCS.browse() method to load a list
+                  numbers.  Use the .FCCS.browse() method to load a list
                   of all FCCS ID#'s and their associated site names. Use
                   .FCCS.info(id#) to get a site description of the
                   specified FCCD ID number. To get a complete listing of fuel
@@ -92,11 +92,9 @@ There are a number of alternative options for setting input values:
                 : a list (or single region to be used for all fuelbeds) of
                   ecoregions ('western', 'southern', or 'boreal') that
                   represent the ecoregion for the corresponding FCCS fuelbed ID
-                  listed in the 'fuelbeds_fccs_ids' variable. Regions within the
-                  US that correspond to each broad regional description can be
-                  found in the official Consume 3.0 User's Guide, p. 60. Further
+                  listed in the 'fuelbeds_fccs_ids' variable. Further
                   info on Bailey's ecoregions can be found here:
-                www.eoearth.org/article/Ecoregions_of_the_United_States_(Bailey)
+                  www.eoearth.org/article/Ecoregions_of_the_United_States_(Bailey)
                   Default is 'western'
 
         fuel_moisture_1000hr_pct
@@ -117,12 +115,7 @@ There are a number of alternative options for setting input values:
 
         canopy_consumption_pct
                 : Percent canopy consumed. A number or list of numbers ranging
-                  from 0-100 representing a percentage. Set to '-1' to
-                  use an FCCS-fuelbed dependent precalculated canopy consumption
-                  percentage based on crown fire initiation potential, crown to
-                  crown transmissivity, and crown fire spreading potential.
-                  (note: auto-calc is not available for FCCS ID's 401-456)
-                  Default is -1
+                  from 0-100 representing a percentage.
 
         shrub_blackened_pct
                 : Percent of shrub that has been blackened. A number or list
@@ -239,16 +232,6 @@ a variety of different formats:
 
 ### OTHER USEFUL METHODS ###
 
->>> consume.list_valid_units()        ...displays a list of valid output unit
-                                         options
-
->>> consume.list_valid_consumption_strata()
-                                      ...displays a list of valid consumption
-                                         strata group names
-
->>> fc_obj.list_variable_names()      ...displays a list of the variable names
-                                         used for each input parameter
-
 >>> fc_obj.FCCS.browse()              ...loads a list of all FCCS fuelbed ID
                                          numbers and their site names
 
@@ -256,15 +239,6 @@ a variety of different formats:
                                          fuelbed with the specified ID number.
                                          Set detail=True to print out detailed
                                          fuel loading information
-
->>> fc_obj.FCCS.get_canopy_pct(#)     ...displays estimated canopy consumption
-                                         percent as calculated by MTRI for the
-                                         specified FCCS ID number. This is the
-                                         value that will be used if
-                                         canopy_consumption_pct is set to -1.
-
->>> fc_obj.load_example()             ...loads an example scenario with 2
-                                         fuelbeds
 
 >>> fc_obj.reset_inputs_and_outputs() ...clears input and output parameters
 
@@ -539,7 +513,6 @@ msg.addHandler(logging.StreamHandler())
 #snow_free_days = 30 # need for curing eval, if still valid
 
 
-#class FuelConsumption(object):
 class FuelConsumption(util.FrozenClass):
     """A class that estimates fuel consumption due to fire.
 
@@ -612,12 +585,7 @@ class FuelConsumption(util.FrozenClass):
 
         canopy_consumption_pct
                 : Percent canopy consumed. A number or list of numbers ranging
-                  from 0-100 representing a percentage. Set to '-1' to
-                  use an FCCS-fuelbed dependent precalculated canopy consumption
-                  percentage based on crown fire initiation potential, crown to
-                  crown transmissivity, and crown fire spreading potential.
-                  (note: auto-calc is not available for FCCS ID's 401-456)
-                  Default is -1
+                  from 0-100 representing a percentage.
 
         shrub_blackened_pct
                 : Percent of shrub that has been blackened. A number or list
@@ -773,7 +741,7 @@ class FuelConsumption(util.FrozenClass):
 
         fccs_file   : Location of the .xml file that contains all FCCS fuel
                       loading information. The default location is:
-                      "[python-consume dir.]/input_data/fccs_loadings_1_458.xml.xml"
+                      "[python-consume dir.]/input_data/fccs_loadings.xml"
 
         """
         self.msg_level = msg_level
