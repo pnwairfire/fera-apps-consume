@@ -176,7 +176,7 @@ class FCCSDB():
 
         """
         try:
-            fb_index = (self.loadings_data_.fccs_id == fccs_id).nonzero()[0][0]
+            fb_index = (self.loadings_data_.fccs_id == str(fccs_id)).nonzero()[0][0]
             row = self.loadings_data_.ix[fb_index]
             text = "\nFCCS ID# : " + str(row.get('fccs_id'))
             text += "\nSite name: " + str(row.get('site_name'))
