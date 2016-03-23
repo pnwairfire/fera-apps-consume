@@ -67,6 +67,44 @@ def ccon_shrub(shrub_black_pct, LD):
         hold = util.csdist(np.array([0.0] * len(LD['fccs_id']), dtype=float), [0.0, 0.0, 0.0])
         return hold, hold, hold, hold
 
+def shrub_calc(shrub_black_pct, loadings, ecoregion_masks):
+    """ Shrub consumption, western, southern, activity """
+    SEASON = 1
+    MGHA_2_TONSAC = 0.44609
+    def southern_cons(load):
+        return (-0.1889 + 0.9049*(np.log(load)) + 0.0676 * SEASON) * MGHA_2_TONSAC
+
+    def western_cons(load, shrub_black_pct):
+        tmp_sqrt = (0.1102 + 0.1139*(load) + ((1.9647*shrub_black_pct) - (0.3296 * SEASON)))
+        return (tmp_sqrt**tmp_sqrt) * MGHA_2_TONSAC
+        #return (tmp_sqrt**2) * MGHA_2_TONSAC
+
+    csd_live = [0.95, 0.05, 0.0]
+    csd_dead = [0.90, 0.10, 0.0]
+
+    shrub_load_total = values(loadings, 'shrub_prim') + values(loadings, 'shrub_seco')
+    shrub_cons = np.zeros_like(shrub_load_total)
+    if sum(shrub_load_total) > 0:
+        shrub_cons = western_cons(shrub_load_total, 0.8)
+
+        pctlivep = values(loadings, 'shrub_prim_pctlv')
+        pctdeadp = 1 - pctlivep
+        pctlives = values(loadings, 'shrub_seco_pctlv')
+        pctdeads = 1 - pctlives
+
+        # TODO: kjell, finish this!
+        return shrub_cons
+
+        '''
+        return (util.csdist(shb_prim_total * pctlivep, csd_live),
+                util.csdist(shb_prim_total * pctdeadp, csd_dead),
+                util.csdist(shb_seco_total * pctlives, csd_live),
+                util.csdist(shb_seco_total * pctdeads, csd_dead))
+        '''
+    else:
+        hold = util.csdist(np.array([0.0] * len(loadings['fccs_id']), dtype=float), [0.0, 0.0, 0.0])
+        return hold, hold, hold, hold
+
 
 def ccon_nw(LD):
     """ Nonwoody consumption, activity & natural, p.169 """

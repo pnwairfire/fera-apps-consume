@@ -22,7 +22,7 @@ class TestFCCSDB(unittest.TestCase):
 
     # This is ugly. Originally in place to test functionality that MTRI was using, several
     #  layers of changes have made it largely useless (fuelbed file format changed, possible
-    #  python 2 to 3 changes). TODO: consider removing
+    #  python 2 to 3 changes). TODO: consider removing info functionality and unit test
     def test_long_info(self):
         ''' Long info check: '''
         expected = {
