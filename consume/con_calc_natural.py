@@ -77,7 +77,6 @@ def shrub_calc(shrub_black_pct, loadings, ecoregion_masks):
     def western_cons(load, shrub_black_pct):
         tmp_sqrt = (0.1102 + 0.1139*(load) + ((1.9647*shrub_black_pct) - (0.3296 * SEASON)))
         return (tmp_sqrt**tmp_sqrt) * MGHA_2_TONSAC
-        #return (tmp_sqrt**2) * MGHA_2_TONSAC
 
     csd_live = [0.95, 0.05, 0.0]
     csd_dead = [0.90, 0.10, 0.0]
@@ -85,7 +84,7 @@ def shrub_calc(shrub_black_pct, loadings, ecoregion_masks):
     shrub_load_total = values(loadings, 'shrub_prim') + values(loadings, 'shrub_seco')
     shrub_cons = np.zeros_like(shrub_load_total)
     if sum(shrub_load_total) > 0:
-        shrub_cons = western_cons(shrub_load_total, 0.8)
+        shrub_cons = western_cons(shrub_load_total, shrub_black_pct)
 
         pctlivep = values(loadings, 'shrub_prim_pctlv')
         pctdeadp = 1 - pctlivep

@@ -12,14 +12,13 @@ class TestNaturalEquations(unittest.TestCase):
     def tearDown(self):
         pass
         
-    def test_test(self):
+    def test_ccon_shrub(self):
         idxs = ['1','2','3']
         loadings = self.fc._get_loadings_for_specified_files(idxs)
-        ret = ccn.ccon_shrub(0.5, loadings)
-        for idx, _ in enumerate(idxs):
-            print(ret[idx][3])        
-        self.assertFalse(True)            
-        
+        shrub_black_pct = 0.8
+        ret = ccn.ccon_shrub(shrub_black_pct, loadings)
+        print(ret)
+
     def test_shrub_calc(self):
         # Setup ecoregion masks for equations that vary by ecoregion
         ecodict = {"maskb": {"boreal":1, "western":0, "southern":0},
@@ -32,8 +31,9 @@ class TestNaturalEquations(unittest.TestCase):
         ecoregion_masks = {'boreal':ecob_mask, 'southern':ecos_mask , 'western':ecow_mask}    
         
         idxs = ['1','2','3']
+        shrub_black_pct = 0.8
         loadings = self.fc._get_loadings_for_specified_files(idxs)
-        ret = ccn.shrub_calc(0.5, loadings, ecoregion_masks)
-        print(ret)
-        print(ret / 2.0)
-        self.assertFalse(True)
+        ret = ccn.shrub_calc(shrub_black_pct, loadings, ecoregion_masks)
+        self.assertAlmostEqual(0.78, ret[0], places=2)
+        self.assertAlmostEqual(1.09, ret[1], places=2)
+        self.assertAlmostEqual(1.9, ret[2], places=2)
