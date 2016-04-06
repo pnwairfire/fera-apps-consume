@@ -2,6 +2,7 @@ import unittest
 import consume
 import consume.con_calc_natural as ccn
 import helper
+import numpy as np
 
 class TestNaturalEquations(unittest.TestCase):
 
@@ -13,12 +14,13 @@ class TestNaturalEquations(unittest.TestCase):
         pass
         
     def test_ccon_shrub(self):
-        idxs = ['1','2','3']
-        loadings = self.fc._get_loadings_for_specified_files(idxs)
+        self.fc.burn_type = 'natural'
+        self.fc.load_scenario(load_file='test_input.csv')
+        loadings = self.fc._get_loadings_for_specified_files(self.fc._settings.get('fuelbeds'))
         shrub_black_pct = 0.8
         ret = ccn.ccon_shrub(shrub_black_pct, loadings)
-        print(ret)
         print(type(ret))
+        print(len(ret))
 
     def test_shrub_calc(self):
         # Setup ecoregion masks for equations that vary by ecoregion
@@ -30,7 +32,7 @@ class TestNaturalEquations(unittest.TestCase):
         self.fc.load_scenario(load_file='test_input.csv')
         shrub_black_pct = 0.8
         loadings = self.fc._get_loadings_for_specified_files(self.fc._settings.get('fuelbeds'))
-        print(loadings)
+        print(loadings.shrub_prim)
         print('---')
         print(self.fc._settings.get('ecoregion'))
 
@@ -42,10 +44,18 @@ class TestNaturalEquations(unittest.TestCase):
         print(ecoregion_masks)
 
         ret = ccn.shrub_calc(shrub_black_pct, loadings, ecoregion_masks)
-        print(ret)
-        self.assertAlmostEqual(0.78, ret[0], places=2)
-        self.assertAlmostEqual(1.09, ret[2], places=2)
-        self.assertAlmostEqual(1.9, ret[3], places=2)
-        self.assertAlmostEqual(1.9, ret[5], places=2)
-        self.assertAlmostEqual(2.22, ret[1], places=2)
-        self.assertAlmostEqual(0.82, ret[4], places=2)
+        print(type(ret))
+        print(len(ret))
+        print(len(ret[0]))
+        for i in ret:
+            print(i)
+        totals = np.zeros_like(ret[0][:,][3])
+        for i, v in enumerate(ret):
+            totals += v[:,][3]
+        print('\n{}'.format(totals))
+        self.assertAlmostEqual(0.78, totals[0], places=2)
+        self.assertAlmostEqual(2.22, totals[1], places=2)
+        self.assertAlmostEqual(1.09, totals[2], places=2)
+        self.assertAlmostEqual(1.9, totals[3], places=2)
+        self.assertAlmostEqual(0.82, totals[4], places=2)
+        self.assertAlmostEqual(1.9, totals[5], places=2)

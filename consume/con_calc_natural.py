@@ -78,30 +78,31 @@ def shrub_calc(shrub_black_pct, loadings, ecoregion_masks):
         tmp_sqrt = (0.1102 + 0.1139*(load) + ((1.9647*shrub_black_pct) - (0.3296 * SEASON)))
         return (tmp_sqrt**tmp_sqrt) * MGHA_2_TONSAC
 
-    csd_live = [0.95, 0.05, 0.0]
-    csd_dead = [0.90, 0.10, 0.0]
-
     shrub_load_total = values(loadings, 'shrub_prim') + values(loadings, 'shrub_seco')
-    shrub_cons = np.zeros_like(shrub_load_total)
-    if sum(shrub_load_total) > 0:
-        shrub_cons = np.where(
-            ecoregion_masks['southern'], southern_cons(shrub_load_total),
-            western_cons(shrub_load_total, shrub_black_pct))
+    shrub_primary_pct = values(loadings, 'shrub_prim') / shrub_load_total
+    shrub_secondary_pct = 1.0 - shrub_primary_pct
+
+    if shrub_load_total.any():  # any positive totals
+        shrub_cons = np.where(shrub_load_total > 0,
+            np.where(ecoregion_masks['southern'],
+                southern_cons(shrub_load_total),
+                western_cons(shrub_load_total, shrub_black_pct)), 0)
+
+        shrub_primary_total = shrub_cons * shrub_primary_pct
+        shrub_secondary_total = shrub_cons * shrub_secondary_pct
 
         pctlivep = values(loadings, 'shrub_prim_pctlv')
-        pctdeadp = 1 - pctlivep
+        pctdeadp = 1.0 - pctlivep
         pctlives = values(loadings, 'shrub_seco_pctlv')
-        pctdeads = 1 - pctlives
+        pctdeads = 1.0 - pctlives
 
-        # TODO: kjell, finish this!
-        return shrub_cons
+        csd_live = [0.95, 0.05, 0.0]
+        csd_dead = [0.90, 0.10, 0.0]
 
-        '''
-        return (util.csdist(shb_prim_total * pctlivep, csd_live),
-                util.csdist(shb_prim_total * pctdeadp, csd_dead),
-                util.csdist(shb_seco_total * pctlives, csd_live),
-                util.csdist(shb_seco_total * pctdeads, csd_dead))
-        '''
+        return (util.csdist(shrub_primary_total * pctlivep, csd_live),
+                util.csdist(shrub_primary_total * pctdeadp, csd_dead),
+                util.csdist(shrub_secondary_total * pctlives, csd_live),
+                util.csdist(shrub_secondary_total * pctdeads, csd_dead))
     else:
         hold = util.csdist(np.array([0.0] * len(loadings['fccs_id']), dtype=float), [0.0, 0.0, 0.0])
         return hold, hold, hold, hold
