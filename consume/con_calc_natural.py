@@ -67,51 +67,64 @@ def ccon_shrub(shrub_black_pct, LD):
         hold = util.csdist(np.array([0.0] * len(LD['fccs_id']), dtype=float), [0.0, 0.0, 0.0])
         return hold, hold, hold, hold
 
-def shrub_calc(shrub_black_pct, loadings, ecoregion_masks):
-    """ Shrub consumption, western, southern, activity """
-    SEASON = 1
-    MGHA_2_TONSAC = 0.4461
-    def southern_cons(load):
-        return (np.e ** (-0.1889 + (0.9049*np.log(load/MGHA_2_TONSAC)) + 0.0676 * SEASON)) * MGHA_2_TONSAC
-
-    def western_cons(load, shrub_black_pct):
-        tmp_sqrt = (0.1102 + 0.1139*(load) + ((1.9647*shrub_black_pct) - (0.3296 * SEASON)))
-        return (tmp_sqrt**tmp_sqrt) * MGHA_2_TONSAC
-
+def multi_layer_calc(loadings, ecoregion_masks, primary, secondary, primary_pct_live, secondary_pct_live, calculator):
     # determine primary and secondary percentages, replace nan value with zeros
-    shrub_load_total = values(loadings, 'shrub_prim') + values(loadings, 'shrub_seco')
-    shrub_primary_pct = values(loadings, 'shrub_prim') / shrub_load_total
-    shrub_primary_pct = np.where(np.isnan(shrub_primary_pct), 0, shrub_primary_pct)
-    shrub_secondary_pct = 1.0 - shrub_primary_pct
-    shrub_secondary_pct = np.where(np.isnan(shrub_secondary_pct), 0, shrub_secondary_pct)
+    total_load = values(loadings, primary) + values(loadings, secondary)
+    primary_pct = values(loadings, primary) / total_load
+    primary_pct = np.where(np.isnan(primary_pct), 0, primary_pct)
+    secondary_pct = 1.0 - primary_pct
+    secondary_pct = np.where(np.isnan(secondary_pct), 0, secondary_pct)
 
-    if shrub_load_total.any():  # any positive totals
-        shrub_cons = np.where(shrub_load_total > 0,
+    if total_load.any():  # any positive totals
+        cons = np.where(total_load > 0,
             np.where(ecoregion_masks['southern'],   # for southern use southern, everything else is western
-                southern_cons(shrub_load_total),
-                western_cons(shrub_load_total, shrub_black_pct)), 0)
+                calculator.southern_cons(total_load),
+                calculator.western_cons(total_load)), 0)
 
-        shrub_primary_total = shrub_cons * shrub_primary_pct
-        shrub_secondary_total = shrub_cons * shrub_secondary_pct
-        assert np.isnan(shrub_primary_total).any() == False, '{}'.format(shrub_primary_pct)
-        assert np.isnan(shrub_secondary_total).any() == False, '{}'.format(shrub_secondary_total)
+        primary_total = cons * primary_pct
+        secondary_total = cons * secondary_pct
+        assert np.isnan(primary_total).any() == False, '{}'.format(primary_pct)
+        assert np.isnan(secondary_total).any() == False, '{}'.format(secondary_total)
 
-        pctlivep = values(loadings, 'shrub_prim_pctlv')
+        pctlivep = values(loadings, primary_pct_live)
         pctdeadp = 1.0 - pctlivep
-        pctlives = values(loadings, 'shrub_seco_pctlv')
+        pctlives = values(loadings, secondary_pct_live)
         pctdeads = 1.0 - pctlives
 
         csd_live = [0.95, 0.05, 0.0]
         csd_dead = [0.90, 0.10, 0.0]
 
-        return (util.csdist(shrub_primary_total * pctlivep, csd_live),
-                util.csdist(shrub_primary_total * pctdeadp, csd_dead),
-                util.csdist(shrub_secondary_total * pctlives, csd_live),
-                util.csdist(shrub_secondary_total * pctdeads, csd_dead))
+        return (util.csdist(primary_total * pctlivep, csd_live),
+                util.csdist(primary_total * pctdeadp, csd_dead),
+                util.csdist(secondary_total * pctlives, csd_live),
+                util.csdist(secondary_total * pctdeads, csd_dead))
     else:
         hold = util.csdist(np.array([0.0] * len(loadings['fccs_id']), dtype=float), [0.0, 0.0, 0.0])
         return hold, hold, hold, hold
 
+def shrub_calc(shrub_black_pct, loadings, ecoregion_masks):
+    """ Shrub consumption, western, southern, activity """
+    def get_calculator(shrub_black_pct):
+        class Calculator(object):
+            SEASON = 1
+            MGHA_2_TONSAC = 0.4461
+
+            def __init__(self, shrub_black_pct):
+                self._shrub_black_pct = shrub_black_pct
+
+            def southern_cons(self, load):
+                return (np.e ** (-0.1889 + (0.9049 * np.log(load / Calculator.MGHA_2_TONSAC))
+                                 + 0.0676 * Calculator.SEASON)) * Calculator.MGHA_2_TONSAC
+
+            def western_cons(self, load):
+                tmp = (0.1102 + 0.1139 * (load)
+                            + ((1.9647 * self._shrub_black_pct) - (0.3296 * Calculator.SEASON)))
+                return (tmp ** tmp) * Calculator.MGHA_2_TONSAC
+
+        return Calculator(shrub_black_pct)
+
+    return multi_layer_calc(loadings, ecoregion_masks,
+                'shrub_prim', 'shrub_seco', 'shrub_prim_pctlv', 'shrub_seco_pctlv', get_calculator(shrub_black_pct))
 
 def ccon_nw(LD):
     """ Nonwoody consumption, activity & natural, p.169 """
@@ -131,6 +144,22 @@ def ccon_nw(LD):
             util.csdist(nw_prim_total * pctdeadp, csd_dead),
             util.csdist(nw_seco_total * pctlives, csd_live),
             util.csdist(nw_seco_total * pctdeads, csd_dead))
+
+def herb_calc(loadings, ecoregion_masks):
+    """ Herbaceous consumption, activity & natural, p.169 """
+    def get_calculator(shrub_black_pct):
+        class Calculator(object):
+            def southern_cons(load):
+                return load * 0.9713
+            
+            def western_cons(load):
+                return load * 0.9274
+            
+        return Calculator()
+
+    return multi_layer_calc(loadings, ecoregion_masks,
+                            'nw_prim', 'nw_seco', 'nw_prim_pctlv', 'nw_seco_pctlv',
+                            get_calculator(nw_black_pct))
 
 
 ###################################################################
@@ -269,6 +298,15 @@ def ccon_hun_nat(ecos_mask, LD):
             np.equal(ecos_mask, 1),       # if southern ecoregion,
             values(LD, 'hun_hr_sound') * 0.4022,    # true
             values(LD, 'hun_hr_sound') * 0.7844)    # false
+    return util.csdist(total, csd)
+
+def sound_hundred_nat(loadings, ecos_mask):
+    """ 100-hr (1 to 3"), natural """
+    csd = [0.85, 0.10, 0.05]
+    total = np.where(
+            np.equal(ecos_mask, 1),       # if southern ecoregion,
+            values(loadings, 'hun_hr_sound') * 0.4022,    # true, ks - note unchanged, not in spreadsheet
+            values(loadings, 'hun_hr_sound') * 0.7166)    # false
     return util.csdist(total, csd)
 
 def ccon_oneK_snd_nat(fm_duff, fm_1000hr, ecos_mask, LD):
