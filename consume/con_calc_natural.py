@@ -78,6 +78,7 @@ def shrub_calc(shrub_black_pct, loadings, ecoregion_masks):
         tmp_sqrt = (0.1102 + 0.1139*(load) + ((1.9647*shrub_black_pct) - (0.3296 * SEASON)))
         return (tmp_sqrt**tmp_sqrt) * MGHA_2_TONSAC
 
+    # determine primary and secondary percentages, replace nan value with zeros
     shrub_load_total = values(loadings, 'shrub_prim') + values(loadings, 'shrub_seco')
     shrub_primary_pct = values(loadings, 'shrub_prim') / shrub_load_total
     shrub_primary_pct = np.where(np.isnan(shrub_primary_pct), 0, shrub_primary_pct)
@@ -86,7 +87,7 @@ def shrub_calc(shrub_black_pct, loadings, ecoregion_masks):
 
     if shrub_load_total.any():  # any positive totals
         shrub_cons = np.where(shrub_load_total > 0,
-            np.where(ecoregion_masks['southern'],
+            np.where(ecoregion_masks['southern'],   # for southern use southern, everything else is western
                 southern_cons(shrub_load_total),
                 western_cons(shrub_load_total, shrub_black_pct)), 0)
 
@@ -242,10 +243,23 @@ def ccon_one_nat(LD):
     csd = [0.95, 0.05, 0.00]
     return util.csdist(values(LD, 'one_hr_sound'), csd)
 
+def sound_one_nat(LD):
+    """ 1-hr (0 to 1/4"), natural """
+    # ks - this is unchanged based on Susan's spreadsheet, although the modeling
+    #  indicated a fraction, not all, is consumed
+    csd = [0.95, 0.05, 0.00]
+    return util.csdist(values(LD, 'one_hr_sound'), csd)
+
 def ccon_ten_nat(LD):
     """ 10-hr (1/4" to 1"), natural, p.169"""
     csd = [0.90, 0.10, 0.00]
     total = values(LD, 'ten_hr_sound') * 0.8650
+    return util.csdist(total, csd)
+
+def sound_ten_nat(LD):
+    """ 10-hr (1/4" to 1"), natural, p.169"""
+    csd = [0.90, 0.10, 0.00]
+    total = values(LD, 'ten_hr_sound') * 0.8581
     return util.csdist(total, csd)
 
 def ccon_hun_nat(ecos_mask, LD):
