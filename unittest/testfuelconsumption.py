@@ -7,7 +7,7 @@ import helper
 class TestFuelConsumption(unittest.TestCase):
 
     def setUp(self):
-        infile = helper.get_test_inputfile()
+        infile = helper.get_test_loadingsfile()
         self._consumer = consume.FuelConsumption()
         '''
         self._consumer.burn_type = 'natural'

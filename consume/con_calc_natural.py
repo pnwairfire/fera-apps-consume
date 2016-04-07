@@ -80,7 +80,9 @@ def shrub_calc(shrub_black_pct, loadings, ecoregion_masks):
 
     shrub_load_total = values(loadings, 'shrub_prim') + values(loadings, 'shrub_seco')
     shrub_primary_pct = values(loadings, 'shrub_prim') / shrub_load_total
+    shrub_primary_pct = np.where(np.isnan(shrub_primary_pct), 0, shrub_primary_pct)
     shrub_secondary_pct = 1.0 - shrub_primary_pct
+    shrub_secondary_pct = np.where(np.isnan(shrub_secondary_pct), 0, shrub_secondary_pct)
 
     if shrub_load_total.any():  # any positive totals
         shrub_cons = np.where(shrub_load_total > 0,
@@ -90,6 +92,8 @@ def shrub_calc(shrub_black_pct, loadings, ecoregion_masks):
 
         shrub_primary_total = shrub_cons * shrub_primary_pct
         shrub_secondary_total = shrub_cons * shrub_secondary_pct
+        assert np.isnan(shrub_primary_total).any() == False, '{}'.format(shrub_primary_pct)
+        assert np.isnan(shrub_secondary_total).any() == False, '{}'.format(shrub_secondary_total)
 
         pctlivep = values(loadings, 'shrub_prim_pctlv')
         pctdeadp = 1.0 - pctlivep

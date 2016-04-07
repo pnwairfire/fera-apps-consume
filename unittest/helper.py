@@ -7,7 +7,7 @@
 #-------------------------------------------------------------------------------
 import os
 
-def get_test_inputfile():
+def get_test_loadingsfile():
     """ In-editor unit tests versus command line unit tests have a different
     working directory. Make both work."""
     infile = ""
@@ -15,4 +15,14 @@ def get_test_inputfile():
         infile = "unittest/test.csv"
     else:
         infile = "test.csv"
+    return infile
+
+def get_test_inputfile():
+    """ In-editor unit tests versus command line unit tests have a different
+    working directory. Make both work."""
+    infile = ""
+    if os.path.exists("unittest/test_input.csv"):
+        infile = "unittest/test_input.csv"
+    else:
+        infile = "test_input.csv"
     return infile
