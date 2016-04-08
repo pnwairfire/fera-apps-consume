@@ -122,4 +122,20 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR_SOUTHERN, totals[7], places=4)
         self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR, totals[8], places=4)
 
+    def test_sound_large_wood(self):
+        CONSUMPTION_FACTOR_SOUTHERN = 0.4022
+        ret = ccn.sound_large_wood(self._loadings, self.fc.fuel_moisture_1000hr_pct, self._ecos_mask)
+        print(ret[3])  # print totals
+        totals = ret[3]
+        # ks - looks like Susan is converting to mgha before calculating and then converting back
+        self.assertEquals(9, len(totals))
+        self.assertAlmostEqual(0.2, totals[0], places=4)
+        self.assertAlmostEqual(4.5 * CONSUMPTION_FACTOR_SOUTHERN, totals[1], places=4)
+        self.assertAlmostEqual(1.0, totals[2], places=4)
+        self.assertAlmostEqual(2.22, totals[3], places=4)
+        self.assertAlmostEqual(1.5 * CONSUMPTION_FACTOR_SOUTHERN, totals[4], places=4)
+        self.assertAlmostEqual(2.22, totals[5], places=4)
+        self.assertAlmostEqual(0.0, totals[6], places=4)
+        self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR_SOUTHERN, totals[7], places=4)
+        self.assertAlmostEqual(0.0, totals[8], places=4)
 

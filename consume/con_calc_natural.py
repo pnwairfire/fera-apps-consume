@@ -68,6 +68,9 @@ def ccon_shrub(shrub_black_pct, LD):
         return hold, hold, hold, hold
 
 def multi_layer_calc(loadings, ecoregion_masks, primary, secondary, primary_pct_live, secondary_pct_live, calculator):
+    ''' This function is called by both the shrub and herb calculators. The general tasks are handled
+        here, and the specific setup is done in the respective calling functions
+    '''
     # determine primary and secondary percentages, replace nan value with zeros
     total_load = values(loadings, primary) + values(loadings, secondary)
     primary_pct = values(loadings, primary) / total_load
@@ -333,6 +336,27 @@ def ccon_tnkp_snd_nat(fm_1000hr, LD):
     z = 0.3960 - (0.0389 * fm_1000hr)
     total = values(LD, 'tnkp_hr_sound') * util.propcons(z)
     return util.csdist(total, csd)
+
+def sound_large_wood(loadings, fm_1000, ecos_mask):
+    def southern_cons(load):
+        return load*0.2998
+
+    def western_cons(load, fm_1000):
+        return 2.6414 + 0.2691*load - 0.0388*fm_1000
+
+    sound_wood_columns = ['oneK_hr_sound', 'tenK_hr_sound', 'tnkp_hr_sound']
+    total = sum([values(loadings, col) for col in sound_wood_columns])
+    assert False, 'Loadings: {}\nFM1000 {}\n'.format(total, fm_1000)
+
+    # ks - is this correct?
+    csd = [0.40, 0.40, 0.20]
+    cons = np.where(total > 0,
+                np.where(ecos_mask,  # for southern use southern, everything else is western
+                         southern_cons(total),
+                         western_cons(total, fm_1000)), 0)
+
+    return util.csdist(cons, csd)
+
 
 def ccon_oneK_rot_nat(fm_duff, ecos_mask, LD):
     """ 1000-hr (3 to 9") rotten, natural """
