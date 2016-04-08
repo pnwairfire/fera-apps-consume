@@ -139,3 +139,20 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR_SOUTHERN, totals[7], places=4)
         self.assertAlmostEqual(0.0, totals[8], places=4)
 
+    def test_litter_calc(self):
+        ret = ccn.litter_calc(self._loadings,
+                self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_1000hr_pct, self._ecoregion_masks)
+        print(ret)  # print totals
+        print('---------------')
+        CONSUMPTION_FACTOR_WESTERN = 0.6804
+        CONSUMPTION_FACTOR_SOUTHERN = 0.7428
+        CONSUMPTION_FACTOR_BOREAL = 0.9794
+        FM_DUFF = 0.8
+        FM_1000 = 0.8
+        self.assertEquals(9, len(ret))
+        self.assertAlmostEqual(
+            CONSUMPTION_FACTOR_WESTERN * 0.5 - FM_DUFF * 0.007, ret[0], places=4)
+        self.assertAlmostEqual(
+            CONSUMPTION_FACTOR_SOUTHERN * 1.5 - FM_1000 * 0.0013, ret[1], places=4)
+        self.assertAlmostEqual(
+            CONSUMPTION_FACTOR_BOREAL * 1.5 - FM_DUFF * 0.0281, ret[2], places=4)

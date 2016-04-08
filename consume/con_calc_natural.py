@@ -225,6 +225,29 @@ def ccon_forest_floor(LD, ff_reduction, key_depth, key_loading, csd):
     total = proportional_reduction * values(LD, key_loading)
     return util.csdist(total, csd)
 
+def litter_calc(loadings, fm_duff, fm_1000, ecoregion_masks):
+    def southern_cons(load, fm_1000):
+        return 0.7428*load - 0.0013*fm_1000
+
+    def western_cons(load, fm_duff):
+        #assert False, '{}\n{}'.format(load, fm_duff)
+        return 0.6804*load - 0.007*fm_duff
+
+    def boreal_cons(load, fm_duff):
+        return 0.9794*load - 0.0281*fm_duff
+
+    litter_load = values(loadings, 'litter_loading')
+    #assert False, fm_1000
+    cons = np.where(litter_load > 0,
+        np.where(ecoregion_masks['southern'],
+            southern_cons(litter_load, fm_1000/100),
+            np.where(ecoregion_masks['western'],
+                western_cons(litter_load, fm_duff/100), boreal_cons(litter_load, fm_duff/100))), 0)
+
+    return cons
+
+
+
 
 ################################
 ### Ground FUELS CONSUMPTION ###
@@ -346,7 +369,6 @@ def sound_large_wood(loadings, fm_1000, ecos_mask):
 
     sound_wood_columns = ['oneK_hr_sound', 'tenK_hr_sound', 'tnkp_hr_sound']
     total = sum([values(loadings, col) for col in sound_wood_columns])
-    assert False, 'Loadings: {}\nFM1000 {}\n'.format(total, fm_1000)
 
     # ks - is this correct?
     csd = [0.40, 0.40, 0.20]
@@ -382,21 +404,3 @@ def ccon_tnkp_rot_nat(fm_duff, LD):
     total = values(LD, 'tnkp_hr_rotten') * util.propcons(y)
     return util.csdist(total, csd)
 
-
-##        def duff_redux_natural(LD):
-##            """ Duff reduction calculation, natural """
-##
-##            # total depth of litter, lichen, and moss layer, used in duff calc.
-##            llm_depth = LD['lit_depth'] + LD['lch_depth'] + LD['moss_depth']
-##
-##            #Duff reduction equation (natural fuels):
-##
-##            #if llm_depth[n] >= duff_reduction:   #<<<EQUATIONS DOCUMENTATION
-##            #if llm_depth[n] > duff_depth[n]:    #<<< USER'S GUIDE - SUSAN PRICHARD SAYS THIS IS THE CORRECT COMPARISON
-##            #if llm_depth[n] >= ff_reduction[n]:  #<<< SOURCE CODE
-##
-##            # KS - if the duff_reduction value is greater than zero use it,
-##            # otherwise, use zero.
-##            duff_reduction_tmp = (LD['ff_reduction'] - llm_depth)
-##            non_zero = duff_reduction_tmp > 0.0
-##            return (duff_reduction_tmp * non_zero)
