@@ -70,7 +70,7 @@ class TestNaturalEquations(unittest.TestCase):
         ret = ccn.sound_one_nat(self._loadings)
         print(ret[3])  # print totals
         totals = ret[3]
-        self.assertEquals(9, len(totals))
+        self.assertEqual(9, len(totals))
         self.assertAlmostEqual(0.5, totals[0], places=2)
         self.assertAlmostEqual(1.5, totals[1], places=2)
         self.assertAlmostEqual(1.5, totals[2], places=2)
@@ -90,7 +90,7 @@ class TestNaturalEquations(unittest.TestCase):
         ret = ccn.sound_ten_nat(self._loadings)
         print(ret[3])  # print totals
         totals = ret[3]
-        self.assertEquals(9, len(totals))
+        self.assertEqual(9, len(totals))
         self.assertAlmostEqual(0.5 * CONSUMPTION_FACTOR, totals[0], places=4)
         self.assertAlmostEqual(1.5 * CONSUMPTION_FACTOR, totals[1], places=4)
         self.assertAlmostEqual(1.5 * CONSUMPTION_FACTOR, totals[2], places=4)
@@ -111,7 +111,7 @@ class TestNaturalEquations(unittest.TestCase):
         ret = ccn.sound_hundred_nat(self._loadings, self._ecos_mask)
         print(ret[3])  # print totals
         totals = ret[3]
-        self.assertEquals(9, len(totals))
+        self.assertEqual(9, len(totals))
         self.assertAlmostEqual(0.5 * CONSUMPTION_FACTOR, totals[0], places=4)
         self.assertAlmostEqual(1.5 * CONSUMPTION_FACTOR_SOUTHERN, totals[1], places=4)
         self.assertAlmostEqual(1.5 * CONSUMPTION_FACTOR, totals[2], places=4)
@@ -128,7 +128,7 @@ class TestNaturalEquations(unittest.TestCase):
         print(ret[3])  # print totals
         totals = ret[3]
         # ks - looks like Susan is converting to mgha before calculating and then converting back
-        self.assertEquals(9, len(totals))
+        self.assertEqual(9, len(totals))
         self.assertAlmostEqual(0.2, totals[0], places=4)
         self.assertAlmostEqual(4.5 * CONSUMPTION_FACTOR_SOUTHERN, totals[1], places=4)
         self.assertAlmostEqual(1.0, totals[2], places=4)
@@ -149,10 +149,37 @@ class TestNaturalEquations(unittest.TestCase):
         CONSUMPTION_FACTOR_BOREAL = 0.9794
         FM_DUFF = 0.8
         FM_1000 = 0.8
-        self.assertEquals(9, len(ret))
+        self.assertEqual(9, len(ret))
         self.assertAlmostEqual(
             CONSUMPTION_FACTOR_WESTERN * 0.5 - FM_DUFF * 0.007, ret[0], places=4)
         self.assertAlmostEqual(
             CONSUMPTION_FACTOR_SOUTHERN * 1.5 - FM_1000 * 0.0013, ret[1], places=4)
         self.assertAlmostEqual(
             CONSUMPTION_FACTOR_BOREAL * 1.5 - FM_DUFF * 0.0281, ret[2], places=4)
+        self.assertAlmostEqual(
+            CONSUMPTION_FACTOR_WESTERN * 3.0 - FM_DUFF * 0.007, ret[3], places=4)
+        self.assertAlmostEqual(
+            CONSUMPTION_FACTOR_SOUTHERN * 0.5 - FM_1000 * 0.0013, ret[4], places=4)
+        self.assertAlmostEqual(
+            CONSUMPTION_FACTOR_BOREAL * 3.0 - FM_DUFF * 0.0281, ret[5], places=4)
+        self.assertAlmostEqual(0.0, ret[6], places=4)
+        self.assertAlmostEqual(0.0, ret[7], places=4)
+        self.assertAlmostEqual(0.0, ret[8], places=4)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
