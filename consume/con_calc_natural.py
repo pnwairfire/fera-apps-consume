@@ -246,6 +246,28 @@ def litter_calc(loadings, fm_duff, fm_1000, ecoregion_masks):
 
     return cons
 
+def duff_calc(loadings, fm_duff, fm_litter, ecoregion_masks):
+    def southern_cons(load, fm_litter):
+        return 0.7428*load - 0.0013*fm_litter
+
+    def western_cons(load, fm_duff):
+        #assert False, '{}\n{}'.format(load, fm_duff)
+        return 0.1288*load - 0.0267*fm_duff
+
+    # No good model - use western?
+    #def boreal_cons(load, fm_duff):
+    #    return 0.5845*load - 0.0917*fm_duff
+
+    duff_load_total = values(loadings, 'duff_upper_loading') + values(loadings, 'duff_lower_loading')
+    #assert False, fm_1000
+    cons = np.where(duff_load_total > 0,
+        np.where(ecoregion_masks['southern'],
+            southern_cons(duff_load_total, fm_litter/100),
+            np.where(ecoregion_masks['western'],
+                western_cons(duff_load_total, fm_duff/100), boreal_cons(litter_load, fm_duff/100))), 0)
+
+    return cons
+
 
 
 
