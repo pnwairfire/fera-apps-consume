@@ -1,3 +1,15 @@
+#-------------------------------------------------------------------------------
+# Purpose:     Test new Consume consumption equations.
+#               The general pattern is:
+#                   1.) Run the current consumption function. Usually 'test_ccon...'
+#                       The results are not tested against anything.
+#                   2.) Run the new consumption function. Written 'test_<catagory>'
+#                       Compare results to numbers from a spreadsheet Susan
+#                       developed. Use loading totals 0.5, 1.5, and 3.0
+#
+# Author:      kjells
+# Created:     1/6/2016
+#-------------------------------------------------------------------------------
 import unittest
 import consume
 import consume.con_calc_natural as ccn
@@ -19,7 +31,7 @@ class TestNaturalEquations(unittest.TestCase):
                    "maskw": {"boreal": 0, "western": 1, "southern": 0}}
 
         print('---')
-        print(self.fc._settings.get('ecoregion'))
+        print('\t'.join(self.fc._settings.get('ecoregion')))
 
         ecoregion = self.fc._settings.get('ecoregion')
         self._ecob_mask = [self._ecodict["maskb"][e] for e in ecoregion]
@@ -29,26 +41,25 @@ class TestNaturalEquations(unittest.TestCase):
             'boreal': self._ecob_mask,
             'southern': self._ecos_mask,
             'western': self._ecow_mask}
-        # print(ecoregion_masks)
 
     def tearDown(self):
         pass
 
     def compute_shrub_totals(self, ret):
-        print('\nType: '.format(type(ret)))
+        print('\nType: {}'.format(type(ret)))
         totals = np.zeros_like(ret[0][:, ][3])
         for i, v in enumerate(ret):
             totals += v[:, ][3]
         print('\n{}'.format(totals))
         return totals
 
-    def test_ccon_shrub(self):
+    def test_ccon_shrub(self):  # current
         ''' this simply gets values against which to compare '''
         shrub_black_pct = 0.8
         ret = ccn.ccon_shrub(shrub_black_pct, self._loadings)
         self.compute_shrub_totals(ret)
 
-    def test_shrub_calc(self):
+    def test_shrub_calc(self):  # new
         shrub_black_pct = 0.8
         ret = ccn.shrub_calc(shrub_black_pct, self._loadings, self._ecoregion_masks)
         totals = self.compute_shrub_totals(ret)
@@ -62,11 +73,11 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0.0, totals[7], places=2)
         self.assertAlmostEqual(0.0, totals[8], places=2)
 
-    def test_ccon_one(self):
+    def test_ccon_one(self):    # current
         ret = ccn.ccon_one_nat(self._loadings)
         print(ret[3])  # print totals
 
-    def test_sound_one_nat(self):
+    def test_sound_one_nat(self):   # new
         ret = ccn.sound_one_nat(self._loadings)
         print('test_sound_one_nat')
         print(ret[3])  # print totals
@@ -82,11 +93,11 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0.0, totals[7], places=2)
         self.assertAlmostEqual(0.0, totals[8], places=2)
 
-    def test_ccon_ten(self):
+    def test_ccon_ten(self):    # current
         ret = ccn.ccon_ten_nat(self._loadings)
         print(ret[3])  # print totals
 
-    def test_sound_ten_nat(self):
+    def test_sound_ten_nat(self):   # new
         CONSUMPTION_FACTOR = 0.8581
         ret = ccn.sound_ten_nat(self._loadings)
         print('test_sound_ten_nat')  # print totals
@@ -103,11 +114,11 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR, totals[7], places=4)
         self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR, totals[8], places=4)
 
-    def test_ccon_hun_nat(self):
+    def test_ccon_hun_nat(self):    # current
         ret = ccn.ccon_hun_nat(self._ecos_mask, self._loadings)
         print(ret[3])  # print totals
 
-    def test_sound_hundred_nat(self):
+    def test_sound_hundred_nat(self):   # new
         CONSUMPTION_FACTOR = 0.7166
         CONSUMPTION_FACTOR_SOUTHERN = 0.5725
         ret = ccn.sound_hundred_nat(self._loadings, self._ecos_mask)
@@ -125,7 +136,7 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR_SOUTHERN, totals[7], places=4)
         self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR, totals[8], places=4)
 
-    def test_sound_large_wood(self):
+    def test_sound_large_wood(self):    # new
         CONSUMPTION_FACTOR_SOUTHERN = 0.4022
         ret = ccn.sound_large_wood(self._loadings, self.fc.fuel_moisture_1000hr_pct, self._ecos_mask)
         print('test_sound_large_wood')
@@ -146,7 +157,7 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0.0, totals[8], places=4)
         '''
 
-    def test_litter_calc(self):
+    def test_litter_calc(self): # new
         ret = ccn.litter_calc(self._loadings,
                 self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_1000hr_pct, self._ecoregion_masks)
         print('test_litter_calc')
