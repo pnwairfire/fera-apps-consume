@@ -353,7 +353,7 @@ def sound_hundred_nat(loadings, ecos_mask):
     csd = [0.85, 0.10, 0.05]
     total = np.where(
             np.equal(ecos_mask, 1),       # if southern ecoregion,
-            values(loadings, 'hun_hr_sound') * 0.4022,    # true, ks - note unchanged, not in spreadsheet
+            values(loadings, 'hun_hr_sound') * 0.5725,    # true
             values(loadings, 'hun_hr_sound') * 0.7166)    # false
     return util.csdist(total, csd)
 

@@ -68,6 +68,7 @@ class TestNaturalEquations(unittest.TestCase):
 
     def test_sound_one_nat(self):
         ret = ccn.sound_one_nat(self._loadings)
+        print('test_sound_one_nat')
         print(ret[3])  # print totals
         totals = ret[3]
         self.assertEqual(9, len(totals))
@@ -88,6 +89,7 @@ class TestNaturalEquations(unittest.TestCase):
     def test_sound_ten_nat(self):
         CONSUMPTION_FACTOR = 0.8581
         ret = ccn.sound_ten_nat(self._loadings)
+        print('test_sound_ten_nat')  # print totals
         print(ret[3])  # print totals
         totals = ret[3]
         self.assertEqual(9, len(totals))
@@ -107,8 +109,9 @@ class TestNaturalEquations(unittest.TestCase):
 
     def test_sound_hundred_nat(self):
         CONSUMPTION_FACTOR = 0.7166
-        CONSUMPTION_FACTOR_SOUTHERN = 0.4022
+        CONSUMPTION_FACTOR_SOUTHERN = 0.5725
         ret = ccn.sound_hundred_nat(self._loadings, self._ecos_mask)
+        print('test_sound_hundred_nat')  # print totals
         print(ret[3])  # print totals
         totals = ret[3]
         self.assertEqual(9, len(totals))
@@ -125,6 +128,7 @@ class TestNaturalEquations(unittest.TestCase):
     def test_sound_large_wood(self):
         CONSUMPTION_FACTOR_SOUTHERN = 0.4022
         ret = ccn.sound_large_wood(self._loadings, self.fc.fuel_moisture_1000hr_pct, self._ecos_mask)
+        print('test_sound_large_wood')
         print(ret[3])  # print totals
         totals = ret[3]
         # ks - looks like Susan is converting to mgha before calculating and then converting back
@@ -145,6 +149,7 @@ class TestNaturalEquations(unittest.TestCase):
     def test_litter_calc(self):
         ret = ccn.litter_calc(self._loadings,
                 self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_1000hr_pct, self._ecoregion_masks)
+        print('test_litter_calc')
         print(ret)  # print totals
         print('---------------')
         CONSUMPTION_FACTOR_WESTERN = 0.6804
