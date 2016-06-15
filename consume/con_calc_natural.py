@@ -105,6 +105,13 @@ def multi_layer_calc(loadings, ecoregion_masks, primary, secondary, primary_pct_
         hold = util.csdist(np.array([0.0] * len(loadings['fccs_id']), dtype=float), [0.0, 0.0, 0.0])
         return hold, hold, hold, hold
 
+CVT_MGHA = 0.44609
+def to_mgha(tons):
+    return tons / CVT_MGHA
+
+def to_tons(mgha):
+    return mgha * CVT_MGHA
+
 def shrub_calc(shrub_black_pct, loadings, ecoregion_masks):
     """ Shrub consumption, western, southern, activity """
     def get_calculator(shrub_black_pct):
@@ -116,13 +123,13 @@ def shrub_calc(shrub_black_pct, loadings, ecoregion_masks):
                 self._shrub_black_pct = shrub_black_pct
 
             def southern_cons(self, load):
-                return (np.e ** (-0.1889 + (0.9049 * np.log(load / Calculator.MGHA_2_TONSAC))
-                                 + 0.0676 * Calculator.SEASON)) * Calculator.MGHA_2_TONSAC
+                tmp = np.e ** (-0.1889 + (0.9049 * np.log(to_mgha(load)) + 0.0676 * Calculator.SEASON))
+                return to_tons(tmp)
 
             def western_cons(self, load):
-                tmp = (0.1102 + 0.1139 * (load)
+                tmp = (0.1102 + 0.1139 * to_mgha(load)
                             + ((1.9647 * self._shrub_black_pct) - (0.3296 * Calculator.SEASON)))
-                return (tmp ** tmp) * Calculator.MGHA_2_TONSAC
+                return to_tons(tmp ** tmp)
 
         return Calculator(shrub_black_pct)
 

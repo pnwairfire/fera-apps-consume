@@ -16,6 +16,13 @@ import consume.con_calc_natural as ccn
 import helper
 import numpy as np
 
+CVT_MGHA = 0.44609
+def to_mgha(tons):
+    return tons / CVT_MGHA
+
+def to_tons(mgha):
+    return mgha * CVT_MGHA
+
 class TestNaturalEquations(unittest.TestCase):
 
     def setUp(self):
@@ -60,18 +67,29 @@ class TestNaturalEquations(unittest.TestCase):
         self.compute_shrub_totals(ret)
 
     def test_shrub_calc(self):  # new
+        def western(loading, percent_black):
+            tmp =  0.1102 + 0.1139*to_mgha(loading) + 1.9647*percent_black - 0.3296
+            return to_tons(tmp**tmp)
+
+        def southern(loading, season):
+            log_loading = np.log(to_mgha(loading))
+            tmp = -0.1889 + 0.9049*log_loading + 0.0676*season
+            return to_tons(np.e**tmp)
+
         shrub_black_pct = 0.8
         ret = ccn.shrub_calc(shrub_black_pct, self._loadings, self._ecoregion_masks)
         totals = self.compute_shrub_totals(ret)
-        self.assertAlmostEqual(0.78, totals[0], places=2)
-        self.assertAlmostEqual(2.22, totals[1], places=2)
-        self.assertAlmostEqual(1.09, totals[2], places=2)
-        self.assertAlmostEqual(1.9, totals[3], places=2)
-        self.assertAlmostEqual(0.82, totals[4], places=2)
-        self.assertAlmostEqual(1.9, totals[5], places=2)
-        self.assertAlmostEqual(0.0, totals[6], places=2)
-        self.assertAlmostEqual(0.0, totals[7], places=2)
-        self.assertAlmostEqual(0.0, totals[8], places=2)
+        print(totals)
+
+        self.assertAlmostEqual(western(1, shrub_black_pct), totals[0], places=4)
+        self.assertAlmostEqual(southern(3, 1), totals[1], places=4)
+        self.assertAlmostEqual(western(3, shrub_black_pct), totals[2], places=4)
+        self.assertAlmostEqual(western(6, shrub_black_pct), totals[3], places=4)
+        self.assertAlmostEqual(southern(1, 1), totals[4], places=4)
+        self.assertAlmostEqual(western(6, shrub_black_pct), totals[5], places=4)
+        self.assertAlmostEqual(0.0, totals[6], places=4)
+        self.assertAlmostEqual(0.0, totals[7], places=4)
+        self.assertAlmostEqual(0.0, totals[8], places=4)
 
     def test_ccon_one(self):    # current
         ret = ccn.ccon_one_nat(self._loadings)
