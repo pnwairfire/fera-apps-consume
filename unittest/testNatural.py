@@ -171,6 +171,26 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(eq(0.0, self.fc.fuel_moisture_1000hr_pct), totals[7], places=4)
         self.assertAlmostEqual(eq(0.0, self.fc.fuel_moisture_1000hr_pct), totals[8], places=4)
 
+    def test_rotten_large_wood(self):    # new
+        def calc(load, fm):
+            ret = (1.9024 + load*0.4933 + fm*-0.0338)[0]
+            return ret if ret > 0 else 0
+            
+        ret = ccn.rotten_large_wood(self._loadings, self.fc.fuel_moisture_1000hr_pct, self._ecos_mask)
+        print('test_rotten_large_wood')
+        print(ret[3])  # print totals
+        totals = ret[3]
+        self.assertEqual(9, len(totals))
+        self.assertAlmostEqual(calc(0, self.fc.fuel_moisture_1000hr_pct), totals[0], places=4)
+        self.assertAlmostEqual(calc(4.5, self.fc.fuel_moisture_1000hr_pct), totals[1], places=4)
+        self.assertAlmostEqual(calc(4.5, self.fc.fuel_moisture_1000hr_pct), totals[2], places=4)
+        self.assertAlmostEqual(calc(9.0, self.fc.fuel_moisture_1000hr_pct), totals[3], places=4)
+        self.assertAlmostEqual(calc(0, self.fc.fuel_moisture_1000hr_pct), totals[4], places=4)
+        self.assertAlmostEqual(calc(9.0, self.fc.fuel_moisture_1000hr_pct), totals[5], places=4)
+        self.assertAlmostEqual(calc(0.0, self.fc.fuel_moisture_1000hr_pct), totals[6], places=4)
+        self.assertAlmostEqual(calc(0.0, self.fc.fuel_moisture_1000hr_pct), totals[7], places=4)
+        self.assertAlmostEqual(calc(0.0, self.fc.fuel_moisture_1000hr_pct), totals[8], places=4)
+
     def test_litter_calc(self): # new
         ret = ccn.litter_calc(self._loadings,
                 self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_1000hr_pct, self._ecoregion_masks)

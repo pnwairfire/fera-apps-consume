@@ -3,6 +3,11 @@ import numpy as np
 from . import util_consume as util
 from . util_consume import values
 
+def bracket(load, cons):
+    # ensure that results are between 0 and initial load value)
+    return np.where(0 > cons, 0, np.where(cons > load, load, cons))
+
+
 # Consumption calculation methods
 def ccon_canopy(can_con_pct, LD):
     """ Canopy consumption, activity & natural, p.166
@@ -399,6 +404,20 @@ def sound_large_wood(loadings, fm_1000, ecos_mask):
     # ks - is this correct?
     csd = [0.60, 0.30, 0.10]
     cons = western_cons(total, fm_1000)
+
+    return util.csdist(cons, csd)
+
+def rotten_large_wood(loadings, fm_1000, ecos_mask):
+    def western_cons(load, fm_1000):
+        return 1.9024 + 0.4933*load - 0.0338*fm_1000
+
+    sound_wood_columns = ['oneK_hr_rotten', 'tenK_hr_rotten', 'tnkp_hr_rotten']
+    total = sum([values(loadings, col) for col in sound_wood_columns])
+
+    # ks - is this correct?
+    csd = [0.60, 0.30, 0.10]
+    cons = western_cons(total, fm_1000)
+    cons = bracket(total, cons)
 
     return util.csdist(cons, csd)
 
