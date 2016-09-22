@@ -60,12 +60,6 @@ class TestNaturalEquations(unittest.TestCase):
         print('\n{}'.format(totals))
         return totals
 
-    def test_ccon_shrub(self):  # current
-        ''' this simply gets values against which to compare '''
-        shrub_black_pct = 0.8
-        ret = ccn.ccon_shrub(shrub_black_pct, self._loadings)
-        self.compute_shrub_totals(ret)
-
     def test_shrub_calc(self):  # new
         def western(loading, percent_black):
             tmp =  0.1102 + 0.1139*to_mgha(loading) + 1.9647*percent_black - 0.3296
@@ -91,10 +85,6 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0.0, totals[7], places=4)
         self.assertAlmostEqual(0.0, totals[8], places=4)
 
-    def test_ccon_one(self):    # current
-        ret = ccn.ccon_one_nat(self._loadings)
-        print(ret[3])  # print totals
-
     def test_sound_one_nat(self):   # new
         ret = ccn.sound_one_nat(self._loadings)
         print('test_sound_one_nat')
@@ -110,10 +100,6 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0.0, totals[6], places=2)
         self.assertAlmostEqual(0.0, totals[7], places=2)
         self.assertAlmostEqual(0.0, totals[8], places=2)
-
-    def test_ccon_ten(self):    # current
-        ret = ccn.ccon_ten_nat(self._loadings)
-        print(ret[3])  # print totals
 
     def test_sound_ten_nat(self):   # new
         CONSUMPTION_FACTOR = 0.8469
@@ -131,10 +117,6 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR, totals[6], places=4)
         self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR, totals[7], places=4)
         self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR, totals[8], places=4)
-
-    def test_ccon_hun_nat(self):    # current
-        ret = ccn.ccon_hun_nat(self._ecos_mask, self._loadings)
-        print(ret[3])  # print totals
 
     def test_sound_hundred_nat(self):   # new
         CONSUMPTION_FACTOR = 0.7127
@@ -198,7 +180,7 @@ class TestNaturalEquations(unittest.TestCase):
         print(ret)  # print totals
         print('---------------')
         CONSUMPTION_FACTOR_WESTERN = 0.6804
-        CONSUMPTION_FACTOR_SOUTHERN = 0.7428
+        CONSUMPTION_FACTOR_SOUTHERN = 0.6918
         CONSUMPTION_FACTOR_BOREAL = 0.9794
         FM_DUFF = 0.8
         FM_1000 = 0.8
@@ -206,13 +188,13 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(
             CONSUMPTION_FACTOR_WESTERN * 0.5 - FM_DUFF * 0.007, ret[0], places=4)
         self.assertAlmostEqual(
-            CONSUMPTION_FACTOR_SOUTHERN * 1.5 - FM_1000 * 0.0013, ret[1], places=4)
+            CONSUMPTION_FACTOR_SOUTHERN * 1.5, ret[1], places=4)
         self.assertAlmostEqual(
             CONSUMPTION_FACTOR_BOREAL * 1.5 - FM_DUFF * 0.0281, ret[2], places=4)
         self.assertAlmostEqual(
             CONSUMPTION_FACTOR_WESTERN * 3.0 - FM_DUFF * 0.007, ret[3], places=4)
         self.assertAlmostEqual(
-            CONSUMPTION_FACTOR_SOUTHERN * 0.5 - FM_1000 * 0.0013, ret[4], places=4)
+            CONSUMPTION_FACTOR_SOUTHERN * 0.5, ret[4], places=4)
         self.assertAlmostEqual(
             CONSUMPTION_FACTOR_BOREAL * 3.0 - FM_DUFF * 0.0281, ret[5], places=4)
         self.assertAlmostEqual(0.0, ret[6], places=4)

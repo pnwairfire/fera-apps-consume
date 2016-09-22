@@ -141,25 +141,6 @@ def shrub_calc(shrub_black_pct, loadings, ecoregion_masks):
     return multi_layer_calc(loadings, ecoregion_masks,
                 'shrub_prim', 'shrub_seco', 'shrub_prim_pctlv', 'shrub_seco_pctlv', get_calculator(shrub_black_pct))
 
-def ccon_nw(LD):
-    """ Nonwoody consumption, activity & natural, p.169 """
-
-    nw_prim_total = values(LD, 'nw_prim') * 0.9274
-    nw_seco_total = values(LD, 'nw_seco') * 0.9274
-
-    csd_live = [0.95, 0.05, 0.0]
-    csd_dead = [0.95, 0.05, 0.0]
-
-    pctlivep = values(LD, 'nw_prim_pctlv')
-    pctdeadp = 1 - pctlivep
-    pctlives = values(LD, 'nw_seco_pctlv')
-    pctdeads = 1 - pctlives
-
-    return (util.csdist(nw_prim_total * pctlivep, csd_live),
-            util.csdist(nw_prim_total * pctdeadp, csd_dead),
-            util.csdist(nw_seco_total * pctlives, csd_live),
-            util.csdist(nw_seco_total * pctdeads, csd_dead))
-
 def herb_calc(loadings, ecoregion_masks):
     """ Herbaceous consumption, activity & natural, p.169 """
     def get_calculator(shrub_black_pct):
@@ -180,79 +161,22 @@ def herb_calc(loadings, ecoregion_masks):
 ###################################################################
 ### LITTER LICHEN MOSS (LLM) CONSUMPTION - ACTIVITY and NATURAL ###
 ###################################################################
-# p. 175 in the manual
-
-def ccon_ffr(fm_duff, ecoregion_masks, LD):
-    """ Forest-floor reduction calculation, p.177  """
-
-    # total duff depth (inches)
-    duff_depth = values(LD, 'duff_upper_depth') + values(LD, 'duff_lower_depth')
-    # total forest floor depth (inches)
-    ff_depth = (duff_depth + values(LD, 'lit_depth') +
-                values(LD, 'lch_depth') + values(LD, 'moss_depth'))
-
-    # boreal
-    y_b = 1.2383 - (0.0114 * fm_duff) # used to calc squirrel mid. redux
-    ffr_boreal = ff_depth * util.propcons(y_b)
-
-    # southern
-    ffr_southern = (-0.0061 * fm_duff) + (0.6179 * ff_depth)
-    ffr_southern = np.where(
-                np.less_equal(ffr_southern, 0.25), # if ffr south <= .25
-                (0.006181 * math.e**(0.398983 * (ff_depth - # true
-                (0.00987 * (fm_duff-60.0))))),
-                ffr_southern)                               # false
-
-    # western
-    y = -0.8085 - (0.0213 * fm_duff) + (1.0625 * ff_depth)
-    ffr_western = ff_depth * util.propcons(y)
-
-    ffr = ((ecoregion_masks['southern'] * ffr_southern) +
-            (ecoregion_masks['boreal'] * ffr_boreal) +
-            (ecoregion_masks['western'] * ffr_western))
-    return [ffr, y_b, duff_depth]
-
-
-def calc_and_reduce_ff(LD, ff_reduction, key):
-    # if the depth of the layer (LD[key]) is less than the available reduction
-    #  use the depth of the layer. Otherwise, use the available reduction
-    layer_reduction = np.where(LD[key] < ff_reduction, LD[key], ff_reduction)
-    # reduce the available reduction by the calculated amount
-    ff_reduction -= layer_reduction
-    # should never be less than zero
-    assert 0 == len(np.where(ff_reduction < 0)[0]), "Error: Negative ff reduction found in calc_and_reduce_ff()"
-    assert False == np.isnan(ff_reduction).any(), "Error: NaN found in calc_and_reduce_ff()"
-    return layer_reduction
-
-def ccon_forest_floor(LD, ff_reduction, key_depth, key_loading, csd):
-    ''' Same procedure for litter, lichen, moss, upper and lower duff
-    '''
-    # - get per-layer reduction
-    layer_reduction = calc_and_reduce_ff(LD, ff_reduction, key_depth)
-
-    # - how much was it reduced relative to the layer depth
-    proportional_reduction = np.where(LD[key_depth] > 0.0,
-        layer_reduction / LD[key_depth], 0.0)
-
-    total = proportional_reduction * values(LD, key_loading)
-    return util.csdist(total, csd)
-
 def litter_calc(loadings, fm_duff, fm_1000, ecoregion_masks):
-    def southern_cons(load, fm_1000):
-        return 0.7428*load - 0.0013*fm_1000
+    def boreal_cons(load, fm_duff):
+        return 0.9794*load - 0.0281*fm_duff
+        
+    def southern_cons(load):
+        return 0.6918*load
 
     def western_cons(load, fm_duff):
         #assert False, '{}\n{}'.format(load, fm_duff)
         return 0.6804*load - 0.007*fm_duff
 
-    def boreal_cons(load, fm_duff):
-        return 0.9794*load - 0.0281*fm_duff
-
     litter_load = values(loadings, 'litter_loading')
     #assert False, fm_1000
     cons = np.where(litter_load > 0,
         np.where(ecoregion_masks['southern'],
-            southern_cons(litter_load, fm_1000/100),
+            southern_cons(litter_load),
             np.where(ecoregion_masks['western'],
                 western_cons(litter_load, fm_duff/100), boreal_cons(litter_load, fm_duff/100))), 0)
 
@@ -260,23 +184,22 @@ def litter_calc(loadings, fm_duff, fm_1000, ecoregion_masks):
 
 def duff_calc(loadings, fm_duff, fm_litter, ecoregion_masks):
     def southern_cons(load, fm_litter):
-        return 0.7428*load - 0.0013*fm_litter
+        return 2.9711 + load*0.0702 + fm_litter*-0.1715
 
     def western_cons(load, fm_duff):
         #assert False, '{}\n{}'.format(load, fm_duff)
-        return 0.1288*load - 0.0267*fm_duff
+        return 0.6456*load - 0.0969*fm_duff
 
     # No good model - use western?
-    #def boreal_cons(load, fm_duff):
-    #    return 0.5845*load - 0.0917*fm_duff
+    def boreal_cons(load, fm_duff):
+        return western_cons(load, fm_duff)
 
     duff_load_total = values(loadings, 'duff_upper_loading') + values(loadings, 'duff_lower_loading')
-    #assert False, fm_1000
     cons = np.where(duff_load_total > 0,
         np.where(ecoregion_masks['southern'],
             southern_cons(duff_load_total, fm_litter/100),
             np.where(ecoregion_masks['western'],
-                western_cons(duff_load_total, fm_duff/100), boreal_cons(litter_load, fm_duff/100))), 0)
+                western_cons(duff_load_total, fm_duff/100), boreal_cons(duff_load_total, fm_duff/100))), 0)
 
     return cons
 
@@ -309,7 +232,7 @@ def ccon_sqm(sqm_loading, ff_redux_proportion):
 ##############################
 # p. 169-175 in the manual
 
-def ccon_stumps(LD):
+def stump_calc(LD):
     """ STUMP CONSUMPTION - ACTIVITY and NATURAL """
     stump_params = [['stump_sound', 0.10, [0.50, 0.50, 0.0]],
                     ['stump_rotten', 0.50, [0.10, 0.30, 0.60]],
@@ -317,7 +240,7 @@ def ccon_stumps(LD):
 
     return [util.csdist(values(LD, s[0]) * s[1], s[2]) for s in stump_params]
 
-def ccon_piles(pct_consumed, LD):
+def pile_calc(pct_consumed, LD):
     """  pile loading appears as clean, dirty, and verydirty """
     # Flaming, smoldering, residual
     csd = [0.70, 0.15, 0.15]
@@ -327,11 +250,6 @@ def ccon_piles(pct_consumed, LD):
     return util.csdist(total_consumed, csd)
 
 ### WOODY FUEL CONSUMPTION NATURAL EQUATIONS ###
-def ccon_one_nat(LD):
-    """ 1-hr (0 to 1/4"), natural """
-    csd = [0.95, 0.05, 0.00]
-    return util.csdist(values(LD, 'one_hr_sound'), csd)
-
 def sound_one_nat(LD):
     """ 1-hr (0 to 1/4"), natural """
     # ks - this is unchanged based on Susan's spreadsheet, although the modeling
@@ -339,25 +257,10 @@ def sound_one_nat(LD):
     csd = [0.95, 0.05, 0.00]
     return util.csdist(values(LD, 'one_hr_sound'), csd)
 
-def ccon_ten_nat(LD):
-    """ 10-hr (1/4" to 1"), natural, p.169"""
-    csd = [0.90, 0.10, 0.00]
-    total = values(LD, 'ten_hr_sound') * 0.8650
-    return util.csdist(total, csd)
-
 def sound_ten_nat(LD):
     """ 10-hr (1/4" to 1"), natural, p.169"""
     csd = [0.90, 0.10, 0.00]
     total = values(LD, 'ten_hr_sound') * 0.8469
-    return util.csdist(total, csd)
-
-def ccon_hun_nat(ecos_mask, LD):
-    """ 100-hr (1 to 3"), natural """
-    csd = [0.85, 0.10, 0.05]
-    total = np.where(
-            np.equal(ecos_mask, 1),       # if southern ecoregion,
-            values(LD, 'hun_hr_sound') * 0.4022,    # true
-            values(LD, 'hun_hr_sound') * 0.7844)    # false
     return util.csdist(total, csd)
 
 def sound_hundred_nat(loadings, ecos_mask):
@@ -367,31 +270,6 @@ def sound_hundred_nat(loadings, ecos_mask):
             np.equal(ecos_mask, 1),       # if southern ecoregion,
             values(loadings, 'hun_hr_sound') * 0.5725,    # true
             values(loadings, 'hun_hr_sound') * 0.7127)    # false
-    return util.csdist(total, csd)
-
-def ccon_oneK_snd_nat(fm_duff, fm_1000hr, ecos_mask, LD):
-    """ 1000-hr (3 to 9") sound, natural """
-    csd = [0.60, 0.30, 0.10]
-    y = 0.0302 - (0.0379 * fm_duff)
-    z = 3.1052 - (0.0559 * fm_1000hr)
-    total = np.where(
-           np.equal(ecos_mask, 1),      # if southern ecoregion,
-           values(LD, 'oneK_hr_sound') * util.propcons(y),   # true
-           values(LD, 'oneK_hr_sound') * util.propcons(z))   # false
-    return util.csdist(total, csd)
-
-def ccon_tenK_snd_nat(fm_1000hr, LD):
-    """ 10K-hr (9 to 20") sound, natural """
-    csd = [0.40, 0.40, 0.20]
-    x = 0.7869 - (0.0387 * fm_1000hr)
-    total = values(LD, 'tenK_hr_sound') * util.propcons(x)
-    return util.csdist(total, csd)
-
-def ccon_tnkp_snd_nat(fm_1000hr, LD):
-    """ 10K+ hr (>20") sound, natural """
-    csd = [0.20, 0.40, 0.40]
-    z = 0.3960 - (0.0389 * fm_1000hr)
-    total = values(LD, 'tnkp_hr_sound') * util.propcons(z)
     return util.csdist(total, csd)
 
 def sound_large_wood(loadings, fm_1000, ecos_mask):
@@ -420,29 +298,3 @@ def rotten_large_wood(loadings, fm_1000, ecos_mask):
     cons = bracket(total, cons)
 
     return util.csdist(cons, csd)
-
-
-def ccon_oneK_rot_nat(fm_duff, ecos_mask, LD):
-    """ 1000-hr (3 to 9") rotten, natural """
-    csd = [0.20, 0.30, 0.50]
-    y = 4.0139 - (0.0600 * fm_duff) + (0.8341 * values(LD, 'oneK_hr_rotten'))
-    z = 0.5052 - (0.0434 * fm_duff)
-    total = np.where(np.equal(ecos_mask, 1),    # if southern ecoegion,
-            values(LD, 'oneK_hr_rotten') * util.propcons(z),     # true
-            values(LD, 'oneK_hr_rotten') * util.propcons(y))     # false
-    return util.csdist(total, csd)
-
-def ccon_tenK_rot_nat(fm_duff, LD):
-    """ 10K-hr (9 to 20") rotten, natural """
-    csd = [0.10, 0.30, 0.60]
-    y = 2.1218 - (0.0438 * fm_duff)
-    total = values(LD, 'tenK_hr_rotten') * util.propcons(y)
-    return util.csdist(total, csd)
-
-def ccon_tnkp_rot_nat(fm_duff, LD):
-    """ 10K+ hr (>20") rotten, natural """
-    csd = [0.10, 0.30, 0.60]
-    y = 0.8022 - (0.0266 * fm_duff)
-    total = values(LD, 'tnkp_hr_rotten') * util.propcons(y)
-    return util.csdist(total, csd)
-
