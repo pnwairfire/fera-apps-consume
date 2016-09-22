@@ -343,7 +343,7 @@ def ccon_ten_nat(LD):
 def sound_ten_nat(LD):
     """ 10-hr (1/4" to 1"), natural, p.169"""
     csd = [0.90, 0.10, 0.00]
-    total = values(LD, 'ten_hr_sound') * 0.8581
+    total = values(LD, 'ten_hr_sound') * 0.8469
     return util.csdist(total, csd)
 
 def ccon_hun_nat(ecos_mask, LD):
@@ -361,7 +361,7 @@ def sound_hundred_nat(loadings, ecos_mask):
     total = np.where(
             np.equal(ecos_mask, 1),       # if southern ecoregion,
             values(loadings, 'hun_hr_sound') * 0.5725,    # true
-            values(loadings, 'hun_hr_sound') * 0.7166)    # false
+            values(loadings, 'hun_hr_sound') * 0.7127)    # false
     return util.csdist(total, csd)
 
 def ccon_oneK_snd_nat(fm_duff, fm_1000hr, ecos_mask, LD):
@@ -390,21 +390,15 @@ def ccon_tnkp_snd_nat(fm_1000hr, LD):
     return util.csdist(total, csd)
 
 def sound_large_wood(loadings, fm_1000, ecos_mask):
-    def southern_cons(load):
-        return load*0.2998
-
     def western_cons(load, fm_1000):
-        return 2.6414 + 0.2691*load - 0.0388*fm_1000
+        return 2.735 + 0.3285*load - 0.0457*fm_1000
 
     sound_wood_columns = ['oneK_hr_sound', 'tenK_hr_sound', 'tnkp_hr_sound']
     total = sum([values(loadings, col) for col in sound_wood_columns])
 
     # ks - is this correct?
-    csd = [0.40, 0.40, 0.20]
-    cons = np.where(total > 0,
-                np.where(ecos_mask,  # for southern use southern, everything else is western
-                         southern_cons(total),
-                         western_cons(total, fm_1000)), 0)
+    csd = [0.60, 0.30, 0.10]
+    cons = western_cons(total, fm_1000)
 
     return util.csdist(cons, csd)
 

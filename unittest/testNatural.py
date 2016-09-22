@@ -116,7 +116,7 @@ class TestNaturalEquations(unittest.TestCase):
         print(ret[3])  # print totals
 
     def test_sound_ten_nat(self):   # new
-        CONSUMPTION_FACTOR = 0.8581
+        CONSUMPTION_FACTOR = 0.8469
         ret = ccn.sound_ten_nat(self._loadings)
         print('test_sound_ten_nat')  # print totals
         print(ret[3])  # print totals
@@ -137,7 +137,7 @@ class TestNaturalEquations(unittest.TestCase):
         print(ret[3])  # print totals
 
     def test_sound_hundred_nat(self):   # new
-        CONSUMPTION_FACTOR = 0.7166
+        CONSUMPTION_FACTOR = 0.7127
         CONSUMPTION_FACTOR_SOUTHERN = 0.5725
         ret = ccn.sound_hundred_nat(self._loadings, self._ecos_mask)
         print('test_sound_hundred_nat')  # print totals
@@ -155,25 +155,21 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR, totals[8], places=4)
 
     def test_sound_large_wood(self):    # new
-        CONSUMPTION_FACTOR_SOUTHERN = 0.4022
+        eq = lambda load, fm: (2.735 + load*0.3285 + fm*-0.0457)[0]
         ret = ccn.sound_large_wood(self._loadings, self.fc.fuel_moisture_1000hr_pct, self._ecos_mask)
         print('test_sound_large_wood')
         print(ret[3])  # print totals
         totals = ret[3]
-        # ks - looks like Susan is converting to mgha before calculating and then converting back
-        #  Is this necessary?
-        '''
         self.assertEqual(9, len(totals))
-        self.assertAlmostEqual(0.2, totals[0], places=4)
-        self.assertAlmostEqual(4.5 * CONSUMPTION_FACTOR_SOUTHERN, totals[1], places=4)
-        self.assertAlmostEqual(1.0, totals[2], places=4)
-        self.assertAlmostEqual(2.22, totals[3], places=4)
-        self.assertAlmostEqual(1.5 * CONSUMPTION_FACTOR_SOUTHERN, totals[4], places=4)
-        self.assertAlmostEqual(2.22, totals[5], places=4)
-        self.assertAlmostEqual(0.0, totals[6], places=4)
-        self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR_SOUTHERN, totals[7], places=4)
-        self.assertAlmostEqual(0.0, totals[8], places=4)
-        '''
+        self.assertAlmostEqual(eq(1.5, self.fc.fuel_moisture_1000hr_pct), totals[0], places=4)
+        self.assertAlmostEqual(eq(4.5, self.fc.fuel_moisture_1000hr_pct), totals[1], places=4)
+        self.assertAlmostEqual(eq(4.5, self.fc.fuel_moisture_1000hr_pct), totals[2], places=4)
+        self.assertAlmostEqual(eq(9.0, self.fc.fuel_moisture_1000hr_pct), totals[3], places=4)
+        self.assertAlmostEqual(eq(1.5, self.fc.fuel_moisture_1000hr_pct), totals[4], places=4)
+        self.assertAlmostEqual(eq(9.0, self.fc.fuel_moisture_1000hr_pct), totals[5], places=4)
+        self.assertAlmostEqual(eq(0.0, self.fc.fuel_moisture_1000hr_pct), totals[6], places=4)
+        self.assertAlmostEqual(eq(0.0, self.fc.fuel_moisture_1000hr_pct), totals[7], places=4)
+        self.assertAlmostEqual(eq(0.0, self.fc.fuel_moisture_1000hr_pct), totals[8], places=4)
 
     def test_litter_calc(self): # new
         ret = ccn.litter_calc(self._loadings,
