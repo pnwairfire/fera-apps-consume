@@ -28,50 +28,6 @@ def ccon_canopy(can_con_pct, LD):
 
     return [util.csdist(values(LD, t[0]) * pct, t[1]) for t in can_params]
 
-
-def ccon_shrub(shrub_black_pct, LD):
-    """ Shrub consumption, activity & natural, p.168
-
-    ## The manual specifies the following equation to calculate percent
-    ## black:
-    ##      y = -1.6693 + (0.1185 * nw_pctcv) - (0.2453 * fm_10hr)
-    ##                  + (0.1697 * WindxSlopeCategory)
-    ##  shrub_black_pct = 100 * math.e**(y) / (1 + math.e**(y))
-    ##
-    ## However, there is no explanation on how to derive
-    ## 'WindxSlopeCategory' """
-    csd_live = [0.95, 0.05, 0.0]
-    csd_dead = [0.90, 0.10, 0.0]
-
-    shb_load_total = values(LD, 'shrub_prim') + values(LD, 'shrub_seco')
-    if sum(shb_load_total) > 0:
-
-        z = -2.6573 + (0.0956 * shb_load_total) + (0.0473 * shrub_black_pct)
-
-        shb_cnsm_total = shb_load_total * util.propcons(z)
-
-        # - this works correctly but still generates a warning, use the
-        #   context manager to swallow the benign warning
-        with np.errstate(divide='ignore', invalid='ignore'):
-            nonzero_loading = np.not_equal(shb_load_total, 0.0)
-            shb_prim_total = np.where(nonzero_loading,
-                  shb_cnsm_total * (values(LD, 'shrub_prim') / shb_load_total), 0.0)
-            shb_seco_total = np.where(nonzero_loading,
-                  shb_cnsm_total * (values(LD, 'shrub_seco') / shb_load_total), 0.0)
-
-        pctlivep = values(LD, 'shrub_prim_pctlv')
-        pctdeadp = 1 - pctlivep
-        pctlives = values(LD, 'shrub_seco_pctlv')
-        pctdeads = 1 - pctlives
-
-        return (util.csdist(shb_prim_total * pctlivep, csd_live),
-                util.csdist(shb_prim_total * pctdeadp, csd_dead),
-                util.csdist(shb_seco_total * pctlives, csd_live),
-                util.csdist(shb_seco_total * pctdeads, csd_dead))
-    else:
-        hold = util.csdist(np.array([0.0] * len(LD['fccs_id']), dtype=float), [0.0, 0.0, 0.0])
-        return hold, hold, hold, hold
-
 def multi_layer_calc(loadings, ecoregion_masks, primary, secondary, primary_pct_live, secondary_pct_live, calculator):
     ''' This function is called by both the shrub and herb calculators. The general tasks are handled
         here, and the specific setup is done in the respective calling functions
@@ -117,29 +73,31 @@ def to_mgha(tons):
 def to_tons(mgha):
     return mgha * CVT_MGHA
 
-def shrub_calc(shrub_black_pct, loadings, ecoregion_masks):
-    """ Shrub consumption, western, southern, activity """
-    def get_calculator(shrub_black_pct):
-        class Calculator(object):
-            SEASON = 1
-            MGHA_2_TONSAC = 0.4461
+SEASON_SPRING = 1
+SEASON_ALL_OTHER = 0
 
-            def __init__(self, shrub_black_pct):
+def shrub_calc(shrub_black_pct, loadings, ecoregion_masks, season=SEASON_ALL_OTHER):
+    """ Shrub consumption, western, southern, activity """
+    def get_calculator(shrub_black_pct, season):
+        class Calculator(object):
+            def __init__(self, shrub_black_pct, season):
                 self._shrub_black_pct = shrub_black_pct
+                self._season = season
 
             def southern_cons(self, load):
-                tmp = np.e ** (-0.1889 + (0.9049 * np.log(to_mgha(load)) + 0.0676 * Calculator.SEASON))
+                tmp = np.e ** (-0.1889 + (0.9049 * np.log(to_mgha(load)) + 0.0676 * self._season))
                 return to_tons(tmp)
 
             def western_cons(self, load):
                 tmp = (0.1102 + 0.1139 * to_mgha(load)
-                            + ((1.9647 * self._shrub_black_pct) - (0.3296 * Calculator.SEASON)))
-                return to_tons(tmp ** tmp)
+                            + ((1.9647 * self._shrub_black_pct) - (0.3296 * self._season)))
+                return to_tons(tmp**tmp)
 
-        return Calculator(shrub_black_pct)
+        return Calculator(shrub_black_pct, season)
 
     return multi_layer_calc(loadings, ecoregion_masks,
-                'shrub_prim', 'shrub_seco', 'shrub_prim_pctlv', 'shrub_seco_pctlv', get_calculator(shrub_black_pct))
+                'shrub_prim', 'shrub_seco', 'shrub_prim_pctlv', 'shrub_seco_pctlv',
+                get_calculator(shrub_black_pct, season))
 
 def herb_calc(loadings, ecoregion_masks):
     """ Herbaceous consumption, activity & natural, p.169 """
@@ -202,7 +160,10 @@ def duff_calc(loadings, fm_duff, fm_litter, ecoregion_masks):
                 western_cons(duff_load_total, fm_duff/100), boreal_cons(duff_load_total, fm_duff/100))), 0)
 
     return cons
-
+    
+def proportion_of_other_calc(loadings, proportion, flame_smolder_resid):
+    cons = loadings * proportion_of_other_calc
+    return util.csdist(cons, flame_smolder_resid)
 
 
 
@@ -250,20 +211,20 @@ def pile_calc(pct_consumed, LD):
     return util.csdist(total_consumed, csd)
 
 ### WOODY FUEL CONSUMPTION NATURAL EQUATIONS ###
-def sound_one_nat(LD):
+def sound_one_calc(LD):
     """ 1-hr (0 to 1/4"), natural """
     # ks - this is unchanged based on Susan's spreadsheet, although the modeling
     #  indicated a fraction, not all, is consumed
     csd = [0.95, 0.05, 0.00]
     return util.csdist(values(LD, 'one_hr_sound'), csd)
 
-def sound_ten_nat(LD):
+def sound_ten_calc(LD):
     """ 10-hr (1/4" to 1"), natural, p.169"""
     csd = [0.90, 0.10, 0.00]
     total = values(LD, 'ten_hr_sound') * 0.8469
     return util.csdist(total, csd)
 
-def sound_hundred_nat(loadings, ecos_mask):
+def sound_hundred_calc(loadings, ecos_mask):
     """ 100-hr (1 to 3"), natural """
     csd = [0.85, 0.10, 0.05]
     total = np.where(
@@ -272,7 +233,7 @@ def sound_hundred_nat(loadings, ecos_mask):
             values(loadings, 'hun_hr_sound') * 0.7127)    # false
     return util.csdist(total, csd)
 
-def sound_large_wood(loadings, fm_1000, ecos_mask):
+def sound_large_wood_calc(loadings, fm_1000, ecos_mask):
     def western_cons(load, fm_1000):
         return 2.735 + 0.3285*load - 0.0457*fm_1000
 
@@ -285,7 +246,7 @@ def sound_large_wood(loadings, fm_1000, ecos_mask):
 
     return util.csdist(cons, csd)
 
-def rotten_large_wood(loadings, fm_1000, ecos_mask):
+def rotten_large_wood_calc(loadings, fm_1000, ecos_mask):
     def western_cons(load, fm_1000):
         return 1.9024 + 0.4933*load - 0.0338*fm_1000
 
