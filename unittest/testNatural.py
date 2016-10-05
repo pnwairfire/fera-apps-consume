@@ -50,20 +50,38 @@ class TestNaturalEquations(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def compute_shrub_totals(self, ret):
+    def extract_shrub_herb_totals(self, ret):
         print('\nType: {}'.format(type(ret)))
         totals = np.zeros_like(ret[0][:, ][3])
         for i, v in enumerate(ret):
             totals += v[:, ][3]
         print('\n{}'.format(totals))
         return totals
+        
+    def test_herb_calc(self): 
+        print('test_herb_calc')
+        ret = ccn.herb_calc(self._loadings, self._ecoregion_masks)
+        totals = self.extract_shrub_herb_totals(ret)
+        print(totals)
+        self.assertEqual(9, len(totals))
+        self.assertAlmostEqual(0.93, totals[0], places=2)    # western (boreal)
+        self.assertAlmostEqual(2.91, totals[1], places=2)    # southern
+        self.assertAlmostEqual(2.78, totals[2], places=2)    # western
+        self.assertAlmostEqual(5.56, totals[3], places=2)    # western (boreal)
+        self.assertAlmostEqual(0.97, totals[4], places=2)    # southern
+        self.assertAlmostEqual(5.56, totals[5], places=2)    # western
+        self.assertAlmostEqual(0.0, totals[6], places=2)    # western (boreal)
+        self.assertAlmostEqual(0.0, totals[7], places=2)    # southern
+        self.assertAlmostEqual(0.0, totals[8], places=2)    # western
 
-    def test_shrub_calc(self):  # new
+    def test_shrub_calc(self):
         def western(loading, percent_black, season=0):
+            # ks - replace with values from Susan's spreadsheet
             tmp =  0.1102 + 0.1139*to_mgha(loading) + 1.9647*percent_black - 0.3296*season
             return to_tons(tmp**tmp)
 
         def southern(loading, season):
+            # ks - replace with values from Susan's spreadsheet
             log_loading = np.log(to_mgha(loading))
             tmp = -0.1889 + 0.9049*log_loading + 0.0676*season
             return to_tons(np.e**tmp)
@@ -71,7 +89,7 @@ class TestNaturalEquations(unittest.TestCase):
         print('test_shrub_calc')
         shrub_black_pct = 0.8
         ret = ccn.shrub_calc(shrub_black_pct, self._loadings, self._ecoregion_masks)
-        totals = self.compute_shrub_totals(ret)
+        totals = self.extract_shrub_herb_totals(ret)
         print(totals)
 
         #self.assertAlmostEqual(0.86, totals[0], places=2)
@@ -84,7 +102,7 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0.0, totals[7], places=4)
         self.assertAlmostEqual(0.0, totals[8], places=4)
 
-    def test_sound_one_calc(self):   # new
+    def test_sound_one_calc(self): 
         ret = ccn.sound_one_calc(self._loadings)
         print('test_sound_one_calc')
         print(ret[3])  # print totals
@@ -100,7 +118,7 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0.0, totals[7], places=2)
         self.assertAlmostEqual(0.0, totals[8], places=2)
 
-    def test_sound_ten_calc(self):   # new
+    def test_sound_ten_calc(self): 
         CONSUMPTION_FACTOR = 0.8469
         ret = ccn.sound_ten_calc(self._loadings)
         print('test_sound_ten_calc')  # print totals
@@ -117,7 +135,7 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR, totals[7], places=4)
         self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR, totals[8], places=4)
 
-    def test_sound_hundred_calc(self):   # new
+    def test_sound_hundred_calc(self): 
         CONSUMPTION_FACTOR = 0.7127
         CONSUMPTION_FACTOR_SOUTHERN = 0.5725
         ret = ccn.sound_hundred_calc(self._loadings, self._ecos_mask)
@@ -135,7 +153,7 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR_SOUTHERN, totals[7], places=4)
         self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR, totals[8], places=4)
 
-    def test_sound_large_wood_calc(self):    # new
+    def test_sound_large_wood_calc(self):  
         eq = lambda load, fm: (2.735 + load*0.3285 + fm*-0.0457)[0]
         ret = ccn.sound_large_wood_calc(self._loadings, self.fc.fuel_moisture_1000hr_pct, self._ecos_mask)
         print('test_sound_large_wood')
@@ -152,7 +170,7 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(eq(0.0, self.fc.fuel_moisture_1000hr_pct), totals[7], places=4)
         self.assertAlmostEqual(eq(0.0, self.fc.fuel_moisture_1000hr_pct), totals[8], places=4)
 
-    def test_rotten_large_wood_calc(self):    # new
+    def test_rotten_large_wood_calc(self):  
         def calc(load, fm):
             ret = (1.9024 + load*0.4933 + fm*-0.0338)[0]
             return ret if ret > 0 else 0

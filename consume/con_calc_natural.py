@@ -101,19 +101,19 @@ def shrub_calc(shrub_black_pct, loadings, ecoregion_masks, season=SEASON_ALL_OTH
 
 def herb_calc(loadings, ecoregion_masks):
     """ Herbaceous consumption, activity & natural, p.169 """
-    def get_calculator(shrub_black_pct):
+    def get_calculator():
         class Calculator(object):
-            def southern_cons(load):
+            def southern_cons(self, load):
                 return load * 0.9713
             
-            def western_cons(load):
+            def western_cons(self, load):
                 return load * 0.9274
             
         return Calculator()
 
     return multi_layer_calc(loadings, ecoregion_masks,
                             'nw_prim', 'nw_seco', 'nw_prim_pctlv', 'nw_seco_pctlv',
-                            get_calculator(nw_black_pct))
+                            get_calculator())
 
 
 ###################################################################
