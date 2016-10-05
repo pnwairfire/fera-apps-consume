@@ -103,55 +103,52 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0.0, totals[8], places=4)
 
     def test_sound_one_calc(self): 
-        ret = ccn.sound_one_calc(self._loadings)
+        ret = ccn.sound_one_calc(self._loadings, self._ecos_mask)
         print('test_sound_one_calc')
         print(ret[3])  # print totals
         totals = ret[3]
         self.assertEqual(9, len(totals))
-        self.assertAlmostEqual(0.5, totals[0], places=2)
-        self.assertAlmostEqual(1.5, totals[1], places=2)
-        self.assertAlmostEqual(1.5, totals[2], places=2)
-        self.assertAlmostEqual(3.0, totals[3], places=2)
-        self.assertAlmostEqual(0.5, totals[4], places=2)
-        self.assertAlmostEqual(3.0, totals[5], places=2)
+        self.assertAlmostEqual(0.4235, totals[0], places=2)
+        self.assertAlmostEqual(1.24, totals[1], places=2)
+        self.assertAlmostEqual(1.27, totals[2], places=2)
+        self.assertAlmostEqual(2.54, totals[3], places=2)
+        self.assertAlmostEqual(0.41, totals[4], places=2)
+        self.assertAlmostEqual(2.54, totals[5], places=2)
         self.assertAlmostEqual(0.0, totals[6], places=2)
         self.assertAlmostEqual(0.0, totals[7], places=2)
         self.assertAlmostEqual(0.0, totals[8], places=2)
 
     def test_sound_ten_calc(self): 
-        CONSUMPTION_FACTOR = 0.8469
-        ret = ccn.sound_ten_calc(self._loadings)
+        ret = ccn.sound_ten_calc(self._loadings, self._ecos_mask)
         print('test_sound_ten_calc')  # print totals
         print(ret[3])  # print totals
         totals = ret[3]
         self.assertEqual(9, len(totals))
-        self.assertAlmostEqual(0.5 * CONSUMPTION_FACTOR, totals[0], places=4)
-        self.assertAlmostEqual(1.5 * CONSUMPTION_FACTOR, totals[1], places=4)
-        self.assertAlmostEqual(1.5 * CONSUMPTION_FACTOR, totals[2], places=4)
-        self.assertAlmostEqual(3.0 * CONSUMPTION_FACTOR, totals[3], places=4)
-        self.assertAlmostEqual(0.5 * CONSUMPTION_FACTOR, totals[4], places=4)
-        self.assertAlmostEqual(3.0 * CONSUMPTION_FACTOR, totals[5], places=4)
-        self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR, totals[6], places=4)
-        self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR, totals[7], places=4)
-        self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR, totals[8], places=4)
+        self.assertAlmostEqual(0.42, totals[0], places=2)
+        self.assertAlmostEqual(0.56, totals[1], places=2)
+        self.assertAlmostEqual(1.27, totals[2], places=2)
+        self.assertAlmostEqual(2.54, totals[3], places=2)
+        self.assertAlmostEqual(0.19, totals[4], places=2)
+        self.assertAlmostEqual(2.54, totals[5], places=2)
+        self.assertAlmostEqual(0.0, totals[6], places=2)
+        self.assertAlmostEqual(0.0, totals[7], places=2)
+        self.assertAlmostEqual(0.0, totals[8], places=2)
 
     def test_sound_hundred_calc(self): 
-        CONSUMPTION_FACTOR = 0.7127
-        CONSUMPTION_FACTOR_SOUTHERN = 0.5725
         ret = ccn.sound_hundred_calc(self._loadings, self._ecos_mask)
         print('test_sound_hundred_calc')  # print totals
         print(ret[3])  # print totals
         totals = ret[3]
         self.assertEqual(9, len(totals))
-        self.assertAlmostEqual(0.5 * CONSUMPTION_FACTOR, totals[0], places=4)
-        self.assertAlmostEqual(1.5 * CONSUMPTION_FACTOR_SOUTHERN, totals[1], places=4)
-        self.assertAlmostEqual(1.5 * CONSUMPTION_FACTOR, totals[2], places=4)
-        self.assertAlmostEqual(3.0 * CONSUMPTION_FACTOR, totals[3], places=4)
-        self.assertAlmostEqual(0.5 * CONSUMPTION_FACTOR_SOUTHERN, totals[4], places=4)
-        self.assertAlmostEqual(3.0 * CONSUMPTION_FACTOR, totals[5], places=4)
-        self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR, totals[6], places=4)
-        self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR_SOUTHERN, totals[7], places=4)
-        self.assertAlmostEqual(0.0 * CONSUMPTION_FACTOR, totals[8], places=4)
+        self.assertAlmostEqual(0.36, totals[0], places=2)
+        self.assertAlmostEqual(0.86, totals[1], places=2)
+        self.assertAlmostEqual(1.07, totals[2], places=2)
+        self.assertAlmostEqual(2.14, totals[3], places=2)
+        self.assertAlmostEqual(0.29, totals[4], places=2)
+        self.assertAlmostEqual(2.14, totals[5], places=2)
+        self.assertAlmostEqual(0.0, totals[6], places=2)
+        self.assertAlmostEqual(0.0, totals[7], places=2)
+        self.assertAlmostEqual(0.0, totals[8], places=2)
 
     def test_sound_large_wood_calc(self):  
         eq = lambda load, fm: (2.735 + load*0.3285 + fm*-0.0457)[0]

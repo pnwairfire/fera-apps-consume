@@ -211,17 +211,22 @@ def pile_calc(pct_consumed, LD):
     return util.csdist(total_consumed, csd)
 
 ### WOODY FUEL CONSUMPTION NATURAL EQUATIONS ###
-def sound_one_calc(LD):
+def sound_one_calc(loadings, ecos_mask):
     """ 1-hr (0 to 1/4"), natural """
-    # ks - this is unchanged based on Susan's spreadsheet, although the modeling
-    #  indicated a fraction, not all, is consumed
     csd = [0.95, 0.05, 0.00]
-    return util.csdist(values(LD, 'one_hr_sound'), csd)
+    total = np.where(
+            np.equal(ecos_mask, 1),       # if southern ecoregion,
+            values(loadings, 'one_hr_sound') * 0.8259,    # true
+            values(loadings, 'one_hr_sound') * 0.8469)    # false
+    return util.csdist(total, csd)
 
-def sound_ten_calc(LD):
+def sound_ten_calc(loadings, ecos_mask):
     """ 10-hr (1/4" to 1"), natural, p.169"""
     csd = [0.90, 0.10, 0.00]
-    total = values(LD, 'ten_hr_sound') * 0.8469
+    total = np.where(
+            np.equal(ecos_mask, 1),       # if southern ecoregion,
+            values(loadings, 'ten_hr_sound') * 0.3727,    # true
+            values(loadings, 'ten_hr_sound') * 0.8469)    # false
     return util.csdist(total, csd)
 
 def sound_hundred_calc(loadings, ecos_mask):
