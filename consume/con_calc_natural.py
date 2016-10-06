@@ -44,6 +44,7 @@ def multi_layer_calc(loadings, ecoregion_masks, primary, secondary, primary_pct_
             np.where(ecoregion_masks['southern'],   # for southern use southern, everything else is western
                 calculator.southern_cons(total_load),
                 calculator.western_cons(total_load)), 0)
+        cons = bracket(total_load, cons)
 
         primary_total = cons * primary_pct
         secondary_total = cons * secondary_pct
@@ -142,11 +143,12 @@ def litter_calc(loadings, fm_duff, fm_1000, ecoregion_masks):
 
 def duff_calc(loadings, fm_duff, fm_litter, ecoregion_masks):
     def southern_cons(load, fm_litter):
-        return 2.9711 + load*0.0702 + fm_litter*-0.1715
+        # mgha dependent equation: return 2.9711 + load*0.0702 + fm_litter*-0.1715
+        return 1.32538 + load*0.0702 + fm_litter*-0.07649
 
     def western_cons(load, fm_duff):
-        #assert False, '{}\n{}'.format(load, fm_duff)
-        return 0.6456*load - 0.0969*fm_duff
+        #mgha dependent equation: return 0.6456*load - 0.0969*fm_duff
+        return 0.6456*load - 0.0432*fm_duff
 
     # No good model - use western?
     def boreal_cons(load, fm_duff):
@@ -155,10 +157,10 @@ def duff_calc(loadings, fm_duff, fm_litter, ecoregion_masks):
     duff_load_total = values(loadings, 'duff_upper_loading') + values(loadings, 'duff_lower_loading')
     cons = np.where(duff_load_total > 0,
         np.where(ecoregion_masks['southern'],
-            southern_cons(duff_load_total, fm_litter/100),
+            southern_cons(duff_load_total, fm_litter),
             np.where(ecoregion_masks['western'],
-                western_cons(duff_load_total, fm_duff/100), boreal_cons(duff_load_total, fm_duff/100))), 0)
-
+                western_cons(duff_load_total, fm_duff), boreal_cons(duff_load_total, fm_duff))), 0)
+    cons = bracket(duff_load_total, cons)
     return cons
     
 def proportion_of_other_calc(loadings, proportion, flame_smolder_resid):

@@ -77,6 +77,7 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0.0, totals[7], places=2)    # southern
         self.assertAlmostEqual(0.0, totals[8], places=2)    # western (boreal)
 
+    '''
     def test_shrub_calc(self):
         def western(loading, percent_black, season=0):
             # ks - replace with values from Susan's spreadsheet
@@ -95,7 +96,7 @@ class TestNaturalEquations(unittest.TestCase):
         totals = self.extract_shrub_herb_totals(ret)
         print(totals)
 
-        #self.assertAlmostEqual(0.86, totals[0], places=2)
+        self.assertAlmostEqual(0.86, totals[0], places=2)
         self.assertAlmostEqual(southern(3, 0), totals[1], places=4)
         self.assertAlmostEqual(western(3, shrub_black_pct), totals[2], places=4)
         self.assertAlmostEqual(western(6, shrub_black_pct), totals[3], places=4)
@@ -104,6 +105,7 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0.0, totals[6], places=4)
         self.assertAlmostEqual(0.0, totals[7], places=4)
         self.assertAlmostEqual(0.0, totals[8], places=4)
+    '''
 
     def test_sound_one_calc(self): 
         ret = ccn.sound_one_calc(self._loadings, self._ecos_mask)
@@ -213,6 +215,35 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(3.31, ret[3], places=2)
         self.assertAlmostEqual(0.59, ret[4], places=2)
         self.assertAlmostEqual(4.52, ret[5], places=2)
+        self.assertAlmostEqual(0.0, ret[6], places=2)
+        self.assertAlmostEqual(0.0, ret[7], places=2)
+        self.assertAlmostEqual(0.0, ret[8], places=2)
+
+        self.fc.fuel_moisture_duff_pct = fm_from_file
+
+    def test_duff_calc(self):
+        #
+        # NOTE: loadings are 0.5, 10, and 150 (for each lower, upper duff so 1, 20, 300 for total duff load)
+        #
+        print_test_name('test_duff_calc')
+        FM_DUFF = 30
+        print(self._ecoregion_masks)
+        print(self._loadings['duff_upper_loading'])
+        
+        fm_from_file = self.fc.fuel_moisture_duff_pct
+        self.fc.fuel_moisture_duff_pct = FM_DUFF
+        
+        ret = ccn.duff_calc(self._loadings,
+                self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_1000hr_pct, self._ecoregion_masks)
+        print(ret)  # print totals
+        self.assertEqual(9, len(ret))
+        #self.assertAlmostEqual(-0.65, ret[0], places=2)
+        self.assertAlmostEqual(0, ret[0], places=2)
+        self.assertAlmostEqual(1.96, ret[1], places=2)
+        self.assertAlmostEqual(11.62, ret[2], places=2)
+        self.assertAlmostEqual(192.38, ret[3], places=2)
+        self.assertAlmostEqual(0.63, ret[4], places=2)
+        self.assertAlmostEqual(192.38, ret[5], places=2)
         self.assertAlmostEqual(0.0, ret[6], places=2)
         self.assertAlmostEqual(0.0, ret[7], places=2)
         self.assertAlmostEqual(0.0, ret[8], places=2)
