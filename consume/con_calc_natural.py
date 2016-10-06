@@ -121,22 +121,22 @@ def herb_calc(loadings, ecoregion_masks):
 ###################################################################
 def litter_calc(loadings, fm_duff, fm_1000, ecoregion_masks):
     def boreal_cons(load, fm_duff):
-        return 0.9794*load - 0.0281*fm_duff
+        # mgha dependent equation: return 0.9794*load - 0.0281*fm_duff
+        return 0.9794*load - 0.012535129*fm_duff
         
     def southern_cons(load):
         return 0.6918*load
 
     def western_cons(load, fm_duff):
-        #assert False, '{}\n{}'.format(load, fm_duff)
-        return 0.6804*load - 0.007*fm_duff
+        # mgha dependent equation: return 0.6804*load - 0.007*fm_duff
+        return 0.6804*load - 0.00312263*fm_duff
 
     litter_load = values(loadings, 'litter_loading')
-    #assert False, fm_1000
     cons = np.where(litter_load > 0,
         np.where(ecoregion_masks['southern'],
             southern_cons(litter_load),
             np.where(ecoregion_masks['western'],
-                western_cons(litter_load, fm_duff/100), boreal_cons(litter_load, fm_duff/100))), 0)
+                western_cons(litter_load, fm_duff), boreal_cons(litter_load, fm_duff))), 0)
 
     return cons
 
