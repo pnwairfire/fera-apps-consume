@@ -72,9 +72,11 @@ class TestInputSettings(unittest.TestCase):
         self.assertTrue(s.set('ecoregion', ['western', 'southern', 'boreal']))
         self.assertTrue(s.set('fm_1000hr', [1, 2, 4]))
         self.assertTrue(s.set('fm_duff', [1, 2, 4]))
+        self.assertTrue(s.set('fm_litter', [1,2,4]))
         self.assertTrue(s.set('can_con_pct', 4))    ### - manufacture a sequence if necessary
         self.assertTrue(s.set('shrub_black_pct', [1, 2, 4]))
         self.assertTrue(s.set('pile_black_pct', [1, 2, 4]))
+        self.assertTrue(s.set('season', ['spring','fall','winter']))
         s.fm_type = 'MEAS-Th'
         self.assertFalse(s.settings_are_complete())
         s.units = 'kg_ha'
@@ -95,8 +97,10 @@ class TestInputSettings(unittest.TestCase):
         self.assertTrue(s.set('ecoregion', ['western', 'southern', 'boreal']))
         self.assertTrue(s.set('fm_1000hr', [1, 2, 4]))
         self.assertTrue(s.set('fm_duff', [1, 2, 4]))
+        self.assertTrue(s.set('fm_litter', [1, 2, 4]))
         self.assertTrue(s.set('can_con_pct', [1, 2, 4]))
         self.assertTrue(s.set('shrub_black_pct', [1, 2, 4]))
+        self.assertTrue(s.set('season', ['spring','fall','winter']))
         s.fm_type = 'MEAS-Th'
         s.units = 'kg_ha'
         result = s.display_settings()
@@ -106,19 +110,20 @@ class TestInputSettings(unittest.TestCase):
     #   File loading tests
     # -------------------------------------------------------------------------
     ### - natural test data
-    ncols = ['area', 'can_con_pct', 'ecoregion', 'fm_1000hr', 'fm_duff', 'fuelbeds', 'shrub_black_pct', 'units', 'pile_black_pct']
+    ncols = ['area', 'can_con_pct', 'ecoregion', 'fm_1000hr', 'fm_duff', 'fm_litter', \
+                'fuelbeds', 'shrub_black_pct', 'units', 'pile_black_pct', 'season']
     nrows = [
-        ['10', '20', 'western', '30', '40', '1', '50', 'kg_ha', '90'],
-        ['20', '30', 'western', '40', '50', '1', '60', 'kg_ha', '90']]
+        ['10', '20', 'western', '30', '40', '25', '1', '50', 'kg_ha', '90', 'spring'],
+        ['20', '30', 'western', '40', '50', '35', '1', '60', 'kg_ha', '90', 'winter']]
         
     ### - activity test data
-    acols = ['area', 'can_con_pct', 'ecoregion', 'fm_1000hr', 'fm_duff', \
+    acols = ['area', 'can_con_pct', 'ecoregion', 'fm_1000hr', 'fm_duff', 'fm_litter',\
         'fuelbeds', 'shrub_black_pct', 'units', 'slope', 'windspeed', 'days_since_rain', \
-        'fm_10hr', 'length_of_ignition', 'fm_type', 'pile_black_pct']
+        'fm_10hr', 'length_of_ignition', 'fm_type', 'pile_black_pct', 'season']
     arows = [
-        ['10', '20', 'western', '30', '40', '1', '50', 'kg_ha', '5', '10', '3', '20', '30', 'NFDRS-Th', '90'],
-        ['15', '21', 'western', '35', '35', '2', '45', 'kg_ha', '10', '15', '4', '25', '35', 'NFDRS-Th', '90'],
-        ['20', '22', 'western', '40', '30', '3', '40', 'kg_ha', '15', '20', '5', '30', '40', 'NFDRS-Th', '90']
+        ['10', '20', 'western', '30', '40', '15', '1', '50', 'kg_ha', '5', '10', '3', '20', '30', 'NFDRS-Th', '90', 'fall'],
+        ['15', '21', 'western', '35', '35', '25', '2', '45', 'kg_ha', '10', '15', '4', '25', '35', 'NFDRS-Th', '90', 'fall'],
+        ['20', '22', 'western', '40', '30', '35', '3', '40', 'kg_ha', '15', '20', '5', '30', '40', 'NFDRS-Th', '90', 'fall']
         ]
         
     nat_data = pan.DataFrame(nrows, columns=ncols)
@@ -151,8 +156,10 @@ class TestInputSettings(unittest.TestCase):
         self.assertEqual(list(s.get('ecoregion')), list(data.ecoregion))
         self.assertEqual(list(s.get('fm_1000hr')), [float(x) for x in list(data.fm_1000hr)])
         self.assertEqual(list(s.get('fm_duff')), [float(x) for x in list(data.fm_duff)])
+        self.assertEqual(list(s.get('fm_litter')), [float(x) for x in list(data.fm_litter)])
         self.assertEqual(list(s.get('fuelbeds')), [str(x) for x in list(data.fuelbeds)])
         self.assertEqual(list(s.get('shrub_black_pct')), [float(x) for x in list(data.shrub_black_pct)])
+        self.assertEqual(list(s.get('season')), [x for x in list(data.season)])
         os.unlink(infile[1])
 
     def test_load_natural_from_dict(self):
@@ -170,9 +177,11 @@ class TestInputSettings(unittest.TestCase):
         'ecoregion' : data.ecoregion.values,
         'fm_1000hr' : as_ints(data.fm_1000hr.values),
         'fm_duff' : as_ints(data.fm_duff.values),
+        'fm_litter' : as_ints(data.fm_litter.values),
         'can_con_pct' : as_ints(data.can_con_pct.values),
         'shrub_black_pct' : as_ints(data.shrub_black_pct.values),
         'pile_black_pct' : as_ints(data.pile_black_pct.values),
+        'season' : data.season.values
         }
 
         s = ConsumeInputSettings()
@@ -186,8 +195,10 @@ class TestInputSettings(unittest.TestCase):
         self.assertEqual(list(s.get('ecoregion')), list(data.ecoregion))
         self.assertEqual(list(s.get('fm_1000hr')), [float(x) for x in list(data.fm_1000hr)])
         self.assertEqual(list(s.get('fm_duff')), [float(x) for x in list(data.fm_duff)])
+        self.assertEqual(list(s.get('fm_litter')), [float(x) for x in list(data.fm_litter)])
         self.assertEqual(list(s.get('fuelbeds')), [str(x) for x in list(data.fuelbeds)])
         self.assertEqual(list(s.get('shrub_black_pct')), [float(x) for x in list(data.shrub_black_pct)])
+        self.assertEqual(list(s.get('season')), [x for x in list(data.season)])
 
     def test_load_activity(self):
         ''' Write a temp file, load the temp file and verify that the settings are equal to the 
@@ -213,8 +224,10 @@ class TestInputSettings(unittest.TestCase):
         self.assertEqual(list(s.get('ecoregion')), list(data.ecoregion))
         self.assertEqual(list(s.get('fm_1000hr')), [float(x) for x in list(data.fm_1000hr)])
         self.assertEqual(list(s.get('fm_duff')), [float(x) for x in list(data.fm_duff)])
+        self.assertEqual(list(s.get('fm_litter')), [float(x) for x in list(data.fm_litter)])
         self.assertEqual(list(s.get('fuelbeds')), [str(x) for x in list(data.fuelbeds)])
         self.assertEqual(list(s.get('shrub_black_pct')), [float(x) for x in list(data.shrub_black_pct)])
+        self.assertEqual(list(s.get('season')), [x for x in list(data.season)])
 
         self.assertEqual(list(s.get('slope')), [float(x) for x in list(data.slope)])
         self.assertEqual(list(s.get('windspeed')), [float(x) for x in list(data.windspeed)])

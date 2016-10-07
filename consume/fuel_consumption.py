@@ -679,6 +679,11 @@ class FuelConsumption(util.FrozenClass):
     def fuel_moisture_duff_pct(self, value):
         self._settings.set('fm_duff', value)
     @property
+    def fuel_moisture_litter_pct(self): return self._settings.get('fm_litter')
+    @fuel_moisture_duff_pct.setter
+    def fuel_moisture_litter_pct(self, value):
+        self._settings.set('fm_litter', value)
+    @property
     def fuel_moisture_10hr_pct(self): return self._settings.get('fm_10hr')
     @fuel_moisture_10hr_pct.setter
     def fuel_moisture_10hr_pct(self, value):

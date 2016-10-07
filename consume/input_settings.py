@@ -66,9 +66,11 @@ class ConsumeInputSettings(object):
         'ecoregion' : ['Fuelbed ecoregion',  dd.list_valid_ecoregions(), validate_list],
         'fm_1000hr' : ['Fuel moisture (1000-hr, %)', [0,140], validate_range],
         'fm_duff' : ['Fuel moisture (duff, %)', [0,400], validate_range],
+        'fm_litter' : ['Fuel moisture (litter, %)', [0,50], validate_range],
         'can_con_pct' : ['Canopy consumption (%)', [0,100], validate_range],
         'shrub_black_pct' : ['Shrub blackened (%)', [0,100], validate_range],
         'pile_black_pct' : ['Pile blackened (%)', [0,100], validate_range],
+        'season' : ['Season (spring, summer, fall, winter)', ['spring', 'summer', 'fall', 'winter'], validate_list],
         }
 
     AllInputParameters = ActivityInputVarParameters.copy()
