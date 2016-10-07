@@ -144,7 +144,8 @@ def litter_calc(loadings, fm_duff, fm_1000, ecoregion_masks):
 def duff_calc(loadings, fm_duff, fm_litter, ecoregion_masks):
     def southern_cons(load, fm_litter):
         # mgha dependent equation: return 2.9711 + load*0.0702 + fm_litter*-0.1715
-        return 1.32538 + load*0.0702 + fm_litter*-0.07649
+        print('KJELL {}  {}'.format(load, fm_litter))
+        return 1.3254 + load*0.0702 + fm_litter*-0.0765
 
     def western_cons(load, fm_duff):
         #mgha dependent equation: return 0.6456*load - 0.0969*fm_duff

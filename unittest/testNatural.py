@@ -30,7 +30,9 @@ class TestNaturalEquations(unittest.TestCase):
         loadings_file = helper.get_test_loadingsfile()
         self.fc = consume.FuelConsumption(fccs_file=loadings_file)
         self.fc.burn_type = 'natural'
-        self.fc.load_scenario(load_file=helper.get_test_inputfile())
+        input_file = helper.get_test_inputfile()
+        # debug: print(' - Loading input from: {}'.format(input_file))
+        self.fc.load_scenario(load_file=input_file)
         self._loadings = self.fc._get_loadings_for_specified_files(self.fc._settings.get('fuelbeds'))
 
         # Setup ecoregion masks for equations that vary by ecoregion
@@ -210,10 +212,10 @@ class TestNaturalEquations(unittest.TestCase):
         print(ret)  # print totals
         self.assertEqual(9, len(ret))
         self.assertAlmostEqual(0.59, ret[0], places=2)
-        #self.assertAlmostEqual(1.78, ret[1], places=2)
+        self.assertAlmostEqual(2.08, ret[1], places=2)
         self.assertAlmostEqual(2.56, ret[2], places=2)
         self.assertAlmostEqual(3.31, ret[3], places=2)
-        self.assertAlmostEqual(0.59, ret[4], places=2)
+        self.assertAlmostEqual(0.69, ret[4], places=2)
         self.assertAlmostEqual(4.52, ret[5], places=2)
         self.assertAlmostEqual(0.0, ret[6], places=2)
         self.assertAlmostEqual(0.0, ret[7], places=2)
@@ -229,15 +231,15 @@ class TestNaturalEquations(unittest.TestCase):
         FM_DUFF = 30
         print(self._ecoregion_masks)
         print(self._loadings['duff_upper_loading'])
+        print(self.fc.fuel_moisture_litter_pct)
         
         fm_from_file = self.fc.fuel_moisture_duff_pct
         self.fc.fuel_moisture_duff_pct = FM_DUFF
         
         ret = ccn.duff_calc(self._loadings,
-                self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_1000hr_pct, self._ecoregion_masks)
+                self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_litter_pct, self._ecoregion_masks)
         print(ret)  # print totals
         self.assertEqual(9, len(ret))
-        #self.assertAlmostEqual(-0.65, ret[0], places=2)
         self.assertAlmostEqual(0, ret[0], places=2)
         self.assertAlmostEqual(1.96, ret[1], places=2)
         self.assertAlmostEqual(11.62, ret[2], places=2)
