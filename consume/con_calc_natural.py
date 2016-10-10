@@ -241,18 +241,36 @@ def sound_hundred_calc(loadings, ecos_mask):
             values(loadings, 'hun_hr_sound') * 0.7127)    # false
     return util.csdist(total, csd)
 
-def sound_large_wood_calc(loadings, fm_1000, ecos_mask):
-    def western_cons(load, fm_1000):
-        return 2.735 + 0.3285*load - 0.0457*fm_1000
-
+TIMELAG_RATIO_SOUND_WOOD_1K = 0.5    
+TIMELAG_RATIO_SOUND_WOOD_10K = 0.3    
+TIMELAG_RATIO_SOUND_WOOD_10K_PLUS = 0.2    
+def sound_large_wood_calc(loadings, fm_1000):
     sound_wood_columns = ['oneK_hr_sound', 'tenK_hr_sound', 'tnkp_hr_sound']
-    total = sum([values(loadings, col) for col in sound_wood_columns])
-
-    # ks - is this correct?
-    csd = [0.60, 0.30, 0.10]
-    cons = western_cons(total, fm_1000)
-
-    return util.csdist(cons, csd)
+    total_swload = sum([values(loadings, col) for col in sound_wood_columns])
+    # mgha dependent: cons_total = 2.735 + 0.3285*total_swload - 0.0457*fm_1000
+    cons_total = 1.2201 + 0.3285*total_swload - 0.0203863*fm_1000
+    
+    onek_load = loadings['oneK_hr_sound']
+    tenk_load = loadings['tenK_hr_sound']
+    tenk_plus_load = loadings['tnkp_hr_sound']
+    
+    ideal_onek = onek_load * TIMELAG_RATIO_SOUND_WOOD_1K
+    ideal_tenk = tenk_load * TIMELAG_RATIO_SOUND_WOOD_10K
+    ideal_tenk_plus = tenk_plus_load * TIMELAG_RATIO_SOUND_WOOD_10K_PLUS
+    ideal_sw_total = ideal_onek + ideal_tenk + ideal_tenk_plus
+    
+    # determine a correction factor based on the relationship of the ideal total to the 
+    #  calculated consumption (done on a single loading value)
+    correction = np.where(ideal_sw_total > 0, cons_total/ideal_sw_total, 0)
+    
+    one_k_cons = bracket(onek_load, ideal_onek * correction)
+    ten_k_cons = bracket(tenk_load, ideal_tenk * correction)
+    ten_k_plus_cons = bracket(tenk_plus_load, ideal_tenk_plus * correction)
+    #assert np.isclose(cons_total == (one_k_cons + ten_k_cons + ten_k_plus_cons))
+    
+    return (util.csdist(one_k_cons, [.6, .3, .1]),
+            util.csdist(ten_k_cons, [.4, .4, .2]),
+            util.csdist(ten_k_plus_cons, [.2, .4, .4]))    
 
 def rotten_large_wood_calc(loadings, fm_1000, ecos_mask):
     def western_cons(load, fm_1000):
@@ -267,3 +285,24 @@ def rotten_large_wood_calc(loadings, fm_1000, ecos_mask):
     cons = bracket(total, cons)
 
     return util.csdist(cons, csd)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
