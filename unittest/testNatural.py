@@ -86,28 +86,25 @@ class TestNaturalEquations(unittest.TestCase):
     '''
     def test_shrub_calc(self):
         def western(loading, percent_black, season=0):
-            # ks - replace with values from Susan's spreadsheet
             tmp =  0.1102 + 0.1139*to_mgha(loading) + 1.9647*percent_black - 0.3296*season
             return to_tons(tmp**tmp)
 
         def southern(loading, season):
-            # ks - replace with values from Susan's spreadsheet
             log_loading = np.log(to_mgha(loading))
             tmp = -0.1889 + 0.9049*log_loading + 0.0676*season
             return to_tons(np.e**tmp)
 
         print_test_name('test_shrub_calc')
-        shrub_black_pct = 0.8
-        ret = ccn.shrub_calc(shrub_black_pct, self._loadings, self._ecoregion_masks)
+        ret = ccn.shrub_calc(self.fc.shrub_blackened_pct, self._loadings, self._ecoregion_masks, 0)
         totals = self.extract_shrub_herb_totals(ret)
         print(totals)
 
-        self.assertAlmostEqual(0.86, totals[0], places=2)
+        self.assertAlmostEqual(western(1, self.fc.shrub_blackened_pct)[0], totals[0], places=2)
         self.assertAlmostEqual(southern(3, 0), totals[1], places=4)
-        self.assertAlmostEqual(western(3, shrub_black_pct), totals[2], places=4)
-        self.assertAlmostEqual(western(6, shrub_black_pct), totals[3], places=4)
-        self.assertAlmostEqual(0.77, totals[4], places=2)
-        self.assertAlmostEqual(western(6, shrub_black_pct), totals[5], places=4)
+        self.assertAlmostEqual(western(3, self.fc.shrub_blackened_pct), totals[2], places=4)
+        self.assertAlmostEqual(western(6, self.fc.shrub_blackened_pct), totals[3], places=4)
+        self.assertAlmostEqual(southern(1, 1), totals[4], places=2)
+        self.assertAlmostEqual(western(6, self.fc.shrub_blackened_pct), totals[5], places=4)
         self.assertAlmostEqual(0.0, totals[6], places=4)
         self.assertAlmostEqual(0.0, totals[7], places=4)
         self.assertAlmostEqual(0.0, totals[8], places=4)
@@ -247,39 +244,39 @@ class TestNaturalEquations(unittest.TestCase):
 
         print(one_k)
         one_k_totals = one_k[3]
-        self.assertAlmostEqual(.73, one_k_totals[0], places=2)
-        self.assertAlmostEqual(2.11, one_k_totals[1], places=2)
-        self.assertAlmostEqual(2.11, one_k_totals[2], places=2)
-        self.assertAlmostEqual(3.49, one_k_totals[3], places=2)
-        self.assertAlmostEqual(.73, one_k_totals[4], places=2)
-        self.assertAlmostEqual(3.49, one_k_totals[5], places=2)
-        self.assertAlmostEqual(0, one_k_totals[6], places=2)
-        self.assertAlmostEqual(0, one_k_totals[7], places=2)
-        self.assertAlmostEqual(0, one_k_totals[8], places=2)
+        self.assertAlmostEqual(.73, one_k_totals[0], places=1)
+        self.assertAlmostEqual(2.11, one_k_totals[1], places=1)
+        self.assertAlmostEqual(2.11, one_k_totals[2], places=1)
+        self.assertAlmostEqual(3.49, one_k_totals[3], places=1)
+        self.assertAlmostEqual(.73, one_k_totals[4], places=1)
+        self.assertAlmostEqual(3.49, one_k_totals[5], places=1)
+        self.assertAlmostEqual(0, one_k_totals[6], places=1)
+        self.assertAlmostEqual(0, one_k_totals[7], places=1)
+        self.assertAlmostEqual(0, one_k_totals[8], places=1)
 
         print(ten_k)
         ten_k_totals = ten_k[3]
-        self.assertAlmostEqual(1.03, ten_k_totals[0], places=2)
-        self.assertAlmostEqual(3.01, ten_k_totals[1], places=2)
-        self.assertAlmostEqual(3.01, ten_k_totals[2], places=2)
-        self.assertAlmostEqual(4.98, ten_k_totals[3], places=2)
-        self.assertAlmostEqual(1.03, ten_k_totals[4], places=2)
-        self.assertAlmostEqual(4.98, ten_k_totals[5], places=2)
-        self.assertAlmostEqual(0, ten_k_totals[6], places=2)
-        self.assertAlmostEqual(0, ten_k_totals[7], places=2)
-        self.assertAlmostEqual(0, ten_k_totals[8], places=2)
+        self.assertAlmostEqual(1.03, ten_k_totals[0], places=1)
+        self.assertAlmostEqual(3.01, ten_k_totals[1], places=1)
+        self.assertAlmostEqual(3.01, ten_k_totals[2], places=1)
+        self.assertAlmostEqual(4.98, ten_k_totals[3], places=1)
+        self.assertAlmostEqual(1.03, ten_k_totals[4], places=1)
+        self.assertAlmostEqual(4.98, ten_k_totals[5], places=1)
+        self.assertAlmostEqual(0, ten_k_totals[6], places=1)
+        self.assertAlmostEqual(0, ten_k_totals[7], places=1)
+        self.assertAlmostEqual(0, ten_k_totals[8], places=1)
 
         print(tenk_plus)
         tenk_plus_totals = tenk_plus[3]
-        self.assertAlmostEqual(.31, tenk_plus_totals[0], places=2)
-        self.assertAlmostEqual(.90, tenk_plus_totals[1], places=2)
-        self.assertAlmostEqual(.90, tenk_plus_totals[2], places=2)
-        self.assertAlmostEqual(1.49, tenk_plus_totals[3], places=2)
-        self.assertAlmostEqual(.31, tenk_plus_totals[4], places=2)
-        self.assertAlmostEqual(1.49, tenk_plus_totals[5], places=2)
-        self.assertAlmostEqual(0, tenk_plus_totals[6], places=2)
-        self.assertAlmostEqual(0, tenk_plus_totals[7], places=2)
-        self.assertAlmostEqual(0, tenk_plus_totals[8], places=2)
+        self.assertAlmostEqual(.31, tenk_plus_totals[0], places=1)
+        self.assertAlmostEqual(.90, tenk_plus_totals[1], places=1)
+        self.assertAlmostEqual(.90, tenk_plus_totals[2], places=1)
+        self.assertAlmostEqual(1.49, tenk_plus_totals[3], places=1)
+        self.assertAlmostEqual(.31, tenk_plus_totals[4], places=1)
+        self.assertAlmostEqual(1.49, tenk_plus_totals[5], places=1)
+        self.assertAlmostEqual(0, tenk_plus_totals[6], places=1)
+        self.assertAlmostEqual(0, tenk_plus_totals[7], places=1)
+        self.assertAlmostEqual(0, tenk_plus_totals[8], places=1)
         
         self.fc.fuel_moisture_1000hr_pct = fm_from_file
 

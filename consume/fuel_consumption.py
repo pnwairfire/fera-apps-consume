@@ -1244,8 +1244,10 @@ class FuelConsumption(util.FrozenClass):
          can_snag1w_fsrt, can_snag1nf_fsrt, can_snag2_fsrt, can_snag3_fsrt,
          can_ladder_fsrt] = ccn.ccon_canopy(self._settings.get('can_con_pct'), LD)
 
+        season = np.where('spring' == self._settings.get('season') , 1, 0)
         [shb_prim_live_fsrt, shb_prim_dead_fsrt,
-         shb_seco_live_fsrt, shb_seco_dead_fsrt] = ccn.ccon_shrub(self._settings.get('shrub_black_pct'), LD)
+         shb_seco_live_fsrt, shb_seco_dead_fsrt] = ccn.shrub_calc(self._settings.get('shrub_black_pct'), LD,
+                                                        ecoregion_masks, season)
 
         [nw_prim_live_fsrt, nw_prim_dead_fsrt,
          nw_seco_live_fsrt, nw_seco_dead_fsrt] = ccn.ccon_nw(LD)

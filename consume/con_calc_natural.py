@@ -275,9 +275,6 @@ TIMELAG_RATIO_ROTTEN_WOOD_1K = 0.47
 TIMELAG_RATIO_ROTTEN_WOOD_10K = 0.33   
 TIMELAG_RATIO_ROTTEN_WOOD_10K_PLUS = 0.2    
 def rotten_large_wood_calc(loadings, fm_1000):
-    def western_cons(load, fm_1000):
-        return 1.9024 + 0.4933*load - 0.0338*fm_1000
-
     rotten_wood_columns = ['oneK_hr_rotten', 'tenK_hr_rotten', 'tnkp_hr_rotten']
     total_rload = sum([values(loadings, col) for col in rotten_wood_columns])
     
