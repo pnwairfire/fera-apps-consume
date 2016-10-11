@@ -21,6 +21,10 @@ def to_mgha(tons):
 def to_tons(mgha):
     return mgha * CVT_MGHA
     
+def bracket(load, cons):
+    # ensure that results are between 0 and initial load value)
+    return np.where(0 > cons, 0, np.where(cons > load, load, cons))
+    
 def print_test_name(name):
     print('\n^^^^^^^^^^^^^^^^^^^\n{}'.format(name))
 
@@ -179,8 +183,7 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(eq(0.0, self.fc.fuel_moisture_1000hr_pct), totals[6], places=4)
         self.assertAlmostEqual(eq(0.0, self.fc.fuel_moisture_1000hr_pct), totals[7], places=4)
         self.assertAlmostEqual(eq(0.0, self.fc.fuel_moisture_1000hr_pct), totals[8], places=4)
-        
-        print(one_k)
+
         one_k_totals = one_k[3]
         self.assertAlmostEqual(.58, one_k_totals[0], places=2)
         self.assertAlmostEqual(1.59, one_k_totals[1], places=2)
@@ -192,7 +195,6 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0, one_k_totals[7], places=2)
         self.assertAlmostEqual(0, one_k_totals[8], places=2)
         
-        print(ten_k)
         ten_k_totals = ten_k[3]
         self.assertAlmostEqual(.70, ten_k_totals[0], places=2)
         self.assertAlmostEqual(1.91, ten_k_totals[1], places=2)
@@ -204,7 +206,6 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0, ten_k_totals[7], places=2)
         self.assertAlmostEqual(0, ten_k_totals[8], places=2)
         
-        print(tenk_plus)
         tenk_plus_totals = tenk_plus[3]
         self.assertAlmostEqual(.23, tenk_plus_totals[0], places=2)
         self.assertAlmostEqual(.64, tenk_plus_totals[1], places=2)
@@ -215,30 +216,72 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0, tenk_plus_totals[6], places=2)
         self.assertAlmostEqual(0, tenk_plus_totals[7], places=2)
         self.assertAlmostEqual(0, tenk_plus_totals[8], places=2)
-        
+
         self.fc.fuel_moisture_1000hr_pct = fm_from_file
         
 
     def test_rotten_large_wood_calc(self):  
         print_test_name('test_rotten_large_wood')
+        # test loading amounts are (1,2,1) = 4, (3,6,3) = 12, (5,10,5) = 20
+        TEST_FM = 50
+        fm_from_file = self.fc.fuel_moisture_1000hr_pct
+        self.fc.fuel_moisture_1000hr_pct = TEST_FM
         
         def calc(load, fm):
-            ret = (1.9024 + load*0.4933 + fm*-0.0338)[0]
-            return ret if ret > 0 else 0
+            ret = to_tons((1.9024 + to_mgha(load)*0.4933 + fm*-0.0338)[0])
+            return bracket(load, ret)
             
-        ret = ccn.rotten_large_wood_calc(self._loadings, self.fc.fuel_moisture_1000hr_pct, self._ecos_mask)
-        print(ret[3])  # print totals
-        totals = ret[3]
+        one_k, ten_k, tenk_plus = ccn.rotten_large_wood_calc(self._loadings, self.fc.fuel_moisture_1000hr_pct)
+        totals = one_k[3] + ten_k[3] + tenk_plus[3]
+        print(totals)  # print totals
         self.assertEqual(9, len(totals))
-        self.assertAlmostEqual(calc(0, self.fc.fuel_moisture_1000hr_pct), totals[0], places=4)
-        self.assertAlmostEqual(calc(4.5, self.fc.fuel_moisture_1000hr_pct), totals[1], places=4)
-        self.assertAlmostEqual(calc(4.5, self.fc.fuel_moisture_1000hr_pct), totals[2], places=4)
-        self.assertAlmostEqual(calc(9.0, self.fc.fuel_moisture_1000hr_pct), totals[3], places=4)
-        self.assertAlmostEqual(calc(0, self.fc.fuel_moisture_1000hr_pct), totals[4], places=4)
-        self.assertAlmostEqual(calc(9.0, self.fc.fuel_moisture_1000hr_pct), totals[5], places=4)
+        self.assertAlmostEqual(calc(4, self.fc.fuel_moisture_1000hr_pct), totals[0], places=4)
+        self.assertAlmostEqual(calc(12, self.fc.fuel_moisture_1000hr_pct), totals[1], places=4)
+        self.assertAlmostEqual(calc(12, self.fc.fuel_moisture_1000hr_pct), totals[2], places=4)
+        self.assertAlmostEqual(calc(20, self.fc.fuel_moisture_1000hr_pct), totals[3], places=4)
+        self.assertAlmostEqual(calc(4, self.fc.fuel_moisture_1000hr_pct), totals[4], places=4)
+        self.assertAlmostEqual(calc(20, self.fc.fuel_moisture_1000hr_pct), totals[5], places=4)
         self.assertAlmostEqual(calc(0.0, self.fc.fuel_moisture_1000hr_pct), totals[6], places=4)
         self.assertAlmostEqual(calc(0.0, self.fc.fuel_moisture_1000hr_pct), totals[7], places=4)
         self.assertAlmostEqual(calc(0.0, self.fc.fuel_moisture_1000hr_pct), totals[8], places=4)
+
+        print(one_k)
+        one_k_totals = one_k[3]
+        self.assertAlmostEqual(.73, one_k_totals[0], places=2)
+        self.assertAlmostEqual(2.11, one_k_totals[1], places=2)
+        self.assertAlmostEqual(2.11, one_k_totals[2], places=2)
+        self.assertAlmostEqual(3.49, one_k_totals[3], places=2)
+        self.assertAlmostEqual(.73, one_k_totals[4], places=2)
+        self.assertAlmostEqual(3.49, one_k_totals[5], places=2)
+        self.assertAlmostEqual(0, one_k_totals[6], places=2)
+        self.assertAlmostEqual(0, one_k_totals[7], places=2)
+        self.assertAlmostEqual(0, one_k_totals[8], places=2)
+
+        print(ten_k)
+        ten_k_totals = ten_k[3]
+        self.assertAlmostEqual(1.03, ten_k_totals[0], places=2)
+        self.assertAlmostEqual(3.01, ten_k_totals[1], places=2)
+        self.assertAlmostEqual(3.01, ten_k_totals[2], places=2)
+        self.assertAlmostEqual(4.98, ten_k_totals[3], places=2)
+        self.assertAlmostEqual(1.03, ten_k_totals[4], places=2)
+        self.assertAlmostEqual(4.98, ten_k_totals[5], places=2)
+        self.assertAlmostEqual(0, ten_k_totals[6], places=2)
+        self.assertAlmostEqual(0, ten_k_totals[7], places=2)
+        self.assertAlmostEqual(0, ten_k_totals[8], places=2)
+
+        print(tenk_plus)
+        tenk_plus_totals = tenk_plus[3]
+        self.assertAlmostEqual(.31, tenk_plus_totals[0], places=2)
+        self.assertAlmostEqual(.90, tenk_plus_totals[1], places=2)
+        self.assertAlmostEqual(.90, tenk_plus_totals[2], places=2)
+        self.assertAlmostEqual(1.49, tenk_plus_totals[3], places=2)
+        self.assertAlmostEqual(.31, tenk_plus_totals[4], places=2)
+        self.assertAlmostEqual(1.49, tenk_plus_totals[5], places=2)
+        self.assertAlmostEqual(0, tenk_plus_totals[6], places=2)
+        self.assertAlmostEqual(0, tenk_plus_totals[7], places=2)
+        self.assertAlmostEqual(0, tenk_plus_totals[8], places=2)
+        
+        self.fc.fuel_moisture_1000hr_pct = fm_from_file
 
     def test_litter_calc(self):
         #
