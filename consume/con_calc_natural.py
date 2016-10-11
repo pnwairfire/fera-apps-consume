@@ -144,7 +144,6 @@ def litter_calc(loadings, fm_duff, fm_1000, ecoregion_masks):
 def duff_calc(loadings, fm_duff, fm_litter, ecoregion_masks):
     def southern_cons(load, fm_litter):
         # mgha dependent equation: return 2.9711 + load*0.0702 + fm_litter*-0.1715
-        print('KJELL {}  {}'.format(load, fm_litter))
         return 1.3254 + load*0.0702 + fm_litter*-0.0765
 
     def western_cons(load, fm_duff):
@@ -161,12 +160,16 @@ def duff_calc(loadings, fm_duff, fm_litter, ecoregion_masks):
             southern_cons(duff_load_total, fm_litter),
             np.where(ecoregion_masks['western'],
                 western_cons(duff_load_total, fm_duff), boreal_cons(duff_load_total, fm_duff))), 0)
-    cons = bracket(duff_load_total, cons)
-    return cons
     
-def proportion_of_other_calc(loadings, proportion, flame_smolder_resid):
-    cons = loadings * proportion_of_other_calc
-    return util.csdist(cons, flame_smolder_resid)
+    cons = bracket(duff_load_total, cons)
+    
+    cons_duff_upper = np.where(cons > values(loadings, 'duff_upper_loading'),
+        values(loadings, 'duff_upper_loading'), cons)
+    cons_duff_lower = np.where(cons > values(loadings, 'duff_upper_loading'),
+        (cons - values(loadings, 'duff_upper_loading')), 0)
+    assert(np.all(cons_duff_lower >= 0))
+    
+    return util.csdist(cons_duff_upper, [0.1, 0.7, 0.2]), util.csdist(cons_duff_lower, [0, 0.2, 0.8])
 
 
 

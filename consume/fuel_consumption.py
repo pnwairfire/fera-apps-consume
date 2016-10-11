@@ -1250,27 +1250,24 @@ class FuelConsumption(util.FrozenClass):
                                                         ecoregion_masks, season)
 
         [nw_prim_live_fsrt, nw_prim_dead_fsrt,
-         nw_seco_live_fsrt, nw_seco_dead_fsrt] = ccn.ccon_nw(LD)
+         nw_seco_live_fsrt, nw_seco_dead_fsrt] = ccn.herb_calc(LD, ecoregion_masks)
 
-        [stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt] = ccn.ccon_stumps(LD)
+        [stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt] = ccn.stump_calc(LD)
 
         # special case for piles
-        pile_fsrt = ccn.ccon_piles(self._settings.get('pile_black_pct'), LD)
+        pile_fsrt = ccn.pile_calc(self._settings.get('pile_black_pct'), LD)
         self._cons_data_piles = pile_fsrt
 
         fm_1000hr = self._settings.get('fm_1000hr')
         fm_duff =  self._settings.get('fm_duff')
         if self._settings.burn_type in ['natural', ['natural']]:
-
-            one_hr_fsrt = ccn.ccon_one_nat(LD)
-            ten_hr_fsrt = ccn.ccon_ten_nat(LD)
-            hun_hr_fsrt = ccn.ccon_hun_nat(ecos_mask, LD)
-            oneK_hr_snd_fsrt = ccn.ccon_oneK_snd_nat(fm_duff, fm_1000hr, ecos_mask, LD)
-            tenK_hr_snd_fsrt = ccn.ccon_tenK_snd_nat(fm_1000hr, LD)
-            tnkp_hr_snd_fsrt = ccn.ccon_tnkp_snd_nat(fm_1000hr, LD)
-            oneK_hr_rot_fsrt = ccn.ccon_oneK_rot_nat(fm_1000hr, ecos_mask, LD)
-            tenK_hr_rot_fsrt = ccn.ccon_tenK_rot_nat(fm_1000hr, LD)
-            tnkp_hr_rot_fsrt = ccn.ccon_tnkp_rot_nat(fm_1000hr, LD)
+            one_hr_fsrt = ccn.sound_one_calc(LD)
+            ten_hr_fsrt = ccn.sound_ten_calc(LD)
+            hun_hr_fsrt = ccn.sound_hundred_calc(ecos_mask, LD)
+            oneK_hr_snd_fsrt, tenK_hr_snd_fsrt, tnkp_hr_snd_fsrt = \
+                ccn.sound_large_wood_calc(LD, fm_1000hr)
+            oneK_hr_rot_fsrt, tenK_hr_rot_fsrt, tnkp_hr_rot_fsrt = \
+                ccn.sound_rotten_wood_calc(LD, fm_1000hr)
             [ff_reduction, y_b, duff_depth] = ccn.ccon_ffr(fm_duff, ecoregion_masks, LD)
         else:
             fm_type = self._settings.fm_type

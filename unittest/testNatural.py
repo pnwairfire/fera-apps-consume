@@ -242,7 +242,6 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(calc(0.0, self.fc.fuel_moisture_1000hr_pct), totals[7], places=4)
         self.assertAlmostEqual(calc(0.0, self.fc.fuel_moisture_1000hr_pct), totals[8], places=4)
 
-        print(one_k)
         one_k_totals = one_k[3]
         self.assertAlmostEqual(.73, one_k_totals[0], places=1)
         self.assertAlmostEqual(2.11, one_k_totals[1], places=1)
@@ -254,7 +253,6 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0, one_k_totals[7], places=1)
         self.assertAlmostEqual(0, one_k_totals[8], places=1)
 
-        print(ten_k)
         ten_k_totals = ten_k[3]
         self.assertAlmostEqual(1.03, ten_k_totals[0], places=1)
         self.assertAlmostEqual(3.01, ten_k_totals[1], places=1)
@@ -266,7 +264,6 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0, ten_k_totals[7], places=1)
         self.assertAlmostEqual(0, ten_k_totals[8], places=1)
 
-        print(tenk_plus)
         tenk_plus_totals = tenk_plus[3]
         self.assertAlmostEqual(.31, tenk_plus_totals[0], places=1)
         self.assertAlmostEqual(.90, tenk_plus_totals[1], places=1)
@@ -321,19 +318,20 @@ class TestNaturalEquations(unittest.TestCase):
         fm_from_file = self.fc.fuel_moisture_duff_pct
         self.fc.fuel_moisture_duff_pct = FM_DUFF
         
-        ret = ccn.duff_calc(self._loadings,
+        cons_duff_upper, cons_duff_lower = ccn.duff_calc(self._loadings,
                 self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_litter_pct, self._ecoregion_masks)
-        print(ret)  # print totals
-        self.assertEqual(9, len(ret))
-        self.assertAlmostEqual(0, ret[0], places=2)
-        self.assertAlmostEqual(1.96, ret[1], places=2)
-        self.assertAlmostEqual(11.62, ret[2], places=2)
-        self.assertAlmostEqual(192.38, ret[3], places=2)
-        self.assertAlmostEqual(0.63, ret[4], places=2)
-        self.assertAlmostEqual(192.38, ret[5], places=2)
-        self.assertAlmostEqual(0.0, ret[6], places=2)
-        self.assertAlmostEqual(0.0, ret[7], places=2)
-        self.assertAlmostEqual(0.0, ret[8], places=2)
+        total = cons_duff_upper[3] + cons_duff_lower[3]
+        print(total)  # print totals
+        self.assertEqual(9, len(total))
+        self.assertAlmostEqual(0, total[0], places=2)
+        self.assertAlmostEqual(1.96, total[1], places=2)
+        self.assertAlmostEqual(11.62, total[2], places=2)
+        self.assertAlmostEqual(192.38, total[3], places=2)
+        self.assertAlmostEqual(0.63, total[4], places=2)
+        self.assertAlmostEqual(192.38, total[5], places=2)
+        self.assertAlmostEqual(0.0, total[6], places=2)
+        self.assertAlmostEqual(0.0, total[7], places=2)
+        self.assertAlmostEqual(0.0, total[8], places=2)
 
         self.fc.fuel_moisture_duff_pct = fm_from_file
 
