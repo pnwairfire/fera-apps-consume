@@ -142,26 +142,21 @@ def litter_calc(loadings, fm_duff, fm_1000, ecoregion_masks):
     cons = bracket(litter_load, cons)
 
     return util.csdist(cons, [0.9, 0.1, 0])
+    
+def southern_cons_duff(load, fm_litter):
+    # mgha dependent equation: return 2.9711 + load*0.0702 + fm_litter*-0.1715
+    return 1.3254 + load*0.0702 + fm_litter*-0.0765
+
+def western_cons_duff(load, fm_duff):
+    #mgha dependent equation: return 0.6456*load - 0.0969*fm_duff
+    return 0.6456*load - 0.0432*fm_duff
 
 def duff_calc(loadings, fm_duff, fm_litter, ecoregion_masks):
-    def southern_cons(load, fm_litter):
-        # mgha dependent equation: return 2.9711 + load*0.0702 + fm_litter*-0.1715
-        return 1.3254 + load*0.0702 + fm_litter*-0.0765
-
-    def western_cons(load, fm_duff):
-        #mgha dependent equation: return 0.6456*load - 0.0969*fm_duff
-        return 0.6456*load - 0.0432*fm_duff
-
-    # No good model - use western?
-    def boreal_cons(load, fm_duff):
-        return western_cons(load, fm_duff)
-
     duff_load_total = values(loadings, 'duff_upper_loading') + values(loadings, 'duff_lower_loading')
     cons = np.where(duff_load_total > 0,
         np.where(ecoregion_masks['southern'],
-            southern_cons(duff_load_total, fm_litter),
-            np.where(ecoregion_masks['western'],
-                western_cons(duff_load_total, fm_duff), boreal_cons(duff_load_total, fm_duff))), 0)
+            southern_cons_duff(duff_load_total, fm_litter),
+            western_cons_duff(duff_load_total, fm_duff)), 0)
     
     cons = bracket(duff_load_total, cons)
     
@@ -178,22 +173,39 @@ def duff_calc(loadings, fm_duff, fm_litter, ecoregion_masks):
 ################################
 ### Ground FUELS CONSUMPTION ###
 ################################
-# p. 179-183 in the manual
-
+FSR_PROP_BAS_ACC = [0.10, 0.40, 0.50]
+FSR_PROP_SQ_MID = [0.10, 0.30, 0.60]
 def ccon_bas(basal_loading, ff_redux_proportion):
     """ Basal accumulations consumption, activity & natural
     """
-    csd_bas = [0.10, 0.40, 0.50]
     basal_consumption = np.array([])
     basal_consumption = basal_loading * ff_redux_proportion
-    return util.csdist(basal_consumption, csd_bas)
+    return util.csdist(basal_consumption, FSR_PROP_BAS_ACC)
 
 def ccon_sqm(sqm_loading, ff_redux_proportion):
     """ Squirrel middens consumption, activity & natural
     """
     csd_sqm = [0.10, 0.30, 0.60]
     sqm_consumption = sqm_loading * ff_redux_proportion
-    return util.csdist(sqm_consumption, csd_sqm)
+    return util.csdist(sqm_consumption, FSR_PROP_SQ_MID)
+    
+def basal_accumulation_calc(loadings, fm_duff, fm_litter, ecoregion_masks):
+    # use duff equations for basal accumulation
+    basal_load = values(loadings, 'bas_loading')
+    cons = np.where(basal_load > 0,
+        np.where(ecoregion_masks['southern'],
+            southern_cons_duff(basal_load, fm_litter),
+            western_cons_duff(basal_load, fm_duff)), 0)
+    return util.csdist(cons, FSR_PROP_BAS_ACC)
+    
+def squirrel_midden_calc(loadings, fm_duff, fm_litter, ecoregion_masks):
+    # use duff equations for basal accumulation
+    sq_mid_load = values(loadings, 'sqm_loading')
+    cons = np.where(sq_mid_load > 0,
+        np.where(ecoregion_masks['southern'],
+            southern_cons_duff(sq_mid_load, fm_litter),
+            western_cons_duff(sq_mid_load, fm_duff)), 0)
+    return util.csdist(cons, FSR_PROP_SQ_MID)
 
 
 ##############################
