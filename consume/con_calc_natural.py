@@ -138,8 +138,10 @@ def litter_calc(loadings, fm_duff, fm_1000, ecoregion_masks):
             southern_cons(litter_load),
             np.where(ecoregion_masks['western'],
                 western_cons(litter_load, fm_duff), boreal_cons(litter_load, fm_duff))), 0)
+                
+    cons = bracket(litter_load, cons)
 
-    return cons
+    return util.csdist(cons, [0.9, 0.1, 0])
 
 def duff_calc(loadings, fm_duff, fm_litter, ecoregion_masks):
     def southern_cons(load, fm_litter):

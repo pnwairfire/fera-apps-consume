@@ -291,17 +291,19 @@ class TestNaturalEquations(unittest.TestCase):
         
         ret = ccn.litter_calc(self._loadings,
                 self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_1000hr_pct, self._ecoregion_masks)
-        print(ret)  # print totals
-        self.assertEqual(9, len(ret))
-        self.assertAlmostEqual(0.59, ret[0], places=2)
-        self.assertAlmostEqual(2.08, ret[1], places=2)
-        self.assertAlmostEqual(2.56, ret[2], places=2)
-        self.assertAlmostEqual(3.31, ret[3], places=2)
-        self.assertAlmostEqual(0.69, ret[4], places=2)
-        self.assertAlmostEqual(4.52, ret[5], places=2)
-        self.assertAlmostEqual(0.0, ret[6], places=2)
-        self.assertAlmostEqual(0.0, ret[7], places=2)
-        self.assertAlmostEqual(0.0, ret[8], places=2)
+        print(ret[3])  # print totals
+        
+        total = ret[3]
+        self.assertEqual(9, len(total))
+        self.assertAlmostEqual(0.59, total[0], places=2)
+        self.assertAlmostEqual(2.08, total[1], places=2)
+        self.assertAlmostEqual(2.56, total[2], places=2)
+        self.assertAlmostEqual(3.31, total[3], places=2)
+        self.assertAlmostEqual(0.69, total[4], places=2)
+        self.assertAlmostEqual(4.52, total[5], places=2)
+        self.assertAlmostEqual(0.0, total[6], places=2)
+        self.assertAlmostEqual(0.0, total[7], places=2)
+        self.assertAlmostEqual(0.0, total[8], places=2)
 
         self.fc.fuel_moisture_duff_pct = fm_from_file
 
