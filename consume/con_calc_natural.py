@@ -120,7 +120,7 @@ def herb_calc(loadings, ecoregion_masks):
 ###################################################################
 ### LITTER LICHEN MOSS (LLM) CONSUMPTION - ACTIVITY and NATURAL ###
 ###################################################################
-def litter_calc(loadings, fm_duff, fm_1000, ecoregion_masks):
+def litter_lichen_moss_calc(load, fm_duff, fm_1000, ecoregion_masks, fsr_prop):
     def boreal_cons(load, fm_duff):
         # mgha dependent equation: return 0.9794*load - 0.0281*fm_duff
         return 0.9794*load - 0.012535129*fm_duff
@@ -132,20 +132,27 @@ def litter_calc(loadings, fm_duff, fm_1000, ecoregion_masks):
         # mgha dependent equation: return 0.6804*load - 0.007*fm_duff
         return 0.6804*load - 0.00312263*fm_duff
 
-    litter_load = values(loadings, 'litter_loading')
-    cons = np.where(litter_load > 0,
+    cons = np.where(load > 0,
         np.where(ecoregion_masks['southern'],
-            southern_cons(litter_load),
+            southern_cons(load),
             np.where(ecoregion_masks['western'],
-                western_cons(litter_load, fm_duff), boreal_cons(litter_load, fm_duff))), 0)
+                western_cons(load, fm_duff), boreal_cons(load, fm_duff))), 0)
                 
-    cons = bracket(litter_load, cons)
-
-    return util.csdist(cons, [0.9, 0.1, 0])
+    cons = bracket(load, cons)
+    
+    return util.csdist(cons, fsr_prop)
+    
+def litter_calc(loadings, fm_duff, fm_1000, ecoregion_masks):
+    return litter_lichen_moss_calc(values(loadings, 'litter_loading'), fm_duff, fm_1000, ecoregion_masks, [0.9, 0.1, 0.0])
+    
+def lichen_calc(loadings, fm_duff, fm_1000, ecoregion_masks):
+    return litter_lichen_moss_calc(values(loadings, 'lichen_loading'), fm_duff, fm_1000, ecoregion_masks, [0.95, 0.05, 0.0])
+    
+def moss_calc(loadings, fm_duff, fm_1000, ecoregion_masks):
+    return litter_lichen_moss_calc(values(loadings, 'moss_loading'), fm_duff, fm_1000, ecoregion_masks, [0.95, 0.05, 0.0])
     
 def southern_cons_duff(load, fm_litter):
     # mgha dependent equation: return 2.9711 + load*0.0702 + fm_litter*-0.1715
-    print('FM is: ', fm_litter)
     return 1.3254 + load*0.0702 + fm_litter*-0.0765
 
 def western_cons_duff(load, fm_duff):

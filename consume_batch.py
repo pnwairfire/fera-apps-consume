@@ -12,6 +12,7 @@
 import consume
 import os
 import sys
+import traceback
 import batch_locator
 import cmdline
 import pandas as pd
@@ -215,7 +216,10 @@ def main():
         run(parser.burn_type, parser.csv_file, parser.do_metric, parser.msg_level, parser.output_filename,
             parser.fuel_loadings_file, parser.col_cfg_file)
     except Exception as e:
+        tb = sys.exc_info()[2]
+        traceback.print_tb(tb, limit=-5, file=sys.stdout)
         print(e)
+        
 
 if __name__ == '__main__':
     main()

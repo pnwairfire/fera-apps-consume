@@ -1260,15 +1260,23 @@ class FuelConsumption(util.FrozenClass):
 
         fm_1000hr = self._settings.get('fm_1000hr')
         fm_duff =  self._settings.get('fm_duff')
+        fm_litter =  self._settings.get('fm_litter')
         if self._settings.burn_type in ['natural', ['natural']]:
-            one_hr_fsrt = ccn.sound_one_calc(LD)
-            ten_hr_fsrt = ccn.sound_ten_calc(LD)
-            hun_hr_fsrt = ccn.sound_hundred_calc(ecos_mask, LD)
+            one_hr_fsrt = ccn.sound_one_calc(LD, ecos_mask)
+            ten_hr_fsrt = ccn.sound_ten_calc(LD, ecos_mask)
+            hun_hr_fsrt = ccn.sound_hundred_calc(LD, ecos_mask)
             oneK_hr_snd_fsrt, tenK_hr_snd_fsrt, tnkp_hr_snd_fsrt = \
                 ccn.sound_large_wood_calc(LD, fm_1000hr)
             oneK_hr_rot_fsrt, tenK_hr_rot_fsrt, tnkp_hr_rot_fsrt = \
-                ccn.sound_rotten_wood_calc(LD, fm_1000hr)
-            [ff_reduction, y_b, duff_depth] = ccn.ccon_ffr(fm_duff, ecoregion_masks, LD)
+                ccn.rotten_large_wood_calc(LD, fm_1000hr)
+                
+            lch_fsrt = ccn.lichen_calc(LD, fm_duff, fm_litter, ecoregion_masks)
+            moss_fsrt = ccn.moss_calc(LD, fm_duff, fm_litter, ecoregion_masks)
+            lit_fsrt = ccn.litter_calc(LD, fm_duff, fm_litter, ecoregion_masks)
+            
+            duff_upper_fsrt, duff_lower_fsrt = ccn.duff_calc(LD, fm_duff, fm_litter, ecoregion_masks)
+            bas_fsrt = ccn.basal_accumulation_calc(LD, fm_duff, fm_litter, ecoregion_masks)
+            sqm_fsrt = ccn.squirrel_midden_calc(LD, fm_duff, fm_litter, ecoregion_masks)
         else:
             fm_type = self._settings.fm_type
             windspeed =  self._settings.get('windspeed')
@@ -1285,18 +1293,18 @@ class FuelConsumption(util.FrozenClass):
             ff_reduction] = cca.ccon_activity(fm_1000hr, fm_type,
                 windspeed, slope, area, days_since_rain, fm_10hr, length_of_ignition, LD)
 
-        # The ff reduction is a destructive process (modifies the ff_reduction array)
-        # Make a copy for use in basal area and sq midden calcs
-        ff_redux_copy = ff_reduction.copy()
-        lch_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'lch_depth', 'lichen_loading', [0.95, 0.05, 0.00])
-        moss_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'moss_depth', 'moss_loading', [0.95, 0.05, 0.00])
-        lit_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'lit_depth', 'litter_loading', [0.90, 0.10, 0.00])
-        duff_upper_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'duff_upper_depth', 'duff_upper_loading', [0.10, 0.70, 0.20])
-        duff_lower_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'duff_lower_depth', 'duff_lower_loading', [0.00, 0.20, 0.80])
+            # The ff reduction is a destructive process (modifies the ff_reduction array)
+            # Make a copy for use in basal area and sq midden calcs
+            ff_redux_copy = ff_reduction.copy()
+            lch_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'lch_depth', 'lichen_loading', [0.95, 0.05, 0.00])
+            moss_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'moss_depth', 'moss_loading', [0.95, 0.05, 0.00])
+            lit_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'lit_depth', 'litter_loading', [0.90, 0.10, 0.00])
+            duff_upper_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'duff_upper_depth', 'duff_upper_loading', [0.10, 0.70, 0.20])
+            duff_lower_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'duff_lower_depth', 'duff_lower_loading', [0.00, 0.20, 0.80])
 
-        ff_redux_proportion = self.calc_ff_redux_proportion(LD, ff_redux_copy)
-        bas_fsrt = ccn.ccon_bas(values(LD, 'bas_loading'), ff_redux_proportion)
-        sqm_fsrt = ccn.ccon_sqm(values(LD, 'sqm_loading'), ff_redux_proportion)
+            ff_redux_proportion = self.calc_ff_redux_proportion(LD, ff_redux_copy)
+            bas_fsrt = ccn.ccon_bas(values(LD, 'bas_loading'), ff_redux_proportion)
+            sqm_fsrt = ccn.ccon_sqm(values(LD, 'sqm_loading'), ff_redux_proportion)
 
 
         # Category summations
@@ -1367,8 +1375,6 @@ class FuelConsumption(util.FrozenClass):
             tnkp_hr_snd_fsrt,
             tnkp_hr_rot_fsrt]
             )
-
-        self._cons_debug_data = np.array(ff_reduction)
 
         # delete extraneous memory hogging variables
         del (all_fsrt, can_fsrt, shb_fsrt, nw_fsrt, llm_fsrt,
