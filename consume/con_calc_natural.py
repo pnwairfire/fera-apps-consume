@@ -145,6 +145,7 @@ def litter_calc(loadings, fm_duff, fm_1000, ecoregion_masks):
     
 def southern_cons_duff(load, fm_litter):
     # mgha dependent equation: return 2.9711 + load*0.0702 + fm_litter*-0.1715
+    print('FM is: ', fm_litter)
     return 1.3254 + load*0.0702 + fm_litter*-0.0765
 
 def western_cons_duff(load, fm_duff):
@@ -196,6 +197,7 @@ def basal_accumulation_calc(loadings, fm_duff, fm_litter, ecoregion_masks):
         np.where(ecoregion_masks['southern'],
             southern_cons_duff(basal_load, fm_litter),
             western_cons_duff(basal_load, fm_duff)), 0)
+    cons = bracket(basal_load, cons)
     return util.csdist(cons, FSR_PROP_BAS_ACC)
     
 def squirrel_midden_calc(loadings, fm_duff, fm_litter, ecoregion_masks):

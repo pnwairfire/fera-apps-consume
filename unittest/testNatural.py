@@ -338,6 +338,74 @@ class TestNaturalEquations(unittest.TestCase):
         self.fc.fuel_moisture_duff_pct = fm_from_file
 
 
+    def test_basal_acc_calc(self):
+        #
+        # NOTE: loadings are 1, 5, 10 for these catagories
+        #
+        print_test_name('test_basal_acc_calc')
+        FM_DUFF = 30
+        FM_LITTER = 10
+        print(self._ecoregion_masks)
+        print(self._loadings['bas_loading'])
+        
+        fm_duff_from_file = self.fc.fuel_moisture_duff_pct
+        fm_litter_from_file = self.fc.fuel_moisture_litter_pct
+        self.fc.fuel_moisture_duff_pct = FM_DUFF
+        self.fc.fuel_moisture_litter_pct = FM_LITTER
+        
+        ret = ccn.basal_accumulation_calc(self._loadings,
+                self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_litter_pct, self._ecoregion_masks)
+        print(ret[3])  # print totals
+        
+        total = ret[3]
+        self.assertEqual(9, len(total))
+        self.assertAlmostEqual(0.0, total[0], places=2)
+        self.assertAlmostEqual(0.91, total[1], places=2)
+        self.assertAlmostEqual(1.93, total[2], places=2)
+        self.assertAlmostEqual(5.16, total[3], places=2)
+        self.assertAlmostEqual(0.63, total[4], places=2)
+        self.assertAlmostEqual(5.16, total[5], places=2)
+        self.assertAlmostEqual(0.0, total[6], places=2)
+        self.assertAlmostEqual(0.0, total[7], places=2)
+        self.assertAlmostEqual(0.0, total[8], places=2)
+
+        self.fc.fuel_moisture_duff_pct = fm_duff_from_file
+        self.fc.fuel_moisture_litter_pct = fm_litter_from_file
+
+    def test_sq_midden_calc(self):
+        #
+        # NOTE: loadings are 1, 5, 10 for these catagories
+        #
+        print_test_name('test_sq_midden_calc')
+        FM_DUFF = 30
+        FM_LITTER = 10
+        print(self._ecoregion_masks)
+        print(self._loadings['sqm_loading'])
+        
+        fm_duff_from_file = self.fc.fuel_moisture_duff_pct
+        fm_litter_from_file = self.fc.fuel_moisture_litter_pct
+        self.fc.fuel_moisture_duff_pct = FM_DUFF
+        self.fc.fuel_moisture_litter_pct = FM_LITTER
+        
+        ret = ccn.basal_accumulation_calc(self._loadings,
+                self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_litter_pct, self._ecoregion_masks)
+        print(ret[3])  # print totals
+        
+        total = ret[3]
+        self.assertEqual(9, len(total))
+        self.assertAlmostEqual(0.0, total[0], places=2)
+        self.assertAlmostEqual(0.91, total[1], places=2)
+        self.assertAlmostEqual(1.93, total[2], places=2)
+        self.assertAlmostEqual(5.16, total[3], places=2)
+        self.assertAlmostEqual(0.63, total[4], places=2)
+        self.assertAlmostEqual(5.16, total[5], places=2)
+        self.assertAlmostEqual(0.0, total[6], places=2)
+        self.assertAlmostEqual(0.0, total[7], places=2)
+        self.assertAlmostEqual(0.0, total[8], places=2)
+
+        self.fc.fuel_moisture_duff_pct = fm_duff_from_file
+        self.fc.fuel_moisture_litter_pct = fm_litter_from_file
+
 
 
 
