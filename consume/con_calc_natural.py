@@ -181,22 +181,9 @@ def duff_calc(loadings, fm_duff, fm_litter, ecoregion_masks):
 ################################
 ### Ground FUELS CONSUMPTION ###
 ################################
+# todo: duplicate, pull into common include file    
 FSR_PROP_BAS_ACC = [0.10, 0.40, 0.50]
 FSR_PROP_SQ_MID = [0.10, 0.30, 0.60]
-def ccon_bas(basal_loading, ff_redux_proportion):
-    """ Basal accumulations consumption, activity & natural
-    """
-    basal_consumption = np.array([])
-    basal_consumption = basal_loading * ff_redux_proportion
-    return util.csdist(basal_consumption, FSR_PROP_BAS_ACC)
-
-def ccon_sqm(sqm_loading, ff_redux_proportion):
-    """ Squirrel middens consumption, activity & natural
-    """
-    csd_sqm = [0.10, 0.30, 0.60]
-    sqm_consumption = sqm_loading * ff_redux_proportion
-    return util.csdist(sqm_consumption, FSR_PROP_SQ_MID)
-    
 def basal_accumulation_calc(loadings, fm_duff, fm_litter, ecoregion_masks):
     # use duff equations for basal accumulation
     basal_load = values(loadings, 'bas_loading')

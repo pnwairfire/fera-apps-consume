@@ -1296,15 +1296,15 @@ class FuelConsumption(util.FrozenClass):
             # The ff reduction is a destructive process (modifies the ff_reduction array)
             # Make a copy for use in basal area and sq midden calcs
             ff_redux_copy = ff_reduction.copy()
-            lch_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'lch_depth', 'lichen_loading', [0.95, 0.05, 0.00])
-            moss_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'moss_depth', 'moss_loading', [0.95, 0.05, 0.00])
-            lit_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'lit_depth', 'litter_loading', [0.90, 0.10, 0.00])
-            duff_upper_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'duff_upper_depth', 'duff_upper_loading', [0.10, 0.70, 0.20])
-            duff_lower_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'duff_lower_depth', 'duff_lower_loading', [0.00, 0.20, 0.80])
+            lch_fsrt = cca.ccon_forest_floor(LD, ff_reduction, 'lch_depth', 'lichen_loading', [0.95, 0.05, 0.00])
+            moss_fsrt = cca.ccon_forest_floor(LD, ff_reduction, 'moss_depth', 'moss_loading', [0.95, 0.05, 0.00])
+            lit_fsrt = cca.ccon_forest_floor(LD, ff_reduction, 'lit_depth', 'litter_loading', [0.90, 0.10, 0.00])
+            duff_upper_fsrt = cca.ccon_forest_floor(LD, ff_reduction, 'duff_upper_depth', 'duff_upper_loading', [0.10, 0.70, 0.20])
+            duff_lower_fsrt = cca.ccon_forest_floor(LD, ff_reduction, 'duff_lower_depth', 'duff_lower_loading', [0.00, 0.20, 0.80])
 
             ff_redux_proportion = self.calc_ff_redux_proportion(LD, ff_redux_copy)
-            bas_fsrt = ccn.ccon_bas(values(LD, 'bas_loading'), ff_redux_proportion)
-            sqm_fsrt = ccn.ccon_sqm(values(LD, 'sqm_loading'), ff_redux_proportion)
+            bas_fsrt = cca.ccon_bas(values(LD, 'bas_loading'), ff_redux_proportion)
+            sqm_fsrt = cca.ccon_sqm(values(LD, 'sqm_loading'), ff_redux_proportion)
 
 
         # Category summations
