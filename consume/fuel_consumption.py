@@ -704,6 +704,11 @@ class FuelConsumption(util.FrozenClass):
     def pile_blackened_pct(self, value):
         self._settings.set('pile_black_pct', value)
     @property
+    def season(self): return self._settings.get('season')
+    @season.setter
+    def season(self, value):
+        self._settings.set('season', value)
+    @property
     def slope(self): return self._settings.get('slope')
     @slope.setter
     def slope(self, value):
