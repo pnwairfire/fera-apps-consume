@@ -10,11 +10,6 @@ def bracket(load, cons):
 
 # Consumption calculation methods
 def ccon_canopy(can_con_pct, LD):
-    """ Canopy consumption, activity & natural, p.166
-    Proportions for snag1nf are not specified in the manual; right now,
-    the class 1 wood values are in place, which seem to correspond to
-    the GUI <<< """
-
     pct = can_con_pct / 100.0
     can_params = [['overstory', [0.75, 0.05, 0.0]],
                   ['midstory', [0.80, 0.05, 0.0]],
@@ -90,15 +85,14 @@ def shrub_calc(shrub_black_pct, loadings, ecoregion_masks, season=SEASON_ALL_OTH
                 return to_tons(tmp)
 
             def western_cons(self, load):
-                tmp = (0.1102 + 0.1139 * to_mgha(load)
-                            + ((1.9647 * self._shrub_black_pct) - (0.3296 * self._season)))
-                return to_tons(tmp**tmp)
+                tmp = (0.1102 + (0.1139*to_mgha(load)) + 1.9647*self._shrub_black_pct - 0.3296*self._season)
+                return to_tons(tmp*tmp)
 
         return Calculator(shrub_black_pct, season)
 
     return multi_layer_calc(loadings, ecoregion_masks,
                 'shrub_prim', 'shrub_seco', 'shrub_prim_pctlv', 'shrub_seco_pctlv',
-                get_calculator(shrub_black_pct, season))
+                get_calculator(shrub_black_pct/100, season))
 
 def herb_calc(loadings, ecoregion_masks):
     """ Herbaceous consumption, activity & natural, p.169 """

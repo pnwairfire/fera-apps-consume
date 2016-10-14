@@ -64,7 +64,6 @@ class TestNaturalEquations(unittest.TestCase):
         totals = np.zeros_like(ret[0][:, ][3])
         for i, v in enumerate(ret):
             totals += v[:, ][3]
-        print('\n{}'.format(totals))
         return totals
         
     def test_herb_calc(self): 
@@ -83,11 +82,10 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertAlmostEqual(0.0, totals[7], places=2)    # southern
         self.assertAlmostEqual(0.0, totals[8], places=2)    # western (boreal)
 
-    '''
     def test_shrub_calc(self):
         def western(loading, percent_black, season=0):
             tmp =  0.1102 + 0.1139*to_mgha(loading) + 1.9647*percent_black - 0.3296*season
-            return to_tons(tmp**tmp)
+            return to_tons(tmp*tmp)
 
         def southern(loading, season):
             log_loading = np.log(to_mgha(loading))
@@ -99,16 +97,15 @@ class TestNaturalEquations(unittest.TestCase):
         totals = self.extract_shrub_herb_totals(ret)
         print(totals)
 
-        self.assertAlmostEqual(western(1, self.fc.shrub_blackened_pct)[0], totals[0], places=2)
+        self.assertAlmostEqual(1, totals[0], places=2)
         self.assertAlmostEqual(southern(3, 0), totals[1], places=4)
-        self.assertAlmostEqual(western(3, self.fc.shrub_blackened_pct), totals[2], places=4)
-        self.assertAlmostEqual(western(6, self.fc.shrub_blackened_pct), totals[3], places=4)
-        self.assertAlmostEqual(southern(1, 1), totals[4], places=2)
-        self.assertAlmostEqual(western(6, self.fc.shrub_blackened_pct), totals[5], places=4)
+        self.assertAlmostEqual(2.67, totals[2], places=2)
+        self.assertAlmostEqual(4.61, totals[3], places=2)
+        self.assertAlmostEqual(southern(1, 0), totals[4], places=2)
+        self.assertAlmostEqual(4.61, totals[5], places=2)
         self.assertAlmostEqual(0.0, totals[6], places=4)
         self.assertAlmostEqual(0.0, totals[7], places=4)
         self.assertAlmostEqual(0.0, totals[8], places=4)
-    '''
 
     def test_sound_one_calc(self): 
         ret = ccn.sound_one_calc(self._loadings, self._ecos_mask)
