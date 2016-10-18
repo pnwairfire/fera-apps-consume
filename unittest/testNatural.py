@@ -59,6 +59,11 @@ class TestNaturalEquations(unittest.TestCase):
 
     def tearDown(self):
         pass
+    
+    def check_catagory(self, reference_values, calculated_values):
+        self.assertEqual(len(reference_values), len(calculated_values))
+        for idx, val in enumerate(reference_values):
+            self.assertAlmostEqual(val, calculated_values[idx], places=2)
 
     def extract_shrub_herb_totals(self, ret):
         my_print('\nType: {}'.format(type(ret)))
@@ -385,15 +390,7 @@ class TestNaturalEquations(unittest.TestCase):
         # waiting for spreadsheet update
         # upper duff
         total = cons_duff_upper[3]
-        self.assertAlmostEqual(0, total[0], places=2)
-        self.assertAlmostEqual(1.96, total[1], places=2)
-        self.assertAlmostEqual(10.0, total[2], places=2)
-        self.assertAlmostEqual(150.0, total[3], places=2)
-        self.assertAlmostEqual(0.5, total[4], places=2)
-        self.assertAlmostEqual(150.0, total[5], places=2)
-        self.assertAlmostEqual(0.0, total[6], places=2)
-        self.assertAlmostEqual(0.0, total[7], places=2)
-        self.assertAlmostEqual(0.0, total[8], places=2)
+        self.check_catagory([0, 1.96, 10.0, 150.0, 0.5, 150.0, 0, 0, 0], total)
         
         # lower duff
         total = cons_duff_lower[3]
