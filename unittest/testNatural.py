@@ -60,10 +60,10 @@ class TestNaturalEquations(unittest.TestCase):
     def tearDown(self):
         pass
     
-    def check_catagory(self, reference_values, calculated_values):
+    def check_catagory(self, reference_values, calculated_values, num_places=2):
         self.assertEqual(len(reference_values), len(calculated_values))
         for idx, val in enumerate(reference_values):
-            self.assertAlmostEqual(val, calculated_values[idx], places=2)
+            self.assertAlmostEqual(val, calculated_values[idx], places=num_places)
 
     def extract_shrub_herb_totals(self, ret):
         my_print('\nType: {}'.format(type(ret)))
@@ -120,37 +120,13 @@ class TestNaturalEquations(unittest.TestCase):
         self.check_catagory([1.51, 4.14, 4.14, 6.77, 1.51, 6.77, 0, 0, 0], totals)
 
         one_k_totals = one_k[3]
-        self.assertAlmostEqual(.58, one_k_totals[0], places=2)
-        self.assertAlmostEqual(1.59, one_k_totals[1], places=2)
-        self.assertAlmostEqual(1.59, one_k_totals[2], places=2)
-        self.assertAlmostEqual(2.6, one_k_totals[3], places=2)
-        self.assertAlmostEqual(.58, one_k_totals[4], places=2)
-        self.assertAlmostEqual(2.6, one_k_totals[5], places=2)
-        self.assertAlmostEqual(0, one_k_totals[6], places=2)
-        self.assertAlmostEqual(0, one_k_totals[7], places=2)
-        self.assertAlmostEqual(0, one_k_totals[8], places=2)
+        self.check_catagory([.58, 1.59, 1.59, 2.6, .58, 2.6, 0, 0, 0], one_k_totals)
         
         ten_k_totals = ten_k[3]
-        self.assertAlmostEqual(.70, ten_k_totals[0], places=2)
-        self.assertAlmostEqual(1.91, ten_k_totals[1], places=2)
-        self.assertAlmostEqual(1.91, ten_k_totals[2], places=2)
-        self.assertAlmostEqual(3.12, ten_k_totals[3], places=2)
-        self.assertAlmostEqual(.70, ten_k_totals[4], places=2)
-        self.assertAlmostEqual(3.12, ten_k_totals[5], places=2)
-        self.assertAlmostEqual(0, ten_k_totals[6], places=2)
-        self.assertAlmostEqual(0, ten_k_totals[7], places=2)
-        self.assertAlmostEqual(0, ten_k_totals[8], places=2)
+        self.check_catagory([.7, 1.91, 1.91, 3.12, .7, 3.12, 0, 0, 0], ten_k_totals)
         
         tenk_plus_totals = tenk_plus[3]
-        self.assertAlmostEqual(.23, tenk_plus_totals[0], places=2)
-        self.assertAlmostEqual(.64, tenk_plus_totals[1], places=2)
-        self.assertAlmostEqual(.64, tenk_plus_totals[2], places=2)
-        self.assertAlmostEqual(1.04, tenk_plus_totals[3], places=2)
-        self.assertAlmostEqual(.23, tenk_plus_totals[4], places=2)
-        self.assertAlmostEqual(1.04, tenk_plus_totals[5], places=2)
-        self.assertAlmostEqual(0, tenk_plus_totals[6], places=2)
-        self.assertAlmostEqual(0, tenk_plus_totals[7], places=2)
-        self.assertAlmostEqual(0, tenk_plus_totals[8], places=2)
+        self.check_catagory([.23, .64, .64, 1.04, .23, 1.04, 0, 0, 0], tenk_plus_totals)
 
         self.fc.fuel_moisture_1000hr_pct = fm_from_file
         
@@ -169,48 +145,16 @@ class TestNaturalEquations(unittest.TestCase):
         totals = one_k[3] + ten_k[3] + tenk_plus[3]
         my_print(totals)  # print totals
         self.assertEqual(9, len(totals))
-        self.assertAlmostEqual(calc(4, self.fc.fuel_moisture_1000hr_pct), totals[0], places=4)
-        self.assertAlmostEqual(calc(12, self.fc.fuel_moisture_1000hr_pct), totals[1], places=4)
-        self.assertAlmostEqual(calc(12, self.fc.fuel_moisture_1000hr_pct), totals[2], places=4)
-        self.assertAlmostEqual(calc(20, self.fc.fuel_moisture_1000hr_pct), totals[3], places=4)
-        self.assertAlmostEqual(calc(4, self.fc.fuel_moisture_1000hr_pct), totals[4], places=4)
-        self.assertAlmostEqual(calc(20, self.fc.fuel_moisture_1000hr_pct), totals[5], places=4)
-        self.assertAlmostEqual(calc(0.0, self.fc.fuel_moisture_1000hr_pct), totals[6], places=4)
-        self.assertAlmostEqual(calc(0.0, self.fc.fuel_moisture_1000hr_pct), totals[7], places=4)
-        self.assertAlmostEqual(calc(0.0, self.fc.fuel_moisture_1000hr_pct), totals[8], places=4)
+        self.check_catagory([2.07, 6.01, 6.01, 9.96, 2.07, 9.96, 0, 0, 0], totals)
 
         one_k_totals = one_k[3]
-        self.assertAlmostEqual(.73, one_k_totals[0], places=1)
-        self.assertAlmostEqual(2.11, one_k_totals[1], places=1)
-        self.assertAlmostEqual(2.11, one_k_totals[2], places=1)
-        self.assertAlmostEqual(3.49, one_k_totals[3], places=1)
-        self.assertAlmostEqual(.73, one_k_totals[4], places=1)
-        self.assertAlmostEqual(3.49, one_k_totals[5], places=1)
-        self.assertAlmostEqual(0, one_k_totals[6], places=1)
-        self.assertAlmostEqual(0, one_k_totals[7], places=1)
-        self.assertAlmostEqual(0, one_k_totals[8], places=1)
+        self.check_catagory([.73, 2.11, 2.11, 3.49, .73, 3.49, 0, 0, 0], one_k_totals, num_places=1)
 
         ten_k_totals = ten_k[3]
-        self.assertAlmostEqual(1.03, ten_k_totals[0], places=1)
-        self.assertAlmostEqual(3.01, ten_k_totals[1], places=1)
-        self.assertAlmostEqual(3.01, ten_k_totals[2], places=1)
-        self.assertAlmostEqual(4.98, ten_k_totals[3], places=1)
-        self.assertAlmostEqual(1.03, ten_k_totals[4], places=1)
-        self.assertAlmostEqual(4.98, ten_k_totals[5], places=1)
-        self.assertAlmostEqual(0, ten_k_totals[6], places=1)
-        self.assertAlmostEqual(0, ten_k_totals[7], places=1)
-        self.assertAlmostEqual(0, ten_k_totals[8], places=1)
+        self.check_catagory([1.03, 3.01, 3.01, 4.98, 1.03, 4.98, 0, 0, 0], ten_k_totals, num_places=1)
 
         tenk_plus_totals = tenk_plus[3]
-        self.assertAlmostEqual(.31, tenk_plus_totals[0], places=1)
-        self.assertAlmostEqual(.90, tenk_plus_totals[1], places=1)
-        self.assertAlmostEqual(.90, tenk_plus_totals[2], places=1)
-        self.assertAlmostEqual(1.49, tenk_plus_totals[3], places=1)
-        self.assertAlmostEqual(.31, tenk_plus_totals[4], places=1)
-        self.assertAlmostEqual(1.49, tenk_plus_totals[5], places=1)
-        self.assertAlmostEqual(0, tenk_plus_totals[6], places=1)
-        self.assertAlmostEqual(0, tenk_plus_totals[7], places=1)
-        self.assertAlmostEqual(0, tenk_plus_totals[8], places=1)
+        self.check_catagory([.31, .90, .90, 1.49, .31, 1.49, 0, 0, 0], tenk_plus_totals, num_places=1)
         
         self.fc.fuel_moisture_1000hr_pct = fm_from_file
 
