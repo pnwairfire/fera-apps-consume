@@ -77,106 +77,47 @@ class TestNaturalEquations(unittest.TestCase):
         totals = self.extract_shrub_herb_totals(ret)
         my_print(totals)
         self.assertEqual(9, len(totals))
-        self.assertAlmostEqual(0.93, totals[0], places=2)    # western
-        self.assertAlmostEqual(2.91, totals[1], places=2)    # southern
-        self.assertAlmostEqual(2.78, totals[2], places=2)    # western (boreal)
-        self.assertAlmostEqual(5.56, totals[3], places=2)    # western
-        self.assertAlmostEqual(0.97, totals[4], places=2)    # southern
-        self.assertAlmostEqual(5.56, totals[5], places=2)    # western (boreal)
-        self.assertAlmostEqual(0.0, totals[6], places=2)    # western
-        self.assertAlmostEqual(0.0, totals[7], places=2)    # southern
-        self.assertAlmostEqual(0.0, totals[8], places=2)    # western (boreal)
+        self.check_catagory([0.93, 2.91, 2.78, 5.56, 0.97, 5.56, 0, 0, 0], totals)
 
     def test_shrub_calc(self):
-        def western(loading, percent_black, season=0):
-            tmp =  0.1102 + 0.1139*to_mgha(loading) + 1.9647*percent_black - 0.3296*season
-            return to_tons(tmp*tmp)
-
-        def southern(loading, season):
-            log_loading = np.log(to_mgha(loading))
-            tmp = -0.1889 + 0.9049*log_loading + 0.0676*season
-            return to_tons(np.e**tmp)
-
         ret = ccn.shrub_calc(self.fc.shrub_blackened_pct, self._loadings, self._ecoregion_masks, 0)
         totals = self.extract_shrub_herb_totals(ret)
         my_print(totals)
-
-        self.assertAlmostEqual(1, totals[0], places=2)
-        self.assertAlmostEqual(southern(3, 0), totals[1], places=4)
-        self.assertAlmostEqual(2.67, totals[2], places=2)
-        self.assertAlmostEqual(4.61, totals[3], places=2)
-        self.assertAlmostEqual(southern(1, 0), totals[4], places=2)
-        self.assertAlmostEqual(4.61, totals[5], places=2)
-        self.assertAlmostEqual(0.0, totals[6], places=4)
-        self.assertAlmostEqual(0.0, totals[7], places=4)
-        self.assertAlmostEqual(0.0, totals[8], places=4)
+        self.check_catagory([1, 2.07, 2.67, 4.61, 0.77, 4.61, 0, 0, 0], totals)
 
     def test_sound_one_calc(self): 
         ret = ccn.sound_one_calc(self._loadings, self._ecos_mask)
         my_print(ret[3])  # print totals
         totals = ret[3]
         self.assertEqual(9, len(totals))
-        self.assertAlmostEqual(0.4235, totals[0], places=2)
-        self.assertAlmostEqual(1.24, totals[1], places=2)
-        self.assertAlmostEqual(1.27, totals[2], places=2)
-        self.assertAlmostEqual(2.54, totals[3], places=2)
-        self.assertAlmostEqual(0.41, totals[4], places=2)
-        self.assertAlmostEqual(2.54, totals[5], places=2)
-        self.assertAlmostEqual(0.0, totals[6], places=2)
-        self.assertAlmostEqual(0.0, totals[7], places=2)
-        self.assertAlmostEqual(0.0, totals[8], places=2)
+        self.check_catagory([0.4235, 1.24, 1.27, 2.54, 0.41, 2.54, 0, 0, 0], totals)
 
     def test_sound_ten_calc(self): 
         ret = ccn.sound_ten_calc(self._loadings, self._ecos_mask)
         my_print(ret[3])  # print totals
         totals = ret[3]
         self.assertEqual(9, len(totals))
-        self.assertAlmostEqual(0.42, totals[0], places=2)
-        self.assertAlmostEqual(0.56, totals[1], places=2)
-        self.assertAlmostEqual(1.27, totals[2], places=2)
-        self.assertAlmostEqual(2.54, totals[3], places=2)
-        self.assertAlmostEqual(0.19, totals[4], places=2)
-        self.assertAlmostEqual(2.54, totals[5], places=2)
-        self.assertAlmostEqual(0.0, totals[6], places=2)
-        self.assertAlmostEqual(0.0, totals[7], places=2)
-        self.assertAlmostEqual(0.0, totals[8], places=2)
+        self.check_catagory([0.42, 0.56, 1.27, 2.54, 0.19, 2.54, 0, 0, 0], totals)
 
     def test_sound_hundred_calc(self): 
         ret = ccn.sound_hundred_calc(self._loadings, self._ecos_mask)
         my_print(ret[3])  # print totals
         totals = ret[3]
         self.assertEqual(9, len(totals))
-        self.assertAlmostEqual(0.36, totals[0], places=2)
-        self.assertAlmostEqual(0.86, totals[1], places=2)
-        self.assertAlmostEqual(1.07, totals[2], places=2)
-        self.assertAlmostEqual(2.14, totals[3], places=2)
-        self.assertAlmostEqual(0.29, totals[4], places=2)
-        self.assertAlmostEqual(2.14, totals[5], places=2)
-        self.assertAlmostEqual(0.0, totals[6], places=2)
-        self.assertAlmostEqual(0.0, totals[7], places=2)
-        self.assertAlmostEqual(0.0, totals[8], places=2)
+        self.check_catagory([0.36, 0.86, 1.07, 2.14, 0.29, 2.14, 0, 0, 0], totals)
 
     def test_sound_large_wood_calc(self):  
         # test loading amounts are (1,2,1) = 4, (3,6,3) = 12, (5,10,5) = 20
         TEST_FM = 50
         fm_from_file = self.fc.fuel_moisture_1000hr_pct
         self.fc.fuel_moisture_1000hr_pct = TEST_FM
-        eq = lambda load, fm: 0 if load == 0 else to_tons((2.735 + to_mgha(load)*0.3285 + fm*-0.0457)[0])
         
         one_k, ten_k, tenk_plus = ccn.sound_large_wood_calc(self._loadings, self.fc.fuel_moisture_1000hr_pct)
         totals = one_k[3] + ten_k[3] + tenk_plus[3]
         my_print(totals)
         
         self.assertEqual(9, len(totals))
-        self.assertAlmostEqual(eq(4, self.fc.fuel_moisture_1000hr_pct), totals[0], places=4)
-        self.assertAlmostEqual(eq(12, self.fc.fuel_moisture_1000hr_pct), totals[1], places=4)
-        self.assertAlmostEqual(eq(12, self.fc.fuel_moisture_1000hr_pct), totals[2], places=4)
-        self.assertAlmostEqual(eq(20, self.fc.fuel_moisture_1000hr_pct), totals[3], places=4)
-        self.assertAlmostEqual(eq(4, self.fc.fuel_moisture_1000hr_pct), totals[4], places=4)
-        self.assertAlmostEqual(eq(20, self.fc.fuel_moisture_1000hr_pct), totals[5], places=4)
-        self.assertAlmostEqual(eq(0.0, self.fc.fuel_moisture_1000hr_pct), totals[6], places=4)
-        self.assertAlmostEqual(eq(0.0, self.fc.fuel_moisture_1000hr_pct), totals[7], places=4)
-        self.assertAlmostEqual(eq(0.0, self.fc.fuel_moisture_1000hr_pct), totals[8], places=4)
+        self.check_catagory([1.51, 4.14, 4.14, 6.77, 1.51, 6.77, 0, 0, 0], totals)
 
         one_k_totals = one_k[3]
         self.assertAlmostEqual(.58, one_k_totals[0], places=2)
@@ -365,10 +306,6 @@ class TestNaturalEquations(unittest.TestCase):
         # NOTE: loadings are 0.5, 10, and 150 (for each lower, upper duff so 1, 20, 300 for total duff load)
         #
         FM_DUFF = 30
-        print(self._ecoregion_masks)
-        print(self._loadings['duff_upper_loading'])
-        print(self.fc.fuel_moisture_litter_pct)
-        
         fm_from_file = self.fc.fuel_moisture_duff_pct
         self.fc.fuel_moisture_duff_pct = FM_DUFF
         
