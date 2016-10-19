@@ -64,9 +64,14 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertEqual(len(reference_values), len(calculated_values))
         for idx, val in enumerate(reference_values):
             self.assertAlmostEqual(val, calculated_values[idx], places=num_places)
+            
+    def check_fsr(self, reference_values, calculated_values, num_places=2):
+        for i in range(3):
+            self.assertAlmostEqual(reference_values[i], calculated_values[i], num_places)
 
     def extract_shrub_herb_totals(self, ret):
         my_print('\nType: {}'.format(type(ret)))
+        my_print(ret)
         totals = np.zeros_like(ret[0][:, ][3])
         for i, v in enumerate(ret):
             totals += v[:, ][3]
@@ -91,6 +96,7 @@ class TestNaturalEquations(unittest.TestCase):
         totals = ret[3]
         self.assertEqual(9, len(totals))
         self.check_catagory([0.4235, 1.24, 1.27, 2.54, 0.41, 2.54, 0, 0, 0], totals)
+        self.check_fsr([2.41, 0.13, 0], ret[:,3])
 
     def test_sound_ten_calc(self): 
         ret = ccn.sound_ten_calc(self._loadings, self._ecos_mask)
@@ -98,6 +104,7 @@ class TestNaturalEquations(unittest.TestCase):
         totals = ret[3]
         self.assertEqual(9, len(totals))
         self.check_catagory([0.42, 0.56, 1.27, 2.54, 0.19, 2.54, 0, 0, 0], totals)
+        self.check_fsr([2.29, 0.25, 0], ret[:,3])
 
     def test_sound_hundred_calc(self): 
         ret = ccn.sound_hundred_calc(self._loadings, self._ecos_mask)
@@ -105,6 +112,7 @@ class TestNaturalEquations(unittest.TestCase):
         totals = ret[3]
         self.assertEqual(9, len(totals))
         self.check_catagory([0.36, 0.86, 1.07, 2.14, 0.29, 2.14, 0, 0, 0], totals)
+        self.check_fsr([1.82, 0.21, 0.11], ret[:,3])
 
     def test_sound_large_wood_calc(self):  
         # test loading amounts are (1,2,1) = 4, (3,6,3) = 12, (5,10,5) = 20
@@ -121,12 +129,15 @@ class TestNaturalEquations(unittest.TestCase):
 
         one_k_totals = one_k[3]
         self.check_catagory([.58, 1.59, 1.59, 2.6, .58, 2.6, 0, 0, 0], one_k_totals)
+        self.check_fsr([1.56, .78, .26], one_k[:,3])
         
         ten_k_totals = ten_k[3]
         self.check_catagory([.7, 1.91, 1.91, 3.12, .7, 3.12, 0, 0, 0], ten_k_totals)
+        self.check_fsr([1.25, 1.25, .62], ten_k[:,3])
         
         tenk_plus_totals = tenk_plus[3]
         self.check_catagory([.23, .64, .64, 1.04, .23, 1.04, 0, 0, 0], tenk_plus_totals)
+        self.check_fsr([.21, .42, .42], tenk_plus[:,3])
 
         self.fc.fuel_moisture_1000hr_pct = fm_from_file
         
@@ -149,6 +160,7 @@ class TestNaturalEquations(unittest.TestCase):
 
         one_k_totals = one_k[3]
         self.check_catagory([.73, 2.11, 2.11, 3.49, .73, 3.49, 0, 0, 0], one_k_totals, num_places=1)
+        self.check_fsr([2.09, 1.05, .35], one_k[:,3])
 
         ten_k_totals = ten_k[3]
         self.check_catagory([1.03, 3.01, 3.01, 4.98, 1.03, 4.98, 0, 0, 0], ten_k_totals, num_places=1)
@@ -176,6 +188,7 @@ class TestNaturalEquations(unittest.TestCase):
         total = ret[3]
         self.assertEqual(9, len(total))
         self.check_catagory([0.59, 2.08, 2.56, 3.31, .69, 4.52, 0, 0, 0], total)
+        self.check_fsr([2.98, .33, 0], ret[:,3])
 
         self.fc.fuel_moisture_duff_pct = fm_from_file
 
@@ -197,6 +210,7 @@ class TestNaturalEquations(unittest.TestCase):
         total = ret[3]
         self.assertEqual(9, len(total))
         self.check_catagory([0.59, 2.08, 2.56, 3.31, .69, 4.52, 0, 0, 0], total)
+        self.check_fsr([3.14, .17, 0], ret[:,3])
 
         self.fc.fuel_moisture_duff_pct = fm_from_file
 
