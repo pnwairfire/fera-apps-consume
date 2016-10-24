@@ -12,7 +12,7 @@ UNITTEST_LOADINGSFILE = 'unittest_loadings.csv'
 UNITTEST_INPUTFILE = 'test_input.csv'
 
 def imp(the_file):
-    parent_path = ''.format('{}/{}'.format(UNITTEST_DIR, the_file))
+    parent_path = './{}/{}'.format(UNITTEST_DIR, the_file)
     return parent_path if os.path.exists(parent_path) else the_file
 
 def get_test_loadingsfile():
