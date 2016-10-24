@@ -7,22 +7,20 @@
 #-------------------------------------------------------------------------------
 import os
 
+UNITTEST_DIR = 'unittest'
+UNITTEST_LOADINGSFILE = 'unittest_loadings.csv'
+UNITTEST_INPUTFILE = 'test_input.csv'
+
+def imp(the_file):
+    parent_path = ''.format('{}/{}'.format(UNITTEST_DIR, the_file))
+    return parent_path if os.path.exists(parent_path) else the_file
+
 def get_test_loadingsfile():
-    """ In-editor unit tests versus command line unit tests have a different
-    working directory. Make both work."""
-    infile = ""
-    if os.path.exists("unittest/test.csv"):
-        infile = "unittest/test.csv"
-    else:
-        infile = "test.csv"
-    return infile
+    ''' In-editor unit tests versus command line unit tests have a different
+    working directory. Make both work.'''
+    return imp(UNITTEST_LOADINGSFILE)
 
 def get_test_inputfile():
-    """ In-editor unit tests versus command line unit tests have a different
-    working directory. Make both work."""
-    infile = ""
-    if os.path.exists("unittest/test_input.csv"):
-        infile = "unittest/test_input.csv"
-    else:
-        infile = "test_input.csv"
-    return infile
+    ''' In-editor unit tests versus command line unit tests have a different
+    working directory. Make both work.'''
+    return imp(UNITTEST_INPUTFILE)
