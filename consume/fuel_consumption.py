@@ -1275,12 +1275,12 @@ class FuelConsumption(util.FrozenClass):
             oneK_hr_rot_fsrt, tenK_hr_rot_fsrt, tnkp_hr_rot_fsrt = \
                 ccn.rotten_large_wood_calc(LD, fm_1000hr)
                 
+            lit_fsrt = ccn.litter_calc(LD, fm_duff, fm_litter, ecoregion_masks)
             lch_fsrt = ccn.lichen_calc(LD, fm_duff, fm_litter, ecoregion_masks)
             moss_fsrt = ccn.moss_calc(LD, fm_duff, fm_litter, ecoregion_masks)
-            lit_fsrt = ccn.litter_calc(LD, fm_duff, fm_litter, ecoregion_masks)
             
-            duff_upper_fsrt, duff_lower_fsrt = ccn.duff_calc(LD, fm_duff, fm_litter, ecoregion_masks)
-            bas_fsrt = ccn.basal_accumulation_calc(LD, fm_duff, fm_litter, ecoregion_masks)
+            duff_upper_fsrt, duff_lower_fsrt, duff_proportion_consumed = ccn.duff_calc(LD, fm_duff, fm_litter, ecoregion_masks)
+            bas_fsrt = ccn.basal_accumulation_calc(LD, fm_duff, fm_litter, ecoregion_masks, duff_proportion_consumed)
             sqm_fsrt = ccn.squirrel_midden_calc(LD, fm_duff, fm_litter, ecoregion_masks)
         else:
             fm_type = self._settings.fm_type

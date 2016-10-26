@@ -43,6 +43,8 @@ COMBUSTION_PHASE_TABLE = {
     'c_wood_r+10khr': [.1,.3,.6],
     'c_upperduff': [.1,.7,.2],
     'c_lowerduff': [.0,.2,.8],
+    'c_basal_accum': [.1,.4,.5],
+    'c_squirrel': [.1,.3,.6],
 }
     
 SOUTHERN_EXPECTED_FILE = 'southern_unittest.csv'
@@ -57,6 +59,9 @@ class TestNaturalEquations(unittest.TestCase):
         '''
         self._south_exp = pd.read_csv(helper.imp(SOUTHERN_EXPECTED_FILE))
         self._west_exp = pd.read_csv(helper.imp(WESTERN_EXPECTED_FILE))
+        
+        # unfortunately, the basal acc. and sq. midden calculations use proportional duff consumption
+        self._duff_proportional_consumption = None
         
         loadings_file = helper.get_test_loadingsfile()
         self.fc = consume.FuelConsumption(fccs_file=loadings_file)
@@ -238,8 +243,12 @@ class TestNaturalEquations(unittest.TestCase):
         self.check_catagory([0.59, 2.08, 2.56, 3.31, .69, 4.52, 0, 0], total)
 
     def test_duff_calc(self):
-        cons_duff_upper, cons_duff_lower = ccn.duff_calc(self._loadings,
+        cons_duff_upper, cons_duff_lower, proportion_duff_consumed = ccn.duff_calc(self._loadings,
                 self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_litter_pct, self._ecoregion_masks)
+                
+        # store for basal, sqm
+        self._duff_proportional_consumption = proportion_duff_consumed
+        
         total = cons_duff_upper[3] + cons_duff_lower[3]
         
         # upper duff
@@ -255,28 +264,34 @@ class TestNaturalEquations(unittest.TestCase):
         self.check_fsr(exp_totals, cons_duff_lower[0:3,:], COMBUSTION_PHASE_TABLE['c_lowerduff'])
 
     def test_basal_acc_calc(self):
-        my_print(self._ecoregion_masks)
         my_print(self._loadings['bas_loading'])
         
         ret = ccn.basal_accumulation_calc(self._loadings,
-                self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_litter_pct, self._ecoregion_masks)
+                self.fc.fuel_moisture_duff_pct,
+                self.fc.fuel_moisture_litter_pct,
+                self._ecoregion_masks,
+                self._duff_proportional_consumption)
         my_print(ret[3])  # print totals
         
         total = ret[3]
-        self.assertEqual(8, len(total))
-        self.check_catagory([0, .91, 1.93, 5.16, 0.63, 5.16, 0, 0], total)
+        exp_totals = self.get_expected_list('c_basal_accum')
+        self.check_catagory(exp_totals, total)
+        self.check_fsr(exp_totals, cons_duff_upper[0:3,:], COMBUSTION_PHASE_TABLE['c_basal_accum'])
 
     def test_sq_midden_calc(self):
-        my_print(self._ecoregion_masks)
         my_print(self._loadings['sqm_loading'])
         
-        ret = ccn.basal_accumulation_calc(self._loadings,
-                self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_litter_pct, self._ecoregion_masks)
+        ret = ccn.squirrel_midden_calc(self._loadings,
+                self.fc.fuel_moisture_duff_pct,
+                self.fc.fuel_moisture_litter_pct,
+                self._ecoregion_masks,
+                self._duff_proportional_consumption)
         my_print(ret[3])  # print totals
         
         total = ret[3]
-        self.assertEqual(8, len(total))
-        self.check_catagory([0, .91, 1.93, 5.16, 0.63, 5.16, 0, 0], total)
+        exp_totals = self.get_expected_list('c_squirrel')
+        self.check_catagory(exp_totals, total)
+        self.check_fsr(exp_totals, cons_duff_upper[0:3,:], COMBUSTION_PHASE_TABLE['c_squirrel'])
 
 
 
