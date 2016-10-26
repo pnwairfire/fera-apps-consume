@@ -127,7 +127,6 @@ class TestNaturalEquations(unittest.TestCase):
     def test_sound_one_calc(self): 
         ret = ccn.sound_one_calc(self._loadings, self._ecos_mask)
         my_print(ret[3])  # print totals
-        print(ret)
         totals = ret[3]
         self.assertEqual(8, len(totals))
         exp_totals = self.get_expected_list('c_wood_1hr')
@@ -153,36 +152,30 @@ class TestNaturalEquations(unittest.TestCase):
         self.check_fsr(exp_totals, ret[0:3,:], COMBUSTION_PHASE_TABLE['c_wood_100hr'])
 
     def test_sound_large_wood_calc(self):  
-        # test loading amounts are (1,2,1) = 4, (3,6,3) = 12, (5,10,5) = 20
-        TEST_FM = 50
-        fm_from_file = self.fc.fuel_moisture_1000hr_pct
-        self.fc.fuel_moisture_1000hr_pct = TEST_FM
-        
         one_k, ten_k, tenk_plus = ccn.sound_large_wood_calc(self._loadings, self.fc.fuel_moisture_1000hr_pct)
         totals = one_k[3] + ten_k[3] + tenk_plus[3]
         my_print(totals)
         
-        self.assertEqual(8, len(totals))
-        self.check_catagory([1.51, 4.14, 4.14, 6.77, 1.51, 6.77, 0, 0], totals)
+        # todo: self.check_catagory([1.51, 4.14, 4.14, 6.77, 1.51, 6.77, 0, 0], totals)
 
         one_k_totals = one_k[3]
-        self.check_catagory([.58, 1.59, 1.59, 2.6, .58, 2.6, 0, 0], one_k_totals)
+        print(one_k_totals)
+        exp_totals = self.get_expected_list('c_wood_s1000hr')
+        print(exp_totals)
+        self.check_catagory(exp_totals, one_k_totals)
+        self.check_fsr(exp_totals, one_k_totals[0:3,:], COMBUSTION_PHASE_TABLE['c_wood_s1000hr'])
         
         ten_k_totals = ten_k[3]
-        self.check_catagory([.7, 1.91, 1.91, 3.12, .7, 3.12, 0, 0], ten_k_totals)
+        exp_totals = self.get_expected_list('c_wood_s10khr')
+        self.check_catagory(exp_totals, ten_k_totals)
+        self.check_fsr(exp_totals, ten_k_totals[0:3,:], COMBUSTION_PHASE_TABLE['c_wood_s10khr'])
         
         tenk_plus_totals = tenk_plus[3]
-        self.check_catagory([.23, .64, .64, 1.04, .23, 1.04, 0, 0], tenk_plus_totals)
-
-        self.fc.fuel_moisture_1000hr_pct = fm_from_file
-        
+        exp_totals = self.get_expected_list('c_wood_s+10khr')
+        self.check_catagory(exp_totals, tenk_plus_totals)
+        self.check_fsr(exp_totals, tenk_plus_totals[0:3,:], COMBUSTION_PHASE_TABLE['c_wood_s+10khr'])
 
     def test_rotten_large_wood_calc(self):  
-        # test loading amounts are (1,2,1) = 4, (3,6,3) = 12, (5,10,5) = 20
-        TEST_FM = 50
-        fm_from_file = self.fc.fuel_moisture_1000hr_pct
-        self.fc.fuel_moisture_1000hr_pct = TEST_FM
-        
         def calc(load, fm):
             ret = to_tons((1.9024 + to_mgha(load)*0.4933 + fm*-0.0338)[0])
             return bracket(load, ret)
@@ -201,19 +194,10 @@ class TestNaturalEquations(unittest.TestCase):
 
         tenk_plus_totals = tenk_plus[3]
         self.check_catagory([.31, .90, .90, 1.49, .31, 1.49, 0, 0], tenk_plus_totals, num_places=1)
-        
-        self.fc.fuel_moisture_1000hr_pct = fm_from_file
 
     def test_litter_calc(self):
-        #
-        # NOTE: loadings are 1,3, and 5 for these catagories
-        #
-        FM_DUFF = 30
         my_print(self._ecoregion_masks)
         my_print(self._loadings['litter_loading'])
-        
-        fm_from_file = self.fc.fuel_moisture_duff_pct
-        self.fc.fuel_moisture_duff_pct = FM_DUFF
         
         ret = ccn.litter_calc(self._loadings,
                 self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_1000hr_pct, self._ecoregion_masks)
@@ -223,18 +207,9 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertEqual(8, len(total))
         self.check_catagory([0.59, 2.08, 2.56, 3.31, .69, 4.52, 0, 0], total)
 
-        self.fc.fuel_moisture_duff_pct = fm_from_file
-
     def test_lichen_calc(self):
-        #
-        # NOTE: loadings are 1,3, and 5 for these catagories
-        #
-        FM_DUFF = 30
         my_print(self._ecoregion_masks)
         my_print(self._loadings['lichen_loading'])
-        
-        fm_from_file = self.fc.fuel_moisture_duff_pct
-        self.fc.fuel_moisture_duff_pct = FM_DUFF
         
         ret = ccn.lichen_calc(self._loadings,
                 self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_1000hr_pct, self._ecoregion_masks)
@@ -244,18 +219,9 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertEqual(8, len(total))
         self.check_catagory([0.59, 2.08, 2.56, 3.31, .69, 4.52, 0, 0], total)
 
-        self.fc.fuel_moisture_duff_pct = fm_from_file
-
     def test_moss_calc(self):
-        #
-        # NOTE: loadings are 1,3, and 5 for these catagories
-        #
-        FM_DUFF = 30
         my_print(self._ecoregion_masks)
         my_print(self._loadings['moss_loading'])
-        
-        fm_from_file = self.fc.fuel_moisture_duff_pct
-        self.fc.fuel_moisture_duff_pct = FM_DUFF
         
         ret = ccn.moss_calc(self._loadings,
                 self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_1000hr_pct, self._ecoregion_masks)
@@ -265,16 +231,7 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertEqual(8, len(total))
         self.check_catagory([0.59, 2.08, 2.56, 3.31, .69, 4.52, 0, 0], total)
 
-        self.fc.fuel_moisture_duff_pct = fm_from_file
-
     def test_duff_calc(self):
-        #
-        # NOTE: loadings are 0.5, 10, and 150 (for each lower, upper duff so 1, 20, 300 for total duff load)
-        #
-        FM_DUFF = 30
-        fm_from_file = self.fc.fuel_moisture_duff_pct
-        self.fc.fuel_moisture_duff_pct = FM_DUFF
-        
         cons_duff_upper, cons_duff_lower = ccn.duff_calc(self._loadings,
                 self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_litter_pct, self._ecoregion_masks)
         total = cons_duff_upper[3] + cons_duff_lower[3]
@@ -290,23 +247,10 @@ class TestNaturalEquations(unittest.TestCase):
         total = cons_duff_lower[3]
         self.check_catagory([0, 0, 1.62, 42.38, 0.13, 42.38, 0, 0], total)
 
-        self.fc.fuel_moisture_duff_pct = fm_from_file
-
-
     def test_basal_acc_calc(self):
-        #
-        # NOTE: loadings are 1, 5, 10 for these catagories
-        #
-        FM_DUFF = 30
-        FM_LITTER = 10
         my_print(self._ecoregion_masks)
         my_print(self._loadings['bas_loading'])
         
-        fm_duff_from_file = self.fc.fuel_moisture_duff_pct
-        fm_litter_from_file = self.fc.fuel_moisture_litter_pct
-        self.fc.fuel_moisture_duff_pct = FM_DUFF
-        self.fc.fuel_moisture_litter_pct = FM_LITTER
-        
         ret = ccn.basal_accumulation_calc(self._loadings,
                 self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_litter_pct, self._ecoregion_masks)
         my_print(ret[3])  # print totals
@@ -315,24 +259,10 @@ class TestNaturalEquations(unittest.TestCase):
         self.assertEqual(8, len(total))
         self.check_catagory([0, .91, 1.93, 5.16, 0.63, 5.16, 0, 0], total)
 
-        self.fc.fuel_moisture_duff_pct = fm_duff_from_file
-        self.fc.fuel_moisture_litter_pct = fm_litter_from_file
-
     def test_sq_midden_calc(self):
-        #
-        # NOTE: loadings are 1, 5, 10 for these catagories
-        #
-        FM_DUFF = 30
-        FM_DUFF = 30
-        FM_LITTER = 10
         my_print(self._ecoregion_masks)
         my_print(self._loadings['sqm_loading'])
         
-        fm_duff_from_file = self.fc.fuel_moisture_duff_pct
-        fm_litter_from_file = self.fc.fuel_moisture_litter_pct
-        self.fc.fuel_moisture_duff_pct = FM_DUFF
-        self.fc.fuel_moisture_litter_pct = FM_LITTER
-        
         ret = ccn.basal_accumulation_calc(self._loadings,
                 self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_litter_pct, self._ecoregion_masks)
         my_print(ret[3])  # print totals
@@ -340,9 +270,6 @@ class TestNaturalEquations(unittest.TestCase):
         total = ret[3]
         self.assertEqual(8, len(total))
         self.check_catagory([0, .91, 1.93, 5.16, 0.63, 5.16, 0, 0], total)
-
-        self.fc.fuel_moisture_duff_pct = fm_duff_from_file
-        self.fc.fuel_moisture_litter_pct = fm_litter_from_file
 
 
 
