@@ -100,7 +100,7 @@ class TestNaturalEquations(unittest.TestCase):
         with the southern versions
         '''
         tmp = [i for i in self._west_exp.get(keyname)]
-        tmp.extend([i for i in self._west_exp.get(keyname)])
+        tmp.extend([i for i in self._south_exp.get(keyname)])
         return np.array(tmp)
 
     def extract_shrub_herb_totals(self, ret):
@@ -139,14 +139,18 @@ class TestNaturalEquations(unittest.TestCase):
         my_print(ret[3])  # print totals
         totals = ret[3]
         self.assertEqual(8, len(totals))
-        self.check_catagory([0.42, 0.56, 1.27, 2.54, 0.19, 2.54, 0, 0], totals)
+        exp_totals = self.get_expected_list('c_wood_10hr')
+        self.check_catagory(exp_totals, totals)
+        self.check_fsr(exp_totals, ret[0:3,:], COMBUSTION_PHASE_TABLE['c_wood_10hr'])
 
     def test_sound_hundred_calc(self): 
         ret = ccn.sound_hundred_calc(self._loadings, self._ecos_mask)
         my_print(ret[3])  # print totals
         totals = ret[3]
         self.assertEqual(8, len(totals))
-        self.check_catagory([0.36, 0.86, 1.07, 2.14, 0.29, 2.14, 0, 0], totals)
+        exp_totals = self.get_expected_list('c_wood_100hr')
+        self.check_catagory(exp_totals, totals)
+        self.check_fsr(exp_totals, ret[0:3,:], COMBUSTION_PHASE_TABLE['c_wood_100hr'])
 
     def test_sound_large_wood_calc(self):  
         # test loading amounts are (1,2,1) = 4, (3,6,3) = 12, (5,10,5) = 20
