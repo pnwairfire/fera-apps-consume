@@ -162,9 +162,7 @@ class TestNaturalEquations(unittest.TestCase):
         # todo: self.check_catagory([1.51, 4.14, 4.14, 6.77, 1.51, 6.77, 0, 0], totals)
 
         one_k_totals = one_k[3]
-        print(one_k_totals)
         exp_totals = self.get_expected_list('c_wood_s1000hr')
-        print(exp_totals)
         self.check_catagory(exp_totals, one_k_totals)
         self.check_fsr(exp_totals, one_k[0:3,:], COMBUSTION_PHASE_TABLE['c_wood_s1000hr'])
         
@@ -179,24 +177,27 @@ class TestNaturalEquations(unittest.TestCase):
         self.check_fsr(exp_totals, tenk_plus[0:3,:], COMBUSTION_PHASE_TABLE['c_wood_s+10khr'])
 
     def test_rotten_large_wood_calc(self):  
-        def calc(load, fm):
-            ret = to_tons((1.9024 + to_mgha(load)*0.4933 + fm*-0.0338)[0])
-            return bracket(load, ret)
-            
         one_k, ten_k, tenk_plus = ccn.rotten_large_wood_calc(self._loadings, self.fc.fuel_moisture_1000hr_pct)
         totals = one_k[3] + ten_k[3] + tenk_plus[3]
         my_print(totals)  # print totals
-        self.assertEqual(8, len(totals))
-        self.check_catagory([2.07, 6.01, 6.01, 9.96, 2.07, 9.96, 0, 0], totals)
+        # todo: self.check_catagory([2.07, 6.01, 6.01, 9.96, 2.07, 9.96, 0, 0], totals)
 
         one_k_totals = one_k[3]
-        self.check_catagory([.73, 2.11, 2.11, 3.49, .73, 3.49, 0, 0], one_k_totals, num_places=1)
+        print(one_k_totals)
+        exp_totals = self.get_expected_list('c_wood_r1000hr')
+        print(exp_totals)
+        self.check_catagory(exp_totals, one_k_totals, num_places=1)
+        self.check_fsr(exp_totals, one_k[0:3,:], COMBUSTION_PHASE_TABLE['c_wood_r1000hr'])
 
         ten_k_totals = ten_k[3]
-        self.check_catagory([1.03, 3.01, 3.01, 4.98, 1.03, 4.98, 0, 0], ten_k_totals, num_places=1)
+        exp_totals = self.get_expected_list('c_wood_r10khr')
+        self.check_catagory(exp_totals, ten_k_totals, num_places=1)
+        self.check_fsr(exp_totals, ten_k[0:3,:], COMBUSTION_PHASE_TABLE['c_wood_r10khr'])
 
         tenk_plus_totals = tenk_plus[3]
-        self.check_catagory([.31, .90, .90, 1.49, .31, 1.49, 0, 0], tenk_plus_totals, num_places=1)
+        exp_totals = self.get_expected_list('c_wood_r+10khr')
+        self.check_catagory(exp_totals, tenk_plus_totals, num_places=1)
+        self.check_fsr(exp_totals, tenk_plus[0:3,:], COMBUSTION_PHASE_TABLE['c_wood_r+10khr'])
 
     def test_litter_calc(self):
         my_print(self._ecoregion_masks)
