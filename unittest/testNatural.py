@@ -41,6 +41,8 @@ COMBUSTION_PHASE_TABLE = {
     'c_wood_r1000hr': [.2,.3,.5],
     'c_wood_r10khr': [.1,.3,.6],
     'c_wood_r+10khr': [.1,.3,.6],
+    'c_upperduff': [.1,.7,.2],
+    'c_lowerduff': [.0,.2,.8],
 }
     
 SOUTHERN_EXPECTED_FILE = 'southern_unittest.csv'
@@ -239,17 +241,18 @@ class TestNaturalEquations(unittest.TestCase):
         cons_duff_upper, cons_duff_lower = ccn.duff_calc(self._loadings,
                 self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_litter_pct, self._ecoregion_masks)
         total = cons_duff_upper[3] + cons_duff_lower[3]
-        my_print(total)  # print totals
-        self.assertEqual(8, len(total))
-        self.check_catagory([0, 1.96, 11.62, 192.38, .63, 192.38, 0, 0], total)
         
         # upper duff
         total = cons_duff_upper[3]
-        self.check_catagory([0, 1.96, 10.0, 150.0, 0.5, 150.0, 0, 0], total)
+        exp_totals = self.get_expected_list('c_upperduff')
+        self.check_catagory(exp_totals, total)
+        self.check_fsr(exp_totals, cons_duff_upper[0:3,:], COMBUSTION_PHASE_TABLE['c_upperduff'])
         
         # lower duff
         total = cons_duff_lower[3]
-        self.check_catagory([0, 0, 1.62, 42.38, 0.13, 42.38, 0, 0], total)
+        exp_totals = self.get_expected_list('c_lowerduff')
+        self.check_catagory(exp_totals, total)
+        self.check_fsr(exp_totals, cons_duff_lower[0:3,:], COMBUSTION_PHASE_TABLE['c_lowerduff'])
 
     def test_basal_acc_calc(self):
         my_print(self._ecoregion_masks)
