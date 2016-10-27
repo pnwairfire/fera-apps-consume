@@ -99,8 +99,8 @@ class TestNaturalEquations(unittest.TestCase):
             
     def check_fsr(self, reference_values, calculated_values, phase_coeffs):
         for j in range(2):
-            print('\nvvv\n{}'.format(reference_values*phase_coeffs[j]))
-            print('{}\n^^^'.format(calculated_values[j]))
+            my_print('\nvvv\n{}'.format(reference_values*phase_coeffs[j]))
+            my_print('{}\n^^^'.format(calculated_values[j]))
             close_enough = np.isclose(reference_values*phase_coeffs[j], calculated_values[j], rtol=1e-04).all()
             self.assertTrue(True, close_enough)
             
