@@ -161,7 +161,7 @@ def duff_calc(loadings, fm_duff, fm_litter, ecoregion_masks):
             western_cons_duff(duff_load_total, fm_duff)), 0)
     
     cons = bracket(duff_load_total, cons)
-    proportion_consumed = cons / duff_load_total
+    proportion_consumed = np.where(duff_load_total, cons / duff_load_total, 0)
     
     cons_duff_upper = np.where(cons > values(loadings, 'duff_upper_loading'),
         values(loadings, 'duff_upper_loading'), cons)
@@ -182,13 +182,14 @@ FSR_PROP_SQ_MID = [0.10, 0.30, 0.60]
 
 def use_proportional_duff_cons(loadings, fsr_prop,
         fm_duff, fm_litter, ecoregion_masks, proportional_duff_consumption):
+    print(proportional_duff_consumption)
     cons = np.where(loadings > 0,
         np.where(proportional_duff_consumption > 0,
             loadings * proportional_duff_consumption,
         np.where(ecoregion_masks['southern'],
             southern_cons_duff(loadings, fm_litter),
-            western_cons_duff(loadings, fm_duff)),
-        0))
+            western_cons_duff(loadings, fm_duff))),
+        0)
     cons = bracket(loadings, cons)
     return util.csdist(cons, fsr_prop)
 
@@ -199,7 +200,6 @@ def basal_accumulation_calc(loadings, fm_duff, fm_litter, ecoregion_masks, propo
     
 def squirrel_midden_calc(loadings, fm_duff, fm_litter, ecoregion_masks, proportional_duff_consumption):
     sq_mid_load = values(loadings, 'sqm_loading')
-    sq_mid_load = np.where(np.isnan(sq_mid_load), 0, sq_mid_load)
     return use_proportional_duff_cons(
         sq_mid_load, FSR_PROP_SQ_MID, fm_duff, fm_litter, ecoregion_masks, proportional_duff_consumption)
 
