@@ -47,7 +47,8 @@ COMBUSTION_PHASE_TABLE = {
     'c_squirrel': [.1,.3,.6],
     'c_litter': [.9,.1,.0],
     'c_lichen': [.95,.05,0.0],
-    'c_moss': [.95,.05,0.0]
+    'c_moss': [.95,.05,0.0],
+    'c_herb': [.95,.05,0.0]
 }
     
 SOUTHERN_EXPECTED_FILE = 'southern_unittest.csv'
@@ -116,7 +117,7 @@ class TestNaturalEquations(unittest.TestCase):
 
     def extract_shrub_herb_totals(self, ret):
         my_print('\nType: {}'.format(type(ret)))
-        my_print(ret)
+        print(ret)
         totals = np.zeros_like(ret[0][:, ][3])
         for i, v in enumerate(ret):
             totals += v[:, ][3]

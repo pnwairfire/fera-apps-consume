@@ -27,12 +27,11 @@ def multi_layer_calc(loadings, ecoregion_masks, primary, secondary, primary_pct_
     ''' This function is called by both the shrub and herb calculators. The general tasks are handled
         here, and the specific setup is done in the respective calling functions
     '''
-    # determine primary and secondary percentages, replace nan value with zeros
+    # determine primary and secondary percentages
     total_load = values(loadings, primary) + values(loadings, secondary)
-    primary_pct = values(loadings, primary) / total_load
-    primary_pct = np.where(np.isnan(primary_pct), 0, primary_pct)
+    primary_pct = np.where(total_load, values(loadings, primary) / total_load, 0)
     secondary_pct = 1.0 - primary_pct
-    secondary_pct = np.where(np.isnan(secondary_pct), 0, secondary_pct)
+    assert(not np.isnan(secondary_pct).all())
 
     if total_load.any():  # any positive totals
         cons = np.where(total_load > 0,
