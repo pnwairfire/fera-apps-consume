@@ -114,36 +114,49 @@ def herb_calc(loadings, ecoregion_masks):
 ###################################################################
 ### LITTER LICHEN MOSS (LLM) CONSUMPTION - ACTIVITY and NATURAL ###
 ###################################################################
-def litter_lichen_moss_calc(load, fm_duff, fm_1000, ecoregion_masks, fsr_prop):
-    def boreal_cons(load, fm_duff):
-        # mgha dependent equation: return 0.9794*load - 0.0281*fm_duff
-        return 0.9794*load - 0.012535129*fm_duff
-        
-    def southern_cons(load):
-        return 0.6918*load
+def southern_cons_litter(load):
+    return 0.6918*load
 
-    def western_cons(load, fm_duff):
-        # mgha dependent equation: return 0.6804*load - 0.007*fm_duff
-        return 0.6804*load - 0.00312263*fm_duff
+def western_cons_litter(load, fm_duff):
+    # mgha dependent equation: return 0.6804*load - 0.007*fm_duff
+    return 0.6804*load - 0.00312263*fm_duff
 
+FSR_PROP_LITTER = [0.9, 0.1, 0.0]        
+def litter_calc(loadings, fm_duff, fm_1000, ecoregion_masks):
+    
+    load = values(loadings, 'litter_loading')
     cons = np.where(load > 0,
         np.where(ecoregion_masks['southern'],
-            southern_cons(load),
-            np.where(ecoregion_masks['western'],
-                western_cons(load, fm_duff), boreal_cons(load, fm_duff))), 0)
+            southern_cons_litter(load),
+            western_cons_litter(load, fm_duff)),
+            0)
                 
     cons = bracket(load, cons)
+    proportion_consumed = np.where(load, cons / load, 0)
     
+    return util.csdist(cons, FSR_PROP_LITTER), proportion_consumed
+    
+def use_proportional_litter_cons(loadings, fsr_prop,
+        fm_duff, fm_litter, ecoregion_masks, proportional_consumption):
+    cons = np.where(loadings > 0,
+        np.where(proportional_consumption > 0,
+            loadings * proportional_consumption,
+        np.where(ecoregion_masks['southern'],
+            southern_cons_litter(loadings),
+            western_cons_litter(loadings, fm_duff))),
+        0)
+    cons = bracket(loadings, cons)
     return util.csdist(cons, fsr_prop)
     
-def litter_calc(loadings, fm_duff, fm_1000, ecoregion_masks):
-    return litter_lichen_moss_calc(values(loadings, 'litter_loading'), fm_duff, fm_1000, ecoregion_masks, [0.9, 0.1, 0.0])
+def lichen_calc(loadings, fm_duff, fm_litter, ecoregion_masks, proportion_litter_consumed):
+    lichen_load = values(loadings, 'lichen_loading')
+    return use_proportional_litter_cons(lichen_load,
+            [0.95, 0.05, 0.0], fm_duff, fm_litter, ecoregion_masks, proportion_litter_consumed)
     
-def lichen_calc(loadings, fm_duff, fm_1000, ecoregion_masks):
-    return litter_lichen_moss_calc(values(loadings, 'lichen_loading'), fm_duff, fm_1000, ecoregion_masks, [0.95, 0.05, 0.0])
-    
-def moss_calc(loadings, fm_duff, fm_1000, ecoregion_masks):
-    return litter_lichen_moss_calc(values(loadings, 'moss_loading'), fm_duff, fm_1000, ecoregion_masks, [0.95, 0.05, 0.0])
+def moss_calc(loadings, fm_duff, fm_litter, ecoregion_masks, proportion_litter_consumed):
+    moss_load = values(loadings, 'moss_loading')
+    return use_proportional_litter_cons(moss_load,
+            [0.95, 0.05, 0.0], fm_duff, fm_litter, ecoregion_masks, proportion_litter_consumed)
     
 def southern_cons_duff(load, fm_litter):
     # mgha dependent equation: return 2.9711 + load*0.0702 + fm_litter*-0.1715
@@ -182,7 +195,6 @@ FSR_PROP_SQ_MID = [0.10, 0.30, 0.60]
 
 def use_proportional_duff_cons(loadings, fsr_prop,
         fm_duff, fm_litter, ecoregion_masks, proportional_duff_consumption):
-    print(proportional_duff_consumption)
     cons = np.where(loadings > 0,
         np.where(proportional_duff_consumption > 0,
             loadings * proportional_duff_consumption,

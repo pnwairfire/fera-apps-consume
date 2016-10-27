@@ -208,9 +208,9 @@ class TestNaturalEquations(unittest.TestCase):
     def test_litter_calc(self):
         my_print(self._loadings['litter_loading'])
         
-        ret = ccn.litter_calc(self._loadings,
+        ret, proportion_litter_consumed = ccn.litter_calc(self._loadings,
                 self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_1000hr_pct, self._ecoregion_masks)
-        my_print(ret[3])  # print totals
+        my_print(ret[3])
         
         total = ret[3]
         exp_totals = self.get_expected_list('c_litter')
@@ -221,25 +221,33 @@ class TestNaturalEquations(unittest.TestCase):
         my_print(self._ecoregion_masks)
         my_print(self._loadings['lichen_loading'])
         
-        ret = ccn.lichen_calc(self._loadings,
+        _, proportion_litter_consumed = ccn.litter_calc(self._loadings,
                 self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_1000hr_pct, self._ecoregion_masks)
-        my_print(ret[3])  # print totals
+        
+        ret = ccn.lichen_calc(self._loadings, self.fc.fuel_moisture_duff_pct,
+                self.fc.fuel_moisture_1000hr_pct, self._ecoregion_masks, proportion_litter_consumed)
+        my_print(ret[3])
         
         total = ret[3]
-        self.assertEqual(8, len(total))
-        self.check_catagory([0.59, 2.08, 2.56, 3.31, .69, 4.52, 0, 0], total)
+        exp_totals = self.get_expected_list('c_lichen')
+        self.check_catagory(exp_totals, total, num_places=4)
+        self.check_fsr(exp_totals, ret[0:3,:], COMBUSTION_PHASE_TABLE['c_lichen'])
 
     def test_moss_calc(self):
         my_print(self._ecoregion_masks)
         my_print(self._loadings['moss_loading'])
         
-        ret = ccn.moss_calc(self._loadings,
+        _, proportion_litter_consumed = ccn.litter_calc(self._loadings,
                 self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_1000hr_pct, self._ecoregion_masks)
-        my_print(ret[3])  # print totals
+        
+        ret = ccn.moss_calc(self._loadings, self.fc.fuel_moisture_duff_pct,
+                self.fc.fuel_moisture_1000hr_pct, self._ecoregion_masks, proportion_litter_consumed)
+        my_print(ret[3])
         
         total = ret[3]
-        self.assertEqual(8, len(total))
-        self.check_catagory([0.59, 2.08, 2.56, 3.31, .69, 4.52, 0, 0], total)
+        exp_totals = self.get_expected_list('c_moss')
+        self.check_catagory(exp_totals, total, num_places=4)
+        self.check_fsr(exp_totals, ret[0:3,:], COMBUSTION_PHASE_TABLE['c_moss'])
 
     def test_duff_calc(self):
         cons_duff_upper, cons_duff_lower, proportion_duff_consumed = ccn.duff_calc(self._loadings,
