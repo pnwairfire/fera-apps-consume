@@ -125,19 +125,20 @@ class TestNaturalEquations(unittest.TestCase):
     def test_herb_calc(self): 
         ret = ccn.herb_calc(self._loadings, self._ecoregion_masks)
         totals = self.extract_shrub_herb_totals(ret)
-        my_print(totals)
-        self.assertEqual(8, len(totals))
-        self.check_catagory([0.93, 2.91, 2.78, 5.56, 0.97, 5.56, 0, 0], totals)
+        exp_totals = self.get_expected_list('c_herb')
+        self.check_catagory(exp_totals, totals)
+        #self.check_fsr(exp_totals, ret[0:3,:], COMBUSTION_PHASE_TABLE['c_herb'])
 
     def test_shrub_calc(self):
         ret = ccn.shrub_calc(self.fc.shrub_blackened_pct, self._loadings, self._ecoregion_masks, 0)
         totals = self.extract_shrub_herb_totals(ret)
-        my_print(totals)
-        self.check_catagory([1, 2.07, 2.67, 4.61, 0.77, 4.61, 0, 0], totals)
+        exp_totals = self.get_expected_list('c_shrub')
+        self.check_catagory(exp_totals, totals)
+        #self.check_fsr(exp_totals, ret[0:3,:], COMBUSTION_PHASE_TABLE['c_shrub'])
 
     def test_sound_one_calc(self): 
         ret = ccn.sound_one_calc(self._loadings, self._ecos_mask)
-        my_print(ret[3])  # print totals
+        my_print(ret[3])
         totals = ret[3]
         self.assertEqual(8, len(totals))
         exp_totals = self.get_expected_list('c_wood_1hr')
@@ -146,7 +147,7 @@ class TestNaturalEquations(unittest.TestCase):
 
     def test_sound_ten_calc(self): 
         ret = ccn.sound_ten_calc(self._loadings, self._ecos_mask)
-        my_print(ret[3])  # print totals
+        my_print(ret[3])
         totals = ret[3]
         self.assertEqual(8, len(totals))
         exp_totals = self.get_expected_list('c_wood_10hr')
@@ -155,7 +156,7 @@ class TestNaturalEquations(unittest.TestCase):
 
     def test_sound_hundred_calc(self): 
         ret = ccn.sound_hundred_calc(self._loadings, self._ecos_mask)
-        my_print(ret[3])  # print totals
+        my_print(ret[3])
         totals = ret[3]
         self.assertEqual(8, len(totals))
         exp_totals = self.get_expected_list('c_wood_100hr')
@@ -167,8 +168,6 @@ class TestNaturalEquations(unittest.TestCase):
         totals = one_k[3] + ten_k[3] + tenk_plus[3]
         my_print(totals)
         
-        # todo: self.check_catagory([1.51, 4.14, 4.14, 6.77, 1.51, 6.77, 0, 0], totals)
-
         one_k_totals = one_k[3]
         exp_totals = self.get_expected_list('c_wood_s1000hr')
         self.check_catagory(exp_totals, one_k_totals)
@@ -188,7 +187,6 @@ class TestNaturalEquations(unittest.TestCase):
         one_k, ten_k, tenk_plus = ccn.rotten_large_wood_calc(self._loadings, self.fc.fuel_moisture_1000hr_pct)
         totals = one_k[3] + ten_k[3] + tenk_plus[3]
         my_print(totals)  # print totals
-        # todo: self.check_catagory([2.07, 6.01, 6.01, 9.96, 2.07, 9.96, 0, 0], totals)
 
         one_k_totals = one_k[3]
         exp_totals = self.get_expected_list('c_wood_r1000hr')
