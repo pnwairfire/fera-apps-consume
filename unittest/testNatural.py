@@ -45,6 +45,9 @@ COMBUSTION_PHASE_TABLE = {
     'c_lowerduff': [.0,.2,.8],
     'c_basal_accum': [.1,.4,.5],
     'c_squirrel': [.1,.3,.6],
+    'c_litter': [.9,.1,.0],
+    'c_lichen': [.95,.05,0.0],
+    'c_moss': [.95,.05,0.0]
 }
     
 SOUTHERN_EXPECTED_FILE = 'southern_unittest.csv'
@@ -203,7 +206,6 @@ class TestNaturalEquations(unittest.TestCase):
         self.check_fsr(exp_totals, tenk_plus[0:3,:], COMBUSTION_PHASE_TABLE['c_wood_r+10khr'])
 
     def test_litter_calc(self):
-        my_print(self._ecoregion_masks)
         my_print(self._loadings['litter_loading'])
         
         ret = ccn.litter_calc(self._loadings,
@@ -211,8 +213,9 @@ class TestNaturalEquations(unittest.TestCase):
         my_print(ret[3])  # print totals
         
         total = ret[3]
-        self.assertEqual(8, len(total))
-        self.check_catagory([0.59, 2.08, 2.56, 3.31, .69, 4.52, 0, 0], total)
+        exp_totals = self.get_expected_list('c_litter')
+        self.check_catagory(exp_totals, total, num_places=4)
+        self.check_fsr(exp_totals, ret[0:3,:], COMBUSTION_PHASE_TABLE['c_litter'])
 
     def test_lichen_calc(self):
         my_print(self._ecoregion_masks)
