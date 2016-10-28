@@ -1281,7 +1281,7 @@ class FuelConsumption(util.FrozenClass):
             
             duff_upper_fsrt, duff_lower_fsrt, duff_proportion_consumed = ccn.duff_calc(LD, fm_duff, fm_litter, ecoregion_masks)
             bas_fsrt = ccn.basal_accumulation_calc(LD, fm_duff, fm_litter, ecoregion_masks, duff_proportion_consumed)
-            sqm_fsrt = ccn.squirrel_midden_calc(LD, fm_duff, fm_litter, ecoregion_masks)
+            sqm_fsrt = ccn.squirrel_midden_calc(LD, fm_duff, fm_litter, ecoregion_masks, duff_proportion_consumed)
         else:
             fm_type = self._settings.fm_type
             windspeed =  self._settings.get('windspeed')
