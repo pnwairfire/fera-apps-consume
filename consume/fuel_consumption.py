@@ -464,15 +464,11 @@ Index 1           Index 2              Index 3                     Index 4      
                'litter-lichen-moss' 'litter'                    'flaming','smoldering','residual', or 'total'
                                     'lichen'                    'flaming','smoldering','residual', or 'total'
                                     'moss'                      'flaming','smoldering','residual', or 'total'
-               'nonwoody'           'primary dead'              'flaming','smoldering','residual', or 'total'
-                                    'primary live'              'flaming','smoldering','residual', or 'total'
-                                    'secondary dead'            'flaming','smoldering','residual', or 'total'
-                                    'secondary live'            'flaming','smoldering','residual', or 'total'
+               'nonwoody'           'primary'                   'flaming','smoldering','residual', or 'total'
+                                    'secondary'                 'flaming','smoldering','residual', or 'total'
 
-               'shrub'              'primary dead'              'flaming','smoldering','residual', or 'total'
-                                    'primary live'              'flaming','smoldering','residual', or 'total'
-                                    'secondary dead'            'flaming','smoldering','residual', or 'total'
-                                    'secondary live'            'flaming','smoldering','residual', or 'total'
+               'shrub'              'primary'                   'flaming','smoldering','residual', or 'total'
+                                    'secondary'                 'flaming','smoldering','residual', or 'total'
                'woody fuels'        '1-hr fuels'                'flaming','smoldering','residual', or 'total'
                                     '10-hr fuels'               'flaming','smoldering','residual', or 'total'
                                     '100-hr fuels'              'flaming','smoldering','residual', or 'total'
@@ -1250,12 +1246,10 @@ class FuelConsumption(util.FrozenClass):
          can_ladder_fsrt] = ccn.ccon_canopy(self._settings.get('can_con_pct'), LD)
 
         season = np.where('spring' == self._settings.get('season') , 1, 0)
-        [shb_prim_live_fsrt, shb_prim_dead_fsrt,
-         shb_seco_live_fsrt, shb_seco_dead_fsrt] = ccn.shrub_calc(self._settings.get('shrub_black_pct'), LD,
-                                                        ecoregion_masks, season)
+        [shb_prim_fsrt, shb_seco_fsrt] =\
+            ccn.shrub_calc(self._settings.get('shrub_black_pct'), LD, ecoregion_masks, season)
 
-        [nw_prim_live_fsrt, nw_prim_dead_fsrt,
-         nw_seco_live_fsrt, nw_seco_dead_fsrt] = ccn.herb_calc(LD, ecoregion_masks)
+        [nw_prim_fsrt, nw_seco_fsrt] = ccn.herb_calc(LD, ecoregion_masks)
 
         [stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt] = ccn.stump_calc(LD)
 
@@ -1316,10 +1310,8 @@ class FuelConsumption(util.FrozenClass):
         can_fsrt = sum([can_over_fsrt, can_mid_fsrt, can_under_fsrt,
                         can_snag1f_fsrt, can_snag1w_fsrt, can_snag1nf_fsrt,
                         can_snag2_fsrt, can_snag3_fsrt, can_ladder_fsrt])
-        shb_fsrt = sum([shb_prim_live_fsrt, shb_prim_dead_fsrt,
-                        shb_seco_live_fsrt, shb_seco_dead_fsrt])
-        nw_fsrt = sum([nw_prim_live_fsrt, nw_prim_dead_fsrt,
-                       nw_seco_live_fsrt, nw_seco_dead_fsrt])
+        shb_fsrt = sum([shb_prim_fsrt, shb_seco_fsrt])
+        nw_fsrt = sum([nw_prim_fsrt, nw_seco_fsrt])
         llm_fsrt = sum([lch_fsrt, moss_fsrt, lit_fsrt])
         gf_fsrt = sum([duff_upper_fsrt, duff_lower_fsrt, bas_fsrt, sqm_fsrt])
         woody_fsrt = sum([pile_fsrt, stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt,
@@ -1351,14 +1343,10 @@ class FuelConsumption(util.FrozenClass):
             can_snag2_fsrt,
             can_snag3_fsrt,
             can_ladder_fsrt,
-            shb_prim_live_fsrt,
-            shb_prim_dead_fsrt,
-            shb_seco_live_fsrt,
-            shb_seco_dead_fsrt,
-            nw_prim_live_fsrt,
-            nw_prim_dead_fsrt,
-            nw_seco_live_fsrt,
-            nw_seco_dead_fsrt,
+            shb_prim_fsrt,
+            shb_seco_fsrt,
+            nw_prim_fsrt,
+            nw_seco_fsrt,
             lit_fsrt,
             lch_fsrt,
             moss_fsrt,
@@ -1386,9 +1374,8 @@ class FuelConsumption(util.FrozenClass):
                 gf_fsrt,woody_fsrt, can_over_fsrt, can_mid_fsrt, can_under_fsrt,
                 can_snag1f_fsrt, can_snag1w_fsrt, can_snag1nf_fsrt,
                 can_snag2_fsrt, can_snag3_fsrt, can_ladder_fsrt,
-                shb_prim_live_fsrt, shb_prim_dead_fsrt, shb_seco_live_fsrt,
-                shb_seco_dead_fsrt, nw_prim_live_fsrt, nw_prim_dead_fsrt,
-                nw_seco_live_fsrt, nw_seco_dead_fsrt, lit_fsrt, lch_fsrt,
+                shb_prim_fsrt, shb_seco_fsrt,
+                nw_prim_fsrt, nw_seco_fsrt, lit_fsrt, lch_fsrt,
                 moss_fsrt, duff_upper_fsrt, duff_lower_fsrt, bas_fsrt,
                 sqm_fsrt, pile_fsrt, stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt,
                 one_hr_fsrt, ten_hr_fsrt, hun_hr_fsrt, oneK_hr_snd_fsrt,

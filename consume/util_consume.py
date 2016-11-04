@@ -118,34 +118,30 @@ def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs):
     can_snags_2 = cons_dict(13)
     can_snags_3 = cons_dict(14)
     can_ladder = cons_dict(15)
-    shb_prim_live = cons_dict(16)
-    shb_prim_dead = cons_dict(17)
-    shb_seco_live = cons_dict(18)
-    shb_seco_dead = cons_dict(19)
-    nw_prim_live = cons_dict(20)
-    nw_prim_dead = cons_dict(21)
-    nw_seco_live = cons_dict(22)
-    nw_seco_dead = cons_dict(23)
-    llm_litter = cons_dict(24)
-    llm_lichen = cons_dict(25)
-    llm_moss = cons_dict(26)
-    gf_duff_upper = cons_dict(27)
-    gf_duff_lower = cons_dict(28)
-    gf_ba = cons_dict(29)
-    gf_sm = cons_dict(30)
-    piles = cons_dict(31)
-    wd_stumps_snd = cons_dict(32)
-    wd_stumps_rot = cons_dict(33)
-    wd_stumps_lgt = cons_dict(34)
-    wd_hr1 = cons_dict(35)
-    wd_hr10 = cons_dict(36)
-    wd_hr100 = cons_dict(37)
-    wd_hr1000_snd = cons_dict(38)
-    wd_hr1000_rot = cons_dict(39)
-    wd_hr10000_snd = cons_dict(40)
-    wd_hr10000_rot = cons_dict(41)
-    wd_hr10kp_snd = cons_dict(42)
-    wd_hr10kp_rot = cons_dict(43)
+    shb_prim = cons_dict(16)
+    shb_seco = cons_dict(17)
+    nw_prim = cons_dict(18)
+    nw_seco = cons_dict(19)
+    llm_litter = cons_dict(20)
+    llm_lichen = cons_dict(21)
+    llm_moss = cons_dict(22)
+    gf_duff_upper = cons_dict(23)
+    gf_duff_lower = cons_dict(24)
+    gf_ba = cons_dict(25)
+    gf_sm = cons_dict(26)
+    piles = cons_dict(27)
+    wd_stumps_snd = cons_dict(28)
+    wd_stumps_rot = cons_dict(29)
+    wd_stumps_lgt = cons_dict(30)
+    wd_hr1 = cons_dict(31)
+    wd_hr10 = cons_dict(32)
+    wd_hr100 = cons_dict(33)
+    wd_hr1000_snd = cons_dict(34)
+    wd_hr1000_rot = cons_dict(35)
+    wd_hr10000_snd = cons_dict(36)
+    wd_hr10000_rot = cons_dict(37)
+    wd_hr10kp_snd = cons_dict(38)
+    wd_hr10kp_rot = cons_dict(39)
 
     results = {'parameters' : inputs,
                'heat release' : all_heat,
@@ -169,15 +165,11 @@ def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs):
                                     'snags class 3' : can_snags_3,
                                     'ladder fuels' : can_ladder},
                                 'shrub' : {
-                                    'primary live' : shb_prim_live,
-                                    'primary dead' : shb_prim_dead,
-                                    'secondary live' : shb_seco_live,
-                                    'secondary dead' :  shb_seco_dead},
+                                    'primary live' : shb_prim,
+                                    'secondary live' : shb_seco},
                                 'nonwoody' : {
-                                    'primary live' : nw_prim_live,
-                                    'primary dead' : nw_prim_dead,
-                                    'secondary live' : nw_seco_live,
-                                    'secondary dead' :  nw_seco_dead},
+                                    'primary live' : nw_prim,
+                                    'secondary live' : nw_seco},
                                 'litter-lichen-moss' : {
                                     'litter' : llm_litter,
                                     'lichen' : llm_lichen,

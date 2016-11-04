@@ -23,13 +23,13 @@ def ccon_canopy(can_con_pct, LD):
 
     return [util.csdist(values(LD, t[0]) * pct, t[1]) for t in can_params]
 
-def multi_layer_calc(loadings, ecoregion_masks, primary, secondary, primary_pct_live, secondary_pct_live, calculator):
+def multi_layer_calc(loadings, ecoregion_masks, primary, secondary, calculator):
     ''' This function is called by both the shrub and herb calculators. The general tasks are handled
         here, and the specific setup is done in the respective calling functions
     '''
     # determine primary and secondary percentages
     total_load = values(loadings, primary) + values(loadings, secondary)
-    primary_pct = np.where(total_load, values(loadings, primary) / total_load, 0)
+    primary_pct = np.where(total_load > 0, values(loadings, primary) / total_load, 0)
     secondary_pct = 1.0 - primary_pct
     assert(not np.isnan(secondary_pct).all())
 
@@ -45,28 +45,21 @@ def multi_layer_calc(loadings, ecoregion_masks, primary, secondary, primary_pct_
         assert np.isnan(primary_total).any() == False, '{}'.format(primary_pct)
         assert np.isnan(secondary_total).any() == False, '{}'.format(secondary_total)
 
-        pctlivep = values(loadings, primary_pct_live)
-        pctdeadp = 1.0 - pctlivep
-        pctlives = values(loadings, secondary_pct_live)
-        pctdeads = 1.0 - pctlives
+        fsr = [0.90, 0.10, 0.0]
 
-        csd_live = [0.95, 0.05, 0.0]
-        csd_dead = [0.90, 0.10, 0.0]
-
-        return (util.csdist(primary_total * pctlivep, csd_live),
-                util.csdist(primary_total * pctdeadp, csd_dead),
-                util.csdist(secondary_total * pctlives, csd_live),
-                util.csdist(secondary_total * pctdeads, csd_dead))
+        return (util.csdist(primary_total, fsr), util.csdist(secondary_total, fsr))
     else:
         hold = util.csdist(np.array([0.0] * len(loadings['fccs_id']), dtype=float), [0.0, 0.0, 0.0])
-        return hold, hold, hold, hold
+        return hold, hold
 
-CVT_MGHA = 0.44609
+CVT_MGHA_TO_TONS = 0.44609
+CVT_TONS_TO_MGHA = 1.0 / CVT_MGHA_TO_TONS
+
 def to_mgha(tons):
-    return tons / CVT_MGHA
+    return tons * CVT_TONS_TO_MGHA
 
 def to_tons(mgha):
-    return mgha * CVT_MGHA
+    return mgha * CVT_MGHA_TO_TONS
 
 SEASON_SPRING = 1
 SEASON_ALL_OTHER = 0
@@ -90,8 +83,7 @@ def shrub_calc(shrub_black_pct, loadings, ecoregion_masks, season=SEASON_ALL_OTH
         return Calculator(shrub_black_pct, season)
 
     return multi_layer_calc(loadings, ecoregion_masks,
-                'shrub_prim', 'shrub_seco', 'shrub_prim_pctlv', 'shrub_seco_pctlv',
-                get_calculator(shrub_black_pct/100, season))
+                'shrub_prim', 'shrub_seco', get_calculator(shrub_black_pct/100, season))
 
 def herb_calc(loadings, ecoregion_masks):
     """ Herbaceous consumption, activity & natural, p.169 """
@@ -105,9 +97,7 @@ def herb_calc(loadings, ecoregion_masks):
             
         return Calculator()
 
-    return multi_layer_calc(loadings, ecoregion_masks,
-                            'nw_prim', 'nw_seco', 'nw_prim_pctlv', 'nw_seco_pctlv',
-                            get_calculator())
+    return multi_layer_calc(loadings, ecoregion_masks, 'nw_prim', 'nw_seco', get_calculator())
 
 
 ###################################################################

@@ -115,24 +115,16 @@ class TestNaturalEquations(unittest.TestCase):
         tmp.extend([i for i in self._south_exp.get(keyname)])
         return np.array(tmp)
 
-    def extract_shrub_herb_totals(self, ret):
-        my_print('\nType: {}'.format(type(ret)))
-        print(ret)
-        totals = np.zeros_like(ret[0][:, ][3])
-        for i, v in enumerate(ret):
-            totals += v[:, ][3]
-        return totals
-        
     def test_herb_calc(self): 
         ret = ccn.herb_calc(self._loadings, self._ecoregion_masks)
-        totals = self.extract_shrub_herb_totals(ret)
+        totals = ret[0][:, ][3] + ret[1][:, ][3]
         exp_totals = self.get_expected_list('c_herb')
         self.check_catagory(exp_totals, totals)
         #self.check_fsr(exp_totals, ret[0:3,:], COMBUSTION_PHASE_TABLE['c_herb'])
 
     def test_shrub_calc(self):
         ret = ccn.shrub_calc(self.fc.shrub_blackened_pct, self._loadings, self._ecoregion_masks, 0)
-        totals = self.extract_shrub_herb_totals(ret)
+        totals = ret[0][:, ][3] + ret[1][:, ][3]
         exp_totals = self.get_expected_list('c_shrub')
         self.check_catagory(exp_totals, totals)
         #self.check_fsr(exp_totals, ret[0:3,:], COMBUSTION_PHASE_TABLE['c_shrub'])
