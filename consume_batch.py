@@ -23,6 +23,8 @@ import numpy as np
 DO_PICKLE_OUTPUT = 'pickle'
 DO_RAW_OUTPUT = 'raw'
 
+PRECISION = 4
+
 FEPS_EMISSIONS_INPUT = 'feps_emissions_input.csv'
 
 # -- From stackoverflow.com ---
@@ -145,8 +147,6 @@ def write_feps_emissions_input(all_results):
         df[p] /= LBS_PER_TON
     df.to_csv(FEPS_EMISSIONS_INPUT, index=False, float_format='%.3f')
 
-
-
 def write_results(all_results, outfile, do_metric, col_cfg_file=None):
     # calculated results are in a hierarchical dictionary. Flatten the entire structure
     #  so that any chosen datum can be specified
@@ -182,6 +182,9 @@ def write_results(all_results, outfile, do_metric, col_cfg_file=None):
                 if key in tmp.keys():
                     add_these.append((new_key, converter(key, tmp[key])))
             newdf = pd.DataFrame.from_items(add_these)
+
+            newdf = newdf.round(PRECISION)
+
             newdf.to_csv(outfile, index=False)
         else:
             # The command line parser should preclude getting here.
