@@ -48,7 +48,8 @@ COMBUSTION_PHASE_TABLE = {
     'c_litter': [.9,.1,.0],
     'c_lichen': [.95,.05,0.0],
     'c_moss': [.95,.05,0.0],
-    'c_herb': [.95,.05,0.0]
+    'c_herb': [.95,.05,0.0],
+    'c_shrub': [.90, .10, 0.0]
 }
     
 SOUTHERN_EXPECTED_FILE = 'southern_unittest.csv'
@@ -120,14 +121,14 @@ class TestNaturalEquations(unittest.TestCase):
         totals = ret[0][:, ][3] + ret[1][:, ][3]
         exp_totals = self.get_expected_list('c_herb')
         self.check_catagory(exp_totals, totals)
-        #self.check_fsr(exp_totals, ret[0:3,:], COMBUSTION_PHASE_TABLE['c_herb'])
+        self.check_fsr(exp_totals, totals, COMBUSTION_PHASE_TABLE['c_herb'])
 
     def test_shrub_calc(self):
         ret = ccn.shrub_calc(self.fc.shrub_blackened_pct, self._loadings, self._ecoregion_masks, 0)
         totals = ret[0][:, ][3] + ret[1][:, ][3]
         exp_totals = self.get_expected_list('c_shrub')
         self.check_catagory(exp_totals, totals)
-        #self.check_fsr(exp_totals, ret[0:3,:], COMBUSTION_PHASE_TABLE['c_shrub'])
+        self.check_fsr(exp_totals, totals, COMBUSTION_PHASE_TABLE['c_shrub'])
 
     def test_sound_one_calc(self): 
         ret = ccn.sound_one_calc(self._loadings, self._ecos_mask)

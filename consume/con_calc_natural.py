@@ -29,6 +29,7 @@ def multi_layer_calc(loadings, ecoregion_masks, primary, secondary, calculator):
     '''
     # determine primary and secondary percentages
     total_load = values(loadings, primary) + values(loadings, secondary)
+    #print('total_load has nan - {}'.format(np.isnan(total_load).any()))
     primary_pct = np.where(total_load > 0, values(loadings, primary) / total_load, 0)
     secondary_pct = 1.0 - primary_pct
     assert(not np.isnan(secondary_pct).all())
