@@ -23,7 +23,7 @@ import numpy as np
 DO_PICKLE_OUTPUT = 'pickle'
 DO_RAW_OUTPUT = 'raw'
 
-PRECISION = 4
+PRECISION = 2
 
 FEPS_EMISSIONS_INPUT = 'feps_emissions_input.csv'
 
