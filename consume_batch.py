@@ -146,6 +146,18 @@ def write_feps_emissions_input(all_results):
     for p in pollutants:
         df[p] /= LBS_PER_TON
     df.to_csv(FEPS_EMISSIONS_INPUT, index=False, float_format='%.3f')
+    
+def round_to(df):
+    ''' Our packaged version of Pandas doesn't have round.
+    Once we update the following is all that is required
+    
+    newdf = newdf.round(PRECISION)
+    '''
+    for col in df.columns:
+        if 'fuelbeds' == col or 'filename' == col: continue
+        df[col] = np.round(df.get(col), PRECISION)
+    return df
+
 
 def write_results(all_results, outfile, do_metric, col_cfg_file=None):
     # calculated results are in a hierarchical dictionary. Flatten the entire structure
@@ -183,7 +195,7 @@ def write_results(all_results, outfile, do_metric, col_cfg_file=None):
                     add_these.append((new_key, converter(key, tmp[key])))
             newdf = pd.DataFrame.from_items(add_these)
 
-            newdf = newdf.round(PRECISION)
+            newdf = round_to(newdf)
 
             newdf.to_csv(outfile, index=False)
         else:
