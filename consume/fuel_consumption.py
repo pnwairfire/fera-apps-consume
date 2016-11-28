@@ -464,15 +464,11 @@ Index 1           Index 2              Index 3                     Index 4      
                'litter-lichen-moss' 'litter'                    'flaming','smoldering','residual', or 'total'
                                     'lichen'                    'flaming','smoldering','residual', or 'total'
                                     'moss'                      'flaming','smoldering','residual', or 'total'
-               'nonwoody'           'primary dead'              'flaming','smoldering','residual', or 'total'
-                                    'primary live'              'flaming','smoldering','residual', or 'total'
-                                    'secondary dead'            'flaming','smoldering','residual', or 'total'
-                                    'secondary live'            'flaming','smoldering','residual', or 'total'
+               'nonwoody'           'primary'                   'flaming','smoldering','residual', or 'total'
+                                    'secondary'                 'flaming','smoldering','residual', or 'total'
 
-               'shrub'              'primary dead'              'flaming','smoldering','residual', or 'total'
-                                    'primary live'              'flaming','smoldering','residual', or 'total'
-                                    'secondary dead'            'flaming','smoldering','residual', or 'total'
-                                    'secondary live'            'flaming','smoldering','residual', or 'total'
+               'shrub'              'primary'                   'flaming','smoldering','residual', or 'total'
+                                    'secondary'                 'flaming','smoldering','residual', or 'total'
                'woody fuels'        '1-hr fuels'                'flaming','smoldering','residual', or 'total'
                                     '10-hr fuels'               'flaming','smoldering','residual', or 'total'
                                     '100-hr fuels'              'flaming','smoldering','residual', or 'total'
@@ -679,6 +675,11 @@ class FuelConsumption(util.FrozenClass):
     def fuel_moisture_duff_pct(self, value):
         self._settings.set('fm_duff', value)
     @property
+    def fuel_moisture_litter_pct(self): return self._settings.get('fm_litter')
+    @fuel_moisture_litter_pct.setter
+    def fuel_moisture_litter_pct(self, value):
+        self._settings.set('fm_litter', value)
+    @property
     def fuel_moisture_10hr_pct(self): return self._settings.get('fm_10hr')
     @fuel_moisture_10hr_pct.setter
     def fuel_moisture_10hr_pct(self, value):
@@ -698,6 +699,11 @@ class FuelConsumption(util.FrozenClass):
     @pile_blackened_pct.setter
     def pile_blackened_pct(self, value):
         self._settings.set('pile_black_pct', value)
+    @property
+    def season(self): return self._settings.get('season')
+    @season.setter
+    def season(self, value):
+        self._settings.set('season', value)
     @property
     def slope(self): return self._settings.get('slope')
     @slope.setter
@@ -1239,32 +1245,37 @@ class FuelConsumption(util.FrozenClass):
          can_snag1w_fsrt, can_snag1nf_fsrt, can_snag2_fsrt, can_snag3_fsrt,
          can_ladder_fsrt] = ccn.ccon_canopy(self._settings.get('can_con_pct'), LD)
 
-        [shb_prim_live_fsrt, shb_prim_dead_fsrt,
-         shb_seco_live_fsrt, shb_seco_dead_fsrt] = ccn.ccon_shrub(self._settings.get('shrub_black_pct'), LD)
+        season = np.where('spring' == self._settings.get('season') , 1, 0)
+        [shb_prim_fsrt, shb_seco_fsrt] =\
+            ccn.shrub_calc(self._settings.get('shrub_black_pct'), LD, ecoregion_masks, season)
 
-        [nw_prim_live_fsrt, nw_prim_dead_fsrt,
-         nw_seco_live_fsrt, nw_seco_dead_fsrt] = ccn.ccon_nw(LD)
+        [nw_prim_fsrt, nw_seco_fsrt] = ccn.herb_calc(LD, ecoregion_masks)
 
-        [stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt] = ccn.ccon_stumps(LD)
+        [stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt] = ccn.stump_calc(LD)
 
         # special case for piles
-        pile_fsrt = ccn.ccon_piles(self._settings.get('pile_black_pct'), LD)
+        pile_fsrt = ccn.pile_calc(self._settings.get('pile_black_pct'), LD)
         self._cons_data_piles = pile_fsrt
 
         fm_1000hr = self._settings.get('fm_1000hr')
         fm_duff =  self._settings.get('fm_duff')
+        fm_litter =  self._settings.get('fm_litter')
         if self._settings.burn_type in ['natural', ['natural']]:
-
-            one_hr_fsrt = ccn.ccon_one_nat(LD)
-            ten_hr_fsrt = ccn.ccon_ten_nat(LD)
-            hun_hr_fsrt = ccn.ccon_hun_nat(ecos_mask, LD)
-            oneK_hr_snd_fsrt = ccn.ccon_oneK_snd_nat(fm_duff, fm_1000hr, ecos_mask, LD)
-            tenK_hr_snd_fsrt = ccn.ccon_tenK_snd_nat(fm_1000hr, LD)
-            tnkp_hr_snd_fsrt = ccn.ccon_tnkp_snd_nat(fm_1000hr, LD)
-            oneK_hr_rot_fsrt = ccn.ccon_oneK_rot_nat(fm_1000hr, ecos_mask, LD)
-            tenK_hr_rot_fsrt = ccn.ccon_tenK_rot_nat(fm_1000hr, LD)
-            tnkp_hr_rot_fsrt = ccn.ccon_tnkp_rot_nat(fm_1000hr, LD)
-            [ff_reduction, y_b, duff_depth] = ccn.ccon_ffr(fm_duff, ecoregion_masks, LD)
+            one_hr_fsrt = ccn.sound_one_calc(LD, ecos_mask)
+            ten_hr_fsrt = ccn.sound_ten_calc(LD, ecos_mask)
+            hun_hr_fsrt = ccn.sound_hundred_calc(LD, ecos_mask)
+            oneK_hr_snd_fsrt, tenK_hr_snd_fsrt, tnkp_hr_snd_fsrt = \
+                ccn.sound_large_wood_calc(LD, fm_1000hr)
+            oneK_hr_rot_fsrt, tenK_hr_rot_fsrt, tnkp_hr_rot_fsrt = \
+                ccn.rotten_large_wood_calc(LD, fm_1000hr)
+                
+            lit_fsrt, litter_proportion_consumed  = ccn.litter_calc(LD, fm_duff, fm_litter, ecoregion_masks)
+            lch_fsrt = ccn.lichen_calc(LD, fm_duff, fm_litter, ecoregion_masks, litter_proportion_consumed)
+            moss_fsrt = ccn.moss_calc(LD, fm_duff, fm_litter, ecoregion_masks, litter_proportion_consumed)
+            
+            duff_upper_fsrt, duff_lower_fsrt, duff_proportion_consumed = ccn.duff_calc(LD, fm_duff, fm_litter, ecoregion_masks)
+            bas_fsrt = ccn.basal_accumulation_calc(LD, fm_duff, fm_litter, ecoregion_masks, duff_proportion_consumed)
+            sqm_fsrt = ccn.squirrel_midden_calc(LD, fm_duff, fm_litter, ecoregion_masks, duff_proportion_consumed)
         else:
             fm_type = self._settings.fm_type
             windspeed =  self._settings.get('windspeed')
@@ -1281,28 +1292,26 @@ class FuelConsumption(util.FrozenClass):
             ff_reduction] = cca.ccon_activity(fm_1000hr, fm_type,
                 windspeed, slope, area, days_since_rain, fm_10hr, length_of_ignition, LD)
 
-        # The ff reduction is a destructive process (modifies the ff_reduction array)
-        # Make a copy for use in basal area and sq midden calcs
-        ff_redux_copy = ff_reduction.copy()
-        lch_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'lch_depth', 'lichen_loading', [0.95, 0.05, 0.00])
-        moss_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'moss_depth', 'moss_loading', [0.95, 0.05, 0.00])
-        lit_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'lit_depth', 'litter_loading', [0.90, 0.10, 0.00])
-        duff_upper_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'duff_upper_depth', 'duff_upper_loading', [0.10, 0.70, 0.20])
-        duff_lower_fsrt = ccn.ccon_forest_floor(LD, ff_reduction, 'duff_lower_depth', 'duff_lower_loading', [0.00, 0.20, 0.80])
+            # The ff reduction is a destructive process (modifies the ff_reduction array)
+            # Make a copy for use in basal area and sq midden calcs
+            ff_redux_copy = ff_reduction.copy()
+            lch_fsrt = cca.ccon_forest_floor(LD, ff_reduction, 'lch_depth', 'lichen_loading', [0.95, 0.05, 0.00])
+            moss_fsrt = cca.ccon_forest_floor(LD, ff_reduction, 'moss_depth', 'moss_loading', [0.95, 0.05, 0.00])
+            lit_fsrt = cca.ccon_forest_floor(LD, ff_reduction, 'lit_depth', 'litter_loading', [0.90, 0.10, 0.00])
+            duff_upper_fsrt = cca.ccon_forest_floor(LD, ff_reduction, 'duff_upper_depth', 'duff_upper_loading', [0.10, 0.70, 0.20])
+            duff_lower_fsrt = cca.ccon_forest_floor(LD, ff_reduction, 'duff_lower_depth', 'duff_lower_loading', [0.00, 0.20, 0.80])
 
-        ff_redux_proportion = self.calc_ff_redux_proportion(LD, ff_redux_copy)
-        bas_fsrt = ccn.ccon_bas(values(LD, 'bas_loading'), ff_redux_proportion)
-        sqm_fsrt = ccn.ccon_sqm(values(LD, 'sqm_loading'), ff_redux_proportion)
+            ff_redux_proportion = self.calc_ff_redux_proportion(LD, ff_redux_copy)
+            bas_fsrt = cca.ccon_bas(values(LD, 'bas_loading'), ff_redux_proportion)
+            sqm_fsrt = cca.ccon_sqm(values(LD, 'sqm_loading'), ff_redux_proportion)
 
 
         # Category summations
         can_fsrt = sum([can_over_fsrt, can_mid_fsrt, can_under_fsrt,
                         can_snag1f_fsrt, can_snag1w_fsrt, can_snag1nf_fsrt,
                         can_snag2_fsrt, can_snag3_fsrt, can_ladder_fsrt])
-        shb_fsrt = sum([shb_prim_live_fsrt, shb_prim_dead_fsrt,
-                        shb_seco_live_fsrt, shb_seco_dead_fsrt])
-        nw_fsrt = sum([nw_prim_live_fsrt, nw_prim_dead_fsrt,
-                       nw_seco_live_fsrt, nw_seco_dead_fsrt])
+        shb_fsrt = sum([shb_prim_fsrt, shb_seco_fsrt])
+        nw_fsrt = sum([nw_prim_fsrt, nw_seco_fsrt])
         llm_fsrt = sum([lch_fsrt, moss_fsrt, lit_fsrt])
         gf_fsrt = sum([duff_upper_fsrt, duff_lower_fsrt, bas_fsrt, sqm_fsrt])
         woody_fsrt = sum([pile_fsrt, stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt,
@@ -1334,14 +1343,10 @@ class FuelConsumption(util.FrozenClass):
             can_snag2_fsrt,
             can_snag3_fsrt,
             can_ladder_fsrt,
-            shb_prim_live_fsrt,
-            shb_prim_dead_fsrt,
-            shb_seco_live_fsrt,
-            shb_seco_dead_fsrt,
-            nw_prim_live_fsrt,
-            nw_prim_dead_fsrt,
-            nw_seco_live_fsrt,
-            nw_seco_dead_fsrt,
+            shb_prim_fsrt,
+            shb_seco_fsrt,
+            nw_prim_fsrt,
+            nw_seco_fsrt,
             lit_fsrt,
             lch_fsrt,
             moss_fsrt,
@@ -1364,16 +1369,13 @@ class FuelConsumption(util.FrozenClass):
             tnkp_hr_rot_fsrt]
             )
 
-        self._cons_debug_data = np.array(ff_reduction)
-
         # delete extraneous memory hogging variables
         del (all_fsrt, can_fsrt, shb_fsrt, nw_fsrt, llm_fsrt,
                 gf_fsrt,woody_fsrt, can_over_fsrt, can_mid_fsrt, can_under_fsrt,
                 can_snag1f_fsrt, can_snag1w_fsrt, can_snag1nf_fsrt,
                 can_snag2_fsrt, can_snag3_fsrt, can_ladder_fsrt,
-                shb_prim_live_fsrt, shb_prim_dead_fsrt, shb_seco_live_fsrt,
-                shb_seco_dead_fsrt, nw_prim_live_fsrt, nw_prim_dead_fsrt,
-                nw_seco_live_fsrt, nw_seco_dead_fsrt, lit_fsrt, lch_fsrt,
+                shb_prim_fsrt, shb_seco_fsrt,
+                nw_prim_fsrt, nw_seco_fsrt, lit_fsrt, lch_fsrt,
                 moss_fsrt, duff_upper_fsrt, duff_lower_fsrt, bas_fsrt,
                 sqm_fsrt, pile_fsrt, stump_snd_fsrt, stump_rot_fsrt, stump_ltr_fsrt,
                 one_hr_fsrt, ten_hr_fsrt, hun_hr_fsrt, oneK_hr_snd_fsrt,

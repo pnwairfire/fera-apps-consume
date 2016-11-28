@@ -377,3 +377,75 @@ def ccon_activity(fm_1000hr, fm_type, windspeed,
            oneK_fsrt, tenK_fsrt, tnkp_fsrt,
            ccon_ffr_activity(diam_reduction, oneK_fsrt, tenK_fsrt, tnkp_fsrt, days_since_rain, LD))
 
+def ccon_ffr(fm_duff, ecoregion_masks, LD):
+    """ Forest-floor reduction calculation, p.177  """
+
+    # total duff depth (inches)
+    duff_depth = values(LD, 'duff_upper_depth') + values(LD, 'duff_lower_depth')
+    # total forest floor depth (inches)
+    ff_depth = (duff_depth + values(LD, 'lit_depth') +
+                values(LD, 'lch_depth') + values(LD, 'moss_depth'))
+
+    # boreal
+    y_b = 1.2383 - (0.0114 * fm_duff) # used to calc squirrel mid. redux
+    ffr_boreal = ff_depth * util.propcons(y_b)
+
+    # southern
+    ffr_southern = (-0.0061 * fm_duff) + (0.6179 * ff_depth)
+    ffr_southern = np.where(
+                np.less_equal(ffr_southern, 0.25), # if ffr south <= .25
+                (0.006181 * math.e**(0.398983 * (ff_depth - # true
+                (0.00987 * (fm_duff-60.0))))),
+                ffr_southern)                               # false
+
+    # western
+    y = -0.8085 - (0.0213 * fm_duff) + (1.0625 * ff_depth)
+    ffr_western = ff_depth * util.propcons(y)
+
+    ffr = ((ecoregion_masks['southern'] * ffr_southern) +
+            (ecoregion_masks['boreal'] * ffr_boreal) +
+            (ecoregion_masks['western'] * ffr_western))
+    return [ffr, y_b, duff_depth]
+
+
+def calc_and_reduce_ff(LD, ff_reduction, key):
+    # if the depth of the layer (LD[key]) is less than the available reduction
+    #  use the depth of the layer. Otherwise, use the available reduction
+    layer_reduction = np.where(LD[key] < ff_reduction, LD[key], ff_reduction)
+    # reduce the available reduction by the calculated amount
+    ff_reduction -= layer_reduction
+    # should never be less than zero
+    assert 0 == len(np.where(ff_reduction < 0)[0]), "Error: Negative ff reduction found in calc_and_reduce_ff()"
+    assert False == np.isnan(ff_reduction).any(), "Error: NaN found in calc_and_reduce_ff()"
+    return layer_reduction
+
+def ccon_forest_floor(LD, ff_reduction, key_depth, key_loading, csd):
+    ''' Same procedure for litter, lichen, moss, upper and lower duff
+    '''
+    # - get per-layer reduction
+    layer_reduction = calc_and_reduce_ff(LD, ff_reduction, key_depth)
+
+    # - how much was it reduced relative to the layer depth
+    proportional_reduction = np.where(LD[key_depth] > 0.0,
+        layer_reduction / LD[key_depth], 0.0)
+
+    total = proportional_reduction * values(LD, key_loading)
+    return util.csdist(total, csd)
+
+# todo: duplicate, pull into common include file    
+FSR_PROP_BAS_ACC = [0.10, 0.40, 0.50]
+FSR_PROP_SQ_MID = [0.10, 0.30, 0.60]
+def ccon_bas(basal_loading, ff_redux_proportion):
+    """ Basal accumulations consumption, activity & natural
+    """
+    basal_consumption = np.array([])
+    basal_consumption = basal_loading * ff_redux_proportion
+    return util.csdist(basal_consumption, FSR_PROP_BAS_ACC)
+
+def ccon_sqm(sqm_loading, ff_redux_proportion):
+    """ Squirrel middens consumption, activity & natural
+    """
+    csd_sqm = [0.10, 0.30, 0.60]
+    sqm_consumption = sqm_loading * ff_redux_proportion
+    return util.csdist(sqm_consumption, FSR_PROP_SQ_MID)
+

@@ -1,1 +1,0 @@
-@%py2_path%\python build_distribution\build.py

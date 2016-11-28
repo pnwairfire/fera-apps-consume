@@ -12,6 +12,7 @@
 import consume
 import os
 import sys
+import traceback
 import batch_locator
 import cmdline
 import pandas as pd
@@ -21,6 +22,8 @@ import numpy as np
 
 DO_PICKLE_OUTPUT = 'pickle'
 DO_RAW_OUTPUT = 'raw'
+
+PRECISION = 2
 
 FEPS_EMISSIONS_INPUT = 'feps_emissions_input.csv'
 
@@ -144,8 +147,6 @@ def write_feps_emissions_input(all_results):
         df[p] /= LBS_PER_TON
     df.to_csv(FEPS_EMISSIONS_INPUT, index=False, float_format='%.3f')
 
-
-
 def write_results(all_results, outfile, do_metric, col_cfg_file=None):
     # calculated results are in a hierarchical dictionary. Flatten the entire structure
     #  so that any chosen datum can be specified
@@ -181,6 +182,9 @@ def write_results(all_results, outfile, do_metric, col_cfg_file=None):
                 if key in tmp.keys():
                     add_these.append((new_key, converter(key, tmp[key])))
             newdf = pd.DataFrame.from_items(add_these)
+
+            newdf = newdf.round(PRECISION)
+
             newdf.to_csv(outfile, index=False)
         else:
             # The command line parser should preclude getting here.
@@ -215,7 +219,10 @@ def main():
         run(parser.burn_type, parser.csv_file, parser.do_metric, parser.msg_level, parser.output_filename,
             parser.fuel_loadings_file, parser.col_cfg_file)
     except Exception as e:
+        tb = sys.exc_info()[2]
+        traceback.print_tb(tb, limit=-5, file=sys.stdout)
         print(e)
+        
 
 if __name__ == '__main__':
     main()

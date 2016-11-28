@@ -10,7 +10,7 @@
 #!/usr/bin/env python
 import csv
 import sys
-from . ulp import WithinThisManyULP, HowManyULP
+from ulp import WithinThisManyULP, HowManyULP
 import decimal as dec
 import re
 import math
@@ -42,7 +42,7 @@ class DataObj(object):
         reader = csv.DictReader(open(self._filename, 'r'), delimiter=',', quotechar='|')
         self._cols = reader.fieldnames
         for row in reader:
-            self._map[row['fuelbed']] = row
+            self._map[row['fuelbeds']] = row
 
     def GetTolerance(self, number):
         if number < 0.01:
@@ -117,15 +117,21 @@ class DataObj(object):
         if self._console_output:
             print("\n{} comparisons {} failures".format(comparisons, failures))
             print("Left value = {}   Right values = {}".format(self._filename, other._filename))
+            
+        if len(commonKeys) != len(self._map.keys()):
+            failures = 1
+            
         return failures, comparisons
 
 def main():
+    retval = 1
     if len(sys.argv) > 2:
         one = DataObj(sys.argv[1])
         two = DataObj(sys.argv[2])
-        one.Compare(two)
+        retval, _ = one.Compare(two)
     else:
         print("\nError: Please specify the two files to compare.\n")
+    exit(retval)
 
 if __name__ == '__main__':
     main()
