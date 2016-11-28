@@ -131,8 +131,8 @@ def sort_fuelbeds(df):
         return flattened
 
     result = {}
-    df[['Fuelbeds']] = df[['Fuelbeds']].astype(str)
-    for item in df.Fuelbeds:
+    df[['fuelbeds']] = df[['fuelbeds']].astype(str)
+    for item in df.fuelbeds:
         chunked = sort_chunkify(str(item))
         if chunked[0] in result.keys():
             result[chunked[0]].append(chunked)
@@ -140,7 +140,7 @@ def sort_fuelbeds(df):
             result[chunked[0]] = [chunked]
     sorted_list = sort_sort_and_flatten(result)
     ranking_column = dict([(v[2], i) for i, v in enumerate(sorted_list)])
-    df['Fb_Rank'] = df.Fuelbeds.map(ranking_column)
+    df['Fb_Rank'] = df.fuelbeds.map(ranking_column)
     df.sort(['Fb_Rank'], inplace = True)
     return df.drop('Fb_Rank', 1)
 
@@ -162,12 +162,12 @@ def get_combined_results(all_results):
 
 def write_results_feps(results, directory):
     df = pd.DataFrame({
-        'Fuelbeds': results.get('Fuelbeds'),
-        'cons_flm': results.get('C_total_F'),
-        'cons_sts': results.get('C_total_S'),
-        'cons_lts': results.get('C_total_R'),
-        'cons_duff_upper': results.get('C_upperduff'),
-        'cons_duff_lower': results.get('C_lowerduff')
+        'fuelbeds': results.get('fuelbeds'),
+        'cons_flm': results.get('c_total_f'),
+        'cons_sts': results.get('c_total_s'),
+        'cons_lts': results.get('c_total_r'),
+        'cons_duff_upper': results.get('c_upperduff'),
+        'cons_duff_lower': results.get('c_lowerduff')
     })
     try:
         feps_file = os.path.join(directory, FEPS_FILE)
