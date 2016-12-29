@@ -37,7 +37,7 @@ def exception_wrapper(func, *args):
 #-------------------------------------------------------------------------------
 errors = 0
 for ifile in INPUT_FILES:
-    cmd = 'python {} {} {}'.format(CONSUME_DRIVER, TYPE_NATURAL, ifile)
+    cmd = 'python3 {} {} {}'.format(CONSUME_DRIVER, TYPE_NATURAL, ifile)
     errors += os.system(cmd)
 if errors:
     print('\nFailed !!!\n')
