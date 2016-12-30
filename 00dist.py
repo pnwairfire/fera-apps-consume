@@ -14,12 +14,10 @@ import zipfile
 import os
 import shutil
 import glob
-import subprocess
 from glob import iglob # lower memory footprint than glob
 
 DIST_DIR = 'dist'
 DISTRIBUTION_BUILDER = '00dist.py'
-BUILD_HELPER = 'get_tip.py'
 
 def make_dist_dir():
     if os.path.exists(DIST_DIR):
@@ -33,26 +31,16 @@ def copy_files():
     for f in glob.glob('output*.csv'):
         shutil.copyfile(f, '{}/{}'.format(DIST_DIR, f))
     shutil.copytree('consume', '{}/consume'.format(DIST_DIR))
-    
-def get_tip():
-    #proc = subprocess.Popen(['hg', 'tip', '--template', '{rev}'],stdout=subprocess.PIPE)
-    #tip = proc.stdout.readline().strip()
-    tip = 000
-    with open('build_num.properties', 'r') as infile:
-        line = infile.readline()
-        tip = line.split('=')[1].strip()
-    return tip
 
 def make_archive():
     print("In {} ...".format('make_archive'))
-    ARCHIVE = "Consume-4.3.{}.zip".format(get_tip())
+    ARCHIVE = "consume.zip".format(get_tip())
 
     def clean_files():
         try:
             cmd = "find . -name '*.pyc' -delete"
             os.system(cmd)
             os.unlink(DISTRIBUTION_BUILDER)
-            os.unlink(BUILD_HELPER)
         except:
             pass
 
