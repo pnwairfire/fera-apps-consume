@@ -34,8 +34,8 @@ def copy_files():
 
 def make_archive():
     print("In {} ...".format('make_archive'))
-    ARCHIVE = "consume.zip".format(get_tip())
-
+    ARCHIVE = "consume.zip"
+    
     def clean_files():
         try:
             cmd = "find . -name '*.pyc' -delete"
