@@ -38,6 +38,10 @@ def exception_wrapper(func, *args):
 errors = 0
 for ifile in INPUT_FILES:
     cmd = 'python3 {} {} {}'.format(CONSUME_DRIVER, TYPE_NATURAL, ifile)
+    print(cmd, '\n')
+    errors += os.system(cmd)
+    cmd = 'diff {} {}'.format('./consume_results.csv', './test/expected/regression_expected_{}.csv'.format(ifile.split('_')[-1].split('.')[0]))
+    print(cmd, '\n')
     errors += os.system(cmd)
 if errors:
     print('\nFailed !!!\n')

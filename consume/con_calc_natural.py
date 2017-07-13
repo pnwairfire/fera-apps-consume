@@ -30,7 +30,8 @@ def multi_layer_calc(loadings, ecoregion_masks, primary, secondary, calculator):
     # determine primary and secondary percentages
     total_load = values(loadings, primary) + values(loadings, secondary)
     #print('total_load has nan - {}'.format(np.isnan(total_load).any()))
-    primary_pct = np.where(total_load > 0, values(loadings, primary) / total_load, 0)
+    with np.errstate(invalid='ignore', divide='ignore'):
+        primary_pct = np.where(total_load > 0, values(loadings, primary) / total_load, 0)
     secondary_pct = 1.0 - primary_pct
     assert(not np.isnan(secondary_pct).all())
 
@@ -74,7 +75,8 @@ def shrub_calc(shrub_black_pct, loadings, ecoregion_masks, season=SEASON_ALL_OTH
                 self._season = season
 
             def southern_cons(self, load):
-                tmp = np.e ** (-0.1889 + (0.9049 * np.log(to_mgha(load)) + 0.0676 * self._season))
+                with np.errstate(invalid='ignore', divide='ignore'):
+                    tmp = np.where(load > 0, np.e ** (-0.1889 + (0.9049 * np.log(to_mgha(load)) + 0.0676 * self._season)), 0)
                 return to_tons(tmp)
 
             def western_cons(self, load):
@@ -122,7 +124,8 @@ def litter_calc(loadings, fm_duff, fm_1000, ecoregion_masks):
             0)
                 
     cons = bracket(load, cons)
-    proportion_consumed = np.where(load, cons / load, 0)
+    with np.errstate(invalid='ignore', divide='ignore'):
+        proportion_consumed = np.where(load > 0, cons / load, 0)
     
     return util.csdist(cons, FSR_PROP_LITTER), proportion_consumed
     
@@ -164,7 +167,8 @@ def duff_calc(loadings, fm_duff, fm_litter, ecoregion_masks):
             western_cons_duff(duff_load_total, fm_duff)), 0)
     
     cons = bracket(duff_load_total, cons)
-    proportion_consumed = np.where(duff_load_total, cons / duff_load_total, 0)
+    with np.errstate(invalid='ignore', divide='ignore'):
+        proportion_consumed = np.where(duff_load_total > 0, cons / duff_load_total, 0)
     
     cons_duff_upper = np.where(cons > values(loadings, 'duff_upper_loading'),
         values(loadings, 'duff_upper_loading'), cons)
