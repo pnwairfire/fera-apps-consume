@@ -98,6 +98,24 @@ Python 3.4.3 :: Continuum Analytics, Inc.
 ```
 
 ### Problems/Quirks
+Consume runs under both Python 2 and 3, and we package a version of portable Python within FFT. At some point, there will be changes to Python that break the portable Python. At some point, it might be advisable to pull python from FFT and require Windows uses to install Python locally.
+
+Known dependencies on Consume:
+
+* Bluesky uses the Consume_loadings.csv file (FCCS output)
+
+* Consume module has been implemented in:
+
+    - BlueSky
+
+    - FFT
+
+    - WFEIS (not maintained - Michigan Tech)
+
+    - WA DNR Smoke Management System
+
+    - ODF ACost System 
+
 
 ### Links
 name (link)
