@@ -57,7 +57,7 @@ Examples:
 Consume is written in Python so there is no build. Consume runs under both Python 2 an 3
 
 ### Tests
-Consume has regression tests and unit tests. Run them like so:
+Consume has regression tests and unit tests (depends on the green library). Run them like so:
 
 ```
 $ ./run_regression_tests.sh 
