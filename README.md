@@ -61,39 +61,20 @@ Consume has regression tests. Run them like so (note that Consume runs under bot
 
 ```
 $ ./run_regression_tests.sh 
-Python 2.7.10 :: Continuum Analytics, Inc.
-
-0 = failed, 15300 compared:	/home/kjells/fera/Consume4/test/results/western_out.csv
-0 = failed, 15300 compared:	/home/kjells/fera/Consume4/test/results/southern_out.csv
-0 = failed, 15300 compared:	/home/kjells/fera/Consume4/test/results/boreal_out.csv
-0 = failed, 15300 compared:	/home/kjells/fera/Consume4/test/results/activity_out.csv
-0 = failed, 15300 compared:	/home/kjells/fera/Consume4/test/results/2_out.csv
-0 = failed, 15300 compared:	/home/kjells/fera/Consume4/test/results/3_out.csv
-0 = failed, 15300 compared:	/home/kjells/fera/Consume4/test/results/4_out.csv
-0 = failed, 15300 compared:	/home/kjells/fera/Consume4/test/results/5_out.csv
-0 = failed, 7992 compared:	activity_emissions_kgha.csv
-0 = failed, 8029 compared:	western_emissions.csv
-0 = failed, 8029 compared:	activity_emissions.csv
-0 = failed, 7992 compared:	activity_emissions_kgha_alpha.csv
-0 = failed, 7918 compared:	activity_emissions_kgha_random.csv
+python3 consume_batch.py natural ./test/regression_input_southern.csv 
 
 
-$ ./rr.sh 
-Python 3.4.3 :: Continuum Analytics, Inc.
+Success!!! Results are in "/home/kjells/fera/consume/consume_results.csv"
+diff ./consume_results.csv ./test/expected/regression_expected_southern.csv 
 
-0 = failed, 15300 compared:	/home/kjells/fera/Consume4/test/results/western_out.csv
-0 = failed, 15300 compared:	/home/kjells/fera/Consume4/test/results/southern_out.csv
-0 = failed, 15300 compared:	/home/kjells/fera/Consume4/test/results/boreal_out.csv
-0 = failed, 15300 compared:	/home/kjells/fera/Consume4/test/results/activity_out.csv
-0 = failed, 15300 compared:	/home/kjells/fera/Consume4/test/results/2_out.csv
-0 = failed, 15300 compared:	/home/kjells/fera/Consume4/test/results/3_out.csv
-0 = failed, 15300 compared:	/home/kjells/fera/Consume4/test/results/4_out.csv
-0 = failed, 15300 compared:	/home/kjells/fera/Consume4/test/results/5_out.csv
-0 = failed, 7992 compared:	activity_emissions_kgha.csv
-0 = failed, 8029 compared:	western_emissions.csv
-0 = failed, 8029 compared:	activity_emissions.csv
-0 = failed, 7992 compared:	activity_emissions_kgha_alpha.csv
-0 = failed, 7918 compared:	activity_emissions_kgha_random.csv
+python3 consume_batch.py natural ./test/regression_input_western.csv 
+
+
+Success!!! Results are in "/home/kjells/fera/consume/consume_results.csv"
+diff ./consume_results.csv ./test/expected/regression_expected_western.csv 
+
+
+Success !!!
 
 ```
 
