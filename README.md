@@ -57,7 +57,7 @@ Examples:
 Consume is written in Python so there is no build. Consume runs under both Python 2 an 3
 
 ### Tests
-Consume has regression tests. Run them like so (note that Consume runs under both Python 2 and 3):
+Consume has regression tests and unit tests. Run them like so:
 
 ```
 $ ./run_regression_tests.sh 
@@ -77,6 +77,17 @@ diff ./consume_results.csv ./test/expected/regression_expected_western.csv
 Success !!!
 
 ```
+
+```
+$ ./run_unit_tests.sh 
+......................................
+
+Ran 38 tests in 0.111s
+
+OK (passes=38)
+
+```
+
 
 ### Problems/Quirks
 Consume runs under both Python 2 and 3, and we package a version of portable Python within FFT. At some point, there will be changes to Python that break the portable Python. At some point, it might be advisable to pull python from FFT and require Windows uses to install Python locally.
