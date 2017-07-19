@@ -90,7 +90,7 @@ OK (passes=38)
 
 
 ### Problems/Quirks
-Consume runs under both Python 2 and 3, and we package a version of portable Python within FFT. At some point, there will be changes to Python that break the portable Python. At some point, it might be advisable to pull python from FFT and require Windows uses to install Python locally.
+Consume runs under both Python 2 and 3, and we package a version of portable Python within FFT. At some point, there will be changes to Python that break the portable Python. At some point, it might be advisable to pull python from FFT and require Windows users to install Python locally.
 
 Known dependencies on Consume:
 
