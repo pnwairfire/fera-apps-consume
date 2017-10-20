@@ -9,7 +9,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='apps-consume4',
-    version='4.1.3',
+    version='5.0.0',
     author='Fire and Environmental Research Applications Team (FERA)',
     #author_email='',
     packages=[
