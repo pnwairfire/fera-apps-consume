@@ -193,7 +193,7 @@ def write_results(all_results, outfile, do_metric, col_cfg_file=None):
                 new_key = col[1]
                 if key in tmp.keys():
                     add_these.append((new_key, converter(key, tmp[key])))
-            newdf = pd.DataFrame.from_items(add_these)
+            newdf = pd.DataFrame.from_dict(dict(add_these))
 
             newdf = round_to(newdf)
 
