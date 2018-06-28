@@ -7,7 +7,8 @@
 #
 #              MAJOR_VERSION = 4
 #              MINOR_VERSION = 2
-#              BUILD_REVISION = ###
+#
+#              BUILD_NUMBER = ###
 #
 # Author:      kjells
 #
