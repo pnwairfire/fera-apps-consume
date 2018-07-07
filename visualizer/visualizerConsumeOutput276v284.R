@@ -4,7 +4,7 @@
 # The output files that are compared are created using commands like: 
 # python3 consume_batch.py -f ../landfiredisturbance/run_landfire/deliverables284/consume_loadings.csv 
 # -o consumeOutputFromDeliverables284.csv natural 
-# ../landfiredisturbance/run_landfire/deliverables284/deliverableInputFileWestern.csv
+# ./visualizer/deliverableInputFileWestern.csv
 #
 # (note: the input file deliverableInputFileWestern.csv is a custom input file made to match the number
 #  of rows in the deliverables284/consume_loadings.csv)
