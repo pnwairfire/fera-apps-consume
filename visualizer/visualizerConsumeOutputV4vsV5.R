@@ -5,27 +5,46 @@
 #
 # The input files were created in Landfire (using FCCS build 284)
 # 
+
+############## steps to create v4 output files using Western and Southern input files #######################
 # change directory to Consume v4  (paths below are from Brian Drye's dev machine)
 #
 # python3 consume_batch.py -f ~/repos/uw/landfiredisturbance/run_landfire/deliverables284/consume_loadings.csv 
-# -o consumeV4OutputFromDeliverables284.csv natural ~/repos/uw/apps-consume/visualizer/deliverableInputFileWestern.csv
-
+# -o consumeV4OutputFromDeliverables284Western.csv natural ~/repos/uw/apps-consume/visualizer/deliverableInputFileWesternForV4.csv
+#
 # python3 consume_batch.py -f ~/repos/uw/landfiredisturbance/run_landfire/baseline284/consume_loadings.csv 
-# -o consumeV4OutputFromBaseline284.csv natural ~/repos/uw/apps-consume/test/regression_input_western.csv
-
+# -o consumeV4OutputFromBaseline284Western.csv natural ~/repos/uw/apps-consume/test/regression_input_westernForV4.csv
+#
+# python3 consume_batch.py -f ~/repos/uw/landfiredisturbance/run_landfire/deliverables284/consume_loadings.csv 
+# -o consumeV4OutputFromDeliverables284Southern.csv natural ~/repos/uw/apps-consume/visualizer/deliverableInputFileSouthernForV4.csv
+#
+# python3 consume_batch.py -f ~/repos/uw/landfiredisturbance/run_landfire/baseline284/consume_loadings.csv 
+# -o consumeV4OutputFromBaseline284Southern.csv natural ~/repos/uw/apps-consume/test/regression_input_southernForV4.csv
+#
+#
+############## steps to create v5 output files using Western and Southern input files #######################
 #
 # change directory to Consume v5  
 #
 # python3 consume_batch.py -f ../landfiredisturbance/run_landfire/deliverables284/consume_loadings.csv 
-# -o consumeV5OutputFromDeliverables284.csv natural 
+# -o consumeV5OutputFromDeliverables284Western.csv natural 
 # ./visualizer/deliverableInputFileWestern.csv
 #
 # python3 consume_batch.py -f ../landfiredisturbance/run_landfire/baseline284/consume_loadings.csv 
-# -o consumeV5OutputFromBaseline284.csv natural ./test/regression_input_western.csv
-
-
+# -o consumeV5OutputFromBaseline284Western.csv natural ./test/regression_input_western.csv
+#
+# python3 consume_batch.py -f ../landfiredisturbance/run_landfire/deliverables284/consume_loadings.csv 
+# -o consumeV5OutputFromDeliverables284Southern.csv natural 
+# ./visualizer/deliverableInputFileSouthern.csv
+#
+# python3 consume_batch.py -f ../landfiredisturbance/run_landfire/baseline284/consume_loadings.csv 
+# -o consumeV5OutputFromBaseline284Southern.csv natural ./test/regression_input_southern.csv
+#
+###############################################################################################################
+#
 # (note: the input file deliverableInputFileWestern.csv is a custom input file made to match the number
-#  of rows in the deliverables284/consume_loadings.csv)
+#  of rows in the deliverables284/consume_loadings.csv. Likewise, deliverablesInputFileWesternForV4.csv is 
+# a copy of deliverableInputFileWestern.csv but has the last two columns removed.)
 #
 #
 # Copy the following files to the same directory as this script:
@@ -45,18 +64,41 @@ library(ggplot2)
 library(manipulate)
 library(gridExtra)
 
-v5BaselineData = read.csv("consumeV5OutputFromBaseline284.csv", header=T)
-dim(v5BaselineData)
+# Western
+# v5BaselineData = read.csv("consumeV5OutputFromBaseline284Western.csv", header=T)
+# v5DeliverableData = read.csv("consumeV5OutputFromDeliverables284Western.csv", header=T)
+# v4BaselineData = read.csv("consumeV4OutputFromBaseline284Western.csv", header=T)
+# v4DeliverableData = read.csv("consumeV4OutputFromDeliverables284Western.csv", header=T)
 
-v5DeliverableData = read.csv("consumeV5OutputFromDeliverables284.csv", header=T)
+# Southern
+v5BaselineData = read.csv("consumeV5OutputFromBaseline284Southern.csv", header=T)
+v5DeliverableData = read.csv("consumeV5OutputFromDeliverables284Southern.csv", header=T)
+v4BaselineData = read.csv("consumeV4OutputFromBaseline284Southern.csv", header=T)
+v4DeliverableData = read.csv("consumeV4OutputFromDeliverables284Southern.csv", header=T)
+
+v5columnsToDrop <- c("c_piles")
+v5BaselineData <- v5BaselineData[ , -which(names(v5BaselineData) %in% v5columnsToDrop)]
+
 dim(v5DeliverableData)
+v5DeliverableData <- v5DeliverableData[ , -which(names(v5DeliverableData) %in% v5columnsToDrop)]
 
-v4BaselineData = read.csv("consumeV4OutputFromBaseline284.csv", header=T)
+v4columnsToDrop <- c("C_shrub_1dead", "C_shrub_2dead", "C_herb_1dead", "C_herb_2dead")
 dim(v4BaselineData)
+v4BaselineData <- v4BaselineData[ , -which(names(v4BaselineData) %in% v4columnsToDrop)]
 
-v4DeliverableData = read.csv("consumeV4OutputFromDeliverables284.csv", header=T)
+colnames(v4BaselineData) <- colnames(v5BaselineData)
+
 dim(v4DeliverableData)
+v4DeliverableData <- v4DeliverableData[ , -which(names(v4DeliverableData) %in% v4columnsToDrop)]
 
+colnames(v4DeliverableData) <- colnames((v5DeliverableData))
+
+
+ncol(v4BaselineData)
+ncol(v4DeliverableData)
+ncol(v5BaselineData)
+ncol(v5DeliverableData)
+warnings()
 
 myPlot <- function(fb_number, disturbance, columnName){
   
