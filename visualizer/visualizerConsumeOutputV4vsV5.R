@@ -65,16 +65,16 @@ library(manipulate)
 library(gridExtra)
 
 # Western
-# v5BaselineData = read.csv("consumeV5OutputFromBaseline284Western.csv", header=T)
-# v5DeliverableData = read.csv("consumeV5OutputFromDeliverables284Western.csv", header=T)
-# v4BaselineData = read.csv("consumeV4OutputFromBaseline284Western.csv", header=T)
-# v4DeliverableData = read.csv("consumeV4OutputFromDeliverables284Western.csv", header=T)
+ v5BaselineData = read.csv("consumeV5OutputFromBaseline284Western.csv", header=T)
+ v5DeliverableData = read.csv("consumeV5OutputFromDeliverables284Western.csv", header=T)
+ v4BaselineData = read.csv("consumeV4OutputFromBaseline284Western.csv", header=T)
+ v4DeliverableData = read.csv("consumeV4OutputFromDeliverables284Western.csv", header=T)
 
 # Southern
-v5BaselineData = read.csv("consumeV5OutputFromBaseline284Southern.csv", header=T)
-v5DeliverableData = read.csv("consumeV5OutputFromDeliverables284Southern.csv", header=T)
-v4BaselineData = read.csv("consumeV4OutputFromBaseline284Southern.csv", header=T)
-v4DeliverableData = read.csv("consumeV4OutputFromDeliverables284Southern.csv", header=T)
+#v5BaselineData = read.csv("consumeV5OutputFromBaseline284Southern.csv", header=T)
+#v5DeliverableData = read.csv("consumeV5OutputFromDeliverables284Southern.csv", header=T)
+#v4BaselineData = read.csv("consumeV4OutputFromBaseline284Southern.csv", header=T)
+#v4DeliverableData = read.csv("consumeV4OutputFromDeliverables284Southern.csv", header=T)
 
 v5columnsToDrop <- c("c_piles")
 v5BaselineData <- v5BaselineData[ , -which(names(v5BaselineData) %in% v5columnsToDrop)]
@@ -93,6 +93,10 @@ v4DeliverableData <- v4DeliverableData[ , -which(names(v4DeliverableData) %in% v
 
 colnames(v4DeliverableData) <- colnames((v5DeliverableData))
 
+v5BaselineData[is.na(v5BaselineData)] <- 0
+v4DeliverableData[is.na(v4DeliverableData)] <- 0
+v4BaselineData[is.na(v4BaselineData)] <- 0
+v5DeliverableData[is.na(v5DeliverableData)] <- 0
 
 ncol(v4BaselineData)
 ncol(v4DeliverableData)
@@ -142,7 +146,7 @@ myPlot <- function(fb_number, disturbance, columnName){
   graphV4 <- graphV4 + ggtitle(paste(v4CombinedData$filename[1], "Consume V4", sep=" ")) + xlim(0,3)
   graphV4 <- graphV4 + scale_color_manual(values = c("green4", "orange", "red"))
   
-  graphV5 <- ggplot(data = v5CombinedData, aes_string(x="TimeStep", y=columnName)) + geom_line(aes(colour=Prefix))
+  graphV5 <- ggplot(data = v5CombinedData, aes_string(x="TimeStep", y=columnName)) + geom_line(aes(colour=Prefix), alpha=0.7)
   graphV5 <- graphV5 + guides(colour=guide_legend(title="Disturbance"))
   graphV5 <- graphV5 + ggtitle(paste(v5CombinedData$filename[1], "Consume V5", sep=" ")) + xlim(0,3)
   graphV5 <- graphV5 + scale_color_manual(values = c("green4", "orange", "red"))
