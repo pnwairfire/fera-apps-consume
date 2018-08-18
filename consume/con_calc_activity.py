@@ -108,7 +108,7 @@ def calc_mb(x, fm_type, mask_spring, mask_summer, mask_trans, spring_ff):
     # retrieved from source code
     return ((mask_spring * sprg) +
      (mask_summer * sumr) +
-     (mask_trans * ((spring_ff + sprg) * (sumr - sprg))))
+     (mask_trans * (sprg + spring_ff * (sumr - sprg))))
 
 
 def calc_intensity_reduction_factor(area, lengthOfIgnition, fm_10hr, fm_1000hr):
