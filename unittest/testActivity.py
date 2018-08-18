@@ -1,12 +1,8 @@
 #-------------------------------------------------------------------------------
-# Purpose:     Test new Consume consumption equations.
-#               The general pattern is:
-#                   - Run the new consumption function. Written 'test_<catagory>'
-#                       Compare results to numbers from a spreadsheet Susan
-#                       developed. Use loading totals 0.5, 1.5, and 3.0
+# Purpose:     Test Step Function calc_mb
 #
-# Author:      kjells
-# Created:     1/6/2016
+# Author:      Brian Drye
+# Created:     8/18/2018
 #-------------------------------------------------------------------------------
 import unittest
 import consume
