@@ -8,7 +8,7 @@ with open('requirements.txt') as f:
     REQUIREMENTS = f.read().splitlines()
 
 setup(
-    name='apps-consume4',
+    name='apps-consume',
     version='5.0.0',
     author='Fire and Environmental Research Applications Team (FERA)',
     #author_email='',
