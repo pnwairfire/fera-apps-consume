@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 from consume import version
 
 # Note: using pip.req.parse_requirements like so:
