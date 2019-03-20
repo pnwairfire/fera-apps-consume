@@ -1,4 +1,5 @@
 from distutils.core import setup
+from consume import version
 
 # Note: using pip.req.parse_requirements like so:
 #  > REQUIREMENTS = [str(ir.req) for ir in parse_requirements('requirements.txt')]
@@ -9,7 +10,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='apps-consume',
-    version='5.0.1',
+    version='{}.{}'.format(version.MAJOR_VERSION, version.MINOR_VERSION),
     author='Fire and Environmental Research Applications Team (FERA)',
     #author_email='',
     packages=[

@@ -5,8 +5,8 @@
 #              The CI server appends a line to this file so that a deployed
 #               version looks like:
 #
-#              MAJOR_VERSION = 4
-#              MINOR_VERSION = 2
+#              MAJOR_VERSION = 5
+#              MINOR_VERSION = 0
 #
 #              BUILD_REVISION = ###
 #
@@ -14,6 +14,6 @@
 #
 # Created:     7/30/2015
 #-------------------------------------------------------------------------------
-MAJOR_VERSION = 4
-MINOR_VERSION = 3
+MAJOR_VERSION = 5
+MINOR_VERSION = 0
 
