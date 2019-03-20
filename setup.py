@@ -10,7 +10,8 @@ with open('requirements.txt') as f:
 
 setup(
     name='apps-consume',
-    version='{}.{}.0'.format(version.MAJOR_VERSION, version.MINOR_VERSION),
+    version='{}.{}.{}'.format(version.MAJOR_VERSION, version.MINOR_VERSION,
+        version.PYPI_BUILD_REVISION),
     author='Fire and Environmental Research Applications Team (FERA)',
     #author_email='',
     packages=[
