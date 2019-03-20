@@ -10,7 +10,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='apps-consume',
-    version='{}.{}'.format(version.MAJOR_VERSION, version.MINOR_VERSION),
+    version='{}.{}.0'.format(version.MAJOR_VERSION, version.MINOR_VERSION),
     author='Fire and Environmental Research Applications Team (FERA)',
     #author_email='',
     packages=[
