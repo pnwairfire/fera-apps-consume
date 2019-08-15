@@ -19,6 +19,7 @@ import pandas as pd
 import pickle
 import unit_convert
 import numpy as np
+import time
 
 DO_PICKLE_OUTPUT = 'pickle'
 DO_RAW_OUTPUT = 'raw'
@@ -94,8 +95,15 @@ def validate_fuel_loadings(alt_loadings_file):
     if valid:
         return True
     else:
-        print("\n!!! Error !!!\n\t\'{}\' is not a valid fuel loadings file.\n".format(alt_loadings_file))
-        sys.exit(1)
+        time.sleep(1)    #wait a second, and try again
+        with open(alt_loadings_file, 'r') as infile:
+            header = infile.readline()
+            valid = True if header.startswith('GeneratorName') else False
+        if valid:
+            return True
+        else:
+            print("\n!!! Error !!!\n\t\'{}\' is not a valid fuel loadings file.\n".format(alt_loadings_file))
+            sys.exit(1)
 
 def read_col_cfg_file(filename):
     retval = []
