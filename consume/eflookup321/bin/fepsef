@@ -1,0 +1,65 @@
+#!/usr/bin/env python
+
+"""fepsef: returns FEPS style emissions factors
+"""
+
+__author__      = "Joel Dubowy"
+
+import json
+import logging
+import sys
+
+from afscripting import (
+    args as scripting_args,
+    utils as scripting_utils
+)
+
+from eflookup.fepsef import FepsEFLookup
+
+OPTIONAL_OPTIONS = [
+    {
+        'short': '-p',
+        'long': '--phase',
+        'help': "combustion phase ('flaming','smoldering','residual')"
+    },
+    {
+        'short': '-s',
+        'long': '--species',
+        'help': "emissions species (e.g. 'CO2', 'PM2.5')"
+    },
+    {
+        'short': '-i',
+        'long': '--include-haps-polutants',
+        'help': "include HAPS polutants (ex. 1,3-Dichloropropene, 1,4-Butanediol, etc.)",
+        'action': 'store_true',
+        'default': False
+    }
+]
+EXAMPLES_STRING = """
+Example calls:
+ $ {script_name}
+ $ {script_name} -p residual
+ $ {script_name} -p flaming -s CO2
+ """.format(script_name=sys.argv[0])
+
+def main():
+    parser, args = scripting_args.parse_args([], OPTIONAL_OPTIONS,
+        epilog=EXAMPLES_STRING)
+
+    try:
+        look_up = FepsEFLookup(include_haps=args.include_haps_polutants)
+        r = look_up.get(phase=args.phase, species=args.species)
+        if args.phase is not None:
+            if args.species is not None:
+                r = {args.species: r}
+            r = {args.phase: r}
+        sys.stdout.write(json.dumps(r))
+
+    except Exception as e:
+        if logging.getLogger().getEffectiveLevel() <= logging.DEBUG:
+            scripting_utils.exit_with_msg(traceback.format_exc(), prefix="")
+        else:
+            scripting_utils.exit_with_msg(str(e))
+
+if __name__ == "__main__":
+    main()
