@@ -210,7 +210,7 @@ def write_results(all_results, outfile, do_metric, col_cfg_file=None):
             # The command line parser should preclude getting here.
             print("\nError: bad or missing column configuration file!\n")
 
-def run(burn_type, csv_input, do_metric, msg_level, outfile, fuel_loadings=None, col_cfg=None):
+def run(burn_type, csv_input, do_metric, msg_level, outfile, fuel_loadings=None, col_cfg=None, no_sera=False):
     # validate alternate loadings file if provide. Throws exception on invalid
     if fuel_loadings: validate_fuel_loadings(fuel_loadings)
 
@@ -223,7 +223,13 @@ def run(burn_type, csv_input, do_metric, msg_level, outfile, fuel_loadings=None,
     consumer.burn_type = burn_type
     if consumer.load_scenario(csv_input, display=False):
         emissions = consume.Emissions(consumer)
+        if no_sera:
+            emissions.no_sera = True
+        else:
+            emissions.no_sera = False
+
         results = emissions.results()
+
         write_results(results, outfile, do_metric, col_cfg_file=col_cfg)
         if not pickle_output(col_cfg):
             print("\nSuccess!!! Results are in \"{}\"".format(outfile))
@@ -236,8 +242,11 @@ def main():
         can_run()
         parser = cmdline.ConsumeParser([DO_PICKLE_OUTPUT, DO_RAW_OUTPUT])
         parser.do_parse(sys.argv)
+        if parser.no_sera == True:
+            print("no_sera is True... run without SERA emissions values")
+        
         run(parser.burn_type, parser.csv_file, parser.do_metric, parser.msg_level, parser.output_filename,
-            parser.fuel_loadings_file, parser.col_cfg_file)
+            parser.fuel_loadings_file, parser.col_cfg_file, parser.no_sera)
     except Exception as e:
         tb = sys.exc_info()[2]
         traceback.print_tb(tb, limit=-5, file=sys.stdout)

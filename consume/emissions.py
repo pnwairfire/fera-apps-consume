@@ -320,6 +320,9 @@ from . emissions_db import EmissionsFactorDB as edb
 from . import data_desc as dd
 from . import util_consume as util
 
+# use eflookup version 3.2.1 when doing SERA EF lookups
+from  .eflookup321.eflookup.fccs2ef import Fccs2SeraEf
+
 #class Emissions(object):
 class Emissions(util.FrozenClass):
     """A class that estimates emissions from fire.
@@ -328,6 +331,12 @@ class Emissions(util.FrozenClass):
     due to fire based on fuel consumption data.
 
     """
+    @property
+    def no_sera(self): return self._no_sera
+    @no_sera.setter
+    def no_sera(self, value):
+        self._no_sera = value
+
     @property
     def output_units(self): return self._output_units
     @output_units.setter
@@ -369,6 +378,7 @@ class Emissions(util.FrozenClass):
             ### - output variables
             self._emis_data = None
             self._emis_summ = None
+            self._no_sera = False
             self._freeze()
 
     def results(self):
@@ -381,6 +391,7 @@ class Emissions(util.FrozenClass):
         the dictionary and examples on how to extract information from the
         dictionary.
         """
+                
         self._calculate()
         self._convert_units()
 
@@ -596,7 +607,14 @@ class Emissions(util.FrozenClass):
         pile_co2 = calc_pollutant(pile_loadings, util.pile_pollutant_emission_factors['CO2'], pile_black_pct)
         pile_ch4= calc_pollutant(pile_loadings, util.pile_pollutant_emission_factors['CH4'], pile_black_pct)
         pile_nmhc = calc_pollutant(pile_loadings, util.pile_pollutant_emission_factors['NMHC'], pile_black_pct)
-        return (pile_co, pile_co2, pile_ch4, pile_nmhc)
+        pile_nmoc = calc_pollutant(pile_loadings, util.pile_pollutant_emission_factors['NMOC'], pile_black_pct)
+        pile_nh3 = calc_pollutant(pile_loadings, util.pile_pollutant_emission_factors['NH3'], pile_black_pct)
+        pile_no = calc_pollutant(pile_loadings, util.pile_pollutant_emission_factors['NO'], pile_black_pct)
+        pile_no2 = calc_pollutant(pile_loadings, util.pile_pollutant_emission_factors['NO2'], pile_black_pct)
+        pile_nox = calc_pollutant(pile_loadings, util.pile_pollutant_emission_factors['NOx'], pile_black_pct)
+        pile_so2 = calc_pollutant(pile_loadings, util.pile_pollutant_emission_factors['SO2'], pile_black_pct)
+
+        return (pile_co, pile_co2, pile_ch4, pile_nmhc, pile_nmoc, pile_nh3, pile_no, pile_no2, pile_nox, pile_so2)
 
     def _emissions_calc(self, efg):
         """Calculates emissions estimates.
@@ -648,45 +666,175 @@ class Emissions(util.FrozenClass):
         # Load default emissions factors (average of all factors...)
         t = self._emission_factor_db.data[0]
         num_fuelbeds = int(self._have_cons_data)# <<< ucons
+        
+        if self._no_sera:
+            ef_flamg_pm = np.array([t['PM_flaming']] * num_fuelbeds, dtype = float)
+            ef_flamg_pm10 = np.array([t['PM10b_flaming']] * num_fuelbeds, dtype = float)
+            ef_flamg_pm25 = np.array([t['PM25_flaming']] * num_fuelbeds, dtype = float)
+            ef_flamg_co = np.array([t['CO_flaming']] * num_fuelbeds, dtype = float)
+            ef_flamg_co2 = np.array([t['CO2_flaming']] * num_fuelbeds, dtype = float)
+            ef_flamg_ch4 = np.array([t['CH4_flaming']] * num_fuelbeds, dtype = float)
+            ef_flamg_nmhc = np.array([t['NMHC_flaming']] * num_fuelbeds, dtype = float)
+            # these are in SERA lookup, but not Consume
+            ef_flamg_nmoc = np.array([0] * num_fuelbeds, dtype = float)
+            ef_flamg_nh3 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_flamg_no = np.array([0] * num_fuelbeds, dtype = float)
+            ef_flamg_no2 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_flamg_nox = np.array([0] * num_fuelbeds, dtype = float)
+            ef_flamg_so2 = np.array([0] * num_fuelbeds, dtype = float)
 
-        ef_flamg_pm = np.array([t['PM_flaming']] * num_fuelbeds, dtype = float)
-        ef_flamg_pm10 = np.array([t['PM10b_flaming']] * num_fuelbeds, dtype = float)
-        ef_flamg_pm25 = np.array([t['PM25_flaming']] * num_fuelbeds, dtype = float)
-        ef_flamg_co = np.array([t['CO_flaming']] * num_fuelbeds, dtype = float)
-        ef_flamg_co2 = np.array([t['CO2_flaming']] * num_fuelbeds, dtype = float)
-        ef_flamg_ch4 = np.array([t['CH4_flaming']] * num_fuelbeds, dtype = float)
-        ef_flamg_nmhc = np.array([t['NMHC_flaming']] * num_fuelbeds, dtype = float)
+            ef_smres_pm = np.array([t['PM_smold_resid']] * num_fuelbeds, dtype = float)
+            ef_smres_pm10 = np.array([t['PM10b_smold_resid']] * num_fuelbeds, dtype = float)
+            ef_smres_pm25 = np.array([t['PM25_smold_resid']] * num_fuelbeds, dtype = float)
+            ef_smres_co = np.array([t['CO_smold_resid']] * num_fuelbeds, dtype = float)
+            ef_smres_co2 = np.array([t['CO2_smold_resid']] * num_fuelbeds, dtype = float)
+            ef_smres_ch4 = np.array([t['CH4_smold_resid']] * num_fuelbeds, dtype = float)
+            ef_smres_nmhc = np.array([t['NMHC_smold_resid']] * num_fuelbeds, dtype = float)
+            # these are in SERA lookup, but not Consume
+            ef_smres_nmoc = np.array([0] * num_fuelbeds, dtype = float)
+            ef_smres_nh3 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_smres_no = np.array([0] * num_fuelbeds, dtype = float)
+            ef_smres_no2 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_smres_nox = np.array([0] * num_fuelbeds, dtype = float)
+            ef_smres_so2 = np.array([0] * num_fuelbeds, dtype = float)
 
-        ef_smres_pm = np.array([t['PM_smold_resid']] * num_fuelbeds, dtype = float)
-        ef_smres_pm10 = np.array([t['PM10b_smold_resid']] * num_fuelbeds, dtype = float)
-        ef_smres_pm25 = np.array([t['PM25_smold_resid']] * num_fuelbeds, dtype = float)
-        ef_smres_co = np.array([t['CO_smold_resid']] * num_fuelbeds, dtype = float)
-        ef_smres_co2 = np.array([t['CO2_smold_resid']] * num_fuelbeds, dtype = float)
-        ef_smres_ch4 = np.array([t['CH4_smold_resid']] * num_fuelbeds, dtype = float)
-        ef_smres_nmhc = np.array([t['NMHC_smold_resid']] * num_fuelbeds, dtype = float)
+            # And go fetch factors from the chosen emissions factor groups
+            for i in range(0, num_fuelbeds):
+                data = self._emission_factor_db.data[int(efg[i])]
+                ef_flamg_pm25[i] = data['PM25_flaming']; ef_smres_pm25[i] = data['PM25_smold_resid']
+                ef_flamg_co[i] = data['CO_flaming']; ef_smres_co[i] = data['CO_smold_resid']
+                ef_flamg_co2[i] = data['CO2_flaming']; ef_smres_co2[i] = data['CO2_smold_resid']
+                ef_flamg_ch4[i] = data['CH4_flaming']; ef_smres_ch4[i] = data['CH4_smold_resid']
+                ef_flamg_nmhc[i] = data['NMHC_flaming']; ef_smres_nmhc[i] = data['NMHC_smold_resid']
+                ef_flamg_pm[i] = data['PM_flaming']; ef_smres_pm[i] = data['PM_smold_resid']
+                ef_flamg_pm10[i] = data['PM10b_flaming']; ef_smres_pm10[i] = data['PM10b_smold_resid']
 
-        # And go fetch factors from the chosen emissions factor groups
-        for i in range(0, num_fuelbeds):
-            data = self._emission_factor_db.data[int(efg[i])]
-            ef_flamg_pm25[i] = data['PM25_flaming']; ef_smres_pm25[i] = data['PM25_smold_resid']
-            ef_flamg_co[i] = data['CO_flaming']; ef_smres_co[i] = data['CO_smold_resid']
-            ef_flamg_co2[i] = data['CO2_flaming']; ef_smres_co2[i] = data['CO2_smold_resid']
-            ef_flamg_ch4[i] = data['CH4_flaming']; ef_smres_ch4[i] = data['CH4_smold_resid']
-            ef_flamg_nmhc[i] = data['NMHC_flaming']; ef_smres_nmhc[i] = data['NMHC_smold_resid']
-            ef_flamg_pm[i] = data['PM_flaming']; ef_smres_pm[i] = data['PM_smold_resid']
-            ef_flamg_pm10[i] = data['PM10b_flaming']; ef_smres_pm10[i] = data['PM10b_smold_resid']
+            fill = [np.array([0] * num_fuelbeds, dtype=float)]
+            
+            ef_pm = np.array([ef_flamg_pm] + [ef_smres_pm] + [ef_smres_pm] + fill)
+            ef_pm10 = np.array([ef_flamg_pm10] + [ef_smres_pm10] + [ef_smres_pm10] + fill)
+            ef_pm25 = np.array([ef_flamg_pm25] + [ef_smres_pm25] + [ef_smres_pm25] + fill)
+            ef_co = np.array([ef_flamg_co] + [ef_smres_co] + [ef_smres_co] + fill)
+            ef_co2 = np.array([ef_flamg_co2] + [ef_smres_co2] + [ef_smres_co2] + fill)
+            ef_ch4 = np.array([ef_flamg_ch4] + [ef_smres_ch4] + [ef_smres_ch4] + fill)
+            ef_nmhc = np.array([ef_flamg_nmhc] + [ef_smres_nmhc] + [ef_smres_nmhc] + fill)
+            # these will all be zeros
+            ef_nmoc = np.array([ef_flamg_nmoc] + [ef_smres_nmoc] + [ef_smres_nmoc] + fill)
+            ef_nh3 = np.array([ef_flamg_nh3] + [ef_smres_nh3] + [ef_smres_nh3] + fill)
+            ef_no = np.array([ef_flamg_no] + [ef_smres_no] + [ef_smres_no] + fill)
+            ef_no2 = np.array([ef_flamg_no2] + [ef_smres_no2] + [ef_smres_no2] + fill)
+            ef_nox = np.array([ef_flamg_nox] + [ef_smres_nox] + [ef_smres_nox] + fill)
+            ef_so2 = np.array([ef_flamg_so2] + [ef_smres_so2] + [ef_smres_so2] + fill)
 
-        fill = [np.array([0] * num_fuelbeds, dtype=float)]
-        ef_pm = np.array([ef_flamg_pm] + [ef_smres_pm] + [ef_smres_pm] + fill)
-        ef_pm10 = np.array([ef_flamg_pm10] + [ef_smres_pm10] + [ef_smres_pm10] + fill)
-        ef_pm25 = np.array([ef_flamg_pm25] + [ef_smres_pm25] + [ef_smres_pm25] + fill)
-        ef_co = np.array([ef_flamg_co] + [ef_smres_co] + [ef_smres_co] + fill)
-        ef_co2 = np.array([ef_flamg_co2] + [ef_smres_co2] + [ef_smres_co2] + fill)
-        ef_ch4 = np.array([ef_flamg_ch4] + [ef_smres_ch4] + [ef_smres_ch4] + fill)
-        ef_nmhc = np.array([ef_flamg_nmhc] + [ef_smres_nmhc] + [ef_smres_nmhc] + fill)
+        else:
+            # using SERA numbers
+            # set up some arrays
+            ef_flamg_pm = np.array([0] * num_fuelbeds, dtype = float)
+            ef_flamg_pm10 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_flamg_pm25 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_flamg_co = np.array([0] * num_fuelbeds, dtype = float)
+            ef_flamg_co2 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_flamg_ch4 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_flamg_nh3 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_flamg_nmhc = np.array([0] * num_fuelbeds, dtype = float)
+            ef_flamg_nmoc = np.array([0] * num_fuelbeds, dtype = float)
+            ef_flamg_no = np.array([0] * num_fuelbeds, dtype = float)
+            ef_flamg_no2 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_flamg_nox = np.array([0] * num_fuelbeds, dtype = float)
+            ef_flamg_so2 = np.array([0] * num_fuelbeds, dtype = float)
+
+            ef_smold_pm = np.array([0] * num_fuelbeds, dtype = float)
+            ef_smold_pm10 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_smold_pm25 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_smold_co = np.array([0] * num_fuelbeds, dtype = float)
+            ef_smold_co2 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_smold_ch4 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_smold_nh3 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_smold_nmhc = np.array([0] * num_fuelbeds, dtype = float)
+            ef_smold_nmoc = np.array([0] * num_fuelbeds, dtype = float)
+            ef_smold_no = np.array([0] * num_fuelbeds, dtype = float)
+            ef_smold_no2 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_smold_nox = np.array([0] * num_fuelbeds, dtype = float)
+            ef_smold_so2 = np.array([0] * num_fuelbeds, dtype = float)
+
+            ef_resid_pm = np.array([0] * num_fuelbeds, dtype = float)
+            ef_resid_pm10 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_resid_pm25 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_resid_co = np.array([0] * num_fuelbeds, dtype = float)
+            ef_resid_co2 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_resid_ch4 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_resid_nh3 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_resid_nmhc = np.array([0] * num_fuelbeds, dtype = float)
+            ef_resid_nmoc = np.array([0] * num_fuelbeds, dtype = float)
+            ef_resid_no = np.array([0] * num_fuelbeds, dtype = float)
+            ef_resid_no2 = np.array([0] * num_fuelbeds, dtype = float)
+            ef_resid_nox = np.array([0] * num_fuelbeds, dtype = float)
+            ef_resid_so2 = np.array([0] * num_fuelbeds, dtype = float)
+
+            fuelbeds = self._cons_object._settings.get('fuelbeds')
+            for i in range(0, num_fuelbeds):
+                fuelbedNum = fuelbeds[i]
+                lu = Fccs2SeraEf(fuelbedNum)
+                
+                ef_flamg_pm25[i] = lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="PM2.5")
+                ef_smold_pm25[i] = lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="PM2.5")
+                
+                ef_flamg_pm10[i] = ef_flamg_pm25[i] * 1.111
+                ef_smold_pm10[i] = ef_smold_pm25[i] * 1.111
+
+                ef_flamg_co[i] = lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="CO")
+                ef_smold_co[i] = lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="CO")
+
+                ef_flamg_co2[i] = lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="CO2")
+                ef_smold_co2[i] = lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="CO2")
+                
+                ef_flamg_ch4[i] = lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="CH4")
+                ef_smold_ch4[i] = lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="CH4")
+
+                # NMHC ? PM ? instead of showing old values, leave these set to zero. 
+                # In other words, NHMC and PM are unsupported. Instead of NMHC, we return NMOC 
+                
+                ef_flamg_nmoc[i] = lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NMOC")
+                ef_smold_nmoc[i] = lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NMOC")
+
+                # new pollutants follow: NH3, NO, NO2, NOx, SO2
+                ef_flamg_nh3[i] = lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NH3")
+                ef_smold_nh3[i] = lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NH3")
+
+                ef_flamg_no[i] = lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NO")
+                ef_smold_no[i] = lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NO")
+
+                ef_flamg_no2[i] = lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NO2")
+                ef_smold_no2[i] = lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NO2")
+
+                ef_flamg_nox[i] = lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NOx")
+                ef_smold_nox[i] = lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NOx")
+
+                ef_flamg_so2[i] = lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="SO2")
+                ef_smold_so2[i] = lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="SO2")
+         
+            fill = [np.array([0] * num_fuelbeds, dtype=float)]
+            ef_pm = np.array([ef_flamg_pm] + [ef_smold_pm] + [ef_resid_pm] + fill)
+            ef_pm10 = np.array([ef_flamg_pm10] + [ef_smold_pm10] + [ef_resid_pm10] + fill)
+            ef_pm25 = np.array([ef_flamg_pm25] + [ef_smold_pm25] + [ef_resid_pm25] + fill)
+            ef_co = np.array([ef_flamg_co] + [ef_smold_co] + [ef_resid_co] + fill)
+            ef_co2 = np.array([ef_flamg_co2] + [ef_smold_co2] + [ef_resid_co2] + fill)
+            ef_ch4 = np.array([ef_flamg_ch4] + [ef_smold_ch4] + [ef_resid_ch4] + fill)
+            ef_nmhc = np.array([ef_flamg_nmhc] + [ef_smold_nmhc] + [ef_resid_nmhc] + fill)
+
+            ef_nmoc = np.array([ef_flamg_nmoc] + [ef_smold_nmoc] + [ef_resid_nmoc] + fill)
+            ef_nh3 = np.array([ef_flamg_nh3] + [ef_smold_nh3] + [ef_resid_nh3] + fill)
+            ef_no = np.array([ef_flamg_no] + [ef_smold_no] + [ef_resid_no] + fill)
+            ef_no2 = np.array([ef_flamg_no2] + [ef_smold_no2] + [ef_resid_no2] + fill)
+            ef_nox = np.array([ef_flamg_nox] + [ef_smold_nox] + [ef_resid_nox] + fill)
+            ef_so2 = np.array([ef_flamg_so2] + [ef_smold_so2] + [ef_resid_so2] + fill)
+            
 
 
-       # Emissions calculations:
+###---------------------------------------------------
+
+       
+        # Emissions calculations:
        # consumption (tons/acre) * emissions factor (lb/ton) = lbs/ac emissions
        # Emissions for all fuels combined
         emis_pm_fsrt = calc_species(all_fsrt, ef_pm)
@@ -696,8 +844,13 @@ class Emissions(util.FrozenClass):
         emis_co2_fsrt = calc_species(all_fsrt, ef_co2)
         emis_ch4_fsrt = calc_species(all_fsrt, ef_ch4)
         emis_nmhc_fsrt = calc_species(all_fsrt, ef_nmhc)
-
-
+        emis_nmoc_fsrt = calc_species(all_fsrt, ef_nmoc)
+        emis_nh3_fsrt = calc_species(all_fsrt, ef_nh3)
+        emis_no_fsrt = calc_species(all_fsrt, ef_no)
+        emis_no2_fsrt = calc_species(all_fsrt, ef_no2)
+        emis_nox_fsrt = calc_species(all_fsrt, ef_nox)
+        emis_so2_fsrt = calc_species(all_fsrt, ef_so2)
+        
         # --- Seperate pile calculations ---
         (all_loadings, pile_loadings, pile_black_pct) = pile_info(self._cons_object)
         (pile_pm, pile_pm10, pile_pm25) = \
@@ -711,7 +864,7 @@ class Emissions(util.FrozenClass):
         emis_pm25_fsrt[0] = emis_pm25_fsrt[0] + pile_pm25
         emis_pm25_fsrt[6] = emis_pm25_fsrt[6] + pile_pm25
 
-        (pile_co, pile_co2, pile_ch4, pile_nmhc) = \
+        (pile_co, pile_co2, pile_ch4, pile_nmhc, pile_nmoc, pile_nh3, pile_no, pile_no2, pile_nox, pile_so2) = \
             self._emissions_calc_pollutants_piles(pile_loadings, pile_black_pct)
         emis_co_fsrt[0] = emis_co_fsrt[0] + pile_co
         emis_co_fsrt[6] = emis_co_fsrt[6] + pile_co
@@ -721,12 +874,25 @@ class Emissions(util.FrozenClass):
         emis_ch4_fsrt[6] = emis_ch4_fsrt[6] + pile_ch4
         emis_nmhc_fsrt[0] = emis_nmhc_fsrt[0] + pile_nmhc
         emis_nmhc_fsrt[6] = emis_nmhc_fsrt[6] + pile_nmhc
-        # ^^^ Seperate pile calculations ^^^
+        emis_nmoc_fsrt[0] = emis_nmoc_fsrt[0] + pile_nmoc
+        emis_nmoc_fsrt[6] = emis_nmoc_fsrt[6] + pile_nmoc
+        # new pollutants from SERA
+        emis_nh3_fsrt[0] = emis_nh3_fsrt[0] + pile_nh3
+        emis_nh3_fsrt[6] = emis_nh3_fsrt[6] + pile_nh3
+        emis_no_fsrt[0] = emis_no_fsrt[0] + pile_no
+        emis_no_fsrt[6] = emis_no_fsrt[6] + pile_no
+        emis_no2_fsrt[0] = emis_no2_fsrt[0] + pile_no2
+        emis_no2_fsrt[6] = emis_no2_fsrt[6] + pile_no2
+        emis_nox_fsrt[0] = emis_nox_fsrt[0] + pile_nox
+        emis_nox_fsrt[6] = emis_nox_fsrt[6] + pile_nox
+        emis_so2_fsrt[0] = emis_so2_fsrt[0] + pile_so2
+        emis_so2_fsrt[6] = emis_so2_fsrt[6] + pile_so2
+        # ^^^ Separate pile calculations ^^^
 
         #print "UNPACKING"
-        self._emis_data = arrayize([emis_pm_fsrt,
-                   emis_pm10_fsrt, emis_pm25_fsrt,
-                   emis_co_fsrt, emis_co2_fsrt, emis_ch4_fsrt, emis_nmhc_fsrt])
+        self._emis_data = arrayize([emis_pm_fsrt, emis_pm10_fsrt, emis_pm25_fsrt,
+                   emis_co_fsrt, emis_co2_fsrt, emis_ch4_fsrt, emis_nmhc_fsrt, emis_nmoc_fsrt, 
+                   emis_nh3_fsrt, emis_no_fsrt, emis_no2_fsrt, emis_nox_fsrt, emis_so2_fsrt])
 
         #print "ADDING PER AREA STUFF"
         # And emissions per-unit-area summaries:
@@ -742,9 +908,15 @@ class Emissions(util.FrozenClass):
         co2_all = get_emis_summ(4)
         ch4_all = get_emis_summ(5)
         nmhc_all = get_emis_summ(6)
+        nmoc_all = get_emis_summ(7)
+        nh3_all = get_emis_summ(8)
+        no_all = get_emis_summ(9)
+        no2_all = get_emis_summ(10)
+        nox_all = get_emis_summ(11)
+        so2_all = get_emis_summ(12)
 
         # ks todo - what does this do?
-        self._emis_summ = np.array([pm_all, pm10_all, pm25_all, co_all, co2_all, ch4_all, nmhc_all])
+        self._emis_summ = np.array([pm_all, pm10_all, pm25_all, co_all, co2_all, ch4_all, nmhc_all, nmoc_all, nh3_all, no_all, no2_all, nox_all, so2_all])
         # the only problem this line causes is if unit conversion is involved
         # self._emis_summ = np.array([0, 0, 0, 0, 0, 0, 0])
 

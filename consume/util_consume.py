@@ -20,7 +20,13 @@ pile_pollutant_emission_factors = {
     'CO': np.array([52.66, 130.37, 130.37, 0.0]),
     'CO2': np.array([3429.24, 3089.88, 3089.88, 0.0]),
     'CH4': np.array([3.28, 11.03, 11.03, 0.0]),
-    'NMHC': np.array([3.56, 6.78, 6.78, 0.0])
+    'NMHC': np.array([3.56, 6.78, 6.78, 0.0]),
+    'NMOC': np.array([0.0, 0.0, 0.0, 0.0]),
+    'NH3': np.array([0.0, 0.0, 0.0, 0.0]),
+    'NO': np.array([0.0, 0.0, 0.0, 0.0]),
+    'NO2': np.array([0.0, 0.0, 0.0, 0.0]),
+    'NOx': np.array([0.0, 0.0, 0.0, 0.0]),
+    'SO2': np.array([0.0, 0.0, 0.0, 0.0])
     }
 
 class FrozenClass(object):
@@ -204,6 +210,12 @@ def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs):
         co2_emis = emis_dict(0, 4)
         ch4_emis = emis_dict(0, 5)
         nmhc_emis = emis_dict(0, 6)
+        nmoc_emis = emis_dict(0, 7)
+        nh3_emis = emis_dict(0, 8)
+        no_emis = emis_dict(0, 9)
+        no2_emis = emis_dict(0, 10)
+        nox_emis = emis_dict(0, 11)
+        so2_emis = emis_dict(0, 12)
 
         pm_detail = emis_dict_detail(0)
         pm10_detail = emis_dict_detail(1)
@@ -212,6 +224,12 @@ def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs):
         co2_detail = emis_dict_detail(4)
         ch4_detail = emis_dict_detail(5)
         nmhc_detail = emis_dict_detail(6)
+        nmoc_detail = emis_dict_detail(7)
+        nh3_detail = emis_dict_detail(8)
+        no_detail = emis_dict_detail(9)
+        no2_detail = emis_dict_detail(10)
+        nox_detail = emis_dict_detail(11)
+        so2_detail = emis_dict_detail(12)
 
 
         results['emissions'] = { 'pm' : pm_emis,
@@ -221,6 +239,12 @@ def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs):
                                     'co2' : co2_emis,
                                     'ch4' : ch4_emis,
                                     'nmhc' : nmhc_emis,
+                                    'nmoc' : nmoc_emis,
+                                    'nh3' : nh3_emis,
+                                    'no' : no_emis,
+                                    'no2' : no2_emis,
+                                    'nox' : nox_emis,
+                                    'so2' : so2_emis,
                                     'stratum' : {
                                         'pm' : pm_detail,
                                         'pm10' : pm10_detail,
@@ -228,7 +252,13 @@ def make_dictionary_of_lists(cons_data, heat_data, emis_data, inputs):
                                         'co' : co_detail,
                                         'co2' : co2_detail,
                                         'ch4' : ch4_detail,
-                                        'nmhc' : nmhc_detail,}}
+                                        'nmhc' : nmhc_detail,
+                                        'nmoc' : nmoc_detail,
+                                        'nh3' : nh3_detail,
+                                        'no' : no_detail,
+                                        'no2' : no2_detail,
+                                        'nox' : nox_detail,
+                                        'so2' : so2_detail,}}
 
     return results
 

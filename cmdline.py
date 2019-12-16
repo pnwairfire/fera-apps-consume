@@ -79,6 +79,10 @@ Examples:
     parser.add_argument('--metric', dest='do_metric', action='store_true',
         help='Indicate that columns should be converted to metric units.')
 
+    # - specify whether SERA emissions data should be used
+    parser.add_argument('--nosera', dest='no_sera', action='store_true',
+        help='Use consume emissions values instead of SERA emissions values.')
+
     # - specify an output filename
     parser.add_argument('-o', action='store', nargs=1, default=['consume_results.csv'],
         dest='output_filename', metavar='output filename',
@@ -100,6 +104,7 @@ class ConsumeParser(object):
         self._col_cfg_file = None
         self._msg_level = logging.ERROR
         self._do_metric = False
+        self._no_sera = False
 
     def do_parse(self, argv):
         parser = make_parser()
@@ -152,6 +157,9 @@ class ConsumeParser(object):
             if args.do_metric:
                 self._do_metric = True
 
+            if args.no_sera:
+                self._no_sera = True
+
 
     def exists(self, filename):
         return True if os.path.exists(filename) else False
@@ -168,6 +176,8 @@ class ConsumeParser(object):
     def fuel_loadings_file(self): return self._fuel_loadings_file
     @property
     def do_metric(self): return self._do_metric
+    @property
+    def no_sera(self): return self._no_sera
 
 
 def main():
