@@ -141,7 +141,8 @@ def sort_fuelbeds(df):
     sorted_list = sort_sort_and_flatten(result)
     ranking_column = dict([(v[2], i) for i, v in enumerate(sorted_list)])
     df['Fb_Rank'] = df.fuelbeds.map(ranking_column)
-    df.sort(['Fb_Rank'], inplace = True)
+    #df.sort(['Fb_Rank'], inplace = True)
+    df.sort_values(by=['Fb_Rank'], inplace = True)
     return df.drop('Fb_Rank', 1)
 
 #-------------------------------------------------------------------------------
