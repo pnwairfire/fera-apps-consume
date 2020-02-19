@@ -129,7 +129,10 @@ def write_feps_emissions_input(all_results):
 
     NOTE: Consume doesn't supply NOx, SO2, or NH3 -- we simply supply 0 for those pollutants.
     '''
+    
+
     LBS_PER_TON = 2000
+    '''
     emissions = {
         'Phase' : ['Flame', 'Smold', 'Resid'],
         'CO2' : [np.sum(all_results['emissions_co2_flaming']), np.sum(all_results['emissions_co2_smoldering']),
@@ -147,6 +150,39 @@ def write_feps_emissions_input(all_results):
         'NH3' : [0.0, 0.0, 0.0],
         'NMHC' : [np.sum(all_results['emissions_nmhc_flaming']), np.sum(all_results['emissions_nmhc_smoldering']),
                     np.sum(all_results['emissions_nmhc_residual'])],
+    }
+    '''
+
+    # the commented out code above did not consider the percentage area, so FEPS would end up with extremely high
+    # values when a burn unit contains multiple fuelbeds. The rates were just summed. Below, the rates are multiplied 
+    # by the corresponding area, then divided by the total area, then summed. 
+    # Example: Fuelbed 36 100 acres and Fuelbed 4 300 acres... suppose the emissions_pm25_flaming are [12, 24], then
+    # the total pm25 flaming rate = (12 * 100)/400 + (24 * 300)/400 = 3 + 18 = 21. 21 is the rate for all 400 acres. 
+    # In the old (wrong) code above the rate just added 12 and 24 to get a rate of 36. This would be the rate for 800 acres.   
+    total_area = np.sum(all_results['parameters_area'])
+    emissions = {
+        'Phase' : ['Flame', 'Smold', 'Resid'],
+        'CO2' : [np.sum(all_results['emissions_co2_flaming'] * all_results['parameters_area'] / total_area), 
+                    np.sum(all_results['emissions_co2_smoldering'] * all_results['parameters_area'] / total_area),
+                    np.sum(all_results['emissions_co2_residual'] * all_results['parameters_area'] / total_area)],
+        'CO' : [np.sum(all_results['emissions_co_flaming'] * all_results['parameters_area'] / total_area),
+                    np.sum(all_results['emissions_co_smoldering'] * all_results['parameters_area'] / total_area),
+                    np.sum(all_results['emissions_co_residual'] * all_results['parameters_area'] / total_area)],
+        'CH4' : [np.sum(all_results['emissions_ch4_flaming'] * all_results['parameters_area'] / total_area),
+                    np.sum(all_results['emissions_ch4_smoldering'] * all_results['parameters_area'] / total_area),
+                    np.sum(all_results['emissions_ch4_residual'] * all_results['parameters_area'] / total_area)],
+        'PM25' : [np.sum(all_results['emissions_pm25_flaming'] * all_results['parameters_area'] / total_area),
+                    np.sum(all_results['emissions_pm25_smoldering'] * all_results['parameters_area'] / total_area),
+                    np.sum(all_results['emissions_pm25_residual'] * all_results['parameters_area'] / total_area)],
+        'PM10' : [np.sum(all_results['emissions_pm10_flaming'] * all_results['parameters_area'] / total_area),
+                    np.sum(all_results['emissions_pm10_smoldering'] * all_results['parameters_area'] / total_area),
+                    np.sum(all_results['emissions_pm10_residual'] * all_results['parameters_area'] / total_area)],
+        'NOx' : [0.0, 0.0, 0.0],
+        'SO2' : [0.0, 0.0, 0.0],
+        'NH3' : [0.0, 0.0, 0.0],
+        'NMHC' : [np.sum(all_results['emissions_nmhc_flaming'] * all_results['parameters_area'] / total_area),
+                    np.sum(all_results['emissions_nmhc_smoldering'] * all_results['parameters_area'] / total_area),
+                    np.sum(all_results['emissions_nmhc_residual'] * all_results['parameters_area'] / total_area)],
     }
     df = pd.DataFrame(emissions)
     df = df[['Phase', 'CO2', 'CO', 'CH4', 'PM25', 'PM10', 'NOx', 'SO2', 'NH3', 'NMHC']]
