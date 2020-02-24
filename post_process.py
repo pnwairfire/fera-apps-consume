@@ -22,6 +22,204 @@ import unit_convert
 CONSUME_RESULTS = 'consume_results.csv'
 FEPS_FILE = 'feps_input_from_consume.csv'
 
+TONS_PER_ACRE_TO_MG_PER_ACRE = 2.24170231  # tons/acre to Mg/ha
+LBS_PER_ACRE_TO_KG_PER_HA = 1.12085116
+
+unit_conversion_dict = {
+'c_total': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_canopy': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_shrub': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_herb': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_wood': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_llm': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_ground': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_total_f': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_canopy_f': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_shrub_f': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_herb_f': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_wood_f': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_llm_f': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_ground_f': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_total_s': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_canopy_s': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_shrub_s': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_herb_s': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_wood_s': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_llm_s': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_ground_s': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_total_r': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_canopy_r': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_wood_r': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_llm_r': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_ground_r': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'ch4': LBS_PER_ACRE_TO_KG_PER_HA,
+'co': LBS_PER_ACRE_TO_KG_PER_HA,
+'co2': LBS_PER_ACRE_TO_KG_PER_HA,
+'nh3': LBS_PER_ACRE_TO_KG_PER_HA,
+'nmhc': LBS_PER_ACRE_TO_KG_PER_HA,
+'nmoc': LBS_PER_ACRE_TO_KG_PER_HA,
+'no': LBS_PER_ACRE_TO_KG_PER_HA,
+'no2': LBS_PER_ACRE_TO_KG_PER_HA,
+'nox': LBS_PER_ACRE_TO_KG_PER_HA,
+'so2': LBS_PER_ACRE_TO_KG_PER_HA,
+'pm': LBS_PER_ACRE_TO_KG_PER_HA,
+'pm10': LBS_PER_ACRE_TO_KG_PER_HA,
+'pm25': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_ch4_f': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_co_f': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_co2_f': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_nh3_f': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_nmhc_f': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_nmoc_f': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_no_f': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_no2_f': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_nox_f': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_so2_f': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_pm_f': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_pm10_f': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_pm25_f': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_ch4_s': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_co_s': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_co2_s': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_nh3_s': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_nmhc_s': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_nmoc_s': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_no_s': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_no2_s': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_nox_s': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_so2_s': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_pm_s': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_pm10_s': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_pm25_s': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_ch4_r': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_co_r': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_co2_r': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_nh3_r': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_nmhc_r': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_nmoc_r': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_no_r': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_no2_r': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_nox_r': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_so2_r': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_pm_r': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_pm10_r': LBS_PER_ACRE_TO_KG_PER_HA,
+'e_pm25_r': LBS_PER_ACRE_TO_KG_PER_HA,
+'c_overstory_crown': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_midstory_crown': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_understory_crown': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_snagc1f_crown': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_snagc1f_wood': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_snagc1_wood': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_snagc2_wood': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_snagc3_wood': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_ladder': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_shrub_1live': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_shrub_2live': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_herb_1live': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_herb_2live': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_piles': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_wood_1hr': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_wood_10hr': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_wood_100hr': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_wood_s1000hr': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_wood_r1000hr': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_wood_s10khr': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_wood_r10khr': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_wood_s+10khr': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_wood_r+10khr': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_stump_sound': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_stump_rotten': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_stump_lightered': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_litter': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_lichen': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_moss': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_upperduff': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_lowerduff': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_basal': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'c_squirrel': TONS_PER_ACRE_TO_MG_PER_ACRE,
+'ch4_canopy': LBS_PER_ACRE_TO_KG_PER_HA,
+'ch4_shrub': LBS_PER_ACRE_TO_KG_PER_HA,
+'ch4_herb': LBS_PER_ACRE_TO_KG_PER_HA,
+'ch4_wood': LBS_PER_ACRE_TO_KG_PER_HA,
+'ch4_llm': LBS_PER_ACRE_TO_KG_PER_HA,
+'ch4_ground': LBS_PER_ACRE_TO_KG_PER_HA,
+'co_canopy': LBS_PER_ACRE_TO_KG_PER_HA,
+'co_shrub': LBS_PER_ACRE_TO_KG_PER_HA,
+'co_herb': LBS_PER_ACRE_TO_KG_PER_HA,
+'co_wood': LBS_PER_ACRE_TO_KG_PER_HA,
+'co_llm': LBS_PER_ACRE_TO_KG_PER_HA,
+'co_ground': LBS_PER_ACRE_TO_KG_PER_HA,
+'co2_canopy': LBS_PER_ACRE_TO_KG_PER_HA,
+'co2_shrub': LBS_PER_ACRE_TO_KG_PER_HA,
+'co2_herb': LBS_PER_ACRE_TO_KG_PER_HA,
+'co2_wood': LBS_PER_ACRE_TO_KG_PER_HA,
+'co2_llm': LBS_PER_ACRE_TO_KG_PER_HA,
+'co2_ground': LBS_PER_ACRE_TO_KG_PER_HA,
+'nh3_canopy': LBS_PER_ACRE_TO_KG_PER_HA,
+'nh3_shrub': LBS_PER_ACRE_TO_KG_PER_HA,
+'nh3_herb': LBS_PER_ACRE_TO_KG_PER_HA,
+'nh3_wood': LBS_PER_ACRE_TO_KG_PER_HA,
+'nh3_llm': LBS_PER_ACRE_TO_KG_PER_HA,
+'nh3_ground': LBS_PER_ACRE_TO_KG_PER_HA,
+'nmhc_canopy': LBS_PER_ACRE_TO_KG_PER_HA,
+'nmhc_shrub': LBS_PER_ACRE_TO_KG_PER_HA,
+'nmhc_herb': LBS_PER_ACRE_TO_KG_PER_HA,
+'nmhc_wood': LBS_PER_ACRE_TO_KG_PER_HA,
+'nmhc_llm': LBS_PER_ACRE_TO_KG_PER_HA,
+'nmhc_ground': LBS_PER_ACRE_TO_KG_PER_HA,
+'nmoc_canopy': LBS_PER_ACRE_TO_KG_PER_HA,
+'nmoc_shrub': LBS_PER_ACRE_TO_KG_PER_HA,
+'nmoc_herb': LBS_PER_ACRE_TO_KG_PER_HA,
+'nmoc_wood': LBS_PER_ACRE_TO_KG_PER_HA,
+'nmoc_llm': LBS_PER_ACRE_TO_KG_PER_HA,
+'nmoc_ground': LBS_PER_ACRE_TO_KG_PER_HA,
+'no_canopy': LBS_PER_ACRE_TO_KG_PER_HA,
+'no_shrub': LBS_PER_ACRE_TO_KG_PER_HA,
+'no_herb': LBS_PER_ACRE_TO_KG_PER_HA,
+'no_wood': LBS_PER_ACRE_TO_KG_PER_HA,
+'no_llm': LBS_PER_ACRE_TO_KG_PER_HA,
+'no_ground': LBS_PER_ACRE_TO_KG_PER_HA,
+'no2_canopy': LBS_PER_ACRE_TO_KG_PER_HA,
+'no2_shrub': LBS_PER_ACRE_TO_KG_PER_HA,
+'no2_herb': LBS_PER_ACRE_TO_KG_PER_HA,
+'no2_wood': LBS_PER_ACRE_TO_KG_PER_HA,
+'no2_llm': LBS_PER_ACRE_TO_KG_PER_HA,
+'no2_ground': LBS_PER_ACRE_TO_KG_PER_HA,
+'nox_canopy': LBS_PER_ACRE_TO_KG_PER_HA,
+'nox_shrub': LBS_PER_ACRE_TO_KG_PER_HA,
+'nox_herb': LBS_PER_ACRE_TO_KG_PER_HA,
+'nox_wood': LBS_PER_ACRE_TO_KG_PER_HA,
+'nox_llm': LBS_PER_ACRE_TO_KG_PER_HA,
+'nox_ground': LBS_PER_ACRE_TO_KG_PER_HA,
+'so2_canopy': LBS_PER_ACRE_TO_KG_PER_HA,
+'so2_shrub': LBS_PER_ACRE_TO_KG_PER_HA,
+'so2_herb': LBS_PER_ACRE_TO_KG_PER_HA,
+'so2_wood': LBS_PER_ACRE_TO_KG_PER_HA,
+'so2_llm': LBS_PER_ACRE_TO_KG_PER_HA,
+'so2_ground': LBS_PER_ACRE_TO_KG_PER_HA,
+'pm_canopy': LBS_PER_ACRE_TO_KG_PER_HA,
+'pm_shrub': LBS_PER_ACRE_TO_KG_PER_HA,
+'pm_herb': LBS_PER_ACRE_TO_KG_PER_HA,
+'pm_wood': LBS_PER_ACRE_TO_KG_PER_HA,
+'pm_llm': LBS_PER_ACRE_TO_KG_PER_HA,
+'pm_ground': LBS_PER_ACRE_TO_KG_PER_HA,
+'pm10_canopy': LBS_PER_ACRE_TO_KG_PER_HA,
+'pm10_shrub': LBS_PER_ACRE_TO_KG_PER_HA,
+'pm10_herb': LBS_PER_ACRE_TO_KG_PER_HA,
+'pm10_wood': LBS_PER_ACRE_TO_KG_PER_HA,
+'pm10_llm': LBS_PER_ACRE_TO_KG_PER_HA,
+'pm10_ground': LBS_PER_ACRE_TO_KG_PER_HA,
+'pm25_canopy': LBS_PER_ACRE_TO_KG_PER_HA,
+'pm25_shrub': LBS_PER_ACRE_TO_KG_PER_HA,
+'pm25_herb': LBS_PER_ACRE_TO_KG_PER_HA,
+'pm25_wood': LBS_PER_ACRE_TO_KG_PER_HA,
+'pm25_llm': LBS_PER_ACRE_TO_KG_PER_HA,
+'pm25_ground': LBS_PER_ACRE_TO_KG_PER_HA
+}
+
+
+
+
 #-------------------------------------------------------------------------------
 # Simple command line parser for post_process
 #-------------------------------------------------------------------------------
@@ -183,6 +381,24 @@ def parse_column_line(line):
     retval = ([i.strip() for i in columns_to_sum], column_output_name)
     return retval
 
+	
+def convert_units(all_results, do_metric):
+    if do_metric: 
+        if len(all_results) > 0:
+            for result in all_results:
+#                print(result)
+                if result in unit_conversion_dict:
+#                    print("MATCH FOUND =================")
+#                    print(all_results[result])
+#                    print(unit_conversion_dict[result])
+                    all_results[result] *= unit_conversion_dict[result]
+#                    print(all_results[result])
+            return all_results
+        else:	
+            print("\nError: results file corrupted.\n")
+    else:
+        return all_results
+
 #-------------------------------------------------------------------------------
 # Main
 #-------------------------------------------------------------------------------
@@ -190,6 +406,7 @@ def main():
     parser = PostProcessParser()
     parser.do_parse(sys.argv)
     results = get_combined_results(parser.results_files)
+    results = convert_units(results, parser.do_metric)
     write_results_feps(results, os.path.split(parser.results_files[0])[0])
     results.to_csv(parser.output_file, index=False)
 
