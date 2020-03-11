@@ -776,42 +776,42 @@ class Emissions(util.FrozenClass):
                 fuelbedNum = fuelbeds[i]
                 lu = Fccs2SeraEf(fuelbedNum)
                 
-                ef_flamg_pm25[i] = lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="PM2.5")
-                ef_smold_pm25[i] = lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="PM2.5")
+                ef_flamg_pm25[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="PM2.5")
+                ef_smold_pm25[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="PM2.5")
                 
                 ef_flamg_pm10[i] = ef_flamg_pm25[i] * 1.111
                 ef_smold_pm10[i] = ef_smold_pm25[i] * 1.111
 
-                ef_flamg_co[i] = lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="CO")
-                ef_smold_co[i] = lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="CO")
+                ef_flamg_co[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="CO")
+                ef_smold_co[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="CO")
 
-                ef_flamg_co2[i] = lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="CO2")
-                ef_smold_co2[i] = lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="CO2")
+                ef_flamg_co2[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="CO2")
+                ef_smold_co2[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="CO2")
                 
-                ef_flamg_ch4[i] = lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="CH4")
-                ef_smold_ch4[i] = lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="CH4")
+                ef_flamg_ch4[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="CH4")
+                ef_smold_ch4[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="CH4")
 
                 # NMHC ? PM ? instead of showing old values, leave these set to zero. 
                 # In other words, NHMC and PM are unsupported. Instead of NMHC, we return NMOC 
                 
-                ef_flamg_nmoc[i] = lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NMOC")
-                ef_smold_nmoc[i] = lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NMOC")
+                ef_flamg_nmoc[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NMOC")
+                ef_smold_nmoc[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NMOC")
 
                 # new pollutants follow: NH3, NO, NO2, NOx, SO2
-                ef_flamg_nh3[i] = lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NH3")
-                ef_smold_nh3[i] = lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NH3")
+                ef_flamg_nh3[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NH3")
+                ef_smold_nh3[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NH3")
 
-                ef_flamg_no[i] = lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NO")
-                ef_smold_no[i] = lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NO")
+                ef_flamg_no[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NO")
+                ef_smold_no[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NO")
 
-                ef_flamg_no2[i] = lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NO2")
-                ef_smold_no2[i] = lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NO2")
+                ef_flamg_no2[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NO2")
+                ef_smold_no2[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NO2")
 
-                ef_flamg_nox[i] = lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NOx")
-                ef_smold_nox[i] = lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NOx")
+                ef_flamg_nox[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NOx")
+                ef_smold_nox[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NOx")
 
-                ef_flamg_so2[i] = lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="SO2")
-                ef_smold_so2[i] = lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="SO2")
+                ef_flamg_so2[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="SO2")
+                ef_smold_so2[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="SO2")
          
             fill = [np.array([0] * num_fuelbeds, dtype=float)]
             ef_pm = np.array([ef_flamg_pm] + [ef_smold_pm] + [ef_resid_pm] + fill)
