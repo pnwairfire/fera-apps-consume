@@ -324,13 +324,16 @@ class CoverType2SeraEf():
 class Fccs2SeraEf(CoverType2SeraEf):
 
     def __init__(self, fccs_fuelbed_id):
-        self.fccs_fuelbed_id = str(fccs_fuelbed_id)
+        just_fb_id = str(fccs_fuelbed_id)
+        if('u' in just_fb_id):                       #could be 273u1 if custom
+            just_fb_id = just_fb_id.split('u', 1)[0]
+        self.fccs_fuelbed_id = just_fb_id
         
         # Fuelbed to Cover Type (fuel bed 0 => cover type 404)
         fccs_2_cover_type = Fccs2CoverType()
-        cover_type = fccs_2_cover_type.get(str(fccs_fuelbed_id))
+        cover_type = fccs_2_cover_type.get(just_fb_id)
         if not cover_type:
-            raise ValueError("Invalid Fuelbed Id {}".format(fccs_fuelbed_id))
+            raise ValueError("Invalid Fuelbed Id {}".format(just_fb_id))
                         
         super(Fccs2SeraEf, self).__init__(cover_type)
         
