@@ -851,14 +851,15 @@ class Emissions(util.FrozenClass):
         emis_nox_fsrt = calc_species(all_fsrt, ef_nox)
         emis_so2_fsrt = calc_species(all_fsrt, ef_so2)
         
-        # --- Seperate pile calculations ---
+        # --- Separate pile calculations ---
         (all_loadings, pile_loadings, pile_black_pct) = pile_info(self._cons_object)
         (pile_pm, pile_pm10, pile_pm25) = \
             self._emissions_calc_pm_piles(all_loadings, pile_loadings, pile_black_pct)
 
         # Add pile PM contribution in. Add to the totals (index 0) and the woody stratum (index 6)
-        emis_pm_fsrt[0] = emis_pm_fsrt[0] + pile_pm
-        emis_pm_fsrt[6] = emis_pm_fsrt[6] + pile_pm
+        if self._no_sera:
+            emis_pm_fsrt[0] = emis_pm_fsrt[0] + pile_pm
+            emis_pm_fsrt[6] = emis_pm_fsrt[6] + pile_pm
         emis_pm10_fsrt[0] = emis_pm10_fsrt[0] + pile_pm10
         emis_pm10_fsrt[6] = emis_pm10_fsrt[6] + pile_pm10
         emis_pm25_fsrt[0] = emis_pm25_fsrt[0] + pile_pm25
@@ -872,8 +873,9 @@ class Emissions(util.FrozenClass):
         emis_co2_fsrt[6] = emis_co2_fsrt[6] + pile_co2
         emis_ch4_fsrt[0] = emis_ch4_fsrt[0] + pile_ch4
         emis_ch4_fsrt[6] = emis_ch4_fsrt[6] + pile_ch4
-        emis_nmhc_fsrt[0] = emis_nmhc_fsrt[0] + pile_nmhc
-        emis_nmhc_fsrt[6] = emis_nmhc_fsrt[6] + pile_nmhc
+        if self._no_sera:
+            emis_nmhc_fsrt[0] = emis_nmhc_fsrt[0] + pile_nmhc
+            emis_nmhc_fsrt[6] = emis_nmhc_fsrt[6] + pile_nmhc
         emis_nmoc_fsrt[0] = emis_nmoc_fsrt[0] + pile_nmoc
         emis_nmoc_fsrt[6] = emis_nmoc_fsrt[6] + pile_nmoc
         # new pollutants from SERA
