@@ -782,7 +782,7 @@ class Emissions(util.FrozenClass):
                 
                 ef_flamg_pm10[i] = ef_flamg_pm25[i] * 1.111
                 ef_smold_pm10[i] = ef_smold_pm25[i] * 1.111
-                ef_resid_pm10[i] = ef_smold_pm10
+                ef_resid_pm10[i] = ef_smold_pm10[i]
 
                 ef_flamg_co[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="CO")
                 ef_smold_co[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="CO")
