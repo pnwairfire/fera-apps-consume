@@ -778,40 +778,51 @@ class Emissions(util.FrozenClass):
                 
                 ef_flamg_pm25[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="PM2.5")
                 ef_smold_pm25[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="PM2.5")
+                ef_resid_pm25[i] = ef_smold_pm25[i]
                 
                 ef_flamg_pm10[i] = ef_flamg_pm25[i] * 1.111
                 ef_smold_pm10[i] = ef_smold_pm25[i] * 1.111
+                ef_resid_pm10[i] = ef_smold_pm10
 
                 ef_flamg_co[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="CO")
                 ef_smold_co[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="CO")
+                ef_resid_co[i] = ef_smold_co[i]
 
                 ef_flamg_co2[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="CO2")
                 ef_smold_co2[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="CO2")
-                
+                ef_resid_co2[i] = ef_smold_co2[i]
+
                 ef_flamg_ch4[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="CH4")
                 ef_smold_ch4[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="CH4")
+                ef_resid_ch4[i] = ef_smold_ch4[i]
 
                 # NMHC ? PM ? instead of showing old values, leave these set to zero. 
                 # In other words, NHMC and PM are unsupported. Instead of NMHC, we return NMOC 
                 
                 ef_flamg_nmoc[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NMOC")
                 ef_smold_nmoc[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NMOC")
+                ef_resid_nmoc[i] = ef_smold_nmoc[i]
 
                 # new pollutants follow: NH3, NO, NO2, NOx, SO2
                 ef_flamg_nh3[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NH3")
                 ef_smold_nh3[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NH3")
+                ef_resid_nh3[i] = ef_smold_nh3[i]
 
                 ef_flamg_no[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NO")
                 ef_smold_no[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NO")
+                ef_resid_no[i] = ef_smold_no[i]
 
                 ef_flamg_no2[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NO2")
                 ef_smold_no2[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NO2")
+                ef_resid_no2[i] = ef_smold_no2[i]
 
                 ef_flamg_nox[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NOx")
                 ef_smold_nox[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NOx")
+                ef_resid_nox[i] = ef_smold_nox[i]
 
                 ef_flamg_so2[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="SO2")
                 ef_smold_so2[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="SO2")
+                ef_resid_so2[i] = ef_smold_so2[i]
          
             fill = [np.array([0] * num_fuelbeds, dtype=float)]
             ef_pm = np.array([ef_flamg_pm] + [ef_smold_pm] + [ef_resid_pm] + fill)
@@ -821,7 +832,6 @@ class Emissions(util.FrozenClass):
             ef_co2 = np.array([ef_flamg_co2] + [ef_smold_co2] + [ef_resid_co2] + fill)
             ef_ch4 = np.array([ef_flamg_ch4] + [ef_smold_ch4] + [ef_resid_ch4] + fill)
             ef_nmhc = np.array([ef_flamg_nmhc] + [ef_smold_nmhc] + [ef_resid_nmhc] + fill)
-
             ef_nmoc = np.array([ef_flamg_nmoc] + [ef_smold_nmoc] + [ef_resid_nmoc] + fill)
             ef_nh3 = np.array([ef_flamg_nh3] + [ef_smold_nh3] + [ef_resid_nh3] + fill)
             ef_no = np.array([ef_flamg_no] + [ef_smold_no] + [ef_resid_no] + fill)
