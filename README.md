@@ -7,7 +7,7 @@ Consume calculates consumption and emission results based on a number of input p
 
 $ python consume_batch.py 
 usage: consume_batch.py [-h] [-f loadings file] [-x output columns]
-                        [-l message level] [--metric] [-o output filename]
+                        [-l message level] [--metric] [--nosera] [-o output filename]
                         [burn type	(activity | natural)]
                         [input file	csv format]
 
@@ -36,6 +36,11 @@ optional arguments:
                         fewest messages 3 = most messages
   --metric              Indicate that columns should be converted to metric
                         units.
+  --nosera              Normally, emissions factors are looked up in tables based
+                        on the Smoke Emissions Reference Application (SERA) database: 
+                        (https://depts.washington.edu/nwfire/sera/index.php) 
+                        Use this option to lookup values in tables not based 
+                        on the SERA database.
   -o output filename    Specify the name of the Consume output results file.
 
 Examples:
