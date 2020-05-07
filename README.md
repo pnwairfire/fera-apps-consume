@@ -51,10 +51,10 @@ Examples:
     python consume_batch.py natural input_natural.csv
 
     // Specify an alternative loadings file
-    consume_batch.exe natural input_natural.csv -f my_loadings.xml
+    python consume_batch.py natural input_natural.csv -f my_loadings.xml
 
     // Specify a column configuration file. Please see the documentation for details.
-    consume_batch.exe activity input_activity.csv -x output_summary.csv
+    python consume_batch.py activity input_activity.csv -x output_summary.csv
 
 ```
 
