@@ -121,14 +121,14 @@ Known dependencies on Consume:
 
 ### EFLookup
 
-* to get updated fccs2covertype.py (this contains the mapping from fuelbed to cover type) file: 
+#####To update fccs2covertype.py (this contains the mapping from fuelbed to cover type) file: 
 
-cd /Users/briandrye/repos/uw/apps-consumeGIT/consume/eflookup321
-edit  input-data/orig-fccs2covertype.csv
-run ./dev/scripts/import-fccs2ct2ef --log-level=DEBUG
-updated file may not be where you expect... Mine was in :
-~/anaconda3/lib/python3.6/site-packages/eflookup/fccs2ef/data/fccs2covertype.py
-copy fccs2covertype.py to: 
-/Users/briandrye/repos/uw/apps-consumeGIT/consume/eflookup321/eflookup/fccs2ef/data
+cd /Users/briandrye/repos/uw/apps-consumeGIT/consume/eflookup321  
+edit  input-data/orig-fccs2covertype.csv  
+run ./dev/scripts/import-fccs2ct2ef --log-level=DEBUG  
+updated file may not be where you expect... Mine was in:  
+~/anaconda3/lib/python3.6/site-packages/eflookup/fccs2ef/data/fccs2covertype.py  
+copy fccs2covertype.py to:  
+/Users/briandrye/repos/uw/apps-consumeGIT/consume/eflookup321/eflookup/fccs2ef/data  
 
 
