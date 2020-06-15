@@ -121,7 +121,7 @@ Known dependencies on Consume:
 
 ### EFLookup
 
-#####To update fccs2covertype.py (this contains the mapping from fuelbed to cover type) file: 
+##### To update fccs2covertype.py (this contains the mapping from fuelbed to cover type) file: 
 
 cd /Users/briandrye/repos/uw/apps-consumeGIT/consume/eflookup321  
 edit  input-data/orig-fccs2covertype.csv  
