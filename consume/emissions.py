@@ -322,6 +322,7 @@ from . import util_consume as util
 
 # use eflookup version 3.2.1 when doing SERA EF lookups
 from  .eflookup321.eflookup.fccs2ef import Fccs2SeraEf
+from  .eflookup321.eflookup.fccs2ef import CoverType2SeraEf
 
 #class Emissions(object):
 class Emissions(util.FrozenClass):
@@ -772,9 +773,16 @@ class Emissions(util.FrozenClass):
             ef_resid_so2 = np.array([0] * num_fuelbeds, dtype = float)
 
             fuelbeds = self._cons_object._settings.get('fuelbeds')
+
             for i in range(0, num_fuelbeds):
                 fuelbedNum = fuelbeds[i]
-                lu = Fccs2SeraEf(fuelbedNum)
+
+                ## get the cover_type, then use it to do lu = CoverType2SeraEf(cover_type)
+
+                indexForFCCSObject = self._cons_object.FCCS.loadings_data_.fccs_id==fuelbedNum
+                cover_type = self._cons_object.FCCS.loadings_data_[indexForFCCSObject].cover_type.values[0]
+
+                lu = CoverType2SeraEf(cover_type)
                 
                 ef_flamg_pm25[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="PM2.5")
                 ef_smold_pm25[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="PM2.5")
