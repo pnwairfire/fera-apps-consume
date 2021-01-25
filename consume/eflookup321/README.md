@@ -68,7 +68,13 @@ to the search path.
 Use pytest:
 
     py.test
-    py.test test/eflookup/test_lookup.py
+    test/unit/eflookup/test_basic_ef_lookup.py ....
+    test/unit/eflookup/test_fepsef.py ......
+    test/unit/eflookup/fccs2ef/test_import.py ....
+    test/unit/eflookup/fccs2ef/test_lookup.py ........
+    == 22 passed in 0.17 seconds ==
+    
+    py.test test/unit/eflookup/fccs2ef/test_lookup.py
 
 You can also use the ```--collect-only``` option to see a list of all tests.
 
