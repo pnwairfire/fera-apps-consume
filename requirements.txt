@@ -1,6 +1,7 @@
 --extra-index https://pypi.airfire.org/simple/
 -f https://pypi.airfire.org/simple/
 eflookup>=4.0.0,<5.0.0
-pandas==1.2.1
+pandas==0.25.3
 numpy
 lxml
+green==3.2.5
