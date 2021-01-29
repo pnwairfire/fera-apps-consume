@@ -6,7 +6,7 @@ from setuptools import setup
 # can result in the folloing error (for example, on Heroku):
 #    TypeError: parse_requirements() missing 1 required keyword argument: 'session'
 with open('requirements.txt') as f:
-    REQUIREMENTS = f.read().splitlines()
+    REQUIREMENTS = [r for r in f.read().splitlines() if not r.startswith('-')]
 
 # HACK: we can't import consume.version because there's no guarantee that
 #   any of the dependencies indirectly imported by consume.__init__.py
