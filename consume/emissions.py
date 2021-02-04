@@ -316,13 +316,13 @@ Index 1           Index 2              Index 3                     Index 4      
 
 """
 import numpy as np
+from eflookup.fccs2ef import Fccs2SeraEf
+from eflookup.fccs2ef import CoverType2SeraEf
+
 from . emissions_db import EmissionsFactorDB as edb
 from . import data_desc as dd
 from . import util_consume as util
 
-# use eflookup version 3.2.1 when doing SERA EF lookups
-from  .eflookup321.eflookup.fccs2ef import Fccs2SeraEf
-from  .eflookup321.eflookup.fccs2ef import CoverType2SeraEf
 
 #class Emissions(object):
 class Emissions(util.FrozenClass):

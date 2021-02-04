@@ -31,6 +31,7 @@ def copy_files():
     for f in glob.glob('output*.csv'):
         shutil.copyfile(f, '{}/{}'.format(DIST_DIR, f))
     shutil.copytree('consume', '{}/consume'.format(DIST_DIR))
+    shutil.copyfile('requirements.txt', '{}/{}'.format(DIST_DIR, 'requirements.txt'))
 
 def make_archive():
     print("In {} ...".format('make_archive'))

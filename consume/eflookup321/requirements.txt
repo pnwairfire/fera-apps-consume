@@ -1,2 +1,0 @@
---extra-index https://pypi.airfire.org/simple/
--e .
