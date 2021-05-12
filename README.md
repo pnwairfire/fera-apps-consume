@@ -54,7 +54,7 @@ Examples:
     python consume_batch.py natural input_natural.csv -f my_loadings.xml
 
     // Specify a column configuration file. Please see the documentation for details.
-    python consume_batch.py activity input_activity.csv -x output_summary.csv
+    python consume_batch.py activity input_activity.csv -x output_all.csv
 
 ```
 

@@ -47,8 +47,9 @@ Examples:
     // Specify an alternative loadings file
     consume_batch.exe natural input_natural.csv -f my_loadings.xml
 
-    // Specify a column configuration file. Please see the documentation for details.
-    consume_batch.exe activity input_activity.csv -x output_summary.csv'''
+    // Specify a column configuration file. Please see the documentation for details. 
+    // note: output_all.csv is the default column configuration file.
+    consume_batch.exe activity input_activity.csv -x output_all.csv'''
 
     # - build the parser
     parser = argparse.ArgumentParser(
