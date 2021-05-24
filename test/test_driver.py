@@ -11,9 +11,14 @@ import os
 import random
 import traceback
 
-INPUT_FILES = [
+INPUT_FILES_NATURAL = [
     './test/regression_input_southern.csv',
     './test/regression_input_western.csv',
+]
+
+INPUT_FILES_ACTIVITY = [
+    './test/regression_input_southern-activity.csv',
+    './test/regression_input_western-activity.csv',
 ]
 
 CONSUME_DRIVER = 'consume_batch.py'
@@ -36,7 +41,7 @@ def exception_wrapper(func, *args):
 # Start
 #-------------------------------------------------------------------------------
 errors = 0
-for ifile in INPUT_FILES:
+for ifile in INPUT_FILES_NATURAL:
     cmd = 'python3 {} {} {}'.format(CONSUME_DRIVER, TYPE_NATURAL, ifile)
     print(cmd, '\n')
     errors += os.system(cmd)
@@ -44,6 +49,20 @@ for ifile in INPUT_FILES:
     print(cmd, '\n')
     errors += os.system(cmd)
     cmd = 'python3 {} --nosera {} {}'.format(CONSUME_DRIVER, TYPE_NATURAL, ifile)
+    print(cmd, '\n')
+    errors += os.system(cmd)
+    cmd = 'diff {} {}'.format('./consume_results.csv', './test/expected/regression_expected_{}_nosera.csv'.format(ifile.split('_')[-1].split('.')[0]))
+    print(cmd, '\n')
+    errors += os.system(cmd)
+
+for ifile in INPUT_FILES_ACTIVITY:
+    cmd = 'python3 {} {} {}'.format(CONSUME_DRIVER, TYPE_ACTIVITY, ifile)
+    print(cmd, '\n')
+    errors += os.system(cmd)
+    cmd = 'diff {} {}'.format('./consume_results.csv', './test/expected/regression_expected_{}_sera.csv'.format(ifile.split('_')[-1].split('.')[0]))
+    print(cmd, '\n')
+    errors += os.system(cmd)
+    cmd = 'python3 {} --nosera {} {}'.format(CONSUME_DRIVER, TYPE_ACTIVITY, ifile)
     print(cmd, '\n')
     errors += os.system(cmd)
     cmd = 'diff {} {}'.format('./consume_results.csv', './test/expected/regression_expected_{}_nosera.csv'.format(ifile.split('_')[-1].split('.')[0]))
