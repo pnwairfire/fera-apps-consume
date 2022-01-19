@@ -84,8 +84,8 @@ class FCCSDB():
 
         """
         for c in self.loadings_data_.index:
-            print("ID# " + str(self.loadings_data_.ix[c].get('fccs_id')) \
-                 + "\t: " + str(self.loadings_data_.ix[c].get('site_name')))
+            print("ID# " + str(self.loadings_data_.loc[c].get('fccs_id')) \
+                 + "\t: " + str(self.loadings_data_.loc[c].get('site_name')))
 
         print("\nFor more information on a specific fuelbed, use the " +
                ".info(id#, detail=True/False) method.\n")
@@ -177,7 +177,7 @@ class FCCSDB():
         """
         try:
             fb_index = (self.loadings_data_.fccs_id == str(fccs_id)).nonzero()[0][0]
-            row = self.loadings_data_.ix[fb_index]
+            row = self.loadings_data_.loc[fb_index]
             text = "\nFCCS ID# : " + str(row.get('fccs_id'))
             text += "\nSite name: " + str(row.get('site_name'))
             text += "\n\nSite description: " + str(row.get('site_description'))
