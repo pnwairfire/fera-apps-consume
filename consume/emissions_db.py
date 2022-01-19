@@ -58,8 +58,13 @@ class EmissionsFactorDB:
         for i in loadings.fccs_id:
             try:
                 components = {}
-                components['natural'] = int(loadings.ix[loadings.fccs_id==i].efg_natural)
-                components['activity'] = int(loadings.ix[loadings.fccs_id==i].efg_activity)
+                # ix is deprecated in pandas, use loc or iloc instead
+                #components['natural'] = int(loadings.ix[loadings.fccs_id==i].efg_natural)
+                #components['activity'] = int(loadings.ix[loadings.fccs_id==i].efg_activity)
+
+                components['natural'] = int(loadings.loc[loadings['fccs_id'] == str(i)].efg_natural)
+                components['activity'] = int(loadings.loc[loadings['fccs_id'] == str(i)].efg_activity)
+
                 ef_eqid_map[i] = components
             except:
                 print('Function "_load_emissions_factor_eqid()". Error with fuelbed id: {}'.format(i))
