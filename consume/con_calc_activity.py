@@ -33,7 +33,8 @@ def pct_hun_hr_calc(windspeed, slope, fm_10hr, LD):
     # doubling of flux [Rothermel 1972])
     fm_flux = 3.0
 
-    # Eq. C: 10-hr fuel moisture correction
+    # Eq. C: 10-hr fuel moisture correction 
+    # note: np.log(heat_flux_crx) will get evaluated before the np.equal() leading to a division by zero warning
     fm_10hr_correction = np.where(
               np.equal(heat_flux_crx, 0.0),
               0.0,
