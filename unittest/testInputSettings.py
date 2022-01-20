@@ -173,7 +173,7 @@ class TestInputSettings(unittest.TestCase):
         input_dict = {
         'fuelbeds' : data.fuelbeds.values,
         'area' : as_ints(data.area.values),
-        'units': data.units.ix[0],
+        'units': data.units.loc[0],
         'ecoregion' : data.ecoregion.values,
         'fm_1000hr' : as_ints(data.fm_1000hr.values),
         'fm_duff' : as_ints(data.fm_duff.values),
