@@ -29,7 +29,7 @@ PRECISION = 2
 FEPS_EMISSIONS_INPUT = 'feps_emissions_input.csv'
 
 # -- From stackoverflow.com ---
-import collections as colls
+import collections.abc as colls
 import itertools as it
 
 same = lambda x:x  # identity function
@@ -238,7 +238,7 @@ def write_results(all_results, outfile, do_metric, col_cfg_file=None):
                 if key in tmp.keys():
                     add_these.append((new_key, converter(key, tmp[key])))
             newdf = pd.DataFrame.from_dict(dict(add_these))
-#            newdf = pd.DataFrame.from_items(add_these)
+#           	 newdf = pd.DataFrame.from_items(add_these)
             newdf = round_to(newdf)
 
             newdf.to_csv(outfile, index=False)
