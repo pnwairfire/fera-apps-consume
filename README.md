@@ -97,6 +97,9 @@ Ran 38 tests in 0.111s
 OK (passes=38)
 
 ```
+### How to run from Command Line
+See https://depts.washington.edu/fft/fft_download/  
+zip file contains instructions and sample input files
 
 
 ### Problems/Quirks
