@@ -26,16 +26,15 @@ def validate_range(input_vals, permitted_vals):
             print("\nError: can't convert sequence to numpy array")
     return (0 == len(invalid), valid, invalid)
 
-def validate_list(input_vals, permitted_vals):
+def validate_list(input_val, permitted_vals):
     ''' Is the input value part of the permitted list?
     '''
     valid = []
     invalid = []
-    for val in input_vals:
-        if val not in permitted_vals:
-            invalid.append(val)
+    if input_val not in permitted_vals:
+        invalid.append(input_val)
     if 0 == len(invalid):
-        valid = input_vals
+        valid = input_val
     return (0 == len(invalid), valid, invalid)
 
 def is_sequence(maybe_seq):
