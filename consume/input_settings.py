@@ -4,7 +4,14 @@ Code in this file deals with input settings to consume
 import numpy as np
 import pandas as pan
 import os
+import collections.abc
 from . import data_desc as dd
+
+def iterable(arg):
+    return (
+        isinstance(arg, collections.abc.Iterable)
+        and not isinstance(arg, str)
+    )
 
 def validate_fuelbed_number(input_vals, permitted=None):
     return (True, [str(i) for i in input_vals], [])
@@ -26,23 +33,21 @@ def validate_range(input_vals, permitted_vals):
             print("\nError: can't convert sequence to numpy array")
     return (0 == len(invalid), valid, invalid)
 
-def validate_list(input_val, permitted_vals):
+def validate_list(input_vals, permitted_vals):
     ''' Is the input value part of the permitted list?
     '''
     valid = []
     invalid = []
-    if input_val not in permitted_vals:
-        invalid.append(input_val)
+    for val in input_vals:
+        if val not in permitted_vals:
+            invalid.append(val)
     if 0 == len(invalid):
-        valid = input_val
+        valid = input_vals
     return (0 == len(invalid), valid, invalid)
 
 def is_sequence(maybe_seq):
-    try:
-        iter(maybe_seq)
-        return True
-    except:
-        return False
+    return iterable(maybe_seq)
+
 
 class ConsumeInputSettings(object):
     '''
