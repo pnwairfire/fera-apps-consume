@@ -44,7 +44,8 @@ class EmissionsFactorDB:
         efg_map = {}
         efg = root.iterfind('EFG')
         for node in efg:
-            kids = node.getchildren()
+#            kids = node.getchildren()  # deprecated, obsolete
+            kids = list(node)
             efg_id = int(get_item('ID', kids))
             components = {}
             for kid in kids:
