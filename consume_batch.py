@@ -246,6 +246,25 @@ def write_results(all_results, outfile, do_metric, col_cfg_file=None):
             # The command line parser should preclude getting here.
             print("\nError: bad or missing column configuration file!\n")
 
+def write_units(outfile, do_metric):
+    cons_units = 'tons_ac'
+    emis_units = 'lbs_ac'
+    emis_reason = 'no metric flag'
+    if do_metric:
+        cons_units = 'tonnes_ha'
+        emis_units = 'kg_ha'
+        emis_reason = 'metric flag'
+    d = {'column type': ["Consumption", "Emissions"],
+         'Units': [cons_units, emis_units],
+         'Reason': [emis_reason, emis_reason],
+         'Options': ['tons_ac, tonnes_ha', 'lbs_ac, kg_ha']}
+    df = pd.DataFrame(data=d)
+    name, ext = os.path.splitext(outfile)
+    outfile = name + '_units' + ext
+    df.to_csv(outfile, index=False)
+    print("\nSuccess!!! Description of units used \"{}\"".format(outfile))
+
+
 def run(burn_type, csv_input, do_metric, msg_level, outfile, fuel_loadings=None, col_cfg=None, no_sera=False):
     # validate alternate loadings file if provide. Throws exception on invalid
     if fuel_loadings: validate_fuel_loadings(fuel_loadings)
@@ -267,6 +286,9 @@ def run(burn_type, csv_input, do_metric, msg_level, outfile, fuel_loadings=None,
         results = emissions.results()
 
         write_results(results, outfile, do_metric, col_cfg_file=col_cfg)
+
+        write_units(outfile, do_metric)
+
         if not pickle_output(col_cfg):
             print("\nSuccess!!! Results are in \"{}\"".format(outfile))
 

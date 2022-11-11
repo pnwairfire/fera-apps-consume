@@ -1138,7 +1138,7 @@ class FuelConsumption(util.FrozenClass):
 
         if self._calc_success:
             if self._internal_units != self._settings.units:
-                print("Converting units: {} -> {}".format(self._internal_units, self._settings.units))
+                print("Converting Consumption column units: {} -> {}".format(self._internal_units, self._settings.units))
                 new_units = None
                 [new_units, self._cons_data] = util.unit_conversion(
                                                     self._cons_data,

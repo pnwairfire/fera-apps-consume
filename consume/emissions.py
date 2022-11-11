@@ -540,6 +540,7 @@ class Emissions(util.FrozenClass):
     def _convert_units(self):
         """Converts units of consumption and emissions data"""
         area = self._cons_object._settings.get('area')
+        # if Emissions internal/output units differ, update emissions data
         if self._internal_units != self._output_units:
             orig_units = self._internal_units
 

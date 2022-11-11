@@ -295,7 +295,12 @@ class ConsumeInputSettings(object):
 
                     if unit_check and fm_type_check:
                         # - assign the single-input-value / property items
-                        self.units = contents.units[0]
+
+                        # ignore "units" column in input file... only way to change units when running
+                        # from command line is via --metric.
+                        # default: tons_ac (consumption columns), lbs_ac (emissions columns)
+                        # self.units = contents.units[0]
+
                         if 'activity' == self.burn_type: self.fm_type = contents.fm_type[0]
 
                         # - set the 'tagged' input items
