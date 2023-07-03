@@ -158,7 +158,7 @@ class TestNaturalEquations(unittest.TestCase):
         self.check_fsr(exp_totals, ret[0:3,:], COMBUSTION_PHASE_TABLE['c_wood_100hr'])
 
     def test_sound_large_wood_calc(self):  
-        one_k, ten_k, tenk_plus = ccn.sound_large_wood_calc(self._loadings, self.fc.fuel_moisture_1000hr_pct)
+        one_k, ten_k, tenk_plus = ccn.sound_large_wood_calc(self._loadings, self.fc.fuel_moisture_1000hr_pct, self.fc.sound_cwd_pct_available)
         totals = one_k[3] + ten_k[3] + tenk_plus[3]
         my_print(totals)
         
@@ -178,7 +178,7 @@ class TestNaturalEquations(unittest.TestCase):
         self.check_fsr(exp_totals, tenk_plus[0:3,:], COMBUSTION_PHASE_TABLE['c_wood_s+10khr'])
 
     def test_rotten_large_wood_calc(self):  
-        one_k, ten_k, tenk_plus = ccn.rotten_large_wood_calc(self._loadings, self.fc.fuel_moisture_1000hr_pct)
+        one_k, ten_k, tenk_plus = ccn.rotten_large_wood_calc(self._loadings, self.fc.fuel_moisture_1000hr_pct, self.fc.rotten_cwd_pct_available)
         totals = one_k[3] + ten_k[3] + tenk_plus[3]
         my_print(totals)  # print totals
 
@@ -243,7 +243,7 @@ class TestNaturalEquations(unittest.TestCase):
 
     def test_duff_calc(self):
         cons_duff_upper, cons_duff_lower, proportion_duff_consumed = ccn.duff_calc(self._loadings,
-                self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_litter_pct, self._ecoregion_masks)
+                self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_litter_pct, self._ecoregion_masks, self.fc.duff_pct_available)
         
         total = cons_duff_upper[3] + cons_duff_lower[3]
         

@@ -68,7 +68,6 @@ Requirements:
 
 For questions/comments, contact:
     Susan Prichard, Consume manager, sprich@uw.edu
-    Kjell Swedin, software engineer, kjells@uw.edu
 
 
 ##################################################

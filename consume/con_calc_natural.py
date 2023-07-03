@@ -159,21 +159,29 @@ def western_cons_duff(load, fm_duff):
     #mgha dependent equation: return 0.6456*load - 0.0969*fm_duff
     return 0.6456*load - 0.0432*fm_duff
 
-def duff_calc(loadings, fm_duff, fm_litter, ecoregion_masks):
+def duff_calc(loadings, fm_duff, fm_litter, ecoregion_masks, duff_pct_available):
     duff_load_total = values(loadings, 'duff_upper_loading') + values(loadings, 'duff_lower_loading')
-    cons = np.where(duff_load_total > 0,
-        np.where(ecoregion_masks['southern'],
-            southern_cons_duff(duff_load_total, fm_litter),
-            western_cons_duff(duff_load_total, fm_duff)), 0)
     
-    cons = bracket(duff_load_total, cons)
+    pct = (duff_pct_available/100.0)
+
+    duff_load_total_adjusted = values(loadings, 'duff_upper_loading')*(pct) + values(loadings, 'duff_lower_loading')*(pct)
+
+    cons = np.where(duff_load_total_adjusted > 0,
+        np.where(ecoregion_masks['southern'],
+            southern_cons_duff(duff_load_total_adjusted, fm_litter),
+            western_cons_duff(duff_load_total_adjusted, fm_duff)), 0)
+    
+    cons = bracket(duff_load_total_adjusted, cons)
+    # calculate proportion_consumed based on non-adjusted duff_load_total
+    # otherwise would probably over estimate consumption of basal and squirrel middens
     with np.errstate(invalid='ignore', divide='ignore'):
         proportion_consumed = np.where(duff_load_total > 0, cons / duff_load_total, 0)
     
-    cons_duff_upper = np.where(cons > values(loadings, 'duff_upper_loading'),
-        values(loadings, 'duff_upper_loading'), cons)
-    cons_duff_lower = np.where(cons > values(loadings, 'duff_upper_loading'),
-        (cons - values(loadings, 'duff_upper_loading')), 0)
+    # consume the available upper duff first, remainder is from available lower duff
+    cons_duff_upper = np.where(cons > values(loadings, 'duff_upper_loading')*(pct), 
+        values(loadings, 'duff_upper_loading')*(pct), cons)
+    cons_duff_lower = np.where(cons > values(loadings, 'duff_upper_loading')*(pct), 
+        (cons - values(loadings, 'duff_upper_loading')*(pct)), 0)
     assert(np.all(cons_duff_lower >= 0))
     
     return util.csdist(cons_duff_upper, [0.1, 0.7, 0.2]), util.csdist(cons_duff_lower, [0, 0.2, 0.8]), proportion_consumed
@@ -263,9 +271,11 @@ def sound_hundred_calc(loadings, ecos_mask):
 TIMELAG_RATIO_SOUND_WOOD_1K = 0.5    
 TIMELAG_RATIO_SOUND_WOOD_10K = 0.3    
 TIMELAG_RATIO_SOUND_WOOD_10K_PLUS = 0.2    
-def sound_large_wood_calc(loadings, fm_1000):
+def sound_large_wood_calc(loadings, fm_1000, sound_cwd_pct_available):
+    pct = (sound_cwd_pct_available/100.0)
     sound_wood_columns = ['oneK_hr_sound', 'tenK_hr_sound', 'tnkp_hr_sound']
-    total_swload = sum([values(loadings, col) for col in sound_wood_columns])
+    total_swload = sum([values(loadings, col)*pct for col in sound_wood_columns])
+
     # mgha dependent: cons_total = 2.735 + 0.3285*total_swload - 0.0457*fm_1000
     cons_total = 1.2201 + 0.3285*total_swload - 0.0203863*fm_1000
     
@@ -293,9 +303,10 @@ def sound_large_wood_calc(loadings, fm_1000):
 TIMELAG_RATIO_ROTTEN_WOOD_1K = 0.47    
 TIMELAG_RATIO_ROTTEN_WOOD_10K = 0.33   
 TIMELAG_RATIO_ROTTEN_WOOD_10K_PLUS = 0.2    
-def rotten_large_wood_calc(loadings, fm_1000):
+def rotten_large_wood_calc(loadings, fm_1000, rotten_cwd_pct_available):
+    pct = (rotten_cwd_pct_available/100.0)
     rotten_wood_columns = ['oneK_hr_rotten', 'tenK_hr_rotten', 'tnkp_hr_rotten']
-    total_rload = sum([values(loadings, col) for col in rotten_wood_columns])
+    total_rload = sum([values(loadings, col)*pct for col in rotten_wood_columns])
     
     # mgha dependent: cons_total = 1.9024 + 0.4933*load - 0.0338*fm_1000
     cons_total =  0.848641616 + 0.4933*total_rload - 0.015077842*fm_1000

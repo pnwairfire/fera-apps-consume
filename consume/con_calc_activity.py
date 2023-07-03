@@ -298,18 +298,20 @@ def ccon_oneK_act(LD, QMDS, diam_reduction, flamgDRED):
     flamg = flamg_portion(QMDs[1], [total_snd, total_rot], totld, flamgDRED)
     return csdist_act(flamg, np.array([total_snd, total_rot]), resFrac)
 
-def ccon_tenK_act(LD, QMDS, diam_reduction, flamgDRED):
+def ccon_tenK_act(LD, QMDS, diam_reduction, flamgDRED, sound_cwd_pct_available, rotten_cwd_pct_available):
     """ 10K-hr (9 to 20") woody fuels consumption, activity
         Eq. O, ln 4615-4618 """
     resFrac = np.array([[0.33], [0.67]]) # [snd, rot] non-flaming resid pct
-    totld = np.array([values(LD, 'tenK_hr_sound'), values(LD, 'tenK_hr_rotten')])
+    s_pct = (sound_cwd_pct_available/100.0)
+    r_pct = (rotten_cwd_pct_available/100.0)
+    totld = np.array([values(LD, 'tenK_hr_sound')*s_pct, values(LD, 'tenK_hr_rotten')*r_pct])
     tenK_redux = qmd_redux_calc(QMDs[2], diam_reduction)
     total_snd = tenK_redux * totld[0]
     total_rot = tenK_redux * totld[1]
     flamg = flamg_portion(QMDs[2], [total_snd, total_rot], totld, flamgDRED)
     return csdist_act(flamg, np.array([total_snd, total_rot]), resFrac)
 
-def ccon_tnkp_act(adjfm_1000hr, flaming_portion, LD):
+def ccon_tnkp_act(adjfm_1000hr, flaming_portion, LD, sound_cwd_pct_available, rotten_cwd_pct_available):
     """ >10,000-hr (20"+) woody fuel consumption, activity
      p. 153 Table P, ln 4619
      Documentation does not include the condition that where
@@ -320,8 +322,10 @@ def ccon_tnkp_act(adjfm_1000hr, flaming_portion, LD):
               0.05,                                   # true
              (35.0 - adjfm_1000hr) / 100.0)))       # false - Table P.
 
-    total_snd = pct_redux * values(LD, 'tnkp_hr_sound')
-    total_rot = pct_redux * values(LD, 'tnkp_hr_rotten')
+    s_pct = (sound_cwd_pct_available/100.0)
+    r_pct = (rotten_cwd_pct_available/100.0)
+    total_snd = pct_redux * values(LD, 'tnkp_hr_sound')*s_pct
+    total_rot = pct_redux * values(LD, 'tnkp_hr_rotten')*r_pct
     # <<< DISCREPANCY b/t SOURCE and DOCUMENTATION here
     # corresponds to source code right now for testing-sake
     flamgsnd = values(LD, 'tnkp_hr_sound') * flaming_portion
@@ -354,7 +358,8 @@ def ccon_ffr_activity(diam_reduction, oneK_fsrt, tenK_fsrt, tnkp_fsrt, days_sinc
 
 
 def ccon_activity(fm_1000hr, fm_type, windspeed,
-    slope, area, days_since_rain, fm_10hr, lengthOfIgnition, LD):
+    slope, area, days_since_rain, fm_10hr, lengthOfIgnition, LD, 
+    duff_pct_available, sound_cwd_pct_available, rotten_cwd_pct_available):
     """ Woody fuel activity equations, p. 142 """
     # execute calculations
     pct_hun_hr = pct_hun_hr_calc(windspeed, slope, fm_10hr, LD)
@@ -365,8 +370,8 @@ def ccon_activity(fm_1000hr, fm_type, windspeed,
     one_fsrt = ccon_one_act(LD)
     ten_fsrt = ccon_ten_act(LD)
     oneK_fsrt = ccon_oneK_act(LD, QMDs, diam_reduction, flamgDRED)
-    tenK_fsrt = ccon_tenK_act(LD, QMDs, diam_reduction, flamgDRED)
-    tnkp_fsrt = ccon_tnkp_act(adjfm_1000hr, flaming_portion, LD)
+    tenK_fsrt = ccon_tenK_act(LD, QMDs, diam_reduction, flamgDRED, sound_cwd_pct_available, rotten_cwd_pct_available)
+    tnkp_fsrt = ccon_tnkp_act(adjfm_1000hr, flaming_portion, LD, sound_cwd_pct_available, rotten_cwd_pct_available)
 
     # <<< below included to jive with source code- not in manual, tho
     woody = (oneK_fsrt[0][3] + oneK_fsrt[1][3] +
@@ -421,7 +426,7 @@ def calc_and_reduce_ff(LD, ff_reduction, key):
     return layer_reduction
 
 def ccon_forest_floor(LD, ff_reduction, key_depth, key_loading, csd):
-    ''' Same procedure for litter, lichen, moss, upper and lower duff
+    ''' Same procedure for litter, lichen, moss
     '''
     # - get per-layer reduction
     layer_reduction = calc_and_reduce_ff(LD, ff_reduction, key_depth)

@@ -588,6 +588,19 @@ class FuelConsumption(util.FrozenClass):
                   of numbers ranging from 0-100 representing a percentage.
                   Default is 50%
 
+        duff_pct_available
+                : Percent of duff that is available for consumption. A number or list
+                  of numbers ranging from 0-100 representing a percentage. Upper duff is used, 
+                  then lower duff. 
+
+        sound_cwd_pct_available
+                : Percent of sound coarse woody debris that is available for consumption. A number or list
+                  of numbers ranging from 0-100 representing a percentage.
+
+        rotten_cwd_pct_available
+                : Percent of rotten coarse woody debris that is available for consumption. A number or list
+                  of numbers ranging from 0-100 representing a percentage.
+
         slope
                 : <specific to 'activity' burns>
                   Percent slope of a fuelbed unit. Used in predicting 100-hr
@@ -694,6 +707,21 @@ class FuelConsumption(util.FrozenClass):
     @shrub_blackened_pct.setter
     def shrub_blackened_pct(self, value):
         self._settings.set('shrub_black_pct', value)
+    @property
+    def duff_pct_available(self): return self._settings.get('duff_pct_available')
+    @duff_pct_available.setter
+    def duff_pct_available(self, value):
+        self._settings.set('duff_pct_available', value)
+    @property
+    def sound_cwd_pct_available(self): return self._settings.get('sound_cwd_pct_available')
+    @sound_cwd_pct_available.setter
+    def sound_cwd_pct_available(self, value):
+        self._settings.set('sound_cwd_pct_available', value)
+    @property
+    def rotten_cwd_pct_available(self): return self._settings.get('rotten_cwd_pct_available')
+    @rotten_cwd_pct_available.setter
+    def rotten_cwd_pct_available(self, value):
+        self._settings.set('rotten_cwd_pct_available', value)
     @property
     def pile_blackened_pct(self): return self._settings.get('pile_black_pct')
     @pile_blackened_pct.setter
@@ -1260,20 +1288,23 @@ class FuelConsumption(util.FrozenClass):
         fm_1000hr = self._settings.get('fm_1000hr')
         fm_duff =  self._settings.get('fm_duff')
         fm_litter =  self._settings.get('fm_litter')
+        duff_pct_available = self._settings.get('duff_pct_available')
+        sound_cwd_pct_available = self._settings.get('sound_cwd_pct_available')
+        rotten_cwd_pct_available = self._settings.get('rotten_cwd_pct_available')
         if self._settings.burn_type in ['natural', ['natural']]:
             one_hr_fsrt = ccn.sound_one_calc(LD, ecos_mask)
             ten_hr_fsrt = ccn.sound_ten_calc(LD, ecos_mask)
             hun_hr_fsrt = ccn.sound_hundred_calc(LD, ecos_mask)
             oneK_hr_snd_fsrt, tenK_hr_snd_fsrt, tnkp_hr_snd_fsrt = \
-                ccn.sound_large_wood_calc(LD, fm_1000hr)
+                ccn.sound_large_wood_calc(LD, fm_1000hr, sound_cwd_pct_available)
             oneK_hr_rot_fsrt, tenK_hr_rot_fsrt, tnkp_hr_rot_fsrt = \
-                ccn.rotten_large_wood_calc(LD, fm_1000hr)
+                ccn.rotten_large_wood_calc(LD, fm_1000hr, rotten_cwd_pct_available)
                 
             lit_fsrt, litter_proportion_consumed  = ccn.litter_calc(LD, fm_duff, fm_litter, ecoregion_masks)
             lch_fsrt = ccn.lichen_calc(LD, fm_duff, fm_litter, ecoregion_masks, litter_proportion_consumed)
             moss_fsrt = ccn.moss_calc(LD, fm_duff, fm_litter, ecoregion_masks, litter_proportion_consumed)
             
-            duff_upper_fsrt, duff_lower_fsrt, duff_proportion_consumed = ccn.duff_calc(LD, fm_duff, fm_litter, ecoregion_masks)
+            duff_upper_fsrt, duff_lower_fsrt, duff_proportion_consumed = ccn.duff_calc(LD, fm_duff, fm_litter, ecoregion_masks, duff_pct_available)
             bas_fsrt = ccn.basal_accumulation_calc(LD, fm_duff, fm_litter, ecoregion_masks, duff_proportion_consumed)
             sqm_fsrt = ccn.squirrel_midden_calc(LD, fm_duff, fm_litter, ecoregion_masks, duff_proportion_consumed)
         else:
@@ -1290,7 +1321,8 @@ class FuelConsumption(util.FrozenClass):
             [tenK_hr_snd_fsrt, tenK_hr_rot_fsrt],
             [tnkp_hr_snd_fsrt, tnkp_hr_rot_fsrt],
             ff_reduction] = cca.ccon_activity(fm_1000hr, fm_type,
-                windspeed, slope, area, days_since_rain, fm_10hr, length_of_ignition, LD)
+                windspeed, slope, area, days_since_rain, fm_10hr, length_of_ignition, LD, 
+                duff_pct_available, sound_cwd_pct_available, rotten_cwd_pct_available)
 
             # The ff reduction is a destructive process (modifies the ff_reduction array)
             # Make a copy for use in basal area and sq midden calcs
@@ -1298,9 +1330,35 @@ class FuelConsumption(util.FrozenClass):
             lch_fsrt = cca.ccon_forest_floor(LD, ff_reduction, 'lch_depth', 'lichen_loading', [0.95, 0.05, 0.00])
             moss_fsrt = cca.ccon_forest_floor(LD, ff_reduction, 'moss_depth', 'moss_loading', [0.95, 0.05, 0.00])
             lit_fsrt = cca.ccon_forest_floor(LD, ff_reduction, 'lit_depth', 'litter_loading', [0.90, 0.10, 0.00])
-            duff_upper_fsrt = cca.ccon_forest_floor(LD, ff_reduction, 'duff_upper_depth', 'duff_upper_loading', [0.10, 0.70, 0.20])
-            duff_lower_fsrt = cca.ccon_forest_floor(LD, ff_reduction, 'duff_lower_depth', 'duff_lower_loading', [0.00, 0.20, 0.80])
+                
+            layer_reduction = cca.calc_and_reduce_ff(LD, ff_reduction, 'duff_upper_depth')
+            # - how much was it reduced relative to the layer depth
+            proportional_reduction = np.where(LD['duff_upper_depth'] > 0.0, layer_reduction / LD['duff_upper_depth'], 0.0)
+            
+            tempTotalDuffValues = values(LD, 'duff_upper_loading') + values(LD, 'duff_lower_loading')
 
+            tempUpperValues = values(LD, 'duff_upper_loading')
+            tempLowerValues = values(LD, 'duff_lower_loading')
+
+            revisedUpperValues = np.where(tempUpperValues < tempTotalDuffValues * (duff_pct_available/100.0), tempUpperValues, tempTotalDuffValues * (duff_pct_available/100.0))
+            # example: 5 upper, 5 lower, pct_available = 80 or 30
+            # if 5 <= 8, set to 5. 
+            # if 5 > 3, set to 3  (use 3 of 5 upper)
+
+            totalUpper = proportional_reduction * revisedUpperValues
+            duff_upper_fsrt = util.csdist(totalUpper, [0.10, 0.70, 0.20])
+            
+            revisedLowerValues = np.where(tempUpperValues < tempTotalDuffValues * (duff_pct_available/100.0), tempTotalDuffValues * (duff_pct_available/100.0) - tempUpperValues, 0.0)
+            # if 5 < 8, set to 8-5
+            # if 5 >= 3, set to zero
+            
+            layer_reduction = cca.calc_and_reduce_ff(LD, ff_reduction, 'duff_lower_depth')
+            # - how much was it reduced relative to the layer depth
+            proportional_reduction = np.where(LD['duff_lower_depth'] > 0.0, layer_reduction / LD['duff_lower_depth'], 0.0)
+
+            totalLower = proportional_reduction * revisedLowerValues
+            duff_lower_fsrt = util.csdist(totalLower, [0.00, 0.20, 0.80])
+  
             ff_redux_proportion = self.calc_ff_redux_proportion(LD, ff_redux_copy)
             bas_fsrt = cca.ccon_bas(values(LD, 'bas_loading'), ff_redux_proportion)
             sqm_fsrt = cca.ccon_sqm(values(LD, 'sqm_loading'), ff_redux_proportion)

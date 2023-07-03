@@ -75,6 +75,9 @@ class TestInputSettings(unittest.TestCase):
         self.assertTrue(s.set('fm_litter', [1,2,4]))
         self.assertTrue(s.set('can_con_pct', 4))    ### - manufacture a sequence if necessary
         self.assertTrue(s.set('shrub_black_pct', [1, 2, 4]))
+        self.assertTrue(s.set('duff_pct_available', [1, 2, 4]))
+        self.assertTrue(s.set('sound_cwd_pct_available', [1, 2, 4]))
+        self.assertTrue(s.set('rotten_cwd_pct_available', [1, 2, 4]))
         self.assertTrue(s.set('pile_black_pct', [1, 2, 4]))
         self.assertTrue(s.set('season', ['spring','fall','winter']))
         s.fm_type = 'MEAS-Th'

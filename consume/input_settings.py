@@ -75,6 +75,9 @@ class ConsumeInputSettings(object):
         'shrub_black_pct' : ['Shrub blackened (%)', [0,100], validate_range],
         'pile_black_pct' : ['Pile blackened (%)', [0,100], validate_range],
         'season' : ['Season (spring, summer, fall, winter)', ['spring', 'summer', 'fall', 'winter'], validate_list],
+        'duff_pct_available' : ['Upper duff percent available for consumption (%)', [0,100], validate_range],
+        'sound_cwd_pct_available' : ['Sound coarse woody debris percent available for consumption (%)', [0,100], validate_range],
+        'rotten_cwd_pct_available' : ['Rotten coarse woody debris available for consumption (%)', [0,100], validate_range]
         }
 
     AllInputParameters = ActivityInputVarParameters.copy()
