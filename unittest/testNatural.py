@@ -264,7 +264,7 @@ class TestNaturalEquations(unittest.TestCase):
         
         # need proportion of duff consumed...
         _, _, proportion_duff_consumed = ccn.duff_calc(self._loadings,
-                self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_litter_pct, self._ecoregion_masks)
+                self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_litter_pct, self._ecoregion_masks, self.fc.duff_pct_available)
         self.assertTrue(len(proportion_duff_consumed))
                 
         ret = ccn.basal_accumulation_calc(self._loadings,
@@ -284,7 +284,7 @@ class TestNaturalEquations(unittest.TestCase):
         
         # need proportion of duff consumed...
         _, _, proportion_duff_consumed = ccn.duff_calc(self._loadings,
-                self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_litter_pct, self._ecoregion_masks)
+                self.fc.fuel_moisture_duff_pct, self.fc.fuel_moisture_litter_pct, self._ecoregion_masks, self.fc.duff_pct_available)
         self.assertTrue(len(proportion_duff_consumed))
                         
         ret = ccn.squirrel_midden_calc(self._loadings,

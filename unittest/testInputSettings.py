@@ -114,19 +114,22 @@ class TestInputSettings(unittest.TestCase):
     # -------------------------------------------------------------------------
     ### - natural test data
     ncols = ['area', 'can_con_pct', 'ecoregion', 'fm_1000hr', 'fm_duff', 'fm_litter', \
-                'fuelbeds', 'shrub_black_pct', 'units', 'pile_black_pct', 'season']
+                'fuelbeds', 'shrub_black_pct', 'units', 'pile_black_pct', 'season',
+                'duff_pct_available','sound_cwd_pct_available', 'rotten_cwd_pct_available']
     nrows = [
-        ['10', '20', 'western', '30', '40', '25', '1', '50', 'kg_ha', '90', 'spring'],
-        ['20', '30', 'western', '40', '50', '35', '1', '60', 'kg_ha', '90', 'winter']]
+        ['10', '20', 'western', '30', '40', '25', '1', '50', 'kg_ha', '90', 'spring', '100', '100', '100'],
+        ['20', '30', 'western', '40', '50', '35', '1', '60', 'kg_ha', '90', 'winter', '100', '100', '100']
+        ]
         
     ### - activity test data
     acols = ['area', 'can_con_pct', 'ecoregion', 'fm_1000hr', 'fm_duff', 'fm_litter',\
         'fuelbeds', 'shrub_black_pct', 'units', 'slope', 'windspeed', 'days_since_rain', \
-        'fm_10hr', 'length_of_ignition', 'fm_type', 'pile_black_pct', 'season']
+        'fm_10hr', 'length_of_ignition', 'fm_type', 'pile_black_pct', 'season',
+        'duff_pct_available','sound_cwd_pct_available', 'rotten_cwd_pct_available']
     arows = [
-        ['10', '20', 'western', '30', '40', '15', '1', '50', 'kg_ha', '5', '10', '3', '20', '30', 'NFDRS-Th', '90', 'fall'],
-        ['15', '21', 'western', '35', '35', '25', '2', '45', 'kg_ha', '10', '15', '4', '25', '35', 'NFDRS-Th', '90', 'fall'],
-        ['20', '22', 'western', '40', '30', '35', '3', '40', 'kg_ha', '15', '20', '5', '30', '40', 'NFDRS-Th', '90', 'fall']
+        ['10', '20', 'western', '30', '40', '15', '1', '50', 'kg_ha', '5', '10', '3', '20', '30', 'NFDRS-Th', '90', 'fall', '100', '100', '100'],
+        ['15', '21', 'western', '35', '35', '25', '2', '45', 'kg_ha', '10', '15', '4', '25', '35', 'NFDRS-Th', '90', 'fall', '100', '100', '100'],
+        ['20', '22', 'western', '40', '30', '35', '3', '40', 'kg_ha', '15', '20', '5', '30', '40', 'NFDRS-Th', '90', 'fall', '100', '100', '100']
         ]
         
     nat_data = pan.DataFrame(nrows, columns=ncols)
@@ -184,7 +187,10 @@ class TestInputSettings(unittest.TestCase):
         'can_con_pct' : as_ints(data.can_con_pct.values),
         'shrub_black_pct' : as_ints(data.shrub_black_pct.values),
         'pile_black_pct' : as_ints(data.pile_black_pct.values),
-        'season' : data.season.values
+        'season' : data.season.values, 
+        'duff_pct_available' : as_ints(data.duff_pct_available.values),
+        'sound_cwd_pct_available' : as_ints(data.sound_cwd_pct_available.values),
+        'rotten_cwd_pct_available' : as_ints(data.rotten_cwd_pct_available.values),
         }
 
         s = ConsumeInputSettings()
