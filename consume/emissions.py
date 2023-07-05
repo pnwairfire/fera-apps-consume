@@ -25,17 +25,11 @@ The input parameters required for the emissions calculations are as follows:
        FCCS fuelbeds in the consumption scenario, but the user can override
        the auto-select process if desired as described below.
 
-As with the FuelConsumption object, the user can also optionally set alternate
-output units for the Emissions object. Use the consume.list_valid_units() method
-to view output unit options.
+To set alternate output units for the Emissions object, use the consume.list_valid_units() method
+to view output unit options, and set using line below. 
 Default output units for emissions are lbs/ac.
 
 >>> e_obj.output_units = 'kg_ha'
-
-To change the FuelConsumption units, simply modify the units of the FC object
-that is nested within the Emissions object:
-
->>> e_obj._cons_object.output_units = 'kg_ha'
 
 
 ### OUTPUTS ###
@@ -506,7 +500,7 @@ class Emissions(util.FrozenClass):
                 text.close()
 
 
-    def display_inputs(self, print_to_console=True):
+    def display_inputs(self):
         """Lists the input parameters for the emissions scenario.
 
         Displays the input parameters for the consumption and emissions
@@ -515,8 +509,7 @@ class Emissions(util.FrozenClass):
 
         """
         out_consumption = self._cons_object._settings.display_settings()
-        if not print_to_console:
-            return out_consumption
+        return out_consumption
 
     def _calculate(self):
         """Calculates emissions estimates.

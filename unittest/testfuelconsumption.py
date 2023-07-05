@@ -24,13 +24,7 @@ class TestFuelConsumption(unittest.TestCase):
         pass
 
     """
-    def testreset_inputs_and_outputs(self):
-        pass
-
     def testload_example(self):
-        pass
-
-    def testprompt_for_inputs(self):
         pass
 
     def testresults(self):
