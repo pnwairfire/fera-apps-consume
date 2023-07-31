@@ -90,10 +90,11 @@ Success !!!
 ```
 
 ```
-$ ./run_unit_tests.sh 
+$ cd consume
+$ ../run_unit_tests.sh 
 ......................................
 
-Ran 38 tests in 0.111s
+Ran 941 tests in 0.111s
 
 OK (passes=38)
 
