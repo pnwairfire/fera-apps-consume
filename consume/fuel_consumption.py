@@ -19,13 +19,9 @@ Declare a Consume FuelConsumption object:
 
 ### SETTING INPUT PARAMETERS ###
 
-There are a number of alternative options for setting input values:
+There are two alternative options for setting input values:
 
-    1. Start a program that will prompt the user for inputs:
-        >>> fc_obj.prompt_for_inputs()
-
-
-    2. Load inputs from a pre-formatted csv file (see example file:
+    1. Load inputs from a pre-formatted csv file (see example file:
         "consume_inputs_example.csv" for correct formatting):
 
         >>> fc_obj.load_scenario("myscenario.csv")
@@ -36,7 +32,7 @@ There are a number of alternative options for setting input values:
         >>> fc_obj.batch_process("myscenario.csv", "myoutputs.csv")
 
 
-    3. Individually set/change input values manually:
+    2. Individually set/change input values manually:
         >>> fc_obj.burn_type = <'natural' or 'activity'>
         >>> fc_obj.fuelbed_fccs_ids = [FCCSID#1,FCCSID#2,...]
         >>> fc_obj.fuelbed_area_acres = [AREA#1,AREA#2,...]
@@ -161,26 +157,12 @@ There are a number of alternative options for setting input values:
                   intensity, which affects diameter reduction of large woody
                   fuels in 'activity' fuelbeds.
 
-The user can also optionally set alternate output units. Use the
-list_valid_units() method to view output unit options.
-Default fuel consumption units are tons/acre ('tons_ac').
 
->>> consume.list_valid_units()
-Out:
-['lbs',
- 'lbs_ac',
- 'tons',
- 'tons_ac',
- 'kg',
- 'kg_m^2',
- 'kg_ha',
- 'kg_km^2'
- 'tonnes',
- 'tonnes_ha',
- 'tonnes_km^2']
+### OUTPUT UNITS ###
 
+The user can not set alternate output units. 
+The fuel consumption units are tons/acre ('tons_ac').
 
->>> fc_obj.output_units = 'lbs'
 
 
 ### CUSTOMIZING FUEL LOADINGS ###
@@ -240,8 +222,6 @@ a variety of different formats:
                                          Set detail=True to print out detailed
                                          fuel loading information
 
->>> fc_obj.reset_inputs_and_outputs() ...clears input and output parameters
-
 >>> fc_obj.display_inputs()           ...displays a list of the input parameters.
                                          Useful for checking that scenario
                                          parameters were set correctly
@@ -260,6 +240,7 @@ both fuelbeds.
 
 >>> import consume
 >>> fc_obj = consume.FuelConsumption()
+>>> fc_obj.burn_type = 'natural'
 >>> fc_obj.fuelbed_fccs_ids = [1, 47]
 >>> fc_obj.fuelbed_area_acres = [100, 200]
 >>> fc_obj.fuelbed_ecoregion = 'western'
@@ -267,24 +248,18 @@ both fuelbeds.
 >>> fc_obj.fuel_moisture_duff_pct = [50, 40]
 >>> fc_obj.canopy_consumption_pct = 25
 >>> fc_obj.shrub_blackened_pct = 25
->>> fc_obj.output_units = 'kg_ha'
+>>> fc_obj.season = 'fall'
+>>> fc_obj.fuel_moisture_litter_pct = 25
+>>> fc_obj.pile_blackened_pct = 60
+>>> fc_obj.duff_pct_available = 30
+>>> fc_obj.sound_cwd_pct_available = 40
+>>> fc_obj.rotten_cwd_pct_available = 20
 >>> fc_obj.display_inputs()
 
 Out:
 
-Current scenario parameters:
+"burn_type\tnatural\nunits\ttons_ac\nfuelbeds\t['1', '47']\narea\t[100. 200.]\necoregion\t['western']\nfm_1000hr\t[50. 40.]\nfm_duff\t[50. 40.]\ncan_con_pct\t[25.]\nshrub_black_pct\t[25.]\nseason\t['fall']\nfm_litter\t[25.]\npile_black_pct\t[60.]\nduff_pct_available\t[30.]\nsound_cwd_pct_available\t[40.]\nrotten_cwd_pct_available\t[20.]"
 
-Parameter			        Value(s)
---------------------------------------------------------------
-Burn type			        natural
-FCCS fuelbeds (ID#)		    [1, 47]
-Fuelbed area (acres)	    [100, 200]
-Fuelbed ecoregion		    western
-Fuel moisture (1000-hr, %)	[50, 40]
-Fuel moisture (duff, %)		[50, 40]
-Canopy consumption (%)		25
-Shrub blackened (%)		    25
-Output units			    kg_ha
 
 
 >>> fc_obj.report()
@@ -292,45 +267,42 @@ Output units			    kg_ha
 Out:
 
 FUEL CONSUMPTION
-Consumption units: kg/ha
-Heat release units: btu/ha
+Consumption units: tons/ac
+Heat release units: btu/ac
 Total area: 300 acres
-
 
 FCCS ID: 1
 Area:	100
 Ecoregion: western
-CATEGORY	    Flaming		Smoldering	Residual	TOTAL
-canopy		    1.25e+04	9.58e+02	1.51e+02	1.36e+04
-shrub		    1.26e+03	6.97e+01	0.00e+00	1.33e+03
-nonwoody	    3.95e+02	2.08e+01	0.00e+00	4.16e+02
-llm		        2.32e+03	2.20e+02	0.00e+00	2.54e+03
-ground fuels	8.97e+02	1.51e+04	3.72e+04	5.32e+04
-woody fuels	    9.71e+03	5.61e+03	8.81e+03	2.41e+04
-TOTAL:		    2.70e+04	2.20e+04	4.61e+04	9.52e+04
+CATEGORY	Flaming		Smoldering	Residual	TOTAL
+canopy		5.53e+00	4.03e-01 	4.47e-02 	5.97e+00
+shrub		6.68e-01 	7.42e-02 	0.00e+00	7.42e-01
+nonwoody	1.67e-01 	1.85e-02 	0.00e+00	1.85e-01
+llm  		8.20e-01 	8.16e-02 	0.00e+00	9.01e-01
+ground fuels	9.39e-02 	6.57e-01 	1.88e-01 	9.39e-01
+woody fuels	3.24e+00	8.26e-01 	8.98e-01 	4.97e+00
+TOTAL:		1.05e+01	2.06e+00	1.13e+00	1.37e+01
 
-Heat release:	1.19e+08	9.70e+07	2.03e+08	4.20e+08
-
+Heat release:	1.68e+08	3.30e+07	1.81e+07	2.19e+08
 
 FCCS ID: 47
 Area:	200
 Ecoregion: western
-CATEGORY	    Flaming		Smoldering	Residual	TOTAL
-canopy		    7.93e+03	2.48e+03	2.05e+03	1.25e+04
-shrub		    3.87e+03	2.69e+02	0.00e+00	4.13e+03
-nonwoody	    9.88e+02	5.20e+01	0.00e+00	1.04e+03
-llm		        4.93e+03	5.41e+02	0.00e+00	5.47e+03
-ground fuels	3.59e+03	4.08e+04	6.98e+04	1.14e+05
-woody fuels	    2.56e+04	2.06e+04	2.49e+04	7.11e+04
-TOTAL:		    4.69e+04	6.47e+04	9.67e+04	2.08e+05
+CATEGORY	Flaming		Smoldering	Residual	TOTAL
+canopy		3.31e+00	6.86e-01 	4.98e-01 	4.50e+00
+shrub		7.08e-01 	7.87e-02 	0.00e+00	7.87e-01
+nonwoody	4.17e-01 	4.64e-02 	0.00e+00	4.64e-01
+llm  		1.39e+00	1.52e-01 	0.00e+00	1.54e+00
+ground fuels	8.64e-01 	6.45e+00	3.35e+00	1.07e+01
+woody fuels	6.13e+00	3.29e+00	3.64e+00	1.31e+01
+TOTAL:		1.28e+01	1.07e+01	7.48e+00	3.10e+01
 
-Heat release:	2.07e+08	2.85e+08	4.27e+08	9.18e+08
-
+Heat release:	2.05e+08	1.71e+08	1.20e+08	4.96e+08
 
 ALL FUELBEDS:
 
-Consumption:	4.03e+04	5.04e+04	7.99e+04	1.71e+05
-Heat release:	3.26e+08	3.82e+08	6.30e+08	1.34e+09
+Consumption:	1.21e+01	7.83e+00	5.37e+00	2.52e+01
+Heat release:	3.73e+08	2.04e+08	1.38e+08	7.15e+08
 
 
 
@@ -521,9 +493,8 @@ class FuelConsumption(util.FrozenClass):
     default location.
 
     Input parameters to the FuelConsumption object are described below.
-    Values can be input in one of several ways:
+    Values can be input in two ways:
         -manually (e.g. "fc_obj.fuelbed_fccs_ids = [1,5]", etc.)
-        -via the .prompt_for_inputs() method
         -by loading a preformatted csv (see 'consume_batch_inputs_example.csv'
          file) using the .load_scenario(csv=INPUTCSV) or using the
          .batch_process(csv_in=INPUTCSV, csv_out=OUTPUTCSV) method
@@ -851,7 +822,7 @@ class FuelConsumption(util.FrozenClass):
         """
         self._calculate()
         if self._calc_success:
-            self._convert_units()
+            self._convert_units()  # does nothing
             self._conv_success = True
             if self._conv_success:
                 return util.make_dictionary_of_lists(cons_data = self._cons_data,
@@ -879,7 +850,8 @@ class FuelConsumption(util.FrozenClass):
 
         self._calculate()
         if self._calc_success:
-            self._convert_units()
+            self._convert_units() # does nothing
+            self._conv_success = True
             if self._conv_success:
                 if not ret:
                     self._display_report(csv, stratum, incl_heat = incl_heat, ret=ret)
@@ -922,7 +894,7 @@ class FuelConsumption(util.FrozenClass):
         print("\nFile saved to: {}".format(csv_out))
 
 
-    def display_inputs(self, print_to_console=True):
+    def display_inputs(self):
         """Lists the input parameters for the consumption scenario.
 
         Displays the input parameters for the consumption in the shell. Useful

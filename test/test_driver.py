@@ -13,12 +13,12 @@ import traceback
 
 INPUT_FILES_NATURAL = [
     './test/regression_input_southern.csv',
-    './test/regression_input_western.csv',
+    './test/regression_input_western.csv'
 ]
 
 INPUT_FILES_ACTIVITY = [
-    './test/regression_input_southern-activity.csv',
-    './test/regression_input_western-activity.csv',
+   './test/regression_input_southern-activity.csv',
+    './test/regression_input_western-activity.csv'
 ]
 
 CONSUME_DRIVER = 'consume_batch.py'
