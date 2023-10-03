@@ -553,7 +553,7 @@ class Emissions(util.FrozenClass):
         # helper functions
         def get_clean_dirty_vdirty_ratio(loadings, pile_loading_total):
             # - ensure float for divisior
-            plt_as_float = pile_loading_total.copy(np.float)
+            plt_as_float = pile_loading_total.copy(float)
             plt_as_float[:] = pile_loading_total
             clean_ratio =  np.where(pile_loading_total, loadings['pile_clean_loading']  / plt_as_float, 0.0)
             dirty_ratio =  np.where(pile_loading_total, loadings['pile_dirty_loading']  / plt_as_float, 0.0)
