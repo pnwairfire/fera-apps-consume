@@ -60,8 +60,8 @@ class EmissionsFactorDB:
             try:
                 l = loadings.loc[loadings['fccs_id'] == str(fccs_id)]
                 self.fccs_emissions_groups[fccs_id] = {
-                    'natural': int(l.efg_natural),
-                    'activity': int(l.efg_activity)
+                    'natural': int(l.efg_natural.iloc[0]),
+                    'activity': int(l.efg_activity.iloc[0])
                 }
 
             except Exception as e:
