@@ -35,7 +35,7 @@ class EmissionsFactorDB:
         self.data = self._load_emissions_factor_groups(root)
 
         # this data comes from the loadings input file
-        self.fccs_emissions_groups = self._load_emissions_factor_eqid()
+        self.fccs_emissions_groups = {}
 
         # - only used in the prompt() method, which has been removed
         #ks self.cover_type_descriptions = self._load_covertype()
@@ -53,23 +53,22 @@ class EmissionsFactorDB:
             efg_map[efg_id] = components
         return efg_map
 
-    def _load_emissions_factor_eqid(self):
-        ef_eqid_map = {}
-        loadings = self._fco.FCCS.loadings_data_
-        for i in loadings.fccs_id:
+    def _get_emissions_factor_eqid(self, fccs_id):
+        """Loads EFs when needed, and caches in self.fccs_emissions_groups"""
+        if fccs_id not in self.fccs_emissions_groups:
+            loadings = self._fco.FCCS.loadings_data_
             try:
-                components = {}
-                # ix is deprecated in pandas, use loc or iloc instead
-                #components['natural'] = int(loadings.ix[loadings.fccs_id==i].efg_natural)
-                #components['activity'] = int(loadings.ix[loadings.fccs_id==i].efg_activity)
+                l = loadings.loc[loadings['fccs_id'] == str(fccs_id)]
+                self.fccs_emissions_groups[fccs_id] = {
+                    'natural': int(l.efg_natural),
+                    'activity': int(l.efg_activity)
+                }
 
-                components['natural'] = int(loadings.loc[loadings['fccs_id'] == str(i)].efg_natural)
-                components['activity'] = int(loadings.loc[loadings['fccs_id'] == str(i)].efg_activity)
+            except Exception as e:
+                print(f'Function "_get_emissions_factor_eqid()". Error with fuelbed id {fccs_id} - {e}')
+                self.fccs_emissions_groups[fccs_id] = None
 
-                ef_eqid_map[i] = components
-            except:
-                print('Function "_load_emissions_factor_eqid()". Error with fuelbed id: {}'.format(i))
-        return ef_eqid_map
+        return self.fccs_emissions_groups[fccs_id]
 
     def _load_covertype(self):
         assert False # - this may not be necessary
@@ -91,9 +90,9 @@ class EmissionsFactorDB:
         """
         ef_nums = []
         for f in fuelbed_list:
-            eq_id_key = self.get_key(self._fco.burn_type)
-            if f in self.fccs_emissions_groups:
-                efgs = self.fccs_emissions_groups[f]
+            efgs = self._get_emissions_factor_eqid(f)
+            if efgs:
+                eq_id_key = self.get_key(self._fco.burn_type)
                 group = efgs[eq_id_key]
                 ef_nums.append(group)
             else:
