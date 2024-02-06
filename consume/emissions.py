@@ -805,18 +805,18 @@ class Emissions(util.FrozenClass):
                 ef_smold_nmoc[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NMOC")
                 ef_resid_nmoc[i] = ef_smold_nmoc[i]
 
-                # new pollutants follow: NH3, NO, NO2, NOx, SO2
+                # new pollutants follow: NH3, NOx, SO2
                 ef_flamg_nh3[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NH3")
                 ef_smold_nh3[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NH3")
                 ef_resid_nh3[i] = ef_smold_nh3[i]
 
-                ef_flamg_no[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NO")
-                ef_smold_no[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NO")
-                ef_resid_no[i] = ef_smold_no[i]
+                # ef_flamg_no[i] = None
+                # ef_smold_no[i] = None
+                # ef_resid_no[i] = None
 
-                ef_flamg_no2[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NO2")
-                ef_smold_no2[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NO2")
-                ef_resid_no2[i] = ef_smold_no2[i]
+                # ef_flamg_no2[i] = None
+                # ef_smold_no2[i] = None
+                # ef_resid_no2[i] = None
 
                 ef_flamg_nox[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NOx")
                 ef_smold_nox[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NOx")
