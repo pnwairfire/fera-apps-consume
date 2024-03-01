@@ -774,7 +774,7 @@ class Emissions(util.FrozenClass):
                 ## get the cover_type, then use it to do lu = CoverType2SeraEf(cover_type)
 
                 indexForFCCSObject = self._cons_object.FCCS.loadings_data_.fccs_id==fuelbedNum
-                cover_type = self._cons_object.FCCS.loadings_data_[indexForFCCSObject].cover_type.values[0]
+                cover_type = int(self._cons_object.FCCS.loadings_data_[indexForFCCSObject].cover_type.values[0])
 
                 lu = CoverType2SeraEf(cover_type)
                 
