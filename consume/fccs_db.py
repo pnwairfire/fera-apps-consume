@@ -1,10 +1,56 @@
 import os
 import pandas as pan
+import functools
 from collections import namedtuple
 from . import data_desc as dd
 from . import module_locator
 
 FCCS_LOADINGS_FILE = './input_data/fccs_loadings.csv'
+
+
+@functools.cache
+def _load_data_from_csv(loadings_file):
+    """Load FCCS data from an external file.
+    """
+    found_loadings_metadata, loadings_metadata = _get_loadings_metadata(loadings_file)
+    column_header_begins = 1 if found_loadings_metadata else 0
+
+    # - Note that fuelbed_number is treated as an object (basically 'string' versus 'number')
+    loadings_data = pan.read_csv(loadings_file, dtype={'fuelbed_number': object}, header=column_header_begins)
+
+    # - todo: convert percentage data. should this be done in FCCS?
+    pct_data = ['shrubs_primary_perc_live', 'shrubs_secondary_perc_live', 'nw_primary_perc_live', 'nw_secondary_perc_live']
+    loadings_data[pct_data] = loadings_data[pct_data] * 0.01
+
+    # - rename columns to match internal names
+    for item in dd.LoadDefs:
+        loadings_data.rename(columns={item[0] : item[1]}, inplace=True)
+
+    return(loadings_data, loadings_metadata)
+
+def _get_loadings_metadata(loadings_file):
+    ''' The calculator information is in the first line of the file. It
+        should look like this:
+
+            GeneratorName=FCCS 3.0,GeneratorVersion=3.0.0,DateCreated=09/14/2012
+
+        Return a tuple of (found|not found, parsed data or stubs)
+    '''
+    DataInfo = namedtuple('DataInfo', ['generator_name', 'generator_version', 'date_generated'])
+    found = False
+    with open(loadings_file, 'r') as infile:
+        first_line = infile.readline().rstrip()
+        if 'GeneratorName' in first_line:
+            found = True
+            chunks = first_line.split(',')
+            name = chunks[0].split('=')[1]
+            version = chunks[1].split('=')[1]
+            date = chunks[2].split('=')[1]
+            loadings_metadata = DataInfo(name, version, date)
+        else:
+            print("\nWarning: consume loadings file has no metadata information!\n")
+            loadings_metadata = DataInfo("unknown", "unknown", "unknown")
+    return (found, loadings_metadata)
 
 class FCCSDB():
     """ A class the stores, retrieves, and distributes FCCS fuelbed information
@@ -24,54 +70,12 @@ class FCCSDB():
             mod_path = module_locator.module_path()
             self.loadings_file_ = os.path.join(mod_path, FCCS_LOADINGS_FILE)
 
-        (self.loadings_data_, self.loadings_metadata_) = self._load_data_from_csv()
+        (self.loadings_data_, self.loadings_metadata_) = _load_data_from_csv(self.loadings_file_)
         self.valid_fuelbeds_ = [i for i in self.loadings_data_.fccs_id]
 
     @property
     def data_source_info(self): return self.loadings_metadata_
 
-    def _load_data_from_csv(self):
-        """Load FCCS data from an external file.
-        """
-        found_loadings_metadata, loadings_metadata = self._get_loadings_metadata()
-        column_header_begins = 1 if found_loadings_metadata else 0
-
-        # - Note that fuelbed_number is treated as an object (basically 'string' versus 'number')
-        loadings_data = pan.read_csv(self.loadings_file_, dtype={'fuelbed_number': object}, header=column_header_begins)
-
-        # - todo: convert percentage data. should this be done in FCCS?
-        pct_data = ['shrubs_primary_perc_live', 'shrubs_secondary_perc_live', 'nw_primary_perc_live', 'nw_secondary_perc_live']
-        loadings_data[pct_data] = loadings_data[pct_data] * 0.01
-
-        # - rename columns to match internal names
-        for item in dd.LoadDefs:
-            loadings_data.rename(columns={item[0] : item[1]}, inplace=True)
-
-        return(loadings_data, loadings_metadata)
-
-    def _get_loadings_metadata(self):
-        ''' The calculator information is in the first line of the file. It
-            should look like this:
-
-                GeneratorName=FCCS 3.0,GeneratorVersion=3.0.0,DateCreated=09/14/2012
-
-            Return a tuple of (found|not found, parsed data or stubs)
-        '''
-        DataInfo = namedtuple('DataInfo', ['generator_name', 'generator_version', 'date_generated'])
-        found = False
-        with open(self.loadings_file_, 'r') as infile:
-            first_line = infile.readline().rstrip()
-            if 'GeneratorName' in first_line:
-                found = True
-                chunks = first_line.split(',')
-                name = chunks[0].split('=')[1]
-                version = chunks[1].split('=')[1]
-                date = chunks[2].split('=')[1]
-                loadings_metadata = DataInfo(name, version, date)
-            else:
-                print("\nWarning: consume loadings file has no metadata information!\n")
-                loadings_metadata = DataInfo("unknown", "unknown", "unknown")
-        return (found, loadings_metadata)
 
     def get_available_fuelbeds(self):
         return self.valid_fuelbeds_
