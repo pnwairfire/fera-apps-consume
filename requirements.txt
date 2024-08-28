@@ -2,6 +2,6 @@
 -f https://pypi.airfire.org/simple/
 eflookup==4.0.11
 #pandas==2.1.1
-numpy==1.26.0
+#numpy==1.26.0
 lxml==4.9.3
 green==3.2.5
