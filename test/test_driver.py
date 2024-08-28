@@ -42,13 +42,13 @@ def exception_wrapper(func, *args):
 #-------------------------------------------------------------------------------
 errors = 0
 for ifile in INPUT_FILES_NATURAL:
-    cmd = 'python3 {} {} {}'.format(CONSUME_DRIVER, TYPE_NATURAL, ifile)
+    cmd = 'python3.10 {} {} {}'.format(CONSUME_DRIVER, TYPE_NATURAL, ifile)
     print(cmd, '\n')
     errors += os.system(cmd)
     cmd = 'diff {} {}'.format('./consume_results.csv', './test/expected/regression_expected_{}_sera.csv'.format(ifile.split('_')[-1].split('.')[0]))
     print(cmd, '\n')
     errors += os.system(cmd)
-    cmd = 'python3 {} --nosera {} {}'.format(CONSUME_DRIVER, TYPE_NATURAL, ifile)
+    cmd = 'python3.10 {} --nosera {} {}'.format(CONSUME_DRIVER, TYPE_NATURAL, ifile)
     print(cmd, '\n')
     errors += os.system(cmd)
     cmd = 'diff {} {}'.format('./consume_results.csv', './test/expected/regression_expected_{}_nosera.csv'.format(ifile.split('_')[-1].split('.')[0]))
@@ -56,13 +56,13 @@ for ifile in INPUT_FILES_NATURAL:
     errors += os.system(cmd)
 
 for ifile in INPUT_FILES_ACTIVITY:
-    cmd = 'python3 {} {} {}'.format(CONSUME_DRIVER, TYPE_ACTIVITY, ifile)
+    cmd = 'python3.10 {} {} {}'.format(CONSUME_DRIVER, TYPE_ACTIVITY, ifile)
     print(cmd, '\n')
     errors += os.system(cmd)
     cmd = 'diff {} {}'.format('./consume_results.csv', './test/expected/regression_expected_{}_sera.csv'.format(ifile.split('_')[-1].split('.')[0]))
     print(cmd, '\n')
     errors += os.system(cmd)
-    cmd = 'python3 {} --nosera {} {}'.format(CONSUME_DRIVER, TYPE_ACTIVITY, ifile)
+    cmd = 'python3.10 {} --nosera {} {}'.format(CONSUME_DRIVER, TYPE_ACTIVITY, ifile)
     print(cmd, '\n')
     errors += os.system(cmd)
     cmd = 'diff {} {}'.format('./consume_results.csv', './test/expected/regression_expected_{}_nosera.csv'.format(ifile.split('_')[-1].split('.')[0]))
