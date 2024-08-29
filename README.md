@@ -161,9 +161,7 @@ briandrye@Brians-MacBook-Pro consume % source my310env/bin/activate
 pip install -r requirements.txt  
 pip install numpy pandas (not needed... should be installed by requirements.txt)
 
-Create a consume loadings file from online FCCS  
-https://depts.washington.edu/fft/fuelbed-editor-multiple/index.php  
-that has required columns. 
+Create a consume loadings file from online FCCS (or FFT) that has required columns: consume-loadings.csv. 
 
 Create an input file that has a row for each fuelbed in the consume-loadings.csv file. 
 
