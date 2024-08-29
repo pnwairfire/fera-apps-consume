@@ -1,7 +1,10 @@
 # Consume
 
 ### Purpose/Description:
-Consume calculates consumption and emission results based on a number of input parameters. The core Consume code was designed for interactive use in a REPL (read, evaluate, print, loop) environment. FERA has wrapped the core code to provide an application interface. Run the wrapper (consume_batch.py) with no arguments to see usage instructions.
+Consume calculates consumption and emission results based on a number of input parameters.  
+The core Consume code was designed for interactive use in a REPL (read, evaluate, print, loop) environment.  
+FERA has wrapped the core code to provide an application interface.  
+Run the wrapper (consume_batch.py) with no arguments to see usage instructions.
 
 ```
 
@@ -60,7 +63,7 @@ Examples:
 ```
 
 ### Building
-Consume is written in Python so there is no build. Consume runs under both Python 2 an 3
+Consume is written in Python so there is no build. Consume runs under both Python 3.10
 
 ### Tests
 Consume has regression tests and unit tests (depends on the green library). 
@@ -105,7 +108,9 @@ zip file contains instructions and sample input files
 
 
 ### Problems/Quirks
-Consume runs under both Python 2 and 3, and we package a version of portable Python within FFT. At some point, there will be changes to Python that break the portable Python. At some point, it might be advisable to pull python from FFT and require Windows users to install Python locally.
+Consume runs under Python 3.10, and we package a version of portable Python within FFT.  
+At some point, there will be changes to Python that break the portable Python.  
+At some point, it might be advisable to pull python from FFT and require Windows users to install Python locally.
 
 Known dependencies on Consume:
 
@@ -136,4 +141,47 @@ updated file may not be where you expect... Mine was in:
 copy fccs2covertype.py to:  
 /Users/briandrye/repos/uw/apps-consumeGIT/consume/eflookup321/eflookup/fccs2ef/data  
 
+
+### Notes on running Standalone Consume (outside of FFT install)
+
+From Artifactory, download consume to Downloads folder  
+~/Downlaods/consume  
+
+install python 3.10 if not already installed
+
+cd to ~/Downloads/consume  
+
+make virtual environment:  
+
+briandrye@Brians-MacBook-Pro consume % python3.10 --version  
+Python 3.10.12  
+briandrye@Brians-MacBook-Pro consume % python3.10 -m venv my310env  
+briandrye@Brians-MacBook-Pro consume % source my310env/bin/activate  
+
+pip install -r requirements.txt  
+pip install numpy pandas (not needed... should be installed by requirements.txt)
+
+Create a consume loadings file from online FCCS  
+https://depts.washington.edu/fft/fuelbed-editor-multiple/index.php  
+that has required columns. 
+
+Create an input file that has a row for each fuelbed in the consume-loadings.csv file. 
+
+sample_natural_input5and8.csv
+
+fuelbeds,area,fm_duff,fm_1000hr,can_con_pct,shrub_black_pct,pile_black_pct,units,ecoregion,fm_litter,season,duff_pct_available,sound_cwd_pct_available,rotten_cwd_pct_available  
+5,100,30,60,20,80,90,tons,western,30,fall,100,100,100  
+8,100,30,60,20,80,90,tons,western,30,fall,100,100,100  
+
+(my310env2) briandrye@Brians-MacBook-Pro consume % python consume_batch.py -f consume-loadings.csv -o bdtest.csv natural sample_natural_input5and8.csv
+
+Success!  
+
+Summary of commands:  
+1033  python3.10 --version  
+ 1034  python3.10 -m venv my310env  
+ 1035  source my310env/bin/activate  
+ 1036  python --version  
+ 1042  pip install -r requirements.txt  
+ 1045  python consume_batch.py -f consume-loadings2.csv -o bdtest.csv natural sample_natural_input5and8.csv  
 
