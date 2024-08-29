@@ -38,30 +38,6 @@ def exception_wrapper(func, *args):
         return 1
 
 #-------------------------------------------------------------------------------
-# Uncomment to regenerate "expected" output files, comment out test cases below. 
-#-------------------------------------------------------------------------------
-# for ifile in INPUT_FILES_NATURAL:
-#     outfile = './test/expected/regression_expected_{}_sera.csv'.format(ifile.split('_')[-1].split('.')[0])
-#     cmd = 'python3.10 {} {} {} -o {}'.format(CONSUME_DRIVER, TYPE_NATURAL, ifile, outfile)
-#     print(cmd, '\n')
-#     os.system(cmd)
-#     outfile = './test/expected/regression_expected_{}_nosera.csv'.format(ifile.split('_')[-1].split('.')[0])
-#     cmd = 'python3.10 {} --nosera {} {} -o {}'.format(CONSUME_DRIVER, TYPE_NATURAL, ifile, outfile)
-#     print(cmd, '\n')
-#     os.system(cmd)
-
-# for ifile in INPUT_FILES_ACTIVITY:
-#     outfile = './test/expected/regression_expected_{}_sera.csv'.format(ifile.split('_')[-1].split('.')[0])
-#     cmd = 'python3.10 {} {} {} -o {}'.format(CONSUME_DRIVER, TYPE_ACTIVITY, ifile, outfile)
-#     print(cmd, '\n')
-#     os.system(cmd)
-#     outfile = './test/expected/regression_expected_{}_nosera.csv'.format(ifile.split('_')[-1].split('.')[0])
-#     cmd = 'python3.10 {} --nosera {} {} -o {}'.format(CONSUME_DRIVER, TYPE_ACTIVITY, ifile, outfile)
-#     print(cmd, '\n')
-#     os.system(cmd)
-
-
-#-------------------------------------------------------------------------------
 # Start
 #-------------------------------------------------------------------------------
 errors = 0
