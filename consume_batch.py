@@ -102,7 +102,8 @@ def validate_fuel_loadings(alt_loadings_file):
         if valid:
             return True
         else:
-            print("\n!!! Error !!!\n\t\'{}\' is not a valid fuel loadings file.\n".format(alt_loadings_file))
+            print("\n!!! Error !!!\n\t\'{}\' Header line missing from fuel loadings file.\n".format(alt_loadings_file))
+            print("Example (add to first line of csv): GeneratorName=FCCS 4.0,GeneratorVersion=3.0.0,DateCreated=08/28/2024.\n")
             sys.exit(1)
 
 def read_col_cfg_file(filename):
