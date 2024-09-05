@@ -142,6 +142,17 @@ copy fccs2covertype.py to:
 /Users/briandrye/repos/uw/apps-consumeGIT/consume/eflookup321/eflookup/fccs2ef/data  
 
 
+### fccs_loadings.csv (aka consume_loadings.csv) notes  
+
+consume_loadings.csv is created by running FCCS (within FFT) against all fuelbeds using the default environment variables.  
+consume_loadings.csv is renamed fccs_loadings.csv and put in  
+/consume/input_data/fccs_loadings.csv  
+
+This version of fccs_loadings.csv should match what is available on the Landfire FCCS page: https://landfire.gov/fuel/fccs.  
+
+Bluesky Playground uses a fccs_loadings.json file that only has the standard fuelbeds.  
+The processs for creating the json file is described in the README of the bluesky-playground-v3 repository.  
+
 ### Notes on running Standalone Consume (outside of FFT install)
 
 From Artifactory, download consume to Downloads folder  
