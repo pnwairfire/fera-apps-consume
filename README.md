@@ -144,6 +144,24 @@ copy fccs2covertype.py to:
 
 ### fccs_loadings.csv (aka consume_loadings.csv) notes  
 
+steps to update fccs_loadings.csv:  
+install FFT which has fuelbeds (or run FCCS standalone)
+put LF disturbance fuelbeds in "FCCS/fuelbeds" folder
+put R6 fuelbeds in "FCCS/fuelbeds" folder  
+run "java -jar fuelbed.jar fuelbeds/*.xml"  
+duplicate first column, rename to FCCSID  
+replace underscore with '0' in first column (fuelbed_number)  
+sort the rows by the first column  
+replace 0.000000 with 0 (to reduce file size)  
+add 452 - 984, remappings  
+add -1111 row  
+make a copy of fccs_loadings.csv called LF_ConsumeLoadings.csv (send to Landfire)  
+run regression and unit tests for Consume. Update if necessary using test_driver.py.  
+make a new Jenkins/Artifactory build  
+make a new FFT build  
+make a new Cmd Line Instruction zip file  
+
+
 consume_loadings.csv is created by running FCCS (within FFT) against all fuelbeds using the default environment variables.  
 consume_loadings.csv is renamed fccs_loadings.csv and put in  
 /consume/input_data/fccs_loadings.csv  
