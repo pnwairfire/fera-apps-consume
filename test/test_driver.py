@@ -49,7 +49,7 @@ def exception_wrapper(func, *args):
 #     cmd = 'python3.10 {} --nosera {} {} -o {}'.format(CONSUME_DRIVER, TYPE_NATURAL, ifile, outfile)
 #     print(cmd, '\n')
 #     os.system(cmd)
-
+# 
 # for ifile in INPUT_FILES_ACTIVITY:
 #     outfile = './test/expected/regression_expected_{}_sera.csv'.format(ifile.split('_')[-1].split('.')[0])
 #     cmd = 'python3.10 {} {} {} -o {}'.format(CONSUME_DRIVER, TYPE_ACTIVITY, ifile, outfile)
@@ -59,7 +59,9 @@ def exception_wrapper(func, *args):
 #     cmd = 'python3.10 {} --nosera {} {} -o {}'.format(CONSUME_DRIVER, TYPE_ACTIVITY, ifile, outfile)
 #     print(cmd, '\n')
 #     os.system(cmd)
-
+# 
+# print('\nRecreated expected csv files.')
+# exit()
 
 #-------------------------------------------------------------------------------
 # Start
