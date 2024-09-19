@@ -15,5 +15,5 @@
 # Created:     7/30/2015
 #-------------------------------------------------------------------------------
 MAJOR_VERSION = 5
-MINOR_VERSION = 2
-PYPI_BUILD_REVISION = 6
+MINOR_VERSION = 3
+PYPI_BUILD_REVISION = 0
