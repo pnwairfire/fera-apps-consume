@@ -16,4 +16,4 @@
 #-------------------------------------------------------------------------------
 MAJOR_VERSION = 5
 MINOR_VERSION = 3
-PYPI_BUILD_REVISION = 0
+PYPI_BUILD_REVISION = 1
