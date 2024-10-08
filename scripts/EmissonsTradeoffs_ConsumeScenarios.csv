@@ -1,0 +1,8 @@
+,Scenario,Abbrev. Scen.,area,fm_duff,fm_1000hr,can_con_pct,shrub_black_pct,pile_black_pct,fuelbeds,units,ecoregion,fm_litter,season,rotten_cwd_pct_available,duff_pct_available,sound_cwd_pct_available
+1,Spring prescribed burn,SpringRx,100,150,80,0,50,90,populate rows for each FBID,tons,western,15,spring,50,30,0
+2,Spring prescribed burn emissions reduction techniques,SpringRxRed,100,150,80,0,50,90,populate rows for each FBID,tons,western,15,spring,20,10,0
+3,Fall prescribed burn,FallRx,100,60,25,0,100,90,populate rows for each FBID,tons,western,12,fall,100,100,20
+4,Fall prescribed burn emissions reduction techniques,FallRxRed,100,60,35,0,100,90,populate rows for each FBID,tons,western,12,fall,50,50,0
+5,Summer Wildfire - low severity,WFLow,100,30,35,20,100,90,populate rows for each FBID,tons,western,12,summer,100,100,100
+6,Summer Wildfire - moderate severity,WFMod,100,30,25,50,100,90,populate rows for each FBID,tons,western,9,summer,100,100,100
+7,Summer Wildfire - high severity,WFHigh,100,30,10,90,100,100,populate rows for each FBID,tons,western,3,summer,100,100,100
