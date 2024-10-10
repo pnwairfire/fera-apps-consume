@@ -26,8 +26,6 @@ DO_RAW_OUTPUT = 'raw'
 
 PRECISION = 2
 
-FEPS_EMISSIONS_INPUT = 'feps_emissions_input.csv'
-
 # -- From stackoverflow.com ---
 import collections.abc as colls
 import itertools as it
@@ -119,7 +117,7 @@ def read_col_cfg_file(filename):
                     assert False, "Malformed line: {}".format(line)
     return retval
 
-def write_feps_emissions_input(all_results):
+def write_feps_emissions_input(all_results, feps_input_filename):
     '''
     FEPS expects an input file that looks like this:
         Phase,CO2,CO,CH4,PM25,PM10,NOx,SO2,NH3,VOC,Total
@@ -190,7 +188,7 @@ def write_feps_emissions_input(all_results):
     pollutants = ['CO2', 'CO', 'CH4', 'PM25', 'PM10', 'NOx', 'SO2', 'NH3', 'NMHC']
     for p in pollutants:
         df[p] /= LBS_PER_TON
-    df.to_csv(FEPS_EMISSIONS_INPUT, index=False, float_format='%.3f')
+    df.to_csv(feps_input_filename, index=False, float_format='%.3f')
     
 def round_to(df):
     ''' Our packaged version of Pandas doesn't have round.
@@ -204,7 +202,7 @@ def round_to(df):
     return df
 
 
-def write_results(all_results, outfile, do_metric, col_cfg_file=None):
+def write_results(all_results, outfile, feps_input_filename, do_metric, col_cfg_file=None):
     # calculated results are in a hierarchical dictionary. Flatten the entire structure
     #  so that any chosen datum can be specified
     tmp = {}
@@ -214,7 +212,7 @@ def write_results(all_results, outfile, do_metric, col_cfg_file=None):
         tmp[colname] = v
 
     # always write the FEPS emissions input file
-    write_feps_emissions_input(tmp)
+    write_feps_emissions_input(tmp, feps_input_filename)
 
     # Idea: output format will be done later so simply persist the calculated results.
     # I've retained this, but it is no longer the default action. We have a default
@@ -266,7 +264,7 @@ def write_units(outfile, do_metric):
     print("\nSuccess!!! Description of units used \"{}\"".format(outfile))
 
 
-def run(burn_type, csv_input, do_metric, msg_level, outfile, fuel_loadings=None, col_cfg=None, no_sera=False):
+def run(burn_type, csv_input, do_metric, msg_level, outfile, feps_input_filename, fuel_loadings=None, col_cfg=None, no_sera=False):
     # validate alternate loadings file if provide. Throws exception on invalid
     if fuel_loadings: validate_fuel_loadings(fuel_loadings)
 
@@ -286,7 +284,7 @@ def run(burn_type, csv_input, do_metric, msg_level, outfile, fuel_loadings=None,
 
         results = emissions.results()
 
-        write_results(results, outfile, do_metric, col_cfg_file=col_cfg)
+        write_results(results, outfile, feps_input_filename, do_metric, col_cfg_file=col_cfg)
 
         write_units(outfile, do_metric)
 
@@ -304,7 +302,7 @@ def main():
         if parser.no_sera == True:
             print("no_sera is True... run without SERA emissions values")
         
-        run(parser.burn_type, parser.csv_file, parser.do_metric, parser.msg_level, parser.output_filename,
+        run(parser.burn_type, parser.csv_file, parser.do_metric, parser.msg_level, parser.output_filename, parser.feps_input_filename,
             parser.fuel_loadings_file, parser.col_cfg_file, parser.no_sera)
     except Exception as e:
         tb = sys.exc_info()[2]

@@ -91,6 +91,11 @@ Examples:
         dest='output_filename', metavar='output filename',
         help='Specify the name of the Consume output results file.'
         )
+    # - specify a feps output filename
+    parser.add_argument('--fepsfilename', action='store', nargs=1, default=['feps_emissions_input.csv'],
+        dest='feps_input_filename', metavar='feps input filename',
+        help='Specify the name of the FEPS emissions input file.'
+        )
     return parser
 
 class ConsumeParserException(Exception):
@@ -149,6 +154,9 @@ class ConsumeParser(object):
 
             if args.output_filename:
                 self.output_filename = os.path.abspath(args.output_filename[0])
+
+            if args.feps_input_filename:
+                self.feps_input_filename = os.path.abspath(args.feps_input_filename[0])
 
             if args.msg_level:
                 level = int(args.msg_level[0])
