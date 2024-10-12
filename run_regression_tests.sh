@@ -1,2 +1,2 @@
  #! /bin/bash
- python3.10 test/test_driver.py
+ python3.12 test/test_driver.py
