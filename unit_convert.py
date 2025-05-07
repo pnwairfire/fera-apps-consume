@@ -19,8 +19,8 @@ CONS_CONV = 2.24170231
 # from google  (1 lb_ac = 1.12085116 kg_ha)
 EMIS_CONV = 1.12085116
 
-# http://www.translatorscafe.com/cafe/EN/units-converter/heat-flux-density/2-23/kilowatt%2Fmeter%C2%B2-Btu_(th)%2Fhour%2Ffoot%C2%B2/
-HEATRELEASE_CONV = 0.1892754465477
+# BTU/acre = 0.000000072419 KWH/m^2   # 7.2419*10^(-8)
+HEATRELEASE_CONV = 0.000000072419
 
 def column_convert_none(colname, col):
     return col
