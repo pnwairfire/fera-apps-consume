@@ -26,7 +26,7 @@ The input parameters required for the emissions calculations are as follows:
        the auto-select process if desired as described below.
 
 To set alternate output units for the Emissions object, use the consume.list_valid_units() method
-to view output unit options, and set using line below. 
+to view output unit options, and set using line below.
 Default output units for emissions are lbs/ac.
 
 >>> e_obj.output_units = 'kg_ha'
@@ -137,7 +137,6 @@ EMISSIONS
 Units: lbs_ac
 
 FCCS ID: 1
-Area:	100 ac. (40.5 ha)
 Emissions factor group: 2
 SPECIES	Flaming		Smoldering	Residual	TOTAL
 pm	    2.77e+02	3.73e+02	7.82e+02	1.43e+03
@@ -149,7 +148,6 @@ ch4	    5.31e+01	1.92e+02	4.03e+02	6.49e+02
 nmhc	6.27e+01	1.37e+02	2.88e+02	4.88e+02
 
 FCCS ID: 47
-Area:	200 ac. (80.9 ha)
 Emissions factor group: 4
 SPECIES	Flaming		Smoldering	Residual	TOTAL
 pm	    4.60e+02	9.69e+02	1.45e+03	2.88e+03
@@ -162,7 +160,6 @@ nmhc	6.70e+01	3.81e+02	5.70e+02	1.02e+03
 
 ALL FUELBEDS:
 Units: lbs_ac
-Total area: 300 ac. (121.4 ha)
 pm	    3.99e+02	7.70e+02	1.23e+03	2.40e+03
 pm10	9.45e+01	3.02e+01	2.14e+01	1.46e+02
 pm2.5	2.96e+01	3.08e+00	0.00e+00	3.27e+01
@@ -386,7 +383,7 @@ class Emissions(util.FrozenClass):
         the dictionary and examples on how to extract information from the
         dictionary.
         """
-                
+
         self._calculate()
         self._convert_units()
 
@@ -441,8 +438,8 @@ class Emissions(util.FrozenClass):
             for i in range(0, len(fccs_ids)):
                 ha = area[i] * 0.404685642
                 print ("\nFCCS ID: " + str(fccs_ids[i])
-                        + "\nArea:\t%.0f" % area[i] + " ac. (%.1f" % ha
-                        + " ha)\nEmissions factor group: "
+                        + "\n"
+                        + "\nEmissions factor group: "
                         + str(self._emissions_factor_groups[i])
                         + "\nSPECIES\tFlaming\t\tSmoldering\tResidual\tTOTAL")
 
@@ -462,9 +459,7 @@ class Emissions(util.FrozenClass):
                             str(dat[0][i]) + ',' + str(dat[1][i]) + ',' +
                             str(dat[2][i]) + ',' + str(dat[3][i]) + '\n')
 
-            print ("\nALL FUELBEDS:\nUnits: " + self._output_units
-                   + "\nTotal area: %.0f" % sum(area)
-                   + " ac. (%.1f" % (sum(area) * 0.404685642) + " ha)")
+            print ("\nALL FUELBEDS:\nUnits: " + self._output_units)
 
             all_hed =  'ALL,ALL,' + str(sum(area)) + ',ALL,' + str_au + ','
 
@@ -661,7 +656,7 @@ class Emissions(util.FrozenClass):
         # Load default emissions factors (average of all factors...)
         t = self._emission_factor_db.data[0]
         num_fuelbeds = int(self._have_cons_data)# <<< ucons
-        
+
         if self._no_sera:
             ef_flamg_pm = np.array([t['PM_flaming']] * num_fuelbeds, dtype = float)
             ef_flamg_pm10 = np.array([t['PM10b_flaming']] * num_fuelbeds, dtype = float)
@@ -705,7 +700,7 @@ class Emissions(util.FrozenClass):
                 ef_flamg_pm10[i] = data['PM10b_flaming']; ef_smres_pm10[i] = data['PM10b_smold_resid']
 
             fill = [np.array([0] * num_fuelbeds, dtype=float)]
-            
+
             ef_pm = np.array([ef_flamg_pm] + [ef_smres_pm] + [ef_smres_pm] + fill)
             ef_pm10 = np.array([ef_flamg_pm10] + [ef_smres_pm10] + [ef_smres_pm10] + fill)
             ef_pm25 = np.array([ef_flamg_pm25] + [ef_smres_pm25] + [ef_smres_pm25] + fill)
@@ -777,11 +772,11 @@ class Emissions(util.FrozenClass):
                 cover_type = int(self._cons_object.FCCS.loadings_data_[indexForFCCSObject].cover_type.values[0])
 
                 lu = CoverType2SeraEf(cover_type)
-                
+
                 ef_flamg_pm25[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="PM2.5")
                 ef_smold_pm25[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="PM2.5")
                 ef_resid_pm25[i] = ef_smold_pm25[i]
-                
+
                 ef_flamg_pm10[i] = ef_flamg_pm25[i] * 1.111
                 ef_smold_pm10[i] = ef_smold_pm25[i] * 1.111
                 ef_resid_pm10[i] = ef_smold_pm10[i]
@@ -798,9 +793,9 @@ class Emissions(util.FrozenClass):
                 ef_smold_ch4[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="CH4")
                 ef_resid_ch4[i] = ef_smold_ch4[i]
 
-                # NMHC ? PM ? instead of showing old values, leave these set to zero. 
-                # In other words, NHMC and PM are unsupported. Instead of NMHC, we return NMOC 
-                
+                # NMHC ? PM ? instead of showing old values, leave these set to zero.
+                # In other words, NHMC and PM are unsupported. Instead of NMHC, we return NMOC
+
                 ef_flamg_nmoc[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="NMOC")
                 ef_smold_nmoc[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="NMOC")
                 ef_resid_nmoc[i] = ef_smold_nmoc[i]
@@ -825,7 +820,7 @@ class Emissions(util.FrozenClass):
                 ef_flamg_so2[i] = 2 * lu.get(phase="flaming",fuel_category="canopy",fuel_sub_category="overstory",species="SO2")
                 ef_smold_so2[i] = 2 * lu.get(phase="smoldering",fuel_category="canopy",fuel_sub_category="overstory",species="SO2")
                 ef_resid_so2[i] = ef_smold_so2[i]
-         
+
             fill = [np.array([0] * num_fuelbeds, dtype=float)]
             ef_pm = np.array([ef_flamg_pm] + [ef_smold_pm] + [ef_resid_pm] + fill)
             ef_pm10 = np.array([ef_flamg_pm10] + [ef_smold_pm10] + [ef_resid_pm10] + fill)
@@ -840,12 +835,12 @@ class Emissions(util.FrozenClass):
             ef_no2 = np.array([ef_flamg_no2] + [ef_smold_no2] + [ef_resid_no2] + fill)
             ef_nox = np.array([ef_flamg_nox] + [ef_smold_nox] + [ef_resid_nox] + fill)
             ef_so2 = np.array([ef_flamg_so2] + [ef_smold_so2] + [ef_resid_so2] + fill)
-            
+
 
 
 ###---------------------------------------------------
 
-       
+
         # Emissions calculations:
        # consumption (tons/acre) * emissions factor (lb/ton) = lbs/ac emissions
        # Emissions for all fuels combined
@@ -862,7 +857,7 @@ class Emissions(util.FrozenClass):
         emis_no2_fsrt = calc_species(all_fsrt, ef_no2)
         emis_nox_fsrt = calc_species(all_fsrt, ef_nox)
         emis_so2_fsrt = calc_species(all_fsrt, ef_so2)
-        
+
         # --- Separate pile calculations ---
         (all_loadings, pile_loadings, pile_black_pct) = pile_info(self._cons_object)
         (pile_pm, pile_pm10, pile_pm25) = \
@@ -905,7 +900,7 @@ class Emissions(util.FrozenClass):
 
         #print "UNPACKING"
         self._emis_data = arrayize([emis_pm_fsrt, emis_pm10_fsrt, emis_pm25_fsrt,
-                   emis_co_fsrt, emis_co2_fsrt, emis_ch4_fsrt, emis_nmhc_fsrt, emis_nmoc_fsrt, 
+                   emis_co_fsrt, emis_co2_fsrt, emis_ch4_fsrt, emis_nmhc_fsrt, emis_nmoc_fsrt,
                    emis_nh3_fsrt, emis_no_fsrt, emis_no2_fsrt, emis_nox_fsrt, emis_so2_fsrt])
 
         #print "ADDING PER AREA STUFF"

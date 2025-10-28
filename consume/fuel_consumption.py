@@ -80,7 +80,7 @@ There are two alternative options for setting input values:
                   .FCCS.info(id#, detail=True)
 
         fuelbed_area_acres
-                : a list (or single number to be used for all fuelbeds) of
+                : (IGNORED) a list (or single number to be used for all fuelbeds) of
                   numbers in acres that represents area for the corresponding
                   FCCS fuelbed ID listed in the 'fuelbeds_fccs_ids' variable.
 
@@ -160,7 +160,7 @@ There are two alternative options for setting input values:
 
 ### OUTPUT UNITS ###
 
-The user can not set alternate output units. 
+The user can not set alternate output units.
 The fuel consumption units are tons/acre ('tons_ac').
 
 
@@ -269,10 +269,8 @@ Out:
 FUEL CONSUMPTION
 Consumption units: tons/ac
 Heat release units: btu/ac
-Total area: 300 acres
 
 FCCS ID: 1
-Area:	100
 Ecoregion: western
 CATEGORY	Flaming		Smoldering	Residual	TOTAL
 canopy		5.53e+00	4.03e-01 	4.47e-02 	5.97e+00
@@ -286,7 +284,6 @@ TOTAL:		1.05e+01	2.06e+00	1.13e+00	1.37e+01
 Heat release:	1.68e+08	3.30e+07	1.81e+07	2.19e+08
 
 FCCS ID: 47
-Area:	200
 Ecoregion: western
 CATEGORY	Flaming		Smoldering	Residual	TOTAL
 canopy		3.31e+00	6.86e-01 	4.98e-01 	4.50e+00
@@ -519,7 +516,7 @@ class FuelConsumption(util.FrozenClass):
                   .FCCS.info(id#, detail=True)
 
         fuelbed_area_acres
-                : a list (or single number to be used for all fuelbeds) of
+                : (IGNORED) a list (or single number to be used for all fuelbeds) of
                   numbers in acres that represents area for the corresponding
                   FCCS fuelbed ID listed in the 'fuelbeds_fccs_ids' variable.
 
@@ -561,8 +558,8 @@ class FuelConsumption(util.FrozenClass):
 
         duff_pct_available
                 : Percent of duff that is available for consumption. A number or list
-                  of numbers ranging from 0-100 representing a percentage. Upper duff is used, 
-                  then lower duff. 
+                  of numbers ranging from 0-100 representing a percentage. Upper duff is used,
+                  then lower duff.
 
         sound_cwd_pct_available
                 : Percent of sound coarse woody debris that is available for consumption. A number or list
@@ -803,7 +800,7 @@ class FuelConsumption(util.FrozenClass):
         self._ucons_data = None
         self._heat_data = None
         self._cons_data = None
-        
+
     def reset_all(self):
         self._reset_outputs()
         self._settings.reset_to_empty()
@@ -987,8 +984,7 @@ class FuelConsumption(util.FrozenClass):
 
         txt = ""
         txt += ("\n\nFUEL CONSUMPTION\nConsumption units: " + str_au +
-            "\nHeat release units: " + hr_au +
-            "\nTotal area: %.0f" % sum(np.array(area)) + " acres")
+            "\nHeat release units: " + hr_au )
 
         csv_lines = ("unitID,fccsID,ecoregion,area,1000hr_fm,duff_fm,"
                      + "canopy_consumed_pct,shrub_blackened_pct,units,"
@@ -1003,7 +999,7 @@ class FuelConsumption(util.FrozenClass):
         for i in range(0, len(fccs_ids)):
 
             txt += ("\n\nFCCS ID: " + str(fccs_ids[i])
-            + "\nArea:\t%.0f" % area[i] + "\nEcoregion: " + ecoregion[i]
+            + "\nEcoregion: " + ecoregion[i]
             + "\nCATEGORY\tFlaming\t\tSmoldering\tResidual\tTOTAL")
 
             fm_hdr = (str(fm_1000hr[i]) + ',' + str(fm_duff[i]) +
@@ -1271,11 +1267,11 @@ class FuelConsumption(util.FrozenClass):
                 ccn.sound_large_wood_calc(LD, fm_1000hr, sound_cwd_pct_available)
             oneK_hr_rot_fsrt, tenK_hr_rot_fsrt, tnkp_hr_rot_fsrt = \
                 ccn.rotten_large_wood_calc(LD, fm_1000hr, rotten_cwd_pct_available)
-                
+
             lit_fsrt, litter_proportion_consumed  = ccn.litter_calc(LD, fm_duff, fm_litter, ecoregion_masks)
             lch_fsrt = ccn.lichen_calc(LD, fm_duff, fm_litter, ecoregion_masks, litter_proportion_consumed)
             moss_fsrt = ccn.moss_calc(LD, fm_duff, fm_litter, ecoregion_masks, litter_proportion_consumed)
-            
+
             duff_upper_fsrt, duff_lower_fsrt, duff_proportion_consumed = ccn.duff_calc(LD, fm_duff, fm_litter, ecoregion_masks, duff_pct_available)
             bas_fsrt = ccn.basal_accumulation_calc(LD, fm_duff, fm_litter, ecoregion_masks, duff_proportion_consumed)
             sqm_fsrt = ccn.squirrel_midden_calc(LD, fm_duff, fm_litter, ecoregion_masks, duff_proportion_consumed)
@@ -1293,7 +1289,7 @@ class FuelConsumption(util.FrozenClass):
             [tenK_hr_snd_fsrt, tenK_hr_rot_fsrt],
             [tnkp_hr_snd_fsrt, tnkp_hr_rot_fsrt],
             ff_reduction] = cca.ccon_activity(fm_1000hr, fm_type,
-                windspeed, slope, area, days_since_rain, fm_10hr, length_of_ignition, LD, 
+                windspeed, slope, area, days_since_rain, fm_10hr, length_of_ignition, LD,
                 duff_pct_available, sound_cwd_pct_available, rotten_cwd_pct_available)
 
             # The ff reduction is a destructive process (modifies the ff_reduction array)
@@ -1302,11 +1298,11 @@ class FuelConsumption(util.FrozenClass):
             lch_fsrt = cca.ccon_forest_floor(LD, ff_reduction, 'lch_depth', 'lichen_loading', [0.95, 0.05, 0.00])
             moss_fsrt = cca.ccon_forest_floor(LD, ff_reduction, 'moss_depth', 'moss_loading', [0.95, 0.05, 0.00])
             lit_fsrt = cca.ccon_forest_floor(LD, ff_reduction, 'lit_depth', 'litter_loading', [0.90, 0.10, 0.00])
-                
+
             layer_reduction = cca.calc_and_reduce_ff(LD, ff_reduction, 'duff_upper_depth')
             # - how much was it reduced relative to the layer depth
             proportional_reduction = np.where(LD['duff_upper_depth'] > 0.0, layer_reduction / LD['duff_upper_depth'], 0.0)
-            
+
             tempTotalDuffValues = values(LD, 'duff_upper_loading') + values(LD, 'duff_lower_loading')
 
             tempUpperValues = values(LD, 'duff_upper_loading')
@@ -1314,23 +1310,23 @@ class FuelConsumption(util.FrozenClass):
 
             revisedUpperValues = np.where(tempUpperValues < tempTotalDuffValues * (duff_pct_available/100.0), tempUpperValues, tempTotalDuffValues * (duff_pct_available/100.0))
             # example: 5 upper, 5 lower, pct_available = 80 or 30
-            # if 5 <= 8, set to 5. 
+            # if 5 <= 8, set to 5.
             # if 5 > 3, set to 3  (use 3 of 5 upper)
 
             totalUpper = proportional_reduction * revisedUpperValues
             duff_upper_fsrt = util.csdist(totalUpper, [0.10, 0.70, 0.20])
-            
+
             revisedLowerValues = np.where(tempUpperValues < tempTotalDuffValues * (duff_pct_available/100.0), tempTotalDuffValues * (duff_pct_available/100.0) - tempUpperValues, 0.0)
             # if 5 < 8, set to 8-5
             # if 5 >= 3, set to zero
-            
+
             layer_reduction = cca.calc_and_reduce_ff(LD, ff_reduction, 'duff_lower_depth')
             # - how much was it reduced relative to the layer depth
             proportional_reduction = np.where(LD['duff_lower_depth'] > 0.0, layer_reduction / LD['duff_lower_depth'], 0.0)
 
             totalLower = proportional_reduction * revisedLowerValues
             duff_lower_fsrt = util.csdist(totalLower, [0.00, 0.20, 0.80])
-  
+
             ff_redux_proportion = self.calc_ff_redux_proportion(LD, ff_redux_copy)
             bas_fsrt = cca.ccon_bas(values(LD, 'bas_loading'), ff_redux_proportion)
             sqm_fsrt = cca.ccon_sqm(values(LD, 'sqm_loading'), ff_redux_proportion)
