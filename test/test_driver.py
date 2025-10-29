@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------
 # Name:        test_driver.py
-# Author:      kjells
+# Author:      kjells/bdrye
 # Created:     9/22/2011
 # Copyright:   (c) kjells 2011
 # Purpose:     Use to generate results and run regression tests.
@@ -42,21 +42,21 @@ def exception_wrapper(func, *args):
 #-------------------------------------------------------------------------------
 # for ifile in INPUT_FILES_NATURAL:
 #     outfile = './test/expected/regression_expected_{}_sera.csv'.format(ifile.split('_')[-1].split('.')[0])
-#     cmd = 'python3.12 {} {} {} -o {}'.format(CONSUME_DRIVER, TYPE_NATURAL, ifile, outfile)
+#     cmd = 'python {} {} {} -o {}'.format(CONSUME_DRIVER, TYPE_NATURAL, ifile, outfile)
 #     print(cmd, '\n')
 #     os.system(cmd)
 #     outfile = './test/expected/regression_expected_{}_nosera.csv'.format(ifile.split('_')[-1].split('.')[0])
-#     cmd = 'python3.12 {} --nosera {} {} -o {}'.format(CONSUME_DRIVER, TYPE_NATURAL, ifile, outfile)
+#     cmd = 'python {} --nosera {} {} -o {}'.format(CONSUME_DRIVER, TYPE_NATURAL, ifile, outfile)
 #     print(cmd, '\n')
 #     os.system(cmd)
 # 
 # for ifile in INPUT_FILES_ACTIVITY:
 #     outfile = './test/expected/regression_expected_{}_sera.csv'.format(ifile.split('_')[-1].split('.')[0])
-#     cmd = 'python3.12 {} {} {} -o {}'.format(CONSUME_DRIVER, TYPE_ACTIVITY, ifile, outfile)
+#     cmd = 'python {} {} {} -o {}'.format(CONSUME_DRIVER, TYPE_ACTIVITY, ifile, outfile)
 #     print(cmd, '\n')
 #     os.system(cmd)
 #     outfile = './test/expected/regression_expected_{}_nosera.csv'.format(ifile.split('_')[-1].split('.')[0])
-#     cmd = 'python3.12 {} --nosera {} {} -o {}'.format(CONSUME_DRIVER, TYPE_ACTIVITY, ifile, outfile)
+#     cmd = 'python {} --nosera {} {} -o {}'.format(CONSUME_DRIVER, TYPE_ACTIVITY, ifile, outfile)
 #     print(cmd, '\n')
 #     os.system(cmd)
 # 
@@ -68,13 +68,13 @@ def exception_wrapper(func, *args):
 #-------------------------------------------------------------------------------
 errors = 0
 for ifile in INPUT_FILES_NATURAL:
-    cmd = 'python3.12 {} {} {}'.format(CONSUME_DRIVER, TYPE_NATURAL, ifile)
+    cmd = 'python {} {} {}'.format(CONSUME_DRIVER, TYPE_NATURAL, ifile)
     print(cmd, '\n')
     errors += os.system(cmd)
     cmd = 'diff {} {}'.format('./consume_results.csv', './test/expected/regression_expected_{}_sera.csv'.format(ifile.split('_')[-1].split('.')[0]))
     print(cmd, '\n')
     errors += os.system(cmd)
-    cmd = 'python3.12 {} --nosera {} {}'.format(CONSUME_DRIVER, TYPE_NATURAL, ifile)
+    cmd = 'python {} --nosera {} {}'.format(CONSUME_DRIVER, TYPE_NATURAL, ifile)
     print(cmd, '\n')
     errors += os.system(cmd)
     cmd = 'diff {} {}'.format('./consume_results.csv', './test/expected/regression_expected_{}_nosera.csv'.format(ifile.split('_')[-1].split('.')[0]))
@@ -82,13 +82,13 @@ for ifile in INPUT_FILES_NATURAL:
     errors += os.system(cmd)
 
 for ifile in INPUT_FILES_ACTIVITY:
-    cmd = 'python3.12 {} {} {}'.format(CONSUME_DRIVER, TYPE_ACTIVITY, ifile)
+    cmd = 'python {} {} {}'.format(CONSUME_DRIVER, TYPE_ACTIVITY, ifile)
     print(cmd, '\n')
     errors += os.system(cmd)
     cmd = 'diff {} {}'.format('./consume_results.csv', './test/expected/regression_expected_{}_sera.csv'.format(ifile.split('_')[-1].split('.')[0]))
     print(cmd, '\n')
     errors += os.system(cmd)
-    cmd = 'python3.12 {} --nosera {} {}'.format(CONSUME_DRIVER, TYPE_ACTIVITY, ifile)
+    cmd = 'python {} --nosera {} {}'.format(CONSUME_DRIVER, TYPE_ACTIVITY, ifile)
     print(cmd, '\n')
     errors += os.system(cmd)
     cmd = 'diff {} {}'.format('./consume_results.csv', './test/expected/regression_expected_{}_nosera.csv'.format(ifile.split('_')[-1].split('.')[0]))
