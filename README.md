@@ -102,6 +102,17 @@ Ran 941 tests in 0.111s
 OK (passes=38)
 
 ```
+### How to run tests in Docker (Mac Silicon ARM)
+
+docker run -it --rm consume-h3:latest /bin/bash  
+
+Run with volume mounting… this allows editing of test_driver.py:  
+docker run -it --rm -v $(pwd):/app consume-h3:latest /bin/bash  
+
+python test/test_driver.py
+(edit test_driver.py to run tests or update expected results)  
+
+
 ### How to run from Command Line
 See https://depts.washington.edu/fft/fft_download/  
 zip file contains instructions and sample input files

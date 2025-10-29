@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  consume:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: consume-h3:latest
+    container_name: consume-dev
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /app/my310env  # Exclude virtual environments
+      - /app/myenv313
+    environment:
+      - PYTHONPATH=/app
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+
+  # Service for running tests
+  consume-test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: consume-h3:latest
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: python -m pytest unittest/ -v
+
+  # Service for running the consume batch processor
+  consume-batch:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: consume-h3:latest
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: python consume_batch.py --help
