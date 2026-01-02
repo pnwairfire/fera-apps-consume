@@ -67,7 +67,7 @@ with open(newFccsLoadingsPath, 'w', newline='') as newLoadingsFile:
                             ])
 
             # write the values row for this fuelbed_number
-            writer.writerow([fuelbed_number] +[new_fuelbed_number] + values)
+            writer.writerow([new_fuelbed_number] +[new_fuelbed_number] + values)
 
 
 # create input_file_for_adjusted.csv with header and 7 rows per fuelbed_number
@@ -94,15 +94,14 @@ with open(inputFilePath, 'w', newline='') as inputFile:
     writer.writerow(['area','fm_duff','fm_1000hr','can_con_pct','shrub_black_pct','pile_black_pct','fuelbeds','units','ecoregion','fm_litter','season','rotten_cwd_pct_available','duff_pct_available','sound_cwd_pct_available'])
     # write 7 rows for each fuelbed_number
     for i in range(7):
-        new_fuelbed_number = f"{fuelbed_number}000{i+1}"
-        # example values, modify as needed
-        writer.writerow([100,150,80,0,50,90,fuelbed_number,'tons','western',15,'spring',50,30,0])
-        writer.writerow([100,150,80,0,50,90,fuelbed_number,'tons','western',15,'spring',20,10,0])
-        writer.writerow([100,60,25,0,100,90,fuelbed_number,'tons','western',12,'fall',100,100,20])
-        writer.writerow([100,60,35,0,100,90,fuelbed_number,'tons','western',12,'fall',50,50,0])
-        writer.writerow([100,30,35,20,100,90,fuelbed_number,'tons','western',12,'summer',100,100,100])
-        writer.writerow([100,30,25,50,100,90,fuelbed_number,'tons','western',9,'summer',100,100,100])
-        writer.writerow([100,30,10,90,100,100,fuelbed_number,'tons','western',3,'summer',100,100,100])
+        new_fuelbed_number = f"{fuelbed_number}_{i+1}"
+        writer.writerow([100,150,80,0,50,90,new_fuelbed_number,'tons','western',15,'spring',50,30,0])
+        writer.writerow([100,150,80,0,50,90,new_fuelbed_number,'tons','western',15,'spring',20,10,0])
+        writer.writerow([100,60,25,0,100,90,new_fuelbed_number,'tons','western',12,'fall',100,100,20])
+        writer.writerow([100,60,35,0,100,90,new_fuelbed_number,'tons','western',12,'fall',50,50,0])
+        writer.writerow([100,30,35,20,100,90,new_fuelbed_number,'tons','western',12,'summer',100,100,100])
+        writer.writerow([100,30,25,50,100,90,new_fuelbed_number,'tons','western',9,'summer',100,100,100])
+        writer.writerow([100,30,10,90,100,100,new_fuelbed_number,'tons','western',3,'summer',100,100,100])
 
 
 print('Created adjusted loadings and input files based on consumption data.')
