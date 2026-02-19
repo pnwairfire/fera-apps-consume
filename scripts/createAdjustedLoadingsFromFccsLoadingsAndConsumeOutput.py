@@ -7,10 +7,11 @@ import sys
 fccsLoadingsPath = '/Users/briandrye/repos/uw/apps-consumeGIT/consume/input_data/fccs_loadings.csv'
 consumeOutputPath = '/Users/briandrye/Downloads/consume813/consume_output2026_01_30.csv'
 
-newFccsLoadingsPath = '/Users/briandrye/repos/uw/apps-consumeGIT/scripts/adjusted_fccs_loadings2026_01_30.csv'
-inputFilePath = '/Users/briandrye/repos/uw/apps-consumeGIT/scripts/input_file_for_adjusted2026_01_30.csv'
+newFccsLoadingsPath = '/Users/briandrye/repos/uw/apps-consumeGIT/scripts/adjusted_fccs_loadings2026_02_18.csv'
+inputFilePath = '/Users/briandrye/repos/uw/apps-consumeGIT/scripts/input_file_for_adjusted2026_02_18.csv'
 
 #fuelbedsOfInterest = ['52', '208', '292']
+#fuelbedsOfInterest = ['52']
 fuelbedsOfInterest = ['1', '6', '8', '9', '10', '13', '20', '22', '28', '48', '52', '53', '56', '57', '59', '60', '70', '95', '208', '224', '235', '237', '292', '304', '305', '308', '310', '315', '321', '331', '358', '360', '361', '483', '493', '494', '496', '497', '498', '506', '514', '529', '530', '531', '532', '1223', '1232', '1262', '1264', '1273']
 
 # scenarios:
@@ -108,19 +109,23 @@ for fb in fuelbedsOfInterest:
         # find the row in fccsLoadings for the fuelbed_number of interest
         fccsRowIndex = None
 
+
         if variation == '':
-            fb_variation = fb + '0000'
+            fccs_lookup = fb
+            consume_lookup = fb + '0000'
         else:
-            fb_variation = fb + '0'+ variation
-        print(fb_variation)
+            fccs_lookup = fb + '0' + variation
+            consume_lookup = fb + '0' + variation
+        print(fccs_lookup)
+        print(consume_lookup)
         for idx, row in enumerate(fccsLoadings):
             # print(row[0])
-            if row[0] == fb_variation:
+            if row[0] == fccs_lookup:
                 fccsRowIndex = idx
                 print('fccsRowIndex:' + str(fccsRowIndex))
                 break
         if fccsRowIndex is None:
-            print("Could not find " + fb_variation + " in fccs loadings", file=sys.stderr)
+            print("Could not find " + fccs_lookup + " in fccs loadings", file=sys.stderr)
             # skip to next variation
             continue
 
@@ -130,16 +135,16 @@ for fb in fuelbedsOfInterest:
         with open(consumeOutputPath, 'r') as consumeOutputFile:
             reader2 = csv.reader(consumeOutputFile)
             consumeOutput = list(reader2)
-
             # find row index where row[0] starts with fb_variation  520111
+            # for disturbance fuelbeds, look for the full variation like "520111"
             for idx, row in enumerate(consumeOutput):
-                if row[0].startswith(fb_variation):
+                if row[0].startswith(consume_lookup):
                     consumeOutputRowIndex = idx
                     print('ConsumeOutputRowIndex: ' + str(consumeOutputRowIndex))
                     break
 
         if consumeOutputRowIndex is None:
-            print("Could not find " + fb_variation + " consume output", file=sys.stderr)
+            print("Could not find " + consume_lookup + " consume output", file=sys.stderr)
             sys.exit(1)
 
         # for each of the 7 scenarios
@@ -194,8 +199,8 @@ for fb in fuelbedsOfInterest:
                 writer = csv.writer(newLoadingsFile)
                 for jj in range(7):
                     values = []
-                    values.append(str(fb_variation) + "0" + str(i+1) + "0" + str(jj+1))  # fuelbed_number
-                    values.append(str(fb_variation))  # FCCSID
+                    values.append(str(consume_lookup) + "0" + str(i+1) + "0" + str(jj+1))  # fuelbed_number
+                    values.append(str(consume_lookup))  # FCCSID
                     # values.append(scenarios[i])  # Scenario1
                     # values.append(scenarios[jj])  # Scenario2
                     values.extend(columnValues)
@@ -208,13 +213,13 @@ for fb in fuelbedsOfInterest:
             writer = csv.writer(inputFile)
             # write 7 rows for each fuelbed_number
             for j in range(7):
-                writer.writerow([100, 150, 80, 0, 50, 90, fb_variation + "0" + str(j+1) + "01", 'tons', 'western', 15, 'spring', 50, 30, 0])
-                writer.writerow([100, 150, 80, 0, 50, 90, fb_variation + "0" + str(j+1) + "02", 'tons', 'western', 15, 'spring', 20, 10, 0])
-                writer.writerow([100, 60, 25, 0, 100, 90, fb_variation + "0" + str(j+1) + "03", 'tons', 'western', 12, 'fall', 100, 100, 20])
-                writer.writerow([100, 60, 35, 0, 100, 90, fb_variation + "0" + str(j+1) + "04", 'tons', 'western', 12, 'fall', 50, 50, 0])
-                writer.writerow([100, 30, 35, 20, 100, 90, fb_variation + "0" + str(j+1) + "05", 'tons', 'western', 12, 'summer', 100, 100, 100])
-                writer.writerow([100, 30, 25, 50, 100, 90, fb_variation + "0" + str(j+1) + "06", 'tons', 'western', 9, 'summer', 100, 100, 100])
-                writer.writerow([100, 30, 10, 90, 100, 100, fb_variation + "0" + str(j+1) + "07", 'tons', 'western', 3, 'summer', 100, 100, 100])
+                writer.writerow([100, 150, 80, 0, 50, 90, consume_lookup + "0" + str(j+1) + "01", 'tons', 'western', 15, 'spring', 50, 30, 0])
+                writer.writerow([100, 150, 80, 0, 50, 90, consume_lookup + "0" + str(j+1) + "02", 'tons', 'western', 15, 'spring', 20, 10, 0])
+                writer.writerow([100, 60, 25, 0, 100, 90, consume_lookup + "0" + str(j+1) + "03", 'tons', 'western', 12, 'fall', 100, 100, 20])
+                writer.writerow([100, 60, 35, 0, 100, 90, consume_lookup + "0" + str(j+1) + "04", 'tons', 'western', 12, 'fall', 50, 50, 0])
+                writer.writerow([100, 30, 35, 20, 100, 90, consume_lookup + "0" + str(j+1) + "05", 'tons', 'western', 12, 'summer', 100, 100, 100])
+                writer.writerow([100, 30, 25, 50, 100, 90, consume_lookup + "0" + str(j+1) + "06", 'tons', 'western', 9, 'summer', 100, 100, 100])
+                writer.writerow([100, 30, 10, 90, 100, 100, consume_lookup + "0" + str(j+1) + "07", 'tons', 'western', 3, 'summer', 100, 100, 100])
 
 
 print('Created adjusted loadings and input files based on consumption data.')
