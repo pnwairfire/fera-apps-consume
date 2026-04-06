@@ -4,20 +4,20 @@ from pathlib import Path
 import math
 
 # input files
-fccsLoadingsPath = '/Users/briandrye/Downloads/2026_04_02ConsumeScenario/fccs_loadings.csv'
-consumeOutputPath = '/Users/briandrye/Downloads/2026_04_02ConsumeScenario/consume_output2026_01_30.csv'
+fccsLoadingsPath = '/Users/briandrye/Downloads/2026_04_06Scratch/fccs_loadings.csv'
+consumeOutputPath = '/Users/briandrye/Downloads/2026_04_06Scratch/consume_output_run_1.csv'
 
 # output files
-newFccsLoadingsPath = '/Users/briandrye/Downloads/2026_04_02ConsumeScenario/adjusted_fccs_loadings2026_04_02.csv'
-inputFilePath = '/Users/briandrye/Downloads/2026_04_02ConsumeScenario/input_file_for_adjusted2026_04_02.csv'
+newFccsLoadingsPath = '/Users/briandrye/Downloads/2026_04_06Scratch/loadings_for_run_2.csv'
+inputFilePath = '/Users/briandrye/Downloads/2026_04_06Scratch/input_file_for_run_2.csv'
 
 # file for comparison
-referencePath = '/Users/briandrye/Downloads/2026_04_02ConsumeScenario/SPAdjustedFCCSLoadingsFormatted3.csv'
-inputReferencePath = '/Users/briandrye/Downloads/2026_04_02ConsumeScenario/input_file_reference.csv'
+referencePath = '/Users/briandrye/Downloads/2026_04_06Scratch/SPAdjustedFCCSLoadingsFormatted3.csv'
+inputReferencePath = '/Users/briandrye/Downloads/2026_04_06Scratch/input_file_reference.csv'
 
 # log of differences between our generated file and the reference file
-diffLogPath = '/Users/briandrye/Downloads/2026_04_02ConsumeScenario/diff_log.txt'
-diffInputLogPath = '/Users/briandrye/Downloads/2026_04_02ConsumeScenario/diff_input_log.txt'
+diffLogPath = '/Users/briandrye/Downloads/2026_04_06Scratch/diff_log.txt'
+diffInputLogPath = '/Users/briandrye/Downloads/2026_04_06Scratch/diff_input_log.txt'
 
 # small helper: convert strings to float safely, treat blank/non-numeric as 0.0
 def safe_float(s):
@@ -65,7 +65,7 @@ fccsColumnMap.extend(['shrubs_primary_perc_live', 'shrubs_secondary_perc_live',
                     'litter_depth', 'lichen_depth', 'moss_depth',
                     'duff_lower_depth', 'duff_upper_depth', 'ladderfuels_loading',
                     'cover_type', 'ecoregion',
-                    'pile_clean_loading', 'pile_dirty_loading', 'pile_vdirty_loading',
+                    'pile_dirty_loading', 'pile_vdirty_loading',
                     'efg_natural', 'efg_activity'])
 
 consumeColumnMap = ['c_overstory_crown', 'c_midstory_crown', 'c_understory_crown',
@@ -183,8 +183,8 @@ with open(newFccsLoadingsPath, 'w', newline='') as newFile:
             val = fccs_row[col_idx] if col_idx < len(fccs_row) else ''
             if name in ['litter_depth', 'lichen_depth', 'moss_depth', 'ladderfuels_loading',
                         'duff_lower_depth', 'duff_upper_depth',
-                        'pile_clean_loading', 'pile_dirty_loading', 'pile_vdirty_loading']:
-                val = ''
+                         'pile_dirty_loading', 'pile_vdirty_loading']:
+                val = '0'
             extras.append(val)
         columnValues.extend(extras)
 
@@ -344,6 +344,6 @@ print('Created adjusted loadings and input files based on consumption data.')
 
 print('Run Consume against these new files to generate emissions estimates:')
 print(
-    'Example: (my310env) bdxfer@SEFS-A-DRYE consume813 % python consume_batch.py -f ~/Downloads/2026_04_02ConsumeScenario/adjusted_fccs_loadings2026_04_02.csv -o ~/Downloads/2026_04_02ConsumeScenario/consume_output_after_second_run2026_04_02.csv natural ~/Downloads/2026_04_02ConsumeScenario/input_file_for_adjusted2026_04_02.csv')
+    'Example: (my310env) bdxfer@SEFS-A-DRYE consume813 % python consume_batch.py -f ~/Downloads/2026_04_06Scratch/loadings_for_run_2.csv -o ~/Downloads/2026_04_06Scratch/consume_output_after_second_run.csv natural ~/Downloads/2026_04_06Scratch/input_file_for_run_2.csv')
 
 

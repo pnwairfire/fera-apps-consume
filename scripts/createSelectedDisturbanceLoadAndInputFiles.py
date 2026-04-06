@@ -9,11 +9,11 @@
 # this is old fccs_loadings with overstory 1.8 for FB52 (don't use
 #fccsLoadingsPath = '/Users/briandrye/Downloads/consume813/consume/input_data/fccs_loadings.csv'
 
-# use latest fccs_loadings where overstory for FB52 is
-fccsLoadingsPath = '/Users/briandrye/repos/uw/apps-consumeGIT/consume/input_data/fccs_loadings.csv'
-newFccsLoadingsPath = '/Users/briandrye/Downloads/consume813/consume/input_data/new_fccs_loadings2026_01_30.csv'
-inputFilePath = '/Users/briandrye/Downloads/consume813/consume/input_data/input_file2026_01_30.csv'
-scenarioPath =  '/Users/briandrye/Downloads/consume813/EmissonsTradeoffs_ConsumeScenarios.csv'
+# use latest fccs_loadings where overstory for FB52 is 7.5
+fccsLoadingsPath = '/Users/briandrye/Downloads/2026_04_06Scratch/fccs_loadings.csv'
+newFccsLoadingsPath = '/Users/briandrye/Downloads/2026_04_06Scratch/loadings_for_run_1.csv'
+inputFilePath = '/Users/briandrye/Downloads/2026_04_06Scratch/input_file_for_run_1.csv'
+scenarioPath =  '/Users/briandrye/Downloads/2026_04_06Scratch/EmissonsTradeoffs_ConsumeScenarios.csv'
 
 #fuelbedList = [1,4,8,9,13,21,22,24,28,41,52,53,56,57,59,60,61,63,208,238,308,319,329,530,1262,1264]
 #fuelbedList = [0,1,4,21,22,24,28,52,57,59,61,63,208,224,235,237,238,302,308,319,1226,1229,1230,1232,1262,1264,1271]
