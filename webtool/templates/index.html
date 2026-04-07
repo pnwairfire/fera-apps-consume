@@ -255,6 +255,12 @@
     <h2>1. Configure Run</h2>
 
     <div class="field">
+      <label for="api-key">API Key</label>
+      <input type="password" id="api-key" autocomplete="current-password"
+        placeholder="Enter the API key to access this tool">
+    </div>
+
+    <div class="field">
       <label for="fuelbeds">Fuelbed IDs</label>
       <textarea id="fuelbeds" rows="4"
         placeholder="Enter FCCS fuelbed IDs separated by commas, spaces, or newlines&#10;Example: 1, 52, 208, 292, 308">1, 6, 8, 9, 10, 13, 20, 22, 28, 48, 52, 53, 56, 57, 59, 60, 70, 95, 208, 224, 235, 237, 292, 304, 305, 308, 310, 315, 321, 331, 358, 360, 361, 483, 493, 494, 496, 497, 498, 506, 514, 529, 530, 531, 532, 1223, 1232, 1262, 1264, 1273</textarea>
@@ -493,6 +499,7 @@
       fuelbeds: ids.join(','),
       fccs_loadings_path: document.getElementById('fccs-path').value.trim() || null,
       scenarios: getScenarios(),
+      api_key: document.getElementById('api-key').value,
     };
 
     let res;
@@ -522,7 +529,8 @@
   // ── SSE stream ────────────────────────────────────────────────────────────
   function startStream(jobId) {
     if (eventSource) eventSource.close();
-    eventSource = new EventSource(`/stream/${jobId}`);
+    const key = encodeURIComponent(document.getElementById('api-key').value);
+    eventSource = new EventSource(`/stream/${jobId}?api_key=${key}`);
 
     eventSource.onmessage = (e) => {
       const msg = e.data;
@@ -545,7 +553,9 @@
   async function checkFinalStatus(jobId) {
     let data;
     try {
-      const res = await fetch(`/status/${jobId}`);
+      const res = await fetch(`/status/${jobId}`, {
+        headers: {'X-API-Key': document.getElementById('api-key').value},
+      });
       data = await res.json();
     } catch (e) {
       showError('Could not retrieve job status: ' + e.message);
@@ -591,7 +601,8 @@
 
   function showDownloads(jobId, files) {
     document.getElementById('download-card').classList.add('visible');
-    document.getElementById('zip-btn').href = `/download-zip/${jobId}`;
+    const key = encodeURIComponent(document.getElementById('api-key').value);
+    document.getElementById('zip-btn').href = `/download-zip/${jobId}?api_key=${key}`;
     const list = document.getElementById('download-list');
 
     // Sort files by desired order, then any extras at the end
@@ -605,7 +616,7 @@
       const grp     = document.createElement('div');
       grp.className = 'dl-group';
       const link    = document.createElement('a');
-      link.href     = `/download/${jobId}/${encodeURIComponent(fname)}`;
+      link.href     = `/download/${jobId}/${encodeURIComponent(fname)}?api_key=${key}`;
       link.className = 'dl-btn' + (meta.primary ? ' primary' : '');
       link.textContent = '⬇ ' + fname;
       link.download = fname;

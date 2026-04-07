@@ -25,6 +25,26 @@ import workflow  # noqa: E402
 
 app = Flask(__name__)
 
+# ── API key auth ─────────────────────────────────────────────────────────────
+# Set the CONSUME_API_KEY environment variable to enable key protection.
+# If the variable is not set, the app is open (useful for local dev).
+_API_KEY = os.environ.get('CONSUME_API_KEY', '').strip() or None
+
+
+def _check_api_key():
+    """Return a 401 response if a key is required and not provided correctly."""
+    if _API_KEY is None:
+        return None  # no key configured → open access
+    # Accept key from: query string, X-API-Key header
+    provided = (
+        request.args.get('api_key', '')
+        or request.headers.get('X-API-Key', '')
+    ).strip()
+    if not provided or provided != _API_KEY:
+        return jsonify({'error': 'Invalid or missing API key.'}), 401
+    return None
+
+
 # ── in-memory job store ──────────────────────────────────────────────────────
 # jobs[job_id] = {
 #   'status':   'running' | 'done' | 'error',
@@ -92,6 +112,12 @@ def start_run():
 
 def _start_run_inner():
     data = request.get_json(force=True)
+
+    # API key check
+    if _API_KEY is not None:
+        provided = (data.get('api_key') or '').strip() if isinstance(data, dict) else ''
+        if provided != _API_KEY:
+            return jsonify({'error': 'Invalid or missing API key.'}), 401
 
     # Parse fuelbed list
     raw = data.get('fuelbeds', '')
@@ -161,6 +187,9 @@ def _start_run_inner():
 
 @app.route('/stream/<job_id>')
 def stream(job_id):
+    err = _check_api_key()
+    if err:
+        return err
     """Server-Sent Events stream of job progress messages."""
     if job_id not in jobs:
         return Response('data: Job not found\n\n', mimetype='text/event-stream')
@@ -192,6 +221,9 @@ def stream(job_id):
 
 @app.route('/status/<job_id>')
 def status(job_id):
+    err = _check_api_key()
+    if err:
+        return err
     if job_id not in jobs:
         return jsonify({'error': 'Unknown job'}), 404
     with jobs_lock:
@@ -206,6 +238,9 @@ def status(job_id):
 
 @app.route('/download/<job_id>/<filename>')
 def download(job_id, filename):
+    err = _check_api_key()
+    if err:
+        return err
     if job_id not in jobs:
         return jsonify({'error': 'Unknown job'}), 404
     with jobs_lock:
@@ -220,6 +255,9 @@ def download(job_id, filename):
 
 @app.route('/download-zip/<job_id>')
 def download_zip(job_id):
+    err = _check_api_key()
+    if err:
+        return err
     if job_id not in jobs:
         return jsonify({'error': 'Unknown job'}), 404
     with jobs_lock:
@@ -243,5 +281,9 @@ def download_zip(job_id):
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5050))
+    if _API_KEY:
+        print(f'API key protection ENABLED (CONSUME_API_KEY is set)')
+    else:
+        print('API key protection DISABLED (set CONSUME_API_KEY to enable)')
     print(f'Starting consume webtool on http://localhost:{port}')
     app.run(debug=False, port=port, threaded=True)
