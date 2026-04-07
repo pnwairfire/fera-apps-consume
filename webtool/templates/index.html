@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consume Webtool</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f5f7fa;
+      color: #222;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: #1a3a5c;
+    }
+    .subtitle {
+      font-size: 0.875rem;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #dce3ec;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #1a3a5c;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.35rem;
+      color: #333;
+    }
+
+    textarea, input[type="text"] {
+      width: 100%;
+      border: 1px solid #c5cdd8;
+      border-radius: 5px;
+      padding: 0.6rem 0.75rem;
+      font-size: 0.875rem;
+      font-family: monospace;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    textarea:focus, input[type="text"]:focus {
+      border-color: #3a7bd5;
+    }
+
+    .hint {
+      font-size: 0.78rem;
+      color: #777;
+      margin-top: 0.3rem;
+    }
+
+    .field { margin-bottom: 1.1rem; }
+
+    .advanced-toggle {
+      font-size: 0.82rem;
+      color: #3a7bd5;
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: 0.8rem;
+      display: inline-block;
+    }
+    .advanced-toggle:hover { text-decoration: underline; }
+
+    #advanced-section { display: none; }
+    #advanced-section.open { display: block; }
+
+    button#run-btn {
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 0.65rem 1.6rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button#run-btn:hover:not(:disabled) { background: #1d4ed8; }
+    button#run-btn:disabled {
+      background: #93b4ea;
+      cursor: not-allowed;
+    }
+
+    /* Progress */
+    #progress-card { display: none; }
+    #progress-card.visible { display: block; }
+
+    #log {
+      background: #0f172a;
+      color: #94d1a8;
+      border-radius: 6px;
+      padding: 1rem;
+      font-size: 0.8rem;
+      font-family: monospace;
+      height: 260px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .steps {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .step {
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      background: #e8edf5;
+      color: #556;
+      border: 1px solid #c8d0de;
+    }
+    .step.active  { background: #dbeafe; color: #1e40af; border-color: #93c5fd; }
+    .step.done    { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
+    .step.error   { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+
+    /* Downloads */
+    #download-card { display: none; }
+    #download-card.visible { display: block; }
+
+    .download-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      border: 1.5px solid #2563eb;
+      border-radius: 6px;
+      color: #2563eb;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      background: #fff;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .dl-btn:hover { background: #2563eb; color: #fff; }
+    .dl-btn.primary {
+      background: #2563eb;
+      color: #fff;
+    }
+    .dl-btn.primary:hover { background: #1d4ed8; }
+
+    .dl-label {
+      font-size: 0.75rem;
+      color: #777;
+      margin-top: 0.25rem;
+    }
+    .dl-group { display: flex; flex-direction: column; }
+
+    #error-banner {
+      display: none;
+      background: #fee2e2;
+      border: 1px solid #fca5a5;
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      color: #991b1b;
+      font-size: 0.875rem;
+      margin-top: 0.75rem;
+    }
+    #error-banner.visible { display: block; }
+
+    /* Scenario table */
+    .scen-wrap { overflow-x: auto; margin-top: 0.5rem; }
+    .scen-table { border-collapse: collapse; font-size: 0.78rem; white-space: nowrap; }
+    .scen-table th {
+      background: #f0f4fa;
+      border: 1px solid #d0d8e8;
+      padding: 4px 6px;
+      font-weight: 600;
+      color: #334;
+      position: sticky;
+      top: 0;
+    }
+    .scen-table td {
+      border: 1px solid #dce3ec;
+      padding: 2px 4px;
+    }
+    .scen-table input {
+      border: none;
+      outline: none;
+      width: 100%;
+      background: transparent;
+      font-size: 0.78rem;
+      font-family: monospace;
+      padding: 1px 2px;
+    }
+    .scen-table input:focus { background: #eef4ff; }
+    .scen-table .remove-btn {
+      background: none;
+      border: none;
+      color: #c33;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      padding: 0 4px;
+    }
+    .scen-table .remove-btn:hover { color: #900; }
+    .scen-actions { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+    .scen-actions button {
+      font-size: 0.78rem;
+      padding: 0.25rem 0.65rem;
+      border: 1px solid #c5cdd8;
+      border-radius: 4px;
+      background: #f8fafc;
+      cursor: pointer;
+    }
+    .scen-actions button:hover { background: #e8edf5; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <h1>Consume Webtool</h1>
+  <p class="subtitle">
+    Run the two-step fuel consumption &amp; emissions pipeline for selected FCCS fuelbeds.
+  </p>
+
+  <!-- Input card -->
+  <div class="card">
+    <h2>1. Configure Run</h2>
+
+    <div class="field">
+      <label for="fuelbeds">Fuelbed IDs</label>
+      <textarea id="fuelbeds" rows="4"
+        placeholder="Enter FCCS fuelbed IDs separated by commas, spaces, or newlines&#10;Example: 1, 52, 208, 292, 308">1, 6, 8, 9, 10, 13, 20, 22, 28, 48, 52, 53, 56, 57, 59, 60, 70, 95, 208, 224, 235, 237, 292, 304, 305, 308, 310, 315, 321, 331, 358, 360, 361, 483, 493, 494, 496, 497, 498, 506, 514, 529, 530, 531, 532, 1223, 1232, 1262, 1264, 1273</textarea>
+      <div class="hint">
+        Each fuelbed automatically generates 27 disturbance variations (codes 111–333)
+        and 7 fire scenarios, for up to 28 × 7 = 196 run-1 rows per fuelbed.
+        Run 2 then produces 7 additional scenario combinations per run-1 row.
+      </div>
+    </div>
+
+    <span class="advanced-toggle" onclick="toggleAdvanced()">▸ Advanced options</span>
+    <div id="advanced-section">
+      <div class="field">
+        <label for="fccs-path">Custom FCCS loadings file (optional)</label>
+        <input type="text" id="fccs-path"
+          placeholder="Absolute path to fccs_loadings.csv — leave blank to use bundled file">
+        <div class="hint">
+          Default: <code>consume/input_data/fccs_loadings.csv</code> from this repository.
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Fire Scenarios</label>
+        <div class="scen-wrap">
+          <table class="scen-table" id="scenario-table">
+            <thead id="scen-head"></thead>
+            <tbody id="scen-body"></tbody>
+          </table>
+        </div>
+        <div class="scen-actions">
+          <button type="button" onclick="addScenarioRow()">+ Add row</button>
+          <button type="button" onclick="resetScenarios()">Reset to defaults</button>
+        </div>
+        <div class="hint">Each scenario becomes one fire condition applied to every fuelbed variation. Up to 9 scenarios supported.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:1.25rem; display:flex; align-items:center; gap:1rem;">
+      <button id="run-btn" onclick="startRun()">Run Pipeline</button>
+      <span id="run-count" style="font-size:0.82rem; color:#555;"></span>
+    </div>
+  </div>
+
+  <!-- Progress card -->
+  <div class="card" id="progress-card">
+    <h2>2. Progress</h2>
+    <div class="steps">
+      <div class="step" id="step1">1 · Build run-1 files</div>
+      <div class="step" id="step2">2 · Consume run 1</div>
+      <div class="step" id="step3">3 · Build run-2 files</div>
+      <div class="step" id="step4">4 · Consume run 2</div>
+    </div>
+    <div id="log"></div>
+    <div id="error-banner"></div>
+  </div>
+
+  <!-- Download card -->
+  <div class="card" id="download-card">
+    <h2>3. Download Results</h2>
+    <div style="margin-bottom:1rem;">
+      <a id="zip-btn" href="#" class="dl-btn primary" download="consume_results.zip">
+        ⬇ Download all files (.zip)
+      </a>
+    </div>
+    <div class="download-list" id="download-list"></div>
+  </div>
+
+</div>
+
+<script>
+  let currentJobId = null;
+  let eventSource  = null;
+
+  // ── scenario table ────────────────────────────────────────────────────────
+  const SCEN_COLS = [
+    {field: 'name',                     label: 'Name',       w: 88},
+    {field: 'area',                     label: 'Area',       w: 40},
+    {field: 'fm_duff',                  label: 'FM Duff',    w: 52},
+    {field: 'fm_1000hr',                label: 'FM 1000hr',  w: 58},
+    {field: 'can_con_pct',              label: 'Can%',       w: 40},
+    {field: 'shrub_black_pct',          label: 'Shrub%',     w: 46},
+    {field: 'pile_black_pct',           label: 'Pile%',      w: 40},
+    {field: 'units',                    label: 'Units',      w: 46},
+    {field: 'ecoregion',                label: 'Ecoregion',  w: 68},
+    {field: 'fm_litter',                label: 'FM Litter',  w: 56},
+    {field: 'season',                   label: 'Season',     w: 56},
+    {field: 'rotten_cwd_pct_available', label: 'Rot CWD%',   w: 58},
+    {field: 'duff_pct_available',       label: 'Duff%',      w: 44},
+    {field: 'sound_cwd_pct_available',  label: 'Snd CWD%',   w: 56},
+  ];
+
+  const DEFAULT_SCENARIOS = [
+    {name:'SpringRx',    area:100, fm_duff:150, fm_1000hr:80,  can_con_pct:0,  shrub_black_pct:50,  pile_black_pct:90,  units:'tons', ecoregion:'western', fm_litter:15, season:'spring', rotten_cwd_pct_available:50,  duff_pct_available:30,  sound_cwd_pct_available:0},
+    {name:'SpringRxRed', area:100, fm_duff:150, fm_1000hr:80,  can_con_pct:0,  shrub_black_pct:50,  pile_black_pct:90,  units:'tons', ecoregion:'western', fm_litter:15, season:'spring', rotten_cwd_pct_available:20,  duff_pct_available:10,  sound_cwd_pct_available:0},
+    {name:'FallRx',      area:100, fm_duff:60,  fm_1000hr:25,  can_con_pct:0,  shrub_black_pct:100, pile_black_pct:90,  units:'tons', ecoregion:'western', fm_litter:12, season:'fall',   rotten_cwd_pct_available:100, duff_pct_available:100, sound_cwd_pct_available:20},
+    {name:'FallRxRed',   area:100, fm_duff:60,  fm_1000hr:35,  can_con_pct:0,  shrub_black_pct:100, pile_black_pct:90,  units:'tons', ecoregion:'western', fm_litter:12, season:'fall',   rotten_cwd_pct_available:50,  duff_pct_available:50,  sound_cwd_pct_available:0},
+    {name:'WFLow',       area:100, fm_duff:30,  fm_1000hr:35,  can_con_pct:20, shrub_black_pct:100, pile_black_pct:90,  units:'tons', ecoregion:'western', fm_litter:12, season:'summer', rotten_cwd_pct_available:100, duff_pct_available:100, sound_cwd_pct_available:100},
+    {name:'WFMod',       area:100, fm_duff:30,  fm_1000hr:25,  can_con_pct:50, shrub_black_pct:100, pile_black_pct:90,  units:'tons', ecoregion:'western', fm_litter:9,  season:'summer', rotten_cwd_pct_available:100, duff_pct_available:100, sound_cwd_pct_available:100},
+    {name:'WFHigh',      area:100, fm_duff:30,  fm_1000hr:10,  can_con_pct:90, shrub_black_pct:100, pile_black_pct:100, units:'tons', ecoregion:'western', fm_litter:3,  season:'summer', rotten_cwd_pct_available:100, duff_pct_available:100, sound_cwd_pct_available:100},
+  ];
+
+  function buildScenarioHeader() {
+    const tr = document.createElement('tr');
+    for (const col of SCEN_COLS) {
+      const th = document.createElement('th');
+      th.textContent = col.label;
+      th.title = col.field;
+      tr.appendChild(th);
+    }
+    const th = document.createElement('th'); // remove col
+    tr.appendChild(th);
+    document.getElementById('scen-head').appendChild(tr);
+  }
+
+  function addScenarioRow(values) {
+    const tbody = document.getElementById('scen-body');
+    const tr = document.createElement('tr');
+    for (const col of SCEN_COLS) {
+      const td = document.createElement('td');
+      const inp = document.createElement('input');
+      inp.type = 'text';
+      inp.style.width = col.w + 'px';
+      inp.value = values ? (values[col.field] ?? '') : '';
+      td.appendChild(inp);
+      tr.appendChild(td);
+    }
+    // remove button
+    const tdR = document.createElement('td');
+    const btn = document.createElement('button');
+    btn.className = 'remove-btn';
+    btn.textContent = '✕';
+    btn.title = 'Remove row';
+    btn.onclick = () => tr.remove();
+    tdR.appendChild(btn);
+    tr.appendChild(tdR);
+    tbody.appendChild(tr);
+  }
+
+  function resetScenarios() {
+    document.getElementById('scen-body').innerHTML = '';
+    for (const s of DEFAULT_SCENARIOS) addScenarioRow(s);
+  }
+
+  function getScenarios() {
+    const rows = document.querySelectorAll('#scen-body tr');
+    return Array.from(rows).map(tr => {
+      const inputs = tr.querySelectorAll('input');
+      const obj = {};
+      SCEN_COLS.forEach((col, i) => { obj[col.field] = inputs[i].value.trim(); });
+      return obj;
+    });
+  }
+
+  // Build header and populate defaults on load
+  buildScenarioHeader();
+  resetScenarios();
+
+  // ── toggle advanced ────────────────────────────────────────────────────────
+  function toggleAdvanced() {
+    const sec = document.getElementById('advanced-section');
+    const tog = document.querySelector('.advanced-toggle');
+    if (sec.classList.toggle('open')) {
+      tog.textContent = tog.textContent.replace('▸', '▾');
+    } else {
+      tog.textContent = tog.textContent.replace('▾', '▸');
+    }
+  }
+
+  // ── count fuelbeds on change ───────────────────────────────────────────────
+  document.getElementById('fuelbeds').addEventListener('input', updateCount);
+  function updateCount() {
+    const ids = parseFuelbeds();
+    document.getElementById('run-count').textContent =
+      ids.length > 0 ? `${ids.length} fuelbed${ids.length > 1 ? 's' : ''} selected` : '';
+  }
+  updateCount();
+
+  function parseFuelbeds() {
+    const raw = document.getElementById('fuelbeds').value;
+    return raw.split(/[\s,;]+/).map(s => s.trim()).filter(s => /^\d+$/.test(s));
+  }
+
+  // ── step tracker ──────────────────────────────────────────────────────────
+  const STEP_KEYWORDS = [
+    ['Step 1'],
+    ['Step 2', 'Running consume'],
+    ['Step 3'],
+    ['Step 4'],
+  ];
+  let currentStep = -1;
+
+  function advanceStep(msg) {
+    for (let i = currentStep + 1; i < STEP_KEYWORDS.length; i++) {
+      if (STEP_KEYWORDS[i].some(kw => msg.includes(kw))) {
+        if (currentStep >= 0) markStep(currentStep, 'done');
+        currentStep = i;
+        markStep(i, 'active');
+        break;
+      }
+    }
+  }
+
+  function markStep(idx, cls) {
+    const el = document.getElementById('step' + (idx + 1));
+    el.classList.remove('active', 'done', 'error');
+    if (cls) el.classList.add(cls);
+  }
+
+  function allStepsDone() {
+    for (let i = 0; i < 4; i++) markStep(i, 'done');
+  }
+  function markError() {
+    for (let i = 0; i <= currentStep; i++) markStep(i, i < currentStep ? 'done' : 'error');
+  }
+
+  // ── start run ─────────────────────────────────────────────────────────────
+  async function startRun() {
+    const ids = parseFuelbeds();
+    if (ids.length === 0) {
+      alert('Please enter at least one fuelbed ID.');
+      return;
+    }
+
+    // Reset UI
+    document.getElementById('run-btn').disabled = true;
+    document.getElementById('log').textContent  = '';
+    document.getElementById('error-banner').classList.remove('visible');
+    document.getElementById('error-banner').textContent = '';
+    document.getElementById('download-card').classList.remove('visible');
+    document.getElementById('download-list').innerHTML = '';
+    document.getElementById('progress-card').classList.add('visible');
+    currentStep = -1;
+    for (let i = 0; i < 4; i++) markStep(i, '');
+
+    const payload = {
+      fuelbeds: ids.join(','),
+      fccs_loadings_path: document.getElementById('fccs-path').value.trim() || null,
+      scenarios: getScenarios(),
+    };
+
+    let res;
+    try {
+      res = await fetch('/run', {
+        method:  'POST',
+        headers: {'Content-Type': 'application/json'},
+        body:    JSON.stringify(payload),
+      });
+    } catch (e) {
+      showError('Network error: ' + e.message);
+      return;
+    }
+
+    const data = await res.json();
+    if (!res.ok || data.error) {
+      showError(data.error || 'Server error.');
+      return;
+    }
+
+    currentJobId = data.job_id;
+    appendLog(`Job started: ${currentJobId}`);
+    appendLog(`Fuelbeds: ${ids.join(', ')}\n`);
+    startStream(currentJobId);
+  }
+
+  // ── SSE stream ────────────────────────────────────────────────────────────
+  function startStream(jobId) {
+    if (eventSource) eventSource.close();
+    eventSource = new EventSource(`/stream/${jobId}`);
+
+    eventSource.onmessage = (e) => {
+      const msg = e.data;
+      if (msg === '__DONE__') return;
+      appendLog(msg);
+      advanceStep(msg);
+    };
+
+    eventSource.addEventListener('end', () => {
+      eventSource.close();
+      checkFinalStatus(jobId);
+    });
+
+    eventSource.onerror = () => {
+      eventSource.close();
+      checkFinalStatus(jobId);
+    };
+  }
+
+  async function checkFinalStatus(jobId) {
+    let data;
+    try {
+      const res = await fetch(`/status/${jobId}`);
+      data = await res.json();
+    } catch (e) {
+      showError('Could not retrieve job status: ' + e.message);
+      document.getElementById('run-btn').disabled = false;
+      return;
+    }
+
+    if (data.status === 'done') {
+      allStepsDone();
+      appendLog('\n✓ Pipeline complete.');
+      showDownloads(jobId, data.files);
+    } else if (data.status === 'error') {
+      markError();
+      showError(data.error || 'An error occurred.');
+    }
+    document.getElementById('run-btn').disabled = false;
+  }
+
+  // ── helpers ───────────────────────────────────────────────────────────────
+  function appendLog(text) {
+    const el = document.getElementById('log');
+    el.textContent += text + '\n';
+    el.scrollTop = el.scrollHeight;
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('error-banner');
+    el.textContent = '⚠ ' + msg;
+    el.classList.add('visible');
+    document.getElementById('run-btn').disabled = false;
+  }
+
+  // File display metadata
+  const FILE_META = {
+    'consume_output_run2.csv':  { label: 'Final output (run 2)',          primary: true  },
+    'consume_output_run1.csv':  { label: 'Consume output (run 1)',        primary: false },
+    'loadings_run2.csv':        { label: 'Adjusted loadings (run 2)',     primary: false },
+    'input_run2.csv':           { label: 'Input file (run 2)',            primary: false },
+    'loadings_run1.csv':        { label: 'Loadings file (run 1)',         primary: false },
+    'input_run1.csv':           { label: 'Input file (run 1)',            primary: false },
+  };
+  const FILE_ORDER = Object.keys(FILE_META);
+
+  function showDownloads(jobId, files) {
+    document.getElementById('download-card').classList.add('visible');
+    document.getElementById('zip-btn').href = `/download-zip/${jobId}`;
+    const list = document.getElementById('download-list');
+
+    // Sort files by desired order, then any extras at the end
+    const sorted = [...files].sort((a, b) => {
+      const ia = FILE_ORDER.indexOf(a), ib = FILE_ORDER.indexOf(b);
+      return (ia < 0 ? 999 : ia) - (ib < 0 ? 999 : ib);
+    });
+
+    for (const fname of sorted) {
+      const meta    = FILE_META[fname] || { label: fname, primary: false };
+      const grp     = document.createElement('div');
+      grp.className = 'dl-group';
+      const link    = document.createElement('a');
+      link.href     = `/download/${jobId}/${encodeURIComponent(fname)}`;
+      link.className = 'dl-btn' + (meta.primary ? ' primary' : '');
+      link.textContent = '⬇ ' + fname;
+      link.download = fname;
+      const lbl     = document.createElement('div');
+      lbl.className = 'dl-label';
+      lbl.textContent = meta.label;
+      grp.appendChild(link);
+      grp.appendChild(lbl);
+      list.appendChild(grp);
+    }
+  }
+</script>
+</body>
+</html>
