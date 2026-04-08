@@ -265,10 +265,47 @@
       <textarea id="fuelbeds" rows="4"
         placeholder="Enter FCCS fuelbed IDs separated by commas, spaces, or newlines&#10;Example: 1, 52, 208, 292, 308">1, 6, 8, 9, 10, 13, 20, 22, 28, 48, 52, 53, 56, 57, 59, 60, 70, 95, 208, 224, 235, 237, 292, 304, 305, 308, 310, 315, 321, 331, 358, 360, 361, 483, 493, 494, 496, 497, 498, 506, 514, 529, 530, 531, 532, 1223, 1232, 1262, 1264, 1273</textarea>
       <div class="hint">
-        Each fuelbed automatically generates 27 disturbance variations (codes 111–333)
-        and 7 fire scenarios, for up to 28 × 7 = 196 run-1 rows per fuelbed.
-        Run 2 then produces 7 additional scenario combinations per run-1 row.
+        Check "Include disturbance fuelbeds" to generate 27 disturbance variations (codes 111–333)
+        per fuelbed, for up to 28 × 7 = 196 run-1 rows each. Uncheck to run reference fuelbeds only.
       </div>
+    </div>
+
+    <div class="field">
+      <label>Burn Type</label>
+      <div style="display:flex; gap:1.5rem; align-items:center;">
+        <label style="font-weight:normal; display:flex; gap:0.4rem; align-items:center; cursor:pointer;">
+          <input type="radio" name="burn-type" value="natural" checked onchange="setBurnType('natural')">
+          Natural
+        </label>
+        <label style="font-weight:normal; display:flex; gap:0.4rem; align-items:center; cursor:pointer;">
+          <input type="radio" name="burn-type" value="activity" onchange="setBurnType('activity')">
+          Activity
+        </label>
+      </div>
+      <div class="hint" id="burn-type-hint">Natural burn: uses default scenarios with no prescribed-fire activity parameters.</div>
+    </div>
+
+    <div class="field">
+      <label style="display:flex; gap:0.5rem; align-items:center; cursor:pointer; font-weight:normal;">
+        <input type="checkbox" id="include-disturbance">
+        <span style="font-weight:600;">Include disturbance fuelbeds</span>
+      </label>
+      <div class="hint">When checked, each reference fuelbed (e.g. 52) generates 27 disturbance variations (e.g. 52_111 – 52_333). Uncheck to run reference fuelbeds only.</div>
+    </div>
+
+    <div class="field">
+      <label>Number of consume runs</label>
+      <div style="display:flex; gap:1.5rem; align-items:center;">
+        <label style="font-weight:normal; display:flex; gap:0.4rem; align-items:center; cursor:pointer;">
+          <input type="radio" name="num-runs" value="1" onchange="setNumRuns(1)">
+          1 run
+        </label>
+        <label style="font-weight:normal; display:flex; gap:0.4rem; align-items:center; cursor:pointer;">
+          <input type="radio" name="num-runs" value="2" checked onchange="setNumRuns(2)">
+          2 runs
+        </label>
+      </div>
+      <div class="hint">Run 1 uses base FCCS loadings. Run 2 adjusts loadings based on run-1 consumption output and re-runs consume.</div>
     </div>
 
     <span class="advanced-toggle" onclick="toggleAdvanced()">▸ Advanced options</span>
@@ -333,9 +370,10 @@
 <script>
   let currentJobId = null;
   let eventSource  = null;
+  let currentBurnType = 'natural';
 
-  // ── scenario table ────────────────────────────────────────────────────────
-  const SCEN_COLS = [
+  // ── scenario column definitions ───────────────────────────────────────────
+  const NATURAL_SCEN_COLS = [
     {field: 'name',                     label: 'Name',       w: 88},
     {field: 'area',                     label: 'Area',       w: 40},
     {field: 'fm_duff',                  label: 'FM Duff',    w: 52},
@@ -352,7 +390,33 @@
     {field: 'sound_cwd_pct_available',  label: 'Snd CWD%',   w: 56},
   ];
 
-  const DEFAULT_SCENARIOS = [
+  const ACTIVITY_SCEN_COLS = [
+    {field: 'name',                     label: 'Name',            w: 100},
+    {field: 'area',                     label: 'Area',            w: 40},
+    {field: 'fm_duff',                  label: 'FM Duff',         w: 52},
+    {field: 'fm_1000hr',                label: 'FM 1000hr',       w: 58},
+    {field: 'can_con_pct',              label: 'Can%',            w: 40},
+    {field: 'shrub_black_pct',          label: 'Shrub%',          w: 46},
+    {field: 'pile_black_pct',           label: 'Pile%',           w: 40},
+    {field: 'units',                    label: 'Units',           w: 46},
+    {field: 'ecoregion',                label: 'Ecoregion',       w: 68},
+    {field: 'slope',                    label: 'Slope',           w: 44},
+    {field: 'windspeed',                label: 'Wind',            w: 44},
+    {field: 'days_since_rain',          label: 'DaysSinceRain',   w: 70},
+    {field: 'length_of_ignition',       label: 'IgnLen',          w: 52},
+    {field: 'fm_type',                  label: 'FM Type',         w: 68},
+    {field: 'fm_litter',                label: 'FM Litter',       w: 56},
+    {field: 'fm_10hr',                  label: 'FM 10hr',         w: 52},
+    {field: 'season',                   label: 'Season',          w: 56},
+    {field: 'duff_pct_available',       label: 'Duff%',           w: 44},
+    {field: 'sound_cwd_pct_available',  label: 'Snd CWD%',        w: 56},
+    {field: 'rotten_cwd_pct_available', label: 'Rot CWD%',        w: 58},
+  ];
+
+  // alias — updated by setBurnType()
+  let SCEN_COLS = NATURAL_SCEN_COLS;
+
+  const NATURAL_DEFAULT_SCENARIOS = [
     {name:'SpringRx',    area:100, fm_duff:150, fm_1000hr:80,  can_con_pct:0,  shrub_black_pct:50,  pile_black_pct:90,  units:'tons', ecoregion:'western', fm_litter:15, season:'spring', rotten_cwd_pct_available:50,  duff_pct_available:30,  sound_cwd_pct_available:0},
     {name:'SpringRxRed', area:100, fm_duff:150, fm_1000hr:80,  can_con_pct:0,  shrub_black_pct:50,  pile_black_pct:90,  units:'tons', ecoregion:'western', fm_litter:15, season:'spring', rotten_cwd_pct_available:20,  duff_pct_available:10,  sound_cwd_pct_available:0},
     {name:'FallRx',      area:100, fm_duff:60,  fm_1000hr:25,  can_con_pct:0,  shrub_black_pct:100, pile_black_pct:90,  units:'tons', ecoregion:'western', fm_litter:12, season:'fall',   rotten_cwd_pct_available:100, duff_pct_available:100, sound_cwd_pct_available:20},
@@ -362,7 +426,16 @@
     {name:'WFHigh',      area:100, fm_duff:30,  fm_1000hr:10,  can_con_pct:90, shrub_black_pct:100, pile_black_pct:100, units:'tons', ecoregion:'western', fm_litter:3,  season:'summer', rotten_cwd_pct_available:100, duff_pct_available:100, sound_cwd_pct_available:100},
   ];
 
+  const ACTIVITY_DEFAULT_SCENARIOS = [
+    {name:'ActivityDefault', area:100, fm_duff:30, fm_1000hr:60, can_con_pct:20, shrub_black_pct:80, pile_black_pct:90, units:'tons', ecoregion:'western', slope:5, windspeed:5, days_since_rain:4, length_of_ignition:30, fm_type:'MEAS-Th', fm_litter:10, fm_10hr:10, season:'fall', duff_pct_available:100, sound_cwd_pct_available:100, rotten_cwd_pct_available:100},
+  ];
+
+  // alias — updated by setBurnType()
+  let DEFAULT_SCENARIOS = NATURAL_DEFAULT_SCENARIOS;
+
   function buildScenarioHeader() {
+    const thead = document.getElementById('scen-head');
+    thead.innerHTML = '';
     const tr = document.createElement('tr');
     for (const col of SCEN_COLS) {
       const th = document.createElement('th');
@@ -372,7 +445,7 @@
     }
     const th = document.createElement('th'); // remove col
     tr.appendChild(th);
-    document.getElementById('scen-head').appendChild(tr);
+    thead.appendChild(tr);
   }
 
   function addScenarioRow(values) {
@@ -404,6 +477,17 @@
     for (const s of DEFAULT_SCENARIOS) addScenarioRow(s);
   }
 
+  function setBurnType(type) {
+    currentBurnType = type;
+    SCEN_COLS = type === 'activity' ? ACTIVITY_SCEN_COLS : NATURAL_SCEN_COLS;
+    DEFAULT_SCENARIOS = type === 'activity' ? ACTIVITY_DEFAULT_SCENARIOS : NATURAL_DEFAULT_SCENARIOS;
+    buildScenarioHeader();
+    resetScenarios();
+    document.getElementById('burn-type-hint').textContent = type === 'activity'
+      ? 'Activity burn: adds slope, wind, days-since-rain, ignition length, and fuel moisture parameters.'
+      : 'Natural burn: uses default scenarios with no prescribed-fire activity parameters.';
+  }
+
   function getScenarios() {
     const rows = document.querySelectorAll('#scen-body tr');
     return Array.from(rows).map(tr => {
@@ -415,8 +499,7 @@
   }
 
   // Build header and populate defaults on load
-  buildScenarioHeader();
-  resetScenarios();
+  setBurnType('natural');
 
   // ── toggle advanced ────────────────────────────────────────────────────────
   function toggleAdvanced() {
@@ -438,6 +521,14 @@
   }
   updateCount();
 
+  let currentNumRuns = 2;
+
+  function setNumRuns(n) {
+    currentNumRuns = n;
+    document.getElementById('step3').style.display = n === 1 ? 'none' : '';
+    document.getElementById('step4').style.display = n === 1 ? 'none' : '';
+  }
+
   function parseFuelbeds() {
     const raw = document.getElementById('fuelbeds').value;
     return raw.split(/[\s,;]+/).map(s => s.trim()).filter(s => /^\d+$/.test(s));
@@ -453,7 +544,8 @@
   let currentStep = -1;
 
   function advanceStep(msg) {
-    for (let i = currentStep + 1; i < STEP_KEYWORDS.length; i++) {
+    const limit = currentNumRuns * 2;
+    for (let i = currentStep + 1; i < limit; i++) {
       if (STEP_KEYWORDS[i].some(kw => msg.includes(kw))) {
         if (currentStep >= 0) markStep(currentStep, 'done');
         currentStep = i;
@@ -470,7 +562,7 @@
   }
 
   function allStepsDone() {
-    for (let i = 0; i < 4; i++) markStep(i, 'done');
+    for (let i = 0; i < currentNumRuns * 2; i++) markStep(i, 'done');
   }
   function markError() {
     for (let i = 0; i <= currentStep; i++) markStep(i, i < currentStep ? 'done' : 'error');
@@ -494,10 +586,14 @@
     document.getElementById('progress-card').classList.add('visible');
     currentStep = -1;
     for (let i = 0; i < 4; i++) markStep(i, '');
+    setNumRuns(currentNumRuns);
 
     const payload = {
       fuelbeds: ids.join(','),
       fccs_loadings_path: document.getElementById('fccs-path').value.trim() || null,
+      burn_type: currentBurnType,
+      include_disturbance: document.getElementById('include-disturbance').checked,
+      num_runs: currentNumRuns,
       scenarios: getScenarios(),
       api_key: document.getElementById('api-key').value,
     };

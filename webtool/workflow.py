@@ -26,7 +26,9 @@ if str(REPO_ROOT) not in sys.path:
 
 import consume_batch  # noqa: E402
 
-# ── scenario definitions (matches EmissonsTradeoffs_ConsumeScenarios.csv) ───
+# ── scenario definitions ────────────────────────────────────────────────────
+
+# ── NATURAL burn type ────────────────────────────────────────────────────────
 # Columns: area, fm_duff, fm_1000hr, can_con_pct, shrub_black_pct, pile_black_pct,
 #          units, ecoregion, fm_litter, season,
 #          rotten_cwd_pct_available, duff_pct_available, sound_cwd_pct_available
@@ -45,6 +47,23 @@ INPUT_HEADER = [
     'area', 'fm_duff', 'fm_1000hr', 'can_con_pct', 'shrub_black_pct', 'pile_black_pct',
     'fuelbeds', 'units', 'ecoregion', 'fm_litter', 'season',
     'rotten_cwd_pct_available', 'duff_pct_available', 'sound_cwd_pct_available',
+]
+
+# ── ACTIVITY burn type ───────────────────────────────────────────────────────
+# Columns: area, fm_duff, fm_1000hr, can_con_pct, shrub_black_pct, pile_black_pct,
+#          units, ecoregion, slope, windspeed, days_since_rain, length_of_ignition,
+#          fm_type, fm_litter, fm_10hr, season,
+#          duff_pct_available, sound_cwd_pct_available, rotten_cwd_pct_available
+ACTIVITY_SCENARIO_NAMES = ['ActivityDefault']
+ACTIVITY_SCENARIO_ROWS = [
+    [100, 30, 60, 20, 80, 90, 'tons', 'western', 5, 5, 4, 30, 'MEAS-Th', 10, 10, 'fall', 100, 100, 100],
+]
+
+ACTIVITY_INPUT_HEADER = [
+    'area', 'fm_duff', 'fm_1000hr', 'can_con_pct', 'shrub_black_pct', 'pile_black_pct',
+    'fuelbeds', 'units', 'ecoregion', 'slope', 'windspeed', 'days_since_rain',
+    'length_of_ignition', 'fm_type', 'fm_litter', 'fm_10hr', 'season',
+    'duff_pct_available', 'sound_cwd_pct_available', 'rotten_cwd_pct_available',
 ]
 
 # ── column maps for run-2 adjusted loadings ──────────────────────────────────
@@ -169,7 +188,8 @@ def decode_run1_fuelbed(fuelbed_base):
 # ── pipeline step 1: build run-1 files ──────────────────────────────────────
 
 def build_run1_files(fuelbed_list, output_dir, fccs_loadings_path=None, progress=None,
-                     scenario_names=None, scenario_rows=None):
+                     scenario_names=None, scenario_rows=None, burn_type='natural',
+                     include_disturbance=True):
     """
     Create loadings_run1.csv and input_run1.csv in output_dir.
 
@@ -180,9 +200,10 @@ def build_run1_files(fuelbed_list, output_dir, fccs_loadings_path=None, progress
     Returns (loadings_path, input_path).
     """
     if scenario_names is None:
-        scenario_names = SCENARIO_NAMES
+        scenario_names = SCENARIO_NAMES if burn_type == 'natural' else ACTIVITY_SCENARIO_NAMES
     if scenario_rows is None:
-        scenario_rows = SCENARIO_ROWS
+        scenario_rows = SCENARIO_ROWS if burn_type == 'natural' else ACTIVITY_SCENARIO_ROWS
+    input_header = INPUT_HEADER if burn_type == 'natural' else ACTIVITY_INPUT_HEADER
     if fccs_loadings_path is None:
         fccs_loadings_path = str(DEFAULT_FCCS_LOADINGS)
     if progress is None:
@@ -193,17 +214,18 @@ def build_run1_files(fuelbed_list, output_dir, fccs_loadings_path=None, progress
 
     fb_strings = [str(f) for f in fuelbed_list]
 
-    # Build full variation list: base + 27 disturbance codes per fuelbed
+    # Build variation list: base only, or base + 27 disturbance codes per fuelbed
     fb_list_with_variations = []
     for fb in fb_strings:
         fb_list_with_variations.append(fb)
-        for i in range(1, 4):
-            for j in range(1, 4):
-                for k in range(1, 4):
-                    fb_list_with_variations.append(fb + '0' + str(i) + str(j) + str(k))
+        if include_disturbance:
+            for i in range(1, 4):
+                for j in range(1, 4):
+                    for k in range(1, 4):
+                        fb_list_with_variations.append(fb + '0' + str(i) + str(j) + str(k))
 
     progress(f'Building run 1 files for {len(fuelbed_list)} fuelbeds '
-             f'({len(fb_list_with_variations)} entries including disturbance variations, '
+             f'({len(fb_list_with_variations)} entries{" including disturbance variations" if include_disturbance else ", reference fuelbeds only"}, '
              f'{len(scenario_rows)} scenarios)...')
 
     with open(fccs_loadings_path, 'r') as f:
@@ -227,7 +249,7 @@ def build_run1_files(fuelbed_list, output_dir, fccs_loadings_path=None, progress
 
         lf.write(header_line0 + '\n')
         lf.write(header_line1 + '\n')
-        inf.write(','.join(INPUT_HEADER) + '\n')
+        inf.write(','.join(input_header) + '\n')
 
         for fb_num in fb_list_with_variations:
             if fb_num not in line_lookup:
@@ -305,7 +327,7 @@ def run_consume(loadings_path, input_path, output_path, feps_path,
 
 def build_run2_files(fccs_loadings_path, consume_output_path, output_dir,
                      fuelbed_list=None, progress=None,
-                     scenario_names=None, scenario_rows=None):
+                     scenario_names=None, scenario_rows=None, burn_type='natural'):
     """
     Create loadings_run2.csv and input_run2.csv in output_dir, using
     run-1 consume output to compute adjusted (post-consumption) loadings.
@@ -318,9 +340,10 @@ def build_run2_files(fccs_loadings_path, consume_output_path, output_dir,
     if progress is None:
         progress = print
     if scenario_names is None:
-        scenario_names = SCENARIO_NAMES
+        scenario_names = SCENARIO_NAMES if burn_type == 'natural' else ACTIVITY_SCENARIO_NAMES
     if scenario_rows is None:
-        scenario_rows = SCENARIO_ROWS
+        scenario_rows = SCENARIO_ROWS if burn_type == 'natural' else ACTIVITY_SCENARIO_ROWS
+    input_header = INPUT_HEADER if burn_type == 'natural' else ACTIVITY_INPUT_HEADER
 
     loadings_out = os.path.join(output_dir, 'loadings_run2.csv')
     input_out    = os.path.join(output_dir, 'input_run2.csv')
@@ -361,7 +384,7 @@ def build_run2_files(fccs_loadings_path, consume_output_path, output_dir,
         load_writer.writerow(
             ['fuelbed_number', 'FCCSID', 'filename', 'Total_available_fuel_loading']
             + FULL_COL_MAP)
-        inp_writer.writerow(INPUT_HEADER)
+        inp_writer.writerow(input_header)
 
         for crow in consume_rows[1:]:
             if not crow or len(crow) <= fuelbeds_col_idx:
@@ -451,15 +474,17 @@ def build_run2_files(fccs_loadings_path, consume_output_path, output_dir,
 # ── full pipeline ─────────────────────────────────────────────────────────────
 
 def run_pipeline(fuelbed_list, output_dir, fccs_loadings_path=None, progress=None,
-                 scenario_names=None, scenario_rows=None):
+                 scenario_names=None, scenario_rows=None, burn_type='natural',
+                 include_disturbance=True, num_runs=2):
     """
     Execute the full two-run pipeline and return paths to all output files.
 
     fuelbed_list   : list of integer FCCS fuelbed IDs
     output_dir     : directory where all intermediate and final files are written
     progress       : callable(message_str) for progress reporting
-    scenario_names : list of scenario name strings (default: SCENARIO_NAMES)
-    scenario_rows  : list of scenario value lists (default: SCENARIO_ROWS)
+    scenario_names : list of scenario name strings (default depends on burn_type)
+    scenario_rows  : list of scenario value lists (default depends on burn_type)
+    burn_type      : 'natural' (default) or 'activity'
 
     Returns dict of output file paths.
     """
@@ -474,29 +499,40 @@ def run_pipeline(fuelbed_list, output_dir, fccs_loadings_path=None, progress=Non
         progress(msg)
 
     # ── Run 1 ───────────────────────────────────────────────────────────────
-    p('=== Step 1/4: Building run-1 loadings and input files ===')
+    total = num_runs * 2
+    p(f'=== Step 1/{total}: Building run-1 loadings and input files ===')
     loadings1, input1 = build_run1_files(
         fuelbed_list, output_dir, fccs_loadings_path, progress=p,
-        scenario_names=scenario_names, scenario_rows=scenario_rows)
+        scenario_names=scenario_names, scenario_rows=scenario_rows,
+        burn_type=burn_type, include_disturbance=include_disturbance)
 
-    p('=== Step 2/4: Running consume (run 1) ===')
+    p(f'=== Step 2/{total}: Running consume (run 1) ===')
     output1      = os.path.join(output_dir, 'consume_output_run1.csv')
     feps1        = os.path.join(output_dir, 'feps_run1.csv')
-    ok = run_consume(loadings1, input1, output1, feps1, progress=p)
+    ok = run_consume(loadings1, input1, output1, feps1, burn_type=burn_type, progress=p)
     if not ok:
         raise RuntimeError('Consume run 1 failed — no output file produced.')
 
+    if num_runs == 1:
+        p('=== Pipeline complete ===')
+        return {
+            'loadings_run1':       loadings1,
+            'input_run1':          input1,
+            'consume_output_run1': output1,
+        }
+
     # ── Run 2 ───────────────────────────────────────────────────────────────
-    p('=== Step 3/4: Building run-2 adjusted loadings and input files ===')
+    p(f'=== Step 3/{total}: Building run-2 adjusted loadings and input files ===')
     loadings2, input2 = build_run2_files(
         fccs_loadings_path, output1, output_dir,
         fuelbed_list=fuelbed_list, progress=p,
-        scenario_names=scenario_names, scenario_rows=scenario_rows)
+        scenario_names=scenario_names, scenario_rows=scenario_rows,
+        burn_type=burn_type)
 
-    p('=== Step 4/4: Running consume (run 2) ===')
+    p(f'=== Step 4/{total}: Running consume (run 2) ===')
     output2      = os.path.join(output_dir, 'consume_output_run2.csv')
     feps2        = os.path.join(output_dir, 'feps_run2.csv')
-    ok = run_consume(loadings2, input2, output2, feps2, progress=p)
+    ok = run_consume(loadings2, input2, output2, feps2, burn_type=burn_type, progress=p)
     if not ok:
         raise RuntimeError('Consume run 2 failed — no output file produced.')
 

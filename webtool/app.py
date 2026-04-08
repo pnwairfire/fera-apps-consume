@@ -62,7 +62,7 @@ def _record(job_id, msg):
         jobs[job_id]['messages'].append(msg)
 
 
-def _run_job(job_id, fuelbed_list, fccs_loadings_path, scenario_names, scenario_rows):
+def _run_job(job_id, fuelbed_list, fccs_loadings_path, scenario_names, scenario_rows, burn_type, include_disturbance, num_runs):
     output_dir = jobs[job_id]['output_dir']
     try:
         def progress(msg):
@@ -75,6 +75,9 @@ def _run_job(job_id, fuelbed_list, fccs_loadings_path, scenario_names, scenario_
             progress=progress,
             scenario_names=scenario_names,
             scenario_rows=scenario_rows,
+            burn_type=burn_type,
+            include_disturbance=include_disturbance,
+            num_runs=num_runs,
         )
 
         with jobs_lock:
@@ -147,12 +150,36 @@ def _start_run_inner():
     if fccs_loadings_path and not os.path.isfile(fccs_loadings_path):
         return jsonify({'error': f'Loadings file not found: {fccs_loadings_path}'}), 400
 
+    # Parse burn type
+    burn_type = (data.get('burn_type') or 'natural').strip().lower()
+    if burn_type not in ('natural', 'activity'):
+        burn_type = 'natural'
+
     # Parse optional scenarios
-    _SCEN_FIELDS = [
+    _NATURAL_SCEN_FIELDS = [
         'area', 'fm_duff', 'fm_1000hr', 'can_con_pct', 'shrub_black_pct', 'pile_black_pct',
         'units', 'ecoregion', 'fm_litter', 'season',
         'rotten_cwd_pct_available', 'duff_pct_available', 'sound_cwd_pct_available',
     ]
+    _ACTIVITY_SCEN_FIELDS = [
+        'area', 'fm_duff', 'fm_1000hr', 'can_con_pct', 'shrub_black_pct', 'pile_black_pct',
+        'units', 'ecoregion', 'slope', 'windspeed', 'days_since_rain', 'length_of_ignition',
+        'fm_type', 'fm_litter', 'fm_10hr', 'season',
+        'duff_pct_available', 'sound_cwd_pct_available', 'rotten_cwd_pct_available',
+    ]
+    _SCEN_FIELDS = _ACTIVITY_SCEN_FIELDS if burn_type == 'activity' else _NATURAL_SCEN_FIELDS
+
+    # Parse include_disturbance flag
+    include_disturbance = bool(data.get('include_disturbance', True))
+
+    # Parse num_runs
+    try:
+        num_runs = int(data.get('num_runs', 2))
+    except (TypeError, ValueError):
+        num_runs = 2
+    if num_runs not in (1, 2):
+        num_runs = 2
+
     scenarios_raw = data.get('scenarios')
     if scenarios_raw and isinstance(scenarios_raw, list) and len(scenarios_raw) > 0:
         scenario_names = [str(s.get('name', f'Scenario{i+1}')) for i, s in enumerate(scenarios_raw)]
@@ -178,7 +205,7 @@ def _start_run_inner():
         }
 
     thread = threading.Thread(
-        target=_run_job, args=(job_id, fuelbed_list, fccs_loadings_path, scenario_names, scenario_rows),
+        target=_run_job, args=(job_id, fuelbed_list, fccs_loadings_path, scenario_names, scenario_rows, burn_type, include_disturbance, num_runs),
         daemon=True)
     thread.start()
 
