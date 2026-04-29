@@ -170,6 +170,9 @@ class FCCSDB():
         print("   Stumps, sound\t\tstump_sound\t\t" + lu)
         print("   Stumps, rotten\t\tstump_rotten\t\t" + lu)
         print("   Stumps, lightered\t\tstump_lightered\t\t" + lu)
+        print("   Piles, clean\t\tpile_clean_loading\t\t" + lu)
+        print("   Piles, dirty\t\tpile_dirty_loading\t\t" + lu)
+        print("   Piles, very dirty\t\tpile_vdirty_loading\t\t" + lu)
 
     def info(self, fccs_id, detail=False, ret = False):
         """Display an FCCS fuelbed description.
@@ -235,6 +238,9 @@ class FCCSDB():
                 text += "\n\t   Squirrel midden loading: " + str(row.get('sqm_loading')) + ru
 
                 text += "\n\n\tWoody fuel loadings"
+                text += '\n\t   Piles, clean: ' + str(row.get('pile_clean_loading')) + lu
+                text += '\n\t   Piles, dirty: ' + str(row.get('pile_dirty_loading')) + lu
+                text += '\n\t   Piles, very dirty: ' + str(row.get('pile_vdirty_loading')) + lu
                 text += '\n\t   1-hr (0-0.25"): ' + str(row.get('one_hr_sound')) + lu
                 text += '\n\t   10-hr (0.25-1"): ' + str(row.get('ten_hr_sound')) + lu
                 text += '\n\t   100-hr (1-3"): ' + str(row.get('hun_hr_sound')) + lu
