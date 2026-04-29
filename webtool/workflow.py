@@ -157,7 +157,7 @@ def make_run1_fuelbed_id(fb_str, scenario_1based):
       int(fb_str) > 1297 → fb_str + '0' + str(scenario_1based)
       e.g. '10111' → '101110001' … '101110007' (NOT used for filtering)
     """
-    if int(fb_str) <= 1297:
+    if not fb_str.isdigit() or int(fb_str) <= 1297:
         return fb_str + '00000' + str(scenario_1based)
     return fb_str + '0' + str(scenario_1based)
 
@@ -287,7 +287,7 @@ def build_run1_files(fuelbed_list, output_dir, fccs_loadings_path=None, progress
 # ── pipeline step 2: run consume ─────────────────────────────────────────────
 
 def run_consume(loadings_path, input_path, output_path, feps_path,
-                burn_type='natural', progress=None):
+                burn_type='natural', do_metric=False, progress=None):
     """
     Run consume_batch.run() with the supplied files.
     Returns True on success.
@@ -300,11 +300,12 @@ def run_consume(loadings_path, input_path, output_path, feps_path,
     progress(f'  loadings: {loadings_path}')
     progress(f'  input:    {input_path}')
     progress(f'  output:   {output_path}')
+    progress(f'  units:    {"metric" if do_metric else "imperial"}')
 
     consume_batch.run(
         burn_type=burn_type,
         csv_input=input_path,
-        do_metric=False,
+        do_metric=do_metric,
         msg_level=logging.ERROR,
         outfile=output_path,
         feps_input_filename=feps_path,
@@ -475,7 +476,7 @@ def build_run2_files(fccs_loadings_path, consume_output_path, output_dir,
 
 def run_pipeline(fuelbed_list, output_dir, fccs_loadings_path=None, progress=None,
                  scenario_names=None, scenario_rows=None, burn_type='natural',
-                 include_disturbance=True, num_runs=2):
+                 include_disturbance=True, num_runs=2, do_metric=False):
     """
     Execute the full two-run pipeline and return paths to all output files.
 
@@ -495,8 +496,25 @@ def run_pipeline(fuelbed_list, output_dir, fccs_loadings_path=None, progress=Non
 
     os.makedirs(output_dir, exist_ok=True)
 
+    import datetime
+    log_path = os.path.join(output_dir, 'run_log.txt')
+    log_lines = []
+
     def p(msg):
         progress(msg)
+        log_lines.append(msg)
+
+    def _write_log():
+        with open(log_path, 'w') as _lf:
+            _lf.write('\n'.join(log_lines) + '\n')
+
+    log_lines.append(f'Consume pipeline log — {datetime.datetime.now().isoformat(timespec="seconds")}')
+    log_lines.append(f'burn_type: {burn_type}')
+    log_lines.append(f'do_metric: {do_metric}')
+    log_lines.append(f'num_runs: {num_runs}')
+    log_lines.append(f'include_disturbance: {include_disturbance}')
+    log_lines.append(f'fuelbeds: {fuelbed_list}')
+    log_lines.append('')
 
     # ── Run 1 ───────────────────────────────────────────────────────────────
     total = num_runs * 2
@@ -509,16 +527,18 @@ def run_pipeline(fuelbed_list, output_dir, fccs_loadings_path=None, progress=Non
     p(f'=== Step 2/{total}: Running consume (run 1) ===')
     output1      = os.path.join(output_dir, 'consume_output_run1.csv')
     feps1        = os.path.join(output_dir, 'feps_run1.csv')
-    ok = run_consume(loadings1, input1, output1, feps1, burn_type=burn_type, progress=p)
+    ok = run_consume(loadings1, input1, output1, feps1, burn_type=burn_type, do_metric=do_metric, progress=p)
     if not ok:
         raise RuntimeError('Consume run 1 failed — no output file produced.')
 
     if num_runs == 1:
         p('=== Pipeline complete ===')
+        _write_log()
         return {
             'loadings_run1':       loadings1,
             'input_run1':          input1,
             'consume_output_run1': output1,
+            'run_log':             log_path,
         }
 
     # ── Run 2 ───────────────────────────────────────────────────────────────
@@ -532,11 +552,12 @@ def run_pipeline(fuelbed_list, output_dir, fccs_loadings_path=None, progress=Non
     p(f'=== Step 4/{total}: Running consume (run 2) ===')
     output2      = os.path.join(output_dir, 'consume_output_run2.csv')
     feps2        = os.path.join(output_dir, 'feps_run2.csv')
-    ok = run_consume(loadings2, input2, output2, feps2, burn_type=burn_type, progress=p)
+    ok = run_consume(loadings2, input2, output2, feps2, burn_type=burn_type, do_metric=do_metric, progress=p)
     if not ok:
         raise RuntimeError('Consume run 2 failed — no output file produced.')
 
     p('=== Pipeline complete ===')
+    _write_log()
 
     return {
         'loadings_run1':        loadings1,
@@ -545,4 +566,5 @@ def run_pipeline(fuelbed_list, output_dir, fccs_loadings_path=None, progress=Non
         'loadings_run2':        loadings2,
         'input_run2':           input2,
         'consume_output_run2':  output2,
+        'run_log':              log_path,
     }

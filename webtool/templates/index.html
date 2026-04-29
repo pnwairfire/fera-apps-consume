@@ -308,14 +308,38 @@
       <div class="hint">Run 1 uses base FCCS loadings. Run 2 adjusts loadings based on run-1 consumption output and re-runs consume.</div>
     </div>
 
+    <div class="field">
+      <label>Output units</label>
+      <div style="display:flex; gap:1.5rem; align-items:center;">
+        <label style="font-weight:normal; display:flex; gap:0.4rem; align-items:center; cursor:pointer;">
+          <input type="radio" name="output-units" value="imperial" checked>
+          English
+        </label>
+        <label style="font-weight:normal; display:flex; gap:0.4rem; align-items:center; cursor:pointer;">
+          <input type="radio" name="output-units" value="metric">
+          Metric
+        </label>
+      </div>
+      <div class="hint">English: output in US customary units. Metric: output in SI units.</div>
+    </div>
+
     <span class="advanced-toggle" onclick="toggleAdvanced()">▸ Advanced options</span>
     <div id="advanced-section">
       <div class="field">
-        <label for="fccs-path">Custom FCCS loadings file (optional)</label>
-        <input type="text" id="fccs-path"
-          placeholder="Absolute path to fccs_loadings.csv — leave blank to use bundled file">
+        <label>Custom FCCS loadings file (optional)</label>
+        <div style="display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+          <label class="dl-btn" style="cursor:pointer; margin:0;">
+            ↑ Choose file
+            <input type="file" id="fccs-file" accept=".csv" style="display:none" onchange="uploadLoadingsFile(this)">
+          </label>
+          <span id="fccs-file-status" style="font-size:0.82rem; color:#555;">No file chosen</span>
+        </div>
+        <div style="margin-top:0.5rem;">
+          <input type="text" id="fccs-path"
+            placeholder="Or enter absolute server path to fccs_loadings.csv">
+        </div>
         <div class="hint">
-          Default: <code>consume/input_data/fccs_loadings.csv</code> from this repository.
+          Upload a file <em>or</em> enter an absolute path (local server only). Leave both blank to use the bundled default.
         </div>
       </div>
 
@@ -371,6 +395,35 @@
   let currentJobId = null;
   let eventSource  = null;
   let currentBurnType = 'natural';
+  let uploadedLoadingsPath = null;  // set after a successful file upload
+
+  async function uploadLoadingsFile(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const statusEl = document.getElementById('fccs-file-status');
+    statusEl.textContent = `Uploading ${file.name}…`;
+    uploadedLoadingsPath = null;
+
+    const fd = new FormData();
+    fd.append('file', file);
+    fd.append('api_key', document.getElementById('api-key').value);
+
+    try {
+      const res = await fetch('/upload-loadings', { method: 'POST', body: fd });
+      const data = await res.json();
+      if (!res.ok || data.error) {
+        statusEl.textContent = `Upload failed: ${data.error || res.statusText}`;
+        statusEl.style.color = '#991b1b';
+      } else {
+        uploadedLoadingsPath = data.path;
+        statusEl.textContent = `✓ ${file.name} uploaded`;
+        statusEl.style.color = '#065f46';
+      }
+    } catch (e) {
+      statusEl.textContent = `Upload error: ${e.message}`;
+      statusEl.style.color = '#991b1b';
+    }
+  }
 
   // ── scenario column definitions ───────────────────────────────────────────
   const NATURAL_SCEN_COLS = [
@@ -531,7 +584,7 @@
 
   function parseFuelbeds() {
     const raw = document.getElementById('fuelbeds').value;
-    return raw.split(/[\s,;]+/).map(s => s.trim()).filter(s => /^\d+$/.test(s));
+    return raw.split(/[\s,;]+/).map(s => s.trim()).filter(s => /^[A-Za-z0-9]+$/.test(s));
   }
 
   // ── step tracker ──────────────────────────────────────────────────────────
@@ -590,10 +643,11 @@
 
     const payload = {
       fuelbeds: ids.join(','),
-      fccs_loadings_path: document.getElementById('fccs-path').value.trim() || null,
+      fccs_loadings_path: uploadedLoadingsPath || document.getElementById('fccs-path').value.trim() || null,
       burn_type: currentBurnType,
       include_disturbance: document.getElementById('include-disturbance').checked,
       num_runs: currentNumRuns,
+      do_metric: document.querySelector('input[name="output-units"]:checked').value === 'metric',
       scenarios: getScenarios(),
       api_key: document.getElementById('api-key').value,
     };
@@ -692,6 +746,7 @@
     'input_run2.csv':           { label: 'Input file (run 2)',            primary: false },
     'loadings_run1.csv':        { label: 'Loadings file (run 1)',         primary: false },
     'input_run1.csv':           { label: 'Input file (run 1)',            primary: false },
+    'run_log.txt':              { label: 'Pipeline run log',              primary: false },
   };
   const FILE_ORDER = Object.keys(FILE_META);
 

@@ -62,7 +62,7 @@ def _record(job_id, msg):
         jobs[job_id]['messages'].append(msg)
 
 
-def _run_job(job_id, fuelbed_list, fccs_loadings_path, scenario_names, scenario_rows, burn_type, include_disturbance, num_runs):
+def _run_job(job_id, fuelbed_list, fccs_loadings_path, scenario_names, scenario_rows, burn_type, include_disturbance, num_runs, do_metric):
     output_dir = jobs[job_id]['output_dir']
     try:
         def progress(msg):
@@ -78,6 +78,7 @@ def _run_job(job_id, fuelbed_list, fccs_loadings_path, scenario_names, scenario_
             burn_type=burn_type,
             include_disturbance=include_disturbance,
             num_runs=num_runs,
+            do_metric=do_metric,
         )
 
         with jobs_lock:
@@ -102,6 +103,38 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/upload-loadings', methods=['POST'])
+def upload_loadings():
+    """Accept a CSV file upload, save to a temp file, return its path."""
+    # API key check
+    if _API_KEY is not None:
+        provided = (
+            request.form.get('api_key', '')
+            or request.headers.get('X-API-Key', '')
+        ).strip()
+        if not provided or provided != _API_KEY:
+            return jsonify({'error': 'Invalid or missing API key.'}), 401
+
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file provided.'}), 400
+    f = request.files['file']
+    if not f.filename:
+        return jsonify({'error': 'Empty filename.'}), 400
+    # Restrict to CSV only
+    if not f.filename.lower().endswith('.csv'):
+        return jsonify({'error': 'Only .csv files are accepted.'}), 400
+
+    import tempfile
+    tmp = tempfile.NamedTemporaryFile(
+        delete=False, suffix='.csv', prefix='fccs_loadings_upload_')
+    try:
+        f.save(tmp.name)
+    except Exception as e:
+        return jsonify({'error': f'Failed to save file: {e}'}), 500
+
+    return jsonify({'path': tmp.name})
+
+
 @app.route('/run', methods=['POST'])
 def start_run():
     try:
@@ -123,24 +156,24 @@ def _start_run_inner():
             return jsonify({'error': 'Invalid or missing API key.'}), 401
 
     # Parse fuelbed list
+    import re
     raw = data.get('fuelbeds', '')
     if isinstance(raw, list):
         parts = [str(x).strip() for x in raw]
     else:
-        import re
         parts = re.split(r'[\s,;]+', str(raw).strip())
     parts = [p for p in parts if p]
 
     fuelbed_list = []
     bad = []
     for p in parts:
-        try:
-            fuelbed_list.append(int(p))
-        except ValueError:
+        if re.match(r'^[A-Za-z0-9]+$', p):
+            fuelbed_list.append(p)
+        else:
             bad.append(p)
 
     if bad:
-        return jsonify({'error': f'Non-integer fuelbed IDs: {bad}'}), 400
+        return jsonify({'error': f'Invalid fuelbed IDs: {bad}'}), 400
     if not fuelbed_list:
         return jsonify({'error': 'No fuelbed IDs provided.'}), 400
 
@@ -180,6 +213,9 @@ def _start_run_inner():
     if num_runs not in (1, 2):
         num_runs = 2
 
+    # Parse do_metric
+    do_metric = bool(data.get('do_metric', False))
+
     scenarios_raw = data.get('scenarios')
     if scenarios_raw and isinstance(scenarios_raw, list) and len(scenarios_raw) > 0:
         scenario_names = [str(s.get('name', f'Scenario{i+1}')) for i, s in enumerate(scenarios_raw)]
@@ -205,7 +241,7 @@ def _start_run_inner():
         }
 
     thread = threading.Thread(
-        target=_run_job, args=(job_id, fuelbed_list, fccs_loadings_path, scenario_names, scenario_rows, burn_type, include_disturbance, num_runs),
+        target=_run_job, args=(job_id, fuelbed_list, fccs_loadings_path, scenario_names, scenario_rows, burn_type, include_disturbance, num_runs, do_metric),
         daemon=True)
     thread.start()
 
